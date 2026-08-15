@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const flow = [
   { number: "01", title: "Collect", text: "Read public trend signals once each day—never your personal data." },
-  { number: "02", title: "Compare", text: "Normalize velocity, search interest, recency, and cross-source overlap." },
+  { number: "02", title: "Compare", text: "Require at least two independent public sources for every entry." },
   { number: "03", title: "Contextualize", text: "Add a human-readable explanation, source link, and safety note when needed." },
   { number: "04", title: "Cache", text: "Resize every visual and write one validated, versioned briefing file." },
   { number: "05", title: "Publish", text: "Serve static pages from the edge until tomorrow’s update is ready." },
@@ -55,21 +55,22 @@ export default function AboutPage() {
           <p className="eyebrow">Signals, not surveillance</p>
           <h2>What goes in</h2>
           <p>
-            Public pages from Google Trends, TikTok Creative Center, Know Your
-            Meme, Urban Dictionary, Lessons in Meme Culture, Wikipedia, IMDb,
-            and Spotify provide different pieces of the picture. No single
-            source decides a rank.
+            Public pages from Google Trends, Know Your Meme, Urban Dictionary,
+            Lessons in Meme Culture, Social Blade, SocialCounts, Wikipedia,
+            IMDb, Billboard, and Spotify provide different pieces of the
+            picture. No single source decides a rank.
           </p>
           <p>
-            Candidate topics are compared using search velocity, recent
-            publishing activity, cross-source matches, and durable public
-            interest. A last-known-good file stays live if a source is down.
+            Each card keeps links to at least two distinct sources. Rankings use
+            direct measures—poll share, 30-day growth, chart position, ratings,
+            or pageviews—rather than a made-up blended score. A last-known-good
+            file stays live if a source is down.
           </p>
         </article>
         <article className="principle-card">
           <p className="eyebrow">The promise</p>
           <ul>
-            <li><strong>Finite by design.</strong><span>Six boards. Five entries each. No endless scroll.</span></li>
+            <li><strong>Finite by design.</strong><span>Five boards. Five entries each. No endless scroll.</span></li>
             <li><strong>Links over lock-in.</strong><span>Every item opens a primary example or useful source.</span></li>
             <li><strong>Once daily.</strong><span>Enough freshness for context, without manufacturing urgency.</span></li>
             <li><strong>Private by default.</strong><span>No account, profile, personalized ranking, or behavioral ad stack.</span></li>

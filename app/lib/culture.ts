@@ -11,8 +11,14 @@ export type CultureItem = {
   alt: string;
   url: string;
   source: string;
-  signal: string;
-  score: number;
+  metric?: {
+    label: string;
+    value: string;
+  };
+  evidence: Array<{
+    source: string;
+    url: string;
+  }>;
   accent: string;
   caution?: string;
   rating?: string;
@@ -35,17 +41,6 @@ export type CultureBrief = {
   window: string;
   generatedAt: string;
   summary: string;
-  spotlight: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    image: string;
-    alt: string;
-    url: string;
-    source: string;
-    stat: string;
-    statLabel: string;
-  };
   pulse: Array<{
     label: string;
     value: string;
@@ -56,13 +51,16 @@ export type CultureBrief = {
 };
 
 const allowedLinkHosts = new Set([
-  "ads.tiktok.com",
+  "en.wikipedia.org",
   "knowyourmeme.com",
   "open.spotify.com",
+  "socialblade.com",
+  "socialcounts.org",
+  "trends.google.com",
   "trending.knowyourmeme.com",
   "www.imdb.com",
-  "www.instagram.com",
-  "www.tiktok.com",
+  "www.billboard.com",
+  "www.urbandictionary.com",
   "www.youtube.com"
 ]);
 
@@ -77,16 +75,11 @@ function validateBrief(value: CultureBrief) {
   if (!Number.isFinite(Date.parse(value.generatedAt))) {
     throw new Error("Culture brief has an invalid generatedAt date");
   }
-  if (value.sections.length !== 6) {
-    throw new Error("Culture brief must contain exactly six boards");
+  if (value.sections.length !== 5) {
+    throw new Error("Culture brief must contain exactly five boards");
   }
   if (value.pulse.length !== 4) {
     throw new Error("Culture pulse must contain exactly four items");
-  }
-
-  assertExternalUrl(value.spotlight.url, "Spotlight");
-  if (!value.spotlight.image.startsWith("/culture/")) {
-    throw new Error("Spotlight image must be a local cached asset");
   }
 
   for (const pulseItem of value.pulse) {
@@ -117,6 +110,19 @@ function validateBrief(value: CultureBrief) {
         throw new Error(item.title + " must use a local cached image");
       }
       assertExternalUrl(item.url, item.title);
+      if (item.evidence.length < 2) {
+        throw new Error(item.title + " must have at least two sources of evidence");
+      }
+      const evidenceSources = new Set<string>();
+      const evidenceHosts = new Set<string>();
+      for (const evidence of item.evidence) {
+        assertExternalUrl(evidence.url, item.title + " evidence");
+        evidenceSources.add(evidence.source);
+        evidenceHosts.add(new URL(evidence.url).hostname);
+      }
+      if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
+        throw new Error(item.title + " evidence must come from distinct sources");
+      }
       if (item.spotifyId && !/^[A-Za-z0-9]{22}$/.test(item.spotifyId)) {
         throw new Error(item.title + " has an invalid Spotify track ID");
       }

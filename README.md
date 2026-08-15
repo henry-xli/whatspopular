@@ -1,6 +1,6 @@
 # what’s popular?
 
-A finite daily briefing on the memes, formats, slang, creators, movies, shows,
+A finite daily briefing on the memes, slang, creators, movies, shows,
 and songs moving through internet culture. The public experience is static-first:
 no account, feed, database read, or personalization is required.
 
@@ -24,18 +24,22 @@ npm test
 
 ## Daily publishing loop
 
-`scripts/update-trends.mjs` reads public signals from Google Trends, TikTok
-Creative Center (plus an editorial fallback when its page is opaque), Know Your
-Meme, Urban Dictionary, Lessons in Meme Culture, Wikipedia pageviews, and IMDb.
-It normalizes matches, updates scores and ratings, validates a minimum source
-quorum, and atomically replaces `data/trends.json`. Existing entries are the
-curated candidate set; the automation re-ranks those candidates rather than
-publishing unexplained raw terms.
+`scripts/update-trends.mjs` requires two-source evidence for every entry. It
+cross-checks the latest completed Know Your Meme monthly poll against Lessons in
+Meme Culture's 20 most-viewed recent videos; checks a 12-month slang set with
+Urban Dictionary and Google Trends; attempts Social Blade creator profiles and
+falls back to SocialCounts' 30-day growth table when bot protection blocks the
+daily check; ranks screen titles by
+Wikipedia pageviews and refreshes IMDb ratings; and intersects Billboard's Hot
+100 with Spotify's official U.S. Top 50. It stores direct measures rather than a
+made-up blended score and atomically replaces `data/trends.json` only after
+validation.
 
-`scripts/cache-images.mjs` downloads social images through strict host and size
-allowlists, crops them into local WebP assets, and preserves a generated fallback
-if an upstream image is unavailable. This means visitor requests never proxy an
-image through a third party.
+`scripts/cache-images.mjs` derives the current asset set from the validated
+briefing, downloads images through strict host and size allowlists, crops them
+into local WebP assets, and preserves a generated fallback if an upstream image
+is unavailable. It also removes assets no longer referenced by the briefing.
+This means visitor requests never proxy an image through a third party.
 
 `.github/workflows/update-daily.yml` runs both jobs once per day, tests the exact
 result, and commits only a successful changed briefing to `main`. A failed source
@@ -46,7 +50,8 @@ quorum leaves the last-known-good timestamp and page intact.
 - HTML is pre-rendered and cached at the edge for one day with stale-while-revalidate.
 - Culture imagery totals roughly 1 MB, is local, resized, and WebP-compressed.
 - Next/Vite assets are content-hashed and cached immutably.
-- Spotify embeds are created only after a visitor presses play.
+- One official Spotify embed is created only after a visitor presses play, then
+  scrolled into view; copyrighted audio is never copied into the repository.
 - The Buy Me a Coffee widget is deferred until parsing finishes and initializes before `DOMContentLoaded`.
 - No runtime database or scraping occurs during a page request.
 

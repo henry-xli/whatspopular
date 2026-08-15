@@ -52,7 +52,12 @@ export function Leaderboard({ section }: { section: CultureSection }) {
                 ) : null}
                 <p className="card-description">{item.description}</p>
                 {item.caution ? <p className="caution">Note: {item.caution}</p> : null}
-                <div className="signal"><span>{item.signal}</span><strong>{item.score}</strong></div>
+                {item.metric ? (
+                  <div className="metric">
+                    <span>{item.metric.label}</span>
+                    <strong>{item.metric.value}</strong>
+                  </div>
+                ) : null}
               </div>
             </a>
           </li>

@@ -40,34 +40,15 @@ export default function Home() {
           </div>
         </div>
 
-        <a
-          className="spotlight"
-          href={cultureBrief.spotlight.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${cultureBrief.spotlight.title}: open ${cultureBrief.spotlight.source}`}
-        >
-          <div className="spotlight-art">
-            <Image
-              src={cultureBrief.spotlight.image}
-              alt={cultureBrief.spotlight.alt}
-              fill
-              priority
-              sizes="(max-width: 850px) 100vw, 42vw"
-            />
-            <span className="source-chip">{cultureBrief.spotlight.source}</span>
-          </div>
-          <div className="spotlight-copy">
-            <p className="eyebrow">{cultureBrief.spotlight.eyebrow}</p>
-            <h2>{cultureBrief.spotlight.title}</h2>
-            <p>{cultureBrief.spotlight.description}</p>
-            <div className="spotlight-stat">
-              <strong>{cultureBrief.spotlight.stat}</strong>
-              <span>{cultureBrief.spotlight.statLabel}</span>
-              <span className="open-mark" aria-hidden="true">↗</span>
-            </div>
-          </div>
-        </a>
+        <aside className="verification-card" aria-label="How entries qualify">
+          <p className="eyebrow">How an entry earns a spot</p>
+          <ol>
+            <li><span>1</span><strong>Find the public leaders</strong><small>Never a personalized feed</small></li>
+            <li><span>2</span><strong>Confirm with another source</strong><small>Every card has at least two</small></li>
+            <li><span>3</span><strong>Publish one finite briefing</strong><small>Five boards, once a day</small></li>
+          </ol>
+          <Link href="/about">See the full method <span aria-hidden="true">→</span></Link>
+        </aside>
       </section>
 
       <section className="pulse-wrap" aria-labelledby="pulse-title">
@@ -101,9 +82,9 @@ export default function Home() {
       <section className="boards wrap" id="boards" aria-labelledby="boards-title">
         <div className="section-intro">
           <p className="eyebrow">Five is plenty</p>
-          <h2 id="boards-title">The whole internet. Six short lists.</h2>
+          <h2 id="boards-title">The whole internet. Five short lists.</h2>
           <p>
-            Ranked from public momentum signals, then edited for context. Tap any
+            Every entry is checked against at least two public sources. Tap any
             card to see the thing itself—not another engagement trap.
           </p>
         </div>
@@ -121,8 +102,8 @@ export default function Home() {
             <h2>One deliberate update a day.</h2>
           </div>
           <p>
-            We collect public trend signals, compare momentum across sources,
-            cache every visual, and publish one static briefing to the edge. No
+            We compare every entry across at least two public sources, cache
+            every visual, and publish one static briefing to the edge. No
             accounts, no tracking pixels, no personalized rabbit holes.
           </p>
           <Link className="button button-outline" href="/about">

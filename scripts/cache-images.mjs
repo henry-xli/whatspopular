@@ -1,4 +1,4 @@
-import { mkdir, stat } from "node:fs/promises";
+import { mkdir, readFile, readdir, stat, unlink } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import sharp from "sharp";
@@ -10,21 +10,17 @@ const MAX_BYTES = 10 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 
 const pageHosts = new Set([
+  "en.wikipedia.org",
   "knowyourmeme.com",
   "open.spotify.com",
-  "www.distractify.com",
-  "www.hercampus.com",
-  "www.instagram.com",
+  "www.imdb.com",
   "www.youtube.com",
 ]);
 
 const imageHosts = new Set([
   "animotaku.fr",
-  "cdn.hercampus.com",
   "cdn.kinocheck.com",
-  "images.unsplash.com",
   "m.media-amazon.com",
-  "media.distractify.com",
   "s.movieinsider.com",
   "www.nfbio.dk",
 ]);
@@ -37,40 +33,51 @@ const allowedImageSuffixes = [
   ".kym-cdn.com",
   ".scdn.co",
   ".ytimg.com",
+  ".wikimedia.org",
 ];
 
 const assets = [
   { file: "jimothy.webp", title: "Jimothy", page: "https://knowyourmeme.com/memes/jimothy-the-raccoon", shape: "landscape" },
-  { file: "meme-sirens.webp", title: "Odyssey sirens", page: "https://knowyourmeme.com/memes/sirens-scene-what-odysseus-actually-heard-during-the-siren-song", shape: "landscape" },
-  { file: "meme-kettle.webp", title: "Whipping up shi in a kettle", page: "https://knowyourmeme.com/memes/he-was-whipping-up-shit-in-a-kettle-boiling-poo-in-a-kettle", shape: "landscape" },
-  { file: "meme-cavaliers.webp", title: "The Other Cavaliers", page: "https://knowyourmeme.com/memes/the-other-cavaliers", shape: "landscape" },
-  { file: "meme-brewstew.webp", title: "Realistic Brewstew", page: "https://knowyourmeme.com/memes/realistic-brewstew", shape: "landscape" },
-  { file: "meme-eminem-brisk.webp", title: "Eminem Brisk", page: "https://knowyourmeme.com/memes/eminem-brisk-commercial", shape: "landscape" },
-  { file: "kumar-method.webp", title: "The Kumar Method", page: "https://knowyourmeme.com/memes/kumar-method", shape: "landscape" },
-  { file: "format-saxophones.webp", title: "Saxophones getting louder", page: "https://www.distractify.com/p/what-does-the-saxophone-getting-louder-mean-on-tiktok", shape: "landscape" },
-  { file: "format-nonchalant.webp", title: "Not very nonchalant", direct: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1200&q=85", shape: "landscape" },
-  { file: "format-documentary.webp", title: "Netflix documentary", page: "https://www.hercampus.com/culture/netflix-documentary-tiktok-trend-explainer/", shape: "landscape" },
-  { file: "format-spain.webp", title: "I am in Spain without the S", direct: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85", shape: "landscape" },
-  { file: "slang-iyo.webp", title: "IYO", page: "https://knowyourmeme.com/memes/iyo-tiktok-sound", shape: "landscape" },
-  { file: "slang-neegy.webp", title: "Neegy", page: "https://knowyourmeme.com/memes/neegy", shape: "landscape" },
-  { file: "slang-mbappe.webp", title: "Mbappe Special", page: "https://knowyourmeme.com/memes/mbappe-special", shape: "landscape" },
-  { file: "slang-tlpur.webp", title: "TLPUR", page: "https://knowyourmeme.com/memes/tlpur-slang", shape: "landscape" },
-  { file: "slang-boy-kibble.webp", title: "Boy kibble", page: "https://knowyourmeme.com/memes/boy-kibble", shape: "landscape" },
+  { file: "meme-kwebbelkop.webp", title: "Kwebbelkop Laugh", page: "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh", shape: "landscape" },
+  { file: "meme-john-rod.webp", title: "John Rod", page: "https://knowyourmeme.com/memes/john-rod", shape: "landscape" },
+  { file: "meme-pirate-gaster.webp", title: "Pirate Gaster", page: "https://knowyourmeme.com/memes/pirate-gaster", shape: "landscape" },
+  { file: "meme-miku-custody.webp", title: "Hatsune Miku World Cup Custody Battle", page: "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle", shape: "landscape" },
+  { file: "slang-67.webp", title: "67", page: "https://knowyourmeme.com/memes/67-meme", shape: "landscape" },
+  { file: "slang-clanker.webp", title: "Clanker", page: "https://knowyourmeme.com/memes/clanker", shape: "landscape" },
+  { file: "slang-chopped.webp", title: "Chopped", page: "https://knowyourmeme.com/memes/chopped-slang", shape: "landscape" },
+  { file: "slang-aura-farming.webp", title: "Aura Farming", page: "https://knowyourmeme.com/memes/aura-farming", shape: "landscape" },
+  { file: "slang-sybau.webp", title: "SYBAU", page: "https://knowyourmeme.com/memes/sybau", shape: "landscape" },
+  { file: "creator-zhong.webp", title: "Zhong", page: "https://www.youtube.com/@zhong", shape: "square" },
+  { file: "creator-mrbeast.webp", title: "MrBeast", page: "https://www.youtube.com/@MrBeast", shape: "square" },
   { file: "creator-speed.webp", title: "IShowSpeed", page: "https://www.youtube.com/@IShowSpeed", shape: "square" },
-  { file: "creator-ian.webp", title: "Ian McConnell", page: "https://open.spotify.com/track/1lENTiHBIkczAsB0vYE1Xd", shape: "square" },
-  { file: "creator-aora.webp", title: "Aora", page: "https://www.instagram.com/aora.dj/", shape: "square" },
-  { file: "creator-limc.webp", title: "Lessons in Meme Culture", page: "https://www.youtube.com/@LIMC", shape: "square" },
+  { file: "creator-celine.webp", title: "Celine Dept", page: "https://www.youtube.com/@celinedept", shape: "square" },
+  { file: "creator-jesser.webp", title: "Jesser", page: "https://www.youtube.com/@Jesser", shape: "square" },
   { file: "media-spider-man.webp", title: "Spider-Man Brand New Day", direct: "https://s.movieinsider.com/images/p/964462_m1773880192.jpg", shape: "poster" },
   { file: "media-odyssey.webp", title: "The Odyssey", direct: "https://www.nfbio.dk/sites/nfbio.dk/files/styles/movie_poster/public/media-images/2025-12/gmnt-b41983b128-1529119-vst-694521bb7da8f.jpeg?itok=kUouQPma", shape: "poster" },
-  { file: "media-oak-street.webp", title: "End of Oak Street", direct: "https://cdn.kinocheck.com/i/w%3D1200/vsgfjl6w42.jpg", shape: "poster" },
   { file: "media-toy-story.webp", title: "Toy Story 5", direct: "https://m.media-amazon.com/images/M/MV5BMTBlNTEwYmQtNjE1OC00NDRlLWI3M2YtYmRkODVmZTljYWRiXkEyXkFqcGc%40._V1_.jpg", shape: "poster" },
+  { file: "media-moana.webp", title: "Moana", page: "https://en.wikipedia.org/wiki/Moana_(2026_film)", shape: "poster" },
   { file: "media-jujutsu.webp", title: "Jujutsu Kaisen", direct: "https://animotaku.fr/wp-content/uploads/2024/12/anime-jujutsu-kaisen-saison-3-visuel-1.jpg", shape: "poster" },
-  { file: "song-bangladesh.webp", title: "Bangladesh", page: "https://open.spotify.com/track/1lENTiHBIkczAsB0vYE1Xd", shape: "square" },
   { file: "song-choosin-texas.webp", title: "Choosin Texas", page: "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN", shape: "square" },
-  { file: "song-hate-love.webp", title: "hate that i made you love me", page: "https://open.spotify.com/track/3idrvUQYONMAJ6EgZZqiL8", shape: "square" },
-  { file: "song-u-me.webp", title: "u plus me", page: "https://open.spotify.com/track/6ZIMMWWjupzMw7Qy4d52Vy", shape: "square" },
-  { file: "song-ss26.webp", title: "SS26", page: "https://open.spotify.com/track/3d5NbAerF2MMHw9tdIxiFH", shape: "square" },
+  { file: "song-hate-love.webp", title: "hate that i made you love me", page: "https://open.spotify.com/track/3iy2QuCtCzpWnR6tia39AB", shape: "square" },
+  { file: "song-been-by-now.webp", title: "Been By Now", page: "https://open.spotify.com/track/3xwMjQriBVW0OGEvNKo9c0", shape: "square" },
+  { file: "song-petal.webp", title: "petal", page: "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e", shape: "square" },
+  { file: "song-boston.webp", title: "Boston", page: "https://open.spotify.com/track/36idurZmYRjJ56KQ8JD9bN", shape: "square" },
 ];
+
+const brief = JSON.parse(await readFile(path.join(root, "data", "trends.json"), "utf8"));
+const referencedFiles = new Set(brief.sections.flatMap((section) => section.items.map((item) => path.basename(item.image))));
+for (let index = assets.length - 1; index >= 0; index -= 1) {
+  if (!referencedFiles.has(assets[index].file)) assets.splice(index, 1);
+}
+const knownFiles = new Set(assets.map((asset) => asset.file));
+for (const section of brief.sections) {
+  for (const item of section.items) {
+    const file = path.basename(item.image);
+    if (knownFiles.has(file)) continue;
+    assets.push({ file, title: item.title, page: item.url, shape: section.layout });
+    knownFiles.add(file);
+  }
+}
 
 function assertUrl(rawUrl, kind) {
   const url = new URL(rawUrl);
@@ -181,8 +188,16 @@ await mkdir(outputRoot, { recursive: true });
 const results = [];
 for (const asset of assets) results.push(await processAsset(asset));
 await buildIcon();
+const currentFiles = new Set(assets.map((asset) => asset.file));
+const removedFiles = [];
+for (const entry of await readdir(outputRoot, { withFileTypes: true })) {
+  if (!entry.isFile() || !entry.name.endsWith(".webp") || currentFiles.has(entry.name)) continue;
+  await unlink(path.join(outputRoot, entry.name));
+  removedFiles.push(entry.name);
+}
 
 const fallbacks = results.filter(({ state }) => state.startsWith("fallback"));
 for (const { asset, state } of results) console.log(`${state.padEnd(42)} ${asset.file}`);
 console.log(`Prepared ${results.length} images; ${fallbacks.length} used generated fallbacks.`);
+if (removedFiles.length) console.log(`Removed ${removedFiles.length} obsolete cached images.`);
 if (fallbacks.length > 4) process.exitCode = 1;
