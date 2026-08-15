@@ -1,0 +1,573 @@
+{
+  "edition": "August 2026",
+  "status": "August, so far",
+  "window": "Last 30 days · United States",
+  "generatedAt": "2026-08-15T21:19:29.076Z",
+  "summary": "Deadpan confessionals, loud saxophones, an epic siren scene and one extremely specific song about Bangladesh are steering the feed.",
+  "spotlight": {
+    "eyebrow": "Last month's meme winner",
+    "title": "Jimothy the raccoon",
+    "description": "A tiny Seattle raccoon with short spine syndrome became a worldwide fan-art phenomenon — and won July's Know Your Meme poll.",
+    "image": "/culture/jimothy.webp",
+    "alt": "Jimothy, a small round raccoon, standing in a backyard",
+    "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month",
+    "source": "Know Your Meme",
+    "stat": "15.6%",
+    "statLabel": "of the July community vote"
+  },
+  "pulse": [
+    {
+      "label": "Meme",
+      "value": "Odyssey sirens",
+      "image": "/culture/meme-sirens.webp",
+      "url": "https://knowyourmeme.com/memes/sirens-scene-what-odysseus-actually-heard-during-the-siren-song"
+    },
+    {
+      "label": "Format",
+      "value": "Kumar Method",
+      "image": "/culture/kumar-method.webp",
+      "url": "https://www.tiktok.com/@thekumarmethod"
+    },
+    {
+      "label": "Slang",
+      "value": "IYO",
+      "image": "/culture/slang-iyo.webp",
+      "url": "https://knowyourmeme.com/memes/iyo-tiktok-sound"
+    },
+    {
+      "label": "Song",
+      "value": "Bangladesh",
+      "image": "/culture/song-bangladesh.webp",
+      "url": "https://open.spotify.com/track/1lENTiHBIkczAsB0vYE1Xd"
+    }
+  ],
+  "sections": [
+    {
+      "id": "memes",
+      "eyebrow": "The shared joke",
+      "title": "Memes",
+      "description": "The five references most likely to appear in your group chat without explanation.",
+      "sources": [
+        "Know Your Meme",
+        "Lessons in Meme Culture",
+        "Google Trends"
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Whipping up in a kettle",
+          "subtitle": "A brutally negative review",
+          "description": "A wild podcast story became shorthand for saying something is spectacularly bad.",
+          "image": "/culture/meme-kettle.webp",
+          "alt": "Podcast guest telling the whipping up in a kettle story",
+          "url": "https://knowyourmeme.com/memes/he-was-whipping-up-shit-in-a-kettle-boiling-poo-in-a-kettle",
+          "source": "Know Your Meme",
+          "signal": "KYM + LIMC signal",
+          "score": 84,
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "The Other Cavaliers",
+          "subtitle": "One line, endless remixes",
+          "description": "An SNL sports sketch escaped its original context and became a reaction format.",
+          "image": "/culture/meme-cavaliers.webp",
+          "alt": "The Other Cavaliers meme from a television sketch",
+          "url": "https://knowyourmeme.com/memes/the-other-cavaliers",
+          "source": "Lessons in Meme Culture",
+          "signal": "LIMC signal",
+          "score": 70,
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Realistic Brewstew",
+          "subtitle": "Cartoons, rendered cursed",
+          "description": "AI-made, big-headed versions of BrewStew characters are recreating old thumbnails in real life.",
+          "image": "/culture/meme-brewstew.webp",
+          "alt": "Hyper-realistic versions of BrewStew cartoon characters",
+          "url": "https://knowyourmeme.com/memes/realistic-brewstew",
+          "source": "Know Your Meme",
+          "signal": "LIMC signal",
+          "score": 70,
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Eminem's Brisk ad",
+          "subtitle": "A commercial returns",
+          "description": "An old claymation commercial has been rediscovered, clipped and quoted everywhere.",
+          "image": "/culture/meme-eminem-brisk.webp",
+          "alt": "Claymation Eminem in a Brisk commercial",
+          "url": "https://knowyourmeme.com/memes/eminem-brisk-commercial",
+          "source": "Lessons in Meme Culture",
+          "signal": "LIMC signal",
+          "score": 69,
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "The Odyssey sirens",
+          "subtitle": "What Odysseus actually heard",
+          "description": "People replace the sirens' song with the one thing they absolutely could not resist.",
+          "image": "/culture/meme-sirens.webp",
+          "alt": "Odysseus tied to a ship mast in The Odyssey",
+          "url": "https://knowyourmeme.com/memes/sirens-scene-what-odysseus-actually-heard-during-the-siren-song",
+          "source": "Know Your Meme",
+          "signal": "TIKTOK + LIMC signal",
+          "score": 65,
+          "accent": "#ff6b57"
+        }
+      ]
+    },
+    {
+      "id": "formats",
+      "eyebrow": "The recurring bit",
+      "title": "Viral formats",
+      "description": "The templates people keep remaking — knowing the setup is usually enough to get the joke.",
+      "sources": [
+        "TikTok Creative Center",
+        "TikTok examples",
+        "Google Trends"
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Not very nonchalant",
+          "subtitle": "Joy without playing it cool",
+          "description": "Creators reject deadpan coolness and show themselves being loudly, sincerely delighted.",
+          "image": "/culture/format-nonchalant.webp",
+          "alt": "Friends dancing joyfully at an outdoor event",
+          "url": "https://www.tiktok.com/@trace.young",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 70,
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 2,
+          "title": "I'm in pain — I'm in Spain",
+          "subtitle": "Vacation fixes everything",
+          "description": "A travel lip-sync that turns a complaint into a destination reveal.",
+          "image": "/culture/format-spain.webp",
+          "alt": "A bright street in Spain",
+          "url": "https://www.tiktok.com/tag/iminspain",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 69,
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 3,
+          "title": "The Kumar Method",
+          "subtitle": "Make a boring job cinematic",
+          "description": "Present ordinary expertise like an ominous prestige-film mastermind reveal.",
+          "image": "/culture/kumar-method.webp",
+          "alt": "Kumar, the retired accountant behind the Kumar Method format",
+          "url": "https://www.tiktok.com/@thekumarmethod",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 62,
+          "accent": "#ff6b57"
+        },
+        {
+          "rank": 4,
+          "title": "Saxophones getting louder",
+          "subtitle": "Impending consequences",
+          "description": "The Boyz n the Hood score swells as a bad decision approaches its obvious ending.",
+          "image": "/culture/format-saxophones.webp",
+          "alt": "A worried person representing the saxophones getting louder trend",
+          "url": "https://www.tiktok.com/tag/saxophonesgettinglouder",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 62,
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 5,
+          "title": "Netflix documentary",
+          "subtitle": "Treat tiny drama like true crime",
+          "description": "Sit down for a grave interview about the roommate who never did the dishes.",
+          "image": "/culture/format-documentary.webp",
+          "alt": "A person sitting down for a documentary-style interview",
+          "url": "https://www.tiktok.com/tag/netflixdocumentary",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 62,
+          "accent": "#9b8cff"
+        }
+      ]
+    },
+    {
+      "id": "slang",
+      "eyebrow": "What they're saying",
+      "title": "Slang",
+      "description": "A translation layer for the phrases that arrive before their definitions do.",
+      "sources": [
+        "Know Your Meme",
+        "Urban Dictionary",
+        "Google Trends"
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Neegy",
+          "subtitle": "A Fortnite brainrot catchphrase",
+          "description": "A nonsense-sounding nickname from an insult clip. It can read as offensive, so understand the reference without repeating it.",
+          "image": "/culture/slang-neegy.webp",
+          "alt": "Golden caricature associated with the Neegy meme",
+          "url": "https://knowyourmeme.com/memes/neegy",
+          "source": "Know Your Meme",
+          "signal": "KYM signal",
+          "score": 59,
+          "accent": "#ffc857",
+          "caution": "Context only"
+        },
+        {
+          "rank": 2,
+          "title": "IYO",
+          "subtitle": "Pronounced like “ayo”",
+          "description": "A distinctive reaction from a chaotic Fortnite voice-chat clip; mostly used as a sound, not a literal word.",
+          "image": "/culture/slang-iyo.webp",
+          "alt": "Fortnite voice chat screenshot associated with IYO",
+          "url": "https://knowyourmeme.com/memes/iyo-tiktok-sound",
+          "source": "Know Your Meme",
+          "signal": "Breakout",
+          "score": 54,
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Mbappé special",
+          "subtitle": "For example: nothing",
+          "description": "A joking way to say “nothing,” borrowed from Kylian Mbappé describing his cooking specialty.",
+          "image": "/culture/slang-mbappe.webp",
+          "alt": "Kylian Mbappé in the interview that inspired Mbappé special",
+          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "source": "Know Your Meme",
+          "signal": "Holding",
+          "score": 54,
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 4,
+          "title": "TLPUR",
+          "subtitle": "The ambiguity is the joke",
+          "description": "An intentionally unexplained acronym attached to dancing, rainbow lighting and surreal edits.",
+          "image": "/culture/slang-tlpur.webp",
+          "alt": "Rainbow-lit dancing edit associated with TLPUR",
+          "url": "https://knowyourmeme.com/memes/tlpur-slang",
+          "source": "Know Your Meme",
+          "signal": "Niche",
+          "score": 54,
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 5,
+          "title": "Boy kibble",
+          "subtitle": "Rice + ground protein",
+          "description": "The self-deprecating name for a plain, efficient meal-prep bowl that resembles pet food.",
+          "image": "/culture/slang-boy-kibble.webp",
+          "alt": "A simple bowl of rice and ground protein known as boy kibble",
+          "url": "https://knowyourmeme.com/memes/boy-kibble",
+          "source": "Know Your Meme",
+          "signal": "Mainstreaming",
+          "score": 53,
+          "accent": "#ff6b57"
+        }
+      ]
+    },
+    {
+      "id": "creators",
+      "eyebrow": "People moving the feed",
+      "title": "Creators",
+      "description": "Five accounts behind the sounds, formats and moments crossing into the wider culture.",
+      "sources": [
+        "TikTok",
+        "YouTube",
+        "Wikipedia pageviews"
+      ],
+      "layout": "square",
+      "items": [
+        {
+          "rank": 1,
+          "title": "IShowSpeed",
+          "subtitle": "@IShowSpeed · YouTube",
+          "description": "World Cup streams, travel chaos and “Champions” kept one of the web's biggest creators at the center of the summer.",
+          "image": "/culture/creator-speed.webp",
+          "alt": "IShowSpeed smiling in his YouTube profile photo",
+          "url": "https://www.youtube.com/@IShowSpeed",
+          "source": "YouTube",
+          "signal": "TIKTOK signal",
+          "score": 70,
+          "accent": "#ff6b57"
+        },
+        {
+          "rank": 2,
+          "title": "Lessons in Meme Culture",
+          "subtitle": "@LIMC · YouTube",
+          "description": "Fast explainers continue to be an early signal for which niche references are escaping into mainstream feeds.",
+          "image": "/culture/creator-limc.webp",
+          "alt": "Lessons in Meme Culture YouTube profile image",
+          "url": "https://www.youtube.com/@LIMC",
+          "source": "YouTube",
+          "signal": "LIMC signal",
+          "score": 67,
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 3,
+          "title": "Ian McConnell",
+          "subtitle": "@ianmcconnellmusic · TikTok",
+          "description": "His 49-second absurdist song “Bangladesh” jumped from a creator post into the song-of-summer conversation.",
+          "image": "/culture/creator-ian.webp",
+          "alt": "Ian McConnell artwork for the song Bangladesh",
+          "url": "https://www.tiktok.com/@ianmcconnellmusic",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 64,
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 4,
+          "title": "The Kumar Method",
+          "subtitle": "@thekumarmethod · TikTok",
+          "description": "A retired-accountant character turned deliberately engineered virality into the joke itself.",
+          "image": "/culture/kumar-method.webp",
+          "alt": "Kumar posing as a cinematic accounting mastermind",
+          "url": "https://www.tiktok.com/@thekumarmethod",
+          "source": "TikTok",
+          "signal": "TIKTOK signal",
+          "score": 59,
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 5,
+          "title": "Aora.DJ",
+          "subtitle": "@aora.dj · Instagram",
+          "description": "One intense look and bounce at a foam party made her a reaction meme far beyond the original clip.",
+          "image": "/culture/creator-aora.webp",
+          "alt": "Aora.DJ profile portrait",
+          "url": "https://www.instagram.com/aora.dj/",
+          "source": "Instagram",
+          "signal": "KYM signal",
+          "score": 58,
+          "accent": "#57d5a4"
+        }
+      ]
+    },
+    {
+      "id": "watch",
+      "eyebrow": "What everyone's watching",
+      "title": "Movies & shows",
+      "description": "The screen titles producing the most search interest, conversation and downstream memes.",
+      "sources": [
+        "Google Trends",
+        "Wikipedia pageviews",
+        "IMDb"
+      ],
+      "layout": "poster",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Spider-Man: Brand New Day",
+          "subtitle": "Movie · in theaters",
+          "description": "The year's box-office leader and half of the internet's “Petal-Man Day.”",
+          "image": "/culture/media-spider-man.webp",
+          "alt": "Spider-Man Brand New Day theatrical poster",
+          "url": "https://www.imdb.com/title/tt22084616/",
+          "source": "IMDb",
+          "signal": "TIKTOK signal",
+          "score": 76,
+          "accent": "#ff6b57",
+          "rating": "8.2"
+        },
+        {
+          "rank": 2,
+          "title": "The Odyssey",
+          "subtitle": "Movie · in theaters",
+          "description": "Christopher Nolan's epic is both a blockbuster and the month's most reusable meme factory.",
+          "image": "/culture/media-odyssey.webp",
+          "alt": "The Odyssey 2026 theatrical poster",
+          "url": "https://www.imdb.com/title/tt33764258/",
+          "source": "IMDb",
+          "signal": "TIKTOK + LIMC signal",
+          "score": 73,
+          "accent": "#5ab0ff",
+          "rating": "8.4"
+        },
+        {
+          "rank": 3,
+          "title": "Toy Story 5",
+          "subtitle": "Movie · in theaters",
+          "description": "Toys versus screens turned a legacy sequel into a family hit and a debate about digital childhood.",
+          "image": "/culture/media-toy-story.webp",
+          "alt": "Toy Story 5 theatrical poster",
+          "url": "https://www.imdb.com/title/tt29355505/",
+          "source": "IMDb",
+          "signal": "Holding",
+          "score": 65,
+          "accent": "#ffc857",
+          "rating": "7.5"
+        },
+        {
+          "rank": 4,
+          "title": "Jujutsu Kaisen · S3",
+          "subtitle": "Series · streaming",
+          "description": "The Culling Game arc remains one of the year's largest anime conversation engines.",
+          "image": "/culture/media-jujutsu.webp",
+          "alt": "Jujutsu Kaisen season three promotional poster",
+          "url": "https://www.imdb.com/title/tt12343534/",
+          "source": "IMDb",
+          "signal": "Anime mainstay",
+          "score": 63,
+          "accent": "#9b8cff",
+          "rating": "8.5"
+        },
+        {
+          "rank": 5,
+          "title": "The End of Oak Street",
+          "subtitle": "Movie · new this week",
+          "description": "Anne Hathaway, Ewan McGregor, suburban time travel and dinosaurs made a surprise late-summer splash.",
+          "image": "/culture/media-oak-street.webp",
+          "alt": "The End of Oak Street IMAX poster",
+          "url": "https://www.imdb.com/title/tt27165187/",
+          "source": "IMDb",
+          "signal": "Breakout",
+          "score": 59,
+          "accent": "#57d5a4",
+          "rating": "New"
+        }
+      ]
+    },
+    {
+      "id": "songs",
+      "eyebrow": "What the feed sounds like",
+      "title": "Songs",
+      "description": "Press play here — only one lightweight Spotify player loads at a time.",
+      "sources": [
+        "TikTok Creative Center",
+        "Spotify",
+        "Google Trends"
+      ],
+      "layout": "square",
+      "items": [
+        {
+          "rank": 1,
+          "title": "u + me = <3",
+          "subtitle": "Olivia Rodrigo",
+          "description": "A tender chorus scoring then-versus-now carousels about friends, partners and family.",
+          "image": "/culture/song-u-me.webp",
+          "alt": "u plus me equals heart album artwork by Olivia Rodrigo",
+          "url": "https://open.spotify.com/track/6ZIMMWWjupzMw7Qy4d52Vy",
+          "source": "Spotify",
+          "signal": "TIKTOK + LIMC signal",
+          "score": 76,
+          "accent": "#57d5a4",
+          "spotifyId": "6ZIMMWWjupzMw7Qy4d52Vy"
+        },
+        {
+          "rank": 2,
+          "title": "Bangladesh",
+          "subtitle": "Ian McConnell",
+          "description": "A 49-second deadpan complaint song whose requests get stranger with every line.",
+          "image": "/culture/song-bangladesh.webp",
+          "alt": "Bangladesh single artwork by Ian McConnell",
+          "url": "https://open.spotify.com/track/1lENTiHBIkczAsB0vYE1Xd",
+          "source": "Spotify",
+          "signal": "TIKTOK signal",
+          "score": 75,
+          "accent": "#ffc857",
+          "spotifyId": "1lENTiHBIkczAsB0vYE1Xd"
+        },
+        {
+          "rank": 3,
+          "title": "Choosin' Texas",
+          "subtitle": "Ella Langley",
+          "description": "A country crossover powering lip-syncs, cowboy reveals and hometown storytelling.",
+          "image": "/culture/song-choosin-texas.webp",
+          "alt": "Choosin' Texas album artwork by Ella Langley",
+          "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
+          "source": "Spotify",
+          "signal": "TIKTOK signal",
+          "score": 75,
+          "accent": "#ff6b57",
+          "spotifyId": "7scFxt9VhL4FJwuPSfRlfN"
+        },
+        {
+          "rank": 4,
+          "title": "SS26",
+          "subtitle": "Charli xcx",
+          "description": "A dark rock-dance track built for runway edits, fit checks and sharp transitions.",
+          "image": "/culture/song-ss26.webp",
+          "alt": "SS26 single artwork by Charli xcx",
+          "url": "https://open.spotify.com/track/3d5NbAerF2MMHw9tdIxiFH",
+          "source": "Spotify",
+          "signal": "TIKTOK signal",
+          "score": 74,
+          "accent": "#5ab0ff",
+          "spotifyId": "3d5NbAerF2MMHw9tdIxiFH"
+        },
+        {
+          "rank": 5,
+          "title": "hate that i made you love me",
+          "subtitle": "Ariana Grande",
+          "description": "The Petal-era single behind first-listen reactions and the “Petal-Man Day” double event.",
+          "image": "/culture/song-hate-love.webp",
+          "alt": "hate that i made you love me single artwork by Ariana Grande",
+          "url": "https://open.spotify.com/track/3idrvUQYONMAJ6EgZZqiL8",
+          "source": "Spotify",
+          "signal": "TIKTOK signal",
+          "score": 71,
+          "accent": "#9b8cff",
+          "spotifyId": "3idrvUQYONMAJ6EgZZqiL8"
+        }
+      ]
+    }
+  ],
+  "sourceHealth": [
+    {
+      "name": "Google Trends",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.369Z"
+    },
+    {
+      "name": "TikTok Creative Center",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:31.177Z"
+    },
+    {
+      "name": "TikTok editorial fallback",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.725Z"
+    },
+    {
+      "name": "Know Your Meme",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.853Z"
+    },
+    {
+      "name": "Lessons in Meme Culture",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.368Z"
+    },
+    {
+      "name": "Urban Dictionary",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.877Z"
+    },
+    {
+      "name": "Wikipedia pageviews",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.865Z"
+    },
+    {
+      "name": "IMDb ratings",
+      "ok": true,
+      "checkedAt": "2026-08-15T21:19:29.865Z"
+    }
+  ]
+}
