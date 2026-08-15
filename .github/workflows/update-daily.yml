@@ -1,0 +1,39 @@
+name: Refresh culture briefing
+
+on:
+  schedule:
+    - cron: "17 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-culture-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.repository == 'henry-xli/whatspopular'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run content:update -- --force
+      - run: npm run content:images -- --force
+      - run: npm test
+      - name: Commit a changed briefing
+        run: |
+          git config user.name "whatspopular refresh bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/trends.json public/culture public/icon.png
+          git diff --cached --quiet && exit 0
+          git commit -m "Refresh daily culture briefing"
+          git push origin main
