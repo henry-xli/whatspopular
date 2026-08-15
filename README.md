@@ -47,7 +47,7 @@ quorum leaves the last-known-good timestamp and page intact.
 - Culture imagery totals roughly 1 MB, is local, resized, and WebP-compressed.
 - Next/Vite assets are content-hashed and cached immutably.
 - Spotify embeds are created only after a visitor presses play.
-- The Buy Me a Coffee widget loads after the page becomes idle.
+- The Buy Me a Coffee widget is deferred until parsing finishes and initializes before `DOMContentLoaded`.
 - No runtime database or scraping occurs during a page request.
 
 This removes origin/database fan-out from the hot path, which is the architecture

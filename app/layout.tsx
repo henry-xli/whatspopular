@@ -74,7 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           data-position="Right"
           data-x_margin="18"
           data-y_margin="18"
-          strategy="lazyOnload"
+          strategy="beforeInteractive"
         />
       </body>
     </html>
