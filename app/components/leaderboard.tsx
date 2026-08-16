@@ -20,7 +20,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
         {section.items.map((item) => (
           <li key={item.title}>
             <a
-              className="culture-card"
+              className={`culture-card ${item.metric ? "has-metric" : "no-metric"}`}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -51,7 +51,6 @@ export function Leaderboard({ section }: { section: CultureSection }) {
                   </div>
                 ) : null}
                 <p className="card-description">{item.description}</p>
-                {item.caution ? <p className="caution">Note: {item.caution}</p> : null}
                 {item.metric ? (
                   <div className="metric">
                     <span>{item.metric.label}</span>

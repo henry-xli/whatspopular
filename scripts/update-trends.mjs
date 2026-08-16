@@ -24,26 +24,30 @@ const allowedHosts = new Set([
 ]);
 
 const cultureMakers = [
-  { title: "Christopher Nolan", article: "Christopher_Nolan", subtitle: "Film director · producer", description: "The filmmaker behind The Odyssey is included in the same comparison field as musicians and digital-native creators." },
-  { title: "Zendaya", article: "Zendaya", subtitle: "Actor · producer", description: "A major presence in Spider-Man: Brand New Day and The Odyssey keeps Zendaya central to current screen culture." },
-  { title: "Shakira", article: "Shakira", subtitle: "Musician · performer", description: "A global chart presence and major live appearances keep Shakira in the wider culture conversation." },
-  { title: "Ariana Grande", article: "Ariana_Grande", subtitle: "Musician · actor", description: "Multiple current chart entries make Ariana Grande one of the most visible music figures in this comparison." },
-  { title: "Ella Langley", article: "Ella_Langley", subtitle: "Singer-songwriter", description: "A high Hot 100 position and global streaming crossover have sharply raised attention around Ella Langley." },
-  { title: "IShowSpeed", article: "IShowSpeed", subtitle: "Streamer · entertainer", description: "IShowSpeed represents established digital-native creators without limiting the board to short-form channels." },
-  { title: "Taylor Swift", article: "Taylor_Swift", subtitle: "Singer-songwriter", description: "Taylor Swift remains in the broad comparison field so enduring attention is measured alongside newer spikes." },
-  { title: "Justin Bieber", article: "Justin_Bieber", subtitle: "Musician", description: "Renewed streaming interest keeps Justin Bieber in the current cross-platform comparison." },
-  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", subtitle: "Singer-songwriter · actor", description: "Current releases put Olivia Rodrigo back near the center of music and fan conversation." },
-  { title: "Olivia Dean", article: "Olivia_Dean", subtitle: "Singer-songwriter", description: "A global Spotify and Billboard crossover gives Olivia Dean a measurable current-interest signal." },
-  { title: "MrBeast", article: "MrBeast", subtitle: "Digital creator · entrepreneur", description: "MrBeast remains a useful established-digital benchmark in a field that also includes filmmakers and musicians." },
-  { title: "Bruno Mars", article: "Bruno_Mars", subtitle: "Musician · producer", description: "Sustained streaming and chart activity keep Bruno Mars in the broad culture-maker comparison." },
-  { title: "Morgan Wallen", article: "Morgan_Wallen", subtitle: "Singer-songwriter", description: "Several charting songs keep Morgan Wallen in the current music conversation." },
-  { title: "Bad Bunny", article: "Bad_Bunny", subtitle: "Musician · actor", description: "Bad Bunny supplies another global, cross-language benchmark for current popular attention." },
-  { title: "Tom Holland", article: "Tom_Holland", subtitle: "Actor · producer", description: "Two major current theatrical releases make Tom Holland a relevant screen-culture candidate." },
-  { title: "Matt Damon", article: "Matt_Damon", subtitle: "Actor · producer", description: "Leading The Odyssey places Matt Damon in the current film-driven culture conversation." },
-  { title: "Dwayne Johnson", article: "Dwayne_Johnson", subtitle: "Actor · producer", description: "Moana keeps Dwayne Johnson visible across film, music, and mainstream internet discussion." },
-  { title: "James Gunn", article: "James_Gunn", subtitle: "Film director · producer", description: "James Gunn provides another filmmaker benchmark for attention that is not tied to a social platform." },
-  { title: "Greta Gerwig", article: "Greta_Gerwig", subtitle: "Film director · writer", description: "Greta Gerwig keeps the comparison field broad enough to include major filmmakers, not just performers." },
-  { title: "Pierre Coffin", article: "Pierre_Coffin", subtitle: "Film director · animator", description: "The director and voice performer behind Minions & Monsters is included alongside other current filmmakers." },
+  { title: "MrBeast", article: "MrBeast", category: "digital", subtitle: "Digital creator · entrepreneur", description: "The large-scale video creator and entrepreneur remains a useful benchmark for mainstream internet attention." },
+  { title: "IShowSpeed", article: "IShowSpeed", category: "digital", subtitle: "Streamer · entertainer", description: "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture." },
+  { title: "Kai Cenat", article: "Kai_Cenat", category: "digital", subtitle: "Streamer · entertainer", description: "The streamer is measured alongside established film and music figures rather than in a short-form-only list." },
+  { title: "PewDiePie", article: "PewDiePie", category: "digital", subtitle: "Digital creator", description: "One of online video's most established creators remains in the field so sustained attention counts alongside sudden spikes." },
+  { title: "Markiplier", article: "Markiplier", category: "digital", subtitle: "Digital creator · filmmaker", description: "The creator and filmmaker bridges internet-native work and more traditional entertainment." },
+  { title: "KSI", article: "KSI", category: "digital", subtitle: "Digital creator · musician", description: "The creator, musician, boxer, and entrepreneur represents attention that moves between several media." },
+  { title: "Emma Chamberlain", article: "Emma_Chamberlain", category: "digital", subtitle: "Digital creator · podcaster", description: "The creator and podcaster represents internet-native influence outside gaming and spectacle channels." },
+  { title: "Marques Brownlee", article: "Marques_Brownlee", category: "digital", subtitle: "Technology creator · podcaster", description: "The technology creator provides a durable benchmark for online attention outside entertainment fandoms." },
+  { title: "Christopher Nolan", article: "Christopher_Nolan", category: "screen", subtitle: "Film director · producer", description: "The filmmaker is compared directly with musicians and internet-native creators rather than receiving a separate film score." },
+  { title: "Zendaya", article: "Zendaya", category: "screen", subtitle: "Actor · producer", description: "The actor and producer is included as a major creator and subject of current screen culture." },
+  { title: "Tom Holland", article: "Tom_Holland", category: "screen", subtitle: "Actor · producer", description: "The actor and producer is measured by the same public-interest signals as every other person in the field." },
+  { title: "Matt Damon", article: "Matt_Damon", category: "screen", subtitle: "Actor · producer", description: "The actor and producer represents current film-driven attention in the broader comparison." },
+  { title: "Dwayne Johnson", article: "Dwayne_Johnson", category: "screen", subtitle: "Actor · producer", description: "The actor and producer spans film, music, sports entertainment, and mainstream online discussion." },
+  { title: "James Gunn", article: "James_Gunn", category: "screen", subtitle: "Film director · producer", description: "The director and producer provides a filmmaker benchmark that is not tied to any social platform." },
+  { title: "Greta Gerwig", article: "Greta_Gerwig", category: "screen", subtitle: "Film director · writer", description: "The director and writer keeps major behind-the-camera creators in the comparison." },
+  { title: "Jordan Peele", article: "Jordan_Peele", category: "screen", subtitle: "Film director · writer", description: "The filmmaker and comedian adds another behind-the-camera voice to the screen category." },
+  { title: "Shakira", article: "Shakira", category: "music", subtitle: "Musician · performer", description: "The musician and performer supplies a global, cross-language measure of current attention." },
+  { title: "Ariana Grande", article: "Ariana_Grande", category: "music", subtitle: "Musician · actor", description: "The musician and actor is compared on the same public-interest scale as digital and screen creators." },
+  { title: "Taylor Swift", article: "Taylor_Swift", category: "music", subtitle: "Singer-songwriter", description: "The singer-songwriter remains in the field so sustained attention is measured alongside newer spikes." },
+  { title: "Justin Bieber", article: "Justin_Bieber", category: "music", subtitle: "Musician", description: "The musician provides another established global benchmark for current public attention." },
+  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", category: "music", subtitle: "Singer-songwriter · actor", description: "The singer-songwriter and actor is included across both music and screen culture." },
+  { title: "Bad Bunny", article: "Bad_Bunny", category: "music", subtitle: "Musician · actor", description: "The musician and actor adds a global, Spanish-language benchmark to the comparison." },
+  { title: "Bruno Mars", article: "Bruno_Mars", category: "music", subtitle: "Musician · producer", description: "The musician and producer represents sustained chart and performance attention." },
+  { title: "Morgan Wallen", article: "Morgan_Wallen", category: "music", subtitle: "Singer-songwriter", description: "The singer-songwriter provides a current country-music benchmark in the broader field." },
 ];
 
 const movieDetails = new Map([
@@ -258,115 +262,150 @@ function collectLockups(rootValue) {
   return videos;
 }
 
-async function lessonsInMemeCultureTop20() {
+function continuationToken(value) {
+  let token = "";
+  const walk = (candidate) => {
+    if (!candidate || typeof candidate !== "object") return;
+    const next = candidate.continuationItemRenderer?.continuationEndpoint?.continuationCommand?.token;
+    if (next?.length > token.length) token = next;
+    for (const child of Object.values(candidate)) walk(child);
+  };
+  walk(value);
+  return token;
+}
+
+function isWithinTwoMonths(video) {
+  return !/(?:3|4|5|6|7|8|9|10|11|12) months? ago|years? ago/i.test(video.age);
+}
+
+async function lessonsInMemeCultureRecent() {
   const html = await fetchText("https://www.youtube.com/@LIMC/videos", { headers: { "user-agent": "Mozilla/5.0" } });
   const initialRaw = html.match(/var ytInitialData = (\{.*?\});<\/script>/s)?.[1]
     ?? html.match(/window\["ytInitialData"\] = (\{.*?\});/s)?.[1];
   if (!initialRaw) throw new Error("YouTube did not expose its initial video data");
   const initial = JSON.parse(initialRaw);
   const videos = collectLockups(initial);
-  let token = "";
-  const findToken = (value) => {
-    if (!value || typeof value !== "object") return;
-    const candidate = value.continuationItemRenderer?.continuationEndpoint?.continuationCommand?.token;
-    if (candidate?.length > token.length) token = candidate;
-    for (const child of Object.values(value)) findToken(child);
-  };
-  findToken(initial);
+  let token = continuationToken(initial);
   const key = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/)?.[1];
   const version = html.match(/"INNERTUBE_CLIENT_VERSION":"([^"]+)"/)?.[1];
-  if (token && key && version) {
+  for (let page = 0; token && key && version && page < 6; page += 1) {
     const continuation = JSON.parse(await fetchText(`https://www.youtube.com/youtubei/v1/browse?key=${key}`, {
       method: "POST",
       headers: { "content-type": "application/json", "user-agent": "Mozilla/5.0" },
       body: JSON.stringify({ context: { client: { clientName: "WEB", clientVersion: version } }, continuation: token }),
     }));
-    videos.push(...collectLockups(continuation));
+    const pageVideos = collectLockups(continuation);
+    videos.push(...pageVideos);
+    token = continuationToken(continuation);
+    if (pageVideos.length && pageVideos.every((video) => !isWithinTwoMonths(video))) break;
   }
-  const recent = videos.filter((video) => !/(?:3|4|5|6|7|8|9|10|11|12) months? ago/i.test(video.age));
-  return [...new Map(recent.map((video) => [video.id, video])).values()]
-    .sort((a, b) => b.views - a.views)
-    .slice(0, 20);
+  return [...new Map(videos.filter(isWithinTwoMonths).map((video) => [video.id, video])).values()];
 }
 
-function memeVideoMatch(candidate, videos) {
-  const stop = new Set(["meme", "memes", "laugh", "laughing", "yourrage", "the", "this", "that", "with", "world", "month", "still", "from", "gets", "just"]);
-  const tokens = normalize(candidate.title).split(" ").filter((token) => token.length >= 3 && !stop.has(token));
+function memeVideoMatch(candidate, videos, context = "") {
+  const stop = new Set([
+    "about", "also", "based", "became", "character", "during", "example", "from", "image", "images", "internet",
+    "late", "laugh", "laughing", "media", "meme", "memes", "month", "online", "people", "refers", "series", "social",
+    "spread", "still", "term", "that", "their", "these", "this", "trend", "used", "video", "viral", "with", "yourrage",
+  ]);
+  const meaningfulTokens = (value) => normalize(value).split(" ").filter((token) => token.length >= 3 && !stop.has(token));
+  const titleTokens = meaningfulTokens(candidate.title);
+  const contextTokens = meaningfulTokens(context);
+  const direct = videos.find((video) => {
+    const videoTokens = new Set(meaningfulTokens(video.title));
+    const titleShared = titleTokens.filter((token) => videoTokens.has(token));
+    return titleShared.length >= 2 || titleShared.some((token) => token.length >= 6) || (titleTokens.length === 1 && titleShared.length === 1);
+  });
+  if (direct) return direct;
+  const contextPhrases = new Set(contextTokens.slice(0, -1)
+    .map((token, index) => `${token} ${contextTokens[index + 1]}`)
+    .filter((phrase) => phrase.replace(" ", "").length >= 8));
   return videos.find((video) => {
-    const title = normalize(video.title);
-    const shared = tokens.filter((token) => title.includes(token));
-    return shared.length >= 2 || shared.some((token) => token.length >= 6) || (tokens.length === 1 && shared.length === 1);
+    const videoTokens = meaningfulTokens(video.title);
+    return videoTokens.slice(0, -1).some((token, index) => contextPhrases.has(`${token} ${videoTokens[index + 1]}`));
   });
 }
 
-function relatedTitles(left, right) {
-  const stop = new Set(["the", "and", "are", "still", "this", "that", "with", "from", "into", "kinda", "meme", "memes"]);
-  const leftTokens = new Set(normalize(left).split(" ").filter((token) => token.length >= 3 && !stop.has(token)));
-  const rightTokens = normalize(right).split(" ").filter((token) => token.length >= 3 && !stop.has(token));
-  const shared = rightTokens.filter((token) => leftTokens.has(token));
-  return shared.length >= 2 || shared.some((token) => token.length >= 7);
+function sentenceList(value) {
+  return value.match(/[^.!?]+(?:[.!?]+|$)/g)?.map((sentence) => sentence.trim()).filter(Boolean) ?? [];
 }
 
-async function knowYourMemeSearch(video) {
-  const searchStop = new Set(["the", "and", "this", "that", "with", "from", "still", "into", "kinda", "just", "video", "meme", "memes", "are", "is", "was", "were", "works", "art", "passed", "away", "ruined", "algorithm", "show", "years", "late", "might", "lose", "company", "fever", "dream", "situation", "insane", "when", "youre", "minutes", "work", "incredible"]);
-  const query = normalize(video.title).split(" ").filter((token) => token.length >= 3 && !searchStop.has(token)).slice(0, 6).join(" ");
-  const html = await fetchText(`https://knowyourmeme.com/search?q=${encodeURIComponent(query || video.title)}`);
-  const galleryIndex = html.indexOf('<section class="gallery"');
-  if (galleryIndex < 0) return null;
-  const gallery = html.slice(galleryIndex);
-  const match = gallery.match(/<a class="item"[^>]*data-title=(['"])(.*?)\1[^>]*href=(['"])(\/memes\/[^'"?#]+)\3/i);
-  if (!match) return null;
-  const title = plainText(match[2]);
-  if (dryRun) console.log(`KYM search: ${video.title} → ${title}`);
-  if (!relatedTitles(video.title, title)) return null;
-  return { title, url: `https://knowyourmeme.com${match[4]}` };
+function cleanKymSentence(value) {
+  return value
+    .replace(/\bTikTokers?\b/gi, "creators")
+    .replace(/\bTikTok\b/gi, "social media")
+    .replace(/\s*,\s*also known as[\s\S]*?\s*,\s*(?=refers to|is|are)/i, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function shortenWords(value, limit) {
+  const words = value.split(/\s+/);
+  if (words.length <= limit) return value;
+  return `${words.slice(0, limit).join(" ").replace(/[,:;\s]+$/, "")}…`;
+}
+
+function conciseKymDescription(html) {
+  const about = html.match(/<h2[^>]*id=['"]about['"][^>]*>[\s\S]*?<\/h2>([\s\S]*?)(?=<h2\b)/i)?.[1];
+  if (!about) throw new Error("Know Your Meme entry had no About section");
+  const paragraphs = [...about.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((match) => plainText(match[1]))
+    .filter((text) => text.length > 20);
+  const sentences = paragraphs.flatMap(sentenceList).map(cleanKymSentence);
+  const context = sentences[0];
+  const usageCandidates = sentences.slice(1);
+  const usage = usageCandidates.find((sentence) => /\b(?:used|uses|use|caption|reaction|template|format|joke|parody)\b/i.test(sentence))
+    ?? usageCandidates.find((sentence) => /\b(?:meme|memes|fan art|edits)\b/i.test(sentence))
+    ?? usageCandidates.find((sentence) => /\b(?:viral|spread)\b/i.test(sentence));
+  if (!context) throw new Error("Know Your Meme entry had no usable description");
+  return [shortenWords(context, 22), usage && usage !== context ? shortenWords(usage, 22) : null].filter(Boolean).join(" ");
+}
+
+function kymMatchContext(html) {
+  const about = html.match(/<h2[^>]*id=['"]about['"][^>]*>[\s\S]*?<\/h2>([\s\S]*?)(?=<h2\b)/i)?.[1] ?? "";
+  return plainText(about);
 }
 
 async function updateMemes(brief, result, videos) {
   const section = brief.sections.find((entry) => entry.id === "memes");
   if (!section) return;
-  if (dryRun) console.log(`LIMC top 20: ${videos.map((video) => video.title).join(" | ")}`);
+  if (dryRun) console.log(`Recent LIMC uploads: ${videos.map((video) => video.title).join(" | ")}`);
+  if (dryRun) console.log(`Poll order: ${result.candidates.map((candidate) => `#${candidate.rank} ${candidate.title}`).join(" | ")}`);
   const currentByUrl = new Map(section.items.map((item) => [item.url, item]));
-  const pollMatches = result.candidates
-    .map((candidate) => ({ candidate, video: memeVideoMatch(candidate, videos), fromPoll: true }))
-    .filter((entry) => entry.video);
-  if (dryRun) console.log(`Poll matches: ${pollMatches.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
-  const usedVideos = new Set(pollMatches.map((entry) => entry.video.id));
-  const fillers = [];
-  for (const video of videos) {
-    if (pollMatches.length + fillers.length >= 5) break;
-    if (usedVideos.has(video.id)) continue;
-    const candidate = await knowYourMemeSearch(video);
-    if (!candidate || pollMatches.some((entry) => entry.candidate.url === candidate.url) || fillers.some((entry) => entry.candidate.url === candidate.url)) continue;
-    fillers.push({ candidate, video, fromPoll: false });
-    usedVideos.add(video.id);
+  const pollMatches = [];
+  for (const candidate of result.candidates) {
+    const html = await fetchText(candidate.url);
+    const video = memeVideoMatch(candidate, videos, kymMatchContext(html));
+    if (video) pollMatches.push({ candidate, video, description: conciseKymDescription(html) });
+    if (pollMatches.length === 5) break;
   }
-  const ordered = [...pollMatches, ...fillers].slice(0, 5);
+  if (dryRun) console.log(`Poll matches: ${pollMatches.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
+  const ordered = pollMatches.slice(0, 5);
   if (dryRun) console.log(`Meme cross-check: ${ordered.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
-  if (ordered.length < 5) throw new Error(`Only ${ordered.length} memes cleared both Know Your Meme and LIMC's recent top 20`);
+  if (ordered.length < 5) throw new Error(`Only ${ordered.length} poll memes had a matching LIMC upload from the past two months`);
 
   section.eyebrow = `${result.label} · latest complete month`;
-  section.description = `Starts with ${result.month} poll entries that also made Lessons in Meme Culture's 20 most-viewed videos posted in the past two months. If that overlap is short of five, remaining spots are recent LIMC top-20 subjects with a matching Know Your Meme entry. The poll winner is not exempt from the cross-check.`;
-  section.sources = [`Know Your Meme · ${result.month} result`, "Lessons in Meme Culture · recent top 20"];
-  section.items = ordered.map(({ candidate, video, fromPoll }, index) => {
+  section.description = `The ${result.month} Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.`;
+  section.sources = [`Know Your Meme · ${result.month} result`, "Lessons in Meme Culture · past 2 months"];
+  section.items = ordered.map(({ candidate, video, description }, index) => {
     const current = currentByUrl.get(candidate.url);
     const title = current?.title ?? candidate.title;
     return {
       rank: index + 1,
       title,
-      subtitle: current?.subtitle ?? (fromPoll ? `${result.month} poll × recent LIMC top 20` : "KYM entry × recent LIMC top 20"),
-      description: current?.description ?? `${title} ${fromPoll ? `placed in Know Your Meme's ${result.month} community poll and ` : "has a Know Your Meme entry and "}reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.`,
+      subtitle: `${result.month} poll finalist · LIMC covered`,
+      description: current?.description ?? description,
       image: current?.image ?? `/culture/meme-${slugify(title)}.webp`,
       alt: current?.alt ?? `Visual example of the ${title} meme`,
       url: candidate.url,
       source: "Know Your Meme",
-      metric: { label: "LIMC views · past 2 months", value: formatCompact(video.views) },
+      metric: { label: `${result.month} Meme of the Month`, value: `#${candidate.rank}` },
       evidence: [
-        { source: fromPoll ? `Know Your Meme ${result.month} result` : "Know Your Meme", url: fromPoll ? result.resultUrl : candidate.url },
+        { source: `Know Your Meme ${result.month} result`, url: result.resultUrl },
         { source: "Lessons in Meme Culture", url: `https://www.youtube.com/watch?v=${video.id}` },
       ],
       accent: current?.accent ?? accents[index],
-      ...(current?.caution ? { caution: current.caution } : {}),
     };
   });
 }
@@ -466,15 +505,25 @@ function updateCreators(brief, trendInterest, pageviews) {
   const ranking = trendInterest ?? pageviews;
   if (!ranking) return;
   const usesTrends = Boolean(trendInterest);
-  const leaders = cultureMakers
+  const ranked = cultureMakers
     .filter((item) => Number.isFinite(ranking[item.title]))
-    .sort((left, right) => ranking[right.title] - ranking[left.title])
-    .slice(0, 5);
+    .sort((left, right) => ranking[right.title] - ranking[left.title]);
+  const selected = ranked.filter((item) => item.category === "digital").slice(0, 2);
+  const categoryCounts = new Map([["digital", selected.length]]);
+  for (const person of ranked) {
+    if (selected.includes(person)) continue;
+    const count = categoryCounts.get(person.category) ?? 0;
+    if (count >= 2) continue;
+    selected.push(person);
+    categoryCounts.set(person.category, count + 1);
+    if (selected.length === 5) break;
+  }
+  const leaders = selected.sort((left, right) => ranking[right.title] - ranking[left.title]);
   if (leaders.length < 5) throw new Error("Fewer than five culture-makers had a direct popularity measure");
   section.eyebrow = "People · past 30 days";
   section.description = usesTrends
-    ? "Directors, musicians, actors, streamers, and other culture-makers are compared in Google Trends over 30 days. The displayed 0–100 interest index is normalized only within this broad candidate field."
-    : "Directors, musicians, actors, streamers, and other culture-makers are checked in Google Trends. When its automated comparison is rate-limited, this edition ranks the same broad field by transparent 30-day English Wikipedia views.";
+    ? "A balanced field of digital, music, and screen creators is ranked by 30-day Google Trends interest. Two places are reserved for digital-native creators and no category can take more than two."
+    : "A balanced field of digital, music, and screen creators is ranked by 30-day English Wikipedia views when Google Trends rate-limits automation. Two places are reserved for digital-native creators and no category can take more than two.";
   section.sources = ["Google Trends · 30 days", "Wikipedia · 30-day views"];
   section.items = leaders.map((person, index) => {
     const current = currentByTitle.get(normalize(person.title));
@@ -541,11 +590,17 @@ function parseMoney(value) {
 }
 
 function formatMoney(value) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(value);
+  const units = [
+    [1_000_000_000, "B"],
+    [1_000_000, "M"],
+    [1_000, "K"],
+  ];
+  const unit = units.find(([threshold]) => value >= threshold);
+  if (!unit) return `$${Math.round(value)}`;
+  const [threshold, suffix] = unit;
+  const scaled = value / threshold;
+  const digits = scaled >= 100 ? 0 : scaled >= 10 ? 1 : 2;
+  return `$${scaled.toFixed(digits).replace(/\.0+$/, "")}${suffix}`;
 }
 
 function parseWeekendRows(html) {
@@ -670,11 +725,12 @@ function updateSongs(brief, chart, spotifyTracks) {
       const spotifyArtists = new Set(normalize(entry.track.artist).split(" ").filter((token) => token.length >= 3));
       return normalize(entry.row.artist).split(" ").some((token) => token.length >= 3 && spotifyArtists.has(token));
     })
+    .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week))
     .slice(0, 5);
   if (crossovers.length < 5) throw new Error("Fewer than five songs overlapped Billboard and Spotify");
   const currentById = new Map(section.items.map((item) => [item.spotifyId, item]));
   section.eyebrow = "Spotify Global × Billboard";
-  section.description = "The highest songs in Spotify's current Top 50 Global that also appear on the Billboard Hot 100. Spotify order decides the rank; Billboard is the required second check. Press play for Spotify's official embed.";
+  section.description = "Songs must appear in both Spotify's current Top 50 Global and the Billboard Hot 100. Billboard position decides the final order. Press play for Spotify's official embed.";
   section.sources = ["Spotify Top 50 · Global", "Billboard Hot 100"];
   section.items = crossovers.map(({ row, track, spotifyRank }, index) => {
     const current = currentById.get(track.id);
@@ -687,7 +743,7 @@ function updateSongs(brief, chart, spotifyTracks) {
       alt: current?.alt ?? `${track.title} artwork by ${track.artist}`,
       url: `https://open.spotify.com/track/${track.id}`,
       source: "Spotify",
-      metric: { label: "Spotify Top 50 · Global", value: `#${spotifyRank}` },
+      metric: { label: "Billboard Hot 100", value: `#${row.this_week}` },
       evidence: [
         { source: "Spotify", url: "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF" },
         { source: "Billboard", url: `https://www.billboard.com/charts/hot-100/${chart.date}/` },
@@ -700,10 +756,10 @@ function updateSongs(brief, chart, spotifyTracks) {
 
 function updatePulse(brief) {
   const definitions = [
-    ["memes", "Cross-verified meme"],
+    ["memes", "Meme poll leader"],
     ["slang", "Yearly slang"],
     ["creators", "30-day culture-maker"],
-    ["songs", "Spotify crossover"],
+    ["songs", "Billboard crossover"],
   ];
   brief.pulse = definitions.map(([sectionId, label]) => {
     const item = brief.sections.find((section) => section.id === sectionId)?.items[0];
@@ -725,10 +781,27 @@ function validateBrief(brief) {
       }
     });
   }
+  const memes = brief.sections.find((section) => section.id === "memes");
+  const memePollRanks = memes?.items.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
+  if (memePollRanks.some((rank) => !Number.isInteger(rank))
+    || memePollRanks.some((rank, index) => index > 0 && rank <= memePollRanks[index - 1])) {
+    throw new Error("Memes must preserve the published Meme of the Month order");
+  }
+  const creators = brief.sections.find((section) => section.id === "creators");
+  if ((creators?.items.filter((item) => /Digital creator|Streamer|Technology creator/i.test(item.subtitle)).length ?? 0) < 2) {
+    throw new Error("The creator board must retain two digital-native places");
+  }
+  const songs = brief.sections.find((section) => section.id === "songs");
+  const billboardRanks = songs?.items.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
+  if (billboardRanks.some((rank) => !Number.isInteger(rank))
+    || billboardRanks.some((rank, index) => index > 0 && rank < billboardRanks[index - 1])) {
+    throw new Error("Songs must be ordered by Billboard Hot 100 position");
+  }
   const serialized = JSON.stringify(brief);
   if (/tiktok/i.test(serialized)) throw new Error("The briefing must not contain TikTok data");
   if (/socialblade|socialcounts/i.test(serialized)) throw new Error("The briefing must not contain platform-growth ranking data");
   if (/"(?:signal|score)":/.test(serialized)) throw new Error("The briefing must not contain opaque score fields");
+  if (/"caution":|b\*{2,}|a\*{2,}/i.test(serialized)) throw new Error("The briefing must not add profanity warnings or censorship");
 }
 
 const brief = JSON.parse(await readFile(dataPath, "utf8"));
@@ -741,7 +814,7 @@ if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().sl
 const slang = brief.sections.find((section) => section.id === "slang")?.items ?? [];
 const sourceResults = await Promise.all([
   safely("Know Your Meme result", latestMemeResult),
-  safely("Lessons in Meme Culture", lessonsInMemeCultureTop20),
+  safely("Lessons in Meme Culture", lessonsInMemeCultureRecent),
   safely("Know Your Meme annual slang review", () => fetchText("https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025")),
   safely("Urban Dictionary", () => verifyUrbanDictionary(slang)),
   safely("Google Trends slang", () => googleTrendsSlang(slang)),
@@ -762,6 +835,7 @@ if (byName["IMDb / Box Office Mojo"].ok) updateMovies(brief, byName["IMDb / Box 
 if (byName["Billboard Hot 100"].ok && byName["Spotify Top 50 Global"].ok) {
   updateSongs(brief, byName["Billboard Hot 100"].value, byName["Spotify Top 50 Global"].value);
 }
+for (const item of brief.sections.flatMap((section) => section.items)) delete item.caution;
 updatePulse(brief);
 
 const successfulSources = sourceResults.filter((result) => result.ok).length;

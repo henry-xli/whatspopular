@@ -25,19 +25,19 @@ npm test
 ## Daily publishing loop
 
 `scripts/update-trends.mjs` requires two-source evidence for every entry. It
-cross-checks the latest completed Know Your Meme monthly poll against Lessons in
-Meme Culture's 20 most-viewed videos posted in the past two months. A meme never
-gets a winner exemption; if the poll intersection is short, the remaining spots
-must still have both a KYM entry and a recent LIMC top-20 video. Slang uses a
-12-month set checked with Urban Dictionary and Google Trends. Creators span
-filmmakers, musicians, actors, streamers, and established digital creators;
-Google Trends is the primary 30-day comparison and transparent Wikipedia
-pageviews are the fallback when Google rate-limits automation. Movies are the
-five largest cumulative U.S./Canada grosses within IMDb's current weekend top
-ten, using Box Office Mojo's underlying chart data. Songs are ordered by
-Spotify's official Top 50 Global and must also appear on Billboard's Hot 100. It
-stores direct measures rather than a made-up blended score and atomically
-replaces `data/trends.json` only after validation.
+keeps the latest completed Know Your Meme monthly poll in its published order,
+then filters it to memes covered by any Lessons in Meme Culture upload from the
+past two months. Card descriptions are derived from each meme's Know Your Meme
+About section. Slang uses a 12-month set checked with Urban Dictionary and
+Google Trends. Creators come from balanced digital, music, and screen fields;
+two places are reserved for digital-native creators, no category can take more
+than two, and every person is ordered by the same 30-day Google Trends measure
+or transparent Wikipedia-pageview fallback. Movies are the five largest
+cumulative U.S./Canada grosses within IMDb's current weekend top ten, using Box
+Office Mojo's underlying chart data. Songs must appear on both Spotify's
+official Top 50 Global and Billboard's Hot 100, with Billboard position setting
+their final order. The updater atomically replaces `data/trends.json` only after
+validation.
 
 `scripts/cache-images.mjs` derives the current asset set from the validated
 briefing, downloads images through strict host and size allowlists, crops them

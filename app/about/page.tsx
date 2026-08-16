@@ -63,7 +63,7 @@ export default function AboutPage() {
           </p>
           <p>
             Each card keeps links to at least two distinct sources. Rankings use
-            direct measures—recent video views, Google interest, pageviews,
+            direct measures—monthly poll rank, Google interest, pageviews,
             cumulative box office, or chart position—rather than a made-up
             blended score. A last-known-good file stays live if a source is
             down.

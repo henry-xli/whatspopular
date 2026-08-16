@@ -682,6 +682,10 @@ img {
     border-color 0.22s ease;
 }
 
+.culture-card.no-metric {
+  height: auto;
+}
+
 a.culture-card:hover {
   z-index: 2;
   transform: translateY(-7px) rotate(-0.5deg);
@@ -744,6 +748,10 @@ a.culture-card:hover {
   min-height: 265px;
 }
 
+.culture-card.no-metric .card-copy {
+  min-height: 0;
+}
+
 .card-title-line {
   display: flex;
   gap: 8px;
@@ -779,16 +787,6 @@ a.culture-card:hover {
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.45;
-}
-
-.caution {
-  padding: 8px;
-  margin: -8px 0 14px;
-  border-left: 3px solid var(--coral);
-  background: color-mix(in srgb, var(--coral) 8%, transparent);
-  color: var(--muted);
-  font-size: 0.67rem;
-  line-height: 1.35;
 }
 
 .rating-row {

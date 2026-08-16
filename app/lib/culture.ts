@@ -20,7 +20,6 @@ export type CultureItem = {
     url: string;
   }>;
   accent: string;
-  caution?: string;
   rating?: string;
   spotifyId?: string;
 };

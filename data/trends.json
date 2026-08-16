@@ -2,14 +2,14 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete month · other boards: rolling",
-  "generatedAt": "2026-08-15T23:57:55.508Z",
+  "generatedAt": "2026-08-16T04:36:46.811Z",
   "summary": "A five-minute, two-source briefing on the jokes, language, people, screens, and songs shaping internet culture right now.",
   "pulse": [
     {
-      "label": "Cross-verified meme",
-      "value": "Kwebbelkop Laugh",
-      "image": "/culture/meme-kwebbelkop.webp",
-      "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh"
+      "label": "Meme poll leader",
+      "value": "Jimothy the raccoon",
+      "image": "/culture/meme-jimothy-the-raccoon.webp",
+      "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon"
     },
     {
       "label": "Yearly slang",
@@ -24,10 +24,10 @@
       "url": "https://en.wikipedia.org/wiki/Zendaya"
     },
     {
-      "label": "Spotify crossover",
-      "value": "Loser",
-      "image": "/culture/song-loser-tame-impala.webp",
-      "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR"
+      "label": "Billboard crossover",
+      "value": "Choosin' Texas",
+      "image": "/culture/song-choosin-texas-ella-langley.webp",
+      "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN"
     }
   ],
   "sections": [
@@ -35,25 +35,50 @@
       "id": "memes",
       "eyebrow": "July 2026 · latest complete month",
       "title": "Memes",
-      "description": "Starts with July poll entries that also made Lessons in Meme Culture's 20 most-viewed videos posted in the past two months. If that overlap is short of five, remaining spots are recent LIMC top-20 subjects with a matching Know Your Meme entry. The poll winner is not exempt from the cross-check.",
+      "description": "The July Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.",
       "sources": [
         "Know Your Meme · July result",
-        "Lessons in Meme Culture · recent top 20"
+        "Lessons in Meme Culture · past 2 months"
       ],
       "layout": "landscape",
       "items": [
         {
           "rank": 1,
+          "title": "Jimothy the raccoon",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "A round, short-spined Seattle raccoon celebrated through affectionate fan art, sighting posts, and jokes comparing compact objects to him.",
+          "image": "/culture/meme-jimothy-the-raccoon.webp",
+          "alt": "Visual example of the Jimothy the raccoon meme",
+          "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#1"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=Pa-L5dwDGJ4"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
           "title": "Kwebbelkop Laugh",
-          "subtitle": "The laugh that replaces the joke",
-          "description": "A streamer laugh became a reusable punchline, while the associated portrait kept mutating into increasingly strange edits.",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "An exaggerated YourRAGE laugh paired with Kwebbelkop's face, used as an audio punchline and remixed into increasingly distorted reaction edits.",
           "image": "/culture/meme-kwebbelkop.webp",
           "alt": "Kwebbelkop portrait used with the viral laughing sound",
           "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh",
           "source": "Know Your Meme",
           "metric": {
-            "label": "LIMC views · past 2 months",
-            "value": "483K"
+            "label": "July Meme of the Month",
+            "value": "#3"
           },
           "evidence": [
             {
@@ -68,17 +93,67 @@
           "accent": "#9b8cff"
         },
         {
-          "rank": 2,
+          "rank": 3,
+          "title": "Hatsune Miku World Cup Custody Battle",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "World Cup fans jokingly award “custody” of Hatsune Miku to each winning nation, then redraw her in that country's colors and culture.",
+          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
+          "alt": "Visual example of the Hatsune Miku World Cup Custody Battle meme",
+          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#4"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Mbappé Special",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "From Kylian Mbappé calling his favorite thing to cook “nothing”; people now call an empty or nonexistent offering the “Mbappé Special.”",
+          "image": "/culture/meme-mbappe-special.webp",
+          "alt": "Visual example of the Mbappé Special meme",
+          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#5"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
           "title": "John Rod",
-          "subtitle": "The stand that solos fiction",
-          "description": "An odd JoJo's Bizarre Adventure reveal turned into mock power-scaling claims that John Rod can defeat almost anyone.",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "An unnamed JoJo stand nicknamed John Rod, used in absurd power-scaling jokes and fan edits that claim he can defeat anyone.",
           "image": "/culture/meme-john-rod.webp",
           "alt": "John Rod from JoJo's Bizarre Adventure",
           "url": "https://knowyourmeme.com/memes/john-rod",
           "source": "Know Your Meme",
           "metric": {
-            "label": "LIMC views · past 2 months",
-            "value": "650K"
+            "label": "July Meme of the Month",
+            "value": "#6"
           },
           "evidence": [
             {
@@ -90,83 +165,7 @@
               "url": "https://www.youtube.com/watch?v=S2PsR7TCG7U"
             }
           ],
-          "accent": "#57d5a4",
-          "caution": "The source page contains JoJo's manga spoilers"
-        },
-        {
-          "rank": 3,
-          "title": "Erling Haaland",
-          "subtitle": "July poll × recent LIMC top 20",
-          "description": "Erling Haaland placed in Know Your Meme's July community poll and reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.",
-          "image": "/culture/meme-erling-haaland.webp",
-          "alt": "Visual example of the Erling Haaland meme",
-          "url": "https://knowyourmeme.com/memes/erling-haaland-running",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "LIMC views · past 2 months",
-            "value": "764K"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=bdzTgGQJNbc"
-            }
-          ],
           "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
-          "title": "Just Say \"Here,\" Bro",
-          "subtitle": "KYM entry × recent LIMC top 20",
-          "description": "Just Say \"Here,\" Bro has a Know Your Meme entry and reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.",
-          "image": "/culture/meme-just-say-here-bro.webp",
-          "alt": "Visual example of the Just Say \"Here,\" Bro meme",
-          "url": "https://knowyourmeme.com/memes/just-say-here-bro",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "LIMC views · past 2 months",
-            "value": "1M"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme",
-              "url": "https://knowyourmeme.com/memes/just-say-here-bro"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=CrFOSF2Kn3k"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 5,
-          "title": "Jacob Batalon CEO of Sex",
-          "subtitle": "KYM entry × recent LIMC top 20",
-          "description": "Jacob Batalon CEO of Sex has a Know Your Meme entry and reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.",
-          "image": "/culture/meme-jacob-batalon-ceo-of-sex.webp",
-          "alt": "Visual example of the Jacob Batalon CEO of Sex meme",
-          "url": "https://knowyourmeme.com/memes/jacob-batalon-ceo-of-sex",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "LIMC views · past 2 months",
-            "value": "1M"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme",
-              "url": "https://knowyourmeme.com/memes/jacob-batalon-ceo-of-sex"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=WJeAVoKwZuw"
-            }
-          ],
-          "accent": "#ff6b57"
         }
       ]
     },
@@ -286,7 +285,7 @@
           "rank": 5,
           "title": "SYBAU",
           "subtitle": "An aggressive request to be quiet",
-          "description": "An acronym for “shut your b**** a** up,” often used as a blunt reaction rather than a literal instruction.",
+          "description": "An acronym for “shut your bitch ass up,” often used as a blunt reaction rather than a literal instruction.",
           "image": "/culture/slang-sybau.webp",
           "alt": "Reaction image associated with the acronym SYBAU",
           "url": "https://knowyourmeme.com/memes/sybau",
@@ -305,8 +304,7 @@
               "url": "https://www.urbandictionary.com/define.php?term=sybau"
             }
           ],
-          "accent": "#ff6b57",
-          "caution": "The expanded acronym contains profanity"
+          "accent": "#ff6b57"
         }
       ]
     },
@@ -314,7 +312,7 @@
       "id": "creators",
       "eyebrow": "People · past 30 days",
       "title": "Creators",
-      "description": "Directors, musicians, actors, streamers, and other culture-makers are checked in Google Trends. When its automated comparison is rate-limited, this edition ranks the same broad field by transparent 30-day English Wikipedia views.",
+      "description": "A balanced field of digital, music, and screen creators is ranked by 30-day English Wikipedia views when Google Trends rate-limits automation. Two places are reserved for digital-native creators and no category can take more than two.",
       "sources": [
         "Google Trends · 30 days",
         "Wikipedia · 30-day views"
@@ -325,14 +323,14 @@
           "rank": 1,
           "title": "Zendaya",
           "subtitle": "Actor · producer",
-          "description": "A major presence in Spider-Man: Brand New Day and The Odyssey keeps Zendaya central to current screen culture.",
+          "description": "The actor and producer is included as a major creator and subject of current screen culture.",
           "image": "/culture/creator-zendaya.webp",
           "alt": "Portrait of Zendaya",
           "url": "https://en.wikipedia.org/wiki/Zendaya",
           "source": "Wikipedia",
           "metric": {
             "label": "Wikipedia views · 30 days",
-            "value": "3.46M"
+            "value": "3.37M"
           },
           "evidence": [
             {
@@ -350,14 +348,14 @@
           "rank": 2,
           "title": "Tom Holland",
           "subtitle": "Actor · producer",
-          "description": "Two major current theatrical releases make Tom Holland a relevant screen-culture candidate.",
+          "description": "The actor and producer is measured by the same public-interest signals as every other person in the field.",
           "image": "/culture/creator-tom-holland.webp",
           "alt": "Portrait of Tom Holland",
           "url": "https://en.wikipedia.org/wiki/Tom_Holland",
           "source": "Wikipedia",
           "metric": {
             "label": "Wikipedia views · 30 days",
-            "value": "3.18M"
+            "value": "3.12M"
           },
           "evidence": [
             {
@@ -373,41 +371,16 @@
         },
         {
           "rank": 3,
-          "title": "Christopher Nolan",
-          "subtitle": "Film director · producer",
-          "description": "The filmmaker behind The Odyssey is included in the same comparison field as musicians and digital-native creators.",
-          "image": "/culture/creator-christopher-nolan.webp",
-          "alt": "Portrait of Christopher Nolan",
-          "url": "https://en.wikipedia.org/wiki/Christopher_Nolan",
-          "source": "Wikipedia",
-          "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "2.74M"
-          },
-          "evidence": [
-            {
-              "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Christopher%20Nolan"
-            },
-            {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
           "title": "Shakira",
           "subtitle": "Musician · performer",
-          "description": "A global chart presence and major live appearances keep Shakira in the wider culture conversation.",
+          "description": "The musician and performer supplies a global, cross-language measure of current attention.",
           "image": "/culture/creator-shakira.webp",
           "alt": "Portrait of Shakira",
           "url": "https://en.wikipedia.org/wiki/Shakira",
           "source": "Wikipedia",
           "metric": {
             "label": "Wikipedia views · 30 days",
-            "value": "1.87M"
+            "value": "1.84M"
           },
           "evidence": [
             {
@@ -419,29 +392,54 @@
               "url": "https://en.wikipedia.org/wiki/Shakira"
             }
           ],
-          "accent": "#5ab0ff"
+          "accent": "#57d5a4"
         },
         {
-          "rank": 5,
-          "title": "Matt Damon",
-          "subtitle": "Actor · producer",
-          "description": "Leading The Odyssey places Matt Damon in the current film-driven culture conversation.",
-          "image": "/culture/creator-matt-damon.webp",
-          "alt": "Portrait of Matt Damon",
-          "url": "https://en.wikipedia.org/wiki/Matt_Damon",
+          "rank": 4,
+          "title": "IShowSpeed",
+          "subtitle": "Streamer · entertainer",
+          "description": "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture.",
+          "image": "/culture/creator-ishowspeed.webp",
+          "alt": "Portrait of IShowSpeed",
+          "url": "https://en.wikipedia.org/wiki/IShowSpeed",
           "source": "Wikipedia",
           "metric": {
             "label": "Wikipedia views · 30 days",
-            "value": "1.57M"
+            "value": "378K"
           },
           "evidence": [
             {
               "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Matt%20Damon"
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=IShowSpeed"
             },
             {
               "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Matt_Damon"
+              "url": "https://en.wikipedia.org/wiki/IShowSpeed"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "MrBeast",
+          "subtitle": "Digital creator · entrepreneur",
+          "description": "The large-scale video creator and entrepreneur remains a useful benchmark for mainstream internet attention.",
+          "image": "/culture/creator-mrbeast.webp",
+          "alt": "Portrait of MrBeast",
+          "url": "https://en.wikipedia.org/wiki/MrBeast",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "244K"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=MrBeast"
+            },
+            {
+              "source": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/MrBeast"
             }
           ],
           "accent": "#ff6b57"
@@ -470,7 +468,7 @@
           "source": "IMDb",
           "metric": {
             "label": "U.S. & Canada total gross",
-            "value": "$654,342,914"
+            "value": "$654M"
           },
           "rating": "8.2",
           "evidence": [
@@ -496,7 +494,7 @@
           "source": "IMDb",
           "metric": {
             "label": "U.S. & Canada total gross",
-            "value": "$470,699,012"
+            "value": "$471M"
           },
           "rating": "7.5",
           "evidence": [
@@ -522,7 +520,7 @@
           "source": "IMDb",
           "metric": {
             "label": "U.S. & Canada total gross",
-            "value": "$461,385,045"
+            "value": "$461M"
           },
           "rating": "8.3",
           "evidence": [
@@ -548,7 +546,7 @@
           "source": "IMDb",
           "metric": {
             "label": "U.S. & Canada total gross",
-            "value": "$176,357,285"
+            "value": "$176M"
           },
           "rating": "6.5",
           "evidence": [
@@ -574,7 +572,7 @@
           "source": "IMDb",
           "metric": {
             "label": "U.S. & Canada total gross",
-            "value": "$121,626,167"
+            "value": "$122M"
           },
           "rating": "5.6",
           "evidence": [
@@ -595,7 +593,7 @@
       "id": "songs",
       "eyebrow": "Spotify Global × Billboard",
       "title": "Songs",
-      "description": "The highest songs in Spotify's current Top 50 Global that also appear on the Billboard Hot 100. Spotify order decides the rank; Billboard is the required second check. Press play for Spotify's official embed.",
+      "description": "Songs must appear in both Spotify's current Top 50 Global and the Billboard Hot 100. Billboard position decides the final order. Press play for Spotify's official embed.",
       "sources": [
         "Spotify Top 50 · Global",
         "Billboard Hot 100"
@@ -604,16 +602,16 @@
       "items": [
         {
           "rank": 1,
-          "title": "Loser",
-          "subtitle": "Tame Impala",
-          "description": "Loser is #3 in Spotify's current global playlist and #46 on the current Billboard Hot 100.",
-          "image": "/culture/song-loser-tame-impala.webp",
-          "alt": "Loser artwork by Tame Impala",
-          "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
+          "title": "Choosin' Texas",
+          "subtitle": "Ella Langley",
+          "description": "Choosin' Texas is #18 in Spotify's current global playlist and #1 on the current Billboard Hot 100.",
+          "image": "/culture/song-choosin-texas-ella-langley.webp",
+          "alt": "Choosin' Texas artwork by Ella Langley",
+          "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
           "source": "Spotify",
           "metric": {
-            "label": "Spotify Top 50 · Global",
-            "value": "#3"
+            "label": "Billboard Hot 100",
+            "value": "#1"
           },
           "evidence": [
             {
@@ -626,7 +624,7 @@
             }
           ],
           "accent": "#ffc857",
-          "spotifyId": "7bxaFZ1O3cHkgLKMsdC3xR"
+          "spotifyId": "7scFxt9VhL4FJwuPSfRlfN"
         },
         {
           "rank": 2,
@@ -638,8 +636,8 @@
           "url": "https://open.spotify.com/track/3iy2QuCtCzpWnR6tia39AB",
           "source": "Spotify",
           "metric": {
-            "label": "Spotify Top 50 · Global",
-            "value": "#4"
+            "label": "Billboard Hot 100",
+            "value": "#2"
           },
           "evidence": [
             {
@@ -656,16 +654,16 @@
         },
         {
           "rank": 3,
-          "title": "Animal",
-          "subtitle": "KATSEYE",
-          "description": "Animal is #5 in Spotify's current global playlist and #35 on the current Billboard Hot 100.",
-          "image": "/culture/song-animal-katseye.webp",
-          "alt": "Animal artwork by KATSEYE",
-          "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
+          "title": "petal",
+          "subtitle": "Ariana Grande",
+          "description": "petal is #14 in Spotify's current global playlist and #4 on the current Billboard Hot 100.",
+          "image": "/culture/song-petal-ariana-grande.webp",
+          "alt": "petal artwork by Ariana Grande",
+          "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
           "source": "Spotify",
           "metric": {
-            "label": "Spotify Top 50 · Global",
-            "value": "#5"
+            "label": "Billboard Hot 100",
+            "value": "#4"
           },
           "evidence": [
             {
@@ -678,20 +676,20 @@
             }
           ],
           "accent": "#57d5a4",
-          "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX"
+          "spotifyId": "70pVCVMGjmIWPbWXDwf11e"
         },
         {
           "rank": 4,
-          "title": "Earrings",
-          "subtitle": "Malcolm Todd",
-          "description": "Earrings is #6 in Spotify's current global playlist and #28 on the current Billboard Hot 100.",
-          "image": "/culture/song-earrings-malcolm-todd.webp",
-          "alt": "Earrings artwork by Malcolm Todd",
-          "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
+          "title": "So Easy (To Fall In Love)",
+          "subtitle": "Olivia Dean",
+          "description": "So Easy (To Fall In Love) is #45 in Spotify's current global playlist and #9 on the current Billboard Hot 100.",
+          "image": "/culture/song-so-easy-to-fall-in-love-olivia-dean.webp",
+          "alt": "So Easy (To Fall In Love) artwork by Olivia Dean",
+          "url": "https://open.spotify.com/track/6sGIMrtIzQjdzNndVxe397",
           "source": "Spotify",
           "metric": {
-            "label": "Spotify Top 50 · Global",
-            "value": "#6"
+            "label": "Billboard Hot 100",
+            "value": "#9"
           },
           "evidence": [
             {
@@ -704,20 +702,20 @@
             }
           ],
           "accent": "#5ab0ff",
-          "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ"
+          "spotifyId": "6sGIMrtIzQjdzNndVxe397"
         },
         {
           "rank": 5,
-          "title": "Self Aware",
-          "subtitle": "Temper City",
-          "description": "Self Aware is #8 in Spotify's current global playlist and #47 on the current Billboard Hot 100.",
-          "image": "/culture/song-self-aware-temper-city.webp",
-          "alt": "Self Aware artwork by Temper City",
-          "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
+          "title": "Man I Need",
+          "subtitle": "Olivia Dean",
+          "description": "Man I Need is #23 in Spotify's current global playlist and #11 on the current Billboard Hot 100.",
+          "image": "/culture/song-man-i-need-olivia-dean.webp",
+          "alt": "Man I Need artwork by Olivia Dean",
+          "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
           "source": "Spotify",
           "metric": {
-            "label": "Spotify Top 50 · Global",
-            "value": "#8"
+            "label": "Billboard Hot 100",
+            "value": "#11"
           },
           "evidence": [
             {
@@ -730,7 +728,7 @@
             }
           ],
           "accent": "#ff6b57",
-          "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT"
+          "spotifyId": "1qbmS6ep2hbBRaEZFpn7BX"
         }
       ]
     }
@@ -739,54 +737,54 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:56.466Z"
+      "checkedAt": "2026-08-16T04:36:47.259Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:56.892Z"
+      "checkedAt": "2026-08-16T04:36:47.792Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:56.443Z"
+      "checkedAt": "2026-08-16T04:36:47.275Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:55.949Z"
+      "checkedAt": "2026-08-16T04:36:46.980Z"
     },
     {
       "name": "Google Trends slang",
       "ok": false,
-      "checkedAt": "2026-08-15T23:57:55.966Z",
+      "checkedAt": "2026-08-16T04:36:46.992Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Google Trends creators",
       "ok": false,
-      "checkedAt": "2026-08-15T23:57:55.919Z",
+      "checkedAt": "2026-08-16T04:36:46.976Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Wikipedia creator pageviews",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:58.882Z"
+      "checkedAt": "2026-08-16T04:36:50.504Z"
     },
     {
       "name": "IMDb / Box Office Mojo",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:58.428Z"
+      "checkedAt": "2026-08-16T04:36:47.658Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:55.905Z"
+      "checkedAt": "2026-08-16T04:36:46.974Z"
     },
     {
       "name": "Spotify Top 50 Global",
       "ok": true,
-      "checkedAt": "2026-08-15T23:57:56.311Z"
+      "checkedAt": "2026-08-16T04:36:47.261Z"
     }
   ]
 }
