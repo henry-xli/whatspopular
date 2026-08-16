@@ -11,22 +11,38 @@ export type CultureItem = {
   alt: string;
   url: string;
   source: string;
-  signal: string;
-  score: number;
+  metric?: {
+    label: string;
+    value: string;
+  };
+  evidence: Array<{
+    source: string;
+    url: string;
+  }>;
   accent: string;
-  caution?: string;
   rating?: string;
   spotifyId?: string;
+  spotifyRank?: number;
+  category?: string;
 };
+
+export type CultureSource = {
+  label: string;
+  url: string;
+};
+
+export type CultureMoreItem = CultureItem;
 
 export type CultureSection = {
   id: string;
   eyebrow: string;
   title: string;
   description: string;
-  sources: string[];
+  sources: CultureSource[];
   layout: CultureLayout;
   items: CultureItem[];
+  moreItems?: CultureMoreItem[];
+  moreLabel?: string;
 };
 
 export type CultureBrief = {
@@ -35,35 +51,21 @@ export type CultureBrief = {
   window: string;
   generatedAt: string;
   summary: string;
-  spotlight: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    image: string;
-    alt: string;
-    url: string;
-    source: string;
-    stat: string;
-    statLabel: string;
-  };
-  pulse: Array<{
-    label: string;
-    value: string;
-    image: string;
-    url: string;
-  }>;
   sections: CultureSection[];
 };
 
 const allowedLinkHosts = new Set([
-  "ads.tiktok.com",
+  "en.wikipedia.org",
   "knowyourmeme.com",
   "open.spotify.com",
+  "trends.google.com",
   "trending.knowyourmeme.com",
+  "www.boxofficemojo.com",
   "www.imdb.com",
-  "www.instagram.com",
-  "www.tiktok.com",
-  "www.youtube.com"
+  "www.billboard.com",
+  "www.urbandictionary.com",
+  "www.youtube.com",
+  "pageviews.wmcloud.org"
 ]);
 
 function assertExternalUrl(value: string, label: string) {
@@ -77,25 +79,9 @@ function validateBrief(value: CultureBrief) {
   if (!Number.isFinite(Date.parse(value.generatedAt))) {
     throw new Error("Culture brief has an invalid generatedAt date");
   }
-  if (value.sections.length !== 6) {
-    throw new Error("Culture brief must contain exactly six boards");
+  if (value.sections.length !== 5) {
+    throw new Error("Culture brief must contain exactly five boards");
   }
-  if (value.pulse.length !== 4) {
-    throw new Error("Culture pulse must contain exactly four items");
-  }
-
-  assertExternalUrl(value.spotlight.url, "Spotlight");
-  if (!value.spotlight.image.startsWith("/culture/")) {
-    throw new Error("Spotlight image must be a local cached asset");
-  }
-
-  for (const pulseItem of value.pulse) {
-    assertExternalUrl(pulseItem.url, "Pulse item");
-    if (!pulseItem.image.startsWith("/culture/")) {
-      throw new Error("Pulse image must be a local cached asset");
-    }
-  }
-
   const sectionIds = new Set<string>();
   for (const section of value.sections) {
     if (sectionIds.has(section.id)) {
@@ -104,6 +90,15 @@ function validateBrief(value: CultureBrief) {
     sectionIds.add(section.id);
     if (section.items.length !== 5) {
       throw new Error(section.title + " must contain exactly five items");
+    }
+    if (section.sources.length < 2) {
+      throw new Error(section.title + " must list at least two sources");
+    }
+    for (const source of section.sources) {
+      if (!source.label.trim()) {
+        throw new Error(section.title + " has an unlabeled source");
+      }
+      assertExternalUrl(source.url, section.title + " source");
     }
 
     section.items.forEach((item, index) => {
@@ -117,10 +112,83 @@ function validateBrief(value: CultureBrief) {
         throw new Error(item.title + " must use a local cached image");
       }
       assertExternalUrl(item.url, item.title);
+      if (item.evidence.length < 2) {
+        throw new Error(item.title + " must have at least two sources of evidence");
+      }
+      const evidenceSources = new Set<string>();
+      const evidenceHosts = new Set<string>();
+      for (const evidence of item.evidence) {
+        assertExternalUrl(evidence.url, item.title + " evidence");
+        evidenceSources.add(evidence.source);
+        evidenceHosts.add(new URL(evidence.url).hostname);
+      }
+      if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
+        throw new Error(item.title + " evidence must come from distinct sources");
+      }
       if (item.spotifyId && !/^[A-Za-z0-9]{22}$/.test(item.spotifyId)) {
         throw new Error(item.title + " has an invalid Spotify track ID");
       }
+      if (item.spotifyRank !== undefined && (!Number.isInteger(item.spotifyRank) || item.spotifyRank < 1 || item.spotifyRank > 50)) {
+        throw new Error(item.title + " has an invalid Spotify rank");
+      }
     });
+
+    if (!section.moreItems?.length) {
+      throw new Error(section.title + " must include an expandable continuation");
+    }
+    const topTitles = new Set(section.items.map((item) => item.title));
+    section.moreItems.forEach((item, index) => {
+      if (item.rank !== index + 6) {
+        throw new Error(section.title + " continuation ranks must begin at six and be sequential");
+      }
+      if (topTitles.has(item.title)) {
+        throw new Error(section.title + " repeats a top-five item in its continuation");
+      }
+      if (!item.description.trim() || !item.alt.trim()) {
+        throw new Error(item.title + " continuation lacks a description or image description");
+      }
+      if (!/^#[0-9a-f]{6}$/i.test(item.accent)) {
+        throw new Error(item.title + " continuation has an invalid accent color");
+      }
+      if (!item.image.startsWith("/culture/")) {
+        throw new Error(item.title + " continuation must use a local cached image");
+      }
+      assertExternalUrl(item.url, item.title);
+      if (item.evidence.length < 2) {
+        throw new Error(item.title + " continuation must have at least two sources of evidence");
+      }
+      const evidenceSources = new Set(item.evidence.map((entry) => entry.source));
+      const evidenceHosts = new Set(item.evidence.map((entry) => {
+        assertExternalUrl(entry.url, item.title + " continuation evidence");
+        return new URL(entry.url).hostname;
+      }));
+      if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
+        throw new Error(item.title + " continuation evidence must come from distinct sources");
+      }
+      if (item.spotifyRank !== undefined && (!Number.isInteger(item.spotifyRank) || item.spotifyRank < 1 || item.spotifyRank > 50)) {
+        throw new Error(item.title + " continuation has an invalid Spotify rank");
+      }
+    });
+  }
+
+  const slang = value.sections.find((section) => section.id === "slang");
+  const slangViews = [...(slang?.items ?? []), ...(slang?.moreItems ?? [])]
+    .map((item) => Number(item.metric?.value.replaceAll(",", "")));
+  if (slangViews.some((views, index) => !Number.isFinite(views) || (index > 0 && views > slangViews[index - 1]))) {
+    throw new Error("Slang must be ordered by Know Your Meme page views");
+  }
+
+  const songs = value.sections.find((section) => section.id === "songs");
+  const allSongs = [...(songs?.items ?? []), ...(songs?.moreItems ?? [])];
+  const billboardRanks = allSongs.map((item) => Number(item.metric?.value.slice(1)));
+  if (allSongs.some((item) => !/^[A-Za-z0-9]{22}$/.test(item.spotifyId ?? ""))
+    || billboardRanks.some((rank, index) => !Number.isInteger(rank) || (index > 0 && rank < billboardRanks[index - 1]))) {
+    throw new Error("Every song must be playable and globally ordered by Billboard position");
+  }
+
+  const movies = value.sections.find((section) => section.id === "watch");
+  if ([...(movies?.items ?? []), ...(movies?.moreItems ?? [])].some((item) => !item.rating)) {
+    throw new Error("Every movie must include an IMDb rating state");
   }
 }
 

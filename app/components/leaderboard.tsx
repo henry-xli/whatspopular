@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import type { CultureSection } from "../lib/culture";
+import { ExpandedRanking } from "./expanded-ranking";
 
 export function Leaderboard({ section }: { section: CultureSection }) {
   return (
@@ -12,7 +13,11 @@ export function Leaderboard({ section }: { section: CultureSection }) {
         </div>
         <p>{section.description}</p>
         <div className="source-list" aria-label="Sources">
-          {section.sources.map((source) => <span key={source}>{source}</span>)}
+          {section.sources.map((source) => (
+            <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
+              {source.label}<span aria-hidden="true">↗</span>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -20,7 +25,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
         {section.items.map((item) => (
           <li key={item.title}>
             <a
-              className="culture-card"
+              className={`culture-card ${item.metric ? "has-metric" : "no-metric"}`}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -51,13 +56,18 @@ export function Leaderboard({ section }: { section: CultureSection }) {
                   </div>
                 ) : null}
                 <p className="card-description">{item.description}</p>
-                {item.caution ? <p className="caution">Note: {item.caution}</p> : null}
-                <div className="signal"><span>{item.signal}</span><strong>{item.score}</strong></div>
+                {item.metric ? (
+                  <div className="metric">
+                    <span>{item.metric.label}</span>
+                    <strong>{item.metric.value}</strong>
+                  </div>
+                ) : null}
               </div>
             </a>
           </li>
         ))}
       </ol>
+      <ExpandedRanking section={section} />
     </section>
   );
 }

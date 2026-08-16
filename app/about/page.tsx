@@ -3,28 +3,82 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "How what’s popular? turns public culture signals into one concise, cached daily briefing.",
+  description: "The exact sources, ranking rules, and daily publishing flow behind what’s popular?.",
   alternates: { canonical: "/about" },
 };
 
 const flow = [
-  { number: "01", title: "Collect", text: "Read public trend signals once each day—never your personal data." },
-  { number: "02", title: "Compare", text: "Normalize velocity, search interest, recency, and cross-source overlap." },
-  { number: "03", title: "Contextualize", text: "Add a human-readable explanation, source link, and safety note when needed." },
-  { number: "04", title: "Cache", text: "Resize every visual and write one validated, versioned briefing file." },
-  { number: "05", title: "Publish", text: "Serve static pages from the edge until tomorrow’s update is ready." },
+  {
+    number: "01",
+    title: "Pull sources",
+    text: "Fetch public pages from Know Your Meme, Lessons in Meme Culture, Urban Dictionary, Google Trends, Wikipedia, IMDb, Box Office Mojo, Cinemeta, Spotify, and Billboard.",
+  },
+  {
+    number: "02",
+    title: "Run once daily",
+    text: "At 10:17 UTC, one automated job downloads the source data. A visitor never triggers scraping.",
+  },
+  {
+    number: "03",
+    title: "Apply five rules",
+    text: "Each board uses its own explicit filter and ranking rule, listed below. There is no blended mystery score.",
+  },
+  {
+    number: "04",
+    title: "Validate and cache",
+    text: "Require two source hosts per entry, validate every link, write one JSON snapshot, and download images as local WebP files.",
+  },
+  {
+    number: "05",
+    title: "Publish the snapshot",
+    text: "Build static HTML and serve it from the edge until the next validated daily snapshot replaces it.",
+  },
+];
+
+const methods = [
+  {
+    board: "Memes",
+    sources: "Know Your Meme’s latest completed Meme of the Month result + Lessons in Meme Culture uploads from the past two months.",
+    rule: "Keep the poll’s published order, but remove any meme without a matching recent LIMC video. The first five become cards; the next matches appear in the expandable rows.",
+    metric: "Meme of the Month poll place.",
+  },
+  {
+    board: "Slang",
+    sources: "Know Your Meme’s annual slang review + the lifetime view count on each Know Your Meme entry + Urban Dictionary.",
+    rule: "Use every term in the annual review, verify that it has a matching Urban Dictionary usage, then order the complete list from most to least Know Your Meme entry views.",
+    metric: "Lifetime views on each Know Your Meme entry.",
+  },
+  {
+    board: "Creators",
+    sources: "A maintained cross-media candidate list + 30 days of English Wikipedia pageviews + a linked Google Trends comparison.",
+    rule: "Order the maintained candidates by Wikipedia views, then allow no more than two people with the same primary profession in the top five. The next five remaining people are appended without changing those five cards.",
+    metric: "English Wikipedia views over the past 30 days.",
+  },
+  {
+    board: "Movies",
+    sources: "IMDb’s current domestic weekend top 10 + the matching Box Office Mojo weekend table + Cinemeta’s IMDb-linked rating and synopsis metadata.",
+    rule: "Take those 10 movies, re-sort them by cumulative U.S. and Canada gross, show the first five as cards, and put ranks 6–10 in the expandable rows.",
+    metric: "Cumulative U.S. and Canada box office.",
+  },
+  {
+    board: "Songs",
+    sources: "Spotify’s Global Top 50 playlist + the dated Billboard Hot 100.",
+    rule: "Select the first 10 Spotify-ranked tracks that also appear on Billboard, then order that complete 10-song set by Billboard position. The first five become cards and ranks 6–10 remain playable in the expandable rows.",
+    metric: "Billboard Hot 100 position.",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <main className="about-page">
       <section className="about-hero wrap">
-        <p className="eyebrow">About the briefing</p>
-        <h1>Know enough to log off.</h1>
+        <p className="eyebrow">How the site works</p>
+        <h1>Sources in. Rankings out.</h1>
         <p>
-          what’s popular? is a small antidote to FOMO: one finite page that
-          explains what younger, extremely-online people are seeing—without
-          asking you to become extremely online too.
+          Once a day, what’s popular? pulls public data from the sites named
+          below, runs five documented ranking rules, saves one validated
+          snapshot, and publishes that snapshot as a static page. That is the
+          whole system.
         </p>
         <Link className="button button-primary" href="/">Read today’s briefing</Link>
       </section>
@@ -32,8 +86,8 @@ export default function AboutPage() {
       <section className="flow-section" aria-labelledby="flow-title">
         <div className="wrap">
           <div className="section-intro compact">
-            <p className="eyebrow">The daily loop</p>
-            <h2 id="flow-title">From noisy signals to a quiet page.</h2>
+            <p className="eyebrow">Overall flow</p>
+            <h2 id="flow-title">One ingestion run. Five rankings. One page.</h2>
           </div>
           <ol className="flowchart">
             {flow.map((step, index) => (
@@ -50,45 +104,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="about-details wrap">
-        <article>
-          <p className="eyebrow">Signals, not surveillance</p>
-          <h2>What goes in</h2>
-          <p>
-            Public pages from Google Trends, TikTok Creative Center, Know Your
-            Meme, Urban Dictionary, Lessons in Meme Culture, Wikipedia, IMDb,
-            and Spotify provide different pieces of the picture. No single
-            source decides a rank.
-          </p>
-          <p>
-            Candidate topics are compared using search velocity, recent
-            publishing activity, cross-source matches, and durable public
-            interest. A last-known-good file stays live if a source is down.
-          </p>
-        </article>
-        <article className="principle-card">
-          <p className="eyebrow">The promise</p>
-          <ul>
-            <li><strong>Finite by design.</strong><span>Six boards. Five entries each. No endless scroll.</span></li>
-            <li><strong>Links over lock-in.</strong><span>Every item opens a primary example or useful source.</span></li>
-            <li><strong>Once daily.</strong><span>Enough freshness for context, without manufacturing urgency.</span></li>
-            <li><strong>Private by default.</strong><span>No account, profile, personalized ranking, or behavioral ad stack.</span></li>
-          </ul>
-        </article>
+      <section className="algorithm-section wrap" aria-labelledby="algorithm-title">
+        <div className="section-intro compact">
+          <p className="eyebrow">The five algorithms</p>
+          <h2 id="algorithm-title">Exactly how each list is made.</h2>
+        </div>
+        <div className="algorithm-grid">
+          {methods.map((method, index) => (
+            <article key={method.board}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{method.board}</h3>
+              <dl>
+                <div><dt>Sources</dt><dd>{method.sources}</dd></div>
+                <div><dt>Rule</dt><dd>{method.rule}</dd></div>
+                <div><dt>Shown metric</dt><dd>{method.metric}</dd></div>
+              </dl>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="infrastructure">
         <div className="wrap infrastructure-grid">
           <div>
-            <p className="eyebrow">Built to stay tiny</p>
-            <h2>Most visits never touch a database.</h2>
+            <p className="eyebrow">What happens on failure</p>
+            <h2>The last good snapshot stays live.</h2>
           </div>
           <p>
-            The scraper does the expensive work once. Visitors receive
-            pre-rendered HTML, compressed local images, and a small amount of
-            JavaScript from an edge cache. Spotify only loads after you press
-            play. That keeps the experience fast, inexpensive, and resilient
-            during a traffic spike.
+            If a source is down, rate-limited, or produces invalid data, the
+            updater does not publish a partial replacement. Visitors continue
+            receiving the previous pre-rendered page. There is no runtime
+            database query, personalized feed, or request-time scraper.
           </p>
         </div>
       </section>

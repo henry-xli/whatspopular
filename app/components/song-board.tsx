@@ -1,12 +1,24 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { CultureSection } from "../lib/culture";
+import { ExpandedRanking } from "./expanded-ranking";
 
 export function SongBoard({ section }: { section: CultureSection }) {
   const [activeTrack, setActiveTrack] = useState<string | null>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
+  const activeItem = [...section.items, ...(section.moreItems ?? [])]
+    .find((item) => item.spotifyId === activeTrack);
+
+  useEffect(() => {
+    if (!activeTrack) return;
+    const frame = window.requestAnimationFrame(() => {
+      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeTrack]);
 
   return (
     <section className="board" id={section.id} aria-labelledby={`${section.id}-title`}>
@@ -17,7 +29,11 @@ export function SongBoard({ section }: { section: CultureSection }) {
         </div>
         <p>{section.description}</p>
         <div className="source-list" aria-label="Sources">
-          {section.sources.map((source) => <span key={source}>{source}</span>)}
+          {section.sources.map((source) => (
+            <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
+              {source.label}<span aria-hidden="true">↗</span>
+            </a>
+          ))}
         </div>
       </div>
       <ol className="card-grid layout-square song-grid">
@@ -46,25 +62,41 @@ export function SongBoard({ section }: { section: CultureSection }) {
                   </div>
                   <p className="subtitle">{item.subtitle}</p>
                   <p className="card-description">{item.description}</p>
-                  <div className="signal"><span>{item.signal}</span><strong>{item.score}</strong></div>
+                  {item.metric ? (
+                    <div className="metric">
+                      <span>{item.metric.label}</span>
+                      <strong>{item.metric.value}</strong>
+                    </div>
+                  ) : null}
                 </div>
-                {isActive && item.spotifyId ? (
-                  <div className="embed-wrap">
-                    <iframe
-                      title={`Spotify player for ${item.title}`}
-                      src={`https://open.spotify.com/embed/track/${item.spotifyId}?utm_source=generator&theme=0`}
-                      width="100%"
-                      height="152"
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    />
-                  </div>
-                ) : null}
               </article>
             </li>
           );
         })}
       </ol>
+      <ExpandedRanking
+        section={section}
+        activeTrack={activeTrack}
+        onTrackChange={setActiveTrack}
+      />
+      {activeItem?.spotifyId ? (
+        <div className="song-player" ref={playerRef} aria-live="polite">
+          <div className="song-player-heading">
+            <span>Now playing</span>
+            <strong>{activeItem.title} · {activeItem.subtitle}</strong>
+            <button type="button" onClick={() => setActiveTrack(null)} aria-label="Close Spotify player">×</button>
+          </div>
+          <div className="embed-wrap">
+            <iframe
+              title={`Spotify player for ${activeItem.title}`}
+              src={`https://open.spotify.com/embed/track/${activeItem.spotifyId}?utm_source=generator&theme=0`}
+              width="100%"
+              height="152"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            />
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

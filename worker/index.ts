@@ -21,7 +21,7 @@ const securityHeaders = {
     "img-src 'self' data: blob: https://cdn.buymeacoffee.com",
     "font-src 'self' data: https://cdn.buymeacoffee.com",
     "connect-src 'self'",
-    "frame-src https://open.spotify.com https://www.buymeacoffee.com",
+    "frame-src https://open.spotify.com https://www.buymeacoffee.com https://buymeacoffee.com",
     "upgrade-insecure-requests",
   ].join("; "),
   "Cross-Origin-Opener-Policy": "same-origin",

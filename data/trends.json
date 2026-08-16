@@ -1,573 +1,1437 @@
 {
   "edition": "August 2026",
-  "status": "August, so far",
-  "window": "Last 30 days · United States",
-  "generatedAt": "2026-08-15T21:19:29.076Z",
-  "summary": "Deadpan confessionals, loud saxophones, an epic siren scene and one extremely specific song about Bangladesh are steering the feed.",
-  "spotlight": {
-    "eyebrow": "Last month's meme winner",
-    "title": "Jimothy the raccoon",
-    "description": "A tiny Seattle raccoon with short spine syndrome became a worldwide fan-art phenomenon — and won July's Know Your Meme poll.",
-    "image": "/culture/jimothy.webp",
-    "alt": "Jimothy, a small round raccoon, standing in a backyard",
-    "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month",
-    "source": "Know Your Meme",
-    "stat": "15.6%",
-    "statLabel": "of the July community vote"
-  },
-  "pulse": [
-    {
-      "label": "Meme",
-      "value": "Odyssey sirens",
-      "image": "/culture/meme-sirens.webp",
-      "url": "https://knowyourmeme.com/memes/sirens-scene-what-odysseus-actually-heard-during-the-siren-song"
-    },
-    {
-      "label": "Format",
-      "value": "Kumar Method",
-      "image": "/culture/kumar-method.webp",
-      "url": "https://www.tiktok.com/@thekumarmethod"
-    },
-    {
-      "label": "Slang",
-      "value": "IYO",
-      "image": "/culture/slang-iyo.webp",
-      "url": "https://knowyourmeme.com/memes/iyo-tiktok-sound"
-    },
-    {
-      "label": "Song",
-      "value": "Bangladesh",
-      "image": "/culture/song-bangladesh.webp",
-      "url": "https://open.spotify.com/track/1lENTiHBIkczAsB0vYE1Xd"
-    }
-  ],
+  "status": "Checked today",
+  "window": "Memes: latest complete month · other boards: rolling",
+  "generatedAt": "2026-08-16T06:41:28.830Z",
+  "summary": "A five-minute, two-source briefing on the jokes, language, people, screens, and songs shaping internet culture right now.",
   "sections": [
     {
       "id": "memes",
-      "eyebrow": "The shared joke",
+      "eyebrow": "July 2026 · latest complete month",
       "title": "Memes",
-      "description": "The five references most likely to appear in your group chat without explanation.",
+      "description": "The July Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.",
       "sources": [
-        "Know Your Meme",
-        "Lessons in Meme Culture",
-        "Google Trends"
+        {
+          "label": "Know Your Meme · July result",
+          "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+        },
+        {
+          "label": "Lessons in Meme Culture · past 2 months",
+          "url": "https://www.youtube.com/@LIMC/videos"
+        }
       ],
       "layout": "landscape",
       "items": [
         {
           "rank": 1,
-          "title": "Whipping up in a kettle",
-          "subtitle": "A brutally negative review",
-          "description": "A wild podcast story became shorthand for saying something is spectacularly bad.",
-          "image": "/culture/meme-kettle.webp",
-          "alt": "Podcast guest telling the whipping up in a kettle story",
-          "url": "https://knowyourmeme.com/memes/he-was-whipping-up-shit-in-a-kettle-boiling-poo-in-a-kettle",
+          "title": "Jimothy the raccoon",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "A round, short-spined Seattle raccoon celebrated through affectionate fan art, sighting posts, and jokes comparing compact objects to him.",
+          "image": "/culture/meme-jimothy-the-raccoon.webp",
+          "alt": "Visual example of the Jimothy the raccoon meme",
+          "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon",
           "source": "Know Your Meme",
-          "signal": "KYM + LIMC signal",
-          "score": 84,
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#1"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=Pa-L5dwDGJ4"
+            }
+          ],
           "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "The Other Cavaliers",
-          "subtitle": "One line, endless remixes",
-          "description": "An SNL sports sketch escaped its original context and became a reaction format.",
-          "image": "/culture/meme-cavaliers.webp",
-          "alt": "The Other Cavaliers meme from a television sketch",
-          "url": "https://knowyourmeme.com/memes/the-other-cavaliers",
-          "source": "Lessons in Meme Culture",
-          "signal": "LIMC signal",
-          "score": 70,
+          "title": "Kwebbelkop Laugh",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "An exaggerated YourRAGE laugh paired with Kwebbelkop's face, used as an audio punchline and remixed into increasingly distorted reaction edits.",
+          "image": "/culture/meme-kwebbelkop.webp",
+          "alt": "Kwebbelkop portrait used with the viral laughing sound",
+          "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#3"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=c65r2vtjqxc"
+            }
+          ],
           "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "Realistic Brewstew",
-          "subtitle": "Cartoons, rendered cursed",
-          "description": "AI-made, big-headed versions of BrewStew characters are recreating old thumbnails in real life.",
-          "image": "/culture/meme-brewstew.webp",
-          "alt": "Hyper-realistic versions of BrewStew cartoon characters",
-          "url": "https://knowyourmeme.com/memes/realistic-brewstew",
+          "title": "Hatsune Miku World Cup Custody Battle",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "World Cup fans jokingly award “custody” of Hatsune Miku to each winning nation, then redraw her in that country's colors and culture.",
+          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
+          "alt": "Visual example of the Hatsune Miku World Cup Custody Battle meme",
+          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
           "source": "Know Your Meme",
-          "signal": "LIMC signal",
-          "score": 70,
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#4"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
           "accent": "#57d5a4"
         },
         {
           "rank": 4,
-          "title": "Eminem's Brisk ad",
-          "subtitle": "A commercial returns",
-          "description": "An old claymation commercial has been rediscovered, clipped and quoted everywhere.",
-          "image": "/culture/meme-eminem-brisk.webp",
-          "alt": "Claymation Eminem in a Brisk commercial",
-          "url": "https://knowyourmeme.com/memes/eminem-brisk-commercial",
-          "source": "Lessons in Meme Culture",
-          "signal": "LIMC signal",
-          "score": 69,
+          "title": "Mbappé Special",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "From Kylian Mbappé calling his favorite thing to cook “nothing”; people now call an empty or nonexistent offering the “Mbappé Special.”",
+          "image": "/culture/meme-mbappe-special.webp",
+          "alt": "Visual example of the Mbappé Special meme",
+          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#5"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
           "accent": "#5ab0ff"
         },
         {
           "rank": 5,
-          "title": "The Odyssey sirens",
-          "subtitle": "What Odysseus actually heard",
-          "description": "People replace the sirens' song with the one thing they absolutely could not resist.",
-          "image": "/culture/meme-sirens.webp",
-          "alt": "Odysseus tied to a ship mast in The Odyssey",
-          "url": "https://knowyourmeme.com/memes/sirens-scene-what-odysseus-actually-heard-during-the-siren-song",
+          "title": "John Rod",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "An unnamed JoJo stand nicknamed John Rod, used in absurd power-scaling jokes and fan edits that claim he can defeat anyone.",
+          "image": "/culture/meme-john-rod.webp",
+          "alt": "John Rod from JoJo's Bizarre Adventure",
+          "url": "https://knowyourmeme.com/memes/john-rod",
           "source": "Know Your Meme",
-          "signal": "TIKTOK + LIMC signal",
-          "score": 65,
-          "accent": "#ff6b57"
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#6"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=S2PsR7TCG7U"
+            }
+          ],
+          "accent": "#57d5a4"
         }
-      ]
-    },
-    {
-      "id": "formats",
-      "eyebrow": "The recurring bit",
-      "title": "Viral formats",
-      "description": "The templates people keep remaking — knowing the setup is usually enough to get the joke.",
-      "sources": [
-        "TikTok Creative Center",
-        "TikTok examples",
-        "Google Trends"
       ],
-      "layout": "landscape",
-      "items": [
+      "moreItems": [
         {
-          "rank": 1,
-          "title": "Not very nonchalant",
-          "subtitle": "Joy without playing it cool",
-          "description": "Creators reject deadpan coolness and show themselves being loudly, sincerely delighted.",
-          "image": "/culture/format-nonchalant.webp",
-          "alt": "Friends dancing joyfully at an outdoor event",
-          "url": "https://www.tiktok.com/@trace.young",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 70,
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 2,
-          "title": "I'm in pain — I'm in Spain",
-          "subtitle": "Vacation fixes everything",
-          "description": "A travel lip-sync that turns a complaint into a destination reveal.",
-          "image": "/culture/format-spain.webp",
-          "alt": "A bright street in Spain",
-          "url": "https://www.tiktok.com/tag/iminspain",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 69,
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 3,
-          "title": "The Kumar Method",
-          "subtitle": "Make a boring job cinematic",
-          "description": "Present ordinary expertise like an ominous prestige-film mastermind reveal.",
-          "image": "/culture/kumar-method.webp",
-          "alt": "Kumar, the retired accountant behind the Kumar Method format",
-          "url": "https://www.tiktok.com/@thekumarmethod",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 62,
-          "accent": "#ff6b57"
-        },
-        {
-          "rank": 4,
-          "title": "Saxophones getting louder",
-          "subtitle": "Impending consequences",
-          "description": "The Boyz n the Hood score swells as a bad decision approaches its obvious ending.",
-          "image": "/culture/format-saxophones.webp",
-          "alt": "A worried person representing the saxophones getting louder trend",
-          "url": "https://www.tiktok.com/tag/saxophonesgettinglouder",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 62,
+          "rank": 6,
+          "title": "Stay In Character",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "A line shouted by Clark in the 2026 Backrooms movie became a reaction to someone breaking a bit. People turn the scene into brainrot edits, recreations, and accuracy reenactments.",
+          "image": "/culture/meme-stay-in-character.webp",
+          "alt": "Visual example of the Stay In Character meme",
+          "url": "https://knowyourmeme.com/memes/stay-in-character-backrooms",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#7"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=QMKWIuacG8c"
+            }
+          ],
           "accent": "#ffc857"
         },
         {
-          "rank": 5,
-          "title": "Netflix documentary",
-          "subtitle": "Treat tiny drama like true crime",
-          "description": "Sit down for a grave interview about the roommate who never did the dishes.",
-          "image": "/culture/format-documentary.webp",
-          "alt": "A person sitting down for a documentary-style interview",
-          "url": "https://www.tiktok.com/tag/netflixdocumentary",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 62,
+          "rank": 7,
+          "title": "Funky Ehh",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "A child singing an off-key “funky ehh” line during Fortnite became a viral audio. People use it in animations, remixes, and short edits that exaggerate the delivery.",
+          "image": "/culture/meme-funky-ehh.webp",
+          "alt": "Visual example of the Funky Ehh meme",
+          "url": "https://knowyourmeme.com/memes/well-drive-a-funky-ehh",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#8"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=oyR_1uKIK6I"
+            }
+          ],
           "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Somebody Get These Beggars Out Of Here",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Robert Pattinson's line “Somebody get these beggars out of here” from The Odyssey became a reaction image and catchphrase. People use it to mock begging, freeloading, or an unimpressive request.",
+          "image": "/culture/meme-somebody-get-these-beggars-out-of-here.webp",
+          "alt": "Visual example of the Somebody Get These Beggars Out Of Here meme",
+          "url": "https://knowyourmeme.com/memes/robert-pattinson-somebody-get-these-beggars-out-of-here",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#9"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=8ugpFwj6ib8"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Homer Let the Barts Out",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Homer Let the Barts Out is a brainrot and AI song by Rabadoonga about Homer Simpson letting a massive group of Bart Simpsons out of the house, who go on to cause uncontrollable destruction. It inspired memes on sites including social media, X / Twitter and Instagram Reels, including lip dubs, animations, covers and AI-generated videos.",
+          "image": "/culture/meme-homer-let-the-barts-out.webp",
+          "alt": "Visual example of the Homer Let the Barts Out meme",
+          "url": "https://knowyourmeme.com/memes/homer-let-the-barts-out",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#10"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=kawenQiaRtI"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Best of Zach",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "The thumbnail and title of OneyPlays' “Best of Zach” compilation inspired a looping amateur rap and animation. People remix the chant, redraw Zach, and parody repetitive fan edits with it.",
+          "image": "/culture/meme-best-of-zach.webp",
+          "alt": "Visual example of the Best of Zach meme",
+          "url": "https://knowyourmeme.com/memes/best-of-zach",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#11"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=gUS5yEdRrvo"
+            }
+          ],
+          "accent": "#ff6b57"
         }
-      ]
+      ],
+      "moreLabel": "Show ranks 6–10"
     },
     {
       "id": "slang",
-      "eyebrow": "What they're saying",
+      "eyebrow": "Annual slang review · by page views",
       "title": "Slang",
-      "description": "A translation layer for the phrases that arrive before their definitions do.",
+      "description": "Terms from Know Your Meme's annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.",
       "sources": [
-        "Know Your Meme",
-        "Urban Dictionary",
-        "Google Trends"
+        {
+          "label": "Know Your Meme · annual slang review",
+          "url": "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025"
+        },
+        {
+          "label": "Urban Dictionary · 67 / six-seven",
+          "url": "https://www.urbandictionary.com/define.php?term=67"
+        }
       ],
       "layout": "landscape",
       "items": [
         {
           "rank": 1,
-          "title": "Neegy",
-          "subtitle": "A Fortnite brainrot catchphrase",
-          "description": "A nonsense-sounding nickname from an insult clip. It can read as offensive, so understand the reference without repeating it.",
-          "image": "/culture/slang-neegy.webp",
-          "alt": "Golden caricature associated with the Neegy meme",
-          "url": "https://knowyourmeme.com/memes/neegy",
+          "title": "67 / six-seven",
+          "subtitle": "A deliberately ambiguous number catchphrase",
+          "description": "A call-and-response built around saying “six-seven,” often with a palms-up gesture. Its lack of one fixed meaning is the joke, so people use it as a deliberately contextless reply.",
+          "image": "/culture/slang-67.webp",
+          "alt": "The number 67 as used in the six-seven meme",
+          "url": "https://knowyourmeme.com/memes/67-meme",
           "source": "Know Your Meme",
-          "signal": "KYM signal",
-          "score": 59,
-          "accent": "#ffc857",
-          "caution": "Context only"
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "1,000,169"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/67-meme"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=67"
+            }
+          ],
+          "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "IYO",
-          "subtitle": "Pronounced like “ayo”",
-          "description": "A distinctive reaction from a chaotic Fortnite voice-chat clip; mostly used as a sound, not a literal word.",
-          "image": "/culture/slang-iyo.webp",
-          "alt": "Fortnite voice chat screenshot associated with IYO",
-          "url": "https://knowyourmeme.com/memes/iyo-tiktok-sound",
+          "title": "Dead Rose Emoji",
+          "subtitle": "The wilted rose used as ironic punctuation",
+          "description": "The wilted rose emoji 🥀 became an ironic alternative to the broken-heart emoji. People append it to dramatic, embarrassing, disappointed, or mock-heartbroken remarks.",
+          "image": "/culture/slang-dead-rose-emoji.webp",
+          "alt": "Visual example of Dead Rose Emoji",
+          "url": "https://knowyourmeme.com/memes/dead-rose-emoji",
           "source": "Know Your Meme",
-          "signal": "Breakout",
-          "score": 54,
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "114,259"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/dead-rose-emoji"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=dead%20rose"
+            }
+          ],
           "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "Mbappé special",
-          "subtitle": "For example: nothing",
-          "description": "A joking way to say “nothing,” borrowed from Kylian Mbappé describing his cooking specialty.",
-          "image": "/culture/slang-mbappe.webp",
-          "alt": "Kylian Mbappé in the interview that inspired Mbappé special",
-          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "title": "Aura farming",
+          "subtitle": "Performing effortless cool for status",
+          "description": "Aura farming means doing something calculated to look effortlessly cool and build imaginary social status. The phrase captions dramatic entrances, poses, edits, and knowingly over-styled behavior.",
+          "image": "/culture/slang-aura-farming.webp",
+          "alt": "Stylized scene representing aura farming",
+          "url": "https://knowyourmeme.com/memes/aura-farming",
           "source": "Know Your Meme",
-          "signal": "Holding",
-          "score": 54,
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 4,
-          "title": "TLPUR",
-          "subtitle": "The ambiguity is the joke",
-          "description": "An intentionally unexplained acronym attached to dancing, rainbow lighting and surreal edits.",
-          "image": "/culture/slang-tlpur.webp",
-          "alt": "Rainbow-lit dancing edit associated with TLPUR",
-          "url": "https://knowyourmeme.com/memes/tlpur-slang",
-          "source": "Know Your Meme",
-          "signal": "Niche",
-          "score": 54,
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "99,578"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/aura-farming"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=aurafarming"
+            }
+          ],
           "accent": "#57d5a4"
         },
         {
-          "rank": 5,
-          "title": "Boy kibble",
-          "subtitle": "Rice + ground protein",
-          "description": "The self-deprecating name for a plain, efficient meal-prep bowl that resembles pet food.",
-          "image": "/culture/slang-boy-kibble.webp",
-          "alt": "A simple bowl of rice and ground protein known as boy kibble",
-          "url": "https://knowyourmeme.com/memes/boy-kibble",
+          "rank": 4,
+          "title": "SYBAU",
+          "subtitle": "An aggressive request to be quiet",
+          "description": "SYBAU expands to “shut your bitch ass up.” It is used as a blunt dismissal or exaggerated reaction, often as an acronym so the punchline lands only after someone decodes it.",
+          "image": "/culture/slang-sybau.webp",
+          "alt": "Reaction image associated with the acronym SYBAU",
+          "url": "https://knowyourmeme.com/memes/sybau",
           "source": "Know Your Meme",
-          "signal": "Mainstreaming",
-          "score": 53,
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "76,389"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/sybau"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=sybau"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "Labubu Matcha Dubai Chocolate",
+          "subtitle": "A pileup of 2025 consumer-trend buzzwords",
+          "description": "Labubu is a toothy collectible toy, matcha is a powdered green-tea drink, and Dubai chocolate is a pistachio-filled chocolate bar. Stringing them together parodies algorithm-driven consumer trends.",
+          "image": "/culture/slang-labubu-matcha-dubai-chocolate.webp",
+          "alt": "Visual example of Labubu Matcha Dubai Chocolate",
+          "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "55,505"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=labubu"
+            }
+          ],
           "accent": "#ff6b57"
         }
-      ]
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Clanker",
+          "subtitle": "A derogatory word for robots",
+          "description": "A Star Wars insult for battle droids that returned as a joking slur for robots and AI. People use it to mock a machine, chatbot, or conspicuously automated behavior.",
+          "image": "/culture/slang-clanker.webp",
+          "alt": "A battle droid associated with the slang term clanker",
+          "url": "https://knowyourmeme.com/memes/clanker",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "46,812"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/clanker"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=clanker"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "TS PMO ICL",
+          "subtitle": "An intentionally overloaded slang acronym",
+          "description": "TS PMO ICL expands to “this shit pisses me off, I can’t lie.” People use it sincerely, or pile it into deliberately overloaded captions that parody compressed internet slang.",
+          "image": "/culture/slang-ts-pmo-icl.webp",
+          "alt": "Visual example of TS PMO ICL",
+          "url": "https://knowyourmeme.com/memes/ts-pmo-icl",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "43,520"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/ts-pmo-icl"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=TS%20PMO%20ICL"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Performative Male",
+          "subtitle": "Someone visibly curating an appealing persona",
+          "description": "A performative male conspicuously reads feminist books, drinks matcha, carries a tote bag, or wears wired earbuds to appear sensitive and attractive. The label mocks an obviously curated personality.",
+          "image": "/culture/slang-performative-male.webp",
+          "alt": "Visual example of Performative Male",
+          "url": "https://knowyourmeme.com/memes/performative-male",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "27,294"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/performative-male"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Performative%20Male"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Chopped",
+          "subtitle": "Unattractive, damaged, or badly done",
+          "description": "Calling someone or something “chopped” means it looks unattractive, damaged, or badly put together. It appears in blunt reactions, appearance jokes, and before-and-after comparisons.",
+          "image": "/culture/slang-chopped.webp",
+          "alt": "Reaction image associated with chopped slang",
+          "url": "https://knowyourmeme.com/memes/chopped-slang",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "18,429"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/chopped-slang"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Chopped"
+            }
+          ],
+          "accent": "#5ab0ff"
+        }
+      ],
+      "moreLabel": "Show ranks 6–9 by page views"
     },
     {
       "id": "creators",
-      "eyebrow": "People moving the feed",
+      "eyebrow": "People · past 30 days",
       "title": "Creators",
-      "description": "Five accounts behind the sounds, formats and moments crossing into the wider culture.",
+      "description": "People are ranked by 30-day English Wikipedia views, with no more than two actors, musicians, filmmakers, or digital creators in the five.",
       "sources": [
-        "TikTok",
-        "YouTube",
-        "Wikipedia pageviews"
+        {
+          "label": "Wikipedia Pageviews · these five, 30 days",
+          "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+        },
+        {
+          "label": "Google Trends · these five, 30 days",
+          "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Zendaya%2CTom+Holland%2CChristopher+Nolan%2CShakira%2CAriana+Grande"
+        }
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "IShowSpeed",
-          "subtitle": "@IShowSpeed · YouTube",
-          "description": "World Cup streams, travel chaos and “Champions” kept one of the web's biggest creators at the center of the summer.",
-          "image": "/culture/creator-speed.webp",
-          "alt": "IShowSpeed smiling in his YouTube profile photo",
-          "url": "https://www.youtube.com/@IShowSpeed",
-          "source": "YouTube",
-          "signal": "TIKTOK signal",
-          "score": 70,
-          "accent": "#ff6b57"
+          "title": "Zendaya",
+          "subtitle": "Actor",
+          "description": "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention.",
+          "image": "/culture/creator-zendaya.webp",
+          "alt": "Portrait of Zendaya",
+          "url": "https://en.wikipedia.org/wiki/Zendaya",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "3.37M"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Zendaya"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+            }
+          ],
+          "accent": "#ffc857",
+          "category": "actor"
         },
         {
           "rank": 2,
-          "title": "Lessons in Meme Culture",
-          "subtitle": "@LIMC · YouTube",
-          "description": "Fast explainers continue to be an early signal for which niche references are escaping into mainstream feeds.",
-          "image": "/culture/creator-limc.webp",
-          "alt": "Lessons in Meme Culture YouTube profile image",
-          "url": "https://www.youtube.com/@LIMC",
-          "source": "YouTube",
-          "signal": "LIMC signal",
-          "score": 67,
-          "accent": "#5ab0ff"
+          "title": "Tom Holland",
+          "subtitle": "Actor",
+          "description": "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now.",
+          "image": "/culture/creator-tom-holland.webp",
+          "alt": "Portrait of Tom Holland",
+          "url": "https://en.wikipedia.org/wiki/Tom_Holland",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "3.12M"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Tom+Holland"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+            }
+          ],
+          "accent": "#9b8cff",
+          "category": "actor"
         },
         {
           "rank": 3,
-          "title": "Ian McConnell",
-          "subtitle": "@ianmcconnellmusic · TikTok",
-          "description": "His 49-second absurdist song “Bangladesh” jumped from a creator post into the song-of-summer conversation.",
-          "image": "/culture/creator-ian.webp",
-          "alt": "Ian McConnell artwork for the song Bangladesh",
-          "url": "https://www.tiktok.com/@ianmcconnellmusic",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 64,
-          "accent": "#ffc857"
+          "title": "Christopher Nolan",
+          "subtitle": "Film director",
+          "description": "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation.",
+          "image": "/culture/creator-christopher-nolan.webp",
+          "alt": "Portrait of Christopher Nolan",
+          "url": "https://en.wikipedia.org/wiki/Christopher_Nolan",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "2.63M"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Christopher+Nolan"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+            }
+          ],
+          "accent": "#57d5a4",
+          "category": "filmmaker"
         },
         {
           "rank": 4,
-          "title": "The Kumar Method",
-          "subtitle": "@thekumarmethod · TikTok",
-          "description": "A retired-accountant character turned deliberately engineered virality into the joke itself.",
-          "image": "/culture/kumar-method.webp",
-          "alt": "Kumar posing as a cinematic accounting mastermind",
-          "url": "https://www.tiktok.com/@thekumarmethod",
-          "source": "TikTok",
-          "signal": "TIKTOK signal",
-          "score": 59,
-          "accent": "#9b8cff"
+          "title": "Shakira",
+          "subtitle": "Musician",
+          "description": "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention.",
+          "image": "/culture/creator-shakira.webp",
+          "alt": "Portrait of Shakira",
+          "url": "https://en.wikipedia.org/wiki/Shakira",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "1.84M"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Shakira"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "category": "musician"
         },
         {
           "rank": 5,
-          "title": "Aora.DJ",
-          "subtitle": "@aora.dj · Instagram",
-          "description": "One intense look and bounce at a foam party made her a reaction meme far beyond the original clip.",
-          "image": "/culture/creator-aora.webp",
-          "alt": "Aora.DJ profile portrait",
-          "url": "https://www.instagram.com/aora.dj/",
-          "source": "Instagram",
-          "signal": "KYM signal",
-          "score": 58,
-          "accent": "#57d5a4"
+          "title": "Ariana Grande",
+          "subtitle": "Musician",
+          "description": "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest.",
+          "image": "/culture/creator-ariana-grande.webp",
+          "alt": "Portrait of Ariana Grande",
+          "url": "https://en.wikipedia.org/wiki/Ariana_Grande",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "797K"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Ariana+Grande"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+            }
+          ],
+          "accent": "#ff6b57",
+          "category": "musician"
         }
-      ]
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Matt Damon",
+          "subtitle": "Actor",
+          "description": "His lead performance as Odysseus in Christopher Nolan's The Odyssey is driving current interest.",
+          "image": "/culture/creator-matt-damon.webp",
+          "alt": "Portrait of Matt Damon",
+          "url": "https://en.wikipedia.org/wiki/Matt_Damon",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "1.52M"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Matt+Damon"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande%7CMatt_Damon%7CIShowSpeed%7CTaylor_Swift%7CJustin_Bieber%7CDwayne_Johnson"
+            }
+          ],
+          "accent": "#ffc857",
+          "category": "actor"
+        },
+        {
+          "rank": 7,
+          "title": "IShowSpeed",
+          "subtitle": "Streamer",
+          "description": "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture.",
+          "image": "/culture/creator-ishowspeed.webp",
+          "alt": "Portrait of IShowSpeed",
+          "url": "https://en.wikipedia.org/wiki/IShowSpeed",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "378K"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=IShowSpeed"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande%7CMatt_Damon%7CIShowSpeed%7CTaylor_Swift%7CJustin_Bieber%7CDwayne_Johnson"
+            }
+          ],
+          "accent": "#9b8cff",
+          "category": "digital"
+        },
+        {
+          "rank": 8,
+          "title": "Taylor Swift",
+          "subtitle": "Singer-songwriter",
+          "description": "New music activity and sustained catalog attention continue to generate unusually high public interest.",
+          "image": "/culture/creator-taylor-swift.webp",
+          "alt": "Portrait of Taylor Swift",
+          "url": "https://en.wikipedia.org/wiki/Taylor_Swift",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "369K"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Taylor+Swift"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande%7CMatt_Damon%7CIShowSpeed%7CTaylor_Swift%7CJustin_Bieber%7CDwayne_Johnson"
+            }
+          ],
+          "accent": "#57d5a4",
+          "category": "musician"
+        },
+        {
+          "rank": 9,
+          "title": "Justin Bieber",
+          "subtitle": "Musician",
+          "description": "Current music and public appearances have brought the singer back into widespread conversation.",
+          "image": "/culture/creator-justin-bieber.webp",
+          "alt": "Portrait of Justin Bieber",
+          "url": "https://en.wikipedia.org/wiki/Justin_Bieber",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "303K"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Justin+Bieber"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande%7CMatt_Damon%7CIShowSpeed%7CTaylor_Swift%7CJustin_Bieber%7CDwayne_Johnson"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "category": "musician"
+        },
+        {
+          "rank": 10,
+          "title": "Dwayne Johnson",
+          "subtitle": "Actor",
+          "description": "His return as Maui in the live-action Moana has brought him back into current movie conversation.",
+          "image": "/culture/creator-dwayne-johnson.webp",
+          "alt": "Portrait of Dwayne Johnson",
+          "url": "https://en.wikipedia.org/wiki/Dwayne_Johnson",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "296K"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Dwayne+Johnson"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande%7CMatt_Damon%7CIShowSpeed%7CTaylor_Swift%7CJustin_Bieber%7CDwayne_Johnson"
+            }
+          ],
+          "accent": "#ff6b57",
+          "category": "actor"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10 by Wikipedia views"
     },
     {
       "id": "watch",
-      "eyebrow": "What everyone's watching",
-      "title": "Movies & shows",
-      "description": "The screen titles producing the most search interest, conversation and downstream memes.",
+      "eyebrow": "IMDb U.S. box office · July 31–2, 2026",
+      "title": "Movies",
+      "description": "The five largest cumulative U.S. and Canada grosses among IMDb's current weekend box-office top 10, re-sorted by total gross rather than weekend earnings.",
       "sources": [
-        "Google Trends",
-        "Wikipedia pageviews",
-        "IMDb"
+        {
+          "label": "IMDb · box office top 10",
+          "url": "https://www.imdb.com/chart/boxoffice/"
+        },
+        {
+          "label": "Box Office Mojo · total gross",
+          "url": "https://www.boxofficemojo.com/weekend/2026W31/"
+        }
       ],
       "layout": "poster",
       "items": [
         {
           "rank": 1,
-          "title": "Spider-Man: Brand New Day",
+          "title": "Toy Story 5",
           "subtitle": "Movie · in theaters",
-          "description": "The year's box-office leader and half of the internet's “Petal-Man Day.”",
-          "image": "/culture/media-spider-man.webp",
-          "alt": "Spider-Man Brand New Day theatrical poster",
-          "url": "https://www.imdb.com/title/tt22084616/",
+          "description": "Woody, Buzz, Jessie and the rest of the gang's jobs are challenged when they're introduced to electronics, a new threat to playtime.",
+          "image": "/culture/media-toy-story.webp",
+          "alt": "Toy Story 5 theatrical poster",
+          "url": "https://www.imdb.com/title/tt29355505/",
           "source": "IMDb",
-          "signal": "TIKTOK signal",
-          "score": 76,
-          "accent": "#ff6b57",
-          "rating": "8.2"
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$462M"
+          },
+          "rating": "7.5",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl3344859137/"
+            }
+          ],
+          "accent": "#ffc857"
         },
         {
           "rank": 2,
           "title": "The Odyssey",
           "subtitle": "Movie · in theaters",
-          "description": "Christopher Nolan's epic is both a blockbuster and the month's most reusable meme factory.",
+          "description": "After the Trojan War, Odysseus faces a dangerous voyage back to Ithaca, meeting creatures like the Cyclops Polyphemus, Sirens, and Calypso along the way.",
           "image": "/culture/media-odyssey.webp",
           "alt": "The Odyssey 2026 theatrical poster",
           "url": "https://www.imdb.com/title/tt33764258/",
           "source": "IMDb",
-          "signal": "TIKTOK + LIMC signal",
-          "score": 73,
-          "accent": "#5ab0ff",
-          "rating": "8.4"
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$396M"
+          },
+          "rating": "8.5",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl170295297/"
+            }
+          ],
+          "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "Toy Story 5",
+          "title": "Spider-Man: Brand New Day",
           "subtitle": "Movie · in theaters",
-          "description": "Toys versus screens turned a legacy sequel into a family hit and a debate about digital childhood.",
-          "image": "/culture/media-toy-story.webp",
-          "alt": "Toy Story 5 theatrical poster",
-          "url": "https://www.imdb.com/title/tt29355505/",
+          "description": "A forgotten Peter Parker lives alone as a full-time Spider-Man until mounting pressure triggers a dangerous change and a powerful new enemy emerges.",
+          "image": "/culture/media-spider-man.webp",
+          "alt": "Spider-Man Brand New Day theatrical poster",
+          "url": "https://www.imdb.com/title/tt22084616/",
           "source": "IMDb",
-          "signal": "Holding",
-          "score": 65,
-          "accent": "#ffc857",
-          "rating": "7.5"
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$360M"
+          },
+          "rating": "8.1",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl2299756545/"
+            }
+          ],
+          "accent": "#57d5a4"
         },
         {
           "rank": 4,
-          "title": "Jujutsu Kaisen · S3",
-          "subtitle": "Series · streaming",
-          "description": "The Culling Game arc remains one of the year's largest anime conversation engines.",
-          "image": "/culture/media-jujutsu.webp",
-          "alt": "Jujutsu Kaisen season three promotional poster",
-          "url": "https://www.imdb.com/title/tt12343534/",
+          "title": "Minions & Monsters",
+          "subtitle": "Movie · in theaters",
+          "description": "In 1920s Hollywood, the Minions search for creatures for a monster movie, befriend a green monster, and must stop the disaster they accidentally unleash.",
+          "image": "/culture/media-minions-monsters.webp",
+          "alt": "Minions & Monsters theatrical poster",
+          "url": "https://www.imdb.com/title/tt32890033/",
           "source": "IMDb",
-          "signal": "Anime mainstay",
-          "score": 63,
-          "accent": "#9b8cff",
-          "rating": "8.5"
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$169M"
+          },
+          "rating": "6.4",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl779714561/"
+            }
+          ],
+          "accent": "#5ab0ff"
         },
         {
           "rank": 5,
-          "title": "The End of Oak Street",
-          "subtitle": "Movie · new this week",
-          "description": "Anne Hathaway, Ewan McGregor, suburban time travel and dinosaurs made a surprise late-summer splash.",
-          "image": "/culture/media-oak-street.webp",
-          "alt": "The End of Oak Street IMAX poster",
-          "url": "https://www.imdb.com/title/tt27165187/",
+          "title": "Moana",
+          "subtitle": "Movie · in theaters",
+          "description": "Live-action adaptation of the 2016 Disney animated film 'Moana.'",
+          "image": "/culture/media-moana.webp",
+          "alt": "Moana 2026 live-action theatrical poster",
+          "url": "https://www.imdb.com/title/tt27419466/",
           "source": "IMDb",
-          "signal": "Breakout",
-          "score": 59,
-          "accent": "#57d5a4",
-          "rating": "New"
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$115M"
+          },
+          "rating": "New",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl486245121/"
+            }
+          ],
+          "accent": "#ff6b57"
         }
-      ]
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Young Washington",
+          "subtitle": "Movie · in theaters",
+          "description": "A young George Washington faces war, betrayal, and impossible choices that will forge a leader.",
+          "image": "/culture/media-young-washington.webp",
+          "alt": "Young Washington theatrical poster",
+          "url": "https://www.imdb.com/title/tt32104007/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$46.4M"
+          },
+          "rating": "7.3",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl1436123137/"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "Evil Dead Burn",
+          "subtitle": "Movie · in theaters",
+          "description": "After losing her husband, a woman seeks refuge with her in-laws, only for them to transform into Deadites one by one and turn the family home into a fight for survival.",
+          "image": "/culture/media-evil-dead-burn.webp",
+          "alt": "Evil Dead Burn theatrical poster",
+          "url": "https://www.imdb.com/title/tt31170389/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$31.5M"
+          },
+          "rating": "New",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl1925480449/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "The Invite",
+          "subtitle": "Movie · in theaters",
+          "description": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places.",
+          "image": "/culture/media-the-invite.webp",
+          "alt": "The Invite theatrical poster",
+          "url": "https://www.imdb.com/title/tt14173636/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$22.8M"
+          },
+          "rating": "7.9",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl2174058497/"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Hadestown: The Musical",
+          "subtitle": "Movie · in theaters",
+          "description": "A musical juxtaposition of the Orpheus/Eurydice and Hades/Persephone myths that examines the way real life can impact our quest for a perfect world.",
+          "image": "/culture/media-hadestown-the-musical.webp",
+          "alt": "Hadestown: The Musical theatrical poster",
+          "url": "https://www.imdb.com/title/tt36307021/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$18.2M"
+          },
+          "rating": "7.6",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl1530953985/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "I Want Your Sex",
+          "subtitle": "Movie · in theaters",
+          "description": "Elliot lands a job for Erika Tracy as her sexual muse.",
+          "image": "/culture/media-i-want-your-sex.webp",
+          "alt": "I Want Your Sex theatrical poster",
+          "url": "https://www.imdb.com/title/tt32332915/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$635K"
+          },
+          "rating": "5.6",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl4206067713/"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10 by total gross"
     },
     {
       "id": "songs",
-      "eyebrow": "What the feed sounds like",
+      "eyebrow": "Spotify Global × Billboard",
       "title": "Songs",
-      "description": "Press play here — only one lightweight Spotify player loads at a time.",
+      "description": "The first 10 Spotify Global Top 50 tracks that also appear on the Billboard Hot 100 are selected, then all 10 are ordered by Billboard position. Every track can play through Spotify's official embed.",
       "sources": [
-        "TikTok Creative Center",
-        "Spotify",
-        "Google Trends"
+        {
+          "label": "Spotify · Global Top 50",
+          "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+        },
+        {
+          "label": "Billboard Hot 100 · 2026-08-15",
+          "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+        }
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "u + me = <3",
-          "subtitle": "Olivia Rodrigo",
-          "description": "A tender chorus scoring then-versus-now carousels about friends, partners and family.",
-          "image": "/culture/song-u-me.webp",
-          "alt": "u plus me equals heart album artwork by Olivia Rodrigo",
-          "url": "https://open.spotify.com/track/6ZIMMWWjupzMw7Qy4d52Vy",
+          "title": "hate that i made you love me",
+          "subtitle": "Ariana Grande",
+          "description": "hate that i made you love me is #4 in Spotify's current global playlist and #2 on the current Billboard Hot 100.",
+          "image": "/culture/song-hate-love.webp",
+          "alt": "hate that i made you love me artwork by Ariana Grande",
+          "url": "https://open.spotify.com/track/3iy2QuCtCzpWnR6tia39AB",
           "source": "Spotify",
-          "signal": "TIKTOK + LIMC signal",
-          "score": 76,
-          "accent": "#57d5a4",
-          "spotifyId": "6ZIMMWWjupzMw7Qy4d52Vy"
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#2"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#ffc857",
+          "spotifyId": "3iy2QuCtCzpWnR6tia39AB",
+          "spotifyRank": 4
         },
         {
           "rank": 2,
-          "title": "Bangladesh",
-          "subtitle": "Ian McConnell",
-          "description": "A 49-second deadpan complaint song whose requests get stranger with every line.",
-          "image": "/culture/song-bangladesh.webp",
-          "alt": "Bangladesh single artwork by Ian McConnell",
-          "url": "https://open.spotify.com/track/1lENTiHBIkczAsB0vYE1Xd",
+          "title": "petal",
+          "subtitle": "Ariana Grande",
+          "description": "petal is #14 in Spotify's current global playlist and #4 on the current Billboard Hot 100.",
+          "image": "/culture/song-petal-ariana-grande.webp",
+          "alt": "petal artwork by Ariana Grande",
+          "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
           "source": "Spotify",
-          "signal": "TIKTOK signal",
-          "score": 75,
-          "accent": "#ffc857",
-          "spotifyId": "1lENTiHBIkczAsB0vYE1Xd"
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#4"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#9b8cff",
+          "spotifyId": "70pVCVMGjmIWPbWXDwf11e",
+          "spotifyRank": 14
         },
         {
           "rank": 3,
-          "title": "Choosin' Texas",
-          "subtitle": "Ella Langley",
-          "description": "A country crossover powering lip-syncs, cowboy reveals and hometown storytelling.",
-          "image": "/culture/song-choosin-texas.webp",
-          "alt": "Choosin' Texas album artwork by Ella Langley",
-          "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
+          "title": "stupid song",
+          "subtitle": "Olivia Rodrigo",
+          "description": "stupid song is #17 in Spotify's current global playlist and #16 on the current Billboard Hot 100.",
+          "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
+          "alt": "stupid song artwork by Olivia Rodrigo",
+          "url": "https://open.spotify.com/track/49j6SvuvWfbEKZKzsHCdLJ",
           "source": "Spotify",
-          "signal": "TIKTOK signal",
-          "score": 75,
-          "accent": "#ff6b57",
-          "spotifyId": "7scFxt9VhL4FJwuPSfRlfN"
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#16"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#57d5a4",
+          "spotifyId": "49j6SvuvWfbEKZKzsHCdLJ",
+          "spotifyRank": 17
         },
         {
           "rank": 4,
-          "title": "SS26",
-          "subtitle": "Charli xcx",
-          "description": "A dark rock-dance track built for runway edits, fit checks and sharp transitions.",
-          "image": "/culture/song-ss26.webp",
-          "alt": "SS26 single artwork by Charli xcx",
-          "url": "https://open.spotify.com/track/3d5NbAerF2MMHw9tdIxiFH",
+          "title": "Earrings",
+          "subtitle": "Malcolm Todd",
+          "description": "Earrings is #6 in Spotify's current global playlist and #28 on the current Billboard Hot 100.",
+          "image": "/culture/song-earrings-malcolm-todd.webp",
+          "alt": "Earrings artwork by Malcolm Todd",
+          "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
           "source": "Spotify",
-          "signal": "TIKTOK signal",
-          "score": 74,
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#28"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
           "accent": "#5ab0ff",
-          "spotifyId": "3d5NbAerF2MMHw9tdIxiFH"
+          "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ",
+          "spotifyRank": 6
         },
         {
           "rank": 5,
-          "title": "hate that i made you love me",
-          "subtitle": "Ariana Grande",
-          "description": "The Petal-era single behind first-listen reactions and the “Petal-Man Day” double event.",
-          "image": "/culture/song-hate-love.webp",
-          "alt": "hate that i made you love me single artwork by Ariana Grande",
-          "url": "https://open.spotify.com/track/3idrvUQYONMAJ6EgZZqiL8",
+          "title": "Babydoll",
+          "subtitle": "Dominic Fike",
+          "description": "Babydoll is #9 in Spotify's current global playlist and #29 on the current Billboard Hot 100.",
+          "image": "/culture/song-babydoll-dominic-fike.webp",
+          "alt": "Babydoll artwork by Dominic Fike",
+          "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
           "source": "Spotify",
-          "signal": "TIKTOK signal",
-          "score": 71,
-          "accent": "#9b8cff",
-          "spotifyId": "3idrvUQYONMAJ6EgZZqiL8"
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#29"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#ff6b57",
+          "spotifyId": "7yNf9YjeO5JXUE3JEBgnYc",
+          "spotifyRank": 9
         }
-      ]
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "the cure",
+          "subtitle": "Olivia Rodrigo",
+          "description": "the cure is #13 in Spotify's current global playlist and #34 on the current Billboard Hot 100.",
+          "image": "/culture/song-the-cure-olivia-rodrigo.webp",
+          "alt": "the cure artwork by Olivia Rodrigo",
+          "url": "https://open.spotify.com/track/55pBIZO1cqoldeqpp5WR7H",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#34"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#ffc857",
+          "spotifyId": "55pBIZO1cqoldeqpp5WR7H",
+          "spotifyRank": 13
+        },
+        {
+          "rank": 7,
+          "title": "Animal",
+          "subtitle": "KATSEYE",
+          "description": "Animal is #5 in Spotify's current global playlist and #35 on the current Billboard Hot 100.",
+          "image": "/culture/song-animal-katseye.webp",
+          "alt": "Animal artwork by KATSEYE",
+          "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#35"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#9b8cff",
+          "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX",
+          "spotifyRank": 5
+        },
+        {
+          "rank": 8,
+          "title": "Loser",
+          "subtitle": "Tame Impala",
+          "description": "Loser is #3 in Spotify's current global playlist and #46 on the current Billboard Hot 100.",
+          "image": "/culture/song-loser-tame-impala.webp",
+          "alt": "Loser artwork by Tame Impala",
+          "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#46"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#57d5a4",
+          "spotifyId": "7bxaFZ1O3cHkgLKMsdC3xR",
+          "spotifyRank": 3
+        },
+        {
+          "rank": 9,
+          "title": "Self Aware",
+          "subtitle": "Temper City",
+          "description": "Self Aware is #8 in Spotify's current global playlist and #47 on the current Billboard Hot 100.",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "alt": "Self Aware artwork by Temper City",
+          "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#47"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT",
+          "spotifyRank": 8
+        },
+        {
+          "rank": 10,
+          "title": "SWIM",
+          "subtitle": "BTS",
+          "description": "SWIM is #10 in Spotify's current global playlist and #91 on the current Billboard Hot 100.",
+          "image": "/culture/song-swim-bts.webp",
+          "alt": "SWIM artwork by BTS",
+          "url": "https://open.spotify.com/track/68lbSrXDORS51pmyjZv712",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#91"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#ff6b57",
+          "spotifyId": "68lbSrXDORS51pmyjZv712",
+          "spotifyRank": 10
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
     }
   ],
   "sourceHealth": [
     {
-      "name": "Google Trends",
+      "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.369Z"
-    },
-    {
-      "name": "TikTok Creative Center",
-      "ok": true,
-      "checkedAt": "2026-08-15T21:19:31.177Z"
-    },
-    {
-      "name": "TikTok editorial fallback",
-      "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.725Z"
-    },
-    {
-      "name": "Know Your Meme",
-      "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.853Z"
+      "checkedAt": "2026-08-16T06:41:29.320Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.368Z"
+      "checkedAt": "2026-08-16T06:41:29.849Z"
+    },
+    {
+      "name": "Know Your Meme annual slang review",
+      "ok": true,
+      "checkedAt": "2026-08-16T06:41:29.321Z"
+    },
+    {
+      "name": "Know Your Meme slang pageviews",
+      "ok": true,
+      "checkedAt": "2026-08-16T06:41:29.341Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.877Z"
+      "checkedAt": "2026-08-16T06:41:29.317Z"
     },
     {
-      "name": "Wikipedia pageviews",
-      "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.865Z"
+      "name": "Google Trends creators",
+      "ok": false,
+      "checkedAt": "2026-08-16T06:41:29.158Z",
+      "error": "429 from trends.google.com"
     },
     {
-      "name": "IMDb ratings",
+      "name": "Wikipedia creator pageviews",
       "ok": true,
-      "checkedAt": "2026-08-15T21:19:29.865Z"
+      "checkedAt": "2026-08-16T06:41:33.227Z"
+    },
+    {
+      "name": "IMDb / Box Office Mojo",
+      "ok": true,
+      "checkedAt": "2026-08-16T06:41:30.487Z"
+    },
+    {
+      "name": "Billboard Hot 100",
+      "ok": true,
+      "checkedAt": "2026-08-16T06:41:29.141Z"
+    },
+    {
+      "name": "Spotify Top 50 Global",
+      "ok": true,
+      "checkedAt": "2026-08-16T06:41:29.321Z"
     }
   ]
 }
