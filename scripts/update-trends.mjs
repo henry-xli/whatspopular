@@ -18,6 +18,7 @@ const allowedHosts = new Set([
   "trends.google.com",
   "trending.knowyourmeme.com",
   "wikimedia.org",
+  "pageviews.wmcloud.org",
   "www.imdb.com",
   "www.boxofficemojo.com",
   "www.youtube.com",
@@ -32,22 +33,22 @@ const cultureMakers = [
   { title: "KSI", article: "KSI", category: "digital", subtitle: "Digital creator · musician", description: "The creator, musician, boxer, and entrepreneur represents attention that moves between several media." },
   { title: "Emma Chamberlain", article: "Emma_Chamberlain", category: "digital", subtitle: "Digital creator · podcaster", description: "The creator and podcaster represents internet-native influence outside gaming and spectacle channels." },
   { title: "Marques Brownlee", article: "Marques_Brownlee", category: "digital", subtitle: "Technology creator · podcaster", description: "The technology creator provides a durable benchmark for online attention outside entertainment fandoms." },
-  { title: "Christopher Nolan", article: "Christopher_Nolan", category: "screen", subtitle: "Film director · producer", description: "The filmmaker is compared directly with musicians and internet-native creators rather than receiving a separate film score." },
-  { title: "Zendaya", article: "Zendaya", category: "screen", subtitle: "Actor · producer", description: "The actor and producer is included as a major creator and subject of current screen culture." },
-  { title: "Tom Holland", article: "Tom_Holland", category: "screen", subtitle: "Actor · producer", description: "The actor and producer is measured by the same public-interest signals as every other person in the field." },
-  { title: "Matt Damon", article: "Matt_Damon", category: "screen", subtitle: "Actor · producer", description: "The actor and producer represents current film-driven attention in the broader comparison." },
-  { title: "Dwayne Johnson", article: "Dwayne_Johnson", category: "screen", subtitle: "Actor · producer", description: "The actor and producer spans film, music, sports entertainment, and mainstream online discussion." },
-  { title: "James Gunn", article: "James_Gunn", category: "screen", subtitle: "Film director · producer", description: "The director and producer provides a filmmaker benchmark that is not tied to any social platform." },
-  { title: "Greta Gerwig", article: "Greta_Gerwig", category: "screen", subtitle: "Film director · writer", description: "The director and writer keeps major behind-the-camera creators in the comparison." },
-  { title: "Jordan Peele", article: "Jordan_Peele", category: "screen", subtitle: "Film director · writer", description: "The filmmaker and comedian adds another behind-the-camera voice to the screen category." },
-  { title: "Shakira", article: "Shakira", category: "music", subtitle: "Musician · performer", description: "The musician and performer supplies a global, cross-language measure of current attention." },
-  { title: "Ariana Grande", article: "Ariana_Grande", category: "music", subtitle: "Musician · actor", description: "The musician and actor is compared on the same public-interest scale as digital and screen creators." },
-  { title: "Taylor Swift", article: "Taylor_Swift", category: "music", subtitle: "Singer-songwriter", description: "The singer-songwriter remains in the field so sustained attention is measured alongside newer spikes." },
-  { title: "Justin Bieber", article: "Justin_Bieber", category: "music", subtitle: "Musician", description: "The musician provides another established global benchmark for current public attention." },
-  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", category: "music", subtitle: "Singer-songwriter · actor", description: "The singer-songwriter and actor is included across both music and screen culture." },
-  { title: "Bad Bunny", article: "Bad_Bunny", category: "music", subtitle: "Musician · actor", description: "The musician and actor adds a global, Spanish-language benchmark to the comparison." },
-  { title: "Bruno Mars", article: "Bruno_Mars", category: "music", subtitle: "Musician · producer", description: "The musician and producer represents sustained chart and performance attention." },
-  { title: "Morgan Wallen", article: "Morgan_Wallen", category: "music", subtitle: "Singer-songwriter", description: "The singer-songwriter provides a current country-music benchmark in the broader field." },
+  { title: "Christopher Nolan", article: "Christopher_Nolan", category: "filmmaker", subtitle: "Film director · producer", description: "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation." },
+  { title: "Zendaya", article: "Zendaya", category: "actor", subtitle: "Actor · producer", description: "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention." },
+  { title: "Tom Holland", article: "Tom_Holland", category: "actor", subtitle: "Actor · producer", description: "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now." },
+  { title: "Matt Damon", article: "Matt_Damon", category: "actor", subtitle: "Actor · producer", description: "His lead performance as Odysseus in Christopher Nolan's The Odyssey is driving current interest." },
+  { title: "Dwayne Johnson", article: "Dwayne_Johnson", category: "actor", subtitle: "Actor · producer", description: "His return as Maui in the live-action Moana has brought him back into current movie conversation." },
+  { title: "James Gunn", article: "James_Gunn", category: "filmmaker", subtitle: "Film director · producer", description: "His continuing work leading DC Studios keeps his upcoming film and television slate in public discussion." },
+  { title: "Greta Gerwig", article: "Greta_Gerwig", category: "filmmaker", subtitle: "Film director · writer", description: "Interest in her next directing project keeps the filmmaker in current movie conversation." },
+  { title: "Jordan Peele", article: "Jordan_Peele", category: "filmmaker", subtitle: "Film director · writer", description: "Anticipation around his next film keeps the director and writer in current genre-film conversation." },
+  { title: "Shakira", article: "Shakira", category: "musician", subtitle: "Musician · performer", description: "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention." },
+  { title: "Ariana Grande", article: "Ariana_Grande", category: "musician", subtitle: "Musician · actor", description: "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest." },
+  { title: "Taylor Swift", article: "Taylor_Swift", category: "musician", subtitle: "Singer-songwriter", description: "New music activity and sustained catalog attention continue to generate unusually high public interest." },
+  { title: "Justin Bieber", article: "Justin_Bieber", category: "musician", subtitle: "Musician", description: "Current music and public appearances have brought the singer back into widespread conversation." },
+  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", category: "musician", subtitle: "Singer-songwriter · actor", description: "Her current chart activity is keeping the singer-songwriter prominent across music coverage and fan discussion." },
+  { title: "Bad Bunny", article: "Bad_Bunny", category: "musician", subtitle: "Musician · actor", description: "His current music and live appearances continue to drive global, Spanish-language attention." },
+  { title: "Bruno Mars", article: "Bruno_Mars", category: "musician", subtitle: "Musician · producer", description: "Current charting collaborations and live performances are driving renewed interest in the musician." },
+  { title: "Morgan Wallen", article: "Morgan_Wallen", category: "musician", subtitle: "Singer-songwriter", description: "His current chart and touring activity keeps him near the center of country-music conversation." },
 ];
 
 const movieDetails = new Map([
@@ -148,6 +149,31 @@ function formatCompact(value) {
   if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(value >= 10_000_000 ? 1 : 2).replace(/\.0+$/, "").replace(/(\.\d)0$/, "$1")}M`;
   if (value >= 1_000) return `${(value / 1_000).toFixed(value >= 100_000 ? 0 : 1).replace(/\.0$/, "")}K`;
   return String(Math.round(value));
+}
+
+function googleTrendsExploreUrl(titles, range) {
+  const url = new URL("https://trends.google.com/trends/explore");
+  url.searchParams.set("date", range);
+  url.searchParams.set("geo", "US");
+  url.searchParams.set("q", titles.join(","));
+  return url.toString();
+}
+
+function isoPageviewStamp(stamp) {
+  return `${stamp.slice(0, 4)}-${stamp.slice(4, 6)}-${stamp.slice(6, 8)}`;
+}
+
+function pageviewsComparisonUrl(people) {
+  const range = pageviewRange();
+  const url = new URL("https://pageviews.wmcloud.org/");
+  url.searchParams.set("project", "en.wikipedia.org");
+  url.searchParams.set("platform", "all-access");
+  url.searchParams.set("agent", "user");
+  url.searchParams.set("redirects", "0");
+  url.searchParams.set("start", isoPageviewStamp(range.start));
+  url.searchParams.set("end", isoPageviewStamp(range.end));
+  url.searchParams.set("pages", people.map((person) => person.article).join("|"));
+  return url.toString();
 }
 
 function parseViewCount(value) {
@@ -387,7 +413,10 @@ async function updateMemes(brief, result, videos) {
 
   section.eyebrow = `${result.label} · latest complete month`;
   section.description = `The ${result.month} Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.`;
-  section.sources = [`Know Your Meme · ${result.month} result`, "Lessons in Meme Culture · past 2 months"];
+  section.sources = [
+    { label: `Know Your Meme · ${result.month} result`, url: result.resultUrl },
+    { label: "Lessons in Meme Culture · past 2 months", url: "https://www.youtube.com/@LIMC/videos" },
+  ];
   section.items = ordered.map(({ candidate, video, description }, index) => {
     const current = currentByUrl.get(candidate.url);
     const title = current?.title ?? candidate.title;
@@ -441,11 +470,26 @@ async function googleTrendsSlang(items) {
 }
 
 function updateSlang(brief, interest) {
-  if (!interest) return;
   const section = brief.sections.find((entry) => entry.id === "slang");
   if (!section) return;
-  section.items.sort((a, b) => (interest[b.title] ?? -1) - (interest[a.title] ?? -1));
-  section.items.forEach((item, index) => { item.rank = index + 1; item.accent = accents[index]; });
+  if (interest) {
+    section.items.sort((a, b) => (interest[b.title] ?? -1) - (interest[a.title] ?? -1));
+    section.items.forEach((item, index) => { item.rank = index + 1; item.accent = accents[index]; });
+  }
+  section.sources = [
+    {
+      label: "Know Your Meme · annual slang review",
+      url: "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025",
+    },
+    {
+      label: `Urban Dictionary · ${section.items[0].title}`,
+      url: `https://www.urbandictionary.com/define.php?term=${encodeURIComponent(section.items[0].title)}`,
+    },
+    {
+      label: "Google Trends · these five, 12 months",
+      url: googleTrendsExploreUrl(section.items.map((item) => item.title), "today 12-m"),
+    },
+  ];
 }
 
 async function googleTrendsCreators(items) {
@@ -498,33 +542,33 @@ async function wikipediaCreatorPageviews(items) {
   return values;
 }
 
-function updateCreators(brief, trendInterest, pageviews) {
+function updateCreators(brief, pageviews) {
   const section = brief.sections.find((entry) => entry.id === "creators");
   if (!section) return;
   const currentByTitle = new Map(section.items.map((item) => [normalize(item.title), item]));
-  const ranking = trendInterest ?? pageviews;
-  if (!ranking) return;
-  const usesTrends = Boolean(trendInterest);
+  if (!pageviews) return;
   const ranked = cultureMakers
-    .filter((item) => Number.isFinite(ranking[item.title]))
-    .sort((left, right) => ranking[right.title] - ranking[left.title]);
-  const selected = ranked.filter((item) => item.category === "digital").slice(0, 2);
-  const categoryCounts = new Map([["digital", selected.length]]);
+    .filter((item) => Number.isFinite(pageviews[item.title]))
+    .sort((left, right) => pageviews[right.title] - pageviews[left.title]);
+  const selected = [];
+  const categoryCounts = new Map();
   for (const person of ranked) {
-    if (selected.includes(person)) continue;
     const count = categoryCounts.get(person.category) ?? 0;
     if (count >= 2) continue;
     selected.push(person);
     categoryCounts.set(person.category, count + 1);
     if (selected.length === 5) break;
   }
-  const leaders = selected.sort((left, right) => ranking[right.title] - ranking[left.title]);
+  const leaders = selected;
   if (leaders.length < 5) throw new Error("Fewer than five culture-makers had a direct popularity measure");
+  const pageviewsUrl = pageviewsComparisonUrl(leaders);
+  const trendsUrl = googleTrendsExploreUrl(leaders.map((person) => person.title), "today 1-m");
   section.eyebrow = "People · past 30 days";
-  section.description = usesTrends
-    ? "A balanced field of digital, music, and screen creators is ranked by 30-day Google Trends interest. Two places are reserved for digital-native creators and no category can take more than two."
-    : "A balanced field of digital, music, and screen creators is ranked by 30-day English Wikipedia views when Google Trends rate-limits automation. Two places are reserved for digital-native creators and no category can take more than two.";
-  section.sources = ["Google Trends · 30 days", "Wikipedia · 30-day views"];
+  section.description = "People are ranked by 30-day English Wikipedia views, with no more than two actors, musicians, filmmakers, or digital creators in the five.";
+  section.sources = [
+    { label: "Wikipedia Pageviews · these five, 30 days", url: pageviewsUrl },
+    { label: "Google Trends · these five, 30 days", url: trendsUrl },
+  ];
   section.items = leaders.map((person, index) => {
     const current = currentByTitle.get(normalize(person.title));
     const url = `https://en.wikipedia.org/wiki/${person.article}`;
@@ -537,14 +581,13 @@ function updateCreators(brief, trendInterest, pageviews) {
       alt: current?.alt ?? `Portrait of ${person.title}`,
       url,
       source: "Wikipedia",
-      metric: usesTrends
-        ? { label: "Google Trends interest · 30 days", value: `${ranking[person.title]}/100` }
-        : { label: "Wikipedia views · 30 days", value: formatCompact(ranking[person.title]) },
+      metric: { label: "Wikipedia views · 30 days", value: formatCompact(pageviews[person.title]) },
       evidence: [
-        { source: "Google Trends", url: `https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=${encodeURIComponent(person.title)}` },
-        { source: "Wikipedia", url },
+        { source: "Google Trends", url: googleTrendsExploreUrl([person.title], "today 1-m") },
+        { source: "Wikipedia Pageviews", url: pageviewsUrl },
       ],
       accent: accents[index],
+      category: person.category,
     };
   });
 }
@@ -654,7 +697,10 @@ function updateMovies(brief, chart) {
   section.eyebrow = `IMDb U.S. box office · ${chart.label}`;
   section.title = "Movies";
   section.description = "The five largest cumulative U.S. and Canada grosses among IMDb's current weekend box-office top 10, re-sorted by total gross rather than weekend earnings.";
-  section.sources = ["IMDb · box office top 10", "Box Office Mojo · total gross"];
+  section.sources = [
+    { label: "IMDb · box office top 10", url: chart.imdbChartUrl },
+    { label: "Box Office Mojo · total gross", url: chart.chartUrl },
+  ];
   section.items = chart.rows.map((row, index) => {
     const current = currentByTitle.get(normalize(row.title));
     const details = movieDetails.get(row.title);
@@ -718,20 +764,24 @@ function updateSongs(brief, chart, spotifyTracks) {
   const section = brief.sections.find((entry) => entry.id === "songs");
   if (!section) return;
   const billboardByTitle = new Map(chart.rows.map((row) => [normalize(row.song), row]));
-  const crossovers = spotifyTracks
+  const spotifySelected = spotifyTracks
     .map((track, index) => ({ track, spotifyRank: index + 1, row: billboardByTitle.get(normalize(track.title)) }))
     .filter((entry) => {
       if (!entry.row) return false;
       const spotifyArtists = new Set(normalize(entry.track.artist).split(" ").filter((token) => token.length >= 3));
       return normalize(entry.row.artist).split(" ").some((token) => token.length >= 3 && spotifyArtists.has(token));
     })
-    .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week))
     .slice(0, 5);
+  const crossovers = spotifySelected
+    .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
   if (crossovers.length < 5) throw new Error("Fewer than five songs overlapped Billboard and Spotify");
   const currentById = new Map(section.items.map((item) => [item.spotifyId, item]));
   section.eyebrow = "Spotify Global × Billboard";
-  section.description = "Songs must appear in both Spotify's current Top 50 Global and the Billboard Hot 100. Billboard position decides the final order. Press play for Spotify's official embed.";
-  section.sources = ["Spotify Top 50 · Global", "Billboard Hot 100"];
+  section.description = "The first five Spotify Global Top 50 tracks that also appear on the Billboard Hot 100 are selected; Billboard position then orders only those five. Press play for Spotify's official embed.";
+  section.sources = [
+    { label: "Spotify · Global Top 50", url: "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF" },
+    { label: `Billboard Hot 100 · ${chart.date}`, url: `https://www.billboard.com/charts/hot-100/${chart.date}/` },
+  ];
   section.items = crossovers.map(({ row, track, spotifyRank }, index) => {
     const current = currentById.get(track.id);
     return {
@@ -750,21 +800,8 @@ function updateSongs(brief, chart, spotifyTracks) {
       ],
       accent: accents[index],
       spotifyId: track.id,
+      spotifyRank,
     };
-  });
-}
-
-function updatePulse(brief) {
-  const definitions = [
-    ["memes", "Meme poll leader"],
-    ["slang", "Yearly slang"],
-    ["creators", "30-day culture-maker"],
-    ["songs", "Billboard crossover"],
-  ];
-  brief.pulse = definitions.map(([sectionId, label]) => {
-    const item = brief.sections.find((section) => section.id === sectionId)?.items[0];
-    if (!item) throw new Error(`Missing pulse source board: ${sectionId}`);
-    return { label, value: item.title, image: item.image, url: item.url };
   });
 }
 
@@ -772,6 +809,14 @@ function validateBrief(brief) {
   if (brief.sections.length !== 5) throw new Error("Brief must have five boards");
   for (const section of brief.sections) {
     if (section.items.length !== 5) throw new Error(`${section.title} must have five entries`);
+    if (!Array.isArray(section.sources) || section.sources.length < 2) {
+      throw new Error(`${section.title} must list at least two linked sources`);
+    }
+    for (const source of section.sources) {
+      if (!source?.label || !source?.url || new URL(source.url).protocol !== "https:") {
+        throw new Error(`${section.title} has an invalid linked source`);
+      }
+    }
     section.items.forEach((item, index) => {
       if (item.rank !== index + 1) throw new Error(`${section.title} has non-sequential ranks`);
       if (!Array.isArray(item.evidence)
@@ -788,8 +833,14 @@ function validateBrief(brief) {
     throw new Error("Memes must preserve the published Meme of the Month order");
   }
   const creators = brief.sections.find((section) => section.id === "creators");
-  if ((creators?.items.filter((item) => /Digital creator|Streamer|Technology creator/i.test(item.subtitle)).length ?? 0) < 2) {
-    throw new Error("The creator board must retain two digital-native places");
+  const creatorCategoryCounts = new Map();
+  for (const item of creators?.items ?? []) {
+    const count = (creatorCategoryCounts.get(item.category) ?? 0) + 1;
+    creatorCategoryCounts.set(item.category, count);
+    if (!item.category || count > 2) throw new Error("No creator category may take more than two places");
+    if (item.metric?.label !== "Wikipedia views · 30 days") {
+      throw new Error("Creators must be ranked by Wikipedia views");
+    }
   }
   const songs = brief.sections.find((section) => section.id === "songs");
   const billboardRanks = songs?.items.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
@@ -805,6 +856,15 @@ function validateBrief(brief) {
 }
 
 const brief = JSON.parse(await readFile(dataPath, "utf8"));
+for (const section of brief.sections) {
+  if (section.sources.every((source) => typeof source === "string")) {
+    const evidence = section.items[0]?.evidence ?? [];
+    section.sources = section.sources.map((label, index) => ({
+      label,
+      url: evidence[index % Math.max(evidence.length, 1)]?.url ?? section.items[0].url,
+    }));
+  }
+}
 const now = new Date();
 if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().slice(0, 10)) {
   console.log(`Already refreshed on ${now.toISOString().slice(0, 10)}; use --force to run again.`);
@@ -830,13 +890,13 @@ if (byName["Know Your Meme result"].ok && byName["Lessons in Meme Culture"].ok) 
   await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons in Meme Culture"].value);
 }
 updateSlang(brief, byName["Google Trends slang"].value);
-updateCreators(brief, byName["Google Trends creators"].value, byName["Wikipedia creator pageviews"].value);
+updateCreators(brief, byName["Wikipedia creator pageviews"].value);
 if (byName["IMDb / Box Office Mojo"].ok) updateMovies(brief, byName["IMDb / Box Office Mojo"].value);
 if (byName["Billboard Hot 100"].ok && byName["Spotify Top 50 Global"].ok) {
   updateSongs(brief, byName["Billboard Hot 100"].value, byName["Spotify Top 50 Global"].value);
 }
 for (const item of brief.sections.flatMap((section) => section.items)) delete item.caution;
-updatePulse(brief);
+delete brief.pulse;
 
 const successfulSources = sourceResults.filter((result) => result.ok).length;
 brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt, error }) => ({ name, ok, checkedAt, ...(error ? { error } : {}) }));

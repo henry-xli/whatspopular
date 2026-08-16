@@ -26,16 +26,17 @@ test("renders the complete finite culture briefing", async () => {
   const html = await response.text();
   assert.match(html, /Internet culture,/);
   assert.match(html, /minus the infinite scroll/);
-  assert.match(html, /The whole internet\. Five short lists\./);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
   assert.match(html, />Creators</);
   assert.match(html, />Movies</);
   assert.match(html, />Songs</);
   assert.match(html, /latest complete month/);
-  assert.match(html, /Wikipedia views · 30 days|Google Trends interest · 30 days/);
+  assert.match(html, /Wikipedia views · 30 days/);
   assert.match(html, /U\.S\. &amp; Canada total gross/);
   assert.match(html, /Billboard Hot 100/);
+  assert.match(html, /class="source-list"[^>]*>[\s\S]*?<a /);
+  assert.doesNotMatch(html, /How an entry earns a spot|>Right now<|The whole internet\. Five short lists\.|Less feed\. More signal\./);
   assert.doesNotMatch(html, /Viral formats|TikTok|KYM \+ LIMC signal|SocialCounts|Social Blade|Subscribers gained/i);
   assert.match(html, /BMC-Widget/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
@@ -57,7 +58,11 @@ test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   assert.equal(brief.sections.length, 5);
   assert.ok(brief.sections.every((section) => section.items.length === 5));
-  const items = [...brief.pulse, ...brief.sections.flatMap((section) => section.items)];
+  for (const section of brief.sections) {
+    assert.ok(section.sources.length >= 2);
+    assert.ok(section.sources.every((source) => source.label && new URL(source.url).protocol === "https:"));
+  }
+  const items = brief.sections.flatMap((section) => section.items);
   for (const item of items) {
     assert.match(item.image, /^\/culture\/[a-z0-9-]+\.webp$/);
     assert.equal(new URL(item.url).protocol, "https:");
@@ -76,7 +81,10 @@ test("keeps content and outbound links constrained", async () => {
   assert.deepEqual(pollRanks, [...pollRanks].sort((left, right) => left - right));
   assert.doesNotMatch(memes.items.map((item) => item.description).join(" "), /placed in Know Your Meme|reached Lessons in Meme Culture|has a Know Your Meme entry/i);
   const creators = brief.sections.find((section) => section.id === "creators");
-  assert.ok(creators.items.filter((item) => /Digital creator|Streamer|Technology creator/i.test(item.subtitle)).length >= 2);
+  assert.ok(creators.items.every((item) => item.metric.label === "Wikipedia views · 30 days"));
+  const categoryCounts = new Map();
+  for (const item of creators.items) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
+  assert.ok([...categoryCounts.values()].every((count) => count <= 2));
   const movies = brief.sections.find((section) => section.id === "watch");
   assert.equal(movies.title, "Movies");
   assert.ok(movies.items.every((item) => item.metric.label === "U.S. & Canada total gross"));
@@ -84,7 +92,9 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(movies.items.some((item) => item.title === "Toy Story 5"));
   assert.ok(movies.items.every((item) => !/One Night Only|Super Troopers 3/.test(item.title)));
   const songs = brief.sections.find((section) => section.id === "songs");
+  assert.match(songs.description, /first five Spotify Global Top 50 tracks/i);
   assert.ok(songs.items.every((item) => item.metric.label === "Billboard Hot 100"));
+  assert.ok(songs.items.every((item) => Number.isInteger(item.spotifyRank) && item.spotifyRank <= 50));
   const billboardRanks = songs.items.map((item) => Number(item.metric.value.slice(1)));
   assert.deepEqual(billboardRanks, [...billboardRanks].sort((left, right) => left - right));
   assert.ok(songs.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));

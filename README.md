@@ -29,15 +29,14 @@ keeps the latest completed Know Your Meme monthly poll in its published order,
 then filters it to memes covered by any Lessons in Meme Culture upload from the
 past two months. Card descriptions are derived from each meme's Know Your Meme
 About section. Slang uses a 12-month set checked with Urban Dictionary and
-Google Trends. Creators come from balanced digital, music, and screen fields;
-two places are reserved for digital-native creators, no category can take more
-than two, and every person is ordered by the same 30-day Google Trends measure
-or transparent Wikipedia-pageview fallback. Movies are the five largest
+Google Trends. Creators are ranked by 30-day English Wikipedia views across
+digital creators, musicians, actors, and filmmakers, with no profession taking
+more than two of the five places. Movies are the five largest
 cumulative U.S./Canada grosses within IMDb's current weekend top ten, using Box
-Office Mojo's underlying chart data. Songs must appear on both Spotify's
-official Top 50 Global and Billboard's Hot 100, with Billboard position setting
-their final order. The updater atomically replaces `data/trends.json` only after
-validation.
+Office Mojo's underlying chart data. For songs, Spotify chooses the first five
+Top 50 Global tracks that also appear on Billboard's Hot 100; Billboard position
+then orders only those selected five. The updater atomically replaces
+`data/trends.json` only after validation.
 
 `scripts/cache-images.mjs` derives the current asset set from the validated
 briefing, downloads images through strict host and size allowlists, crops them

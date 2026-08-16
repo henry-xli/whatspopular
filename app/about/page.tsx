@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const flow = [
   { number: "01", title: "Collect", text: "Read public trend signals once each day—never your personal data." },
   { number: "02", title: "Compare", text: "Require at least two independent public sources for every entry." },
-  { number: "03", title: "Contextualize", text: "Add a human-readable explanation, source link, and safety note when needed." },
+  { number: "03", title: "Contextualize", text: "Add a concise explanation of what each item is and why it is currently relevant." },
   { number: "04", title: "Cache", text: "Resize every visual and write one validated, versioned briefing file." },
   { number: "05", title: "Publish", text: "Serve static pages from the edge until tomorrow’s update is ready." },
 ];

@@ -22,6 +22,13 @@ export type CultureItem = {
   accent: string;
   rating?: string;
   spotifyId?: string;
+  spotifyRank?: number;
+  category?: string;
+};
+
+export type CultureSource = {
+  label: string;
+  url: string;
 };
 
 export type CultureSection = {
@@ -29,7 +36,7 @@ export type CultureSection = {
   eyebrow: string;
   title: string;
   description: string;
-  sources: string[];
+  sources: CultureSource[];
   layout: CultureLayout;
   items: CultureItem[];
 };
@@ -40,12 +47,6 @@ export type CultureBrief = {
   window: string;
   generatedAt: string;
   summary: string;
-  pulse: Array<{
-    label: string;
-    value: string;
-    image: string;
-    url: string;
-  }>;
   sections: CultureSection[];
 };
 
@@ -59,7 +60,8 @@ const allowedLinkHosts = new Set([
   "www.imdb.com",
   "www.billboard.com",
   "www.urbandictionary.com",
-  "www.youtube.com"
+  "www.youtube.com",
+  "pageviews.wmcloud.org"
 ]);
 
 function assertExternalUrl(value: string, label: string) {
@@ -76,17 +78,6 @@ function validateBrief(value: CultureBrief) {
   if (value.sections.length !== 5) {
     throw new Error("Culture brief must contain exactly five boards");
   }
-  if (value.pulse.length !== 4) {
-    throw new Error("Culture pulse must contain exactly four items");
-  }
-
-  for (const pulseItem of value.pulse) {
-    assertExternalUrl(pulseItem.url, "Pulse item");
-    if (!pulseItem.image.startsWith("/culture/")) {
-      throw new Error("Pulse image must be a local cached asset");
-    }
-  }
-
   const sectionIds = new Set<string>();
   for (const section of value.sections) {
     if (sectionIds.has(section.id)) {
@@ -95,6 +86,15 @@ function validateBrief(value: CultureBrief) {
     sectionIds.add(section.id);
     if (section.items.length !== 5) {
       throw new Error(section.title + " must contain exactly five items");
+    }
+    if (section.sources.length < 2) {
+      throw new Error(section.title + " must list at least two sources");
+    }
+    for (const source of section.sources) {
+      if (!source.label.trim()) {
+        throw new Error(section.title + " has an unlabeled source");
+      }
+      assertExternalUrl(source.url, section.title + " source");
     }
 
     section.items.forEach((item, index) => {
@@ -123,6 +123,9 @@ function validateBrief(value: CultureBrief) {
       }
       if (item.spotifyId && !/^[A-Za-z0-9]{22}$/.test(item.spotifyId)) {
         throw new Error(item.title + " has an invalid Spotify track ID");
+      }
+      if (item.spotifyRank !== undefined && (!Number.isInteger(item.spotifyRank) || item.spotifyRank < 1 || item.spotifyRank > 50)) {
+        throw new Error(item.title + " has an invalid Spotify rank");
       }
     });
   }

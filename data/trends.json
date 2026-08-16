@@ -2,34 +2,8 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete month · other boards: rolling",
-  "generatedAt": "2026-08-16T04:36:46.811Z",
+  "generatedAt": "2026-08-16T05:28:31.105Z",
   "summary": "A five-minute, two-source briefing on the jokes, language, people, screens, and songs shaping internet culture right now.",
-  "pulse": [
-    {
-      "label": "Meme poll leader",
-      "value": "Jimothy the raccoon",
-      "image": "/culture/meme-jimothy-the-raccoon.webp",
-      "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon"
-    },
-    {
-      "label": "Yearly slang",
-      "value": "67 / six-seven",
-      "image": "/culture/slang-67.webp",
-      "url": "https://knowyourmeme.com/memes/67-meme"
-    },
-    {
-      "label": "30-day culture-maker",
-      "value": "Zendaya",
-      "image": "/culture/creator-zendaya.webp",
-      "url": "https://en.wikipedia.org/wiki/Zendaya"
-    },
-    {
-      "label": "Billboard crossover",
-      "value": "Choosin' Texas",
-      "image": "/culture/song-choosin-texas-ella-langley.webp",
-      "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN"
-    }
-  ],
   "sections": [
     {
       "id": "memes",
@@ -37,8 +11,14 @@
       "title": "Memes",
       "description": "The July Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.",
       "sources": [
-        "Know Your Meme · July result",
-        "Lessons in Meme Culture · past 2 months"
+        {
+          "label": "Know Your Meme · July result",
+          "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+        },
+        {
+          "label": "Lessons in Meme Culture · past 2 months",
+          "url": "https://www.youtube.com/@LIMC/videos"
+        }
       ],
       "layout": "landscape",
       "items": [
@@ -175,9 +155,18 @@
       "title": "Slang",
       "description": "Slang turns over more slowly than memes, so this list uses the past year. Know Your Meme and Urban Dictionary establish usage; Google Trends checks whether interest traveled beyond one community.",
       "sources": [
-        "Know Your Meme · annual review",
-        "Urban Dictionary",
-        "Google Trends · 12 months"
+        {
+          "label": "Know Your Meme · annual slang review",
+          "url": "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025"
+        },
+        {
+          "label": "Urban Dictionary · 67 / six-seven",
+          "url": "https://www.urbandictionary.com/define.php?term=67%20%2F%20six-seven"
+        },
+        {
+          "label": "Google Trends · these five, 12 months",
+          "url": "https://trends.google.com/trends/explore?date=today+12-m&geo=US&q=67+%2F+six-seven%2CClanker%2CChopped%2CAura+farming%2CSYBAU"
+        }
       ],
       "layout": "landscape",
       "items": [
@@ -312,10 +301,16 @@
       "id": "creators",
       "eyebrow": "People · past 30 days",
       "title": "Creators",
-      "description": "A balanced field of digital, music, and screen creators is ranked by 30-day English Wikipedia views when Google Trends rate-limits automation. Two places are reserved for digital-native creators and no category can take more than two.",
+      "description": "People are ranked by 30-day English Wikipedia views, with no more than two actors, musicians, filmmakers, or digital creators in the five.",
       "sources": [
-        "Google Trends · 30 days",
-        "Wikipedia · 30-day views"
+        {
+          "label": "Wikipedia Pageviews · these five, 30 days",
+          "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+        },
+        {
+          "label": "Google Trends · these five, 30 days",
+          "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Zendaya%2CTom+Holland%2CChristopher+Nolan%2CShakira%2CAriana+Grande"
+        }
       ],
       "layout": "square",
       "items": [
@@ -323,7 +318,7 @@
           "rank": 1,
           "title": "Zendaya",
           "subtitle": "Actor · producer",
-          "description": "The actor and producer is included as a major creator and subject of current screen culture.",
+          "description": "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention.",
           "image": "/culture/creator-zendaya.webp",
           "alt": "Portrait of Zendaya",
           "url": "https://en.wikipedia.org/wiki/Zendaya",
@@ -335,20 +330,21 @@
           "evidence": [
             {
               "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Zendaya"
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Zendaya"
             },
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Zendaya"
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
             }
           ],
-          "accent": "#ffc857"
+          "accent": "#ffc857",
+          "category": "actor"
         },
         {
           "rank": 2,
           "title": "Tom Holland",
           "subtitle": "Actor · producer",
-          "description": "The actor and producer is measured by the same public-interest signals as every other person in the field.",
+          "description": "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now.",
           "image": "/culture/creator-tom-holland.webp",
           "alt": "Portrait of Tom Holland",
           "url": "https://en.wikipedia.org/wiki/Tom_Holland",
@@ -360,20 +356,47 @@
           "evidence": [
             {
               "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Tom%20Holland"
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Tom+Holland"
             },
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Tom_Holland"
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
             }
           ],
-          "accent": "#9b8cff"
+          "accent": "#9b8cff",
+          "category": "actor"
         },
         {
           "rank": 3,
+          "title": "Christopher Nolan",
+          "subtitle": "Film director · producer",
+          "description": "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation.",
+          "image": "/culture/creator-christopher-nolan.webp",
+          "alt": "Portrait of Christopher Nolan",
+          "url": "https://en.wikipedia.org/wiki/Christopher_Nolan",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · 30 days",
+            "value": "2.63M"
+          },
+          "evidence": [
+            {
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Christopher+Nolan"
+            },
+            {
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
+            }
+          ],
+          "accent": "#57d5a4",
+          "category": "filmmaker"
+        },
+        {
+          "rank": 4,
           "title": "Shakira",
           "subtitle": "Musician · performer",
-          "description": "The musician and performer supplies a global, cross-language measure of current attention.",
+          "description": "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention.",
           "image": "/culture/creator-shakira.webp",
           "alt": "Portrait of Shakira",
           "url": "https://en.wikipedia.org/wiki/Shakira",
@@ -385,64 +408,41 @@
           "evidence": [
             {
               "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Shakira"
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Shakira"
             },
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Shakira"
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
             }
           ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
-          "title": "IShowSpeed",
-          "subtitle": "Streamer · entertainer",
-          "description": "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture.",
-          "image": "/culture/creator-ishowspeed.webp",
-          "alt": "Portrait of IShowSpeed",
-          "url": "https://en.wikipedia.org/wiki/IShowSpeed",
-          "source": "Wikipedia",
-          "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "378K"
-          },
-          "evidence": [
-            {
-              "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=IShowSpeed"
-            },
-            {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/IShowSpeed"
-            }
-          ],
-          "accent": "#5ab0ff"
+          "accent": "#5ab0ff",
+          "category": "musician"
         },
         {
           "rank": 5,
-          "title": "MrBeast",
-          "subtitle": "Digital creator · entrepreneur",
-          "description": "The large-scale video creator and entrepreneur remains a useful benchmark for mainstream internet attention.",
-          "image": "/culture/creator-mrbeast.webp",
-          "alt": "Portrait of MrBeast",
-          "url": "https://en.wikipedia.org/wiki/MrBeast",
+          "title": "Ariana Grande",
+          "subtitle": "Musician · actor",
+          "description": "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest.",
+          "image": "/culture/creator-ariana-grande.webp",
+          "alt": "Portrait of Ariana Grande",
+          "url": "https://en.wikipedia.org/wiki/Ariana_Grande",
           "source": "Wikipedia",
           "metric": {
             "label": "Wikipedia views · 30 days",
-            "value": "244K"
+            "value": "797K"
           },
           "evidence": [
             {
               "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=MrBeast"
+              "url": "https://trends.google.com/trends/explore?date=today+1-m&geo=US&q=Ariana+Grande"
             },
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/MrBeast"
+              "source": "Wikipedia Pageviews",
+              "url": "https://pageviews.wmcloud.org/?project=en.wikipedia.org&platform=all-access&agent=user&redirects=0&start=2026-07-17&end=2026-08-15&pages=Zendaya%7CTom_Holland%7CChristopher_Nolan%7CShakira%7CAriana_Grande"
             }
           ],
-          "accent": "#ff6b57"
+          "accent": "#ff6b57",
+          "category": "musician"
         }
       ]
     },
@@ -452,8 +452,14 @@
       "title": "Movies",
       "description": "The five largest cumulative U.S. and Canada grosses among IMDb's current weekend box-office top 10, re-sorted by total gross rather than weekend earnings.",
       "sources": [
-        "IMDb · box office top 10",
-        "Box Office Mojo · total gross"
+        {
+          "label": "IMDb · box office top 10",
+          "url": "https://www.imdb.com/chart/boxoffice/"
+        },
+        {
+          "label": "Box Office Mojo · total gross",
+          "url": "https://www.boxofficemojo.com/weekend/2026W32/"
+        }
       ],
       "layout": "poster",
       "items": [
@@ -593,41 +599,21 @@
       "id": "songs",
       "eyebrow": "Spotify Global × Billboard",
       "title": "Songs",
-      "description": "Songs must appear in both Spotify's current Top 50 Global and the Billboard Hot 100. Billboard position decides the final order. Press play for Spotify's official embed.",
+      "description": "The first five Spotify Global Top 50 tracks that also appear on the Billboard Hot 100 are selected; Billboard position then orders only those five. Press play for Spotify's official embed.",
       "sources": [
-        "Spotify Top 50 · Global",
-        "Billboard Hot 100"
+        {
+          "label": "Spotify · Global Top 50",
+          "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+        },
+        {
+          "label": "Billboard Hot 100 · 2026-08-15",
+          "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+        }
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "Choosin' Texas",
-          "subtitle": "Ella Langley",
-          "description": "Choosin' Texas is #18 in Spotify's current global playlist and #1 on the current Billboard Hot 100.",
-          "image": "/culture/song-choosin-texas-ella-langley.webp",
-          "alt": "Choosin' Texas artwork by Ella Langley",
-          "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
-          "source": "Spotify",
-          "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#1"
-          },
-          "evidence": [
-            {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
-            },
-            {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            }
-          ],
-          "accent": "#ffc857",
-          "spotifyId": "7scFxt9VhL4FJwuPSfRlfN"
-        },
-        {
-          "rank": 2,
           "title": "hate that i made you love me",
           "subtitle": "Ariana Grande",
           "description": "hate that i made you love me is #4 in Spotify's current global playlist and #2 on the current Billboard Hot 100.",
@@ -649,21 +635,49 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             }
           ],
-          "accent": "#9b8cff",
-          "spotifyId": "3iy2QuCtCzpWnR6tia39AB"
+          "accent": "#ffc857",
+          "spotifyId": "3iy2QuCtCzpWnR6tia39AB",
+          "spotifyRank": 4
         },
         {
-          "rank": 3,
-          "title": "petal",
-          "subtitle": "Ariana Grande",
-          "description": "petal is #14 in Spotify's current global playlist and #4 on the current Billboard Hot 100.",
-          "image": "/culture/song-petal-ariana-grande.webp",
-          "alt": "petal artwork by Ariana Grande",
-          "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
+          "rank": 2,
+          "title": "Earrings",
+          "subtitle": "Malcolm Todd",
+          "description": "Earrings is #6 in Spotify's current global playlist and #28 on the current Billboard Hot 100.",
+          "image": "/culture/song-earrings-malcolm-todd.webp",
+          "alt": "Earrings artwork by Malcolm Todd",
+          "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
           "source": "Spotify",
           "metric": {
             "label": "Billboard Hot 100",
-            "value": "#4"
+            "value": "#28"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#9b8cff",
+          "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ",
+          "spotifyRank": 6
+        },
+        {
+          "rank": 3,
+          "title": "Animal",
+          "subtitle": "KATSEYE",
+          "description": "Animal is #5 in Spotify's current global playlist and #35 on the current Billboard Hot 100.",
+          "image": "/culture/song-animal-katseye.webp",
+          "alt": "Animal artwork by KATSEYE",
+          "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#35"
           },
           "evidence": [
             {
@@ -676,20 +690,21 @@
             }
           ],
           "accent": "#57d5a4",
-          "spotifyId": "70pVCVMGjmIWPbWXDwf11e"
+          "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX",
+          "spotifyRank": 5
         },
         {
           "rank": 4,
-          "title": "So Easy (To Fall In Love)",
-          "subtitle": "Olivia Dean",
-          "description": "So Easy (To Fall In Love) is #45 in Spotify's current global playlist and #9 on the current Billboard Hot 100.",
-          "image": "/culture/song-so-easy-to-fall-in-love-olivia-dean.webp",
-          "alt": "So Easy (To Fall In Love) artwork by Olivia Dean",
-          "url": "https://open.spotify.com/track/6sGIMrtIzQjdzNndVxe397",
+          "title": "Loser",
+          "subtitle": "Tame Impala",
+          "description": "Loser is #3 in Spotify's current global playlist and #46 on the current Billboard Hot 100.",
+          "image": "/culture/song-loser-tame-impala.webp",
+          "alt": "Loser artwork by Tame Impala",
+          "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
           "source": "Spotify",
           "metric": {
             "label": "Billboard Hot 100",
-            "value": "#9"
+            "value": "#46"
           },
           "evidence": [
             {
@@ -702,20 +717,21 @@
             }
           ],
           "accent": "#5ab0ff",
-          "spotifyId": "6sGIMrtIzQjdzNndVxe397"
+          "spotifyId": "7bxaFZ1O3cHkgLKMsdC3xR",
+          "spotifyRank": 3
         },
         {
           "rank": 5,
-          "title": "Man I Need",
-          "subtitle": "Olivia Dean",
-          "description": "Man I Need is #23 in Spotify's current global playlist and #11 on the current Billboard Hot 100.",
-          "image": "/culture/song-man-i-need-olivia-dean.webp",
-          "alt": "Man I Need artwork by Olivia Dean",
-          "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
+          "title": "Self Aware",
+          "subtitle": "Temper City",
+          "description": "Self Aware is #8 in Spotify's current global playlist and #47 on the current Billboard Hot 100.",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "alt": "Self Aware artwork by Temper City",
+          "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
           "source": "Spotify",
           "metric": {
             "label": "Billboard Hot 100",
-            "value": "#11"
+            "value": "#47"
           },
           "evidence": [
             {
@@ -728,7 +744,8 @@
             }
           ],
           "accent": "#ff6b57",
-          "spotifyId": "1qbmS6ep2hbBRaEZFpn7BX"
+          "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT",
+          "spotifyRank": 8
         }
       ]
     }
@@ -737,54 +754,54 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:47.259Z"
+      "checkedAt": "2026-08-16T05:28:31.493Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:47.792Z"
+      "checkedAt": "2026-08-16T05:28:32.014Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:47.275Z"
+      "checkedAt": "2026-08-16T05:28:31.502Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:46.980Z"
+      "checkedAt": "2026-08-16T05:28:31.299Z"
     },
     {
       "name": "Google Trends slang",
       "ok": false,
-      "checkedAt": "2026-08-16T04:36:46.992Z",
+      "checkedAt": "2026-08-16T05:28:31.285Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Google Trends creators",
       "ok": false,
-      "checkedAt": "2026-08-16T04:36:46.976Z",
+      "checkedAt": "2026-08-16T05:28:31.288Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Wikipedia creator pageviews",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:50.504Z"
+      "checkedAt": "2026-08-16T05:28:35.250Z"
     },
     {
       "name": "IMDb / Box Office Mojo",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:47.658Z"
+      "checkedAt": "2026-08-16T05:28:32.063Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:46.974Z"
+      "checkedAt": "2026-08-16T05:28:31.278Z"
     },
     {
       "name": "Spotify Top 50 Global",
       "ok": true,
-      "checkedAt": "2026-08-16T04:36:47.261Z"
+      "checkedAt": "2026-08-16T05:28:31.481Z"
     }
   ]
 }

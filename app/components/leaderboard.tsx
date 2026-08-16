@@ -12,7 +12,11 @@ export function Leaderboard({ section }: { section: CultureSection }) {
         </div>
         <p>{section.description}</p>
         <div className="source-list" aria-label="Sources">
-          {section.sources.map((source) => <span key={source}>{source}</span>)}
+          {section.sources.map((source) => (
+            <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
+              {source.label}<span aria-hidden="true">↗</span>
+            </a>
+          ))}
         </div>
       </div>
 
