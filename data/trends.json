@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete month · other boards: rolling",
-  "generatedAt": "2026-08-16T05:28:31.105Z",
+  "generatedAt": "2026-08-16T05:58:17.971Z",
   "summary": "A five-minute, two-source briefing on the jokes, language, people, screens, and songs shaping internet culture right now.",
   "sections": [
     {
@@ -153,7 +153,7 @@
       "id": "slang",
       "eyebrow": "The past 12 months",
       "title": "Slang",
-      "description": "Slang turns over more slowly than memes, so this list uses the past year. Know Your Meme and Urban Dictionary establish usage; Google Trends checks whether interest traveled beyond one community.",
+      "description": "These five terms come from Know Your Meme's annual slang review and are checked against Urban Dictionary. Their order follows the latest successful 12-month U.S. Google Trends comparison; lifetime Know Your Meme entry views are shown below.",
       "sources": [
         {
           "label": "Know Your Meme · annual slang review",
@@ -193,7 +193,11 @@
               "url": "https://www.urbandictionary.com/define.php?term=67"
             }
           ],
-          "accent": "#ffc857"
+          "accent": "#ffc857",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "1,000,150"
+          }
         },
         {
           "rank": 2,
@@ -218,7 +222,11 @@
               "url": "https://www.urbandictionary.com/define.php?term=clanker"
             }
           ],
-          "accent": "#9b8cff"
+          "accent": "#9b8cff",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "46,811"
+          }
         },
         {
           "rank": 3,
@@ -243,7 +251,11 @@
               "url": "https://www.urbandictionary.com/define.php?term=Chopped"
             }
           ],
-          "accent": "#5ab0ff"
+          "accent": "#5ab0ff",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "18,428"
+          }
         },
         {
           "rank": 4,
@@ -268,7 +280,11 @@
               "url": "https://www.urbandictionary.com/define.php?term=aurafarming"
             }
           ],
-          "accent": "#57d5a4"
+          "accent": "#57d5a4",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "99,568"
+          }
         },
         {
           "rank": 5,
@@ -293,7 +309,11 @@
               "url": "https://www.urbandictionary.com/define.php?term=sybau"
             }
           ],
-          "accent": "#ff6b57"
+          "accent": "#ff6b57",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "76,381"
+          }
         }
       ]
     },
@@ -317,7 +337,7 @@
         {
           "rank": 1,
           "title": "Zendaya",
-          "subtitle": "Actor · producer",
+          "subtitle": "Actor",
           "description": "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention.",
           "image": "/culture/creator-zendaya.webp",
           "alt": "Portrait of Zendaya",
@@ -343,7 +363,7 @@
         {
           "rank": 2,
           "title": "Tom Holland",
-          "subtitle": "Actor · producer",
+          "subtitle": "Actor",
           "description": "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now.",
           "image": "/culture/creator-tom-holland.webp",
           "alt": "Portrait of Tom Holland",
@@ -369,7 +389,7 @@
         {
           "rank": 3,
           "title": "Christopher Nolan",
-          "subtitle": "Film director · producer",
+          "subtitle": "Film director",
           "description": "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation.",
           "image": "/culture/creator-christopher-nolan.webp",
           "alt": "Portrait of Christopher Nolan",
@@ -395,7 +415,7 @@
         {
           "rank": 4,
           "title": "Shakira",
-          "subtitle": "Musician · performer",
+          "subtitle": "Musician",
           "description": "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention.",
           "image": "/culture/creator-shakira.webp",
           "alt": "Portrait of Shakira",
@@ -421,7 +441,7 @@
         {
           "rank": 5,
           "title": "Ariana Grande",
-          "subtitle": "Musician · actor",
+          "subtitle": "Musician",
           "description": "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest.",
           "image": "/culture/creator-ariana-grande.webp",
           "alt": "Portrait of Ariana Grande",
@@ -754,54 +774,59 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:31.493Z"
+      "checkedAt": "2026-08-16T05:58:18.357Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:32.014Z"
+      "checkedAt": "2026-08-16T05:58:19.006Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:31.502Z"
+      "checkedAt": "2026-08-16T05:58:18.377Z"
+    },
+    {
+      "name": "Know Your Meme slang pageviews",
+      "ok": true,
+      "checkedAt": "2026-08-16T05:58:18.530Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:31.299Z"
+      "checkedAt": "2026-08-16T05:58:18.301Z"
     },
     {
       "name": "Google Trends slang",
       "ok": false,
-      "checkedAt": "2026-08-16T05:28:31.285Z",
+      "checkedAt": "2026-08-16T05:58:18.373Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Google Trends creators",
       "ok": false,
-      "checkedAt": "2026-08-16T05:28:31.288Z",
+      "checkedAt": "2026-08-16T05:58:18.622Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Wikipedia creator pageviews",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:35.250Z"
+      "checkedAt": "2026-08-16T05:58:22.060Z"
     },
     {
       "name": "IMDb / Box Office Mojo",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:32.063Z"
+      "checkedAt": "2026-08-16T05:58:18.885Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:31.278Z"
+      "checkedAt": "2026-08-16T05:58:18.407Z"
     },
     {
       "name": "Spotify Top 50 Global",
       "ok": true,
-      "checkedAt": "2026-08-16T05:28:31.481Z"
+      "checkedAt": "2026-08-16T05:58:18.502Z"
     }
   ]
 }

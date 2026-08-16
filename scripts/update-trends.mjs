@@ -25,29 +25,29 @@ const allowedHosts = new Set([
 ]);
 
 const cultureMakers = [
-  { title: "MrBeast", article: "MrBeast", category: "digital", subtitle: "Digital creator · entrepreneur", description: "The large-scale video creator and entrepreneur remains a useful benchmark for mainstream internet attention." },
-  { title: "IShowSpeed", article: "IShowSpeed", category: "digital", subtitle: "Streamer · entertainer", description: "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture." },
-  { title: "Kai Cenat", article: "Kai_Cenat", category: "digital", subtitle: "Streamer · entertainer", description: "The streamer is measured alongside established film and music figures rather than in a short-form-only list." },
+  { title: "MrBeast", article: "MrBeast", category: "digital", subtitle: "Digital creator", description: "The large-scale video creator and entrepreneur remains a useful benchmark for mainstream internet attention." },
+  { title: "IShowSpeed", article: "IShowSpeed", category: "digital", subtitle: "Streamer", description: "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture." },
+  { title: "Kai Cenat", article: "Kai_Cenat", category: "digital", subtitle: "Streamer", description: "The streamer is measured alongside established film and music figures rather than in a short-form-only list." },
   { title: "PewDiePie", article: "PewDiePie", category: "digital", subtitle: "Digital creator", description: "One of online video's most established creators remains in the field so sustained attention counts alongside sudden spikes." },
-  { title: "Markiplier", article: "Markiplier", category: "digital", subtitle: "Digital creator · filmmaker", description: "The creator and filmmaker bridges internet-native work and more traditional entertainment." },
-  { title: "KSI", article: "KSI", category: "digital", subtitle: "Digital creator · musician", description: "The creator, musician, boxer, and entrepreneur represents attention that moves between several media." },
-  { title: "Emma Chamberlain", article: "Emma_Chamberlain", category: "digital", subtitle: "Digital creator · podcaster", description: "The creator and podcaster represents internet-native influence outside gaming and spectacle channels." },
-  { title: "Marques Brownlee", article: "Marques_Brownlee", category: "digital", subtitle: "Technology creator · podcaster", description: "The technology creator provides a durable benchmark for online attention outside entertainment fandoms." },
-  { title: "Christopher Nolan", article: "Christopher_Nolan", category: "filmmaker", subtitle: "Film director · producer", description: "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation." },
-  { title: "Zendaya", article: "Zendaya", category: "actor", subtitle: "Actor · producer", description: "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention." },
-  { title: "Tom Holland", article: "Tom_Holland", category: "actor", subtitle: "Actor · producer", description: "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now." },
-  { title: "Matt Damon", article: "Matt_Damon", category: "actor", subtitle: "Actor · producer", description: "His lead performance as Odysseus in Christopher Nolan's The Odyssey is driving current interest." },
-  { title: "Dwayne Johnson", article: "Dwayne_Johnson", category: "actor", subtitle: "Actor · producer", description: "His return as Maui in the live-action Moana has brought him back into current movie conversation." },
-  { title: "James Gunn", article: "James_Gunn", category: "filmmaker", subtitle: "Film director · producer", description: "His continuing work leading DC Studios keeps his upcoming film and television slate in public discussion." },
-  { title: "Greta Gerwig", article: "Greta_Gerwig", category: "filmmaker", subtitle: "Film director · writer", description: "Interest in her next directing project keeps the filmmaker in current movie conversation." },
-  { title: "Jordan Peele", article: "Jordan_Peele", category: "filmmaker", subtitle: "Film director · writer", description: "Anticipation around his next film keeps the director and writer in current genre-film conversation." },
-  { title: "Shakira", article: "Shakira", category: "musician", subtitle: "Musician · performer", description: "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention." },
-  { title: "Ariana Grande", article: "Ariana_Grande", category: "musician", subtitle: "Musician · actor", description: "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest." },
+  { title: "Markiplier", article: "Markiplier", category: "digital", subtitle: "Digital creator", description: "The creator and filmmaker bridges internet-native work and more traditional entertainment." },
+  { title: "KSI", article: "KSI", category: "digital", subtitle: "Digital creator", description: "The creator, musician, boxer, and entrepreneur represents attention that moves between several media." },
+  { title: "Emma Chamberlain", article: "Emma_Chamberlain", category: "digital", subtitle: "Digital creator", description: "The creator and podcaster represents internet-native influence outside gaming and spectacle channels." },
+  { title: "Marques Brownlee", article: "Marques_Brownlee", category: "digital", subtitle: "Technology creator", description: "The technology creator provides a durable benchmark for online attention outside entertainment fandoms." },
+  { title: "Christopher Nolan", article: "Christopher_Nolan", category: "filmmaker", subtitle: "Film director", description: "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation." },
+  { title: "Zendaya", article: "Zendaya", category: "actor", subtitle: "Actor", description: "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention." },
+  { title: "Tom Holland", article: "Tom_Holland", category: "actor", subtitle: "Actor", description: "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now." },
+  { title: "Matt Damon", article: "Matt_Damon", category: "actor", subtitle: "Actor", description: "His lead performance as Odysseus in Christopher Nolan's The Odyssey is driving current interest." },
+  { title: "Dwayne Johnson", article: "Dwayne_Johnson", category: "actor", subtitle: "Actor", description: "His return as Maui in the live-action Moana has brought him back into current movie conversation." },
+  { title: "James Gunn", article: "James_Gunn", category: "filmmaker", subtitle: "Film director", description: "His continuing work leading DC Studios keeps his upcoming film and television slate in public discussion." },
+  { title: "Greta Gerwig", article: "Greta_Gerwig", category: "filmmaker", subtitle: "Film director", description: "Interest in her next directing project keeps the filmmaker in current movie conversation." },
+  { title: "Jordan Peele", article: "Jordan_Peele", category: "filmmaker", subtitle: "Film director", description: "Anticipation around his next film keeps the director and writer in current genre-film conversation." },
+  { title: "Shakira", article: "Shakira", category: "musician", subtitle: "Musician", description: "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention." },
+  { title: "Ariana Grande", article: "Ariana_Grande", category: "musician", subtitle: "Musician", description: "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest." },
   { title: "Taylor Swift", article: "Taylor_Swift", category: "musician", subtitle: "Singer-songwriter", description: "New music activity and sustained catalog attention continue to generate unusually high public interest." },
   { title: "Justin Bieber", article: "Justin_Bieber", category: "musician", subtitle: "Musician", description: "Current music and public appearances have brought the singer back into widespread conversation." },
-  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", category: "musician", subtitle: "Singer-songwriter · actor", description: "Her current chart activity is keeping the singer-songwriter prominent across music coverage and fan discussion." },
-  { title: "Bad Bunny", article: "Bad_Bunny", category: "musician", subtitle: "Musician · actor", description: "His current music and live appearances continue to drive global, Spanish-language attention." },
-  { title: "Bruno Mars", article: "Bruno_Mars", category: "musician", subtitle: "Musician · producer", description: "Current charting collaborations and live performances are driving renewed interest in the musician." },
+  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", category: "musician", subtitle: "Musician", description: "Her current chart activity is keeping the singer-songwriter prominent across music coverage and fan discussion." },
+  { title: "Bad Bunny", article: "Bad_Bunny", category: "musician", subtitle: "Musician", description: "His current music and live appearances continue to drive global, Spanish-language attention." },
+  { title: "Bruno Mars", article: "Bruno_Mars", category: "musician", subtitle: "Musician", description: "Current charting collaborations and live performances are driving renewed interest in the musician." },
   { title: "Morgan Wallen", article: "Morgan_Wallen", category: "musician", subtitle: "Singer-songwriter", description: "His current chart and touring activity keeps him near the center of country-music conversation." },
 ];
 
@@ -149,6 +149,10 @@ function formatCompact(value) {
   if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(value >= 10_000_000 ? 1 : 2).replace(/\.0+$/, "").replace(/(\.\d)0$/, "$1")}M`;
   if (value >= 1_000) return `${(value / 1_000).toFixed(value >= 100_000 ? 0 : 1).replace(/\.0$/, "")}K`;
   return String(Math.round(value));
+}
+
+function formatInteger(value) {
+  return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value);
 }
 
 function googleTrendsExploreUrl(titles, range) {
@@ -448,6 +452,16 @@ async function verifyUrbanDictionary(items) {
   return results.length;
 }
 
+async function knowYourMemeSlangPageviews(items) {
+  const pairs = await Promise.all(items.map(async (item) => {
+    const html = await fetchText(item.url);
+    const raw = html.match(/<dd\s+class=['"]views['"]\s+title=['"]([0-9,]+)\s+Views['"]/i)?.[1];
+    if (!raw) throw new Error(`Know Your Meme exposed no page-view count for ${item.title}`);
+    return [item.title, Number(raw.replaceAll(",", ""))];
+  }));
+  return Object.fromEntries(pairs);
+}
+
 function parseGooglePayload(text) {
   return JSON.parse(text.replace(/^\)\]\}',?\s*/, ""));
 }
@@ -469,13 +483,20 @@ async function googleTrendsSlang(items) {
   return Object.fromEntries(items.map((item, index) => [item.title, totals[index] / points.length]));
 }
 
-function updateSlang(brief, interest) {
+function updateSlang(brief, interest, pageviews) {
   const section = brief.sections.find((entry) => entry.id === "slang");
   if (!section) return;
   if (interest) {
     section.items.sort((a, b) => (interest[b.title] ?? -1) - (interest[a.title] ?? -1));
     section.items.forEach((item, index) => { item.rank = index + 1; item.accent = accents[index]; });
   }
+  if (pageviews) {
+    for (const item of section.items) {
+      const views = pageviews[item.title];
+      if (Number.isFinite(views)) item.metric = { label: "Know Your Meme page views", value: formatInteger(views) };
+    }
+  }
+  section.description = "These five terms come from Know Your Meme's annual slang review and are checked against Urban Dictionary. Their order follows the latest successful 12-month U.S. Google Trends comparison; lifetime Know Your Meme entry views are shown below.";
   section.sources = [
     {
       label: "Know Your Meme · annual slang review",
@@ -841,6 +862,16 @@ function validateBrief(brief) {
     if (item.metric?.label !== "Wikipedia views · 30 days") {
       throw new Error("Creators must be ranked by Wikipedia views");
     }
+    if (item.subtitle.includes("·")) {
+      throw new Error(`${item.title} must have one primary creator role`);
+    }
+  }
+  const slang = brief.sections.find((section) => section.id === "slang");
+  for (const item of slang?.items ?? []) {
+    if (item.metric?.label !== "Know Your Meme page views"
+      || !/^\d{1,3}(?:,\d{3})*$/.test(item.metric.value)) {
+      throw new Error(`${item.title} must show exact Know Your Meme page views`);
+    }
   }
   const songs = brief.sections.find((section) => section.id === "songs");
   const billboardRanks = songs?.items.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
@@ -876,6 +907,7 @@ const sourceResults = await Promise.all([
   safely("Know Your Meme result", latestMemeResult),
   safely("Lessons in Meme Culture", lessonsInMemeCultureRecent),
   safely("Know Your Meme annual slang review", () => fetchText("https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025")),
+  safely("Know Your Meme slang pageviews", () => knowYourMemeSlangPageviews(slang)),
   safely("Urban Dictionary", () => verifyUrbanDictionary(slang)),
   safely("Google Trends slang", () => googleTrendsSlang(slang)),
   safely("Google Trends creators", () => googleTrendsCreators(cultureMakers)),
@@ -889,7 +921,7 @@ const byName = Object.fromEntries(sourceResults.map((result) => [result.name, re
 if (byName["Know Your Meme result"].ok && byName["Lessons in Meme Culture"].ok) {
   await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons in Meme Culture"].value);
 }
-updateSlang(brief, byName["Google Trends slang"].value);
+updateSlang(brief, byName["Google Trends slang"].value, byName["Know Your Meme slang pageviews"].value);
 updateCreators(brief, byName["Wikipedia creator pageviews"].value);
 if (byName["IMDb / Box Office Mojo"].ok) updateMovies(brief, byName["IMDb / Box Office Mojo"].value);
 if (byName["Billboard Hot 100"].ok && byName["Spotify Top 50 Global"].ok) {

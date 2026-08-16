@@ -32,6 +32,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, />Movies</);
   assert.match(html, />Songs</);
   assert.match(html, /latest complete month/);
+  assert.match(html, /Know Your Meme page views/);
   assert.match(html, /Wikipedia views · 30 days/);
   assert.match(html, /U\.S\. &amp; Canada total gross/);
   assert.match(html, /Billboard Hot 100/);
@@ -47,11 +48,16 @@ test("renders the About flowchart", async () => {
   const response = await render("/about");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Know enough to log off/);
-  for (const label of ["Collect", "Compare", "Contextualize", "Cache", "Publish"]) {
+  assert.match(html, /Sources in\. Rankings out\./);
+  assert.match(html, /One ingestion run\. Five rankings\. One page\./);
+  assert.match(html, /10:17 UTC/);
+  for (const label of ["Pull sources", "Run once daily", "Apply five rules", "Validate and cache", "Publish the snapshot"]) {
     assert.match(html, new RegExp(`>${label}<`));
   }
-  assert.match(html, /Most visits never touch a database/);
+  for (const board of ["Memes", "Slang", "Creators", "Movies", "Songs"]) {
+    assert.match(html, new RegExp(`>${board}<`));
+  }
+  assert.match(html, /last good snapshot stays live/i);
 });
 
 test("keeps content and outbound links constrained", async () => {
@@ -82,9 +88,13 @@ test("keeps content and outbound links constrained", async () => {
   assert.doesNotMatch(memes.items.map((item) => item.description).join(" "), /placed in Know Your Meme|reached Lessons in Meme Culture|has a Know Your Meme entry/i);
   const creators = brief.sections.find((section) => section.id === "creators");
   assert.ok(creators.items.every((item) => item.metric.label === "Wikipedia views · 30 days"));
+  assert.ok(creators.items.every((item) => !item.subtitle.includes("·")));
   const categoryCounts = new Map();
   for (const item of creators.items) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
   assert.ok([...categoryCounts.values()].every((count) => count <= 2));
+  const slang = brief.sections.find((section) => section.id === "slang");
+  assert.ok(slang.items.every((item) => item.metric.label === "Know Your Meme page views"));
+  assert.ok(slang.items.every((item) => /^\d{1,3}(?:,\d{3})*$/.test(item.metric.value)));
   const movies = brief.sections.find((section) => section.id === "watch");
   assert.equal(movies.title, "Movies");
   assert.ok(movies.items.every((item) => item.metric.label === "U.S. & Canada total gross"));
