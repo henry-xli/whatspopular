@@ -21,6 +21,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /frame-src[^;]*https:\/\/buymeacoffee\.com/);
   assert.match(response.headers.get("cache-control") ?? "", /s-maxage=86400/);
 
   const html = await response.text();
@@ -76,6 +77,7 @@ test("keeps content and outbound links constrained", async () => {
     assert.ok(section.sources.every((source) => source.label && new URL(source.url).protocol === "https:"));
     assert.deepEqual(section.moreItems.map((item) => item.rank), section.moreItems.map((_, index) => index + 6));
     assert.ok(section.moreItems.every((item) => !section.items.some((topItem) => topItem.title === item.title)));
+    assert.ok(section.moreItems.every((item) => !/(?:…|\.{3})\s*$/.test(item.description)));
   }
   const items = brief.sections.flatMap((section) => [...section.items, ...section.moreItems]);
   for (const item of items) {

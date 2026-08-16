@@ -438,12 +438,6 @@ function cleanKymSentence(value) {
     .trim();
 }
 
-function shortenWords(value, limit) {
-  const words = value.split(/\s+/);
-  if (words.length <= limit) return value;
-  return `${words.slice(0, limit).join(" ").replace(/[,:;\s]+$/, "")}…`;
-}
-
 function conciseKymDescription(html) {
   const about = html.match(/<h2[^>]*id=['"]about['"][^>]*>[\s\S]*?<\/h2>([\s\S]*?)(?=<h2\b)/i)?.[1];
   if (!about) throw new Error("Know Your Meme entry had no About section");
@@ -458,7 +452,7 @@ function conciseKymDescription(html) {
     ?? usageCandidates.find((sentence) => /\b(?:meme|memes|fan art|edits)\b/i.test(sentence))
     ?? usageCandidates.find((sentence) => /\b(?:viral|spread)\b/i.test(sentence));
   if (!context) throw new Error("Know Your Meme entry had no usable description");
-  return [shortenWords(context, 34), usage && usage !== context ? shortenWords(usage, 30) : null].filter(Boolean).join(" ");
+  return [context, usage && usage !== context ? usage : null].filter(Boolean).join(" ");
 }
 
 function kymMatchContext(html) {
@@ -813,7 +807,7 @@ async function cinemetaMovieDetails(imdbId) {
   if (!meta?.name) throw new Error(`No movie metadata found for ${imdbId}`);
   return {
     rating: String(meta.imdbRating ?? "").trim() || "New",
-    description: meta.description ? shortenWords(plainText(meta.description), 28) : null,
+    description: meta.description ? plainText(meta.description) : null,
   };
 }
 

@@ -40,30 +40,32 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                   rel="noopener noreferrer"
                   aria-label={`${item.rank}. ${item.title}: open ${item.source}`}
                 >
+                  <span className="expanded-rank" aria-hidden="true">{item.rank}</span>
                   <div className="expanded-art">
                     <Image src={item.image} alt={item.alt} fill sizes="100px" />
-                    <span className="expanded-rank" aria-hidden="true">{item.rank}</span>
-                    <span className="expanded-source">{item.source}</span>
                   </div>
                   <div className="expanded-copy">
+                    <div className="expanded-kicker">
+                      <span className="expanded-source">{item.source}</span>
+                      <span className="expanded-subtitle">{item.subtitle}</span>
+                    </div>
                     <strong className="expanded-title">{item.title}</strong>
-                    <span className="expanded-subtitle">{item.subtitle}</span>
                     <p>{item.description}</p>
-                  </div>
-                  <div className="expanded-facts">
-                    {item.rating ? (
-                      <span className="expanded-rating">
-                        <span aria-hidden="true">★</span>
-                        <strong>{item.rating}</strong>
-                        <small>{item.rating === "New" ? "just opened" : "IMDb"}</small>
-                      </span>
-                    ) : null}
-                    {item.metric ? (
-                      <span className="expanded-metric">
-                        <small>{item.metric.label}</small>
-                        <strong>{item.metric.value}</strong>
-                      </span>
-                    ) : null}
+                    <div className="expanded-facts">
+                      {item.rating ? (
+                        <span className="expanded-rating">
+                          <span aria-hidden="true">★</span>
+                          <strong>{item.rating}</strong>
+                          <small>{item.rating === "New" ? "just opened" : "IMDb"}</small>
+                        </span>
+                      ) : null}
+                      {item.metric ? (
+                        <span className="expanded-metric">
+                          <small>{item.metric.label}</small>
+                          <strong>{item.metric.value}</strong>
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                   <span className="expanded-link" aria-hidden="true">↗</span>
                 </a>
