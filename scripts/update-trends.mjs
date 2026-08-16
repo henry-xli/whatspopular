@@ -1,6 +1,7 @@
-import { readFile, rename, writeFile } from "node:fs/promises";
+import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const dataPath = path.join(root, "data", "trends.json");
@@ -16,7 +17,6 @@ const allowedHosts = new Set([
   "open.spotify.com",
   "raw.githubusercontent.com",
   "v3-cinemeta.strem.io",
-  "trends.google.com",
   "trending.knowyourmeme.com",
   "wikimedia.org",
   "pageviews.wmcloud.org",
@@ -127,44 +127,21 @@ const movieDetails = new Map([
   ["Moana", { rating: "5.6", image: "/culture/media-moana.webp", subtitle: "Movie · in theaters", description: "The live-action musical rounds out the five largest cumulative grosses in the current weekend pool." }],
 ]);
 
-function assertAllowed(rawUrl) {
-  const url = new URL(rawUrl);
-  const allowed = allowedHosts.has(url.hostname) || url.hostname.endsWith(".wikimedia.org");
-  if (url.protocol !== "https:" || !allowed) throw new Error(`Refusing unapproved URL: ${url.origin}`);
-  return url;
-}
-
 async function fetchText(rawUrl, options = {}) {
-  const url = assertAllowed(rawUrl);
-  const response = await fetch(url, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-    ...options,
+  const { buffer } = await fetchBytes(rawUrl, {
+    isAllowedHost: (hostname) => allowedHosts.has(hostname) || hostname.endsWith(".wikimedia.org"),
+    kind: "source",
+    maxBytes: MAX_BYTES,
+    timeoutMs: TIMEOUT_MS,
+    method: options.method ?? "GET",
+    body: options.body,
     headers: {
       accept: "text/html,application/json,application/xml,text/xml;q=0.9,*/*;q=0.5",
       "user-agent": "whatspopular.com/1.0 (+https://whatspopular.com/about)",
-      ...options.headers,
+      ...(options.headers ?? {}),
     },
   });
-  if (!response.ok) throw new Error(`${response.status} from ${url.hostname}`);
-  assertAllowed(response.url);
-  const declared = Number(response.headers.get("content-length") ?? 0);
-  if (declared > MAX_BYTES) throw new Error(`${url.hostname} response was too large`);
-  const reader = response.body?.getReader();
-  if (!reader) throw new Error(`${url.hostname} returned no body`);
-  const chunks = [];
-  let bytes = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    bytes += value.byteLength;
-    if (bytes > MAX_BYTES) {
-      await reader.cancel();
-      throw new Error(`${url.hostname} response exceeded ${MAX_BYTES} bytes`);
-    }
-    chunks.push(value);
-  }
-  return Buffer.concat(chunks).toString("utf8");
+  return buffer.toString("utf8");
 }
 
 async function safely(name, work) {
@@ -188,7 +165,13 @@ function decodeHtml(value) {
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&gt;/gi, ">")
     .replace(/&lt;/gi, "<")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)));
+    .replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, hex, decimal) => {
+      const codePoint = Number.parseInt(hex ?? decimal, hex ? 16 : 10);
+      return Number.isInteger(codePoint) && codePoint >= 0 && codePoint <= 0x10ffff
+        && !(codePoint >= 0xd800 && codePoint <= 0xdfff)
+        ? String.fromCodePoint(codePoint)
+        : "�";
+    });
 }
 
 function plainText(value) {
@@ -196,6 +179,7 @@ function plainText(value) {
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -467,12 +451,16 @@ async function updateMemes(brief, result, videos) {
   if (dryRun) console.log(`Poll order: ${result.candidates.map((candidate) => `#${candidate.rank} ${candidate.title}`).join(" | ")}`);
   const currentByUrl = new Map([...section.items, ...(section.moreItems ?? [])].map((item) => [item.url, item]));
   const pollMatches = [];
-  for (const candidate of result.candidates) {
-    const html = await fetchText(candidate.url);
-    const video = memeVideoMatch(candidate, videos, kymMatchContext(html));
-    if (video) pollMatches.push({ candidate, video, description: conciseKymDescription(html) });
-    if (pollMatches.length === 10) break;
+  for (let index = 0; index < result.candidates.length; index += 4) {
+    const batch = await mapConcurrent(result.candidates.slice(index, index + 4), 4, async (candidate) => {
+      const html = await fetchText(candidate.url);
+      const video = memeVideoMatch(candidate, videos, kymMatchContext(html));
+      return video ? { candidate, video, description: conciseKymDescription(html) } : null;
+    });
+    pollMatches.push(...batch.filter(Boolean));
+    if (pollMatches.length >= 10) break;
   }
+  pollMatches.length = Math.min(pollMatches.length, 10);
   if (dryRun) console.log(`Poll matches: ${pollMatches.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
   const ordered = pollMatches.slice(0, 5);
   if (dryRun) console.log(`Meme cross-check: ${ordered.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
@@ -529,26 +517,22 @@ async function updateMemes(brief, result, videos) {
 }
 
 async function verifyUrbanDictionary(items) {
-  const results = await Promise.all(items.map(async (item) => {
+  const results = await mapConcurrent(items, 4, async (item) => {
     const payload = JSON.parse(await fetchText(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(item.urbanTerm ?? item.title)}`));
     return Array.isArray(payload.list) && payload.list.length > 0;
-  }));
+  });
   if (!results.every(Boolean)) throw new Error("At least one slang term had no Urban Dictionary result");
   return results.length;
 }
 
 async function knowYourMemeSlangPageviews(items) {
-  const pairs = await Promise.all(items.map(async (item) => {
+  const pairs = await mapConcurrent(items, 4, async (item) => {
     const html = await fetchText(item.url);
     const raw = html.match(/<dd\s+class=['"]views['"]\s+title=['"]([0-9,]+)\s+Views['"]/i)?.[1];
     if (!raw) throw new Error(`Know Your Meme exposed no page-view count for ${item.title}`);
     return [item.title, Number(raw.replaceAll(",", ""))];
-  }));
+  });
   return Object.fromEntries(pairs);
-}
-
-function parseGooglePayload(text) {
-  return JSON.parse(text.replace(/^\)\]\}',?\s*/, ""));
 }
 
 function updateSlang(brief, pageviews) {
@@ -600,54 +584,16 @@ function updateSlang(brief, pageviews) {
   section.moreLabel = `Show ranks 6–${allItems.length} by page views`;
 }
 
-async function googleTrendsCreators(items) {
-  const anchor = items.find((item) => item.title === "Taylor Swift") ?? items[0];
-  const ratios = new Map([[anchor.title, 1]]);
-  const candidates = items.filter((item) => item !== anchor);
-  for (let index = 0; index < candidates.length; index += 4) {
-    const group = [anchor, ...candidates.slice(index, index + 4)];
-    const request = {
-      comparisonItem: group.map((item) => ({ keyword: item.title, geo: "US", time: "today 1-m" })),
-      category: 0,
-      property: "",
-    };
-    const explore = parseGooglePayload(await fetchText(`https://trends.google.com/trends/api/explore?hl=en-US&tz=240&req=${encodeURIComponent(JSON.stringify(request))}`));
-    const widget = explore.widgets?.find((entry) => entry.id === "TIMESERIES");
-    if (!widget) throw new Error("Google Trends returned no creator time-series widget");
-    const series = parseGooglePayload(await fetchText(`https://trends.google.com/trends/api/widgetdata/multiline?hl=en-US&tz=240&req=${encodeURIComponent(JSON.stringify(widget.request))}&token=${encodeURIComponent(widget.token)}`));
-    const totals = Array(group.length).fill(0);
-    const points = series.default?.timelineData ?? [];
-    for (const point of points) point.value?.forEach((value, valueIndex) => { totals[valueIndex] += Number(value) || 0; });
-    if (!points.length || totals[0] <= 0) throw new Error("Google Trends returned an unusable creator comparison");
-    group.slice(1).forEach((item, itemIndex) => ratios.set(item.title, totals[itemIndex + 1] / totals[0]));
-  }
-  const maximum = Math.max(...ratios.values());
-  return Object.fromEntries([...ratios].map(([title, ratio]) => [title, Math.round((ratio / maximum) * 100)]));
-}
-
-function sleep(milliseconds) {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
 async function wikipediaCreatorPageviews(items) {
   const range = pageviewRange();
-  const values = {};
-  for (const item of items) {
+  const pairs = await mapConcurrent(items, 3, async (item) => {
     const url = `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/${encodeURIComponent(item.article)}/daily/${range.start}/${range.end}`;
-    let payload;
-    for (let attempt = 0; attempt < 3; attempt += 1) {
-      try {
-        payload = JSON.parse(await fetchText(url));
-        break;
-      } catch (error) {
-        if (attempt === 2 || !String(error).includes("429")) throw error;
-        await sleep(500 * (attempt + 1));
-      }
-    }
-    values[item.title] = (payload?.items ?? []).reduce((total, day) => total + Number(day.views ?? 0), 0);
-    await sleep(100);
-  }
-  return values;
+    const payload = JSON.parse(await fetchText(url));
+    const views = (payload?.items ?? []).reduce((total, day) => total + Number(day.views ?? 0), 0);
+    if (!Number.isFinite(views) || views <= 0) throw new Error(`Wikipedia returned no pageviews for ${item.title}`);
+    return [item.title, views];
+  });
+  return Object.fromEntries(pairs);
 }
 
 function updateCreators(brief, pageviews) {
@@ -758,8 +704,13 @@ function isoWeekCode(date) {
 function weekendLabel(sunday) {
   const friday = new Date(sunday);
   friday.setUTCDate(friday.getUTCDate() - 2);
-  const month = new Intl.DateTimeFormat("en-US", { month: "long", timeZone: "UTC" }).format(friday);
-  return `${month} ${friday.getUTCDate()}–${sunday.getUTCDate()}, ${sunday.getUTCFullYear()}`;
+  const month = new Intl.DateTimeFormat("en-US", { month: "long", timeZone: "UTC" });
+  const fridayMonth = month.format(friday);
+  const sundayMonth = month.format(sunday);
+  const dates = fridayMonth === sundayMonth
+    ? `${fridayMonth} ${friday.getUTCDate()}–${sunday.getUTCDate()}`
+    : `${fridayMonth} ${friday.getUTCDate()}–${sundayMonth} ${sunday.getUTCDate()}`;
+  return `${dates}, ${sunday.getUTCFullYear()}`;
 }
 
 function parseMoney(value) {
@@ -820,13 +771,13 @@ async function boxOfficeWeekend() {
       const rows = parseWeekendRows(await fetchText(chartUrl, { headers: { "user-agent": "Mozilla/5.0" } }))
         .slice(0, 10)
         .sort((left, right) => right.totalGross - left.totalGross);
-      const enriched = await Promise.all(rows.map(async (row) => {
+      const enriched = await mapConcurrent(rows, 4, async (row) => {
         const html = await fetchText(row.releaseUrl, { headers: { "user-agent": "Mozilla/5.0" } });
         const imdbId = html.match(/\/title\/(tt[0-9]{7,9})/i)?.[1];
         if (!imdbId) throw new Error(`No IMDb title ID found for ${row.title}`);
         const metadata = await cinemetaMovieDetails(imdbId);
         return { ...row, ...metadata, imdbId, imdbUrl: `https://www.imdb.com/title/${imdbId}/` };
-      }));
+      });
       return { chartUrl, imdbChartUrl: "https://www.imdb.com/chart/boxoffice/", label: weekendLabel(sunday), rows: enriched };
     } catch (error) {
       lastError = error;
@@ -887,7 +838,12 @@ async function billboardHot100() {
     const stamp = saturdayOnOrBefore(date);
     try {
       const payload = JSON.parse(await fetchText(`https://raw.githubusercontent.com/mhollingshead/billboard-hot-100/main/date/${stamp}.json`));
-      if (!Array.isArray(payload.data) || payload.data.length < 20) throw new Error("Billboard mirror returned an incomplete chart");
+      const validRows = Array.isArray(payload.data)
+        ? payload.data.filter((row) => Number.isInteger(Number(row.this_week))
+          && Number(row.this_week) >= 1 && Number(row.this_week) <= 100
+          && typeof row.song === "string" && typeof row.artist === "string")
+        : [];
+      if (validRows.length < 20) throw new Error("Billboard mirror returned an incomplete chart");
       return { date: payload.date ?? stamp, rows: payload.data };
     } catch (error) {
       lastError = error;
@@ -913,15 +869,31 @@ async function spotifyTop50() {
 function updateSongs(brief, chart, spotifyTracks) {
   const section = brief.sections.find((entry) => entry.id === "songs");
   if (!section) return;
-  const billboardByTitle = new Map(chart.rows.map((row) => [normalize(row.song), row]));
-  const spotifySelected = spotifyTracks
-    .map((track, index) => ({ track, spotifyRank: index + 1, row: billboardByTitle.get(normalize(track.title)) }))
-    .filter((entry) => {
-      if (!entry.row) return false;
-      const spotifyArtists = new Set(normalize(entry.track.artist).split(" ").filter((token) => token.length >= 3));
-      return normalize(entry.row.artist).split(" ").some((token) => token.length >= 3 && spotifyArtists.has(token));
-    })
-    .slice(0, 10);
+  const ignoredArtistTokens = new Set(["and", "feat", "featuring", "the", "with"]);
+  const artistTokens = (value) => new Set(normalize(value).split(" ")
+    .filter((token) => token.length >= 3 && !ignoredArtistTokens.has(token)));
+  const sameArtist = (left, right) => {
+    const leftTokens = artistTokens(left);
+    return [...artistTokens(right)].some((token) => leftTokens.has(token));
+  };
+  const billboardByTitle = new Map();
+  for (const row of chart.rows) {
+    const rank = Number(row.this_week);
+    if (!Number.isInteger(rank) || rank < 1 || rank > 100) continue;
+    const key = normalize(row.song);
+    billboardByTitle.set(key, [...(billboardByTitle.get(key) ?? []), row]);
+  }
+  const spotifySelected = [];
+  const seenTrackIds = new Set();
+  for (let index = 0; index < spotifyTracks.length && spotifySelected.length < 10; index += 1) {
+    const track = spotifyTracks[index];
+    if (!/^[A-Za-z0-9]{22}$/.test(track.id) || seenTrackIds.has(track.id)) continue;
+    const row = (billboardByTitle.get(normalize(track.title)) ?? [])
+      .find((candidate) => sameArtist(track.artist, candidate.artist));
+    if (!row) continue;
+    seenTrackIds.add(track.id);
+    spotifySelected.push({ track, spotifyRank: index + 1, row });
+  }
   if (spotifySelected.length < 10) throw new Error("Fewer than ten songs overlapped Billboard and Spotify");
   const crossovers = [...spotifySelected]
     .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
@@ -1092,34 +1064,32 @@ const sourceResults = await Promise.all([
   safely("Know Your Meme annual slang review", () => fetchText(annualSlangReviewUrl)),
   safely("Know Your Meme slang pageviews", () => knowYourMemeSlangPageviews(annualSlangCandidates)),
   safely("Urban Dictionary", () => verifyUrbanDictionary(annualSlangCandidates)),
-  safely("Google Trends creators", () => googleTrendsCreators(cultureMakers)),
   safely("Wikipedia creator pageviews", () => wikipediaCreatorPageviews(cultureMakers)),
   safely("IMDb / Box Office Mojo", boxOfficeWeekend),
   safely("Billboard Hot 100", billboardHot100),
   safely("Spotify Top 50 Global", spotifyTop50),
 ]);
 const byName = Object.fromEntries(sourceResults.map((result) => [result.name, result]));
-
-if (byName["Know Your Meme result"].ok && byName["Lessons in Meme Culture"].ok) {
-  await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons in Meme Culture"].value);
+for (const result of sourceResults) console.log(`${result.ok ? "ok" : "failed"} ${result.name}${result.error ? `: ${result.error}` : ""}`);
+const failedSources = sourceResults.filter((result) => !result.ok);
+if (failedSources.length) {
+  console.error(`No snapshot was written because ${failedSources.length} required source check${failedSources.length === 1 ? "" : "s"} failed.`);
+  process.exit(1);
 }
+
+await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons in Meme Culture"].value);
 updateSlang(brief, byName["Know Your Meme slang pageviews"].value);
 updateCreators(brief, byName["Wikipedia creator pageviews"].value);
-if (byName["IMDb / Box Office Mojo"].ok) updateMovies(brief, byName["IMDb / Box Office Mojo"].value);
-if (byName["Billboard Hot 100"].ok && byName["Spotify Top 50 Global"].ok) {
-  updateSongs(brief, byName["Billboard Hot 100"].value, byName["Spotify Top 50 Global"].value);
-}
+updateMovies(brief, byName["IMDb / Box Office Mojo"].value);
+updateSongs(brief, byName["Billboard Hot 100"].value, byName["Spotify Top 50 Global"].value);
 for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
 delete brief.pulse;
 
-const successfulSources = sourceResults.filter((result) => result.ok).length;
-brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt, error }) => ({ name, ok, checkedAt, ...(error ? { error } : {}) }));
-if (successfulSources >= 6) {
-  brief.generatedAt = now.toISOString();
-  brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
-  brief.status = "Checked today";
-  brief.window = "Memes: latest complete month · other boards: rolling";
-}
+brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt }) => ({ name, ok, checkedAt }));
+brief.generatedAt = now.toISOString();
+brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
+brief.status = "Checked today";
+brief.window = "Memes: latest complete month · other boards: rolling";
 validateBrief(brief);
 
 const output = `${JSON.stringify(brief, null, 2)}\n`;
@@ -1129,13 +1099,13 @@ if (dryRun) {
     console.log(`${section.id}: ${section.items.map((item) => `${item.rank}. ${item.title}${item.metric ? ` (${item.metric.value})` : ""}`).join(" | ")}`);
   }
 } else {
-  const temporaryPath = `${dataPath}.next`;
-  await writeFile(temporaryPath, output, { mode: 0o644 });
-  await rename(temporaryPath, dataPath);
-}
-
-for (const result of sourceResults) console.log(`${result.ok ? "ok" : "failed"} ${result.name}${result.error ? `: ${result.error}` : ""}`);
-if (successfulSources < 6) {
-  console.error("Fewer than six source checks succeeded; the last-known-good timestamp was preserved.");
-  process.exitCode = 1;
+  const temporaryPath = `${dataPath}.${process.pid}.next`;
+  try {
+    await writeFile(temporaryPath, output, { mode: 0o644, flag: "wx" });
+    await rename(temporaryPath, dataPath);
+  } finally {
+    await unlink(temporaryPath).catch((error) => {
+      if (error?.code !== "ENOENT") throw error;
+    });
+  }
 }

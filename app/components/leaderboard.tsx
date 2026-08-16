@@ -1,9 +1,14 @@
 import type { CSSProperties } from "react";
-import Image from "next/image";
 import type { CultureSection } from "../lib/culture";
 import { ExpandedRanking } from "./expanded-ranking";
 
 export function Leaderboard({ section }: { section: CultureSection }) {
+  const imageSize = section.layout === "poster"
+    ? { width: 520, height: 780 }
+    : section.layout === "square"
+      ? { width: 640, height: 640 }
+      : { width: 720, height: 520 };
+
   return (
     <section className="board" id={section.id} aria-labelledby={`${section.id}-title`}>
       <div className="board-heading">
@@ -33,11 +38,13 @@ export function Leaderboard({ section }: { section: CultureSection }) {
               aria-label={`${item.rank}. ${item.title}: open ${item.source}`}
             >
               <div className="card-art">
-                <Image
+                <img
                   src={item.image}
                   alt={item.alt}
-                  fill
-                  sizes="(max-width: 700px) 72vw, (max-width: 1100px) 32vw, 19vw"
+                  width={imageSize.width}
+                  height={imageSize.height}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span className="rank" aria-hidden="true">{item.rank}</span>
                 <span className="source-chip">{item.source}</span>

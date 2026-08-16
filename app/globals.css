@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 :root {
   --paper: #f4f0e7;
   --paper-deep: #e9e2d4;
@@ -84,6 +82,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+main#main-content {
+  scroll-margin-top: 84px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -133,8 +135,11 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-bottom: 1px solid var(--line);
+  border-bottom-color: color-mix(in srgb, var(--line) 76%, transparent);
+  background: var(--paper);
   background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
 
@@ -188,7 +193,7 @@ img {
 .theme-toggle {
   display: grid;
   width: 62px;
-  height: 32px;
+  height: 44px;
   padding: 0;
   place-items: center;
   border: 1px solid var(--line);
@@ -360,6 +365,8 @@ img {
 }
 
 .card-art img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -377,6 +384,7 @@ img {
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
@@ -426,6 +434,8 @@ img {
   margin-top: 96px;
   border-top: 1px solid var(--line);
   scroll-margin-top: 100px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .boards > .board:first-child {
@@ -592,6 +602,7 @@ a.culture-card:hover {
   font-size: clamp(1.15rem, 1.55vw, 1.52rem);
   letter-spacing: -0.04em;
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 
 .card-title-line > span {
@@ -655,7 +666,7 @@ a.culture-card:hover {
 }
 
 .metric strong {
-  color: var(--accent);
+  color: var(--purple-dark);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.12rem;
 }
@@ -854,6 +865,8 @@ a.culture-card:hover {
 }
 
 .expanded-art img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -900,6 +913,7 @@ a.culture-card:hover {
   display: flex;
   min-width: 0;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -908,6 +922,7 @@ a.culture-card:hover {
   font-size: 1.18rem;
   letter-spacing: -0.025em;
   line-height: 1.12;
+  overflow-wrap: anywhere;
 }
 
 .expanded-subtitle {
@@ -918,6 +933,7 @@ a.culture-card:hover {
   letter-spacing: 0.05em;
   line-height: 1.3;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .expanded-copy p {
@@ -925,6 +941,7 @@ a.culture-card:hover {
   color: var(--muted);
   font-size: 0.76rem;
   line-height: 1.48;
+  overflow-wrap: anywhere;
 }
 
 .expanded-facts {
@@ -958,7 +975,7 @@ a.culture-card:hover {
 }
 
 .expanded-metric strong {
-  color: var(--accent);
+  color: var(--purple-dark);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.05rem;
 }
@@ -1443,6 +1460,43 @@ a.culture-card:hover {
   .algorithm-grid dl > div {
     grid-template-columns: 1fr;
     gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expanded-entry-main {
+    grid-template-columns: 32px 68px minmax(0, 1fr) 14px;
+    gap: 8px;
+    padding-inline: 10px;
+  }
+
+  .expanded-art,
+  .expanded-entry.layout-square .expanded-art {
+    width: 68px;
+  }
+
+  .expanded-entry.layout-poster .expanded-art {
+    width: 58px;
+  }
+
+  .expanded-kicker {
+    gap: 5px;
+  }
+
+  #bmc-iframe {
+    right: 12px !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: calc(100vh - 112px) !important;
+    max-height: calc(100dvh - 112px) !important;
+    min-height: 0 !important;
+  }
+
+  #bmc-wbtn {
+    right: 12px !important;
+    bottom: 12px !important;
+    width: 56px !important;
+    height: 56px !important;
   }
 }
 

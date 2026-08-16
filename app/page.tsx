@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { cultureBrief, formatUpdatedAt } from "./lib/culture";
 import { Leaderboard } from "./components/leaderboard";
 import { SongBoard } from "./components/song-board";
@@ -12,7 +11,7 @@ export default function Home() {
   );
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <section className="hero wrap" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow">The {cultureBrief.edition} culture briefing</p>
@@ -22,12 +21,12 @@ export default function Home() {
           </h1>
           <p className="hero-deck">{cultureBrief.summary}</p>
           <div className="hero-actions">
-            <Link className="button button-primary" href="#boards">
+            <a className="button button-primary" href="#boards">
               Catch me up <span aria-hidden="true">↓</span>
-            </Link>
-            <Link className="button button-quiet" href="/about">
+            </a>
+            <a className="button button-quiet" href="/about">
               How this works
-            </Link>
+            </a>
           </div>
           <div className="freshness" aria-label="Brief freshness">
             <span className="live-dot" aria-hidden="true" />

@@ -1,20 +1,19 @@
-import Link from "next/link";
-
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="wrap footer-grid">
         <div>
-          <Link className="brand footer-brand" href="/">
+          <a className="brand footer-brand" href="/">
             <span aria-hidden="true" className="brand-mark">w?</span>
             <span>what’s popular?</span>
-          </Link>
+          </a>
           <p>Keep the context. Lose the feed.</p>
         </div>
         <div>
           <strong>Explore</strong>
-          <Link href="/#boards">Today’s boards</Link>
-          <Link href="/about">How it works</Link>
+          <a href="/#boards">Today’s boards</a>
+          <a href="/about">How it works</a>
+          <a href="https://buymeacoffee.com/0wtynrfutb" target="_blank" rel="noopener noreferrer">Support the site</a>
         </div>
         <div>
           <strong>Principles</strong>

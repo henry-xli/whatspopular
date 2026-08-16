@@ -1,7 +1,4 @@
-"use client";
-
 import type { CSSProperties } from "react";
-import Image from "next/image";
 import type { CultureSection } from "../lib/culture";
 
 type ExpandedRankingProps = {
@@ -14,8 +11,13 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
   if (!section.moreItems?.length) return null;
 
   const firstRank = section.moreItems[0].rank;
-  const lastRank = section.moreItems.at(-1)?.rank ?? firstRank;
+  const lastRank = section.moreItems[section.moreItems.length - 1]?.rank ?? firstRank;
   const label = section.moreLabel ?? `Show ranks ${firstRank}–${lastRank}`;
+  const imageSize = section.layout === "poster"
+    ? { width: 520, height: 780 }
+    : section.layout === "square"
+      ? { width: 640, height: 640 }
+      : { width: 720, height: 520 };
 
   return (
     <details className="expanded-ranking">
@@ -42,7 +44,14 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                 >
                   <span className="expanded-rank" aria-hidden="true">{item.rank}</span>
                   <div className="expanded-art">
-                    <Image src={item.image} alt={item.alt} fill sizes="100px" />
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      width={imageSize.width}
+                      height={imageSize.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                   <div className="expanded-copy">
                     <div className="expanded-kicker">

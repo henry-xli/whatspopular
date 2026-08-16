@@ -17,29 +17,63 @@ export function ThemeToggle() {
   const [locked, setLocked] = useState(false);
   const frameRef = useRef<number | null>(null);
   const timerRef = useRef<number | null>(null);
+  const lockRef = useRef(false);
 
   useEffect(() => {
-    frameRef.current = window.requestAnimationFrame(() => setTheme(activeTheme()));
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncTheme = () => setTheme(activeTheme());
+    const syncSystemTheme = () => {
+      if (!document.documentElement.dataset.theme) syncTheme();
+    };
+    const syncStoredTheme = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY) return;
+      if (event.newValue === "light" || event.newValue === "dark") {
+        document.documentElement.dataset.theme = event.newValue;
+      } else {
+        delete document.documentElement.dataset.theme;
+      }
+      syncTheme();
+    };
+
+    frameRef.current = window.requestAnimationFrame(syncTheme);
+    if (typeof systemTheme.addEventListener === "function") {
+      systemTheme.addEventListener("change", syncSystemTheme);
+    } else {
+      systemTheme.addListener(syncSystemTheme);
+    }
+    window.addEventListener("storage", syncStoredTheme);
     return () => {
-      if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
-      if (timerRef.current) window.clearTimeout(timerRef.current);
+      if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
+      if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+      if (typeof systemTheme.removeEventListener === "function") {
+        systemTheme.removeEventListener("change", syncSystemTheme);
+      } else {
+        systemTheme.removeListener(syncSystemTheme);
+      }
+      window.removeEventListener("storage", syncStoredTheme);
+      document.documentElement.classList.remove("theme-transition");
     };
   }, []);
 
   function toggleTheme() {
-    if (locked) return;
+    if (lockRef.current) return;
     const next = activeTheme() === "dark" ? "light" : "dark";
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 500;
+    lockRef.current = true;
     setLocked(true);
-    document.documentElement.classList.add("theme-transition");
+    if (duration) document.documentElement.classList.add("theme-transition");
 
     frameRef.current = window.requestAnimationFrame(() => {
       document.documentElement.dataset.theme = next;
-      window.localStorage.setItem(STORAGE_KEY, next);
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next);
+      } catch {}
       setTheme(next);
       timerRef.current = window.setTimeout(() => {
         document.documentElement.classList.remove("theme-transition");
+        lockRef.current = false;
         setLocked(false);
-      }, 500);
+      }, duration);
     });
   }
 

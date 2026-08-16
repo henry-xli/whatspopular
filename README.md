@@ -1,78 +1,65 @@
 # what’s popular?
 
-A finite daily briefing on the memes, slang, creators, movies,
-and songs moving through internet culture. The public experience is static-first:
-no account, feed, database read, or personalization is required.
+A finite daily briefing on internet culture. Visitors receive pre-rendered HTML
+and local images; there is no account, feed, runtime database query, or
+request-time scraper.
 
-## Run it
+## Develop
 
-Requires Node.js 22.13 or newer.
+Node.js 22.13 or newer is required.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Useful checks:
+Before committing:
 
 ```bash
 npm run content:update -- --dry-run
 npm run content:images
 npm run lint
+npm run typecheck
 npm test
 ```
 
-## Daily publishing loop
+## How rankings are made
 
-`scripts/update-trends.mjs` requires two-source evidence for every entry. It
-keeps the latest completed Know Your Meme monthly poll in its published order,
-then filters it to memes covered by any Lessons in Meme Culture upload from the
-past two months. Card descriptions are derived from each meme's Know Your Meme
-About section. Slang uses a 12-month set checked with Urban Dictionary and
-Google Trends. Creators are ranked by 30-day English Wikipedia views across
-digital creators, musicians, actors, and filmmakers, with no profession taking
-more than two of the five places. Movies are the five largest
-cumulative U.S./Canada grosses within IMDb's current weekend top ten, using Box
-Office Mojo's underlying chart data. For songs, Spotify chooses the first five
-Top 50 Global tracks that also appear on Billboard's Hot 100; Billboard position
-then orders only those selected five. The updater atomically replaces
-`data/trends.json` only after validation.
+Once daily, `scripts/update-trends.mjs` verifies every required source and writes
+`data/trends.json` atomically. If any source fails, no new snapshot is published.
 
-`scripts/cache-images.mjs` derives the current asset set from the validated
-briefing, downloads images through strict host and size allowlists, crops them
-into local WebP assets, and preserves a generated fallback if an upstream image
-is unavailable. It also removes assets no longer referenced by the briefing.
-This means visitor requests never proxy an image through a third party.
+- Memes preserve the latest completed Know Your Meme Meme of the Month order,
+  filtered to entries covered by Lessons in Meme Culture in the past two months.
+- Slang comes from Know Your Meme’s annual review, is verified with Urban
+  Dictionary, and is ordered by lifetime Know Your Meme entry views.
+- Creators are ordered by 30-day English Wikipedia views, with at most two
+  people from one primary profession in the top five; each list links a
+  configured Google Trends comparison for independent context.
+- Movies are IMDb’s weekend top 10 re-ordered by cumulative U.S./Canada gross
+  from Box Office Mojo, with IMDb-linked Cinemeta metadata.
+- Songs are the first 10 Spotify Global Top 50 tracks also on the Billboard Hot
+  100, then all 10 are ordered by Billboard position.
 
-`.github/workflows/update-daily.yml` runs both jobs once per day, tests the exact
-result, and commits only a successful changed briefing to `main`. A failed source
-quorum leaves the last-known-good timestamp and page intact.
+Every entry has evidence from at least two distinct approved source hosts.
+`scripts/cache-images.mjs` validates the snapshot, downloads only missing or
+invalid art through HTTPS allowlists, converts it to bounded local WebP files,
+and preserves a last-known-good image when an upstream host fails.
 
-## Performance architecture
+## Architecture and maintenance
 
-- HTML is pre-rendered and cached at the edge for one day with stale-while-revalidate.
-- Culture imagery totals roughly 1 MB, is local, resized, and WebP-compressed.
-- Next/Vite assets are content-hashed and cached immutably.
-- One official Spotify embed is created only after a visitor presses play, then
-  scrolled into view; copyrighted audio is never copied into the repository.
-- The Buy Me a Coffee widget is deferred until parsing finishes and initializes before `DOMContentLoaded`.
-- No runtime database or scraping occurs during a page request.
+- `app/` contains the pages, components, styles, and runtime data validation.
+- `data/trends.json` is the single preprocessed content snapshot.
+- `scripts/` contains the daily ingestion and image pipeline.
+- `worker/index.ts` applies edge caching and production security headers.
+- `tests/` checks rendered content, headers, links, media, and data invariants.
+- `.github/workflows/update-daily.yml` refreshes, verifies, and commits once daily.
 
-This removes origin/database fan-out from the hot path, which is the architecture
-needed for large concurrent traffic on Cloudflare. Capacity should still be
-confirmed with a load test against the final production account and domain.
+Content-hashed application assets cache immutably; successful HTML navigations
+use a deployment-versioned edge cache, and local media uses
+stale-while-revalidate. Error responses, React server requests, and unsafe HTTP
+methods are never cached. Spotify audio loads only after a play action, and the
+Buy Me a Coffee widget is deferred until the document has been parsed.
 
-## Security
-
-Production responses add a restrictive Content Security Policy, HSTS, frame
-denial, MIME sniffing protection, a strict referrer policy, a permissions policy,
-and explicit cache rules. Scrapers use HTTPS-only allowlists, timeouts, response
-size limits, and atomic writes. React escapes all fetched labels; scraped HTML is
-never rendered directly.
-
-## Deployment
-
-The project is configured for Cloudflare’s vinext runtime and OpenAI Sites. Merge
-to `main` after connecting the repository to the production project. Point the
-`whatspopular.com` custom domain at that deployment in the owning Cloudflare
-account. `.openai/hosting.json` records the Sites project after the first publish.
+The project targets the Cloudflare-compatible vinext runtime and OpenAI Sites.
+The deployment project is recorded in `.openai/hosting.json`; the custom
+`whatspopular.com` domain must be configured in the owning Cloudflare account.

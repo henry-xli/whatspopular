@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
@@ -11,7 +10,7 @@ const flow = [
   {
     number: "01",
     title: "Pull sources",
-    text: "Fetch public pages from Know Your Meme, Lessons in Meme Culture, Urban Dictionary, Google Trends, Wikipedia, IMDb, Box Office Mojo, Cinemeta, Spotify, and Billboard.",
+    text: "Fetch ranking data from Know Your Meme, Lessons in Meme Culture, Urban Dictionary, Wikipedia, IMDb, Box Office Mojo, Cinemeta, Spotify, and Billboard; also link a configured Google Trends comparison.",
   },
   {
     number: "02",
@@ -70,7 +69,7 @@ const methods = [
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
+    <main className="about-page" id="main-content" tabIndex={-1}>
       <section className="about-hero wrap">
         <p className="eyebrow">How the site works</p>
         <h1>Sources in. Rankings out.</h1>
@@ -80,7 +79,7 @@ export default function AboutPage() {
           snapshot, and publishes that snapshot as a static page. That is the
           whole system.
         </p>
-        <Link className="button button-primary" href="/">Read today’s briefing</Link>
+        <a className="button button-primary" href="/">Read today’s briefing</a>
       </section>
 
       <section className="flow-section" aria-labelledby="flow-title">
