@@ -13,6 +13,7 @@ const pageHosts = new Set([
   "en.wikipedia.org",
   "knowyourmeme.com",
   "open.spotify.com",
+  "www.boxofficemojo.com",
   "www.imdb.com",
   "www.youtube.com",
 ]);
@@ -37,10 +38,8 @@ const allowedImageSuffixes = [
 ];
 
 const assets = [
-  { file: "jimothy.webp", title: "Jimothy", page: "https://knowyourmeme.com/memes/jimothy-the-raccoon", shape: "landscape" },
   { file: "meme-kwebbelkop.webp", title: "Kwebbelkop Laugh", page: "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh", shape: "landscape" },
   { file: "meme-john-rod.webp", title: "John Rod", page: "https://knowyourmeme.com/memes/john-rod", shape: "landscape" },
-  { file: "meme-pirate-gaster.webp", title: "Pirate Gaster", page: "https://knowyourmeme.com/memes/pirate-gaster", shape: "landscape" },
   { file: "meme-miku-custody.webp", title: "Hatsune Miku World Cup Custody Battle", page: "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle", shape: "landscape" },
   { file: "slang-67.webp", title: "67", page: "https://knowyourmeme.com/memes/67-meme", shape: "landscape" },
   { file: "slang-clanker.webp", title: "Clanker", page: "https://knowyourmeme.com/memes/clanker", shape: "landscape" },
@@ -55,6 +54,7 @@ const assets = [
   { file: "media-spider-man.webp", title: "Spider-Man Brand New Day", direct: "https://s.movieinsider.com/images/p/964462_m1773880192.jpg", shape: "poster" },
   { file: "media-odyssey.webp", title: "The Odyssey", direct: "https://www.nfbio.dk/sites/nfbio.dk/files/styles/movie_poster/public/media-images/2025-12/gmnt-b41983b128-1529119-vst-694521bb7da8f.jpeg?itok=kUouQPma", shape: "poster" },
   { file: "media-toy-story.webp", title: "Toy Story 5", direct: "https://m.media-amazon.com/images/M/MV5BMTBlNTEwYmQtNjE1OC00NDRlLWI3M2YtYmRkODVmZTljYWRiXkEyXkFqcGc%40._V1_.jpg", shape: "poster" },
+  { file: "media-minions-monsters.webp", title: "Minions & Monsters", page: "https://www.boxofficemojo.com/release/rl779714561/", shape: "poster" },
   { file: "media-moana.webp", title: "Moana", page: "https://en.wikipedia.org/wiki/Moana_(2026_film)", shape: "poster" },
   { file: "media-jujutsu.webp", title: "Jujutsu Kaisen", direct: "https://animotaku.fr/wp-content/uploads/2024/12/anime-jujutsu-kaisen-saison-3-visuel-1.jpg", shape: "poster" },
   { file: "song-choosin-texas.webp", title: "Choosin Texas", page: "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN", shape: "square" },

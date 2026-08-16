@@ -56,15 +56,17 @@ export default function AboutPage() {
           <h2>What goes in</h2>
           <p>
             Public pages from Google Trends, Know Your Meme, Urban Dictionary,
-            Lessons in Meme Culture, Social Blade, SocialCounts, Wikipedia,
-            IMDb, Billboard, and Spotify provide different pieces of the
-            picture. No single source decides a rank.
+            Lessons in Meme Culture, Wikipedia, IMDb and Box Office Mojo,
+            Billboard, and Spotify provide different pieces of the picture.
+            Every entry needs corroboration, even when one transparent metric
+            sets the order.
           </p>
           <p>
             Each card keeps links to at least two distinct sources. Rankings use
-            direct measures—poll share, 30-day growth, chart position, ratings,
-            or pageviews—rather than a made-up blended score. A last-known-good
-            file stays live if a source is down.
+            direct measures—recent video views, Google interest, pageviews,
+            cumulative box office, or chart position—rather than a made-up
+            blended score. A last-known-good file stays live if a source is
+            down.
           </p>
         </article>
         <article className="principle-card">

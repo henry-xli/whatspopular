@@ -1,15 +1,15 @@
 {
   "edition": "August 2026",
   "status": "Checked today",
-  "window": "Memes: July · other boards: rolling",
-  "generatedAt": "2026-08-15T23:10:51.142Z",
+  "window": "Memes: latest complete month · other boards: rolling",
+  "generatedAt": "2026-08-15T23:57:55.508Z",
   "summary": "A five-minute, two-source briefing on the jokes, language, people, screens, and songs shaping internet culture right now.",
   "pulse": [
     {
-      "label": "Latest meme winner",
-      "value": "Jimothy",
-      "image": "/culture/jimothy.webp",
-      "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon"
+      "label": "Cross-verified meme",
+      "value": "Kwebbelkop Laugh",
+      "image": "/culture/meme-kwebbelkop.webp",
+      "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh"
     },
     {
       "label": "Yearly slang",
@@ -18,16 +18,16 @@
       "url": "https://knowyourmeme.com/memes/67-meme"
     },
     {
-      "label": "30-day creator",
-      "value": "MrBeast",
-      "image": "/culture/creator-mrbeast.webp",
-      "url": "https://www.youtube.com/channel/UCX6OQ3DkcsbYNE6H8uQQuVA"
+      "label": "30-day culture-maker",
+      "value": "Zendaya",
+      "image": "/culture/creator-zendaya.webp",
+      "url": "https://en.wikipedia.org/wiki/Zendaya"
     },
     {
-      "label": "Chart crossover",
-      "value": "Choosin' Texas",
-      "image": "/culture/song-choosin-texas.webp",
-      "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN"
+      "label": "Spotify crossover",
+      "value": "Loser",
+      "image": "/culture/song-loser-tame-impala.webp",
+      "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR"
     }
   ],
   "sections": [
@@ -35,41 +35,15 @@
       "id": "memes",
       "eyebrow": "July 2026 · latest complete month",
       "title": "Memes",
-      "description": "July's poll winner comes first. Then we prioritize memes also found among Lessons in Meme Culture's 20 most-viewed videos from the past two months and fill any open spots from the July poll.",
+      "description": "Starts with July poll entries that also made Lessons in Meme Culture's 20 most-viewed videos posted in the past two months. If that overlap is short of five, remaining spots are recent LIMC top-20 subjects with a matching Know Your Meme entry. The poll winner is not exempt from the cross-check.",
       "sources": [
-        "Know Your Meme · July poll",
-        "Lessons in Meme Culture · recent top 20",
-        "Google Trends · verification"
+        "Know Your Meme · July result",
+        "Lessons in Meme Culture · recent top 20"
       ],
       "layout": "landscape",
       "items": [
         {
           "rank": 1,
-          "title": "Jimothy",
-          "subtitle": "July's Meme of the Month",
-          "description": "A tiny Seattle raccoon with short spine syndrome became a worldwide fan-art phenomenon and won July's community vote.",
-          "image": "/culture/jimothy.webp",
-          "alt": "Jimothy, a small round raccoon, standing in a backyard",
-          "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July community vote",
-            "value": "15.6%"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=2026-07-01%202026-07-28&geo=US&q=Jimothy"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 2,
           "title": "Kwebbelkop Laugh",
           "subtitle": "The laugh that replaces the joke",
           "description": "A streamer laugh became a reusable punchline, while the associated portrait kept mutating into increasingly strange edits.",
@@ -78,8 +52,8 @@
           "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh",
           "source": "Know Your Meme",
           "metric": {
-            "label": "July community vote",
-            "value": "9%"
+            "label": "LIMC views · past 2 months",
+            "value": "483K"
           },
           "evidence": [
             {
@@ -94,7 +68,7 @@
           "accent": "#9b8cff"
         },
         {
-          "rank": 3,
+          "rank": 2,
           "title": "John Rod",
           "subtitle": "The stand that solos fiction",
           "description": "An odd JoJo's Bizarre Adventure reveal turned into mock power-scaling claims that John Rod can defeat almost anyone.",
@@ -103,8 +77,8 @@
           "url": "https://knowyourmeme.com/memes/john-rod",
           "source": "Know Your Meme",
           "metric": {
-            "label": "July community vote",
-            "value": "5.8%"
+            "label": "LIMC views · past 2 months",
+            "value": "650K"
           },
           "evidence": [
             {
@@ -120,17 +94,17 @@
           "caution": "The source page contains JoJo's manga spoilers"
         },
         {
-          "rank": 4,
-          "title": "Pirate Gaster",
-          "subtitle": "Deltarune's mystery man takes to sea",
-          "description": "Fan art recast W. D. Gaster and a crew of mysterious Deltarune characters as pirates, complete with a sea shanty.",
-          "image": "/culture/meme-pirate-gaster.webp",
-          "alt": "Pirate Gaster and a crew of Deltarune characters",
-          "url": "https://knowyourmeme.com/memes/pirate-gaster",
+          "rank": 3,
+          "title": "Erling Haaland",
+          "subtitle": "July poll × recent LIMC top 20",
+          "description": "Erling Haaland placed in Know Your Meme's July community poll and reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.",
+          "image": "/culture/meme-erling-haaland.webp",
+          "alt": "Visual example of the Erling Haaland meme",
+          "url": "https://knowyourmeme.com/memes/erling-haaland-running",
           "source": "Know Your Meme",
           "metric": {
-            "label": "July community vote",
-            "value": ">10%"
+            "label": "LIMC views · past 2 months",
+            "value": "764K"
           },
           "evidence": [
             {
@@ -138,33 +112,58 @@
               "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
             },
             {
-              "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=2026-07-01%202026-07-28&geo=US&q=Pirate%20Gaster"
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=bdzTgGQJNbc"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Just Say \"Here,\" Bro",
+          "subtitle": "KYM entry × recent LIMC top 20",
+          "description": "Just Say \"Here,\" Bro has a Know Your Meme entry and reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.",
+          "image": "/culture/meme-just-say-here-bro.webp",
+          "alt": "Visual example of the Just Say \"Here,\" Bro meme",
+          "url": "https://knowyourmeme.com/memes/just-say-here-bro",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "LIMC views · past 2 months",
+            "value": "1M"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme",
+              "url": "https://knowyourmeme.com/memes/just-say-here-bro"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=CrFOSF2Kn3k"
             }
           ],
           "accent": "#5ab0ff"
         },
         {
           "rank": 5,
-          "title": "Hatsune Miku World Cup Custody Battle",
-          "subtitle": "Whoever wins keeps Miku",
-          "description": "World Cup matches became imaginary custody battles, with artists redressing Hatsune Miku for whichever nation won.",
-          "image": "/culture/meme-miku-custody.webp",
-          "alt": "Hatsune Miku dressed for the 2026 World Cup custody meme",
-          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
+          "title": "Jacob Batalon CEO of Sex",
+          "subtitle": "KYM entry × recent LIMC top 20",
+          "description": "Jacob Batalon CEO of Sex has a Know Your Meme entry and reached Lessons in Meme Culture's 20 most-viewed uploads from the past two months.",
+          "image": "/culture/meme-jacob-batalon-ceo-of-sex.webp",
+          "alt": "Visual example of the Jacob Batalon CEO of Sex meme",
+          "url": "https://knowyourmeme.com/memes/jacob-batalon-ceo-of-sex",
           "source": "Know Your Meme",
           "metric": {
-            "label": "July community vote",
-            "value": "7.5%"
+            "label": "LIMC views · past 2 months",
+            "value": "1M"
           },
           "evidence": [
             {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+              "source": "Know Your Meme",
+              "url": "https://knowyourmeme.com/memes/jacob-batalon-ceo-of-sex"
             },
             {
-              "source": "Google Trends",
-              "url": "https://trends.google.com/trends/explore?date=2026-07-01%202026-07-28&geo=US&q=Hatsune%20Miku%20World%20Cup%20Custody%20Battle"
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=WJeAVoKwZuw"
             }
           ],
           "accent": "#ff6b57"
@@ -313,137 +312,136 @@
     },
     {
       "id": "creators",
-      "eyebrow": "YouTube · last 30 days",
+      "eyebrow": "People · past 30 days",
       "title": "Creators",
-      "description": "Individual creators ranked by subscribers gained over the past 30 days—not a subjective momentum score. We try Social Blade first and use SocialCounts' comparable 30-day table when its bot protection blocks the daily check.",
+      "description": "Directors, musicians, actors, streamers, and other culture-makers are checked in Google Trends. When its automated comparison is rate-limited, this edition ranks the same broad field by transparent 30-day English Wikipedia views.",
       "sources": [
-        "Social Blade",
-        "SocialCounts · subscribers gained",
-        "YouTube"
+        "Google Trends · 30 days",
+        "Wikipedia · 30-day views"
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "MrBeast",
-          "subtitle": "@MrBeast · YouTube",
-          "description": "The platform's largest creator still added roughly five million subscribers in a month despite an already enormous base.",
-          "image": "/culture/creator-mrbeast.webp",
-          "alt": "MrBeast's YouTube profile image",
-          "url": "https://www.youtube.com/channel/UCX6OQ3DkcsbYNE6H8uQQuVA",
-          "source": "YouTube",
+          "title": "Zendaya",
+          "subtitle": "Actor · producer",
+          "description": "A major presence in Spider-Man: Brand New Day and The Odyssey keeps Zendaya central to current screen culture.",
+          "image": "/culture/creator-zendaya.webp",
+          "alt": "Portrait of Zendaya",
+          "url": "https://en.wikipedia.org/wiki/Zendaya",
+          "source": "Wikipedia",
           "metric": {
-            "label": "Subscribers gained · 30 days",
-            "value": "+4M"
+            "label": "Wikipedia views · 30 days",
+            "value": "3.46M"
           },
           "evidence": [
             {
-              "source": "Social Blade",
-              "url": "https://socialblade.com/youtube/channel/UCX6OQ3DkcsbYNE6H8uQQuVA"
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Zendaya"
             },
             {
-              "source": "SocialCounts",
-              "url": "https://socialcounts.org/top/channels?by=subs_gained&period=last_30_days"
+              "source": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Zendaya"
             }
           ],
           "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "BRUNO",
-          "subtitle": "YouTube creator channel",
-          "description": "BRUNO is one of the fastest-growing human-led YouTube channels in SocialCounts' current 30-day subscriber table.",
-          "image": "/culture/creator-bruno.webp",
-          "alt": "BRUNO's YouTube profile image",
-          "url": "https://www.youtube.com/channel/UCWXCAM8i0N6ZdShx8EqPSzg",
-          "source": "YouTube",
+          "title": "Tom Holland",
+          "subtitle": "Actor · producer",
+          "description": "Two major current theatrical releases make Tom Holland a relevant screen-culture candidate.",
+          "image": "/culture/creator-tom-holland.webp",
+          "alt": "Portrait of Tom Holland",
+          "url": "https://en.wikipedia.org/wiki/Tom_Holland",
+          "source": "Wikipedia",
           "metric": {
-            "label": "Subscribers gained · 30 days",
-            "value": "+2.7M"
+            "label": "Wikipedia views · 30 days",
+            "value": "3.18M"
           },
           "evidence": [
             {
-              "source": "Social Blade",
-              "url": "https://socialblade.com/youtube/channel/UCWXCAM8i0N6ZdShx8EqPSzg"
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Tom%20Holland"
             },
             {
-              "source": "SocialCounts",
-              "url": "https://socialcounts.org/top/channels?by=subs_gained&period=last_30_days"
+              "source": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Tom_Holland"
             }
           ],
           "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "MAT",
-          "subtitle": "YouTube creator channel",
-          "description": "MAT is one of the fastest-growing human-led YouTube channels in SocialCounts' current 30-day subscriber table.",
-          "image": "/culture/creator-mat.webp",
-          "alt": "MAT's YouTube profile image",
-          "url": "https://www.youtube.com/channel/UCjlDH7jvG8y1BkYqJKfrXJA",
-          "source": "YouTube",
+          "title": "Christopher Nolan",
+          "subtitle": "Film director · producer",
+          "description": "The filmmaker behind The Odyssey is included in the same comparison field as musicians and digital-native creators.",
+          "image": "/culture/creator-christopher-nolan.webp",
+          "alt": "Portrait of Christopher Nolan",
+          "url": "https://en.wikipedia.org/wiki/Christopher_Nolan",
+          "source": "Wikipedia",
           "metric": {
-            "label": "Subscribers gained · 30 days",
-            "value": "+2.69M"
+            "label": "Wikipedia views · 30 days",
+            "value": "2.74M"
           },
           "evidence": [
             {
-              "source": "Social Blade",
-              "url": "https://socialblade.com/youtube/channel/UCjlDH7jvG8y1BkYqJKfrXJA"
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Christopher%20Nolan"
             },
             {
-              "source": "SocialCounts",
-              "url": "https://socialcounts.org/top/channels?by=subs_gained&period=last_30_days"
+              "source": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
             }
           ],
           "accent": "#57d5a4"
         },
         {
           "rank": 4,
-          "title": "Stokes Twins",
-          "subtitle": "YouTube creator channel",
-          "description": "Stokes Twins is one of the fastest-growing human-led YouTube channels in SocialCounts' current 30-day subscriber table.",
-          "image": "/culture/creator-stokes-twins.webp",
-          "alt": "Stokes Twins's YouTube profile image",
-          "url": "https://www.youtube.com/channel/UCbp9MyKCTEww4CxEzc_Tp0Q",
-          "source": "YouTube",
+          "title": "Shakira",
+          "subtitle": "Musician · performer",
+          "description": "A global chart presence and major live appearances keep Shakira in the wider culture conversation.",
+          "image": "/culture/creator-shakira.webp",
+          "alt": "Portrait of Shakira",
+          "url": "https://en.wikipedia.org/wiki/Shakira",
+          "source": "Wikipedia",
           "metric": {
-            "label": "Subscribers gained · 30 days",
-            "value": "+2M"
+            "label": "Wikipedia views · 30 days",
+            "value": "1.87M"
           },
           "evidence": [
             {
-              "source": "Social Blade",
-              "url": "https://socialblade.com/youtube/channel/UCbp9MyKCTEww4CxEzc_Tp0Q"
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Shakira"
             },
             {
-              "source": "SocialCounts",
-              "url": "https://socialcounts.org/top/channels?by=subs_gained&period=last_30_days"
+              "source": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Shakira"
             }
           ],
           "accent": "#5ab0ff"
         },
         {
           "rank": 5,
-          "title": "Аришнев",
-          "subtitle": "YouTube creator channel",
-          "description": "Аришнев is one of the fastest-growing human-led YouTube channels in SocialCounts' current 30-day subscriber table.",
-          "image": "/culture/creator-channel-shmmj0pw.webp",
-          "alt": "Аришнев's YouTube profile image",
-          "url": "https://www.youtube.com/channel/UCxm5_Y8j9Bn7LxrSHMMJ0Pw",
-          "source": "YouTube",
+          "title": "Matt Damon",
+          "subtitle": "Actor · producer",
+          "description": "Leading The Odyssey places Matt Damon in the current film-driven culture conversation.",
+          "image": "/culture/creator-matt-damon.webp",
+          "alt": "Portrait of Matt Damon",
+          "url": "https://en.wikipedia.org/wiki/Matt_Damon",
+          "source": "Wikipedia",
           "metric": {
-            "label": "Subscribers gained · 30 days",
-            "value": "+2M"
+            "label": "Wikipedia views · 30 days",
+            "value": "1.57M"
           },
           "evidence": [
             {
-              "source": "Social Blade",
-              "url": "https://socialblade.com/youtube/channel/UCxm5_Y8j9Bn7LxrSHMMJ0Pw"
+              "source": "Google Trends",
+              "url": "https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=Matt%20Damon"
             },
             {
-              "source": "SocialCounts",
-              "url": "https://socialcounts.org/top/channels?by=subs_gained&period=last_30_days"
+              "source": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Matt_Damon"
             }
           ],
           "accent": "#ff6b57"
@@ -452,206 +450,205 @@
     },
     {
       "id": "watch",
-      "eyebrow": "What everyone's watching",
-      "title": "Movies & shows",
-      "description": "Ranked by English Wikipedia attention over the past 30 days, with the IMDb rating shown under each poster and refreshed when IMDb is reachable.",
+      "eyebrow": "IMDb U.S. box office · August 7–9, 2026",
+      "title": "Movies",
+      "description": "The five largest cumulative U.S. and Canada grosses among IMDb's current weekend box-office top 10, re-sorted by total gross rather than weekend earnings.",
       "sources": [
-        "Wikipedia · 30-day pageviews",
-        "IMDb · viewer ratings",
-        "Google Trends · verification"
+        "IMDb · box office top 10",
+        "Box Office Mojo · total gross"
       ],
       "layout": "poster",
       "items": [
         {
           "rank": 1,
-          "title": "The Odyssey",
-          "subtitle": "Movie · in theaters",
-          "description": "Christopher Nolan's epic is both a blockbuster and the source of the month's highly reusable siren-scene meme.",
-          "image": "/culture/media-odyssey.webp",
-          "alt": "The Odyssey 2026 theatrical poster",
-          "url": "https://www.imdb.com/title/tt33764258/",
-          "source": "IMDb",
-          "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "14.6M"
-          },
-          "evidence": [
-            {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
-            },
-            {
-              "source": "IMDb",
-              "url": "https://www.imdb.com/title/tt33764258/"
-            }
-          ],
-          "accent": "#ffc857",
-          "rating": "8.4"
-        },
-        {
-          "rank": 2,
           "title": "Spider-Man: Brand New Day",
           "subtitle": "Movie · in theaters",
-          "description": "The new Spider-Man release is driving huge public attention, box-office conversation, and the “Petal-Man Day” double-feature joke.",
+          "description": "The current Spider-Man release leads the weekend chart's cumulative North American grosses.",
           "image": "/culture/media-spider-man.webp",
           "alt": "Spider-Man Brand New Day theatrical poster",
           "url": "https://www.imdb.com/title/tt22084616/",
           "source": "IMDb",
           "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "10.4M"
+            "label": "U.S. & Canada total gross",
+            "value": "$654,342,914"
           },
+          "rating": "8.2",
           "evidence": [
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Spider-Man:_Brand_New_Day"
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
             },
             {
-              "source": "IMDb",
-              "url": "https://www.imdb.com/title/tt22084616/"
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl2299756545/"
             }
           ],
-          "accent": "#9b8cff",
-          "rating": "8.2"
+          "accent": "#ffc857"
         },
         {
-          "rank": 3,
+          "rank": 2,
           "title": "Toy Story 5",
           "subtitle": "Movie · in theaters",
-          "description": "Toys versus screens turned a legacy sequel into a family hit and a debate about digital childhood.",
+          "description": "Eight weeks of ticket sales put Toy Story 5 ahead of newer weekend debuts when ranked by total gross.",
           "image": "/culture/media-toy-story.webp",
           "alt": "Toy Story 5 theatrical poster",
           "url": "https://www.imdb.com/title/tt29355505/",
           "source": "IMDb",
           "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "801K"
+            "label": "U.S. & Canada total gross",
+            "value": "$470,699,012"
           },
+          "rating": "7.5",
           "evidence": [
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Toy_Story_5"
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
             },
             {
-              "source": "IMDb",
-              "url": "https://www.imdb.com/title/tt29355505/"
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl3344859137/"
             }
           ],
-          "accent": "#57d5a4",
-          "rating": "7.5"
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "The Odyssey",
+          "subtitle": "Movie · in theaters",
+          "description": "Christopher Nolan's epic remains one of the largest cumulative earners still present in the weekend top ten.",
+          "image": "/culture/media-odyssey.webp",
+          "alt": "The Odyssey 2026 theatrical poster",
+          "url": "https://www.imdb.com/title/tt33764258/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$461,385,045"
+          },
+          "rating": "8.3",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl170295297/"
+            }
+          ],
+          "accent": "#57d5a4"
         },
         {
           "rank": 4,
+          "title": "Minions & Monsters",
+          "subtitle": "Movie · in theaters",
+          "description": "The animated holdover outranks smaller new releases once the chart is sorted by total gross.",
+          "image": "/culture/media-minions-monsters.webp",
+          "alt": "Minions & Monsters theatrical poster",
+          "url": "https://www.imdb.com/title/tt32890033/",
+          "source": "IMDb",
+          "metric": {
+            "label": "U.S. & Canada total gross",
+            "value": "$176,357,285"
+          },
+          "rating": "6.5",
+          "evidence": [
+            {
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
+            },
+            {
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl779714561/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
           "title": "Moana",
           "subtitle": "Movie · in theaters",
-          "description": "Disney's live-action remake remains a major summer talking point, from casting and songs to its box-office performance.",
+          "description": "The live-action musical rounds out the five largest cumulative grosses in the current weekend pool.",
           "image": "/culture/media-moana.webp",
           "alt": "Moana 2026 live-action theatrical poster",
           "url": "https://www.imdb.com/title/tt27419466/",
           "source": "IMDb",
           "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "586K"
+            "label": "U.S. & Canada total gross",
+            "value": "$121,626,167"
           },
+          "rating": "5.6",
           "evidence": [
             {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Moana_(2026_film)"
+              "source": "IMDb box office chart",
+              "url": "https://www.imdb.com/chart/boxoffice/"
             },
             {
-              "source": "IMDb",
-              "url": "https://www.imdb.com/title/tt27419466/"
+              "source": "Box Office Mojo",
+              "url": "https://www.boxofficemojo.com/release/rl486245121/"
             }
           ],
-          "accent": "#5ab0ff",
-          "rating": "5.6"
-        },
-        {
-          "rank": 5,
-          "title": "Jujutsu Kaisen · S3",
-          "subtitle": "Series · streaming",
-          "description": "The Culling Game arc remains one of the year's largest anime conversation engines after its first cour concluded.",
-          "image": "/culture/media-jujutsu.webp",
-          "alt": "Jujutsu Kaisen season three promotional poster",
-          "url": "https://www.imdb.com/title/tt12343534/",
-          "source": "IMDb",
-          "metric": {
-            "label": "Wikipedia views · 30 days",
-            "value": "32.3K"
-          },
-          "evidence": [
-            {
-              "source": "Wikipedia",
-              "url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_season_3"
-            },
-            {
-              "source": "IMDb",
-              "url": "https://www.imdb.com/title/tt12343534/"
-            }
-          ],
-          "accent": "#ff6b57",
-          "rating": "8.5"
+          "accent": "#ff6b57"
         }
       ]
     },
     {
       "id": "songs",
-      "eyebrow": "Billboard × Spotify",
+      "eyebrow": "Spotify Global × Billboard",
       "title": "Songs",
-      "description": "The highest Billboard Hot 100 entries that also appear in Spotify's current Top 50 USA. Press play to open one official Spotify player, which scrolls into view automatically.",
+      "description": "The highest songs in Spotify's current Top 50 Global that also appear on the Billboard Hot 100. Spotify order decides the rank; Billboard is the required second check. Press play for Spotify's official embed.",
       "sources": [
-        "Billboard Hot 100",
-        "Spotify Top 50 USA"
+        "Spotify Top 50 · Global",
+        "Billboard Hot 100"
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "Choosin' Texas",
-          "subtitle": "Ella Langley",
-          "description": "The country crossover leads Billboard while also sitting at the top of Spotify's current U.S. playlist.",
-          "image": "/culture/song-choosin-texas.webp",
-          "alt": "Choosin' Texas artwork by Ella Langley",
-          "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
+          "title": "Loser",
+          "subtitle": "Tame Impala",
+          "description": "Loser is #3 in Spotify's current global playlist and #46 on the current Billboard Hot 100.",
+          "image": "/culture/song-loser-tame-impala.webp",
+          "alt": "Loser artwork by Tame Impala",
+          "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
           "source": "Spotify",
           "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#1"
+            "label": "Spotify Top 50 · Global",
+            "value": "#3"
           },
           "evidence": [
             {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
             },
             {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbLRQDuF5jeBp"
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             }
           ],
           "accent": "#ffc857",
-          "spotifyId": "7scFxt9VhL4FJwuPSfRlfN"
+          "spotifyId": "7bxaFZ1O3cHkgLKMsdC3xR"
         },
         {
           "rank": 2,
           "title": "hate that i made you love me",
           "subtitle": "Ariana Grande",
-          "description": "The Petal-era single is both a top-two Hot 100 record and a live entry on Spotify's U.S. chart.",
+          "description": "hate that i made you love me is #4 in Spotify's current global playlist and #2 on the current Billboard Hot 100.",
           "image": "/culture/song-hate-love.webp",
           "alt": "hate that i made you love me artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/3iy2QuCtCzpWnR6tia39AB",
           "source": "Spotify",
           "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#2"
+            "label": "Spotify Top 50 · Global",
+            "value": "#4"
           },
           "evidence": [
             {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
             },
             {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbLRQDuF5jeBp"
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             }
           ],
           "accent": "#9b8cff",
@@ -659,81 +656,81 @@
         },
         {
           "rank": 3,
-          "title": "Been By Now",
-          "subtitle": "Morgan Wallen",
-          "description": "A high-charting country track with enough streaming momentum to clear both public leaderboards.",
-          "image": "/culture/song-been-by-now.webp",
-          "alt": "Been By Now artwork by Morgan Wallen",
-          "url": "https://open.spotify.com/track/3xwMjQriBVW0OGEvNKo9c0",
+          "title": "Animal",
+          "subtitle": "KATSEYE",
+          "description": "Animal is #5 in Spotify's current global playlist and #35 on the current Billboard Hot 100.",
+          "image": "/culture/song-animal-katseye.webp",
+          "alt": "Animal artwork by KATSEYE",
+          "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
           "source": "Spotify",
           "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#3"
+            "label": "Spotify Top 50 · Global",
+            "value": "#5"
           },
           "evidence": [
             {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
             },
             {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbLRQDuF5jeBp"
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             }
           ],
           "accent": "#57d5a4",
-          "spotifyId": "3xwMjQriBVW0OGEvNKo9c0"
+          "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX"
         },
         {
           "rank": 4,
-          "title": "petal",
-          "subtitle": "Ariana Grande",
-          "description": "The title track is fourth on Billboard and remains inside Spotify's current U.S. Top 50.",
-          "image": "/culture/song-petal.webp",
-          "alt": "petal artwork by Ariana Grande",
-          "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
+          "title": "Earrings",
+          "subtitle": "Malcolm Todd",
+          "description": "Earrings is #6 in Spotify's current global playlist and #28 on the current Billboard Hot 100.",
+          "image": "/culture/song-earrings-malcolm-todd.webp",
+          "alt": "Earrings artwork by Malcolm Todd",
+          "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
           "source": "Spotify",
           "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#4"
-          },
-          "evidence": [
-            {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbLRQDuF5jeBp"
-            }
-          ],
-          "accent": "#5ab0ff",
-          "spotifyId": "70pVCVMGjmIWPbWXDwf11e"
-        },
-        {
-          "rank": 5,
-          "title": "Boston",
-          "subtitle": "STELLA LEFTY",
-          "description": "A smaller-name breakout earns its place by appearing in both the Hot 100's top ten and Spotify's U.S. Top 50.",
-          "image": "/culture/song-boston.webp",
-          "alt": "Boston artwork by STELLA LEFTY",
-          "url": "https://open.spotify.com/track/36idurZmYRjJ56KQ8JD9bN",
-          "source": "Spotify",
-          "metric": {
-            "label": "Billboard Hot 100",
+            "label": "Spotify Top 50 · Global",
             "value": "#6"
           },
           "evidence": [
             {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
             },
             {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ"
+        },
+        {
+          "rank": 5,
+          "title": "Self Aware",
+          "subtitle": "Temper City",
+          "description": "Self Aware is #8 in Spotify's current global playlist and #47 on the current Billboard Hot 100.",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "alt": "Self Aware artwork by Temper City",
+          "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
+          "source": "Spotify",
+          "metric": {
+            "label": "Spotify Top 50 · Global",
+            "value": "#8"
+          },
+          "evidence": [
+            {
               "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbLRQDuF5jeBp"
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             }
           ],
           "accent": "#ff6b57",
-          "spotifyId": "36idurZmYRjJ56KQ8JD9bN"
+          "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT"
         }
       ]
     }
@@ -742,60 +739,54 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.675Z"
+      "checkedAt": "2026-08-15T23:57:56.466Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.784Z"
+      "checkedAt": "2026-08-15T23:57:56.892Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.902Z"
+      "checkedAt": "2026-08-15T23:57:56.443Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.520Z"
+      "checkedAt": "2026-08-15T23:57:55.949Z"
     },
     {
-      "name": "Google Trends",
+      "name": "Google Trends slang",
       "ok": false,
-      "checkedAt": "2026-08-15T23:10:51.571Z",
+      "checkedAt": "2026-08-15T23:57:55.966Z",
       "error": "429 from trends.google.com"
     },
     {
-      "name": "SocialCounts",
-      "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.641Z"
-    },
-    {
-      "name": "Social Blade",
+      "name": "Google Trends creators",
       "ok": false,
-      "checkedAt": "2026-08-15T23:10:52.034Z",
-      "error": "Social Blade blocked all five profile checks"
+      "checkedAt": "2026-08-15T23:57:55.919Z",
+      "error": "429 from trends.google.com"
     },
     {
-      "name": "Wikipedia pageviews",
+      "name": "Wikipedia creator pageviews",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.534Z"
+      "checkedAt": "2026-08-15T23:57:58.882Z"
     },
     {
-      "name": "IMDb ratings",
-      "ok": false,
-      "checkedAt": "2026-08-15T23:10:51.901Z",
-      "error": "IMDb returned no parseable ratings"
+      "name": "IMDb / Box Office Mojo",
+      "ok": true,
+      "checkedAt": "2026-08-15T23:57:58.428Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.706Z"
+      "checkedAt": "2026-08-15T23:57:55.905Z"
     },
     {
-      "name": "Spotify Top 50 USA",
+      "name": "Spotify Top 50 Global",
       "ok": true,
-      "checkedAt": "2026-08-15T23:10:51.804Z"
+      "checkedAt": "2026-08-15T23:57:56.311Z"
     }
   ]
 }

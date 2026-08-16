@@ -30,11 +30,13 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
   assert.match(html, />Creators</);
-  assert.match(html, /Movies &amp; shows/);
+  assert.match(html, />Movies</);
   assert.match(html, />Songs</);
-  assert.match(html, /July 2026 · latest complete month/);
-  assert.match(html, /Subscribers gained · 30 days/);
-  assert.doesNotMatch(html, /Viral formats|TikTok|KYM \+ LIMC signal/i);
+  assert.match(html, /latest complete month/);
+  assert.match(html, /Wikipedia views · 30 days|Google Trends interest · 30 days/);
+  assert.match(html, /U\.S\. &amp; Canada total gross/);
+  assert.match(html, /Spotify Top 50 · Global/);
+  assert.doesNotMatch(html, /Viral formats|TikTok|KYM \+ LIMC signal|SocialCounts|Social Blade|Subscribers gained/i);
   assert.match(html, /BMC-Widget/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
   assert.equal((html.match(/class="culture-card/g) ?? []).length, 25);
@@ -65,7 +67,19 @@ test("keeps content and outbound links constrained", async () => {
     assert.ok(new Set(item.evidence.map((entry) => entry.source)).size >= 2);
     assert.ok(new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size >= 2);
   }
-  assert.doesNotMatch(JSON.stringify(brief), /tiktok/i);
+  const memes = brief.sections.find((section) => section.id === "memes");
+  assert.ok(memes.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.youtube.com")));
+  assert.ok(memes.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "knowyourmeme.com")));
+  assert.doesNotMatch(memes.items.map((item) => item.title).join(" "), /Jimothy|Pirate Gaster/i);
+  const movies = brief.sections.find((section) => section.id === "watch");
+  assert.equal(movies.title, "Movies");
+  assert.ok(movies.items.every((item) => item.metric.label === "U.S. & Canada total gross"));
+  assert.ok(movies.items.some((item) => item.title === "Toy Story 5"));
+  assert.ok(movies.items.every((item) => !/One Night Only|Super Troopers 3/.test(item.title)));
+  const songs = brief.sections.find((section) => section.id === "songs");
+  assert.ok(songs.items.every((item) => item.metric.label === "Spotify Top 50 · Global"));
+  assert.ok(songs.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
+  assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);
   assert.doesNotMatch(JSON.stringify(brief), /"(?:signal|score)":/);
   const referencedImages = new Set(brief.sections.flatMap((section) => section.items.map((item) => item.image.split("/").at(-1))));
   const cachedImages = new Set((await readdir(new URL("../public/culture/", import.meta.url))).filter((file) => file.endsWith(".webp")));

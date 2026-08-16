@@ -1,6 +1,6 @@
 # what’s popular?
 
-A finite daily briefing on the memes, slang, creators, movies, shows,
+A finite daily briefing on the memes, slang, creators, movies,
 and songs moving through internet culture. The public experience is static-first:
 no account, feed, database read, or personalization is required.
 
@@ -26,14 +26,18 @@ npm test
 
 `scripts/update-trends.mjs` requires two-source evidence for every entry. It
 cross-checks the latest completed Know Your Meme monthly poll against Lessons in
-Meme Culture's 20 most-viewed recent videos; checks a 12-month slang set with
-Urban Dictionary and Google Trends; attempts Social Blade creator profiles and
-falls back to SocialCounts' 30-day growth table when bot protection blocks the
-daily check; ranks screen titles by
-Wikipedia pageviews and refreshes IMDb ratings; and intersects Billboard's Hot
-100 with Spotify's official U.S. Top 50. It stores direct measures rather than a
-made-up blended score and atomically replaces `data/trends.json` only after
-validation.
+Meme Culture's 20 most-viewed videos posted in the past two months. A meme never
+gets a winner exemption; if the poll intersection is short, the remaining spots
+must still have both a KYM entry and a recent LIMC top-20 video. Slang uses a
+12-month set checked with Urban Dictionary and Google Trends. Creators span
+filmmakers, musicians, actors, streamers, and established digital creators;
+Google Trends is the primary 30-day comparison and transparent Wikipedia
+pageviews are the fallback when Google rate-limits automation. Movies are the
+five largest cumulative U.S./Canada grosses within IMDb's current weekend top
+ten, using Box Office Mojo's underlying chart data. Songs are ordered by
+Spotify's official Top 50 Global and must also appear on Billboard's Hot 100. It
+stores direct measures rather than a made-up blended score and atomically
+replaces `data/trends.json` only after validation.
 
 `scripts/cache-images.mjs` derives the current asset set from the validated
 briefing, downloads images through strict host and size allowlists, crops them
