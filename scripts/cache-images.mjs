@@ -21,6 +21,8 @@ const pageHosts = new Set([
 const imageHosts = new Set([
   "animotaku.fr",
   "cdn.kinocheck.com",
+  "images.metahub.space",
+  "live.metahub.space",
   "m.media-amazon.com",
   "s.movieinsider.com",
   "www.nfbio.dk",
@@ -65,16 +67,25 @@ const assets = [
 ];
 
 const brief = JSON.parse(await readFile(path.join(root, "data", "trends.json"), "utf8"));
-const referencedFiles = new Set(brief.sections.flatMap((section) => section.items.map((item) => path.basename(item.image))));
+const referencedFiles = new Set(brief.sections.flatMap((section) =>
+  [...section.items, ...(section.moreItems ?? [])].map((item) => path.basename(item.image)),
+));
 for (let index = assets.length - 1; index >= 0; index -= 1) {
   if (!referencedFiles.has(assets[index].file)) assets.splice(index, 1);
 }
 const knownFiles = new Set(assets.map((asset) => asset.file));
 for (const section of brief.sections) {
-  for (const item of section.items) {
+  for (const item of [...section.items, ...(section.moreItems ?? [])]) {
     const file = path.basename(item.image);
     if (knownFiles.has(file)) continue;
-    assets.push({ file, title: item.title, page: item.url, shape: section.layout });
+    const imdbId = section.id === "watch" ? item.url.match(/tt[0-9]{7,9}/)?.[0] : null;
+    assets.push({
+      file,
+      title: item.title,
+      page: item.url,
+      ...(imdbId ? { direct: `https://images.metahub.space/poster/medium/${imdbId}/img` } : {}),
+      shape: section.layout,
+    });
     knownFiles.add(file);
   }
 }

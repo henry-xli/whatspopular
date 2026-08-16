@@ -11,7 +11,7 @@ const flow = [
   {
     number: "01",
     title: "Pull sources",
-    text: "Fetch public pages from Know Your Meme, Lessons in Meme Culture, Urban Dictionary, Google Trends, Wikipedia, IMDb, Box Office Mojo, Spotify, and Billboard.",
+    text: "Fetch public pages from Know Your Meme, Lessons in Meme Culture, Urban Dictionary, Google Trends, Wikipedia, IMDb, Box Office Mojo, Cinemeta, Spotify, and Billboard.",
   },
   {
     number: "02",
@@ -44,8 +44,8 @@ const methods = [
   },
   {
     board: "Slang",
-    sources: "Know Your Meme’s annual slang review + Urban Dictionary + a 12-month U.S. Google Trends comparison.",
-    rule: "Use the annual list as the candidate set and order the five by the latest successful Google Trends comparison. If Trends is unavailable, keep the last validated order. Remaining annual terms are appended by Know Your Meme views.",
+    sources: "Know Your Meme’s annual slang review + the lifetime view count on each Know Your Meme entry + Urban Dictionary.",
+    rule: "Use every term in the annual review, verify that it has a matching Urban Dictionary usage, then order the complete list from most to least Know Your Meme entry views.",
     metric: "Lifetime views on each Know Your Meme entry.",
   },
   {
@@ -56,14 +56,14 @@ const methods = [
   },
   {
     board: "Movies",
-    sources: "IMDb’s current domestic weekend top 10 + the matching Box Office Mojo weekend table.",
+    sources: "IMDb’s current domestic weekend top 10 + the matching Box Office Mojo weekend table + Cinemeta’s IMDb-linked rating and synopsis metadata.",
     rule: "Take those 10 movies, re-sort them by cumulative U.S. and Canada gross, show the first five as cards, and put ranks 6–10 in the expandable rows.",
     metric: "Cumulative U.S. and Canada box office.",
   },
   {
     board: "Songs",
     sources: "Spotify’s Global Top 50 playlist + the dated Billboard Hot 100.",
-    rule: "Select the first five Spotify-ranked tracks that also appear on Billboard, then order only those five by Billboard position. The next five Spotify crossovers form a separate expandable cohort, also ordered by Billboard.",
+    rule: "Select the first 10 Spotify-ranked tracks that also appear on Billboard, then order that complete 10-song set by Billboard position. The first five become cards and ranks 6–10 remain playable in the expandable rows.",
     metric: "Billboard Hot 100 position.",
   },
 ];

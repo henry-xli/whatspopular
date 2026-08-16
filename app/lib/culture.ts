@@ -31,23 +31,7 @@ export type CultureSource = {
   url: string;
 };
 
-export type CultureMoreItem = {
-  rank: number;
-  title: string;
-  subtitle: string;
-  url: string;
-  source: string;
-  metric?: {
-    label: string;
-    value: string;
-  };
-  evidence: Array<{
-    source: string;
-    url: string;
-  }>;
-  spotifyRank?: number;
-  category?: string;
-};
+export type CultureMoreItem = CultureItem;
 
 export type CultureSection = {
   id: string;
@@ -160,6 +144,15 @@ function validateBrief(value: CultureBrief) {
       if (topTitles.has(item.title)) {
         throw new Error(section.title + " repeats a top-five item in its continuation");
       }
+      if (!item.description.trim() || !item.alt.trim()) {
+        throw new Error(item.title + " continuation lacks a description or image description");
+      }
+      if (!/^#[0-9a-f]{6}$/i.test(item.accent)) {
+        throw new Error(item.title + " continuation has an invalid accent color");
+      }
+      if (!item.image.startsWith("/culture/")) {
+        throw new Error(item.title + " continuation must use a local cached image");
+      }
       assertExternalUrl(item.url, item.title);
       if (item.evidence.length < 2) {
         throw new Error(item.title + " continuation must have at least two sources of evidence");
@@ -176,6 +169,26 @@ function validateBrief(value: CultureBrief) {
         throw new Error(item.title + " continuation has an invalid Spotify rank");
       }
     });
+  }
+
+  const slang = value.sections.find((section) => section.id === "slang");
+  const slangViews = [...(slang?.items ?? []), ...(slang?.moreItems ?? [])]
+    .map((item) => Number(item.metric?.value.replaceAll(",", "")));
+  if (slangViews.some((views, index) => !Number.isFinite(views) || (index > 0 && views > slangViews[index - 1]))) {
+    throw new Error("Slang must be ordered by Know Your Meme page views");
+  }
+
+  const songs = value.sections.find((section) => section.id === "songs");
+  const allSongs = [...(songs?.items ?? []), ...(songs?.moreItems ?? [])];
+  const billboardRanks = allSongs.map((item) => Number(item.metric?.value.slice(1)));
+  if (allSongs.some((item) => !/^[A-Za-z0-9]{22}$/.test(item.spotifyId ?? ""))
+    || billboardRanks.some((rank, index) => !Number.isInteger(rank) || (index > 0 && rank < billboardRanks[index - 1]))) {
+    throw new Error("Every song must be playable and globally ordered by Billboard position");
+  }
+
+  const movies = value.sections.find((section) => section.id === "watch");
+  if ([...(movies?.items ?? []), ...(movies?.moreItems ?? [])].some((item) => !item.rating)) {
+    throw new Error("Every movie must include an IMDb rating state");
   }
 }
 

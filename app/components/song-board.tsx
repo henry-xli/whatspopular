@@ -9,7 +9,8 @@ import { ExpandedRanking } from "./expanded-ranking";
 export function SongBoard({ section }: { section: CultureSection }) {
   const [activeTrack, setActiveTrack] = useState<string | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
-  const activeItem = section.items.find((item) => item.spotifyId === activeTrack);
+  const activeItem = [...section.items, ...(section.moreItems ?? [])]
+    .find((item) => item.spotifyId === activeTrack);
 
   useEffect(() => {
     if (!activeTrack) return;
@@ -73,7 +74,11 @@ export function SongBoard({ section }: { section: CultureSection }) {
           );
         })}
       </ol>
-      <ExpandedRanking section={section} />
+      <ExpandedRanking
+        section={section}
+        activeTrack={activeTrack}
+        onTrackChange={setActiveTrack}
+      />
       {activeItem?.spotifyId ? (
         <div className="song-player" ref={playerRef} aria-live="polite">
           <div className="song-player-heading">
