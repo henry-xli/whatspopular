@@ -752,6 +752,133 @@ a.culture-card:hover {
   cursor: pointer;
 }
 
+.expanded-ranking {
+  overflow: hidden;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+}
+
+.expanded-ranking summary {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 18px 0 20px;
+  color: var(--purple-dark);
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  list-style: none;
+  text-transform: uppercase;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.expanded-ranking summary::-webkit-details-marker {
+  display: none;
+}
+
+.expanded-ranking summary:hover,
+.expanded-ranking summary:focus-visible {
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+
+.expand-symbol {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 1rem;
+  transition: transform 0.22s ease;
+}
+
+.expanded-ranking[open] .expand-symbol {
+  transform: rotate(45deg);
+}
+
+.expanded-ranking ol {
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.expanded-ranking li + li {
+  border-top: 1px solid var(--line);
+}
+
+.expanded-ranking li > a {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) minmax(150px, auto) 18px;
+  gap: 14px;
+  align-items: center;
+  min-height: 70px;
+  padding: 10px 20px;
+  transition: background 0.18s ease;
+}
+
+.expanded-ranking li > a:hover,
+.expanded-ranking li > a:focus-visible {
+  background: var(--paper-deep);
+}
+
+.expanded-rank {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+}
+
+.expanded-name,
+.expanded-metric {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.expanded-name strong {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.03rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expanded-name small,
+.expanded-metric small {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.expanded-metric {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.expanded-metric strong {
+  color: var(--purple-dark);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.expanded-link {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
 .site-footer {
   padding: 68px 0 26px;
   background: #0c0b0e;
@@ -1101,6 +1228,24 @@ a.culture-card:hover {
   .card-copy,
   .layout-poster .card-copy {
     min-height: 230px;
+  }
+
+  .expanded-ranking li > a {
+    grid-template-columns: 34px minmax(0, 1fr) 16px;
+    gap: 10px;
+    min-height: 76px;
+    padding-inline: 14px;
+  }
+
+  .expanded-metric {
+    grid-column: 2;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .expanded-link {
+    grid-column: 3;
+    grid-row: 1 / span 2;
   }
 
   .footer-grid {

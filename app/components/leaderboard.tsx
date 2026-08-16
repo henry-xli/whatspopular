@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import type { CultureSection } from "../lib/culture";
+import { ExpandedRanking } from "./expanded-ranking";
 
 export function Leaderboard({ section }: { section: CultureSection }) {
   return (
@@ -66,6 +67,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
           </li>
         ))}
       </ol>
+      <ExpandedRanking section={section} />
     </section>
   );
 }

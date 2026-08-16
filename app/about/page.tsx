@@ -39,31 +39,31 @@ const methods = [
   {
     board: "Memes",
     sources: "Know Your Meme’s latest completed Meme of the Month result + Lessons in Meme Culture uploads from the past two months.",
-    rule: "Keep the poll’s published order, but remove any meme without a matching recent LIMC video.",
+    rule: "Keep the poll’s published order, but remove any meme without a matching recent LIMC video. The first five become cards; the next matches appear in the expandable rows.",
     metric: "Meme of the Month poll place.",
   },
   {
     board: "Slang",
     sources: "Know Your Meme’s annual slang review + Urban Dictionary + a 12-month U.S. Google Trends comparison.",
-    rule: "Use the annual list as the candidate set and order the five by the latest successful Google Trends comparison. If Trends is unavailable, keep the last validated order.",
+    rule: "Use the annual list as the candidate set and order the five by the latest successful Google Trends comparison. If Trends is unavailable, keep the last validated order. Remaining annual terms are appended by Know Your Meme views.",
     metric: "Lifetime views on each Know Your Meme entry.",
   },
   {
     board: "Creators",
     sources: "A maintained cross-media candidate list + 30 days of English Wikipedia pageviews + a linked Google Trends comparison.",
-    rule: "Order candidates by Wikipedia views, then allow no more than two people with the same primary profession in the top five.",
+    rule: "Order the maintained candidates by Wikipedia views, then allow no more than two people with the same primary profession in the top five. The next five remaining people are appended without changing those five cards.",
     metric: "English Wikipedia views over the past 30 days.",
   },
   {
     board: "Movies",
     sources: "IMDb’s current domestic weekend top 10 + the matching Box Office Mojo weekend table.",
-    rule: "Take those 10 movies, re-sort them by cumulative U.S. and Canada gross, and publish the first five.",
+    rule: "Take those 10 movies, re-sort them by cumulative U.S. and Canada gross, show the first five as cards, and put ranks 6–10 in the expandable rows.",
     metric: "Cumulative U.S. and Canada box office.",
   },
   {
     board: "Songs",
     sources: "Spotify’s Global Top 50 playlist + the dated Billboard Hot 100.",
-    rule: "Select the first five Spotify-ranked tracks that also appear on Billboard, then order only those five by Billboard position.",
+    rule: "Select the first five Spotify-ranked tracks that also appear on Billboard, then order only those five by Billboard position. The next five Spotify crossovers form a separate expandable cohort, also ordered by Billboard.",
     metric: "Billboard Hot 100 position.",
   },
 ];

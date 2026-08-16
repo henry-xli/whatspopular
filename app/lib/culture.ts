@@ -31,6 +31,24 @@ export type CultureSource = {
   url: string;
 };
 
+export type CultureMoreItem = {
+  rank: number;
+  title: string;
+  subtitle: string;
+  url: string;
+  source: string;
+  metric?: {
+    label: string;
+    value: string;
+  };
+  evidence: Array<{
+    source: string;
+    url: string;
+  }>;
+  spotifyRank?: number;
+  category?: string;
+};
+
 export type CultureSection = {
   id: string;
   eyebrow: string;
@@ -39,6 +57,8 @@ export type CultureSection = {
   sources: CultureSource[];
   layout: CultureLayout;
   items: CultureItem[];
+  moreItems?: CultureMoreItem[];
+  moreLabel?: string;
 };
 
 export type CultureBrief = {
@@ -126,6 +146,34 @@ function validateBrief(value: CultureBrief) {
       }
       if (item.spotifyRank !== undefined && (!Number.isInteger(item.spotifyRank) || item.spotifyRank < 1 || item.spotifyRank > 50)) {
         throw new Error(item.title + " has an invalid Spotify rank");
+      }
+    });
+
+    if (!section.moreItems?.length) {
+      throw new Error(section.title + " must include an expandable continuation");
+    }
+    const topTitles = new Set(section.items.map((item) => item.title));
+    section.moreItems.forEach((item, index) => {
+      if (item.rank !== index + 6) {
+        throw new Error(section.title + " continuation ranks must begin at six and be sequential");
+      }
+      if (topTitles.has(item.title)) {
+        throw new Error(section.title + " repeats a top-five item in its continuation");
+      }
+      assertExternalUrl(item.url, item.title);
+      if (item.evidence.length < 2) {
+        throw new Error(item.title + " continuation must have at least two sources of evidence");
+      }
+      const evidenceSources = new Set(item.evidence.map((entry) => entry.source));
+      const evidenceHosts = new Set(item.evidence.map((entry) => {
+        assertExternalUrl(entry.url, item.title + " continuation evidence");
+        return new URL(entry.url).hostname;
+      }));
+      if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
+        throw new Error(item.title + " continuation evidence must come from distinct sources");
+      }
+      if (item.spotifyRank !== undefined && (!Number.isInteger(item.spotifyRank) || item.spotifyRank < 1 || item.spotifyRank > 50)) {
+        throw new Error(item.title + " continuation has an invalid Spotify rank");
       }
     });
   }

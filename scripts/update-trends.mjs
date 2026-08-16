@@ -51,6 +51,14 @@ const cultureMakers = [
   { title: "Morgan Wallen", article: "Morgan_Wallen", category: "musician", subtitle: "Singer-songwriter", description: "His current chart and touring activity keeps him near the center of country-music conversation." },
 ];
 
+const annualSlangReviewUrl = "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025";
+const additionalAnnualSlang = [
+  { title: "TS PMO ICL", subtitle: "An intentionally overloaded slang acronym", url: "https://knowyourmeme.com/memes/ts-pmo-icl", urbanTerm: "TS PMO ICL" },
+  { title: "Performative Male", subtitle: "Someone visibly curating an appealing persona", url: "https://knowyourmeme.com/memes/performative-male", urbanTerm: "Performative Male" },
+  { title: "Dead Rose Emoji", subtitle: "The wilted rose used as ironic punctuation", url: "https://knowyourmeme.com/memes/dead-rose-emoji", urbanTerm: "dead rose" },
+  { title: "Labubu Matcha Dubai Chocolate", subtitle: "A pileup of 2025 consumer-trend buzzwords", url: "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate", urbanTerm: "labubu" },
+];
+
 const movieDetails = new Map([
   ["Spider-Man: Brand New Day", { rating: "8.2", image: "/culture/media-spider-man.webp", subtitle: "Movie · in theaters", description: "The current Spider-Man release leads the weekend chart's cumulative North American grosses." }],
   ["Toy Story 5", { rating: "7.5", image: "/culture/media-toy-story.webp", subtitle: "Movie · in theaters", description: "Eight weeks of ticket sales put Toy Story 5 ahead of newer weekend debuts when ranked by total gross." }],
@@ -402,18 +410,19 @@ async function updateMemes(brief, result, videos) {
   if (!section) return;
   if (dryRun) console.log(`Recent LIMC uploads: ${videos.map((video) => video.title).join(" | ")}`);
   if (dryRun) console.log(`Poll order: ${result.candidates.map((candidate) => `#${candidate.rank} ${candidate.title}`).join(" | ")}`);
-  const currentByUrl = new Map(section.items.map((item) => [item.url, item]));
+  const currentByUrl = new Map([...section.items, ...(section.moreItems ?? [])].map((item) => [item.url, item]));
   const pollMatches = [];
   for (const candidate of result.candidates) {
     const html = await fetchText(candidate.url);
     const video = memeVideoMatch(candidate, videos, kymMatchContext(html));
     if (video) pollMatches.push({ candidate, video, description: conciseKymDescription(html) });
-    if (pollMatches.length === 5) break;
+    if (pollMatches.length === 10) break;
   }
   if (dryRun) console.log(`Poll matches: ${pollMatches.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
   const ordered = pollMatches.slice(0, 5);
   if (dryRun) console.log(`Meme cross-check: ${ordered.map((entry) => `${entry.candidate.title} ↔ ${entry.video.title}`).join(" | ")}`);
   if (ordered.length < 5) throw new Error(`Only ${ordered.length} poll memes had a matching LIMC upload from the past two months`);
+  if (pollMatches.length < 6) throw new Error("No additional poll meme had a matching recent LIMC upload");
 
   section.eyebrow = `${result.label} · latest complete month`;
   section.description = `The ${result.month} Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.`;
@@ -441,11 +450,27 @@ async function updateMemes(brief, result, videos) {
       accent: current?.accent ?? accents[index],
     };
   });
+  section.moreItems = pollMatches.slice(5, 10).map(({ candidate, video }, index) => {
+    const current = currentByUrl.get(candidate.url);
+    return {
+      rank: index + 6,
+      title: current?.title ?? candidate.title,
+      subtitle: `${result.month} poll finalist · LIMC covered`,
+      url: candidate.url,
+      source: "Know Your Meme",
+      metric: { label: `${result.month} Meme of the Month`, value: `#${candidate.rank}` },
+      evidence: [
+        { source: `Know Your Meme ${result.month} result`, url: result.resultUrl },
+        { source: "Lessons in Meme Culture", url: `https://www.youtube.com/watch?v=${video.id}` },
+      ],
+    };
+  });
+  section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank}`;
 }
 
 async function verifyUrbanDictionary(items) {
   const results = await Promise.all(items.map(async (item) => {
-    const payload = JSON.parse(await fetchText(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(item.title)}`));
+    const payload = JSON.parse(await fetchText(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(item.urbanTerm ?? item.title)}`));
     return Array.isArray(payload.list) && payload.list.length > 0;
   }));
   if (!results.every(Boolean)) throw new Error("At least one slang term had no Urban Dictionary result");
@@ -500,7 +525,7 @@ function updateSlang(brief, interest, pageviews) {
   section.sources = [
     {
       label: "Know Your Meme · annual slang review",
-      url: "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025",
+      url: annualSlangReviewUrl,
     },
     {
       label: `Urban Dictionary · ${section.items[0].title}`,
@@ -511,6 +536,24 @@ function updateSlang(brief, interest, pageviews) {
       url: googleTrendsExploreUrl(section.items.map((item) => item.title), "today 12-m"),
     },
   ];
+  if (pageviews) {
+    section.moreItems = additionalAnnualSlang
+      .filter((item) => Number.isFinite(pageviews[item.title]))
+      .sort((left, right) => pageviews[right.title] - pageviews[left.title])
+      .map((item, index) => ({
+        rank: index + 6,
+        title: item.title,
+        subtitle: item.subtitle,
+        url: item.url,
+        source: "Know Your Meme",
+        metric: { label: "Know Your Meme page views", value: formatInteger(pageviews[item.title]) },
+        evidence: [
+          { source: "Know Your Meme annual slang review", url: annualSlangReviewUrl },
+          { source: "Urban Dictionary", url: `https://www.urbandictionary.com/define.php?term=${encodeURIComponent(item.urbanTerm)}` },
+        ],
+      }));
+    section.moreLabel = `Show ${section.moreItems.length} more terms from the annual review`;
+  }
 }
 
 async function googleTrendsCreators(items) {
@@ -582,7 +625,11 @@ function updateCreators(brief, pageviews) {
   }
   const leaders = selected;
   if (leaders.length < 5) throw new Error("Fewer than five culture-makers had a direct popularity measure");
+  const selectedTitles = new Set(leaders.map((person) => person.title));
+  const continuation = ranked.filter((person) => !selectedTitles.has(person.title)).slice(0, 5);
+  if (!continuation.length) throw new Error("No additional culture-makers had a direct popularity measure");
   const pageviewsUrl = pageviewsComparisonUrl(leaders);
+  const extendedPageviewsUrl = pageviewsComparisonUrl([...leaders, ...continuation]);
   const trendsUrl = googleTrendsExploreUrl(leaders.map((person) => person.title), "today 1-m");
   section.eyebrow = "People · past 30 days";
   section.description = "People are ranked by 30-day English Wikipedia views, with no more than two actors, musicians, filmmakers, or digital creators in the five.";
@@ -611,6 +658,20 @@ function updateCreators(brief, pageviews) {
       category: person.category,
     };
   });
+  section.moreItems = continuation.map((person, index) => ({
+    rank: index + 6,
+    title: person.title,
+    subtitle: person.subtitle,
+    url: `https://en.wikipedia.org/wiki/${person.article}`,
+    source: "Wikipedia",
+    metric: { label: "Wikipedia views · 30 days", value: formatCompact(pageviews[person.title]) },
+    evidence: [
+      { source: "Google Trends", url: googleTrendsExploreUrl([person.title], "today 1-m") },
+      { source: "Wikipedia Pageviews", url: extendedPageviewsUrl },
+    ],
+    category: person.category,
+  }));
+  section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank} by Wikipedia views`;
 }
 
 function pageviewRange() {
@@ -695,8 +756,7 @@ async function boxOfficeWeekend() {
     try {
       const rows = parseWeekendRows(await fetchText(chartUrl, { headers: { "user-agent": "Mozilla/5.0" } }))
         .slice(0, 10)
-        .sort((left, right) => right.totalGross - left.totalGross)
-        .slice(0, 5);
+        .sort((left, right) => right.totalGross - left.totalGross);
       const enriched = await Promise.all(rows.map(async (row) => {
         const html = await fetchText(row.releaseUrl, { headers: { "user-agent": "Mozilla/5.0" } });
         const imdbId = html.match(/\/title\/(tt[0-9]{7,9})/i)?.[1];
@@ -722,7 +782,7 @@ function updateMovies(brief, chart) {
     { label: "IMDb · box office top 10", url: chart.imdbChartUrl },
     { label: "Box Office Mojo · total gross", url: chart.chartUrl },
   ];
-  section.items = chart.rows.map((row, index) => {
+  section.items = chart.rows.slice(0, 5).map((row, index) => {
     const current = currentByTitle.get(normalize(row.title));
     const details = movieDetails.get(row.title);
     return {
@@ -743,6 +803,19 @@ function updateMovies(brief, chart) {
       accent: accents[index],
     };
   });
+  section.moreItems = chart.rows.slice(5, 10).map((row, index) => ({
+    rank: index + 6,
+    title: row.title,
+    subtitle: "Movie · in theaters",
+    url: row.imdbUrl,
+    source: "IMDb",
+    metric: { label: "U.S. & Canada total gross", value: formatMoney(row.totalGross) },
+    evidence: [
+      { source: "IMDb box office chart", url: chart.imdbChartUrl },
+      { source: "Box Office Mojo", url: row.releaseUrl },
+    ],
+  }));
+  section.moreLabel = "Show ranks 6–10 by total gross";
 }
 
 function saturdayOnOrBefore(date) {
@@ -792,10 +865,13 @@ function updateSongs(brief, chart, spotifyTracks) {
       const spotifyArtists = new Set(normalize(entry.track.artist).split(" ").filter((token) => token.length >= 3));
       return normalize(entry.row.artist).split(" ").some((token) => token.length >= 3 && spotifyArtists.has(token));
     })
-    .slice(0, 5);
-  const crossovers = spotifySelected
+    .slice(0, 10);
+  const crossovers = spotifySelected.slice(0, 5)
+    .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
+  const continuation = spotifySelected.slice(5, 10)
     .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
   if (crossovers.length < 5) throw new Error("Fewer than five songs overlapped Billboard and Spotify");
+  if (!continuation.length) throw new Error("No additional songs overlapped Billboard and Spotify");
   const currentById = new Map(section.items.map((item) => [item.spotifyId, item]));
   section.eyebrow = "Spotify Global × Billboard";
   section.description = "The first five Spotify Global Top 50 tracks that also appear on the Billboard Hot 100 are selected; Billboard position then orders only those five. Press play for Spotify's official embed.";
@@ -824,6 +900,20 @@ function updateSongs(brief, chart, spotifyTracks) {
       spotifyRank,
     };
   });
+  section.moreItems = continuation.map(({ row, track, spotifyRank }, index) => ({
+    rank: index + 6,
+    title: track.title,
+    subtitle: track.artist,
+    url: `https://open.spotify.com/track/${track.id}`,
+    source: "Spotify",
+    metric: { label: "Billboard Hot 100", value: `#${row.this_week}` },
+    evidence: [
+      { source: "Spotify", url: "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF" },
+      { source: "Billboard", url: `https://www.billboard.com/charts/hot-100/${chart.date}/` },
+    ],
+    spotifyRank,
+  }));
+  section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank}`;
 }
 
 function validateBrief(brief) {
@@ -846,12 +936,32 @@ function validateBrief(brief) {
         throw new Error(`${item.title} lacks two distinct sources`);
       }
     });
+    if (!Array.isArray(section.moreItems) || !section.moreItems.length) {
+      throw new Error(`${section.title} must include an expandable continuation`);
+    }
+    const topTitles = new Set(section.items.map((item) => normalize(item.title)));
+    section.moreItems.forEach((item, index) => {
+      if (item.rank !== index + 6) throw new Error(`${section.title} continuation ranks must begin at six`);
+      if (topTitles.has(normalize(item.title))) throw new Error(`${section.title} continuation repeats ${item.title}`);
+      if (!item.url || new URL(item.url).protocol !== "https:") throw new Error(`${item.title} has an invalid continuation URL`);
+      if (!Array.isArray(item.evidence)
+        || new Set(item.evidence.map((entry) => entry.source)).size < 2
+        || new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size < 2) {
+        throw new Error(`${item.title} continuation lacks two distinct sources`);
+      }
+    });
   }
   const memes = brief.sections.find((section) => section.id === "memes");
   const memePollRanks = memes?.items.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
   if (memePollRanks.some((rank) => !Number.isInteger(rank))
     || memePollRanks.some((rank, index) => index > 0 && rank <= memePollRanks[index - 1])) {
     throw new Error("Memes must preserve the published Meme of the Month order");
+  }
+  const additionalMemePollRanks = memes?.moreItems.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
+  if (additionalMemePollRanks.some((rank) => !Number.isInteger(rank))
+    || additionalMemePollRanks.some((rank, index) => index > 0 && rank <= additionalMemePollRanks[index - 1])
+    || additionalMemePollRanks[0] <= memePollRanks.at(-1)) {
+    throw new Error("Additional memes must continue the filtered poll order");
   }
   const creators = brief.sections.find((section) => section.id === "creators");
   const creatorCategoryCounts = new Map();
@@ -866,8 +976,13 @@ function validateBrief(brief) {
       throw new Error(`${item.title} must have one primary creator role`);
     }
   }
+  for (const item of creators?.moreItems ?? []) {
+    if (item.subtitle.includes("·") || item.metric?.label !== "Wikipedia views · 30 days") {
+      throw new Error(`${item.title} continuation must use one role and Wikipedia views`);
+    }
+  }
   const slang = brief.sections.find((section) => section.id === "slang");
-  for (const item of slang?.items ?? []) {
+  for (const item of [...(slang?.items ?? []), ...(slang?.moreItems ?? [])]) {
     if (item.metric?.label !== "Know Your Meme page views"
       || !/^\d{1,3}(?:,\d{3})*$/.test(item.metric.value)) {
       throw new Error(`${item.title} must show exact Know Your Meme page views`);
@@ -878,6 +993,11 @@ function validateBrief(brief) {
   if (billboardRanks.some((rank) => !Number.isInteger(rank))
     || billboardRanks.some((rank, index) => index > 0 && rank < billboardRanks[index - 1])) {
     throw new Error("Songs must be ordered by Billboard Hot 100 position");
+  }
+  const additionalBillboardRanks = songs?.moreItems.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
+  if (additionalBillboardRanks.some((rank) => !Number.isInteger(rank))
+    || additionalBillboardRanks.some((rank, index) => index > 0 && rank < additionalBillboardRanks[index - 1])) {
+    throw new Error("Additional songs must be ordered by Billboard Hot 100 position within their Spotify cohort");
   }
   const serialized = JSON.stringify(brief);
   if (/tiktok/i.test(serialized)) throw new Error("The briefing must not contain TikTok data");
@@ -903,12 +1023,13 @@ if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().sl
 }
 
 const slang = brief.sections.find((section) => section.id === "slang")?.items ?? [];
+const allAnnualSlang = [...slang, ...additionalAnnualSlang];
 const sourceResults = await Promise.all([
   safely("Know Your Meme result", latestMemeResult),
   safely("Lessons in Meme Culture", lessonsInMemeCultureRecent),
-  safely("Know Your Meme annual slang review", () => fetchText("https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025")),
-  safely("Know Your Meme slang pageviews", () => knowYourMemeSlangPageviews(slang)),
-  safely("Urban Dictionary", () => verifyUrbanDictionary(slang)),
+  safely("Know Your Meme annual slang review", () => fetchText(annualSlangReviewUrl)),
+  safely("Know Your Meme slang pageviews", () => knowYourMemeSlangPageviews(allAnnualSlang)),
+  safely("Urban Dictionary", () => verifyUrbanDictionary(allAnnualSlang)),
   safely("Google Trends slang", () => googleTrendsSlang(slang)),
   safely("Google Trends creators", () => googleTrendsCreators(cultureMakers)),
   safely("Wikipedia creator pageviews", () => wikipediaCreatorPageviews(cultureMakers)),

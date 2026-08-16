@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { CultureSection } from "../lib/culture";
+import { ExpandedRanking } from "./expanded-ranking";
 
 export function SongBoard({ section }: { section: CultureSection }) {
   const [activeTrack, setActiveTrack] = useState<string | null>(null);
@@ -72,6 +73,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
           );
         })}
       </ol>
+      <ExpandedRanking section={section} />
       {activeItem?.spotifyId ? (
         <div className="song-player" ref={playerRef} aria-live="polite">
           <div className="song-player-heading">

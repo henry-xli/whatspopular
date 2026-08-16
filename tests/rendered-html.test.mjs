@@ -42,6 +42,8 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /BMC-Widget/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
   assert.equal((html.match(/class="culture-card/g) ?? []).length, 25);
+  assert.equal((html.match(/<details class="expanded-ranking"/g) ?? []).length, 5);
+  assert.match(html, /Show ranks 6/);
 });
 
 test("renders the About flowchart", async () => {
@@ -64,9 +66,12 @@ test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   assert.equal(brief.sections.length, 5);
   assert.ok(brief.sections.every((section) => section.items.length === 5));
+  assert.ok(brief.sections.every((section) => section.moreItems.length >= 1 && section.moreItems.length <= 5));
   for (const section of brief.sections) {
     assert.ok(section.sources.length >= 2);
     assert.ok(section.sources.every((source) => source.label && new URL(source.url).protocol === "https:"));
+    assert.deepEqual(section.moreItems.map((item) => item.rank), section.moreItems.map((_, index) => index + 6));
+    assert.ok(section.moreItems.every((item) => !section.items.some((topItem) => topItem.title === item.title)));
   }
   const items = brief.sections.flatMap((section) => section.items);
   for (const item of items) {
@@ -78,9 +83,16 @@ test("keeps content and outbound links constrained", async () => {
     assert.ok(new Set(item.evidence.map((entry) => entry.source)).size >= 2);
     assert.ok(new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size >= 2);
   }
+  for (const item of brief.sections.flatMap((section) => section.moreItems)) {
+    assert.equal(new URL(item.url).protocol, "https:");
+    assert.ok(item.evidence.length >= 2);
+    assert.ok(new Set(item.evidence.map((entry) => entry.source)).size >= 2);
+    assert.ok(new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size >= 2);
+  }
   const memes = brief.sections.find((section) => section.id === "memes");
   assert.ok(memes.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.youtube.com")));
   assert.ok(memes.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "knowyourmeme.com")));
+  assert.ok(memes.moreItems.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.youtube.com")));
   assert.doesNotMatch(memes.items.map((item) => item.title).join(" "), /Pirate Gaster/i);
   assert.ok(memes.items.every((item) => /Meme of the Month$/.test(item.metric.label)));
   const pollRanks = memes.items.map((item) => Number(item.metric.value.slice(1)));
@@ -89,12 +101,14 @@ test("keeps content and outbound links constrained", async () => {
   const creators = brief.sections.find((section) => section.id === "creators");
   assert.ok(creators.items.every((item) => item.metric.label === "Wikipedia views · 30 days"));
   assert.ok(creators.items.every((item) => !item.subtitle.includes("·")));
+  assert.ok(creators.moreItems.every((item) => !item.subtitle.includes("·")));
   const categoryCounts = new Map();
   for (const item of creators.items) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
   assert.ok([...categoryCounts.values()].every((count) => count <= 2));
   const slang = brief.sections.find((section) => section.id === "slang");
   assert.ok(slang.items.every((item) => item.metric.label === "Know Your Meme page views"));
   assert.ok(slang.items.every((item) => /^\d{1,3}(?:,\d{3})*$/.test(item.metric.value)));
+  assert.ok(slang.moreItems.every((item) => item.metric.label === "Know Your Meme page views"));
   const movies = brief.sections.find((section) => section.id === "watch");
   assert.equal(movies.title, "Movies");
   assert.ok(movies.items.every((item) => item.metric.label === "U.S. & Canada total gross"));
