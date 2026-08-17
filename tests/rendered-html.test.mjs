@@ -3,7 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { extractArticleImage, publicHttpsUrl } from "../scripts/lib/news-article.mjs";
+import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/lib/news-article.mjs";
 import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/lib/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
@@ -40,10 +40,11 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, />Slang</);
   assert.match(html, />People</);
   assert.match(html, />Movies</);
+  assert.match(html, />Books</);
   assert.match(html, />Music</);
   assert.match(html, />Products</);
   assert.match(html, />News</);
-  const boardPositions = ["memes", "slang", "people", "movies", "music", "products", "news"]
+  const boardPositions = ["memes", "slang", "people", "movies", "books", "music", "products", "news"]
     .map((id) => html.indexOf(`id="${id}-title"`));
   assert.ok(boardPositions.every((position, index) => position >= 0
     && (index === 0 || position > boardPositions[index - 1])));
@@ -68,7 +69,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.ok(images.every((image) => /\bwidth="\d+"/.test(image) && /\bheight="\d+"/.test(image)));
   assert.ok(images.every((image) => /\bloading="lazy"/.test(image) && /\bdecoding="async"/.test(image)));
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
-  assert.equal((html.match(/class="culture-card/g) ?? []).length, 35);
+  assert.equal((html.match(/class="culture-card/g) ?? []).length, 40);
   assert.equal((html.match(/<details class="expanded-ranking"/g) ?? []).length,
     brief.sections.filter((section) => section.moreItems.length).length);
   assert.equal((html.match(/class="expanded-entry /g) ?? []).length,
@@ -87,12 +88,12 @@ test("renders the About flowchart", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Sources in\. Rankings out\./);
-  assert.match(html, /One daily ingestion\. Seven rankings\. One page\./);
+  assert.match(html, /One daily ingestion\. Eight rankings\. One page\./);
   assert.match(html, /12:00 AM Pacific/);
-  for (const label of ["Pull sources", "Ingest at midnight Pacific", "Apply seven rules", "Validate and cache", "Publish the snapshot"]) {
+  for (const label of ["Pull sources", "Ingest at midnight Pacific", "Apply eight rules", "Validate and cache", "Publish the snapshot"]) {
     assert.match(html, new RegExp(`>${label}<`));
   }
-  for (const board of ["Memes", "Slang", "People", "Movies", "Music", "Products", "News"]) {
+  for (const board of ["Memes", "Slang", "People", "Movies", "Books", "Music", "Products", "News"]) {
     assert.match(html, new RegExp(`>${board}<`));
   }
   assert.match(html, /last good snapshot stays live/i);
@@ -217,6 +218,11 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <script type="application/ld+json">{"url":"https://www.example.com/story","image":{"url":"https://cdn.example.com/news/structured.jpg"}}</script>
   `, "https://www.example.com/story");
   assert.equal(structured.imageSource, "https://cdn.example.com/news/structured.jpg");
+  const intro = extractArticleIntro(`
+    <article><p>The company announced a recall after officials found a contamination risk across several states.</p>
+    <p>The move affects stores nationwide and has prompted new guidance for consumers.</p></article>
+  `);
+  assert.match(intro, /recall after officials found a contamination risk/);
   assert.throws(() => publicHttpsUrl("http://example.com/image.jpg"), /non-public/);
   assert.throws(() => publicHttpsUrl("https://127.0.0.1/image.jpg"), /non-public/);
 });
@@ -247,7 +253,7 @@ test("bounded concurrency preserves result order", async () => {
 test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   assert.deepEqual(brief.sections.map((section) => section.id),
-    ["memes", "slang", "people", "movies", "music", "products", "news"]);
+    ["memes", "slang", "people", "movies", "books", "music", "products", "news"]);
   assert.ok(brief.sections.every((section) => section.items.length === 5));
   assert.ok(brief.sections.every((section) => section.moreItems.length <= 15));
   for (const section of brief.sections) {
@@ -304,6 +310,15 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allMovies.every((item) => !/Wikipedia views|most-read movie pages/i.test(item.description)));
   const movieViews = allMovies.map((item) => Number(item.metric.value.replace("M", "e6").replace("K", "e3")));
   assert.deepEqual(movieViews, [...movieViews].sort((left, right) => right - left));
+  const books = brief.sections.find((section) => section.id === "books");
+  const allBooks = [...books.items, ...books.moreItems];
+  assert.ok(allBooks.every((item) => item.metric.label === "Goodreads monthly readers"));
+  assert.ok(allBooks.every((item) => /^Goodreads · /.test(item.subtitle)));
+  assert.ok(allBooks.every((item) => new URL(item.url).hostname === "www.goodreads.com"));
+  assert.ok(allBooks.every((item) => new URL(item.imageSource).hostname === "i.gr-assets.com"));
+  assert.ok(allBooks.every((item) => !/\b(?:may refer to|was a rock band|television sitcom|American actor|any disturbed state)\b/i.test(item.description)));
+  const bookReaders = allBooks.map((item) => Number(item.metric.value.replaceAll(",", "")));
+  assert.deepEqual(bookReaders, [...bookReaders].sort((left, right) => right - left));
   const music = brief.sections.find((section) => section.id === "music");
   assert.match(music.description, /first 10 tracks in Spotify’s Today’s Top Hits/i);
   const allSongs = [...music.items, ...music.moreItems];

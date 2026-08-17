@@ -1,9 +1,9 @@
 {
   "edition": "August 2026",
   "status": "Checked today",
-  "window": "Memes: latest complete poll · People and Movies: last month · Products and News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-17T19:06:14.333Z",
-  "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, music, products, and news shaping internet culture right now.",
+  "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products and News: past 7 days · Music: current charts",
+  "generatedAt": "2026-08-17T21:40:08.849Z",
+  "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
       "id": "memes",
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,226"
+            "value": "1,001,304"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,418"
+            "value": "114,434"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,781"
+            "value": "99,806"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,494"
+            "value": "76,499"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,552"
+            "value": "55,554"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,893"
+            "value": "46,899"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,541"
+            "value": "43,542"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,351"
+            "value": "27,354"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,500"
+            "value": "18,506"
           },
           "evidence": [
             {
@@ -725,7 +725,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Swift is an American singer-songwriter. Taylor Swift has solo night out in London as Travis Kelce returns to Chiefs practice post-wedding.",
+          "description": "Taylor Swift is an American singer-songwriter. Newlywed Taylor Swift Debuts Her Shortest Hair in Years at U.K.",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -745,8 +745,8 @@
               "url": "https://en.wikipedia.org/wiki/Taylor_Swift"
             },
             {
-              "source": "Page Six via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOcnlpeGNYWTVvblFCU0pzQXRUenBZVzlqWHNHVXNoWDJvX2JSVi1TUE44bE1faFk5a3AzVXotYV9BcDhnRFVrVXFUY2JVdnoyODltVmU4dnhYV3FpNURheXNMeVY0YnlGaTEyTnFScFBDdE5yaWpKTEQydHlTNThvWlZZRW02cTkzR0lGLV9HQzk3QnM5ZmxCLVdGMXdYakdwQ2RGd2YySHo1LVNFVkxsV1gwRkd4TjdRMkowMnE0eDBsdE9pZFl1Z0xZbk9HX0N2?oc=5"
+              "source": "People.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPcFFDY0NPR2FjcVY3Uk9MaVBmN2Z0eHNaanVXSmswYzhDTnBIMnhZRElHQVEtU1JkR2JMQ3J3SWcwZURwcElSeDdQOE9Sc0dXUGdHSk9vdWdZQ3pkTTlZb3pyTWMyVy0wdWJoTExRVFdPcmxaSFVUUnJPd2hsLVBhTXRmaGVJNFpYVEt2My02RHVoaVdEZkE4MTRkUmpnWEpnQnd1RjZqeEVJNlFXRTRz?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -1171,6 +1171,308 @@
       "moreLabel": "Show ranks 6–10 by Wikipedia views"
     },
     {
+      "id": "books",
+      "eyebrow": "Goodreads · most read this month · U.S.",
+      "title": "Books",
+      "description": "The ten books most read by Goodreads members in the United States during the latest completed month, with context from Wikipedia or current coverage.",
+      "sources": [
+        {
+          "label": "Goodreads · most read books, U.S., month",
+          "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+        },
+        {
+          "label": "Google News · current book coverage",
+          "url": "https://news.google.com/search?q=Yesteryear+Caro+Claire+Burke&hl=en-US&gl=US&ceid=US%3Aen"
+        }
+      ],
+      "layout": "poster",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Yesteryear",
+          "subtitle": "Goodreads · Caro Claire Burke",
+          "description": "Yesteryear is a book by Caro Claire Burke.",
+          "image": "/culture/book-yesteryear.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
+          "alt": "Cover of Yesteryear by Caro Claire Burke",
+          "url": "https://www.goodreads.com/book/show/238226942-yesteryear",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "128,619"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/search?q=Yesteryear+Caro+Claire+Burke&hl=en-US&gl=US&ceid=US%3Aen"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "The Calamity Club",
+          "subtitle": "Goodreads · Kathryn Stockett",
+          "description": "The Calamity Club is a historical fiction novel by American author Kathryn Stockett, published by Spiegel & Grau on May 5, 2026. It is Stockett's second novel, appearing seventeen years after her debut The Help (2009). Kathryn Stockett Reflects on 'The Help' Criticism as She Releases New Novel.",
+          "image": "/culture/book-the-calamity-club.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1763049143i/228820257.jpg",
+          "alt": "Cover of The Calamity Club by Kathryn Stockett",
+          "url": "https://www.goodreads.com/book/show/228820257-the-calamity-club",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "93,277"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/The_Calamity_Club"
+            },
+            {
+              "source": "People.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQMm1RNlZ5MWM0LXFPbnZiV3dRc3pOSGFxSEdoN2YzalJNYXBlcGE1TU1XTUprU2NhUEF0M1ZhREhrcW5rYXpnSzJsWlZaZzZUOFBSN1U3YkJGbGdjc2dDWnlKV0NPUGpLcHRxUWg5WkdfZ2JhdnlpcURTdkc3ZC14ODRMd1RFc0kxME5BZkszY3liVDRTQWR0X1hqZG11VXpIY3FV?oc=5"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Theo of Golden",
+          "subtitle": "Goodreads · Allen Levi",
+          "description": "Theo of Golden is a novel by American author Allen Levi. It was first self-published in 2023 and later republished by Atria Books, an imprint of Simon & Schuster, in 2025. The novel later appeared on The New York Times Best Seller list.",
+          "image": "/culture/book-theo-of-golden.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761744192i/242376245.jpg",
+          "alt": "Cover of Theo of Golden by Allen Levi",
+          "url": "https://www.goodreads.com/book/show/242376245-theo-of-golden",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "56,182"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/Theo_of_Golden"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "The Divorce",
+          "subtitle": "Goodreads · Freida McFadden",
+          "description": "The Divorce is a book by Freida McFadden.",
+          "image": "/culture/book-the-divorce.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783i/244403162.jpg",
+          "alt": "Cover of The Divorce by Freida McFadden",
+          "url": "https://www.goodreads.com/book/show/244403162-the-divorce",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "51,829"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/search?q=The+Divorce+Freida+McFadden&hl=en-US&gl=US&ceid=US%3Aen"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "The Correspondent",
+          "subtitle": "Goodreads · Virginia Evans",
+          "description": "The Correspondent is a book by Virginia Evans. 'The Correspondent' Author Virginia Evans Wins 2026 Women's Prize for Fiction.",
+          "image": "/culture/book-the-correspondent.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1735235942i/223001257.jpg",
+          "alt": "Cover of The Correspondent by Virginia Evans",
+          "url": "https://www.goodreads.com/book/show/223001257-the-correspondent",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "48,325"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNbEtmZW01RG1xVHdXZnJhcng3aG1xcHE3M2owbTdZUmJXbTJPX3VPb2JBeFhOcEJMVW5lM0NfMHZmQlNqa0lwMmg3VDJKQ3hEcG9wcTh2VUVrOHlyR0RYUXB6bUhKQm1lcFMtbWxhUk16cmJMYmg4a1ZMNklvMHA4VjF1Ym5xWVBWZFpFc2xJQnFrX2NaM0tRRXFjMmJlZkgyLXZxUQ?oc=5"
+            },
+            {
+              "source": "People.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNbEtmZW01RG1xVHdXZnJhcng3aG1xcHE3M2owbTdZUmJXbTJPX3VPb2JBeFhOcEJMVW5lM0NfMHZmQlNqa0lwMmg3VDJKQ3hEcG9wcTh2VUVrOHlyR0RYUXB6bUhKQm1lcFMtbWxhUk16cmJMYmg4a1ZMNklvMHA4VjF1Ym5xWVBWZFpFc2xJQnFrX2NaM0tRRXFjMmJlZkgyLXZxUQ?oc=5"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Mad Mabel",
+          "subtitle": "Goodreads · Sally Hepworth",
+          "description": "Mad Mabel is a book by Sally Hepworth.",
+          "image": "/culture/book-mad-mabel.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775070793i/231127044.jpg",
+          "alt": "Cover of Mad Mabel by Sally Hepworth",
+          "url": "https://www.goodreads.com/book/show/231127044-mad-mabel",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "47,032"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/search?q=Mad+Mabel+Sally+Hepworth&hl=en-US&gl=US&ceid=US%3Aen"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "Whistler",
+          "subtitle": "Goodreads · Ann Patchett",
+          "description": "Whistler is a book by Ann Patchett. Ann Patchett Returns to New York in “Whistler”.",
+          "image": "/culture/book-whistler.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761863582i/242693052.jpg",
+          "alt": "Cover of Whistler by Ann Patchett",
+          "url": "https://www.goodreads.com/book/show/242693052-whistler",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "44,631"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNN0UzdzZnV096SUFZVW94QkRsdHJGWkVkZ0F4cmctZkEyTG9yR0NTelRVNGU0SjBwZmRmSGxrSEV0anV2WHdlMTNDM1VPN3NneVltajFUVnd5VWhJa1l0XzVTUTE3aUJzSUVtTWYtNm5URDZwdnNaazVVa2JaOVAwRC1UdnlZcDBkaWR0emFR0gGTAUFVX3lxTE83V1I4aDFYSHc0YVh0WUNCYjNGaEFwWjhkemdYczlkTzJIY2hZd1JYRC1ZNnBaWm1uS3pOWDdfdmpQcHoySnp5VkUzRzBrb3FTQkxNeGJEdWVSaUNFRGZWbmlCbjRvWVRWd3JPZTRoQnBNUVMyM2hiMThuaHM1M3FvbmM3VXBLbDRfRW5JUEMtVWpGZw?oc=5"
+            },
+            {
+              "source": "Chicago Review of Books via Google News",
+              "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNN0UzdzZnV096SUFZVW94QkRsdHJGWkVkZ0F4cmctZkEyTG9yR0NTelRVNGU0SjBwZmRmSGxrSEV0anV2WHdlMTNDM1VPN3NneVltajFUVnd5VWhJa1l0XzVTUTE3aUJzSUVtTWYtNm5URDZwdnNaazVVa2JaOVAwRC1UdnlZcDBkaWR0emFR0gGTAUFVX3lxTE83V1I4aDFYSHc0YVh0WUNCYjNGaEFwWjhkemdYczlkTzJIY2hZd1JYRC1ZNnBaWm1uS3pOWDdfdmpQcHoySnp5VkUzRzBrb3FTQkxNeGJEdWVSaUNFRGZWbmlCbjRvWVRWd3JPZTRoQnBNUVMyM2hiMThuaHM1M3FvbmM3VXBLbDRfRW5JUEMtVWpGZw?oc=5"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Dungeon Crawler Carl (Dungeon Crawler Carl, #1)",
+          "subtitle": "Goodreads · Matt Dinniman",
+          "description": "Dungeon Crawler Carl is a science fantasy LitRPG book series written by American author Matt Dinniman. Initially self published by Dinniman via online publisher Royal Road, it and its seven sequels were acquired by Ace Books in 2024.",
+          "image": "/culture/book-dungeon-crawler-carl-dungeon-crawler-carl-1.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1715780755i/211721806.jpg",
+          "alt": "Cover of Dungeon Crawler Carl (Dungeon Crawler Carl, #1) by Matt Dinniman",
+          "url": "https://www.goodreads.com/book/show/211721806-dungeon-crawler-carl",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "43,424"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/Dungeon_Crawler_Carl"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Our Perfect Storm",
+          "subtitle": "Goodreads · Carley Fortune",
+          "description": "Our Perfect Storm is a book by Carley Fortune. Carley Fortune's Reveals How 'Our Perfect Storm' Was Influenced By Laurie & Jo From 'Little Women'.",
+          "image": "/culture/book-our-perfect-storm.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756350403i/239703816.jpg",
+          "alt": "Cover of Our Perfect Storm by Carley Fortune",
+          "url": "https://www.goodreads.com/book/show/239703816-our-perfect-storm",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "42,408"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9lZE1JbEJKcXloMHFLb3kteUxLSkpUS2drR0swWWZ2bVNrWHpjNFRWWE5hbnhwOFlaLXliWkN2bXYwZjlTR2Q5cGJuSzFaQ0hCV0I5XzJXUDF1bTZTR2hNR0dCNC1hR0RRSkJLTUI2cUI?oc=5"
+            },
+            {
+              "source": "Brit + Co via Google News",
+              "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9lZE1JbEJKcXloMHFLb3kteUxLSkpUS2drR0swWWZ2bVNrWHpjNFRWWE5hbnhwOFlaLXliWkN2bXYwZjlTR2Q5cGJuSzFaQ0hCV0I5XzJXUDF1bTZTR2hNR0dCNC1hR0RRSkJLTUI2cUI?oc=5"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Dolly All the Time",
+          "subtitle": "Goodreads · Annabel Monaghan",
+          "description": "Dolly All the Time is a book by Annabel Monaghan. Celebrate the Release of \"Dolly All The Time\" with Annabel Monaghan!",
+          "image": "/culture/book-dolly-all-the-time.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1757041312i/240687665.jpg",
+          "alt": "Cover of Dolly All the Time by Annabel Monaghan",
+          "url": "https://www.goodreads.com/book/show/240687665-dolly-all-the-time",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "38,103"
+          },
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOQmtQb0NHeDlmNHZkdDU2M2tKT3FCLTFyaFFfalRCUmZMZURFalVqOEhwU1ZVcFd5Yk9TaVU3M2xjSDFjNnU5eGVWbEo2amF2ZFQ0a3JJdkZqUHVQRmppazZRaGVDWnAwc0NjYUxtY3NkQ0NNX2ZSVWFTb1Z1dWN6SVBNUkhYM053QlhublphRjBmc0dvRERsa1pSVmM?oc=5"
+            },
+            {
+              "source": "CT Examiner via Google News",
+              "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOQmtQb0NHeDlmNHZkdDU2M2tKT3FCLTFyaFFfalRCUmZMZURFalVqOEhwU1ZVcFd5Yk9TaVU3M2xjSDFjNnU5eGVWbEo2amF2ZFQ0a3JJdkZqUHVQRmppazZRaGVDWnAwc0NjYUxtY3NkQ0NNX2ZSVWFTb1Z1dWN6SVBNUkhYM053QlhublphRjBmc0dvRERsa1pSVmM?oc=5"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
+    },
+    {
       "id": "music",
       "eyebrow": "Spotify Today’s Top Hits × Billboard",
       "title": "Music",
@@ -1191,7 +1493,7 @@
           "rank": 1,
           "title": "Choosin' Texas",
           "subtitle": "Ella Langley",
-          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025.",
+          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘Choosin’ Texas’.",
           "image": "/culture/song-choosin-texas-ella-langley.webp",
           "alt": "Choosin' Texas artwork by Ella Langley",
           "url": "https://open.spotify.com/track/65DbTqJKhbwqYbZ1Okr0rc",
@@ -1208,6 +1510,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Fox News via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPYk1HNFVQTzI0UDVBVGItLUx0Z1V1clNmUFo4bFVFSGVUeFNGZV9fdE9KbVlQdWVMTlVJYjBMLUI5ZWpoNFRZMGhIT1RPMEVWUGRMN2hxRXk3R0NZdmtTNVNSUzZidTU1UklfV3ozX3JkdnZFN1BhMVVfSUJIbnlrSnM0T0V6dF9YSkNCZmR1RjVFd3A2Q0s5NnA0MmQzMjY0ZHhHV1Q3V0hQeDBjTEtJSWZRbWh0ZmpWd2tYUTVVRHFNZ2pkVTJHdHBHZlFlNTJpeWpxSVZ5OTNIZ9IB3wFBVV95cUxQdEtmblh6UzMtdDJSbDYxbm91TC15WHhHR1VHOTNQVjN2b0pzWDhpWXlIeER0TTJqTTZBaDFZTmE5ZnJmQTFTT3FOSi05N0lIaVlGUDNfQXZMSWtrNnI0N0V5Y3hndXRia3otcmN5NmFNU2JQUmVoTnRBYjc4UEZLbmV0aXlJNWxSVFdMd0RzaUhmNFp0ZEVwMkpHblBHX25MVDVRejRZSm50SGtOcjdUWFUxYUFMRjJCZ014end4OTdiYkZ3ckw1a3R0ZG9NRFhVZF9aejdyU0JqNlEyZEJ3?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -1413,7 +1719,7 @@
           "rank": 9,
           "title": "Loser",
           "subtitle": "Tame Impala",
-          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. 'Loser' Lyrics: Tame Impala's 'Deadbeat' Track Finds Second Wind After Being Featured In 'Spider-Man: Brand New Day'.",
+          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. ‘Loser’ Lyrics: Tame Impala’s ‘Deadbeat’ Track Finds Second Wind After Being Featured In ‘Spider-Man: Brand New Day’.",
           "image": "/culture/song-loser-tame-impala.webp",
           "alt": "Loser artwork by Tame Impala",
           "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
@@ -1432,8 +1738,8 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             },
             {
-              "source": "justjared.com via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTkpVeVVtV05jVTlpUnUzZmpGd3IwNGZuelN1Q1dFUFlWdjRuU0ktU0JFSGVYazdueWNja0tvY0gyTDUwaGQwMEl1V08xNWhjRmwwN0NHbWxLZmhzbkRLZVVPVlk5QWp3N0duUzdhT1VMaHA0V0VpNng4ZmQ2UkJxN3dZakVaeEY3dXUtcEppaE5VdUZYMXU5R0hTcW5NdWtHbFBMQkpjczZrS08xWFV1bEU0OHpEa3BUUC1MZGRjamtVYkYxLWhZQVZnNmpkMU1VYVNoUVY3c01jZlJ3dHc?oc=5"
+              "source": "IMDb via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9ERVY0Z1hBZ3VHNzNVTElyWnJLb1JndnF2S0VDNG9PT0dZWXJXREIyMUtUU3htWTFveldYOUVDekJ2VFFzVXU0Y0t6cDZRZnVvS1Y3ZVg0ZVlrVWpxakptczhEUUsyUQ?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -1681,7 +1987,7 @@
           "rank": 1,
           "title": "Rebel Creamery Ice Cream Lawsuit",
           "subtitle": "News · Aug 17, 2026",
-          "description": "Rebel Ice Cream filed for Chapter 11 bankruptcy after 2021 lawsuit.",
+          "description": "Rebel Ice Cream, a major ice cream brand in your local grocery store, has filed for bankruptcy after a $23.8 million judgment in a trademark lawsuit. Rebel Ice Cream filed for Chapter 11 bankruptcy after 2021 lawsuit.",
           "image": "/culture/news-rebel-creamery-ice-cream-lawsuit.webp",
           "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/17/PLSJ/91334761007-screenshot-rebel-ice-cream.jpg?crop=776,435,x6,y0&width=776&height=435&format=pjpg&auto=webp",
           "imageSourceKind": "article",
@@ -1707,14 +2013,14 @@
         },
         {
           "rank": 2,
-          "title": "Hurricane Lala",
+          "title": "Hawaii Hurricane",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Hurricane Lala is a currently active tropical cyclone that was the third-wettest tropical cyclone to effect the U.S. state of Hawaii on record. Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "image": "/culture/news-hurricane-lala.webp",
+          "description": "Authorities warned of potentially life-threatening conditions, including flooding and mudslides. Some residents stayed off roads while others used sandbags and other measures to protect their homes. \"I'm kind of nervous about it. But we are going to hunker down we are going to stay safe,\" said Hilo resident Maxine.",
+          "image": "/culture/news-hawaii-hurricane.webp",
           "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
           "imageSourceKind": "article",
           "imageSourcePageUrl": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
-          "alt": "Lead image from ABC7 Bay Area's coverage of Hurricane Lala",
+          "alt": "Lead image from ABC7 Bay Area's coverage of Hawaii Hurricane",
           "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
           "source": "ABC7 Bay Area",
           "metric": {
@@ -1724,7 +2030,7 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hawaii+hurricane"
             },
             {
               "source": "ABC7 Bay Area via Google News",
@@ -1732,7 +2038,7 @@
             },
             {
               "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/Hurricane_Lala"
+              "url": "https://en.wikipedia.org/wiki/List_of_Hawaii_hurricanes"
             }
           ],
           "accent": "#9b8cff"
@@ -1741,14 +2047,14 @@
           "rank": 3,
           "title": "Egg Recall",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Massive egg recall in US south and south-west due to salmonella outbreak.",
+          "description": "An egg recall linked to a salmonella outbreak was upgraded to the highest possible risk level by the U.S. Food and Drug Administration (FDA) on Wednesday. Classifies Egg Recall as Class I, for Highest Health Risk.",
           "image": "/culture/news-egg-recall.webp",
-          "imageSource": "https://i.guim.co.uk/img/media/8db29763d7dd93fbeef64134375888b2dd0a1629/997_0_4972_3979/master/4972.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=9b27c35f4fa775aec9c7ae7450ce8beb",
+          "imageSource": "https://static.time.com/v3/assets/bltea6093859af6183b/blt3242cef68ca452f2/6a808bde46e4363cddee31ce/GettyImages-2225112800.jpg?branch=production&width=2400&quality=75&auto=webp&crop=16:9",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
-          "alt": "Lead image from The Guardian's coverage of Egg Recall",
-          "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
-          "source": "The Guardian",
+          "imageSourcePageUrl": "https://time.com/article/2026/08/15/eggs-recalled-for-salmonella-upgraded-to-highest-fda-risk-level/",
+          "alt": "GettyImages-2225112800.jpg",
+          "url": "https://time.com/article/2026/08/15/eggs-recalled-for-salmonella-upgraded-to-highest-fda-risk-level/",
+          "source": "Time Magazine",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -1759,8 +2065,8 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
             },
             {
-              "source": "The Guardian via Google News",
-              "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak"
+              "source": "Time Magazine via Google News",
+              "url": "https://time.com/article/2026/08/15/eggs-recalled-for-salmonella-upgraded-to-highest-fda-risk-level/"
             }
           ],
           "accent": "#5ab0ff"
@@ -1769,7 +2075,7 @@
           "rank": 4,
           "title": "GTA 6 August 27 Presentation",
           "subtitle": "News · Aug 6, 2026",
-          "description": "GTA 6 Gameplay Trailer Announced for Netflix on August 27.",
+          "description": "The GTA 6 gameplay trailer and extended look premieres on Netflix on August 27, six hours before its Rockstar Games YouTube release. Rockstar Games has announced that an extended look at GTA 6 is coming to Netflix on August 27. GTA 6 Gameplay Trailer Announced for Netflix on August 27.",
           "image": "/culture/news-gta-6-august-27-presentation.webp",
           "imageSource": "https://www.vice.com/wp-content/uploads/sites/2/2026/08/GTA-6-Gameplay-Trailer-Announced-for-Netflix-on-August-27.jpg?w=1280",
           "imageSourceKind": "article",
@@ -1795,41 +2101,11 @@
         },
         {
           "rank": 5,
-          "title": "Frozen 3",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
-          "image": "/culture/news-frozen-3.webp",
-          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
-          "alt": "Frozen 2",
-          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
-          "source": "Deadline",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
-            },
-            {
-              "source": "Deadline via Google News",
-              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
-            }
-          ],
-          "accent": "#9b8cff"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
           "title": "Have I Been Flocked",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Flock Group Inc., doing business as Flock Safety, is a privately held American manufacturer and operator of surveillance hardware and software, particularly automated license plate recognition (ALPR). ‘Have I Been Flocked’ site lets you check.",
+          "description": "The “Have I Been Flocked” site compiles Flock audit logs and allows drivers to see if their license plate has been run by law enforcement agencies’ Flock camera systems. ‘Have I Been Flocked’ site lets you check.",
           "image": "/culture/news-have-i-been-flocked.webp",
-          "imageSource": "https://nypost.com/wp-content/uploads/sites/2/2026/08/137493657.jpg?quality=75&strip=all&w=1024",
+          "imageSource": "https://nypost.com/wp-content/uploads/sites/2/2026/08/137493657.jpg?quality=75&strip=all&w=1200",
           "imageSourceKind": "article",
           "imageSourcePageUrl": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/",
           "alt": "Lead image from New York Post's coverage of Have I Been Flocked",
@@ -1854,44 +2130,14 @@
             }
           ],
           "accent": "#ffc857"
-        },
+        }
+      ],
+      "moreItems": [
         {
-          "rank": 7,
-          "title": "D23",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "D23: The Official Disney Fan Club, also known as simply D23, is the official fan club for the Walt Disney Company. Everything Announced At D23: New X-Men Cast, 'Avengers: Doomsday' Teaser, 'Coco 2,' 'Tangled' Live Action First Look & More.",
-          "image": "/culture/news-d23.webp",
-          "imageSource": "https://deadline.com/wp-content/uploads/2026/08/d23-news.jpg?w=1024",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://deadline.com/lists/everything-announced-d23-2026-disney-fan-event/",
-          "alt": "D23 News",
-          "url": "https://deadline.com/lists/everything-announced-d23-2026-disney-fan-event/",
-          "source": "Deadline",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=d23"
-            },
-            {
-              "source": "Deadline via Google News",
-              "url": "https://deadline.com/lists/everything-announced-d23-2026-disney-fan-event/"
-            },
-            {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/D23_(Disney)"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 8,
+          "rank": 6,
           "title": "Reacher Season 4",
           "subtitle": "News · Aug 12, 2026",
-          "description": "The fourth season of the American action crime television series Reacher, based on the Jack Reacher book series by Lee Child, premiered on Amazon Prime Video on August 12, 2026. ‘Reacher’ Season 4 Release Schedule: When Every Episode Drops on Prime Video.",
+          "description": "Get ready for more action and more Alan Ritchson in “Reacher” Season 4, which premieres Wednesday, Aug. 12 on Prime. ‘Reacher’ Season 4 Release Schedule: When Every Episode Drops on Prime Video.",
           "image": "/culture/news-reacher-season-4.webp",
           "imageSource": "https://variety.com/wp-content/uploads/2026/08/RCHR_S4_FG_00273900_Still261_3000.jpg?w=1000&h=563&crop=1",
           "imageSourceKind": "article",
@@ -1920,10 +2166,63 @@
           "accent": "#57d5a4"
         },
         {
+          "rank": 7,
+          "title": "Frozen 3",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "The filled Honda Center got a look at Frozen 3 — and let’s just say, there is quite a lot in store. First of all, are those wedding bells, we hear? Indeed, they are! 'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
+          "image": "/culture/news-frozen-3.webp",
+          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "alt": "Frozen 2",
+          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "source": "Deadline",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
+            },
+            {
+              "source": "Deadline via Google News",
+              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Years Of Trump Support Came Undone In 15 Minutes In An Airport",
+          "subtitle": "News",
+          "description": "years of trump support came undone in 15 minutes in an airport.",
+          "image": "/culture/news-years-of-trump-support-came-undone-in-15-minutes-in-an-airport.webp",
+          "alt": "Representative image for Years Of Trump Support Came Undone In 15 Minutes In An Airport",
+          "url": "https://news.google.com/search?q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport&hl=en-US&gl=US&ceid=US%3Aen",
+          "source": "Google News",
+          "metric": {
+            "label": "Google search volume",
+            "value": "100K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport"
+            },
+            {
+              "source": "Google News via Google News",
+              "url": "https://news.google.com/search?q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport&hl=en-US&gl=US&ceid=US%3Aen"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
           "rank": 9,
           "title": "Coco 2",
           "subtitle": "News · Aug 15, 2026",
-          "description": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
+          "description": "Miguel is back in the Land of the Dead in the first look at “ Coco 2.” At D23, Disney revealed new concept art from the film, which depicts a teenage Miguel alongside his beloved dog, Dante. ‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
           "image": "/culture/news-coco-2.webp",
           "imageSource": "https://variety.com/wp-content/uploads/2026/08/Image-1.png?w=1000&h=563&crop=1",
           "imageSourceKind": "article",
@@ -1946,93 +2245,66 @@
             }
           ],
           "accent": "#5ab0ff"
-        },
-        {
-          "rank": 10,
-          "title": "Supreme Court",
-          "subtitle": "News · Aug 17, 2026",
-          "description": "The Supreme Court of the United States (SCOTUS) is the highest court in the federal judiciary of the United States. Governor Reeves Appoints Amanda Jones Tollison to Mississippi Supreme Court.",
-          "image": "/culture/news-supreme-court.webp",
-          "imageSource": "https://governorreeves.ms.gov/wp-content/uploads/da4af2dd-024a-3715-5971-6be254bdad2f.jpg",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://governorreeves.ms.gov/governor-reeves-appoints-amanda-jones-tollison-to-mississippi-supreme-court/",
-          "alt": "Lead image from Office of Governor Tate Reeves (.gov)'s coverage of Supreme Court",
-          "url": "https://governorreeves.ms.gov/governor-reeves-appoints-amanda-jones-tollison-to-mississippi-supreme-court/",
-          "source": "Office of Governor Tate Reeves (.gov)",
-          "metric": {
-            "label": "Google search volume",
-            "value": "50K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=supreme+court"
-            },
-            {
-              "source": "Office of Governor Tate Reeves (.gov) via Google News",
-              "url": "https://governorreeves.ms.gov/governor-reeves-appoints-amanda-jones-tollison-to-mississippi-supreme-court/"
-            },
-            {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States"
-            }
-          ],
-          "accent": "#ff6b57"
         }
       ],
-      "moreLabel": "Show ranks 6–10"
+      "moreLabel": "Show ranks 6–9"
     }
   ],
   "sourceHealth": [
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:14.620Z"
+      "checkedAt": "2026-08-17T21:40:09.230Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:15.331Z"
+      "checkedAt": "2026-08-17T21:40:09.894Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:15.131Z"
+      "checkedAt": "2026-08-17T21:40:09.758Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:16.056Z"
+      "checkedAt": "2026-08-17T21:40:10.759Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:15.622Z"
+      "checkedAt": "2026-08-17T21:40:10.215Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-17T19:07:00.536Z"
+      "checkedAt": "2026-08-17T21:41:20.698Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:14.602Z"
+      "checkedAt": "2026-08-17T21:40:09.357Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:14.611Z"
+      "checkedAt": "2026-08-17T21:40:09.327Z"
+    },
+    {
+      "name": "Goodreads monthly most read",
+      "ok": true,
+      "checkedAt": "2026-08-17T21:40:11.089Z"
     },
     {
       "name": "Google Shopping / Amazon",
       "ok": false,
-      "checkedAt": "2026-08-17T19:06:21.839Z"
+      "checkedAt": "2026-08-17T21:40:16.648Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-17T19:06:21.790Z"
+      "checkedAt": "2026-08-17T21:40:22.781Z"
     }
   ]
 }

@@ -14,6 +14,7 @@ const pageHosts = new Set([
   "en.wikipedia.org",
   "knowyourmeme.com",
   "news.google.com",
+  "www.goodreads.com",
   "open.spotify.com",
   "www.amazon.com",
   "www.imdb.com",
@@ -26,6 +27,7 @@ const imageHosts = new Set([
 
 const allowedImageSuffixes = [
   ".kym-cdn.com",
+  ".gr-assets.com",
   ".media-amazon.com",
   ".scdn.co",
   ".wikimedia.org",
@@ -34,7 +36,7 @@ const allowedImageSuffixes = [
 const assets = [];
 
 const brief = JSON.parse(await readFile(path.join(root, "data", "trends.json"), "utf8"));
-if (!Array.isArray(brief.sections) || brief.sections.length !== 7
+if (!Array.isArray(brief.sections) || brief.sections.length !== 8
   || brief.sections.some((section) => !Array.isArray(section.items) || section.items.length !== 5)) {
   throw new Error("Refusing to modify cached images for an invalid briefing");
 }

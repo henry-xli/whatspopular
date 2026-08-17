@@ -29,6 +29,7 @@ const allowedHosts = new Set([
   "pageviews.wmcloud.org",
   "www.amazon.com",
   "www.billboard.com",
+  "www.goodreads.com",
   "www.imdb.com",
   "www.googleapis.com",
   "www.wikidata.org",
@@ -39,6 +40,7 @@ const limcChannelId = "UCaHT88aobpcvRFEuy4v5Clg";
 const spotifyPlaylistId = "37i9dQZF1DXcBWIGoYBM5M";
 const shoppingTrendsUrl = "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US";
 const newsTrendsUrl = "https://trends.google.com/trending?geo=US&hours=168&sort=search-volume";
+const goodreadsMostReadUrl = "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m";
 
 async function fetchText(rawUrl, options = {}) {
   const { buffer } = await fetchBytes(rawUrl, {
@@ -605,6 +607,117 @@ function updateSlang(brief, review, details, urbanTerms) {
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5);
   section.moreLabel = `Show ranks 6–${allItems.length} by page views`;
+}
+
+function parseGoodreadsBooks(html) {
+  const rows = [...html.matchAll(/<tr\b[^>]*itemscope[^>]*itemtype=["']http:\/\/schema\.org\/Book["'][^>]*>([\s\S]*?)<\/tr>/gi)]
+    .map((match) => match[1])
+    .map((row) => {
+      const rank = Number(plainText(row.match(/<td[^>]*class=["']number["'][^>]*>([\s\S]*?)<\/td>/i)?.[1] ?? ""));
+      const title = plainText(row.match(/<a[^>]*class=["']bookTitle["'][^>]*>[\s\S]*?<span[^>]*itemprop=['"]name['"][^>]*>([\s\S]*?)<\/span>/i)?.[1] ?? "");
+      const href = row.match(/<a[^>]*class=["']bookTitle["'][^>]*itemprop=['"]url['"][^>]*href=["']([^"']+)/i)?.[1];
+      const url = href ? new URL(href, goodreadsMostReadUrl).href : "";
+      const author = plainText(row.match(/itemprop=['"]author['"][\s\S]*?itemprop=['"]name['"][^>]*>([\s\S]*?)<\/span>/i)?.[1] ?? "");
+      const image = row.match(/<img[^>]*itemprop=["']image["'][^>]*src=["']([^"']+)/i)?.[1] ?? "";
+      const readers = Number((plainText(row).match(/([\d,]+)\s+people read it/i)?.[1] ?? "0").replaceAll(",", ""));
+      return {
+        rank,
+        title,
+        author,
+        readers,
+        image: image.replace(/\._S(?:Y|X)\d+_\./, "."),
+        url,
+      };
+    })
+    .filter((book) => Number.isInteger(book.rank) && book.rank > 0
+      && book.title && book.author && book.readers > 0
+      && /^https:\/\/www\.goodreads\.com\/book\/show\//.test(book.url)
+      && /^https:\/\/i\.gr-assets\.com\//.test(book.image));
+  const unique = [...new Map(rows.map((book) => [book.url, book])).values()]
+    .sort((left, right) => left.rank - right.rank);
+  if (unique.length < 10) throw new Error(`Goodreads exposed only ${unique.length} usable monthly books`);
+  return unique.slice(0, 10);
+}
+
+async function goodreadsMostRead() {
+  const html = await fetchText(goodreadsMostReadUrl, {
+    headers: { "user-agent": "Mozilla/5.0", "accept-language": "en-US,en;q=0.9" },
+  });
+  return { url: goodreadsMostReadUrl, books: parseGoodreadsBooks(html) };
+}
+
+function googleNewsSearchUrl(query) {
+  const url = new URL("https://news.google.com/search");
+  url.search = new URLSearchParams({ q: query, hl: "en-US", gl: "US", ceid: "US:en" });
+  return url.href;
+}
+
+async function bookWikipediaContext(book) {
+  const pages = await wikipediaSearch(book.title).catch(() => []);
+  const titleKeys = [book.title, book.title.replace(/\s*\([^)]*\)\s*$/, "")]
+    .map(normalize)
+    .filter(Boolean);
+  const exact = pages.find((page) => {
+    const pageTitle = normalize(page.title);
+    const extract = page.extract ?? "";
+    const titleMatch = titleKeys.some((key) => pageTitle === key);
+    const unrelated = /\b(?:may refer to|disambiguation|was a rock band|television sitcom|american actor|is any disturbed state|is a journalist who|is a type of weather)\b/i.test(extract);
+    return titleMatch && !unrelated;
+  });
+  return exact?.extract && exact.fullurl ? { extract: conciseSentences(exact.extract, 240), pageUrl: exact.fullurl } : null;
+}
+
+function bookDescription(book, wikipedia, context) {
+  const identity = wikipedia?.extract || ensureSentence(`${book.title} is a book by ${book.author}`);
+  return recentDescription(identity, context?.headline, { requireEvent: true });
+}
+
+async function updateBooks(brief, result) {
+  const section = brief.sections.find((entry) => entry.id === "books");
+  if (!section) return;
+  const books = result.books;
+  const [contexts, wikipedia] = await Promise.all([
+    mapConcurrent(books, 4, (book) => googleNewsContext(`"${book.title}" "${book.author}"`, 90, { requireEvent: true }).catch(() => null)),
+    mapConcurrent(books, 4, bookWikipediaContext),
+  ]);
+  const currentByUrl = new Map([...section.items, ...(section.moreItems ?? [])].map((item) => [item.url, item]));
+  const currentByTitle = new Map([...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]));
+  const allItems = books.map((book, index) => {
+    const current = currentByUrl.get(book.url) ?? currentByTitle.get(normalize(book.title));
+    const context = contexts[index];
+    const wiki = wikipedia[index];
+    const newsUrl = context?.link ?? googleNewsSearchUrl(`${book.title} ${book.author}`);
+    return {
+      rank: index + 1,
+      title: book.title,
+      subtitle: `Goodreads · ${book.author}`,
+      description: bookDescription(book, wiki, context),
+      image: current?.image ?? `/culture/book-${slugify(book.title)}.webp`,
+      imageSource: book.image,
+      alt: current?.alt ?? `Cover of ${book.title} by ${book.author}`,
+      url: book.url,
+      source: "Goodreads",
+      metric: { label: "Goodreads monthly readers", value: formatInteger(book.readers) },
+      evidence: [
+        { source: "Goodreads most read this month", url: result.url },
+        wiki
+          ? { source: "Wikipedia book context", url: wiki.pageUrl }
+          : { source: "Google News book coverage", url: newsUrl },
+        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
+      ],
+      accent: current?.accent ?? accents[index % accents.length],
+    };
+  });
+  section.eyebrow = "Goodreads · most read this month · U.S.";
+  section.title = "Books";
+  section.description = "The ten books most read by Goodreads members in the United States during the latest completed month, with context from Wikipedia or current coverage.";
+  section.sources = [
+    { label: "Goodreads · most read books, U.S., month", url: result.url },
+    { label: "Google News · current book coverage", url: googleNewsSearchUrl(`${books[0].title} ${books[0].author}`) },
+  ];
+  section.items = allItems.slice(0, 5);
+  section.moreItems = allItems.slice(5);
+  section.moreLabel = `Show ranks 6–${allItems.length}`;
 }
 
 function articleTitle(article) {
@@ -1680,6 +1793,7 @@ async function googleTrendingNews() {
       imageSourcePageUrl: representative?.sourcePageUrl,
       imagePageUrl: representative?.pageUrl,
       imageTitle: representative?.title,
+      articleIntro: article?.intro,
       topicSummary: topicSummary?.extract,
       topicPageUrl: topicSummary?.pageUrl,
     };
@@ -1700,8 +1814,13 @@ async function linkedNewsArticle(context) {
 }
 
 function newsDescription(topic, title) {
+  const articleIntro = conciseSentences(topic.articleIntro, 320);
   const definition = conciseSentences(topic.topicSummary, 220);
   const event = factualHeadline(topic.headline);
+  if (articleIntro && event && !normalize(articleIntro).includes(normalize(event).slice(0, 48))) {
+    return conciseSentences(`${articleIntro} ${event}`, 360);
+  }
+  if (articleIntro) return articleIntro;
   if (definition && event && !normalize(definition).includes(normalize(event).slice(0, 48))) {
     return conciseSentences(`${definition} ${event}`, 360);
   }
@@ -1756,10 +1875,10 @@ function updateNews(brief, topics) {
 }
 
 function validateBrief(brief) {
-  const expected = ["memes", "slang", "people", "movies", "music", "products", "news"];
+  const expected = ["memes", "slang", "people", "movies", "books", "music", "products", "news"];
   if (brief.sections.length !== expected.length
     || brief.sections.some((section, index) => section.id !== expected[index])) {
-    throw new Error("Brief must contain the seven boards in the documented order");
+    throw new Error("Brief must contain the eight boards in the documented order");
   }
   const validateItems = (section, items, startRank) => items.forEach((item, index) => {
     if (item.rank !== index + startRank) throw new Error(`${section.title} has non-sequential ranks`);
@@ -1774,7 +1893,7 @@ function validateBrief(brief) {
         && item.imageSourcePageUrl
         && publicHttpsUrl(item.imageSourcePageUrl, "article image source page").hostname === new URL(item.url).hostname;
       if (articleImage) publicHttpsUrl(imageUrl, "article image");
-      else if (imageUrl.protocol !== "https:" || !imageUrl.hostname.match(/(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/)) {
+      else if (imageUrl.protocol !== "https:" || !imageUrl.hostname.match(/(?:\.gr-assets\.com|\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/)) {
         throw new Error(`${item.title} has an invalid source image`);
       }
     }
@@ -1836,6 +1955,16 @@ function validateBrief(brief) {
       throw new Error(`${item.title} must show monthly Wikipedia views and an IMDb rating state`);
     }
   }
+  const books = brief.sections.find((section) => section.id === "books");
+  const allBooks = [...books.items, ...books.moreItems];
+  const bookReaders = allBooks.map((item) => Number(item.metric?.value.replaceAll(",", "")));
+  if (allBooks.some((item) => item.metric?.label !== "Goodreads monthly readers"
+      || !/^\d{1,3}(?:,\d{3})*$/.test(item.metric.value)
+      || !/Goodreads/.test(item.subtitle))
+    || bookReaders.some((readers, index) => !Number.isFinite(readers)
+      || (index > 0 && readers > bookReaders[index - 1]))) {
+    throw new Error("Books must preserve Goodreads monthly reader order");
+  }
   const music = brief.sections.find((section) => section.id === "music");
   const allMusic = [...music.items, ...music.moreItems];
   const billboardRanks = allMusic.map((item) => Number(item.metric?.value?.slice(1)));
@@ -1887,9 +2016,10 @@ const emptySection = (id, title, layout) => ({
   items: [],
   moreItems: [],
 });
+if (!brief.sections.some((section) => section.id === "books")) brief.sections.push(emptySection("books", "Books", "poster"));
 if (!brief.sections.some((section) => section.id === "products")) brief.sections.push(emptySection("products", "Products", "square"));
 if (!brief.sections.some((section) => section.id === "news")) brief.sections.push(emptySection("news", "News", "landscape"));
-const order = ["memes", "slang", "people", "movies", "music", "products", "news"];
+const order = ["memes", "slang", "people", "movies", "books", "music", "products", "news"];
 brief.sections.sort((left, right) => order.indexOf(left.id) - order.indexOf(right.id));
 for (const section of brief.sections) {
   if (section.id === "people") {
@@ -1897,6 +2027,9 @@ for (const section of brief.sections) {
     section.layout = "square";
   } else if (section.id === "movies") {
     section.title = "Movies";
+    section.layout = "poster";
+  } else if (section.id === "books") {
+    section.title = "Books";
     section.layout = "poster";
   } else if (section.id === "music") {
     section.title = "Music";
@@ -1924,12 +2057,13 @@ const independentSourcePromises = [
   safely("Wikimedia monthly topviews", wikipediaMonthlyTop),
   safely("Billboard Hot 100", billboardHot100),
   safely("Spotify Today’s Top Hits", spotifyPlaylistTracks),
+  safely("Goodreads monthly most read", goodreadsMostRead),
   safely("Google Shopping / Amazon", productLeaderboard),
   safely("Google Trending Now / News", googleTrendingNews),
 ];
 const slangReviewResult = await safely("Know Your Meme annual slang review", latestAnnualSlangReview);
 const slangCandidates = slangReviewResult.value?.candidates ?? [];
-const [memeResult, limcResult, topviewsResult, billboardResult, spotifyResult, productsResult, newsResult,
+const [memeResult, limcResult, topviewsResult, billboardResult, spotifyResult, booksResult, productsResult, newsResult,
   slangDetailsResult, urbanDictionaryResult] = await Promise.all([
   ...independentSourcePromises,
   safely("Know Your Meme slang pageviews", () => knowYourMemeSlangDetails(slangCandidates)),
@@ -1944,6 +2078,7 @@ const sourceResults = [
   topviewsResult,
   billboardResult,
   spotifyResult,
+  booksResult,
   productsResult,
   newsResult,
 ];
@@ -1966,6 +2101,7 @@ updateSlang(
 await updatePeople(brief, byName["Wikimedia monthly topviews"].value);
 await updateMovies(brief, byName["Wikimedia monthly topviews"].value);
 await updateMusic(brief, byName["Billboard Hot 100"].value, byName["Spotify Today’s Top Hits"].value);
+await updateBooks(brief, byName["Goodreads monthly most read"].value);
 if (byName["Google Shopping / Amazon"].ok) await updateProducts(brief, byName["Google Shopping / Amazon"].value);
 else await updateProducts(brief, await refreshExistingProducts(brief));
 updateNews(brief, byName["Google Trending Now / News"].value);
@@ -1976,8 +2112,8 @@ brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt }) => ({ name, ok,
 brief.generatedAt = now.toISOString();
 brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
 brief.status = "Checked today";
-brief.summary = "A five-minute, two-source briefing on the memes, slang, people, movies, music, products, and news shaping internet culture right now.";
-brief.window = "Memes: latest complete poll · People and Movies: last month · Products and News: past 7 days · Music: current charts";
+brief.summary = "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.";
+brief.window = "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products and News: past 7 days · Music: current charts";
 validateBrief(brief);
 
 const output = `${JSON.stringify(brief, null, 2)}\n`;

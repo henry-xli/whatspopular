@@ -10,7 +10,7 @@ const flow = [
   {
     number: "01",
     title: "Pull sources",
-    text: "Fetch the latest public rankings from Know Your Meme, YouTube, Wikimedia, Spotify, Billboard, Google Trends, Google News, and Amazon.",
+    text: "Fetch the latest public rankings from Know Your Meme, YouTube, Wikimedia, Spotify, Billboard, Goodreads, Google Trends, Google News, and Amazon.",
   },
   {
     number: "02",
@@ -19,7 +19,7 @@ const flow = [
   },
   {
     number: "03",
-    title: "Apply seven rules",
+    title: "Apply eight rules",
     text: "Each board is filtered and ordered by its own rule below. The displayed source metric determines the order; there is no blended score.",
   },
   {
@@ -60,6 +60,12 @@ const methods = [
     metric: "Previous-month English Wikipedia views.",
   },
   {
+    board: "Books",
+    sources: "Goodreads’ U.S. most-read books page for the latest month, plus Wikipedia or current Google News coverage for context.",
+    rule: "Keep the first ten Goodreads entries in the published order. The site uses that list’s monthly reader count as the metric and never blends in a separate score.",
+    metric: "Goodreads monthly readers.",
+  },
+  {
     board: "Music",
     sources: "Spotify’s Today’s Top Hits playlist, the dated Billboard Hot 100, and matching recent Google News coverage for the description.",
     rule: "Select the first 10 playlist tracks that also appear on the Hot 100, then order that same 10-track set by Billboard position. Recent coverage does not affect rank, and every result remains playable with Spotify’s official embed.",
@@ -73,8 +79,8 @@ const methods = [
   },
   {
     board: "News",
-    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, each linked publisher article’s lead image, and Wikimedia only as an image fallback.",
-    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link directly to current coverage, and cache that article’s lead image when it is safely available.",
+    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, each linked publisher article’s opening paragraphs and lead image, and Wikimedia only as an image fallback.",
+    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link directly to current coverage, and use the article’s opening text for a concise event description when safely available.",
     metric: "Seven-day Google search volume.",
   },
 ];
@@ -87,7 +93,7 @@ export default function AboutPage() {
         <h1>Sources in. Rankings out.</h1>
         <p>
           Once a day, what’s popular? pulls public data from the sites named
-          below, runs seven documented ranking rules, saves one validated
+          below, runs eight documented ranking rules, saves one validated
           snapshot, and publishes that snapshot as a static page. That is the
           whole system.
         </p>
@@ -98,7 +104,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div className="section-intro compact">
             <p className="eyebrow">Overall flow</p>
-            <h2 id="flow-title">One daily ingestion. Seven rankings. One page.</h2>
+            <h2 id="flow-title">One daily ingestion. Eight rankings. One page.</h2>
           </div>
           <ol className="flowchart">
             {flow.map((step, index) => (
@@ -117,7 +123,7 @@ export default function AboutPage() {
 
       <section className="algorithm-section wrap" aria-labelledby="algorithm-title">
         <div className="section-intro compact">
-          <p className="eyebrow">The seven algorithms</p>
+          <p className="eyebrow">The eight algorithms</p>
           <h2 id="algorithm-title">Exactly how each list is made.</h2>
         </div>
         <div className="algorithm-grid">

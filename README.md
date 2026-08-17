@@ -38,6 +38,8 @@ last validated snapshot.
   allows at most two people from each category while preserving view order.
 - Movies are movie pages in the same previous-month Topviews list, ordered by
   page views. IMDb-linked ratings are context only.
+- Books preserve the first ten entries on Goodreads’ U.S. most-read-books page
+  for the latest month, ordered by the page’s monthly reader count.
 - Music selects the first 10 Spotify Today’s Top Hits tracks that also appear on
   the Billboard Hot 100, then orders that same set by Billboard position.
 - Products preserve the order of U.S. Google Shopping Rising queries from the
@@ -52,9 +54,10 @@ Wikidata, Wikipedia, Cinemeta, Spotify, or Amazon metadata, then adds a factual
 recent-news sentence when one is available. Google Trends related queries and
 ranked Wikipedia search results disambiguate unfamiliar news topics. Question-
 style, editorial, and personality-led headline fragments are rejected. News
-entries use the selected publisher article’s direct URL, publication date, and
-lead image metadata. Topic-matched Wikimedia imagery is used only when the
-article does not expose a usable image; the final fallback is a local title card.
+entries use the selected publisher article’s direct URL, publication date,
+opening paragraphs, and lead image metadata. Topic-matched Wikimedia imagery is
+used only when the article does not expose a usable image; the final fallback is
+a local title card.
 
 Every entry has evidence from at least two distinct source hosts.
 `scripts/cache-images.mjs` validates the snapshot, refreshes News art daily,

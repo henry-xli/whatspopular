@@ -68,6 +68,7 @@ const allowedLinkHosts = new Set([
   "www.boxofficemojo.com",
   "www.imdb.com",
   "www.billboard.com",
+  "www.goodreads.com",
   "www.urbandictionary.com",
   "www.youtube.com",
   "pageviews.wmcloud.org"
@@ -127,7 +128,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
       && externalUrl(item.imageSourcePageUrl, `${item.title} image source page`, true).hostname
         === externalUrl(item.url, item.title, true).hostname;
     if (imageUrl.protocol !== "https:" || imageUrl.username || imageUrl.password || imageUrl.port
-      || !(articleImage ? publicHostname(imageUrl.hostname) : /(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/.test(imageUrl.hostname))) {
+      || !(articleImage ? publicHostname(imageUrl.hostname) : /(?:\.gr-assets\.com|\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/.test(imageUrl.hostname))) {
       throw new Error(`${item.title} has an unapproved source image host`);
     }
   }
@@ -175,14 +176,15 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
   if (typeof candidate.generatedAt !== "string" || !Number.isFinite(Date.parse(candidate.generatedAt))) {
     throw new Error("Culture brief has an invalid generatedAt date");
   }
-  if (!Array.isArray(candidate.sections) || candidate.sections.length !== 7) {
-    throw new Error("Culture brief must contain exactly seven boards");
+  if (!Array.isArray(candidate.sections) || candidate.sections.length !== 8) {
+    throw new Error("Culture brief must contain exactly eight boards");
   }
   const expected = [
     ["memes", "landscape"],
     ["slang", "landscape"],
     ["people", "square"],
     ["movies", "poster"],
+    ["books", "poster"],
     ["music", "square"],
     ["products", "square"],
     ["news", "landscape"],

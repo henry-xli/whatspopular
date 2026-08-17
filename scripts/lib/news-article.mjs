@@ -127,6 +127,38 @@ export function extractArticleImage(html, baseUrl) {
   return { imageSource: unique[0].url, imageAlt };
 }
 
+function articleText(value) {
+  return decodeHtml(value)
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .trim();
+}
+
+export function extractArticleIntro(html) {
+  const scope = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1]
+    ?? html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1]
+    ?? html;
+  const paragraphs = [...scope.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((match) => articleText(match[1]))
+    .filter((text) => text.length >= 45 && text.length <= 600)
+    .filter((text) => !/^(?:advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i.test(text))
+    .filter((text) => !/\b(?:see more of our coverage|our coverage|in your search results|click here|download our app|follow us|sign up for our|subscribe to our)\b/i.test(text))
+    .filter((text, index, values) => values.indexOf(text) === index)
+    .slice(0, 3);
+  if (!paragraphs.length) return "";
+  let result = "";
+  for (const paragraph of paragraphs) {
+    const candidate = `${result} ${paragraph}`.trim();
+    if (candidate.length > 520 && result) break;
+    result = candidate;
+  }
+  return result.slice(0, 560).replace(/\s+\S*$/, "").trim();
+}
+
 function relatedArticleHost(candidate, expected) {
   const withoutWww = (hostname) => hostname.startsWith("www.") ? hostname.slice(4) : hostname;
   return withoutWww(candidate) === withoutWww(expected);
@@ -217,7 +249,8 @@ export async function linkedArticleMetadata(articleUrl) {
   if (!/^(?:text\/html|application\/xhtml\+xml)\b/i.test(page.contentType)) {
     throw new Error(`Unexpected publisher content type ${page.contentType}`);
   }
-  const metadata = extractArticleImage(page.buffer.toString("utf8"), page.finalUrl);
+  const html = page.buffer.toString("utf8");
+  const metadata = extractArticleImage(html, page.finalUrl);
   await assertPublicHostname(new URL(metadata.imageSource).hostname);
-  return { url: page.finalUrl, ...metadata };
+  return { url: page.finalUrl, intro: extractArticleIntro(html), ...metadata };
 }
