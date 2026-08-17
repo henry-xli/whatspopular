@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { CultureSection } from "../lib/culture";
+import { CloseIcon, ExternalLinkIcon, PlayIcon, StarIcon } from "./icons";
 
 type ExpandedRankingProps = {
   section: CultureSection;
@@ -54,16 +55,13 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                     />
                   </div>
                   <div className="expanded-copy">
-                    <div className="expanded-kicker">
-                      <span className="expanded-source">{item.source}</span>
-                      <span className="expanded-subtitle">{item.subtitle}</span>
-                    </div>
+                    <span className="expanded-subtitle">{item.subtitle}</span>
                     <strong className="expanded-title">{item.title}</strong>
                     <p>{item.description}</p>
                     <div className="expanded-facts">
                       {item.rating ? (
                         <span className="expanded-rating">
-                          <span aria-hidden="true">★</span>
+                          <StarIcon />
                           <strong>{item.rating}</strong>
                           <small>{item.rating === "New" ? "just opened" : "IMDb"}</small>
                         </span>
@@ -76,7 +74,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                       ) : null}
                     </div>
                   </div>
-                  <span className="expanded-link" aria-hidden="true">↗</span>
+                  <ExternalLinkIcon className="expanded-link" />
                 </a>
                 {canPlay ? (
                   <button
@@ -86,7 +84,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                     aria-label={`${isActive ? "Close player for" : "Play"} ${item.title}`}
                     aria-expanded={isActive}
                   >
-                    <span aria-hidden="true">{isActive ? "×" : "▶"}</span>
+                    {isActive ? <CloseIcon /> : <PlayIcon />}
                   </button>
                 ) : null}
               </article>

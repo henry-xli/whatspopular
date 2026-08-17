@@ -54,6 +54,7 @@ export type CultureBrief = {
 };
 
 const allowedLinkHosts = new Set([
+  "commons.wikimedia.org",
   "en.wikipedia.org",
   "knowyourmeme.com",
   "news.google.com",
@@ -262,7 +263,8 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
   };
   const news = items("news");
   const newsVolumes = news.map((item) => volume(item.metric?.value));
-  if (news.some((item) => item.metric?.label !== "Google searches · 7 days")
+  if (news.some((item) => item.metric?.label !== "Google search volume"
+      || !/^News(?: · [A-Z][a-z]{2} \d{1,2}, \d{4})?$/.test(item.subtitle))
     || newsVolumes.some((views, index) => !views || (index > 0 && views > newsVolumes[index - 1]))) {
     throw new Error("News must be ordered by seven-day Google search volume");
   }

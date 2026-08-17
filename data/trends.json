@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Products and News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-17T16:43:15.404Z",
+  "generatedAt": "2026-08-17T17:26:51.849Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,155"
+            "value": "1,001,176"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,383"
+            "value": "114,386"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,768"
+            "value": "99,775"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,484"
+            "value": "76,485"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,888"
+            "value": "46,890"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,346"
+            "value": "27,348"
           },
           "evidence": [
             {
@@ -545,7 +545,7 @@
           "rank": 1,
           "title": "Erling Haaland",
           "subtitle": "Sports",
-          "description": "Erling Braut Haaland (born 21 July 2000) is a Norwegian professional footballer who plays as a striker for Premier League club Manchester City and the Norway national team. Regarded as one of the best players in the world and the greatest Norwegian player of all time, he is known for his speed, strength, positioning, and finishing inside the box.",
+          "description": "Erling Haaland is Norway’s World Cup machine — and the internet’s babygirl. Erling Haaland’s English Wikipedia article drew 7.67M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-erling-haaland.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Erling Haaland",
@@ -563,6 +563,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Erling_Haaland"
+            },
+            {
+              "source": "AP News via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNYk1hYXg5YlZqNHdDYjVUVXlfc0lTQnFwb2ZlV1I1SEJiZHIzazRlNXpJVFNURDdsejg4U0FwZlJYa0dRaVdxUHNuTXd5QktXVXJHeFhmLU9GWVB4TDF1VFluODhEWDhyb21LOGFUTnZ1ODBfc2dXTUxXRk9MT0dhWHAtUTE3cFBmaUtQa3BiZGxJRXVwNmxFS1E0bFB6ZmExYVdISnRuV2p3UUU?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -572,7 +576,7 @@
           "rank": 2,
           "title": "Lamine Yamal",
           "subtitle": "Sports",
-          "description": "Lamine Yamal Nasraoui Ebana (born 13 July 2007), commonly known as Lamine Yamal, is a Spanish professional footballer who plays as a right winger for the La Liga club Barcelona and the Spain national team. He is widely regarded as one of the best players in the world.",
+          "description": "The story behind Lamine Yamal’s full name – and who he is named after - The Athletic. Lamine Yamal’s English Wikipedia article drew 6.55M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-lamine-yamal.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Lamine Yamal",
@@ -590,6 +594,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Lamine_Yamal"
+            },
+            {
+              "source": "The New York Times via Google News",
+              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQSU5uTXZpaDFIaXhNczBtbzB0NEl4Um1TYXFZaVBGNkpvdVczVTFRVkVTTnBZT2duVV9iVXRncEF0d3pnWmxxbjZHQW9ZUUNfemlFeFpFMTJZUVpqVXZxVW50NE9GY3hMajJ0ck1IeWVadVE5NVhlWnV0X3RHZU84MlJIOWNnRGpwWFpYR0hPMXgzUXdYOXVQVQ?oc=5"
             }
           ],
           "accent": "#9b8cff",
@@ -599,7 +607,7 @@
           "rank": 3,
           "title": "Christopher Nolan",
           "subtitle": "Film",
-          "description": "Sir Christopher Edward Nolan (born 30 July 1970) is a British and American filmmaker. Known for his Hollywood blockbusters with complex storytelling, Nolan is considered a leading filmmaker of the 21st century.",
+          "description": "Christopher Nolan’s Trojan Horse. Christopher Nolan’s English Wikipedia article drew 2.65M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/creator-christopher-nolan.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/ChristopherNolan-byPhilipRomano_%28cropped%29.jpg/960px-ChristopherNolan-byPhilipRomano_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Christopher Nolan",
@@ -617,6 +625,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
+            },
+            {
+              "source": "The New York Times via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPSDJLdVBDTFZZaWI2cU1udUsyeUt3SGlLa2hYcmxpLUxBSmstck8xRUhmRE1iNHFfV0VWdjlIUVlrYXlPYnI3MEpFbzRZUlQ5T1ZNMWJsYl9NdUF2V3pjVTdCRGE3MDhHZnBTRHJxSUNpLWtNVTJyZFZXS05zUjRKUXdWUXMtX1g3bGtr?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -626,7 +638,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya Maree Stoermer Coleman ( zen-DAY-ə; born September 1, 1996), known mononymously as Zendaya, is an American actress and singer-songwriter. Her accolades include two Primetime Emmy Awards and a Golden Globe.",
+          "description": "‘Spider-Man’ Cements Zendaya And Tom Holland As The 2026 Box Office's Highest-Grossing Couple. Zendaya’s English Wikipedia article drew 2.19M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -644,6 +656,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Zendaya"
+            },
+            {
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNMWNNODRaeVp1WWZNcW5VbmIyRHFRbkVUU2U5a0thR2MweTc3U05nRnlBSXNvQnhXdGptQjM5ZTNXNUlWaHpaN1lyLUdPQ2FvV2VMNjg4QXZsMDVHVkhnLXBqczRqTzVnMEpmRElmeHpVSHBrU0ZlVlJrSU5OdmRQVkNRLXVxRGJnWHJjTmtxR3d6d0tneU1rUE1EMFRaNmhfT1VlLXFpdXVBYmdEcktqeElLczZZWUd0cnptUl9Kcno?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -653,7 +669,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira Isabel Mebarak Ripoll ( shə-KEER-ə, Spanish: [ʃaˈkiɾa isaˈβel meβaˈɾak riˈpol]; born 2 February 1977), known mononymously as Shakira, is a Colombian singer-songwriter, dancer, and record producer. Referred to as the \"Queen of Latin Music\", she has had a significant impact on the musical landscape of Latin America and has been credited with popularizing Hispanophone music globally, contributing to…",
+          "description": "Justin Bieber Joins Madonna, BTS and Shakira for FIFA World Cup Final Halftime Show. Shakira’s English Wikipedia article drew 2.18M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -671,6 +687,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Shakira"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPZnJReW95N1JaZ3lfaDlVS0tPaU5QNVlnb3BhbjBXbFBCaTRBeUVuU3Y5Y2VYSWxrMC1YUU44V1hCb3FoSllFQktzb0JCX1o5MWw3WWR3U0ZJU2pKNXA0TEJOTG1KZUFZOFljOUItSUxGbmQwZVRVV0ExaEZqTjUwTFJVd2hOT2F1ZVlLLXRpMU92VUtxNTZHeDhwOEI2cE4xc2VR?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -682,7 +702,7 @@
           "rank": 6,
           "title": "Sonam Wangchuk",
           "subtitle": "Science & technology",
-          "description": "Sonam Wangchuk (born 1966) is an Indian engineer, educator, and activist. He is the founding director of the Students' Educational and Cultural Movement of Ladakh (SECMOL), which was founded in 1988 by a group of students who struggled with the public education system.",
+          "description": "Sonam Wangchuk: the 59-year-old who rallied India's Gen Z against Modi and won. Sonam Wangchuk’s English Wikipedia article drew 1.95M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-sonam-wangchuk.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Sonam_Wangchuk%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Sonam Wangchuk",
@@ -700,6 +720,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Sonam_Wangchuk"
+            },
+            {
+              "source": "Reuters via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeUVDaUptNmtKZkdtOXRZaEVjMmtmZHFlVGNxbDVpc0YwQV9VdU90WThfQmxWQ1BFRXdnU0VISnpaR0hlZjJGaTI3eUZ5eHhJUFh6Nk9NMTdNYklWYTd0Mk1uWGM0eHNwZkE0SG4zMEd3TW84bVNHWVRzWXBCV1k5N1lCNWlIVjczX3gxcmdROTBPNUdUY2daZkhENmFYQmhfNG82Y1VSZnBQdw?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -709,7 +733,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Alison Swift (born December 13, 1989) is an American singer-songwriter. One of the most influential figures in popular culture, Swift is known for her autobiographical songwriting and artistic reinventions.",
+          "description": "Taylor Swift Breaks Record for Most Adult Pop Airplay No. 1s With ‘I Knew It, I Knew You’. Taylor Swift’s English Wikipedia article drew 1.45M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -727,6 +751,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Taylor_Swift"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQckQtMExhV3VBZzJ1VGJFR3VBOTlCSXpPLVRyNmJ6cnZCRnBwUzBoZ0FPeVNZMnNfS2ZsQVQ3OE43N0dmZ1FRVDB0S2VxXy14YzB0RTBCWFdPTWxycDhGbHRWblU4di1sMExIR3gycGpoRzhrMXBBeE5MZzdrYnBOME5lNnJZTDhpNXNGdkJfV29iZFp6QUJLbHJLaFJOQnRob2dXMENqYjFUSnh1V1A5dU4zeUZadw?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -736,7 +764,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeffrey Preston Bezos ( BAY-zohss; né Jorgensen; born January 12, 1964) is an American businessman, and the founder, executive chairman, and former president and CEO of Amazon, the world's largest e-commerce and cloud computing company. According to the Bloomberg Billionaires Index and Forbes, he was the world's wealthiest person from 2017 to 2021, and in 2026 his net worth was approximately US$284 billion.",
+          "description": "Liverpool owners sell stake to Jeff Bezos-backed consortium. Jeff Bezos’s English Wikipedia article drew 1.27M views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -754,6 +782,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Jeff_Bezos"
+            },
+            {
+              "source": "ESPN via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNR2FyMzZEVFEtVk9WVVljYmxGUm54Z2w3YjY0NjlPclNuazZkTS1mRkozalF1VUNMX1lWSGFVUm9Za3RRLUVHVC10SHp6c0J0Yjk3dm5WX1FsS0J3ZEI5OTZjbnk2VUlnbG9KUmI1RGk0UTdhTWU4S2ZtYzB0ZDJhM1RsbklVM2R6OXFNS1NJUzJVR0U3VGZDejZGbE9mNmx0N0Y1UDh5TExfTHN3NERzZUkyOA?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -763,7 +795,7 @@
           "rank": 9,
           "title": "Andrew Tate",
           "subtitle": "Business",
-          "description": "Emory Andrew Tate III (born 1 December 1986) is an American and British social media personality and former professional kickboxer who built a webcam pornography business before gaining notoriety for promoting various highly controversial positions in the manosphere. His commentary has resulted in his expulsion from various social media platforms and concern that he promotes misogynistic views to his audience.",
+          "description": "Andrew and Tristan Tate to remain in jail until next extradition hearing. Andrew Tate’s English Wikipedia article drew 887K views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-andrew-tate.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Andrew Tate",
@@ -781,6 +813,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
+            },
+            {
+              "source": "The Guardian via Google News",
+              "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQOTBtVUhuWXpfdDFyMzEzLTJmQUpHRzBlRDVweExmZVp5RmljNXF3cHlLQTQ4Z1pBNkcwQVVFc1dsNmE3dkR3NU5ld1h3UjU0MFNOZFQ4M0pFX1VHZFhuYzIxcW9reHROc01GYUJfdTdqSkNndlhXaVhObzd2X000NXgwZzVqUm9nNzdKTnRxbGxYM1VmaFFqQXZR?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -790,7 +826,7 @@
           "rank": 10,
           "title": "Amelia Dimoldenberg",
           "subtitle": "Media",
-          "description": "Amelia Dimoldenberg ( dim-OHL-dən-burg; born 30 January 1994) is an English comedian, writer, and presenter. She is the creator and host of the web series Chicken Shop Date, in which she interviews celebrities in fried chicken restaurants while subjecting them to her sarcastic, deadpan, and awkward sense of humour.",
+          "description": "Amelia Dimoldenberg’s F1 Series ‘Passenger Princess’ Returning for Season 2 This Month. Amelia Dimoldenberg’s English Wikipedia article drew 653K views in July, placing it among the month’s most-read pages about living people.",
           "image": "/culture/person-amelia-dimoldenberg.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Amelia Dimoldenberg",
@@ -808,6 +844,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Amelia_Dimoldenberg"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPWWpxaDlENE51aUxLNVlqS2NQenVUQUZZR3pCYjlsLXZtT1ZaOWhVSGhTX1ViQlJLYWdHYzhuSHoyWTYwUjVvQ3hyOWZNbVBUNFFmU3FKY1JDWTB6d2RINFRaRWs2bkVPOXdieEF0UjZmN3M4MWtucVg4N2tzdkpoaldMeFp3UVQyS0lKWmlOUFhQZ2xDQ1poU3hqRXJwMGNLcWFmQkExdV80Q0lPZ2ZLcXd3?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -837,7 +877,7 @@
           "rank": 1,
           "title": "The Odyssey",
           "subtitle": "2026 film",
-          "description": "The Odyssey is a 2026 epic action fantasy film written and directed by Christopher Nolan, who produced it with his wife Emma Thomas. An adaptation of Homer's ancient Greek epic poem the Odyssey, it stars an ensemble cast including Matt Damon, Tom Holland, Anne Hathaway, Robert Pattinson, Lupita Nyong'o, Zendaya, and Charlize Theron.",
+          "description": "'The Odyssey' is the epic only Christopher Nolan could make — and thank Zeus he did. The Odyssey drew 13.3M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/media-odyssey.webp",
           "alt": "The Odyssey 2026 theatrical poster",
           "url": "https://www.imdb.com/title/tt33764258/",
@@ -855,6 +895,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
+            },
+            {
+              "source": "NPR via Google News",
+              "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNTVliNVB1RWktMy1PYndsN09aS3BpcUpPVWtRZW5DRmhiZjlTRDE3UHVKcTY3amhZWklPczBac3hFUWpYYmpHOXVqYm83emhaSi13LVNtd09RU2REY2tGdU1WWnA3QU1QMGc0VF9iVnRZN19DVTFqcURhM0NLWmxsdVoxV25mWEJ1M280SGQ3bnM?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -863,7 +907,7 @@
           "rank": 2,
           "title": "Obsession",
           "subtitle": "2025 film",
-          "description": "Obsession is a 2025 American supernatural horror film written, directed, and edited by Curry Barker. The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed.",
+          "description": "Box Office: ‘Obsession’ Surpasses $400 Million Globally. Obsession drew 4.4M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-obsession.webp",
           "alt": "Obsession poster or lead image",
           "url": "https://www.imdb.com/title/tt37287335/",
@@ -881,6 +925,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Obsession_(2025_film)"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNMnhyQ0lyY0sxSkU1cjVYaHE4RmhJV2c4enBCWnBFMzFVTU9XaWFkVTB3WUc4SjFMc1liQ3E5R1ZheXlzMmlqanBPMkg3ekVnd0VmbGtmNlNOWTU4N1BrbFQ1eVhHV3FMNDVEOGpTZ0xyam0wSHA1TndlNTlRaktGZEQ3WHZ2M1d4NkhiZFZiUjlDRE5GLXIxZ0pCWTR5Q1hfRjJ1Ni05WQ?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -889,7 +937,7 @@
           "rank": 3,
           "title": "Project Hail Mary",
           "subtitle": "2026 film",
-          "description": "Project Hail Mary is a 2026 science fiction film produced and directed by Phil Lord and Christopher Miller and written by Drew Goddard, based on the 2021 novel Project Hail Mary by Andy Weir. It stars Ryan Gosling, who also produced the film, as Ryland Grace; Sandra Hüller, James Ortiz, and Lionel Boyce play supporting roles.",
+          "description": "‘Project Hail Mary’ and More Science Fiction Movies to Stream Now. Project Hail Mary drew 1.96M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-project-hail-mary.webp",
           "alt": "Project Hail Mary poster or lead image",
           "url": "https://www.imdb.com/title/tt12042730/",
@@ -907,6 +955,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Project_Hail_Mary_(film)"
+            },
+            {
+              "source": "The New York Times via Google News",
+              "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNR1gwZDdha19DZUctZVRCQWxMMGlKUURxeG8wMUJyajF6M2hjbUw5d2dBQzBtdU1HMlVoS0wxcFRmTkFPcG9sZmRnUmVydXIyMkR2b1ZHNkNja05NMGpQeXE5ZFlRdU5RVWc5NlpjbkhuS1hJcTZ4bS1UdjRVQlJlem5vd1ZuQQ?oc=5"
             }
           ],
           "accent": "#57d5a4"
@@ -915,7 +967,7 @@
           "rank": 4,
           "title": "Backrooms",
           "subtitle": "2026 film",
-          "description": "Backrooms is a 2026 American science fiction psychological horror film directed and co-scored by Kane Parsons (in his feature directorial debut), and written by Will Soodik. It is based on Parsons's web series which was inspired by the \"Backrooms\" creepypasta.",
+          "description": "‘Backrooms’ Is Now Streaming: Where to Watch A24’s Box Office Hit at Home. Backrooms drew 1.73M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-backrooms.webp",
           "alt": "Backrooms poster or lead image",
           "url": "https://www.imdb.com/title/tt26657236/",
@@ -933,6 +985,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Backrooms_(film)"
+            },
+            {
+              "source": "The Hollywood Reporter via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPeExPYXNNX1FjZ0NwWF9sS0hCbTVCSkZhSlRJYmFSdjJMWDVrOWJzd0w1UzkyVHVBYUVhSHNoVk9RZ0I3eFdONXYtay1vUjdlUjhCUk5wemxFYk9xcEg3N290MHo0NnNnbUFqUzhXdm9aSFRzQ09ZSXVxeTl3Vk5tYzdielE4bTJHQ2NUSmQxQ0JIRFdUWU5GUWNUdGxoOHVQRXBBMHlZMUM0X2g0SWc2YnczMVBVX242emItRXdXeG8?oc=5"
             }
           ],
           "accent": "#5ab0ff"
@@ -941,7 +997,7 @@
           "rank": 5,
           "title": "Alpha",
           "subtitle": "Movie",
-          "description": "Alpha is a 2026 Indian Hindi-language action thriller film directed by Shiv Rawail, in his feature film debut, and produced by Aditya Chopra under Yash Raj Films. Written by Soumil Shukla, Shridhar Raghavan, Ishita Moitra and Uday Chopra, it is the seventh installment in the YRF Spy Universe and the first female-led film in the universe, starring Alia Bhatt, Sharvari, Anil Kapoor and Bobby Deol.",
+          "description": "‘Alpha Gang’ First Look: Cate Blanchett’s Alien Sci-Fi, Mahershala Ali Thriller & More Join TIFF 2026. Alpha drew 1.51M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-alpha.webp",
           "alt": "Alpha poster or lead image",
           "url": "https://www.imdb.com/title/tt28363783/",
@@ -959,6 +1015,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Alpha_(2026_film)"
+            },
+            {
+              "source": "theplaylist.net via Google News",
+              "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOZmZsSmxvdHlhQkhxdElUMmtLR1MtWFdTZjVkZEhNSGxXZHhVRjhXXzJkUXFLNU5fLWM0RENHaV9SckJvNVZWN1F1Sl9hc0ZETlRUT0p4MWZvWWM5NlB5aXJQcGRYR19wN0czV0VxNnVjeDdFSnZtMkdRTHhUWTJhYkk3NHkwVjV5SFV4M3BhRG0?oc=5"
             }
           ],
           "accent": "#ff6b57"
@@ -969,7 +1029,7 @@
           "rank": 6,
           "title": "Supergirl",
           "subtitle": "2026 film",
-          "description": "Supergirl is a 2026 American superhero film based on the DC Comics superheroine Kara Zor-El / Supergirl. Directed by Craig Gillespie and written by Ana Nogueira, it is the second film in the DC Universe (DCU).",
+          "description": "Discover the film locations for Supergirl (2026), around the Cairngorms in the Scottish Highlands and in Iceland. Supergirl drew 1.36M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-supergirl.webp",
           "alt": "Supergirl poster or lead image",
           "url": "https://www.imdb.com/title/tt8814476/",
@@ -987,6 +1047,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Supergirl_(2026_film)"
+            },
+            {
+              "source": "The Worldwide Guide To Movie Locations via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1USUEwakZRMEFZQ09IMEw1eFVfdVBtRUhDZ3dJaWhlNlUtelFfQ1B4OXN2UVhTY0V5SzJpSmNJNXB3UFVlZE1UZ3hwVmJ5ZVk3bzRkVXE3aWxkREhEQVpHWVdvMFV0Zw?oc=5"
             }
           ],
           "accent": "#ffc857"
@@ -995,7 +1059,7 @@
           "rank": 7,
           "title": "Jana Nayagan",
           "subtitle": "Movie",
-          "description": "Jana Nayagan (Tamil pronunciation: [dʑanaː n̪aːjagan]; transl. People's Hero) is a 2026 Indian Tamil-language action drama film directed by H. Vinoth and produced by Venkat K. Narayana under KVN Productions. The film stars C. Joseph Vijay, Bobby Deol, Pooja Hegde, and Mamitha Baiju in the lead role alongside Nassar, Prakash Raj, Gautham Vasudev Menon, Narain, and Priyamani.",
+          "description": "‘The Odyssey’ Holds Top Spot as Vijay’s ‘Jana Nayagan’ Bows at No. 5 at U.K. and Ireland Box Office. Jana Nayagan drew 1.34M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-jana-nayagan.webp",
           "alt": "Jana Nayagan poster or lead image",
           "url": "https://www.imdb.com/title/tt33379543/",
@@ -1013,6 +1077,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Jana_Nayagan"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPTF9aaUtGd083dnhCNlF1R2lzZHZiTjFXR2FKZk1ORUtvWE1JY1Z6VFQ4c01DOTBmMV9NcWlLaTRpLURYSFpnSk9NcXF6dXUzdTdZVGJxc1ZWNHhqdjBabXdJZUJEY1U4TXphZHlwaWw2TjhjTDlNd0kyb0R2OTRGNGhaWGY5VVlWanlsdEZrdXgzeXc3N3BGcGxEbFo5WnRCT01UYllENjU?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -1021,7 +1089,7 @@
           "rank": 8,
           "title": "Evil Dead Burn",
           "subtitle": "2026 film",
-          "description": "Evil Dead Burn is a 2026 American supernatural horror film written and directed by Sébastien Vaniček, who co-wrote it with Florent Bernard, and produced by Rob Tapert and series creator Sam Raimi. It serves as a sequel to Evil Dead Rise (2023) and is the sixth installment in the Evil Dead film series.",
+          "description": "'Evil Dead Burn' Review: The Deadites Are More Vicious Than Ever. Evil Dead Burn drew 1.28M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/media-evil-dead-burn.webp",
           "alt": "Evil Dead Burn theatrical poster",
           "url": "https://www.imdb.com/title/tt31170389/",
@@ -1039,6 +1107,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Evil_Dead_Burn"
+            },
+            {
+              "source": "The Hollywood Reporter via Google News",
+              "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOaVhIcTJfY1daM01wWVZBTmZBZmhteVR0eF9JenBGM0lwbE1ZdU40UDFXWi1uV3pLM1NFNWZUS2hOcUtQQ2dRZm81bEdvSWVRN05ablFrSk1nRHVscktOaWh1TDE1cUtnaUVQNDcwamZncFV3RUdBc3R5S2ZRWVNxUmY2ZEt2MWZpRTRKUlR4MjZ4Zw?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -1047,7 +1119,7 @@
           "rank": 9,
           "title": "Masters of the Universe",
           "subtitle": "2026 film",
-          "description": "Masters of the Universe (also known as He-Man and the Masters of the Universe in some territories) is a 2026 American sword-and-sorcery film based on the media franchise by Mattel. It is the second live-action film adaptation after the 1987 film.",
+          "description": "‘Masters of the Universe’ Sets Prime Video Streaming Release Date. Masters of the Universe drew 1.26M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/movie-masters-of-the-universe.webp",
           "alt": "Masters of the Universe poster or lead image",
           "url": "https://www.imdb.com/title/tt0427340/",
@@ -1065,6 +1137,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Masters_of_the_Universe_(2026_film)"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQV3BQMld2dmtpRW5Jem5laXpyTUJyWnBsb0ZJdkdsRlhlNVg2WmlKTjJ1Rkh4Qk9MVVVDQW5TX0l2QlBGblRuYkthZTNyd3ppNUZXd1FiTC1KbGN1U0hMR2RKU3VVQVZvMVczOWhDX3JENV9oWE4xSU5scGFDclZ4Zk9IWlJNZ2RpZE90M2Foc1RJd3FaamdLTUxoMDl4ei1YMjhrTnItM0c?oc=5"
             }
           ],
           "accent": "#5ab0ff"
@@ -1073,7 +1149,7 @@
           "rank": 10,
           "title": "Toy Story 5",
           "subtitle": "2026 film",
-          "description": "Toy Story 5 is a 2026 American animated comedy-drama film produced by Pixar Animation Studios for Walt Disney Pictures. Directed by Andrew Stanton and written by Stanton and Kenna Harris, it is the fifth main installment in the Toy Story film series and the sequel to Toy Story 4 (2019).",
+          "description": "Box Office: ‘Toy Story 5’ Crosses $1 Billion, Becomes Highest-Grossing Movie of the Year. Toy Story 5 drew 1.14M English Wikipedia views in July, making it one of the month’s most-read movie pages.",
           "image": "/culture/media-toy-story.webp",
           "alt": "Toy Story 5 theatrical poster",
           "url": "https://www.imdb.com/title/tt29355505/",
@@ -1091,6 +1167,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Toy_Story_5"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPQVNoUHRQWGF3U0dxb1R6M1p6OGstVWFkQ2szQnVtd1ROSHpVRS1rYmxTb1NraWpGdWpwZ0xWRG9fWFRPRWFva1JLdzBZTWF4bWRJRGVBZzBjREVTeFF6d3V2TjVPN3Mwa0hUUHpwRElaZnRrZHdBR1hKTnVEN09yTE1ZcmViLW5RXzBYSll0SUpqVElo?oc=5"
             }
           ],
           "accent": "#ffc857"
@@ -1119,7 +1199,7 @@
           "rank": 1,
           "title": "Choosin' Texas",
           "subtitle": "Ella Langley",
-          "description": "Choosin' Texas is #7 in Spotify’s current Today’s Top Hits playlist and #1 on the current Billboard Hot 100.",
+          "description": "Ella Langley’s ‘Choosin’ Texas’ Is Now The Fourth-Longest Reigning No. 1 Hit Of All Time. The track is #1 on the current Billboard Hot 100 after appearing at #7 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-choosin-texas-ella-langley.webp",
           "alt": "Choosin' Texas artwork by Ella Langley",
           "url": "https://open.spotify.com/track/65DbTqJKhbwqYbZ1Okr0rc",
@@ -1136,6 +1216,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOU3VWcUVkcEF0Q0VRanpBaUJ4ZVFzSVdlN0pSWUFsVHFhU1lJTGh1X2RYMm5pengyMVhJQ0F2MTRaQ3Rmb2wwWFVjVW9Tb2d6VF9kclo1ZlN1WEhnQ1BLRVdQVkVwNkpRdFNMSXRONGUxMk1nVTRLSERBUmY3NUVhSXRiQjJ0SW91WUZtbm14T0RtcWtVRmNOSms5THpubFh0SW1mb0pkUjVTN3FqUFA5ekZabGxMN2lLTzl4Sl85b2pSZDhNaWNQLWp1UXBnWk1oYkxMSg?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -1146,7 +1230,7 @@
           "rank": 2,
           "title": "hate that i made you love me",
           "subtitle": "Ariana Grande",
-          "description": "hate that i made you love me is #11 in Spotify’s current Today’s Top Hits playlist and #2 on the current Billboard Hot 100.",
+          "description": "Ariana Grande Has Half of the Billboard Global 200’s Top 10, Led by ‘Hate That I Made You Love Me’ at No. 1. The track is #2 on the current Billboard Hot 100 after appearing at #11 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-hate-that-i-made-you-love-me-ariana-grande.webp",
           "alt": "hate that i made you love me artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/20jbSiX29FDX4oQxBXyUEi",
@@ -1163,6 +1247,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPQVluaEFVZUNaZXo2UElGZDRYY2s4c25kSDFoaWJNNlZORHowaFNVNXlWU09tb3R3WjZlRmFkN2xwSHo5eFF6MVRKeHdKRzdITnBnNFZOYXZEWEtOMmhqanJzalZLUE82bGJLeTUxWjNzRy1fb2lLWVYxbjMtRkZoYk1vRUV4aDRqN1BPQmxtUUxPZV9XanJOUjNWYm9SSV9WcjYwRm5WaW05aGM?oc=5"
             }
           ],
           "accent": "#9b8cff",
@@ -1173,7 +1261,7 @@
           "rank": 3,
           "title": "petal",
           "subtitle": "Ariana Grande",
-          "description": "petal is #4 in Spotify’s current Today’s Top Hits playlist and #4 on the current Billboard Hot 100.",
+          "description": "Ariana Grande’s ‘Petal’ Introduces an Angry and Angular Ari: Album Review. The track is #4 on the current Billboard Hot 100 after appearing at #4 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-petal-ariana-grande.webp",
           "alt": "petal artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
@@ -1190,6 +1278,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOUHhsMlpUTHpoRl9FNHQzXzN5YUJnYmlkN2YyeTFaY0ExOU5RcTdNWUV4YlEyRUZiVk9qWTJnajZFYkRZRnI0MnN4TXoyT1BfckdjaDFxZWJRbDdnT1NrZlY1anY5YUp1dXdyQ18tV2g0SnBjRUNGUFBsendiRGd3M0NNcFVvMG5rY1VZekRCZ2NVbENOSGhlUA?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -1200,7 +1292,7 @@
           "rank": 4,
           "title": "Man I Need",
           "subtitle": "Olivia Dean",
-          "description": "Man I Need is #8 in Spotify’s current Today’s Top Hits playlist and #11 on the current Billboard Hot 100.",
+          "description": "Olivia Dean’s ‘Man I Need’ Gets Pause Treatment. The track is #11 on the current Billboard Hot 100 after appearing at #8 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-man-i-need-olivia-dean.webp",
           "alt": "Man I Need artwork by Olivia Dean",
           "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
@@ -1217,6 +1309,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "uDiscoverMusic via Google News",
+              "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5ZNVhxYXBYeWRiQ2M5Y0tHLXU0SW11cHBoS0lIWHVtVHNpSEhNSGNjRzlsS01pYzNEN09xaGt6YV9yeXpVcXdlLV9RRk1feEZUUDNYYmxxdzNTYmdFNTZxRTQtSzdRRnBEOTV6S3FsN1RCdFk2bG9ERg?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -1227,7 +1323,7 @@
           "rank": 5,
           "title": "stupid song",
           "subtitle": "Olivia Rodrigo",
-          "description": "stupid song is #2 in Spotify’s current Today’s Top Hits playlist and #16 on the current Billboard Hot 100.",
+          "description": "Olivia Rodrigo Reveals Favorite Song She Wrote Off New Album. The track is #16 on the current Billboard Hot 100 after appearing at #2 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
           "alt": "stupid song artwork by Olivia Rodrigo",
           "url": "https://open.spotify.com/track/4LfCY65LvojKjWEnU7fNN4",
@@ -1244,6 +1340,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE13Y1Z1dzh5U2VpR0dlSGxoOUNJSHQ2N2w0NzFUNDZwTzFZTjlmTGt4QUFmVXpnRjhYMkhyVFY4Vmg4d2dHSnE5cF9ncC1kaDNqT2tGNFdWRWRUU1c5NjJxVWVn?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -1256,7 +1356,7 @@
           "rank": 6,
           "title": "Earrings",
           "subtitle": "Malcolm Todd",
-          "description": "Earrings is #3 in Spotify’s current Today’s Top Hits playlist and #28 on the current Billboard Hot 100.",
+          "description": "Family affair: how pop-star siblings Audrey Hobert and Malcolm Todd stormed the charts in parallel. The track is #28 on the current Billboard Hot 100 after appearing at #3 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-earrings-malcolm-todd.webp",
           "alt": "Earrings artwork by Malcolm Todd",
           "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
@@ -1273,6 +1373,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "The Guardian via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPOGc4XzU5NWV6VDV0OUY1SE5PYW4zcUEwa2dLSjRJejV4anEtQTZLUlJkQVFZMTlLQk5sRlJyYkp2a3FZcjBvQ1B1bjRCVjNmN2dUWHkzQ2twVTNQV0JQZkhYSjA1czlSTkFuMkZnZmRFVTRUZVB1LTVrUWtKM25rbXNYQ3cxUnBHWl9pUXA2YU1GNmRGWHQ5YW1MbTJBdlpreXRZSWxaZjhTTzJSQXZzblBkejdQOXF5a0hvOWVKcURpNEtwWWJILXA2ajJ0RHhjYm1NMmVERUFDNmM?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -1283,7 +1387,7 @@
           "rank": 7,
           "title": "Babydoll",
           "subtitle": "Dominic Fike",
-          "description": "Babydoll is #6 in Spotify’s current Today’s Top Hits playlist and #29 on the current Billboard Hot 100.",
+          "description": "Dominic Fike Misses His First No. 1 As A K-Pop Superstar Blocks Him. The track is #29 on the current Billboard Hot 100 after appearing at #6 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-babydoll-dominic-fike.webp",
           "alt": "Babydoll artwork by Dominic Fike",
           "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
@@ -1300,6 +1404,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWHF5enZzY3hLOWFVWE02OF83SGctMThLWWFXR1NuQ0FaTS1NTktTY0dPVzRNQ3g2eU5odmF6VVZuWW04WVlnR1ZfN1IzVkhTQXhjeHdtUEc3dzNDRC14OGRTOVlpR0FDSXFGNTdOYTkwTzZYZTYxWUFwZkxSV0dobzdBbF9GbFBGMlVKTzJGMXJ6Y2tEMDBBbmVwcWVlU25UTWxQSVBjREZ3VS1BcVU1LTJQZ3pQbC1MSXFIUA?oc=5"
             }
           ],
           "accent": "#9b8cff",
@@ -1310,7 +1418,7 @@
           "rank": 8,
           "title": "Animal",
           "subtitle": "KATSEYE",
-          "description": "Animal is #1 in Spotify’s current Today’s Top Hits playlist and #35 on the current Billboard Hot 100.",
+          "description": "Ed Sheeran Reveals KATSEYE’s ‘Gnarly’ Inspired Him to Reach Out & Write ‘Animal’. The track is #35 on the current Billboard Hot 100 after appearing at #1 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-animal-katseye.webp",
           "alt": "Animal artwork by KATSEYE",
           "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
@@ -1327,6 +1435,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNcUNYcWtxQXZ5OUN6azdDTnMtNnloUFVOMks4NmM0RS1VRjNfdFEyVmJhbl9pb0JscEtrTW9lU2ZWRTZIY1F2R3h1R1VXRFRqS1I5YWpWeHkxTmcxaDFaTlJHandKSEJxUUpaS21qTVNLY0ZVY3VEOTFvM3BfbHVfN00weGNxeDNyTGNz?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -1337,7 +1449,7 @@
           "rank": 9,
           "title": "Loser",
           "subtitle": "Tame Impala",
-          "description": "Loser is #9 in Spotify’s current Today’s Top Hits playlist and #46 on the current Billboard Hot 100.",
+          "description": "Tame Impala’s ‘Loser’ Lands on ARIA Chart Following ‘Spider-Man’ Sync. The track is #46 on the current Billboard Hot 100 after appearing at #9 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-loser-tame-impala.webp",
           "alt": "Loser artwork by Tame Impala",
           "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
@@ -1354,6 +1466,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMEVWeHVrVjNmYUZGX250bThydmFpMUd4ZDdVTndlMDNHdU9uYTc1ZVQtVGd3T1JEQkRVZktOdFFTQmFkUzFhYU5Pb2Y3WGZVRHN6VUNNS2FTZ3R5XzlpdWZpZmtnaHAzS1VaSjVFV1A0WE5zWHZ5ZmpWSFUwQ0o0TjdRSC1IWlFyLTFzbTQtTHM3UTNsRHFNaGJ6NURoSG1zb0E?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -1364,7 +1480,7 @@
           "rank": 10,
           "title": "Self Aware",
           "subtitle": "Temper City",
-          "description": "Self Aware is #10 in Spotify’s current Today’s Top Hits playlist and #47 on the current Billboard Hot 100.",
+          "description": "Temper City's 'Self Aware' Goes No. 1 on Alternative Airplay Chart. The track is #47 on the current Billboard Hot 100 after appearing at #10 in Spotify’s Today’s Top Hits.",
           "image": "/culture/song-self-aware-temper-city.webp",
           "alt": "Self Aware artwork by Temper City",
           "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
@@ -1381,6 +1497,10 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZWQwcm14NkQxcmxsdm82Wk80bEs0QlBERjgtQU9ibVpOTU5VZFNhakZTMmlOcGdtQnFYaWFyYkVuUUU4clY5c1Z6amp0LTc0bTZjeVlYWl8tSXdjY1JXa1hmX3NoNkxnMlJqdmZIX0txaWxCRkhUbERMLXlwcWVyVWdvNmpzQ3o4dHl0MjhsS3dUZ3JNYmdrdG1Ca3FmNVFjb3EwbTNsdHJKR2x3REFhSEVB?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -1411,7 +1531,7 @@
           "rank": 1,
           "title": "Rechargeable Laptop Battery",
           "subtitle": "Product · Amazon match",
-          "description": "NOBIS Portable Charger 45W 20000mAh Power Bank Fast Charging | 2C+2A Battery Pack with C to C Cable, Battery Bank with Digital Display for iPhone Android Laptop etc",
+          "description": "U.S. Google Shopping interest in “rechargeable laptop battery” rose +450% this week, ranking it #4 among Rising searches with a matching Amazon product.",
           "image": "/culture/product-rechargeable-laptop-battery.webp",
           "imageSource": "https://m.media-amazon.com/images/I/61gijWn1ygL._AC_UY218_.jpg",
           "alt": "Rechargeable Laptop Battery product listing image",
@@ -1437,7 +1557,7 @@
           "rank": 2,
           "title": "Electric Shock Gloves",
           "subtitle": "Product · Amazon match",
-          "description": "DongChu Insulated Electrician Gloves 1000V Coated Work Gloves for Electrical Maintenance, Non-slip Prevent Shock, Home Repair, Outlet Replacement, DIY Projects, Large",
+          "description": "ICE's plan to give officers electric shock gloves draws outrage and fears of misuse. U.S. Google Shopping interest in “electric shock gloves” rose +250% this week, ranking it #6 among Rising searches with a matching Amazon product.",
           "image": "/culture/product-electric-shock-gloves.webp",
           "imageSource": "https://m.media-amazon.com/images/I/7179jynLTKL._AC_UL320_.jpg",
           "alt": "Electric Shock Gloves product listing image",
@@ -1455,6 +1575,10 @@
             {
               "source": "Amazon listing",
               "url": "https://www.amazon.com/dp/B0F6CLTH41"
+            },
+            {
+              "source": "PBS via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNS1lsclpYS2ZaLWM2OF9KUW9Ra3V6Y1o5Ny1ybTZrNTZJdEZ2N0p5cGJPUk9VWDdtalZFcWJpbDFxWnhnWENpUkxTOVFSdXY3NUlIVnFGNGNhUWhXVml1Q3Y3ZnpTWTBxQkxLNEpJSDZESmJYZXVqV1VScWxHenVxS3VsRWplZGIzWW5FaVlLUjJCSFVoNGhSYUNtODNUdVFNLV9XdXZXSjV1RV94c1lkWTJuVWNEMjB5MFE?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -1463,7 +1587,7 @@
           "rank": 3,
           "title": "Alani Potion Pack",
           "subtitle": "Product · Amazon match",
-          "description": "Witch's Brew Sugar Free Energy Drink (Pack of 12)",
+          "description": "U.S. Google Shopping interest in “alani potion pack” rose +190% this week, ranking it #7 among Rising searches with a matching Amazon product.",
           "image": "/culture/product-alani-potion-pack.webp",
           "imageSource": "https://m.media-amazon.com/images/I/81q-7p+ikoL._AC_UL320_.jpg",
           "alt": "Alani Potion Pack product listing image",
@@ -1489,7 +1613,7 @@
           "rank": 4,
           "title": "Madden 27",
           "subtitle": "Product · Amazon match",
-          "description": "EA Sports Madden NFL 27 - Standard Edition PS5 |Disc I VideoGame",
+          "description": "Madden 27 Global Release Date: When Can You Start Playing? U.S. Google Shopping interest in “madden 27” rose +130% this week, ranking it #9 among Rising searches with a matching Amazon product.",
           "image": "/culture/product-madden-27.webp",
           "imageSource": "https://m.media-amazon.com/images/I/61i4mpAfgRL._AC_UY218_.jpg",
           "alt": "Madden 27 product listing image",
@@ -1507,6 +1631,10 @@
             {
               "source": "Amazon listing",
               "url": "https://www.amazon.com/dp/B0H2K3RD7C"
+            },
+            {
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZ1plY0JYVjd2MkJTMFh3bTV0dDRvYjUzZS0xdmV6TUhVWnBneWpiUkxYOVNFSmE4MkozeUxGbW5GcHVnUkZ0QmNKSHNzUERSN1JDSmxOcE5nNkJtSktGdUhqUlFGQjZLaUpqMVREcWpkTTlXd0NmYUxuZ1IwT3ZaTEtmWUVjaHRka0Z5ei1ocThiNnIxVm55VjhVN01GblJWeV9XN2NSMGNsdlFoMzU0?oc=5"
             }
           ],
           "accent": "#5ab0ff"
@@ -1515,7 +1643,7 @@
           "rank": 5,
           "title": "MacBook",
           "subtitle": "Product · Amazon match",
-          "description": "2026 MacBook Air 13-inch Laptop with M5 chip: Built for AI, 13.6-inch Liquid Retina Display, 16GB Unified Memory, 512GB SSD, 12MP Center Stage Camera, Touch ID, Wi-Fi 7; Midnight",
+          "description": "Is The MacBook Pro M5 Still Worth Buying After The Price Hike? U.S. Google Shopping interest in “macbook” rose +50% this week, ranking it #12 among Rising searches with a matching Amazon product.",
           "image": "/culture/product-macbook.webp",
           "imageSource": "https://m.media-amazon.com/images/I/71pkfQGcMKL._AC_UY218_.jpg",
           "alt": "MacBook product listing image",
@@ -1533,6 +1661,10 @@
             {
               "source": "Amazon listing",
               "url": "https://www.amazon.com/dp/B0GR1JTFP8"
+            },
+            {
+              "source": "Engadget via Google News",
+              "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOTW5zWFFxTlNGMTVuNjQyVDR2Qzh1ZnBqazlqNmRaOUpGZXprMFE1RHNycXVzX0pzUnZIamJaVVJhbE1pbnYtZkhhWFNENkoxNTlIQlZGQ203Y0ZoX1NOeUdQRGtwVENQNG8xUGRWa0hZX2hjU0lxMXJHYmp0VmstajJRVmd0LVU?oc=5"
             }
           ],
           "accent": "#ff6b57"
@@ -1543,7 +1675,7 @@
           "rank": 6,
           "title": "Switch 2",
           "subtitle": "Product · Amazon match",
-          "description": "Nintendo Switch 2 System is the Amazon match for the rising “switch 2” shopping query.",
+          "description": "Switch 2 Customers Have No Right to U.S. Tariff Refunds, Nintendo Argues, as They 'Received Exactly What They Bargained and Paid For'. U.S. Google Shopping interest in “switch 2” rose +40% this week, ranking it #15 among Rising searches with a matching Amazon product.",
           "image": "/culture/product-switch-2.webp",
           "imageSource": "https://m.media-amazon.com/images/I/714-Fh3ngmL._AC_UY218_.jpg",
           "alt": "Switch 2 product listing image",
@@ -1561,6 +1693,10 @@
             {
               "source": "Amazon listing",
               "url": "https://www.amazon.com/dp/B0F3GWXLTS"
+            },
+            {
+              "source": "IGN via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNcEpCQnR3RVd3c0tOWFd4YWVSdFZwZE1NWUkyQjltVG40MTQ3ZTlUb0RrWExfT3kxSjA4X25yQi1oT0toYnQ1a3Q0RnY2OVprVE9CSkpFTUd6RDdyTDg2YmpLLTNmcTFCbDBfX242QmFJUlVQeE04MVlYenRwS3M1YjNjS1NpZXgyZlpzRmVIUHpuWkRhR3JZTmw4NFAtNzMwNFN5M1FvVHFDNzBiYUpadG5CTU1iRDRSc1p6VF9Oc21CS0EtekMweC00R2xZTDZlajNGVVMydDRMT1g0V2dFQ2pPaGMwaHlSSDA3RA?oc=5"
             }
           ],
           "accent": "#ffc857"
@@ -1580,7 +1716,7 @@
         },
         {
           "label": "Google News · current coverage",
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPWHJRcURURXlZbXZUVGUwczZYWnBoSGs1SGZEdFRHVEw5NTU0alRoTElPQkd6bnMwMkUzUzQ5emVFMlhYMlNTaWhzUVBfM3pFV1lWV1otV0lLQ2E1ZnZMWG1yYVZSVlJzTGRHdmpIQ3ZiSWF2dDRTYVRhZHdCRXVQcWdrNGt2UnlLbDBTWjY5dWtyMXBLaU95YVp0RUdUQzlibVdjNktLNmZIaUxpSVg2LWFlV1VKUjJPQXlQV1VpcU10R2Y2ZzlpUWtaWW9lcTJ5ZGZDWQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSDBScmFyM1g0SmsxdHVXaG1sendZUWhYalk0TzFLVXBTS1lEUndwQ2JhbGFvSUFNT1V2TC1DcElyR3NwY2gxUF9rYTdfTU12NElXdlZwRzNDTk9EV2tFZ002dklUbDI0VDFvRmZxWkF1R0x1Z1NUaXdETkpFaFNuS1REdHVYbTR1djRyWVRPZVB4MmNaTjhUZTJLUUJTU0hOUWFoTDB2ZmE4bXlLVW9YdjBZcGtwX205czdNOVp2aG9QMU9fSFJYbm51WXh1dw?oc=5"
         }
       ],
       "layout": "landscape",
@@ -1588,14 +1724,15 @@
         {
           "rank": 1,
           "title": "Rebel Creamery Ice Cream Lawsuit",
-          "subtitle": "News topic · past 7 days",
-          "description": "The mistake that helped cost Rebel Creamery $23.8 million and pushed it into bankruptcy",
+          "subtitle": "News · Aug 16, 2026",
+          "description": "Ice cream maker Rebel Creamery files for bankruptcy after being ordered to pay $23.8M in packaging battle. The topic registered 500K+ U.S. Google searches in the current seven-day source window, placing it #1 on this news leaderboard.",
           "image": "/culture/news-rebel-creamery-ice-cream-lawsuit.webp",
-          "alt": "Visual summary card for Rebel Creamery Ice Cream Lawsuit",
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPWHJRcURURXlZbXZUVGUwczZYWnBoSGs1SGZEdFRHVEw5NTU0alRoTElPQkd6bnMwMkUzUzQ5emVFMlhYMlNTaWhzUVBfM3pFV1lWV1otV0lLQ2E1ZnZMWG1yYVZSVlJzTGRHdmpIQ3ZiSWF2dDRTYVRhZHdCRXVQcWdrNGt2UnlLbDBTWjY5dWtyMXBLaU95YVp0RUdUQzlibVdjNktLNmZIaUxpSVg2LWFlV1VKUjJPQXlQV1VpcU10R2Y2ZzlpUWtaWW9lcTJ5ZGZDWQ?oc=5",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ice_cream_with_whipped_cream%2C_chocolate_syrup%2C_and_a_wafer_%28cropped%29.jpg/1280px-Ice_cream_with_whipped_cream%2C_chocolate_syrup%2C_and_a_wafer_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Ice cream, representing Rebel Creamery Ice Cream Lawsuit",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSDBScmFyM1g0SmsxdHVXaG1sendZUWhYalk0TzFLVXBTS1lEUndwQ2JhbGFvSUFNT1V2TC1DcElyR3NwY2gxUF9rYTdfTU12NElXdlZwRzNDTk9EV2tFZ002dklUbDI0VDFvRmZxWkF1R0x1Z1NUaXdETkpFaFNuS1REdHVYbTR1djRyWVRPZVB4MmNaTjhUZTJLUUJTU0hOUWFoTDB2ZmE4bXlLVW9YdjBZcGtwX205czdNOVp2aG9QMU9fSFJYbm51WXh1dw?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "500K+"
           },
           "evidence": [
@@ -1604,8 +1741,12 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+ice+cream+lawsuit"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPWHJRcURURXlZbXZUVGUwczZYWnBoSGs1SGZEdFRHVEw5NTU0alRoTElPQkd6bnMwMkUzUzQ5emVFMlhYMlNTaWhzUVBfM3pFV1lWV1otV0lLQ2E1ZnZMWG1yYVZSVlJzTGRHdmpIQ3ZiSWF2dDRTYVRhZHdCRXVQcWdrNGt2UnlLbDBTWjY5dWtyMXBLaU95YVp0RUdUQzlibVdjNktLNmZIaUxpSVg2LWFlV1VKUjJPQXlQV1VpcU10R2Y2ZzlpUWtaWW9lcTJ5ZGZDWQ?oc=5"
+              "source": "New York Post via Google News",
+              "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSDBScmFyM1g0SmsxdHVXaG1sendZUWhYalk0TzFLVXBTS1lEUndwQ2JhbGFvSUFNT1V2TC1DcElyR3NwY2gxUF9rYTdfTU12NElXdlZwRzNDTk9EV2tFZ002dklUbDI0VDFvRmZxWkF1R0x1Z1NUaXdETkpFaFNuS1REdHVYbTR1djRyWVRPZVB4MmNaTjhUZTJLUUJTU0hOUWFoTDB2ZmE4bXlLVW9YdjBZcGtwX205czdNOVp2aG9QMU9fSFJYbm51WXh1dw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/Ice_cream"
             }
           ],
           "accent": "#ffc857"
@@ -1613,14 +1754,15 @@
         {
           "rank": 2,
           "title": "Hawaii Hurricane",
-          "subtitle": "News topic · past 7 days",
-          "description": "Tropical Storm Lala is lashing Hawaii high winds, heavy rain",
+          "subtitle": "News · Aug 16, 2026",
+          "description": "Hurricane Lala weakens to a tropical storm, but flooding persists in Hawaii. The topic registered 500K+ U.S. Google searches in the current seven-day source window, placing it #2 on this news leaderboard.",
           "image": "/culture/news-hawaii-hurricane.webp",
-          "alt": "Visual summary card for Hawaii Hurricane",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOYmo4TU5EX1hkdU90NnNEWEd2amhDX0x6VHpRX01CSHd1SG9jd2xGdm1mZXhhTmZjeEF0OU45aERGZkNBVHNKZ3pvWUFBSGpwd3Zkc0xXOUFvRHNWZ05EZDlPdWwxZDFHLWd4VlN0eXFySTZQZS1vZjRSVzN2djB2WE5GbkVvQ0pFYzkzNU5Xck90WjI4TTEyYw?oc=5",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Hawaii_hurricane_tracks.png/1280px-Hawaii_hurricane_tracks.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Hawaii hurricane tracks.png, representing Hawaii Hurricane",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMW1xU1o5QWFSNWhmUTVrTkttQXdnejk4aDlnUHluWVYwZ2NzeS1IcWZFWE1TN0FXdUhTdzJheFJRSzZCaHdvWWZfMzdTTHVxajJDRlZ2THVTUlRNZDItWFBFR0Z2VlZ2MW9qcFV4d3hfdVZWcG9BcVlqZzgzbEZJa3p1ODhudC1ZSnZxQUhmRkZBNWNRYWRuaTlyd3I4RnRzakNwZE1oYWVFbFRrZFZyVTlwTWhUUdIBuwFBVV95cUxPYlFrSlhwRGNXajl1enpnNHoxLUsxRl9DNlVGS2tmRVFxenE5WEtYaHJMT1JhRzg2c3NTZjhxQkotUXRWcVJ5U2hHYVhjTVhvMnpqUVNoTllXeDNiU3lHYURoRDNqNkp2Wk1ReEVKX2VuVUdhdkFIZmdMbVhIT0tlWngyMXpLdjZGQl9lajNEeVQ2aGFLYVdJcmZ0eTQtY3hUVWtTRzE3aXV0UDZSc1JjVHc0Tm85cXBSWnE0?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "500K+"
           },
           "evidence": [
@@ -1629,23 +1771,58 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hawaii+hurricane"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOYmo4TU5EX1hkdU90NnNEWEd2amhDX0x6VHpRX01CSHd1SG9jd2xGdm1mZXhhTmZjeEF0OU45aERGZkNBVHNKZ3pvWUFBSGpwd3Zkc0xXOUFvRHNWZ05EZDlPdWwxZDFHLWd4VlN0eXFySTZQZS1vZjRSVzN2djB2WE5GbkVvQ0pFYzkzNU5Xck90WjI4TTEyYw?oc=5"
+              "source": "Al Jazeera via Google News",
+              "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMW1xU1o5QWFSNWhmUTVrTkttQXdnejk4aDlnUHluWVYwZ2NzeS1IcWZFWE1TN0FXdUhTdzJheFJRSzZCaHdvWWZfMzdTTHVxajJDRlZ2THVTUlRNZDItWFBFR0Z2VlZ2MW9qcFV4d3hfdVZWcG9BcVlqZzgzbEZJa3p1ODhudC1ZSnZxQUhmRkZBNWNRYWRuaTlyd3I4RnRzakNwZE1oYWVFbFRrZFZyVTlwTWhUUdIBuwFBVV95cUxPYlFrSlhwRGNXajl1enpnNHoxLUsxRl9DNlVGS2tmRVFxenE5WEtYaHJMT1JhRzg2c3NTZjhxQkotUXRWcVJ5U2hHYVhjTVhvMnpqUVNoTllXeDNiU3lHYURoRDNqNkp2Wk1ReEVKX2VuVUdhdkFIZmdMbVhIT0tlWngyMXpLdjZGQl9lajNEeVQ2aGFLYVdJcmZ0eTQtY3hUVWtTRzE3aXV0UDZSc1JjVHc0Tm85cXBSWnE0?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Hawaii_hurricane_tracks.png"
             }
           ],
           "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "GTA 6 August 27 Presentation",
-          "subtitle": "News topic · past 7 days",
-          "description": "Grand Theft Auto VI: An Extended Look",
-          "image": "/culture/news-gta-6-august-27-presentation.webp",
-          "alt": "Visual summary card for GTA 6 August 27 Presentation",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQYXRNUU1fVzFyd01Sc3c3MTBTM1ZtVGlxeVdnSUI4VklLLWxZa05oa0Z4WDNHUzh4S3lzdV9zcUFyR2xiajV4TDdLdWpBc3lSZENRbEdkUWhIQ1d3OEJZNzBaX3dnM1hyMDRSV084WGRMTDl5WEdLTFJEek5IUFJpaTdEd29vekFkSXVVNVhzajcxYXdqT2tqeW5nZjZ2czQ?oc=5",
+          "title": "Egg Recall",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "Massive egg recall in US south and south-west due to salmonella outbreak. The topic registered 500K+ U.S. Google searches in the current seven-day source window, placing it #3 on this news leaderboard.",
+          "image": "/culture/news-egg-recall.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Chicken_egg01_monovular.jpg/1280px-Chicken_egg01_monovular.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Egg white, representing Egg Recall",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMGdEMXVZNFFYajJxemE4Z1IxZWZ1OFJrQlBFY3d6cEVRZkg0ZFIyeTh0eW8wUEVlTGRqVkZQVVViajBkTVNCU3J6WEJFN2J0c1cxaHN4cS1lc3Z3dDhrX3NOWUlXZVRtRzl3ek5ZX0dvTE5Dbk5mSkFyblpiNENkY3hDWHg1N01namNCaDJueGZkNHJHb3JvdHJ3S21GeGxpTXNybg?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
+            },
+            {
+              "source": "The Guardian via Google News",
+              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMGdEMXVZNFFYajJxemE4Z1IxZWZ1OFJrQlBFY3d6cEVRZkg0ZFIyeTh0eW8wUEVlTGRqVkZQVVViajBkTVNCU3J6WEJFN2J0c1cxaHN4cS1lc3Z3dDhrX3NOWUlXZVRtRzl3ek5ZX0dvTE5Dbk5mSkFyblpiNENkY3hDWHg1N01namNCaDJueGZkNHJHb3JvdHJ3S21GeGxpTXNybg?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/Egg_white"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 4,
+          "title": "GTA 6 August 27 Presentation",
+          "subtitle": "News · Aug 6, 2026",
+          "description": "GTA 6 Gameplay Trailer Announced for Netflix on August 27. The topic registered 200K+ U.S. Google searches in the current seven-day source window, placing it #4 on this news leaderboard.",
+          "image": "/culture/news-gta-6-august-27-presentation.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Grand_Theft_Auto_logo_series.svg/1280px-Grand_Theft_Auto_logo_series.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Grand Theft Auto, representing GTA 6 August 27 Presentation",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5",
+          "source": "Google News",
+          "metric": {
+            "label": "Google search volume",
             "value": "200K+"
           },
           "evidence": [
@@ -1654,48 +1831,28 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=gta+6+august+27+presentation"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQYXRNUU1fVzFyd01Sc3c3MTBTM1ZtVGlxeVdnSUI4VklLLWxZa05oa0Z4WDNHUzh4S3lzdV9zcUFyR2xiajV4TDdLdWpBc3lSZENRbEdkUWhIQ1d3OEJZNzBaX3dnM1hyMDRSV084WGRMTDl5WEdLTFJEek5IUFJpaTdEd29vekFkSXVVNVhzajcxYXdqT2tqeW5nZjZ2czQ?oc=5"
+              "source": "VICE via Google News",
+              "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto"
             }
           ],
           "accent": "#57d5a4"
         },
         {
-          "rank": 4,
-          "title": "Egg Recall",
-          "subtitle": "News topic · past 7 days",
-          "description": "FDA upgrades egg recall to highest risk level as salmonella sickens dozens across several states",
-          "image": "/culture/news-egg-recall.webp",
-          "alt": "Visual summary card for Egg Recall",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNWUg3enVWS2JXb1NCQ1hGVDRqeldibWZtTUN4YV93emJ4Z1czLWVYQVJWT3RuRGs3OEdLcnA5Z1l6N1JvR2w1UklVaGNkbnJjVjdGMGl1VEdBNVBaYkxtdTBSd0RwcFN6V21KamtvUGlzMHZVRlFSQmtSSVB1bFpjQjhsVm9NRFhWWWFHVHdtY3Y3eGE2Wi04YklHSkJwSEtrQW10UVBWbUdHWG1PLUEyV2U4ZTBGQ1BDLVR2bk55X05uanpxSkZr0gHMAUFVX3lxTE01VUlaVXZtdU54VUdMUjNnNTF3SjZYT2NsT1EzS00zQVgtT0w1Zno0ZFlKa1JZQkxKUV9qUHhLRllEZ09hNkV0NV9md1d3eFZKOWhVZ3ZYRHpTN1ZpU2J6ZkJTS2U2djNIMURycDQ5YkEzWjVVLThNNFU2cXFTVEtXRE01aXVITmd2WmFlcEVsQWcxUWI2czBieXNSQWVrUXVUbUlrendqT2d6T3dWVWNnXy1QbkxwVjhCeVJMSjY5bkdUX0FDbmYwV21zSQ?oc=5",
-          "source": "Google News",
-          "metric": {
-            "label": "Google searches · 7 days",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
-            },
-            {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNWUg3enVWS2JXb1NCQ1hGVDRqeldibWZtTUN4YV93emJ4Z1czLWVYQVJWT3RuRGs3OEdLcnA5Z1l6N1JvR2w1UklVaGNkbnJjVjdGMGl1VEdBNVBaYkxtdTBSd0RwcFN6V21KamtvUGlzMHZVRlFSQmtSSVB1bFpjQjhsVm9NRFhWWWFHVHdtY3Y3eGE2Wi04YklHSkJwSEtrQW10UVBWbUdHWG1PLUEyV2U4ZTBGQ1BDLVR2bk55X05uanpxSkZr0gHMAUFVX3lxTE01VUlaVXZtdU54VUdMUjNnNTF3SjZYT2NsT1EzS00zQVgtT0w1Zno0ZFlKa1JZQkxKUV9qUHhLRllEZ09hNkV0NV9md1d3eFZKOWhVZ3ZYRHpTN1ZpU2J6ZkJTS2U2djNIMURycDQ5YkEzWjVVLThNNFU2cXFTVEtXRE01aXVITmd2WmFlcEVsQWcxUWI2czBieXNSQWVrUXVUbUlrendqT2d6T3dWVWNnXy1QbkxwVjhCeVJMSjY5bkdUX0FDbmYwV21zSQ?oc=5"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
           "rank": 5,
           "title": "Have I Been Flocked",
-          "subtitle": "News topic · past 7 days",
-          "description": "Have you been flocked? Here’s how to find out",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "Has your car been recorded or license plate searched? ‘Have I Been Flocked’ site lets you check. The topic registered 200K+ U.S. Google searches in the current seven-day source window, placing it #5 on this news leaderboard.",
           "image": "/culture/news-have-i-been-flocked.webp",
-          "alt": "Visual summary card for Have I Been Flocked",
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOV210MXh3V3c4eEJ0MkM3TXJYaGxzWWhDcWF6bHZ6T2NldjBJRTF3ZGdQTVBwTk1XbzVVNFdkR2cxMDV1Y1NtajJDTG9CcTdpazAyMERwRTU3cEtmc082QTZSaGZGLVphT2taa0FKNXJodjdIa3p0a0g5ak1EdndBMUF2SmN3UdIBiwFBVV95cUxQLXpjSTZ5bXgxcFh0RGY4WjBUSnlKYVFnWS1CTHlDZlQyYzZ6ZDRESlF2aVo4OG40YUwtXzdkM25SMUszNF85WUMyRWNieEJvVXNCX0t2N2EycXdtY2FGbHJNQnlheDMwVHZwanRGd0FOZ0hrWnRjbGVJR2xrZ0FjT1h0Nk1tRlN0N1Vn?oc=5",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/0/06/FrenchNumberPlates.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+          "alt": "Automatic number-plate recognition, representing Have I Been Flocked",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMW4yQUxobnlNbmtfT0VyUVg5U3VyVTYxcnpUa0E2bUV5aG02R0JfdDRKalZ5WVREdkZUNXVTdmxZY3FQT0RlNmlQaTVMUENZUFozRk4ydzNsc1NMY0gwM1E1a2gxT3JfSGxLTjVZMU1PLVNjOWRZaUNwRW00NHJvdUlhZG1kM1Z6S1FEV1I5Z0xEZHBXQkhuSVBiT2JaRGdYc2MyeUdkc3hMckR6N2hMTnZDNm1jYkNFQW5tY1FmZTV6dw?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "200K+"
           },
           "evidence": [
@@ -1704,8 +1861,12 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=have+i+been+flocked"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOV210MXh3V3c4eEJ0MkM3TXJYaGxzWWhDcWF6bHZ6T2NldjBJRTF3ZGdQTVBwTk1XbzVVNFdkR2cxMDV1Y1NtajJDTG9CcTdpazAyMERwRTU3cEtmc082QTZSaGZGLVphT2taa0FKNXJodjdIa3p0a0g5ak1EdndBMUF2SmN3UdIBiwFBVV95cUxQLXpjSTZ5bXgxcFh0RGY4WjBUSnlKYVFnWS1CTHlDZlQyYzZ6ZDRESlF2aVo4OG40YUwtXzdkM25SMUszNF85WUMyRWNieEJvVXNCX0t2N2EycXdtY2FGbHJNQnlheDMwVHZwanRGd0FOZ0hrWnRjbGVJR2xrZ0FjT1h0Nk1tRlN0N1Vn?oc=5"
+              "source": "New York Post via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMW4yQUxobnlNbmtfT0VyUVg5U3VyVTYxcnpUa0E2bUV5aG02R0JfdDRKalZ5WVREdkZUNXVTdmxZY3FQT0RlNmlQaTVMUENZUFozRk4ydzNsc1NMY0gwM1E1a2gxT3JfSGxLTjVZMU1PLVNjOWRZaUNwRW00NHJvdUlhZG1kM1Z6S1FEV1I5Z0xEZHBXQkhuSVBiT2JaRGdYc2MyeUdkc3hMckR6N2hMTnZDNm1jYkNFQW5tY1FmZTV6dw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/Automatic_number-plate_recognition"
             }
           ],
           "accent": "#ffc857"
@@ -1715,14 +1876,14 @@
         {
           "rank": 6,
           "title": "Frozen 3",
-          "subtitle": "News topic · past 7 days",
-          "description": "‘Frozen 3’ “Royal Wedding” Between Anna and Kristoff Is Crashed by New Villain in First-Look",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More. The topic registered 200K+ U.S. Google searches in the current seven-day source window, placing it #6 on this news leaderboard.",
           "image": "/culture/news-frozen-3.webp",
-          "alt": "Visual summary card for Frozen 3",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOYmpsU1Vxd3pILWR0ZVQyeFpzeDcza2lQTEplX1MyS3VUM0N3Z29hNzhVamY3MDJ0VHpRZU1nZXNXRnV2V1l5ZGFaN0N0cjZCUFJrc2VkZ0VxV19ldmNQd0N0Vm82QXFKSFgyV3BsQ3J2akJWMUhnNUU5aFdyZ2pQUHU0d09pY2piSWdiNEhQNjhOZWE5cHNMMDB6TlM5bmJ5RjJHRWpISWw1NFpYWHk3Zlh3?oc=5",
+          "alt": "Representative image for Frozen 3",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "200K+"
           },
           "evidence": [
@@ -1731,8 +1892,8 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOYmpsU1Vxd3pILWR0ZVQyeFpzeDcza2lQTEplX1MyS3VUM0N3Z29hNzhVamY3MDJ0VHpRZU1nZXNXRnV2V1l5ZGFaN0N0cjZCUFJrc2VkZ0VxV19ldmNQd0N0Vm82QXFKSFgyV3BsQ3J2akJWMUhnNUU5aFdyZ2pQUHU0d09pY2piSWdiNEhQNjhOZWE5cHNMMDB6TlM5bmJ5RjJHRWpISWw1NFpYWHk3Zlh3?oc=5"
+              "source": "Deadline via Google News",
+              "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -1740,14 +1901,15 @@
         {
           "rank": 7,
           "title": "D23",
-          "subtitle": "News topic · past 7 days",
-          "description": "'X-Men' cast, release date revealed at D23",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "Everything Announced At D23: New X-Men Cast, 'Avengers: Doomsday' Teaser, 'Coco 2,' 'Tangled' Live Action First Look & More. The topic registered 200K+ U.S. Google searches in the current seven-day source window, placing it #7 on this news leaderboard.",
           "image": "/culture/news-d23.webp",
-          "alt": "Visual summary card for D23",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOZkF6TTZZYmdwc2ZBZ2ItaDljYV9FbkFseUZxcGY3cDlNWnlsSzU5Q0ktMU5QLTYwUGVVcnhvbnZTUUQ3RUY0ZXlMNkdiUlFQLVNhVTRWTGR6NVRXMG5wQ3Q0NzM1bUNDN2d0bVJNa3hhYzZaRlVPVVotZG9Jb21QTTVyMDdjMXBRNXg4ODMxUWR3ZVRyeExwUtIBngFBVV95cUxQR2lzYmlfZFFYVFcxS0RHdXN0VjdGMjJ0VEZ6TW93V3M2dEc1ZzducUM3U0pzRnFmMmpQRTlDZ0FCY3VYWDlwUzBNakRrTEM0Y3hVTk5kMHRScWV6U3pHUlgyUURtNHpxNVJMYXExTUVWMTJOTlhvNVZjN3htelRiWnZQWUUwdHdlOW16cDVSMTlYUUNfXzktY0RQZXN1dw?oc=5",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Disney_D23_logo_2023.svg/1280px-Disney_D23_logo_2023.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "D23 (Disney), representing D23",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE80X29FS1BITzczM3JfaElPWVlfaFJzREpHeXl2bmYwNnNIcFRCSTd3QlRjaW1vNG5LV3R5dmNid3NDdUpTbW9ydktPOGxMczFDZnBJdF9zYXVQRUdWMDlaYmtBcnFhOE14VHNmMEhqSVRjTkZXX3hpckt1eFJGX28?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "200K+"
           },
           "evidence": [
@@ -1756,8 +1918,12 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=d23"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOZkF6TTZZYmdwc2ZBZ2ItaDljYV9FbkFseUZxcGY3cDlNWnlsSzU5Q0ktMU5QLTYwUGVVcnhvbnZTUUQ3RUY0ZXlMNkdiUlFQLVNhVTRWTGR6NVRXMG5wQ3Q0NzM1bUNDN2d0bVJNa3hhYzZaRlVPVVotZG9Jb21QTTVyMDdjMXBRNXg4ODMxUWR3ZVRyeExwUtIBngFBVV95cUxQR2lzYmlfZFFYVFcxS0RHdXN0VjdGMjJ0VEZ6TW93V3M2dEc1ZzducUM3U0pzRnFmMmpQRTlDZ0FCY3VYWDlwUzBNakRrTEM0Y3hVTk5kMHRScWV6U3pHUlgyUURtNHpxNVJMYXExTUVWMTJOTlhvNVZjN3htelRiWnZQWUUwdHdlOW16cDVSMTlYUUNfXzktY0RQZXN1dw?oc=5"
+              "source": "Deadline via Google News",
+              "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE80X29FS1BITzczM3JfaElPWVlfaFJzREpHeXl2bmYwNnNIcFRCSTd3QlRjaW1vNG5LV3R5dmNid3NDdUpTbW9ydktPOGxMczFDZnBJdF9zYXVQRUdWMDlaYmtBcnFhOE14VHNmMEhqSVRjTkZXX3hpckt1eFJGX28?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/D23_(Disney)"
             }
           ],
           "accent": "#57d5a4"
@@ -1765,14 +1931,15 @@
         {
           "rank": 8,
           "title": "Coco 2",
-          "subtitle": "News topic · past 7 days",
-          "description": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029. The topic registered 100K+ U.S. Google searches in the current seven-day source window, placing it #8 on this news leaderboard.",
           "image": "/culture/news-coco-2.webp",
-          "alt": "Visual summary card for Coco 2",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Disney%27s_Coco_logo.png/1280px-Disney%27s_Coco_logo.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Coco (franchise), representing Coco 2",
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "100K+"
           },
           "evidence": [
@@ -1781,8 +1948,12 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=coco+2"
             },
             {
-              "source": "Google News",
+              "source": "Variety via Google News",
               "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/Coco_(franchise)"
             }
           ],
           "accent": "#5ab0ff"
@@ -1790,14 +1961,15 @@
         {
           "rank": 9,
           "title": "Supreme Court",
-          "subtitle": "News topic · past 7 days",
-          "description": "Supreme Court again rejects Trump bid to overturn E. Jean Carroll verdict",
+          "subtitle": "News · Aug 11, 2026",
+          "description": "Trump refuses to back down as Supreme Court blocks major policies. The topic registered 100K+ U.S. Google searches in the current seven-day source window, placing it #9 on this news leaderboard.",
           "image": "/culture/news-supreme-court.webp",
-          "alt": "Visual summary card for Supreme Court",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5LNHllU1M3SzllSHBDOXVtMUhGNEtMZEJhemxyc1ZBdGplaTNUZmNEdDFOeHMxUU1aTjJvV2tzOEE5M2FHSU81Yl9zeWdoMjB0anM0bE5fM0FoSEMzd1NBdmhuRkxFd25JbTRDZ1d5QXFmMUFIREdMbzBlZ9IBgAFBVV95cUxNQ0ZTVXBabVdPdnNPRnpTdkhVWGZYWW4xZVRjY2NTOTc5b1A5eTJrcXA0dmp4LU1Ya0pRV2drb1AxV3dUdHlscS1ZMVllVGpVR1BSNlhTU1B2UkJYczlhVXp6UHhCQ1NfQ242RktvSEhqNk0wQm1Sc1JydFF3QlFBZA?oc=5",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Seal_of_the_United_States_Supreme_Court.svg/1280px-Seal_of_the_United_States_Supreme_Court.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Associate Justice of the Supreme Court of the United States, representing Supreme Court",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOXpuRXFHajY5R3E1amZfVVJQNUNqT1UydlVYaEJoYmhHOTJUSE9xZUFZOHgyOUd4NVNFT2JiR3pkbS1EaEpyU05YcU1GZGlZVC1zSTNNOGtFQXpiZVR3OGhrY2ZNUEJfeG11eXU0Yk9Qb0tWN0NDR0FlMUo1NUh4MEtnY25Hd214cnZYbWR6MVhLZEloMmZ0X2I0WTNDZ1F1T2cyZDhacHdWQml5MjExbGl2YnF1dlY1ZHVrdFVrLVE?oc=5",
           "source": "Google News",
           "metric": {
-            "label": "Google searches · 7 days",
+            "label": "Google search volume",
             "value": "100K+"
           },
           "evidence": [
@@ -1806,8 +1978,12 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=supreme+court"
             },
             {
-              "source": "Google News",
-              "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5LNHllU1M3SzllSHBDOXVtMUhGNEtMZEJhemxyc1ZBdGplaTNUZmNEdDFOeHMxUU1aTjJvV2tzOEE5M2FHSU81Yl9zeWdoMjB0anM0bE5fM0FoSEMzd1NBdmhuRkxFd25JbTRDZ1d5QXFmMUFIREdMbzBlZ9IBgAFBVV95cUxNQ0ZTVXBabVdPdnNPRnpTdkhVWGZYWW4xZVRjY2NTOTc5b1A5eTJrcXA0dmp4LU1Ya0pRV2drb1AxV3dUdHlscS1ZMVllVGpVR1BSNlhTU1B2UkJYczlhVXp6UHhCQ1NfQ242RktvSEhqNk0wQm1Sc1JydFF3QlFBZA?oc=5"
+              "source": "The Washington Post via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOXpuRXFHajY5R3E1amZfVVJQNUNqT1UydlVYaEJoYmhHOTJUSE9xZUFZOHgyOUd4NVNFT2JiR3pkbS1EaEpyU05YcU1GZGlZVC1zSTNNOGtFQXpiZVR3OGhrY2ZNUEJfeG11eXU0Yk9Qb0tWN0NDR0FlMUo1NUh4MEtnY25Hd214cnZYbWR6MVhLZEloMmZ0X2I0WTNDZ1F1T2cyZDhacHdWQml5MjExbGl2YnF1dlY1ZHVrdFVrLVE?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://en.wikipedia.org/wiki/Associate_Justice_of_the_Supreme_Court_of_the_United_States"
             }
           ],
           "accent": "#ff6b57"
@@ -1820,52 +1996,52 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:15.856Z"
+      "checkedAt": "2026-08-17T17:26:52.379Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:16.421Z"
+      "checkedAt": "2026-08-17T17:26:52.896Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:15.708Z"
+      "checkedAt": "2026-08-17T17:26:52.349Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:16.369Z"
+      "checkedAt": "2026-08-17T17:26:52.975Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:15.932Z"
+      "checkedAt": "2026-08-17T17:26:52.291Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-17T16:44:01.519Z"
+      "checkedAt": "2026-08-17T17:27:36.625Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:15.941Z"
+      "checkedAt": "2026-08-17T17:26:52.271Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:15.959Z"
+      "checkedAt": "2026-08-17T17:26:52.347Z"
     },
     {
       "name": "Google Shopping / Amazon",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:40.356Z"
+      "checkedAt": "2026-08-17T17:27:15.856Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-17T16:43:19.408Z"
+      "checkedAt": "2026-08-17T17:26:56.063Z"
     }
   ]
 }

@@ -16,6 +16,7 @@ const allowedHosts = new Set([
   "accounts.spotify.com",
   "api.urbandictionary.com",
   "api.spotify.com",
+  "commons.wikimedia.org",
   "en.wikipedia.org",
   "knowyourmeme.com",
   "news.google.com",
@@ -708,10 +709,147 @@ function eligiblePerson(entity) {
   return !/\b(?:politician|president|prime minister|senator|governor|member of parliament|political candidate|monarch|king|queen)\b/i.test(description);
 }
 
-function conciseDescription(value, fallback) {
-  const clean = plainText(value ?? "");
-  if (!clean) return fallback;
-  return clean.length <= 420 ? clean : `${clean.slice(0, 417).replace(/\s+\S*$/, "")}…`;
+function ensureSentence(value) {
+  const clean = plainText(value ?? "").replace(/\s+([,.;:!?])/g, "$1");
+  if (!clean) return "";
+  return /[.!?][\"'’”)]?$/.test(clean) ? clean : `${clean}.`;
+}
+
+function publicationDateLabel(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
+const googleNewsCache = new Map();
+
+async function googleNewsContext(query, days = 45) {
+  const key = `${normalize(query)}:${days}`;
+  if (googleNewsCache.has(key)) return googleNewsCache.get(key);
+  const request = (async () => {
+    const newsUrl = new URL("https://news.google.com/rss/search");
+    newsUrl.search = new URLSearchParams({
+      q: `${query} when:${days}d`,
+      hl: "en-US",
+      gl: "US",
+      ceid: "US:en",
+    });
+    const rss = await fetchText(newsUrl);
+    const queryTokens = new Set(normalize(query).split(" ").filter((token) => (token.length >= 3 || /\d/.test(token))
+      && !new Set(["and", "for", "from", "news", "film", "movie", "product", "song", "shopping", "the", "with"]).has(token)));
+    const items = [...rss.matchAll(/<item>([\s\S]*?)<\/item>/gi)].slice(0, 8).map((match, index) => {
+      const item = match[1];
+      const source = plainText(item.match(/<source\b[^>]*>([\s\S]*?)<\/source>/i)?.[1] ?? "");
+      const rawHeadline = plainText(item.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "");
+      const headline = (source && rawHeadline.endsWith(` - ${source}`)
+        ? rawHeadline.slice(0, -source.length - 3).trim()
+        : rawHeadline.replace(/\s+-\s+[^-]{2,80}$/, "").trim())
+        .replace(/^(?:opinion|review)\s*\|\s*/i, "")
+        .replace(/\s+\|\s+[^|]{1,40}$/, "")
+        .trim();
+      const link = plainText(item.match(/<link\b[^>]*>([\s\S]*?)<\/link>/i)?.[1] ?? "");
+      const published = plainText(item.match(/<pubDate\b[^>]*>([\s\S]*?)<\/pubDate>/i)?.[1] ?? "");
+      const headlineTokens = new Set(normalize(headline).split(" "));
+      const overlap = [...queryTokens].filter((token) => headlineTokens.has(token)).length;
+      let score = overlap * 12 - index;
+      if (headline.length >= 55 && headline.length <= 180) score += 6;
+      if (/\b(?:announces?|bankruptcy|blocks?|crashes?|damaged|debut|first look|launches?|lawsuit|lets?|opens?|recall|rejects?|release date|reveals?|rises?|sickens|surges?|trailer|unveils?|without power)\b/i.test(headline)) score += 9;
+      if (/^(?:how to|watch|photos?|video)\b/i.test(headline)) score -= 8;
+      if (/\b(?:Associated Press|AP News|BBC|Billboard|Bloomberg|Deadline|ESPN|Forbes|Fortune|FOX Sports|The Guardian|Los Angeles Times|NBC News|NPR|New York Times|Reuters|SCOTUSblog|The Athletic|The Hollywood Reporter|The Washington Post|Variety)\b/i.test(source)) score += 12;
+      if (/\b(?:Just Jared|Medium|Mshale|Weverse)\b/i.test(source)
+        || /^(?:exclusive|opinion)\b|\b(?:cover by|lyrics:)\b/i.test(headline)) score -= 10;
+      if (/\b\w{1,3}$/.test(headline) && !/[.!?'’”)]$/.test(headline)) score -= 6;
+      const date = new Date(published);
+      return {
+        headline,
+        link: link.startsWith("https://news.google.com/") ? link : newsUrl.href,
+        publishedAt: Number.isNaN(date.getTime()) ? null : date.toISOString(),
+        source: source || "Google News",
+        feedUrl: newsUrl.href,
+        overlap,
+        score,
+      };
+    }).filter((item) => item.headline && item.overlap >= Math.min(2, Math.max(1, queryTokens.size)));
+    return items.sort((left, right) => right.score - left.score)[0] ?? null;
+  })();
+  googleNewsCache.set(key, request);
+  return request;
+}
+
+async function wikipediaRepresentativeImage(query) {
+  const imageQuery = query.replace(/\bGTA\s*6\b/i, "Grand Theft Auto VI");
+  const searchUrl = new URL("https://en.wikipedia.org/w/api.php");
+  searchUrl.search = new URLSearchParams({
+    action: "query",
+    generator: "search",
+    gsrsearch: imageQuery,
+    gsrlimit: "6",
+    prop: "pageimages|extracts|info",
+    piprop: "thumbnail",
+    pithumbsize: "1200",
+    exintro: "1",
+    explaintext: "1",
+    inprop: "url",
+    format: "json",
+    origin: "*",
+  });
+  const queryTokens = new Set(normalize(imageQuery).split(" ")
+    .filter((token) => token.length >= 3 || /\d/.test(token))
+    .filter((token) => !new Set(["august", "been", "have", "lawsuit", "presentation", "recall"]).has(token)));
+  const wikipedia = JSON.parse(await fetchText(searchUrl));
+  const pages = Object.values(wikipedia.query?.pages ?? {}).filter((page) => page.thumbnail?.source);
+  const pageScores = (page) => {
+    const titleTokens = new Set(normalize(page.title ?? "").split(" "));
+    const extractTokens = new Set(normalize(page.extract ?? "").split(" "));
+    const titleOverlap = [...queryTokens].filter((token) => titleTokens.has(token)).length;
+    const score = [...queryTokens].reduce((total, token) => total
+      + (titleTokens.has(token) ? 12 : 0) + (extractTokens.has(token) ? 1 : 0), 0);
+    return { titleOverlap, score };
+  };
+  const page = pages.sort((left, right) => pageScores(right).score - pageScores(left).score)[0];
+  const requiredTitleOverlap = Math.min(2, Math.max(1, queryTokens.size));
+  if (page && pageScores(page).titleOverlap >= requiredTitleOverlap) {
+    return { imageSource: page.thumbnail.source, pageUrl: page.fullurl, title: page.title };
+  }
+
+  const sequelBase = imageQuery.match(/^(.+?)\s+\d+$/)?.[1];
+  if (sequelBase) return wikipediaRepresentativeImage(`${sequelBase} franchise`);
+
+  if (![...queryTokens].some((token) => /^(?:court|egg|hurricane|storm)$/.test(token))) return null;
+
+  const commonsUrl = new URL("https://commons.wikimedia.org/w/api.php");
+  commonsUrl.search = new URLSearchParams({
+    action: "query",
+    generator: "search",
+    gsrsearch: imageQuery,
+    gsrnamespace: "6",
+    gsrlimit: "8",
+    prop: "imageinfo",
+    iiprop: "url|mime",
+    iiurlwidth: "1200",
+    format: "json",
+    origin: "*",
+  });
+  const commons = JSON.parse(await fetchText(commonsUrl));
+  const files = Object.values(commons.query?.pages ?? {}).map((entry) => ({
+    ...entry,
+    info: entry.imageinfo?.[0],
+  })).filter((entry) => entry.info?.thumburl && /^image\/(?:jpeg|png|webp)$/i.test(entry.info.mime ?? ""));
+  const scoredFiles = files.map((entry) => {
+    const titleTokens = new Set(normalize(entry.title ?? "").split(" "));
+    const overlap = [...queryTokens].filter((token) => titleTokens.has(token)).length;
+    const genericPenalty = /\b(?:coat of arms|diagram|flag|icon|logo|map|seal)\b/i.test(entry.title ?? "") ? 5 : 0;
+    return { entry, score: overlap * 10 - genericPenalty };
+  }).sort((left, right) => right.score - left.score);
+  return scoredFiles[0]?.score >= requiredTitleOverlap * 10
+    ? { imageSource: scoredFiles[0].entry.info.thumburl, pageUrl: scoredFiles[0].entry.info.descriptionurl, title: scoredFiles[0].entry.title }
+    : null;
 }
 
 async function updatePeople(brief, topviews) {
@@ -736,6 +874,8 @@ async function updatePeople(brief, topviews) {
   }
   if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people");
   const details = await wikipediaPageDetails(selected.map((person) => person.title));
+  const contexts = await mapConcurrent(selected, 4, (person) =>
+    googleNewsContext(`"${person.title}"`, 45).catch(() => null));
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
@@ -744,11 +884,13 @@ async function updatePeople(brief, topviews) {
     const title = page?.title ?? person.title;
     const current = currentByTitle.get(normalize(title));
     const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}`;
+    const context = contexts[index];
+    const recentReason = `${title}’s English Wikipedia article drew ${formatCompact(person.views)} views in ${topviews.period.month}, placing it among the month’s most-read pages about living people.`;
     return {
       rank: index + 1,
       title,
       subtitle: person.label,
-      description: conciseDescription(page?.extract, `${title} was among English Wikipedia's most-read people in ${topviews.period.month}.`),
+      description: context?.headline ? `${ensureSentence(context.headline)} ${recentReason}` : recentReason,
       image: current?.image ?? `/culture/person-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `Portrait of ${title}`,
@@ -758,6 +900,7 @@ async function updatePeople(brief, topviews) {
       evidence: [
         { source: "Wikimedia monthly topviews", url: topviews.apiUrl },
         { source: "Wikipedia article", url: wikipediaUrl },
+        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
       category: person.category,
@@ -809,7 +952,8 @@ async function updateMovies(brief, topviews) {
   const details = await wikipediaPageDetails(selected.map((movie) => movie.title));
   const metadata = await mapConcurrent(selected, 4, async (movie) => {
     const imdbId = claimStrings(movie.entity, "P345").find((value) => /^tt\d{7,9}$/.test(value));
-    return { imdbId, cinemeta: await cinemetaMovieDetails(imdbId) };
+    const context = await googleNewsContext(`"${movieTitle(movie.title)}" film`, 45).catch(() => null);
+    return { imdbId, cinemeta: await cinemetaMovieDetails(imdbId), context };
   });
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
@@ -820,14 +964,15 @@ async function updateMovies(brief, topviews) {
     const current = currentByTitle.get(normalize(title));
     const wikipediaTitle = page?.title ?? movie.title;
     const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(wikipediaTitle.replaceAll(" ", "_"))}`;
-    const { imdbId, cinemeta } = metadata[index];
+    const { imdbId, cinemeta, context } = metadata[index];
+    const recentReason = `${title} drew ${formatCompact(movie.views)} English Wikipedia views in ${topviews.period.month}, making it one of the month’s most-read movie pages.`;
     return {
       rank: index + 1,
       title,
       subtitle: movie.entity?.descriptions?.en?.value?.match(/\b((?:19|20)\d{2})\b/)?.[1]
         ? `${movie.entity.descriptions.en.value.match(/\b((?:19|20)\d{2})\b/)[1]} film`
         : "Movie",
-      description: conciseDescription(page?.extract ?? cinemeta?.description, `${title} was among English Wikipedia's most-read movie pages in ${topviews.period.month}.`),
+      description: context?.headline ? `${ensureSentence(context.headline)} ${recentReason}` : recentReason,
       image: current?.image ?? `/culture/movie-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `${title} poster or lead image`,
@@ -838,6 +983,7 @@ async function updateMovies(brief, topviews) {
       evidence: [
         { source: "Wikimedia monthly topviews", url: topviews.apiUrl },
         { source: "Wikipedia article", url: wikipediaUrl },
+        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
@@ -924,7 +1070,7 @@ async function spotifyPlaylistTracks() {
   return spotifyEmbedTracks();
 }
 
-function updateMusic(brief, chart, spotifyTracks) {
+async function updateMusic(brief, chart, spotifyTracks) {
   const section = brief.sections.find((entry) => entry.id === "music");
   if (!section) return;
   const ignoredArtistTokens = new Set(["and", "feat", "featuring", "the", "with"]);
@@ -955,6 +1101,8 @@ function updateMusic(brief, chart, spotifyTracks) {
   if (spotifySelected.length < 10) throw new Error("Fewer than ten songs overlapped Billboard and Spotify");
   const crossovers = [...spotifySelected]
     .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
+  const contexts = await mapConcurrent(crossovers, 4, ({ track }) =>
+    googleNewsContext(`"${track.title}" "${track.artist}"`, 30).catch(() => null));
   const currentById = new Map(
     [...section.items, ...(section.moreItems ?? [])]
       .filter((item) => item.spotifyId)
@@ -969,11 +1117,13 @@ function updateMusic(brief, chart, spotifyTracks) {
   ];
   const allItems = crossovers.map(({ row, track, spotifyRank }, index) => {
     const current = currentById.get(track.id);
+    const context = contexts[index];
+    const chartReason = `The track is #${row.this_week} on the current Billboard Hot 100 after appearing at #${spotifyRank} in Spotify’s Today’s Top Hits.`;
     return {
       rank: index + 1,
       title: track.title,
       subtitle: track.artist,
-      description: `${track.title} is #${spotifyRank} in Spotify’s current Today’s Top Hits playlist and #${row.this_week} on the current Billboard Hot 100.`,
+      description: context?.headline ? `${ensureSentence(context.headline)} ${chartReason}` : chartReason,
       image: current?.image ?? `/culture/song-${slugify(`${track.title}-${track.artist}`)}.webp`,
       imageSource: track.image,
       alt: current?.alt ?? `${track.title} artwork by ${track.artist}`,
@@ -983,6 +1133,7 @@ function updateMusic(brief, chart, spotifyTracks) {
       evidence: [
         { source: "Spotify", url: `https://open.spotify.com/playlist/${spotifyPlaylistId}` },
         { source: "Billboard", url: chart.chartUrl },
+        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
       ],
       accent: accents[index % accents.length],
       spotifyId: track.id,
@@ -997,7 +1148,7 @@ function updateMusic(brief, chart, spotifyTracks) {
 function titleCase(value) {
   const preferred = new Map([
     ["gta", "GTA"], ["macbook", "MacBook"], ["iphone", "iPhone"], ["ipad", "iPad"],
-    ["nba", "NBA"], ["nfl", "NFL"], ["nhl", "NHL"], ["ps5", "PS5"], ["xbox", "Xbox"],
+    ["llc", "LLC"], ["nba", "NBA"], ["nfl", "NFL"], ["nhl", "NHL"], ["ps5", "PS5"], ["xbox", "Xbox"],
   ]);
   return value.replace(/\b[\w'-]+\b/g, (word) => preferred.get(word.toLowerCase())
     ?? `${word[0].toUpperCase()}${word.slice(1)}`);
@@ -1166,23 +1317,36 @@ async function productLeaderboard() {
   return amazonProducts(filtered);
 }
 
-function updateProducts(brief, products) {
+async function updateProducts(brief, products) {
   const section = brief.sections.find((entry) => entry.id === "products");
   if (!section) return;
+  const contexts = await mapConcurrent(products, 4, (product) => {
+    const queryKey = normalize(product.query);
+    const queryTerms = queryKey.split(" ").filter(Boolean);
+    const qualifiers = queryTerms.length === 1
+      ? [...new Set(plainText(product.title).match(/\b(?:20\d{2}|[a-z]+\d[a-z0-9-]*|\d+[a-z][a-z0-9-]*)\b/gi) ?? [])]
+        .filter((token) => !queryKey.includes(normalize(token)))
+        .slice(0, 2)
+        .map((token) => `"${token}"`)
+        .join(" ")
+      : "";
+    return googleNewsContext(`"${product.query}" ${qualifiers} product`, 30).catch(() => null);
+  });
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
   const allItems = products.map((product, index) => {
     const title = titleCase(product.query);
     const current = currentByTitle.get(normalize(title));
-    const listingDescription = conciseDescription(product.title, `${title} is a rising U.S. Google Shopping query with a matching Amazon listing.`);
+    const context = contexts[index];
+    const trendReason = /^breakout$/i.test(product.growth)
+      ? `Google Shopping labels “${product.query}” a Breakout U.S. query this week, ranking it #${product.rank} among Rising searches with a matching Amazon product.`
+      : `U.S. Google Shopping interest in “${product.query}” rose ${product.growth} this week, ranking it #${product.rank} among Rising searches with a matching Amazon product.`;
     return {
       rank: index + 1,
       title,
       subtitle: "Product · Amazon match",
-      description: listingDescription.length >= 30
-        ? listingDescription
-        : `${listingDescription} is the Amazon match for the rising “${product.query}” shopping query.`,
+      description: context?.headline ? `${ensureSentence(context.headline)} ${trendReason}` : trendReason,
       image: current?.image ?? `/culture/product-${slugify(title)}.webp`,
       imageSource: product.image,
       alt: current?.alt ?? `${title} product listing image`,
@@ -1192,6 +1356,7 @@ function updateProducts(brief, products) {
       evidence: [
         { source: "Google Shopping Trends", url: shoppingTrendsUrl },
         { source: "Amazon listing", url: product.url },
+        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
@@ -1233,13 +1398,30 @@ async function googleTrendingNews() {
     .slice(0, 10);
   if (filtered.length < 6) throw new Error(`Only ${filtered.length} non-person, non-sports news topics remained`);
   return mapConcurrent(filtered, 4, async (row) => {
-    const newsUrl = new URL("https://news.google.com/rss/search");
-    newsUrl.search = new URLSearchParams({ q: row.title, hl: "en-US", gl: "US", ceid: "US:en" });
-    const rss = await fetchText(newsUrl);
-    const item = rss.match(/<item>([\s\S]*?)<\/item>/i)?.[1] ?? "";
-    const headline = plainText(item.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? row.title).replace(/\s+-\s+[^-]+$/, "");
-    const link = plainText(item.match(/<link>([\s\S]*?)<\/link>/i)?.[1] ?? "");
-    return { ...row, headline, link: link.startsWith("https://news.google.com/") ? link : newsUrl.href };
+    const [context, topicRepresentative] = await Promise.all([
+      googleNewsContext(row.title, 14).catch(() => null),
+      wikipediaRepresentativeImage(row.title).catch(() => null),
+    ]);
+    const contextImageQuery = context?.headline && /license plate/i.test(context.headline)
+      ? "automatic license plate recognition"
+      : context?.headline && /ice cream/i.test(context.headline)
+        ? "ice cream"
+        : context?.headline;
+    const representative = topicRepresentative ?? (contextImageQuery
+      ? await wikipediaRepresentativeImage(contextImageQuery).catch(() => null)
+      : null);
+    const fallbackUrl = new URL("https://news.google.com/search");
+    fallbackUrl.search = new URLSearchParams({ q: row.title, hl: "en-US", gl: "US", ceid: "US:en" });
+    return {
+      ...row,
+      headline: context?.headline ?? row.title,
+      link: context?.link ?? fallbackUrl.href,
+      publishedAt: context?.publishedAt ?? null,
+      newsSource: context?.source ?? "Google News",
+      imageSource: representative?.imageSource,
+      imagePageUrl: representative?.pageUrl,
+      imageTitle: representative?.title,
+    };
   });
 }
 
@@ -1253,19 +1435,24 @@ function updateNews(brief, topics) {
     const title = titleCase(topic.title);
     const current = currentByTitle.get(normalize(title));
     const trendUrl = googleTrendsExploreUrl([topic.title], "now 7-d");
+    const published = publicationDateLabel(topic.publishedAt);
+    const eventSummary = ensureSentence(topic.headline);
+    const relevance = `The topic registered ${topic.volume} U.S. Google searches in the current seven-day source window, placing it #${index + 1} on this news leaderboard.`;
     return {
       rank: index + 1,
       title,
-      subtitle: "News topic · past 7 days",
-      description: conciseDescription(topic.headline, `Search interest in ${topic.title} rose during the past seven days.`),
+      subtitle: published ? `News · ${published}` : "News",
+      description: `${eventSummary} ${relevance}`,
       image: current?.image ?? `/culture/news-${slugify(title)}.webp`,
-      alt: current?.alt ?? `Visual summary card for ${title}`,
+      imageSource: topic.imageSource,
+      alt: topic.imageTitle ? `${topic.imageTitle}, representing ${title}` : `Representative image for ${title}`,
       url: topic.link,
       source: "Google News",
-      metric: { label: "Google searches · 7 days", value: topic.volume },
+      metric: { label: "Google search volume", value: topic.volume },
       evidence: [
         { source: "Google Trending Now", url: trendUrl },
-        { source: "Google News", url: topic.link },
+        { source: `${topic.newsSource} via Google News`, url: topic.link },
+        ...(topic.imagePageUrl ? [{ source: "Wikimedia image context", url: topic.imagePageUrl }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
@@ -1376,8 +1563,11 @@ function validateBrief(brief) {
     throw new Error("Products must preserve Google Shopping rising-query order");
   }
   const news = brief.sections.find((section) => section.id === "news");
-  const newsVolumes = [...news.items, ...news.moreItems].map((item) => searchVolume(item.metric?.value));
-  if (newsVolumes.some((volume) => !volume)
+  const allNews = [...news.items, ...news.moreItems];
+  const newsVolumes = allNews.map((item) => searchVolume(item.metric?.value));
+  if (allNews.some((item) => item.metric?.label !== "Google search volume"
+      || !/^News(?: · [A-Z][a-z]{2} \d{1,2}, \d{4})?$/.test(item.subtitle))
+    || newsVolumes.some((volume) => !volume)
     || newsVolumes.some((volume, index) => index > 0 && volume > newsVolumes[index - 1])) {
     throw new Error("News must be ordered by seven-day Google search volume");
   }
@@ -1462,8 +1652,8 @@ await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons 
 updateSlang(brief, byName["Know Your Meme slang pageviews"].value);
 await updatePeople(brief, byName["Wikimedia monthly topviews"].value);
 await updateMovies(brief, byName["Wikimedia monthly topviews"].value);
-updateMusic(brief, byName["Billboard Hot 100"].value, byName["Spotify Today’s Top Hits"].value);
-if (byName["Google Shopping / Amazon"].ok) updateProducts(brief, byName["Google Shopping / Amazon"].value);
+await updateMusic(brief, byName["Billboard Hot 100"].value, byName["Spotify Today’s Top Hits"].value);
+if (byName["Google Shopping / Amazon"].ok) await updateProducts(brief, byName["Google Shopping / Amazon"].value);
 else if (brief.sections.find((section) => section.id === "products")?.items.length !== 5) {
   console.error("No previous Products snapshot is available to preserve.");
   process.exit(1);

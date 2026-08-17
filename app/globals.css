@@ -495,6 +495,76 @@ img {
   color: var(--purple-dark);
 }
 
+.ui-icon {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  color: currentColor;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.ui-icon-external::before {
+  position: absolute;
+  right: 0.22em;
+  bottom: 0.05em;
+  width: 0.62em;
+  height: 0.62em;
+  border: 1.5px solid currentColor;
+  border-radius: 0.08em;
+  content: "";
+}
+
+.ui-icon-external::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.68em;
+  height: 0.68em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  background: linear-gradient(135deg, transparent 46%, currentColor 47% 53%, transparent 54%);
+  content: "";
+}
+
+.ui-icon-play {
+  width: 0.78em;
+  height: 0.9em;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.ui-icon-close::before,
+.ui-icon-close::after {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 8%;
+  width: 84%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.ui-icon-close::before {
+  transform: rotate(45deg);
+}
+
+.ui-icon-close::after {
+  transform: rotate(-45deg);
+}
+
+.ui-icon-star {
+  background: currentColor;
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 94%, 50% 72%, 21% 94%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.source-list .ui-icon-external {
+  font-size: 0.72rem;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -707,6 +777,10 @@ a.culture-card:hover {
   font-size: 0.9rem;
 }
 
+.play-button .ui-icon-close {
+  margin-left: 0;
+}
+
 .embed-wrap {
   padding: 0 12px 12px;
   background: var(--card);
@@ -751,11 +825,13 @@ a.culture-card:hover {
 }
 
 .song-player-heading button {
+  display: grid;
   grid-column: 2;
   grid-row: 1 / span 2;
   width: 34px;
   height: 34px;
   padding: 0;
+  place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--paper);
@@ -885,18 +961,6 @@ a.culture-card:hover {
   box-shadow: 1px 1px 0 #17151c;
 }
 
-.expanded-source {
-  flex: 0 0 auto;
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: #17151c;
-  color: #fff;
-  font-size: 0.52rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .expanded-copy,
 .expanded-facts,
 .expanded-metric {
@@ -909,14 +973,6 @@ a.culture-card:hover {
   gap: 6px;
 }
 
-.expanded-kicker {
-  display: flex;
-  min-width: 0;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .expanded-title {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.18rem;
@@ -926,6 +982,7 @@ a.culture-card:hover {
 }
 
 .expanded-subtitle {
+  display: block;
   min-width: 0;
   color: var(--purple-dark);
   font-size: 0.6rem;
@@ -982,6 +1039,10 @@ a.culture-card:hover {
 
 .playable-entry .expanded-facts {
   padding-right: 44px;
+}
+
+.playable-entry .expanded-copy {
+  padding-right: 48px;
 }
 
 .expanded-play {
@@ -1477,10 +1538,6 @@ a.culture-card:hover {
 
   .expanded-entry.layout-poster .expanded-art {
     width: 58px;
-  }
-
-  .expanded-kicker {
-    gap: 5px;
   }
 
   #bmc-iframe {

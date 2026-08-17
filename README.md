@@ -46,6 +46,12 @@ last validated snapshot.
 - News uses U.S. Google Trending Now over seven days, excludes people and
   sports, and orders the remainder by Google’s displayed search volume.
 
+People, Movies, Music, and Products add a matching recent Google News headline
+when one is available so descriptions explain the current attention without
+changing rank. News entries use the selected article’s publication date and a
+topic-matched Wikimedia image; if no relevant reusable image exists, the image
+pipeline creates a local title card instead of accepting an unrelated result.
+
 Every entry has evidence from at least two distinct approved source hosts.
 `scripts/cache-images.mjs` validates the snapshot, downloads only missing or
 invalid art through HTTPS allowlists, converts it to bounded local WebP files,

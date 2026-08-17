@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { CultureSection } from "../lib/culture";
 import { ExpandedRanking } from "./expanded-ranking";
+import { ExternalLinkIcon, StarIcon } from "./icons";
 
 export function Leaderboard({ section }: { section: CultureSection }) {
   const imageSize = section.layout === "poster"
@@ -20,7 +21,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
         <div className="source-list" aria-label="Sources">
           {section.sources.map((source) => (
             <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
-              {source.label}<span aria-hidden="true">↗</span>
+              {source.label}<ExternalLinkIcon />
             </a>
           ))}
         </div>
@@ -52,12 +53,12 @@ export function Leaderboard({ section }: { section: CultureSection }) {
               <div className="card-copy">
                 <div className="card-title-line">
                   <h3>{item.title}</h3>
-                  <span aria-hidden="true">↗</span>
+                  <ExternalLinkIcon />
                 </div>
                 <p className="subtitle">{item.subtitle}</p>
                 {item.rating ? (
                   <div className="rating-row">
-                    <span aria-hidden="true">★</span>
+                    <StarIcon />
                     <strong>{item.rating}</strong>
                     <small>{item.rating === "New" ? "just opened" : "IMDb"}</small>
                   </div>

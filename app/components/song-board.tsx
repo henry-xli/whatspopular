@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { CultureSection } from "../lib/culture";
 import { ExpandedRanking } from "./expanded-ranking";
+import { CloseIcon, ExternalLinkIcon, PlayIcon } from "./icons";
 
 export function SongBoard({ section }: { section: CultureSection }) {
   const [activeTrack, setActiveTrack] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
         <div className="source-list" aria-label="Sources">
           {section.sources.map((source) => (
             <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
-              {source.label}<span aria-hidden="true">↗</span>
+              {source.label}<ExternalLinkIcon />
             </a>
           ))}
         </div>
@@ -52,13 +53,13 @@ export function SongBoard({ section }: { section: CultureSection }) {
                     aria-label={`${isActive ? "Close player for" : "Play"} ${item.title}`}
                     aria-expanded={isActive}
                   >
-                    <span aria-hidden="true">{isActive ? "×" : "▶"}</span>
+                    {isActive ? <CloseIcon /> : <PlayIcon />}
                   </button>
                 </div>
                 <div className="card-copy">
                   <div className="card-title-line">
                     <h3><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a></h3>
-                    <span aria-hidden="true">↗</span>
+                    <ExternalLinkIcon />
                   </div>
                   <p className="subtitle">{item.subtitle}</p>
                   <p className="card-description">{item.description}</p>
@@ -84,7 +85,9 @@ export function SongBoard({ section }: { section: CultureSection }) {
           <div className="song-player-heading">
             <span>Now playing</span>
             <strong>{activeItem.title} · {activeItem.subtitle}</strong>
-            <button type="button" onClick={() => setActiveTrack(null)} aria-label="Close Spotify player">×</button>
+            <button type="button" onClick={() => setActiveTrack(null)} aria-label="Close Spotify player">
+              <CloseIcon />
+            </button>
           </div>
           <div className="embed-wrap">
             <iframe

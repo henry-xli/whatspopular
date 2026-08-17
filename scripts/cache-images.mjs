@@ -59,6 +59,9 @@ for (const section of brief.sections) {
       file,
       title: item.title,
       page: item.url,
+      expectedFallback: section.id === "news" && !item.imageSource,
+      fit: section.id === "news" && /(?:logo|seal)/i.test(item.imageSource ?? "") ? "contain" : "cover",
+      position: section.id === "news" ? "centre" : "attention",
       ...(item.imageSource
         ? { direct: item.imageSource }
         : imdbId
@@ -122,18 +125,31 @@ function dimensions(shape) {
 
 function fallbackCard(title, shape) {
   const { width, height } = dimensions(shape);
-  const escaped = title.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-  const fontSize = Math.max(36, Math.min(72, Math.round(width / Math.max(7, title.length * 0.55))));
-  return Buffer.from(`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#6f48e5"/><circle cx="${width * 0.8}" cy="${height * 0.15}" r="${width * 0.2}" fill="#d4f163"/><path d="M0 ${height * 0.68} Q ${width * 0.4} ${height * 0.43} ${width} ${height * 0.72} V ${height} H0Z" fill="#ff765f"/><text x="${width * 0.08}" y="${height * 0.5}" width="${width * 0.8}" fill="#fff" font-size="${fontSize}" font-family="Georgia,serif" font-weight="700">${escaped}</text></svg>`);
+  const maxCharacters = shape === "poster" ? 16 : shape === "square" ? 19 : 24;
+  const lines = [];
+  for (const word of title.split(/\s+/).filter(Boolean)) {
+    const current = lines.at(-1);
+    if (!current || `${current} ${word}`.length > maxCharacters) lines.push(word);
+    else lines[lines.length - 1] = `${current} ${word}`;
+  }
+  const visibleLines = lines.slice(0, 3);
+  if (lines.length > 3) visibleLines[2] = lines.slice(2).join(" ");
+  const longestLine = Math.max(...visibleLines.map((line) => line.length), 1);
+  const fontSize = Math.max(34, Math.min(64, Math.floor((width * 0.84) / (longestLine * 0.58))));
+  const lineHeight = Math.round(fontSize * 1.08);
+  const firstLineY = Math.round(height * 0.47 - ((visibleLines.length - 1) * lineHeight) / 2);
+  const escape = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  const text = visibleLines.map((line, index) => `<tspan x="${width * 0.08}" y="${firstLineY + index * lineHeight}">${escape(line)}</tspan>`).join("");
+  return Buffer.from(`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#6f48e5"/><circle cx="${width * 0.8}" cy="${height * 0.15}" r="${width * 0.2}" fill="#d4f163"/><path d="M0 ${height * 0.68} Q ${width * 0.4} ${height * 0.43} ${width} ${height * 0.72} V ${height} H0Z" fill="#ff765f"/><text fill="#fff" font-size="${fontSize}" font-family="Georgia,serif" font-weight="700">${text}</text></svg>`);
 }
 
-async function writeWebp(input, destination, shape) {
+async function writeWebp(input, destination, shape, fit = "cover", position = "attention") {
   const { width, height } = dimensions(shape);
   const temporary = `${destination}.${process.pid}.tmp.webp`;
   try {
     await sharp(input, { failOn: "warning", limitInputPixels: 40_000_000, sequentialRead: true })
       .rotate()
-      .resize(width, height, { fit: "cover", position: "attention" })
+      .resize(width, height, { fit, position })
       .webp({ quality: 78, effort: 5, smartSubsample: true })
       .toFile(temporary);
     await rename(temporary, destination);
@@ -149,13 +165,18 @@ async function processAsset(asset) {
   const cached = await validImage(destination, asset.shape);
   if (!force && cached) return { asset, state: "cached" };
 
+  if (asset.expectedFallback) {
+    await writeWebp(fallbackCard(asset.title, asset.shape), destination, asset.shape);
+    return { asset, state: "fallback (no relevant reusable image was found)" };
+  }
+
   try {
     const imageUrl = await resolveImage(asset);
     const image = await fetchLimited(imageUrl, "image");
     if (!/^image\/(?:avif|gif|jpeg|png|webp)\b/i.test(image.contentType)) {
       throw new Error(`Unexpected content type ${image.contentType}`);
     }
-    await writeWebp(image.buffer, destination, asset.shape);
+    await writeWebp(image.buffer, destination, asset.shape, asset.fit, asset.position);
     return { asset, state: "downloaded" };
   } catch (error) {
     if (cached) return { asset, state: `stale (${error instanceof Error ? error.message : String(error)})` };
@@ -193,7 +214,8 @@ for (const entry of await readdir(outputRoot, { withFileTypes: true })) {
 }
 
 const fallbacks = results.filter(({ state }) => state.startsWith("fallback"));
+const unexpectedFallbacks = fallbacks.filter(({ asset }) => !asset.expectedFallback);
 for (const { asset, state } of results) console.log(`${state.padEnd(42)} ${asset.file}`);
-console.log(`Prepared ${results.length} images; ${fallbacks.length} used generated fallbacks.`);
+console.log(`Prepared ${results.length} images; ${fallbacks.length} used generated fallbacks (${unexpectedFallbacks.length} unexpected).`);
 if (removedFiles.length) console.log(`Removed ${removedFiles.length} obsolete cached images.`);
-if (fallbacks.length > 4) process.exitCode = 1;
+if (unexpectedFallbacks.length > 4) process.exitCode = 1;

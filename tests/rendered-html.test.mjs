@@ -49,7 +49,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /Know Your Meme page views/);
   assert.match(html, /Wikipedia views · [A-Z][a-z]+/);
   assert.match(html, /Google Shopping rising rank/);
-  assert.match(html, /Google searches · 7 days/);
+  assert.match(html, /Google search volume/);
   assert.match(html, /Billboard Hot 100/);
   assert.match(html, /class="source-list"[^>]*>[\s\S]*?<a /);
   assert.doesNotMatch(html, /How an entry earns a spot|>Right now<|The whole internet\. Five short lists\.|Less feed\. More signal\./);
@@ -72,6 +72,9 @@ test("renders the complete finite culture briefing", async () => {
     brief.sections.filter((section) => section.moreItems.length).length);
   assert.equal((html.match(/class="expanded-entry /g) ?? []).length,
     brief.sections.reduce((count, section) => count + section.moreItems.length, 0));
+  assert.doesNotMatch(html, /class="expanded-source"|↗|▶/);
+  assert.match(html, /class="ui-icon ui-icon-external/);
+  assert.match(html, /class="ui-icon ui-icon-play/);
   assert.equal((html.match(/aria-label="Play /g) ?? []).length,
     brief.sections.find((section) => section.id === "music").items.length
       + brief.sections.find((section) => section.id === "music").moreItems.length);
@@ -232,6 +235,7 @@ test("keeps content and outbound links constrained", async () => {
   const allPeople = [...people.items, ...people.moreItems];
   assert.ok(allPeople.every((item) => /^Wikipedia views · [A-Z][a-z]+$/.test(item.metric.label)));
   assert.ok(allPeople.every((item) => !item.subtitle.includes("·")));
+  assert.ok(allPeople.every((item) => /Wikipedia article drew|most-read pages about living people/i.test(item.description)));
   const categoryCounts = new Map();
   for (const item of allPeople) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
   assert.ok([...categoryCounts.values()].every((count) => count <= 2));
@@ -250,6 +254,7 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allMovies.every((item) => /^\d+(?:\.\d{1,2})?[MK]?$/.test(item.metric.value)));
   assert.ok(allMovies.every((item) => item.rating === "Not rated" || /^\d+(?:\.\d)?$/.test(item.rating)));
   assert.ok(allMovies.every((item) => item.description.length >= 30));
+  assert.ok(allMovies.every((item) => /Wikipedia views|most-read movie pages/i.test(item.description)));
   const movieViews = allMovies.map((item) => Number(item.metric.value.replace("M", "e6").replace("K", "e3")));
   assert.deepEqual(movieViews, [...movieViews].sort((left, right) => right - left));
   const music = brief.sections.find((section) => section.id === "music");
@@ -261,10 +266,12 @@ test("keeps content and outbound links constrained", async () => {
   const billboardRanks = allSongs.map((item) => Number(item.metric.value.slice(1)));
   assert.deepEqual(billboardRanks, [...billboardRanks].sort((left, right) => left - right));
   assert.ok(allSongs.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
+  assert.ok(allSongs.every((item) => /current Billboard Hot 100.*Spotify’s Today’s Top Hits/i.test(item.description)));
   const products = brief.sections.find((section) => section.id === "products");
   const productRanks = [...products.items, ...products.moreItems].map((item) => Number(item.metric.value.match(/^#(\d+)/)[1]));
   assert.deepEqual(productRanks, [...productRanks].sort((left, right) => left - right));
   assert.ok([...products.items, ...products.moreItems].every((item) => new URL(item.url).hostname === "www.amazon.com"));
+  assert.ok([...products.items, ...products.moreItems].every((item) => /Google Shopping|U\.S\. Google Shopping/i.test(item.description)));
   const news = brief.sections.find((section) => section.id === "news");
   const volume = (value) => {
     const match = value.match(/([\d.]+)\s*([KMB])?\+/i);
@@ -272,7 +279,10 @@ test("keeps content and outbound links constrained", async () => {
   };
   const newsVolumes = [...news.items, ...news.moreItems].map((item) => volume(item.metric.value));
   assert.deepEqual(newsVolumes, [...newsVolumes].sort((left, right) => right - left));
-  assert.ok([...news.items, ...news.moreItems].every((item) => item.metric.label === "Google searches · 7 days"));
+  assert.ok([...news.items, ...news.moreItems].every((item) => item.metric.label === "Google search volume"));
+  assert.ok([...news.items, ...news.moreItems].every((item) => /^News(?: · [A-Z][a-z]{2} \d{1,2}, \d{4})?$/.test(item.subtitle)));
+  assert.ok([...news.items, ...news.moreItems].every((item) => !/past 7 days/i.test(item.subtitle)));
+  assert.ok([...news.items, ...news.moreItems].every((item) => /U\.S\. Google searches/i.test(item.description)));
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);
   assert.doesNotMatch(JSON.stringify(brief), /caution|b\*{2,}|a\*{2,}/i);
   assert.doesNotMatch(JSON.stringify(brief), /"(?:signal|score)":/);
