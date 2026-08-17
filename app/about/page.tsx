@@ -73,8 +73,8 @@ const methods = [
   },
   {
     board: "News",
-    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, and topic-matched Wikimedia imagery.",
-    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link each topic to current coverage, and reject unrelated reusable images.",
+    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, each linked publisher article’s lead image, and Wikimedia only as an image fallback.",
+    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link directly to current coverage, and cache that article’s lead image when it is safely available.",
     metric: "Seven-day Google search volume.",
   },
 ];

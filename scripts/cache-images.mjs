@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, rename, stat, unlink } from "node:fs/promises
 import path from "node:path";
 import process from "node:process";
 import sharp from "sharp";
-import { fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
+import { assertPublicHostname, fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const outputRoot = path.join(root, "public", "culture");
@@ -59,11 +59,12 @@ for (const section of brief.sections) {
       file,
       title: item.title,
       page: item.url,
+      refreshDaily: section.id === "news",
       expectedFallback: section.id === "news" && !item.imageSource,
       fit: section.id === "news" && /(?:logo|seal)/i.test(item.imageSource ?? "") ? "contain" : "cover",
       position: section.id === "news" ? "centre" : "attention",
       ...(item.imageSource
-        ? { direct: item.imageSource }
+        ? { direct: item.imageSource, directKind: item.imageSourceKind }
         : imdbId
           ? { direct: `https://images.metahub.space/poster/medium/${imdbId}/img` }
           : {}),
@@ -73,11 +74,14 @@ for (const section of brief.sections) {
   }
 }
 
-async function fetchLimited(rawUrl, kind) {
+async function fetchLimited(rawUrl, kind, directKind) {
+  const directHost = directKind === "article" ? new URL(rawUrl).hostname : null;
   return fetchBytes(rawUrl, {
     isAllowedHost: (hostname) => kind === "page"
       ? pageHosts.has(hostname)
-      : imageHosts.has(hostname) || allowedImageSuffixes.some((suffix) => hostname.endsWith(suffix)),
+      : imageHosts.has(hostname) || allowedImageSuffixes.some((suffix) => hostname.endsWith(suffix))
+        || hostname === directHost,
+    validateHost: directHost ? assertPublicHostname : undefined,
     kind,
     maxBytes: MAX_BYTES,
     timeoutMs: TIMEOUT_MS,
@@ -163,7 +167,7 @@ async function writeWebp(input, destination, shape, fit = "cover", position = "a
 async function processAsset(asset) {
   const destination = path.join(outputRoot, asset.file);
   const cached = await validImage(destination, asset.shape);
-  if (!force && cached) return { asset, state: "cached" };
+  if (!force && cached && !asset.refreshDaily) return { asset, state: "cached" };
 
   if (asset.expectedFallback) {
     await writeWebp(fallbackCard(asset.title, asset.shape), destination, asset.shape);
@@ -172,7 +176,7 @@ async function processAsset(asset) {
 
   try {
     const imageUrl = await resolveImage(asset);
-    const image = await fetchLimited(imageUrl, "image");
+    const image = await fetchLimited(imageUrl, "image", asset.directKind);
     if (!/^image\/(?:avif|gif|jpeg|png|webp)\b/i.test(image.contentType)) {
       throw new Error(`Unexpected content type ${image.contentType}`);
     }

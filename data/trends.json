@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Products and News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-17T18:47:12.399Z",
+  "generatedAt": "2026-08-17T19:06:14.333Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,218"
+            "value": "1,001,226"
           },
           "evidence": [
             {
@@ -630,7 +630,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya is an American actress and singer.",
+          "description": "Zendaya is an American actress and singer. ‘Spider-Man’ Cements Zendaya And Tom Holland As The 2026 Box Office's Highest-Grossing Couple.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -648,6 +648,10 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Zendaya"
+            },
+            {
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNMWNNODRaeVp1WWZNcW5VbmIyRHFRbkVUU2U5a0thR2MweTc3U05nRnlBSXNvQnhXdGptQjM5ZTNXNUlWaHpaN1lyLUdPQ2FvV2VMNjg4QXZsMDVHVkhnLXBqczRqTzVnMEpmRElmeHpVSHBrU0ZlVlJrSU5OdmRQVkNRLXVxRGJnWHJjTmtxR3d6d0tneU1rUE1EMFRaNmhfT1VlLXFpdXVBYmdEcktqeElLczZZWUd0cnptUl9Kcno?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -657,7 +661,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is a Colombian singer-songwriter. Justin Bieber Joins Madonna, BTS and Shakira for FIFA World Cup Final Halftime Show.",
+          "description": "Shakira is a Colombian singer-songwriter. Shakira’s 20-Year-Old Song Debuts And Continues Her Massive 2026.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -677,8 +681,8 @@
               "url": "https://en.wikipedia.org/wiki/Shakira"
             },
             {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPZnJReW95N1JaZ3lfaDlVS0tPaU5QNVlnb3BhbjBXbFBCaTRBeUVuU3Y5Y2VYSWxrMC1YUU44V1hCb3FoSllFQktzb0JCX1o5MWw3WWR3U0ZJU2pKNXA0TEJOTG1KZUFZOFljOUItSUxGbmQwZVRVV0ExaEZqTjUwTFJVd2hOT2F1ZVlLLXRpMU92VUtxNTZHeDhwOEI2cE4xc2VR?oc=5"
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNUW42YmFZaGNCd2J4dHYyRzVEVVhwdEQ5ZWpmWFJKUnhEcGl6UE55b3lKN0puWktuN3JSd3EtZGdKYmktRHRGMkxNUERkM2NPRlhvTGtRWFVtZTZXT0RSSjd3MFdybTNfaS1DREdycVNJdTFEUVg3Y2JUUHVIUXN3cXJYLXNxY3pHN0hGdVdLRndOLWZfM3I3ckFwTEtqdUd5QUJHWmpKNnI2N2hsNC1BU0lMbDJUNG9F?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -1668,7 +1672,7 @@
         },
         {
           "label": "Google News · current coverage",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQekVaYmRiX0ZlLS1wSmx4UGNFZnVkMnlmdFFWWXpSWE80X3ZBcEdiNkZzOGlKb0NwajRDOUtWUTkzRm85RGJlb1hLVi1ZejZIS3kzVlNnQzhMT0RadFhpQlh2ZkFWaDVXLUYwMUVSTjNpeWJjeERFVnB1RmJiV3ZFUnVkMXhpTm1VdTlsSG9YWDlxUFJvR0lad29faklGTXYtdjJWbGJnRUtWYllZ?oc=5"
+          "url": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/"
         }
       ],
       "layout": "landscape",
@@ -1679,9 +1683,12 @@
           "subtitle": "News · Aug 17, 2026",
           "description": "Rebel Ice Cream filed for Chapter 11 bankruptcy after 2021 lawsuit.",
           "image": "/culture/news-rebel-creamery-ice-cream-lawsuit.webp",
-          "alt": "Representative image for Rebel Creamery Ice Cream Lawsuit",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQekVaYmRiX0ZlLS1wSmx4UGNFZnVkMnlmdFFWWXpSWE80X3ZBcEdiNkZzOGlKb0NwajRDOUtWUTkzRm85RGJlb1hLVi1ZejZIS3kzVlNnQzhMT0RadFhpQlh2ZkFWaDVXLUYwMUVSTjNpeWJjeERFVnB1RmJiV3ZFUnVkMXhpTm1VdTlsSG9YWDlxUFJvR0lad29faklGTXYtdjJWbGJnRUtWYllZ?oc=5",
-          "source": "Google News",
+          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/17/PLSJ/91334761007-screenshot-rebel-ice-cream.jpg?crop=776,435,x6,y0&width=776&height=435&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/",
+          "alt": "Lead image from Cincinnati Enquirer's coverage of Rebel Creamery Ice Cream Lawsuit",
+          "url": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/",
+          "source": "Cincinnati Enquirer",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -1693,21 +1700,23 @@
             },
             {
               "source": "Cincinnati Enquirer via Google News",
-              "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQekVaYmRiX0ZlLS1wSmx4UGNFZnVkMnlmdFFWWXpSWE80X3ZBcEdiNkZzOGlKb0NwajRDOUtWUTkzRm85RGJlb1hLVi1ZejZIS3kzVlNnQzhMT0RadFhpQlh2ZkFWaDVXLUYwMUVSTjNpeWJjeERFVnB1RmJiV3ZFUnVkMXhpTm1VdTlsSG9YWDlxUFJvR0lad29faklGTXYtdjJWbGJnRUtWYllZ?oc=5"
+              "url": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/"
             }
           ],
           "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "Hawaii Hurricane",
+          "title": "Hurricane Lala",
           "subtitle": "News · Aug 15, 2026",
-          "description": "A Hawaiian hurricane is a tropical cyclone that forms in the Pacific Ocean and affects the Hawaiian Islands. Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "image": "/culture/news-hawaii-hurricane.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Iniki_1992-09-11_1931Z.jpg/1280px-Iniki_1992-09-11_1931Z.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "List of Hawaii hurricanes, representing Hawaii Hurricane",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcExoaTdvVmtRUGpDcUdzNW9sclZzb09qZENkOTF1TWlOOFY0d0taeF9MWUNiVlI3ZnE1MXdMMUxhcHBvR2VYV2ZuS3FKQ1o1NklrM0k2MmNuWnlldEY3TndTeFZ3SFk1dm8wX1U4enJZQ3p0bVZCdVdZLVlpWHJFV2w5REtVdU1tVTdRTEY1RktzQnpnQjU0ZzJaMmpZbU9r0gGmAUFVX3lxTE10Tm1LQmt0ZFE0SG1JazQtSHliMm1wSUk5dTZmRW9lN1BnLUZybURUeU9TMlZzRXlXa0VFODdyOXM0OXVfYXVvTnV3cUYzdFFwZnlGaGVRci1sTWhBYnBKVXM0MXN1OVl3SjJuS1AzYTBDMC1VTUphRkYzREhfb1VRU2NuT19LS0h6UVNYNVNmYWpEU05kb1dhQWFjWkRXeXlJSXBGQkE?oc=5",
-          "source": "Google News",
+          "description": "Hurricane Lala is a currently active tropical cyclone that was the third-wettest tropical cyclone to effect the U.S. state of Hawaii on record. Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "image": "/culture/news-hurricane-lala.webp",
+          "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "alt": "Lead image from ABC7 Bay Area's coverage of Hurricane Lala",
+          "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "source": "ABC7 Bay Area",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -1715,19 +1724,15 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hawaii+hurricane"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
             },
             {
               "source": "ABC7 Bay Area via Google News",
-              "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcExoaTdvVmtRUGpDcUdzNW9sclZzb09qZENkOTF1TWlOOFY0d0taeF9MWUNiVlI3ZnE1MXdMMUxhcHBvR2VYV2ZuS3FKQ1o1NklrM0k2MmNuWnlldEY3TndTeFZ3SFk1dm8wX1U4enJZQ3p0bVZCdVdZLVlpWHJFV2w5REtVdU1tVTdRTEY1RktzQnpnQjU0ZzJaMmpZbU9r0gGmAUFVX3lxTE10Tm1LQmt0ZFE0SG1JazQtSHliMm1wSUk5dTZmRW9lN1BnLUZybURUeU9TMlZzRXlXa0VFODdyOXM0OXVfYXVvTnV3cUYzdFFwZnlGaGVRci1sTWhBYnBKVXM0MXN1OVl3SjJuS1AzYTBDMC1VTUphRkYzREhfb1VRU2NuT19LS0h6UVNYNVNmYWpEU05kb1dhQWFjWkRXeXlJSXBGQkE?oc=5"
+              "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/"
             },
             {
               "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/List_of_Hawaii_hurricanes"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/List_of_Hawaii_hurricanes"
+              "url": "https://en.wikipedia.org/wiki/Hurricane_Lala"
             }
           ],
           "accent": "#9b8cff"
@@ -1738,10 +1743,12 @@
           "subtitle": "News · Aug 15, 2026",
           "description": "Massive egg recall in US south and south-west due to salmonella outbreak.",
           "image": "/culture/news-egg-recall.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/An_omelette_prepared_with_egg_substitute.jpg/1280px-An_omelette_prepared_with_egg_substitute.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "alt": "File:An omelette prepared with egg substitute.jpg, representing Egg Recall",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMGdEMXVZNFFYajJxemE4Z1IxZWZ1OFJrQlBFY3d6cEVRZkg0ZFIyeTh0eW8wUEVlTGRqVkZQVVViajBkTVNCU3J6WEJFN2J0c1cxaHN4cS1lc3Z3dDhrX3NOWUlXZVRtRzl3ek5ZX0dvTE5Dbk5mSkFyblpiNENkY3hDWHg1N01namNCaDJueGZkNHJHb3JvdHJ3S21GeGxpTXNybg?oc=5",
-          "source": "Google News",
+          "imageSource": "https://i.guim.co.uk/img/media/8db29763d7dd93fbeef64134375888b2dd0a1629/997_0_4972_3979/master/4972.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=9b27c35f4fa775aec9c7ae7450ce8beb",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
+          "alt": "Lead image from The Guardian's coverage of Egg Recall",
+          "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
+          "source": "The Guardian",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -1753,11 +1760,7 @@
             },
             {
               "source": "The Guardian via Google News",
-              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMGdEMXVZNFFYajJxemE4Z1IxZWZ1OFJrQlBFY3d6cEVRZkg0ZFIyeTh0eW8wUEVlTGRqVkZQVVViajBkTVNCU3J6WEJFN2J0c1cxaHN4cS1lc3Z3dDhrX3NOWUlXZVRtRzl3ek5ZX0dvTE5Dbk5mSkFyblpiNENkY3hDWHg1N01namNCaDJueGZkNHJHb3JvdHJ3S21GeGxpTXNybg?oc=5"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://commons.wikimedia.org/wiki/File:An_omelette_prepared_with_egg_substitute.jpg"
+              "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak"
             }
           ],
           "accent": "#5ab0ff"
@@ -1768,9 +1771,12 @@
           "subtitle": "News · Aug 6, 2026",
           "description": "GTA 6 Gameplay Trailer Announced for Netflix on August 27.",
           "image": "/culture/news-gta-6-august-27-presentation.webp",
-          "alt": "Representative image for GTA 6 August 27 Presentation",
-          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5",
-          "source": "Google News",
+          "imageSource": "https://www.vice.com/wp-content/uploads/sites/2/2026/08/GTA-6-Gameplay-Trailer-Announced-for-Netflix-on-August-27.jpg?w=1280",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.vice.com/en/article/gta-6-gameplay-trailer-netflix-august-27/",
+          "alt": "Lead image from VICE's coverage of GTA 6 August 27 Presentation",
+          "url": "https://www.vice.com/en/article/gta-6-gameplay-trailer-netflix-august-27/",
+          "source": "VICE",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -1782,57 +1788,23 @@
             },
             {
               "source": "VICE via Google News",
-              "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5"
+              "url": "https://www.vice.com/en/article/gta-6-gameplay-trailer-netflix-august-27/"
             }
           ],
           "accent": "#57d5a4"
         },
         {
           "rank": 5,
-          "title": "Have I Been Flocked",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "Flock Group Inc., doing business as Flock Safety, is a privately held American manufacturer and operator of surveillance hardware and software, particularly automated license plate recognition (ALPR). ‘Have I Been Flocked’ site lets you check.",
-          "image": "/culture/news-have-i-been-flocked.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Flock_Safety_camera.jpg/1280px-Flock_Safety_camera.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "alt": "File:Flock Safety camera.jpg, representing Have I Been Flocked",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMW4yQUxobnlNbmtfT0VyUVg5U3VyVTYxcnpUa0E2bUV5aG02R0JfdDRKalZ5WVREdkZUNXVTdmxZY3FQT0RlNmlQaTVMUENZUFozRk4ydzNsc1NMY0gwM1E1a2gxT3JfSGxLTjVZMU1PLVNjOWRZaUNwRW00NHJvdUlhZG1kM1Z6S1FEV1I5Z0xEZHBXQkhuSVBiT2JaRGdYc2MyeUdkc3hMckR6N2hMTnZDNm1jYkNFQW5tY1FmZTV6dw?oc=5",
-          "source": "Google News",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=have+i+been+flocked"
-            },
-            {
-              "source": "New York Post via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMW4yQUxobnlNbmtfT0VyUVg5U3VyVTYxcnpUa0E2bUV5aG02R0JfdDRKalZ5WVREdkZUNXVTdmxZY3FQT0RlNmlQaTVMUENZUFozRk4ydzNsc1NMY0gwM1E1a2gxT3JfSGxLTjVZMU1PLVNjOWRZaUNwRW00NHJvdUlhZG1kM1Z6S1FEV1I5Z0xEZHBXQkhuSVBiT2JaRGdYc2MyeUdkc3hMckR6N2hMTnZDNm1jYkNFQW5tY1FmZTV6dw?oc=5"
-            },
-            {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/Flock_Safety"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://commons.wikimedia.org/wiki/File:Flock_Safety_camera.jpg"
-            }
-          ],
-          "accent": "#ffc857"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
           "title": "Frozen 3",
           "subtitle": "News · Aug 15, 2026",
           "description": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
           "image": "/culture/news-frozen-3.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Frozen_charlie_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "alt": "File:Frozen charlie 3.jpg, representing Frozen 3",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5",
-          "source": "Google News",
+          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "alt": "Frozen 2",
+          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "source": "Deadline",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -1844,14 +1816,44 @@
             },
             {
               "source": "Deadline via Google News",
-              "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://commons.wikimedia.org/wiki/File:Frozen_charlie_3.jpg"
+              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
             }
           ],
           "accent": "#9b8cff"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Have I Been Flocked",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "Flock Group Inc., doing business as Flock Safety, is a privately held American manufacturer and operator of surveillance hardware and software, particularly automated license plate recognition (ALPR). ‘Have I Been Flocked’ site lets you check.",
+          "image": "/culture/news-have-i-been-flocked.webp",
+          "imageSource": "https://nypost.com/wp-content/uploads/sites/2/2026/08/137493657.jpg?quality=75&strip=all&w=1024",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/",
+          "alt": "Lead image from New York Post's coverage of Have I Been Flocked",
+          "url": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/",
+          "source": "New York Post",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=have+i+been+flocked"
+            },
+            {
+              "source": "New York Post via Google News",
+              "url": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/Flock_Safety"
+            }
+          ],
+          "accent": "#ffc857"
         },
         {
           "rank": 7,
@@ -1859,10 +1861,12 @@
           "subtitle": "News · Aug 15, 2026",
           "description": "D23: The Official Disney Fan Club, also known as simply D23, is the official fan club for the Walt Disney Company. Everything Announced At D23: New X-Men Cast, 'Avengers: Doomsday' Teaser, 'Coco 2,' 'Tangled' Live Action First Look & More.",
           "image": "/culture/news-d23.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Disney_D23_logo_2023.svg/1280px-Disney_D23_logo_2023.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "D23 (Disney), representing D23",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE80X29FS1BITzczM3JfaElPWVlfaFJzREpHeXl2bmYwNnNIcFRCSTd3QlRjaW1vNG5LV3R5dmNid3NDdUpTbW9ydktPOGxMczFDZnBJdF9zYXVQRUdWMDlaYmtBcnFhOE14VHNmMEhqSVRjTkZXX3hpckt1eFJGX28?oc=5",
-          "source": "Google News",
+          "imageSource": "https://deadline.com/wp-content/uploads/2026/08/d23-news.jpg?w=1024",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://deadline.com/lists/everything-announced-d23-2026-disney-fan-event/",
+          "alt": "D23 News",
+          "url": "https://deadline.com/lists/everything-announced-d23-2026-disney-fan-event/",
+          "source": "Deadline",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -1874,14 +1878,10 @@
             },
             {
               "source": "Deadline via Google News",
-              "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE80X29FS1BITzczM3JfaElPWVlfaFJzREpHeXl2bmYwNnNIcFRCSTd3QlRjaW1vNG5LV3R5dmNid3NDdUpTbW9ydktPOGxMczFDZnBJdF9zYXVQRUdWMDlaYmtBcnFhOE14VHNmMEhqSVRjTkZXX3hpckt1eFJGX28?oc=5"
+              "url": "https://deadline.com/lists/everything-announced-d23-2026-disney-fan-event/"
             },
             {
               "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/D23_(Disney)"
-            },
-            {
-              "source": "Wikimedia image context",
               "url": "https://en.wikipedia.org/wiki/D23_(Disney)"
             }
           ],
@@ -1889,14 +1889,48 @@
         },
         {
           "rank": 8,
+          "title": "Reacher Season 4",
+          "subtitle": "News · Aug 12, 2026",
+          "description": "The fourth season of the American action crime television series Reacher, based on the Jack Reacher book series by Lee Child, premiered on Amazon Prime Video on August 12, 2026. ‘Reacher’ Season 4 Release Schedule: When Every Episode Drops on Prime Video.",
+          "image": "/culture/news-reacher-season-4.webp",
+          "imageSource": "https://variety.com/wp-content/uploads/2026/08/RCHR_S4_FG_00273900_Still261_3000.jpg?w=1000&h=563&crop=1",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://variety.com/lists/reacher-season-4-cast-characters/",
+          "alt": "'Reacher' Season 4",
+          "url": "https://variety.com/lists/reacher-season-4-cast-characters/",
+          "source": "Variety",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=reacher+season+4"
+            },
+            {
+              "source": "Variety via Google News",
+              "url": "https://variety.com/lists/reacher-season-4-cast-characters/"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/Reacher_season_4"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
           "title": "Coco 2",
           "subtitle": "News · Aug 15, 2026",
           "description": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
           "image": "/culture/news-coco-2.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cocos_nucifera_from_Villupuram_dt_IMG_3891.JPG/1280px-Cocos_nucifera_from_Villupuram_dt_IMG_3891.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "alt": "File:Cocos nucifera from Villupuram dt IMG 3891.JPG, representing Coco 2",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5",
-          "source": "Google News",
+          "imageSource": "https://variety.com/wp-content/uploads/2026/08/Image-1.png?w=1000&h=563&crop=1",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/",
+          "alt": "coco 2 first look teen miguel",
+          "url": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/",
+          "source": "Variety",
           "metric": {
             "label": "Google search volume",
             "value": "100K+"
@@ -1908,25 +1942,23 @@
             },
             {
               "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://commons.wikimedia.org/wiki/File:Cocos_nucifera_from_Villupuram_dt_IMG_3891.JPG"
+              "url": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/"
             }
           ],
           "accent": "#5ab0ff"
         },
         {
-          "rank": 9,
+          "rank": 10,
           "title": "Supreme Court",
-          "subtitle": "News · Aug 11, 2026",
-          "description": "The Supreme Court of the United States (SCOTUS) is the highest court in the federal judiciary of the United States. Trump refuses to back down as Supreme Court blocks major policies.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "The Supreme Court of the United States (SCOTUS) is the highest court in the federal judiciary of the United States. Governor Reeves Appoints Amanda Jones Tollison to Mississippi Supreme Court.",
           "image": "/culture/news-supreme-court.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Seal_of_the_United_States_Supreme_Court.svg/1280px-Seal_of_the_United_States_Supreme_Court.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "Supreme Court of the United States, representing Supreme Court",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOXpuRXFHajY5R3E1amZfVVJQNUNqT1UydlVYaEJoYmhHOTJUSE9xZUFZOHgyOUd4NVNFT2JiR3pkbS1EaEpyU05YcU1GZGlZVC1zSTNNOGtFQXpiZVR3OGhrY2ZNUEJfeG11eXU0Yk9Qb0tWN0NDR0FlMUo1NUh4MEtnY25Hd214cnZYbWR6MVhLZEloMmZ0X2I0WTNDZ1F1T2cyZDhacHdWQml5MjExbGl2YnF1dlY1ZHVrdFVrLVE?oc=5",
-          "source": "Google News",
+          "imageSource": "https://governorreeves.ms.gov/wp-content/uploads/da4af2dd-024a-3715-5971-6be254bdad2f.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://governorreeves.ms.gov/governor-reeves-appoints-amanda-jones-tollison-to-mississippi-supreme-court/",
+          "alt": "Lead image from Office of Governor Tate Reeves (.gov)'s coverage of Supreme Court",
+          "url": "https://governorreeves.ms.gov/governor-reeves-appoints-amanda-jones-tollison-to-mississippi-supreme-court/",
+          "source": "Office of Governor Tate Reeves (.gov)",
           "metric": {
             "label": "Google search volume",
             "value": "50K+"
@@ -1937,74 +1969,70 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=supreme+court"
             },
             {
-              "source": "The Washington Post via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOXpuRXFHajY5R3E1amZfVVJQNUNqT1UydlVYaEJoYmhHOTJUSE9xZUFZOHgyOUd4NVNFT2JiR3pkbS1EaEpyU05YcU1GZGlZVC1zSTNNOGtFQXpiZVR3OGhrY2ZNUEJfeG11eXU0Yk9Qb0tWN0NDR0FlMUo1NUh4MEtnY25Hd214cnZYbWR6MVhLZEloMmZ0X2I0WTNDZ1F1T2cyZDhacHdWQml5MjExbGl2YnF1dlY1ZHVrdFVrLVE?oc=5"
+              "source": "Office of Governor Tate Reeves (.gov) via Google News",
+              "url": "https://governorreeves.ms.gov/governor-reeves-appoints-amanda-jones-tollison-to-mississippi-supreme-court/"
             },
             {
               "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States"
-            },
-            {
-              "source": "Wikimedia image context",
               "url": "https://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States"
             }
           ],
           "accent": "#ff6b57"
         }
       ],
-      "moreLabel": "Show ranks 6–9"
+      "moreLabel": "Show ranks 6–10"
     }
   ],
   "sourceHealth": [
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:12.717Z"
+      "checkedAt": "2026-08-17T19:06:14.620Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:13.679Z"
+      "checkedAt": "2026-08-17T19:06:15.331Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:13.445Z"
+      "checkedAt": "2026-08-17T19:06:15.131Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:14.421Z"
+      "checkedAt": "2026-08-17T19:06:16.056Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:14.005Z"
+      "checkedAt": "2026-08-17T19:06:15.622Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:58.853Z"
+      "checkedAt": "2026-08-17T19:07:00.536Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:12.672Z"
+      "checkedAt": "2026-08-17T19:06:14.602Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:12.945Z"
+      "checkedAt": "2026-08-17T19:06:14.611Z"
     },
     {
       "name": "Google Shopping / Amazon",
       "ok": false,
-      "checkedAt": "2026-08-17T18:47:19.777Z"
+      "checkedAt": "2026-08-17T19:06:21.839Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-17T18:47:18.624Z"
+      "checkedAt": "2026-08-17T19:06:21.790Z"
     }
   ]
 }

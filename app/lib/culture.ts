@@ -9,6 +9,8 @@ export type CultureItem = {
   description: string;
   image: string;
   imageSource?: string;
+  imageSourceKind?: "article";
+  imageSourcePageUrl?: string;
   alt: string;
   url: string;
   source: string;
@@ -78,7 +80,16 @@ function assertText(value: unknown, label: string, maximum = 800): asserts value
   }
 }
 
-function externalUrl(value: unknown, label: string) {
+function publicHostname(hostname: string) {
+  const normalized = hostname.toLowerCase().replace(/\.$/, "");
+  return Boolean(normalized)
+    && normalized !== "localhost"
+    && !normalized.includes(":")
+    && !/^\d+(?:\.\d+){3}$/.test(normalized)
+    && !/\.(?:home|internal|invalid|lan|local|localhost|onion|test)$/.test(normalized);
+}
+
+function externalUrl(value: unknown, label: string, allowPublicHost = false) {
   assertText(value, label, 2000);
   let url: URL;
   try {
@@ -87,13 +98,13 @@ function externalUrl(value: unknown, label: string) {
     throw new Error(`${label} is not a valid URL`);
   }
   if (url.protocol !== "https:" || url.username || url.password || url.port
-    || !allowedLinkHosts.has(url.hostname)) {
+    || !(allowedLinkHosts.has(url.hostname) || (allowPublicHost && publicHostname(url.hostname)))) {
     throw new Error(`${label} contains an unapproved external URL: ${value}`);
   }
   return url;
 }
 
-function validateItem(value: unknown, label: string, rank: number, titles: Set<string>): asserts value is CultureItem {
+function validateItem(value: unknown, label: string, rank: number, titles: Set<string>, sectionId: string): asserts value is CultureItem {
   if (!value || typeof value !== "object") throw new Error(`${label} is not an object`);
   const item = value as Record<string, unknown>;
   assertText(item.title, `${label} title`, 160);
@@ -111,15 +122,19 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   if (item.imageSource !== undefined) {
     assertText(item.imageSource, `${item.title} source image`, 2000);
     const imageUrl = new URL(item.imageSource);
+    const articleImage = item.imageSourceKind === "article" && sectionId === "news"
+      && typeof item.imageSourcePageUrl === "string"
+      && externalUrl(item.imageSourcePageUrl, `${item.title} image source page`, true).hostname
+        === externalUrl(item.url, item.title, true).hostname;
     if (imageUrl.protocol !== "https:" || imageUrl.username || imageUrl.password || imageUrl.port
-      || !/(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/.test(imageUrl.hostname)) {
+      || !(articleImage ? publicHostname(imageUrl.hostname) : /(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/.test(imageUrl.hostname))) {
       throw new Error(`${item.title} has an unapproved source image host`);
     }
   }
   if (typeof item.accent !== "string" || !/^#[0-9a-f]{6}$/i.test(item.accent)) {
     throw new Error(`${item.title} has an invalid accent color`);
   }
-  externalUrl(item.url, item.title);
+  externalUrl(item.url, item.title, sectionId === "news");
   if (!Array.isArray(item.evidence) || item.evidence.length < 2 || item.evidence.length > 6) {
     throw new Error(`${item.title} must have two to six sources of evidence`);
   }
@@ -130,7 +145,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
     const evidence = value as Record<string, unknown>;
     assertText(evidence.source, `${item.title} evidence label`, 120);
     evidenceSources.add(evidence.source.toLocaleLowerCase("en-US"));
-    evidenceHosts.add(externalUrl(evidence.url, `${item.title} evidence`).hostname);
+    evidenceHosts.add(externalUrl(evidence.url, `${item.title} evidence`, sectionId === "news").hostname);
   }
   if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
     throw new Error(`${item.title} evidence must come from distinct sources`);
@@ -189,7 +204,7 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
       if (!value || typeof value !== "object") throw new Error(`${section.title} has an invalid source`);
       const source = value as Record<string, unknown>;
       assertText(source.label, `${section.title} source label`, 160);
-      externalUrl(source.url, `${section.title} source`);
+      externalUrl(source.url, `${section.title} source`, expectedId === "news");
     }
     if (!Array.isArray(section.items) || section.items.length !== 5) {
       throw new Error(`${section.title} must contain exactly five items`);
@@ -199,8 +214,8 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     }
     if (section.moreLabel !== undefined) assertText(section.moreLabel, `${section.title} continuation label`, 160);
     const titles = new Set<string>();
-    section.items.forEach((item, index) => validateItem(item, `${section.title} item ${index + 1}`, index + 1, titles));
-    section.moreItems.forEach((item, index) => validateItem(item, `${section.title} continuation ${index + 1}`, index + 6, titles));
+    section.items.forEach((item, index) => validateItem(item, `${section.title} item ${index + 1}`, index + 1, titles, expectedId));
+    section.moreItems.forEach((item, index) => validateItem(item, `${section.title} continuation ${index + 1}`, index + 6, titles, expectedId));
   });
 
   const brief = value as CultureBrief;

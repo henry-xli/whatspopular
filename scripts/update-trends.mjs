@@ -2,6 +2,7 @@ import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { withHeadlessPage } from "./lib/headless-browser.mjs";
+import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./lib/news-article.mjs";
 import { fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -858,9 +859,14 @@ async function googleNewsContext(query, days = 45, { requireEvent = false } = {}
         overlap,
         score,
       };
-    }).filter((item) => item.headline && factualHeadline(item.headline, { requireEvent })
+    }).filter((item) => item.headline
       && item.overlap >= Math.min(2, Math.max(1, queryTokens.size)));
-    return items.sort((left, right) => right.score - left.score)[0] ?? null;
+    const ranked = items.sort((left, right) => right.score - left.score);
+    const selected = ranked.find((item) => factualHeadline(item.headline, { requireEvent }));
+    return selected ? {
+      ...selected,
+      alternates: ranked.filter((item) => item !== selected).slice(0, 5),
+    } : null;
   })();
   googleNewsCache.set(key, request);
   return request;
@@ -1647,8 +1653,16 @@ async function googleTrendingNews() {
   return mapConcurrent(filtered, 4, async (row) => {
     const context = await googleNewsContext(row.title, 14, { requireEvent: true }).catch(() => null);
     const topicQueries = [row.title, ...row.relatedTerms, context?.headline].filter(Boolean);
-    const topicSummary = await wikipediaTopicContext(topicQueries).catch(() => null);
-    const representative = topicSummary?.imageSource ? {
+    const [topicSummary, article] = await Promise.all([
+      wikipediaTopicContext(topicQueries).catch(() => null),
+      linkedNewsArticle(context),
+    ]);
+    const representative = article?.imageSource ? {
+      imageSource: article.imageSource,
+      title: article.imageAlt,
+      kind: "article",
+      sourcePageUrl: article.url,
+    } : topicSummary?.imageSource ? {
       imageSource: topicSummary.imageSource,
       pageUrl: topicSummary.pageUrl,
       title: topicSummary.title,
@@ -1658,16 +1672,31 @@ async function googleTrendingNews() {
     return {
       ...row,
       headline: context?.headline ?? row.title,
-      link: context?.link ?? fallbackUrl.href,
-      publishedAt: context?.publishedAt ?? null,
-      newsSource: context?.source ?? "Google News",
+      link: article?.url ?? context?.link ?? fallbackUrl.href,
+      publishedAt: article?.context?.publishedAt ?? context?.publishedAt ?? null,
+      newsSource: article?.context?.source ?? context?.source ?? "Google News",
       imageSource: representative?.imageSource,
+      imageSourceKind: representative?.kind,
+      imageSourcePageUrl: representative?.sourcePageUrl,
       imagePageUrl: representative?.pageUrl,
       imageTitle: representative?.title,
       topicSummary: topicSummary?.extract,
       topicPageUrl: topicSummary?.pageUrl,
     };
   });
+}
+
+async function linkedNewsArticle(context) {
+  if (!context) return null;
+  let primary = null;
+  for (const candidate of [context, ...(context.alternates ?? [])]) {
+    const articleUrl = await resolveGoogleNewsArticle(candidate.link).catch(() => null);
+    if (!articleUrl) continue;
+    if (!primary) primary = { context: candidate, url: articleUrl };
+    const metadata = await linkedArticleMetadata(articleUrl).catch(() => null);
+    if (metadata?.imageSource) return { context: candidate, ...metadata };
+  }
+  return primary;
 }
 
 function newsDescription(topic, title) {
@@ -1697,9 +1726,13 @@ function updateNews(brief, topics) {
       description: newsDescription(topic, title),
       image: current?.image ?? `/culture/news-${slugify(title)}.webp`,
       imageSource: topic.imageSource,
-      alt: topic.imageTitle ? `${topic.imageTitle}, representing ${title}` : `Representative image for ${title}`,
+      imageSourceKind: topic.imageSourceKind,
+      imageSourcePageUrl: topic.imageSourcePageUrl,
+      alt: topic.imageTitle || (topic.imageSourceKind === "article"
+        ? `Lead image from ${topic.newsSource}'s coverage of ${title}`
+        : `Representative image for ${title}`),
       url: topic.link,
-      source: "Google News",
+      source: topic.newsSource,
       metric: { label: "Google search volume", value: topic.volume },
       evidence: [
         { source: "Google Trending Now", url: trendUrl },
@@ -1736,7 +1769,12 @@ function validateBrief(brief) {
     }
     if (item.imageSource) {
       const imageUrl = new URL(item.imageSource);
-      if (imageUrl.protocol !== "https:" || !imageUrl.hostname.match(/(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/)) {
+      const articleImage = item.imageSourceKind === "article"
+        && section.id === "news"
+        && item.imageSourcePageUrl
+        && publicHttpsUrl(item.imageSourcePageUrl, "article image source page").hostname === new URL(item.url).hostname;
+      if (articleImage) publicHttpsUrl(imageUrl, "article image");
+      else if (imageUrl.protocol !== "https:" || !imageUrl.hostname.match(/(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/)) {
         throw new Error(`${item.title} has an invalid source image`);
       }
     }

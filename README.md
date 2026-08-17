@@ -52,14 +52,15 @@ Wikidata, Wikipedia, Cinemeta, Spotify, or Amazon metadata, then adds a factual
 recent-news sentence when one is available. Google Trends related queries and
 ranked Wikipedia search results disambiguate unfamiliar news topics. Question-
 style, editorial, and personality-led headline fragments are rejected. News
-entries use the selected article’s publication date and a source-matched
-Wikimedia image; if no relevant reusable image exists, the image pipeline makes
-a local title card instead of accepting an unrelated result.
+entries use the selected publisher article’s direct URL, publication date, and
+lead image metadata. Topic-matched Wikimedia imagery is used only when the
+article does not expose a usable image; the final fallback is a local title card.
 
-Every entry has evidence from at least two distinct approved source hosts.
-`scripts/cache-images.mjs` validates the snapshot, downloads only missing or
-invalid art through HTTPS allowlists, converts it to bounded local WebP files,
-and preserves a last-known-good image when an upstream host fails.
+Every entry has evidence from at least two distinct source hosts.
+`scripts/cache-images.mjs` validates the snapshot, refreshes News art daily,
+downloads other art only when missing or invalid, and converts everything to
+bounded local WebP files. Publisher hosts and redirects are checked before any
+article image is fetched, and a last-known-good image survives upstream failure.
 
 The YouTube Data API is used for Lessons in Meme Culture when
 `YOUTUBE_API_KEY` is configured; otherwise the updater reads YouTube’s public

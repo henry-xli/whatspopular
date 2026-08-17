@@ -1,5 +1,9 @@
+import { lookup } from "node:dns/promises";
+import { isIP } from "node:net";
+
 const redirectStatuses = new Set([301, 302, 303, 307, 308]);
 const retryableStatuses = new Set([408, 425, 429, 500, 502, 503, 504]);
+const publicHostCache = new Map();
 
 class FetchFailure extends Error {
   constructor(message, status, retryAfter = 0) {
@@ -20,6 +24,70 @@ function secureUrl(rawUrl, isAllowedHost, kind) {
     throw new Error(`Refusing unapproved ${kind} URL: ${url.origin}`);
   }
   return url;
+}
+
+function publicIpv4(address) {
+  const octets = address.split(".").map(Number);
+  if (octets.length !== 4 || octets.some((octet) => !Number.isInteger(octet) || octet < 0 || octet > 255)) return false;
+  const [first, second, third] = octets;
+  return !(first === 0
+    || first === 10
+    || first === 127
+    || (first === 100 && second >= 64 && second <= 127)
+    || (first === 169 && second === 254)
+    || (first === 172 && second >= 16 && second <= 31)
+    || (first === 192 && second === 0 && third === 0)
+    || (first === 192 && second === 0 && third === 2)
+    || (first === 192 && second === 168)
+    || (first === 198 && (second === 18 || second === 19))
+    || (first === 198 && second === 51 && third === 100)
+    || (first === 203 && second === 0 && third === 113)
+    || first >= 224);
+}
+
+function publicIpv6(address) {
+  const normalized = address.toLowerCase().split("%")[0];
+  if (normalized.startsWith("::ffff:")) return publicIpv4(normalized.slice(7));
+  return /^(?:2|3)[0-9a-f]{3}:/.test(normalized)
+    && !normalized.startsWith("2001:db8:");
+}
+
+export function isPublicAddress(address) {
+  const family = isIP(address);
+  return family === 4 ? publicIpv4(address) : family === 6 ? publicIpv6(address) : false;
+}
+
+export async function assertPublicHostname(hostname) {
+  const normalized = String(hostname).toLowerCase().replace(/\.$/, "");
+  if (!normalized || isIP(normalized)
+    || normalized === "localhost"
+    || /\.(?:home|internal|invalid|lan|local|localhost|onion|test)$/.test(normalized)) {
+    throw new Error(`Refusing non-public host: ${hostname}`);
+  }
+  if (!publicHostCache.has(normalized)) {
+    publicHostCache.set(normalized, (async () => {
+      let timer;
+      try {
+        const addresses = await Promise.race([
+          lookup(normalized, { all: true, verbatim: true }),
+          new Promise((_, reject) => {
+            timer = setTimeout(() => reject(new Error(`DNS lookup timed out for ${normalized}`)), 3000);
+          }),
+        ]);
+        if (!addresses.length || addresses.some(({ address }) => !isPublicAddress(address))) {
+          throw new Error(`Refusing non-public host: ${hostname}`);
+        }
+      } finally {
+        clearTimeout(timer);
+      }
+    })());
+  }
+  try {
+    await publicHostCache.get(normalized);
+  } catch (error) {
+    publicHostCache.delete(normalized);
+    throw error;
+  }
 }
 
 function retryAfter(response) {
@@ -63,6 +131,7 @@ async function fetchOnce(rawUrl, options) {
   const signal = AbortSignal.timeout(options.timeoutMs);
 
   for (let redirects = 0; redirects <= options.maxRedirects; redirects += 1) {
+    if (options.validateHost) await options.validateHost(url.hostname);
     const response = await fetch(url, {
       method,
       body,
@@ -121,6 +190,7 @@ export async function fetchBytes(rawUrl, options) {
     ...options,
   };
   if (typeof settings.isAllowedHost !== "function"
+    || (settings.validateHost !== undefined && typeof settings.validateHost !== "function")
     || !Number.isInteger(settings.maxBytes) || settings.maxBytes < 1
     || !Number.isInteger(settings.timeoutMs) || settings.timeoutMs < 1
     || !Number.isInteger(settings.attempts) || settings.attempts < 1 || settings.attempts > 5

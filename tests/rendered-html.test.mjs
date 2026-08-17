@@ -3,7 +3,8 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { fetchBytes, mapConcurrent } from "../scripts/lib/runtime.mjs";
+import { extractArticleImage, publicHttpsUrl } from "../scripts/lib/news-article.mjs";
+import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/lib/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -162,6 +163,30 @@ test("validates every redirect before making the next request", async () => {
   }
 });
 
+test("runs address validation again after an approved-host redirect", async () => {
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls += 1;
+    return new Response(null, { status: 302, headers: { location: "https://images.example.net/private" } });
+  };
+  try {
+    await assert.rejects(fetchBytes("https://publisher.example/story", {
+      isAllowedHost: (hostname) => hostname.endsWith(".example") || hostname.endsWith(".example.net"),
+      validateHost: async (hostname) => {
+        if (hostname === "images.example.net") throw new Error("Refusing non-public host");
+      },
+      kind: "test",
+      maxBytes: 1024,
+      timeoutMs: 1000,
+      attempts: 1,
+    }), /non-public host/);
+    assert.equal(calls, 1);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("rejects oversized upstream responses before reading them", async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () => new Response(new Uint8Array(2048), {
@@ -178,6 +203,31 @@ test("rejects oversized upstream responses before reading them", async () => {
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("extracts safe lead images from linked publisher metadata", () => {
+  const metadata = extractArticleImage(`
+    <meta content="https://cdn.example.com/news/lead.jpg?width=1200&amp;height=675" property="og:image">
+    <meta name="twitter:image" content="https://cdn.example.com/logo.png">
+    <meta property="og:image:alt" content="Storm clouds approaching the coast">
+  `, "https://www.example.com/story");
+  assert.equal(metadata.imageSource, "https://cdn.example.com/news/lead.jpg?width=1200&height=675");
+  assert.equal(metadata.imageAlt, "Storm clouds approaching the coast");
+  const structured = extractArticleImage(`
+    <script type="application/ld+json">{"url":"https://www.example.com/story","image":{"url":"https://cdn.example.com/news/structured.jpg"}}</script>
+  `, "https://www.example.com/story");
+  assert.equal(structured.imageSource, "https://cdn.example.com/news/structured.jpg");
+  assert.throws(() => publicHttpsUrl("http://example.com/image.jpg"), /non-public/);
+  assert.throws(() => publicHttpsUrl("https://127.0.0.1/image.jpg"), /non-public/);
+});
+
+test("classifies public and reserved network addresses", () => {
+  assert.equal(isPublicAddress("8.8.8.8"), true);
+  assert.equal(isPublicAddress("10.0.0.1"), false);
+  assert.equal(isPublicAddress("169.254.1.1"), false);
+  assert.equal(isPublicAddress("2606:4700:4700::1111"), true);
+  assert.equal(isPublicAddress("::1"), false);
+  assert.equal(isPublicAddress("fc00::1"), false);
 });
 
 test("bounded concurrency preserves result order", async () => {
@@ -281,6 +331,8 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok([...news.items, ...news.moreItems].every((item) => !/past 7 days/i.test(item.subtitle)));
   assert.ok([...news.items, ...news.moreItems].every((item) => !/U\.S\. Google searches|search volume|placing it #/i.test(item.description)));
   assert.ok([...news.items, ...news.moreItems].every((item) => item.description.length >= 24 && item.description.length <= 360));
+  assert.ok([...news.items, ...news.moreItems].every((item) => item.imageSourceKind !== "article"
+    || (item.imageSourcePageUrl === item.url && !["news.google.com", "en.wikipedia.org", "commons.wikimedia.org"].includes(new URL(item.imageSource).hostname))));
   const updater = await readFile(new URL("../scripts/update-trends.mjs", import.meta.url), "utf8");
   assert.match(updater, /data-term/);
   assert.match(updater, /parseAnnualSlangReview/);
