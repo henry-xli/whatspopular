@@ -8,6 +8,7 @@ export type CultureItem = {
   subtitle: string;
   description: string;
   image: string;
+  imageSource?: string;
   alt: string;
   url: string;
   source: string;
@@ -55,9 +56,12 @@ export type CultureBrief = {
 const allowedLinkHosts = new Set([
   "en.wikipedia.org",
   "knowyourmeme.com",
+  "news.google.com",
   "open.spotify.com",
   "trends.google.com",
   "trending.knowyourmeme.com",
+  "wikimedia.org",
+  "www.amazon.com",
   "www.boxofficemojo.com",
   "www.imdb.com",
   "www.billboard.com",
@@ -103,6 +107,14 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   if (typeof item.image !== "string" || !/^\/culture\/[a-z0-9-]+\.webp$/.test(item.image)) {
     throw new Error(`${item.title} must use a safe local WebP image`);
   }
+  if (item.imageSource !== undefined) {
+    assertText(item.imageSource, `${item.title} source image`, 2000);
+    const imageUrl = new URL(item.imageSource);
+    if (imageUrl.protocol !== "https:" || imageUrl.username || imageUrl.password || imageUrl.port
+      || !/(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/.test(imageUrl.hostname)) {
+      throw new Error(`${item.title} has an unapproved source image host`);
+    }
+  }
   if (typeof item.accent !== "string" || !/^#[0-9a-f]{6}$/i.test(item.accent)) {
     throw new Error(`${item.title} has an invalid accent color`);
   }
@@ -147,15 +159,17 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
   if (typeof candidate.generatedAt !== "string" || !Number.isFinite(Date.parse(candidate.generatedAt))) {
     throw new Error("Culture brief has an invalid generatedAt date");
   }
-  if (!Array.isArray(candidate.sections) || candidate.sections.length !== 5) {
-    throw new Error("Culture brief must contain exactly five boards");
+  if (!Array.isArray(candidate.sections) || candidate.sections.length !== 7) {
+    throw new Error("Culture brief must contain exactly seven boards");
   }
   const expected = [
     ["memes", "landscape"],
     ["slang", "landscape"],
-    ["creators", "square"],
-    ["watch", "poster"],
-    ["songs", "square"],
+    ["people", "square"],
+    ["movies", "poster"],
+    ["music", "square"],
+    ["products", "square"],
+    ["news", "landscape"],
   ];
   candidate.sections.forEach((value, sectionIndex) => {
     if (!value || typeof value !== "object") throw new Error(`Board ${sectionIndex + 1} is invalid`);
@@ -179,8 +193,8 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     if (!Array.isArray(section.items) || section.items.length !== 5) {
       throw new Error(`${section.title} must contain exactly five items`);
     }
-    if (!Array.isArray(section.moreItems) || section.moreItems.length < 1 || section.moreItems.length > 15) {
-      throw new Error(`${section.title} must contain between one and fifteen continuation items`);
+    if (!Array.isArray(section.moreItems) || section.moreItems.length > 15) {
+      throw new Error(`${section.title} must contain no more than fifteen continuation items`);
     }
     if (section.moreLabel !== undefined) assertText(section.moreLabel, `${section.title} continuation label`, 160);
     const titles = new Set<string>();
@@ -210,30 +224,47 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     throw new Error("Slang must be ordered by Know Your Meme page views");
   }
 
-  const creators = brief.sections.find((section) => section.id === "creators")!;
-  const creatorCategories = new Map<string, number>();
-  for (const item of creators.items) {
-    const count = (creatorCategories.get(item.category ?? "") ?? 0) + 1;
-    creatorCategories.set(item.category ?? "", count);
-    if (!item.category || count > 2) throw new Error("No profession may take more than two creator places");
+  const people = brief.sections.find((section) => section.id === "people")!;
+  const peopleCategories = new Map<string, number>();
+  for (const item of [...people.items, ...(people.moreItems ?? [])]) {
+    const count = (peopleCategories.get(item.category ?? "") ?? 0) + 1;
+    peopleCategories.set(item.category ?? "", count);
+    if (!item.category || count > 2) throw new Error("No category may take more than two People places");
   }
-  if (items("creators").some((item) => item.metric?.label !== "Wikipedia views · 30 days"
+  if (items("people").some((item) => !item.metric?.label.startsWith("Wikipedia views · ")
     || item.subtitle.includes("·"))) {
-    throw new Error("Creators must use one primary role and 30-day Wikipedia views");
+    throw new Error("People must use one primary category and prior-month Wikipedia views");
   }
 
-  const movies = items("watch");
-  if (movies.some((item) => !item.rating || item.metric?.label !== "U.S. & Canada total gross"
-    || !/^\$\d+(?:\.\d{1,2})?[BMK]?$/.test(item.metric.value))) {
-    throw new Error("Every movie must include an IMDb rating and abbreviated total gross");
+  const movies = items("movies");
+  if (movies.some((item) => !item.rating || !item.metric?.label.startsWith("Wikipedia views · "))) {
+    throw new Error("Every movie must include an IMDb rating state and prior-month Wikipedia views");
   }
 
-  const songs = items("songs");
-  const billboardRanks = songs.map((item) => Number(item.metric?.value.slice(1)));
-  if (songs.some((item) => !/^[A-Za-z0-9]{22}$/.test(item.spotifyId ?? "")
+  const music = items("music");
+  const billboardRanks = music.map((item) => Number(item.metric?.value.slice(1)));
+  if (music.some((item) => !/^[A-Za-z0-9]{22}$/.test(item.spotifyId ?? "")
       || item.metric?.label !== "Billboard Hot 100")
     || billboardRanks.some((rank, index) => !Number.isInteger(rank) || (index > 0 && rank < billboardRanks[index - 1]))) {
-    throw new Error("Every song must be playable and globally ordered by Billboard position");
+    throw new Error("Every music entry must be playable and globally ordered by Billboard position");
+  }
+
+  const products = items("products");
+  const productRanks = products.map((item) => Number(item.metric?.value.match(/^#(\d+)/)?.[1]));
+  if (products.some((item) => item.metric?.label !== "Google Shopping rising rank")
+    || productRanks.some((rank, index) => !Number.isInteger(rank) || (index > 0 && rank <= productRanks[index - 1]))) {
+    throw new Error("Products must preserve Google Shopping rising-query order");
+  }
+
+  const volume = (value: string | undefined) => {
+    const match = value?.match(/([\d.]+)\s*([KMB])?\+/i);
+    return match ? Number(match[1]) * ({ K: 1e3, M: 1e6, B: 1e9 }[match[2]?.toUpperCase() as "K" | "M" | "B"] ?? 1) : 0;
+  };
+  const news = items("news");
+  const newsVolumes = news.map((item) => volume(item.metric?.value));
+  if (news.some((item) => item.metric?.label !== "Google searches · 7 days")
+    || newsVolumes.some((views, index) => !views || (index > 0 && views > newsVolumes[index - 1]))) {
+    throw new Error("News must be ordered by seven-day Google search volume");
   }
 }
 

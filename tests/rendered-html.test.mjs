@@ -21,6 +21,8 @@ async function render(pathname = "/", init = {}) {
 }
 
 test("renders the complete finite culture briefing", async () => {
+  const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
+  const allItems = brief.sections.flatMap((section) => [...section.items, ...section.moreItems]);
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -35,13 +37,19 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /minus the infinite scroll/);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
-  assert.match(html, />Creators</);
+  assert.match(html, />People</);
   assert.match(html, />Movies</);
-  assert.match(html, />Songs</);
-  assert.match(html, /latest complete month/);
+  assert.match(html, />Music</);
+  assert.match(html, />Products</);
+  assert.match(html, />News</);
+  const boardPositions = ["memes", "slang", "people", "movies", "music", "products", "news"]
+    .map((id) => html.indexOf(`id="${id}-title"`));
+  assert.ok(boardPositions.every((position, index) => position >= 0
+    && (index === 0 || position > boardPositions[index - 1])));
   assert.match(html, /Know Your Meme page views/);
-  assert.match(html, /Wikipedia views · 30 days/);
-  assert.match(html, /U\.S\. &amp; Canada total gross/);
+  assert.match(html, /Wikipedia views · [A-Z][a-z]+/);
+  assert.match(html, /Google Shopping rising rank/);
+  assert.match(html, /Google searches · 7 days/);
   assert.match(html, /Billboard Hot 100/);
   assert.match(html, /class="source-list"[^>]*>[\s\S]*?<a /);
   assert.doesNotMatch(html, /How an entry earns a spot|>Right now<|The whole internet\. Five short lists\.|Less feed\. More signal\./);
@@ -54,15 +62,19 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /og\.jpg/);
   assert.doesNotMatch(html, /og\.png|data-nimg|\/_next\/image\?/);
   const images = html.match(/<img\b[^>]*>/g) ?? [];
-  assert.equal(images.length, 49);
+  assert.equal(images.length, allItems.length);
   assert.ok(images.every((image) => /\balt="[^"]+"/.test(image)));
   assert.ok(images.every((image) => /\bwidth="\d+"/.test(image) && /\bheight="\d+"/.test(image)));
   assert.ok(images.every((image) => /\bloading="lazy"/.test(image) && /\bdecoding="async"/.test(image)));
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
-  assert.equal((html.match(/class="culture-card/g) ?? []).length, 25);
-  assert.equal((html.match(/<details class="expanded-ranking"/g) ?? []).length, 5);
-  assert.equal((html.match(/class="expanded-entry /g) ?? []).length, 24);
-  assert.equal((html.match(/aria-label="Play /g) ?? []).length, 10);
+  assert.equal((html.match(/class="culture-card/g) ?? []).length, 35);
+  assert.equal((html.match(/<details class="expanded-ranking"/g) ?? []).length,
+    brief.sections.filter((section) => section.moreItems.length).length);
+  assert.equal((html.match(/class="expanded-entry /g) ?? []).length,
+    brief.sections.reduce((count, section) => count + section.moreItems.length, 0));
+  assert.equal((html.match(/aria-label="Play /g) ?? []).length,
+    brief.sections.find((section) => section.id === "music").items.length
+      + brief.sections.find((section) => section.id === "music").moreItems.length);
   assert.match(html, /Show ranks 6/);
   assert.match(html, /this shit pisses me off/i);
   assert.match(html, /toothy collectible toy/i);
@@ -73,12 +85,12 @@ test("renders the About flowchart", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Sources in\. Rankings out\./);
-  assert.match(html, /One ingestion run\. Five rankings\. One page\./);
-  assert.match(html, /10:17 UTC/);
-  for (const label of ["Pull sources", "Run once daily", "Apply five rules", "Validate and cache", "Publish the snapshot"]) {
+  assert.match(html, /One daily ingestion\. Seven rankings\. One page\./);
+  assert.match(html, /12:00 AM Pacific/);
+  for (const label of ["Pull sources", "Ingest at midnight Pacific", "Apply seven rules", "Validate and cache", "Publish the snapshot"]) {
     assert.match(html, new RegExp(`>${label}<`));
   }
-  for (const board of ["Memes", "Slang", "Creators", "Movies", "Songs"]) {
+  for (const board of ["Memes", "Slang", "People", "Movies", "Music", "Products", "News"]) {
     assert.match(html, new RegExp(`>${board}<`));
   }
   assert.match(html, /last good snapshot stays live/i);
@@ -183,9 +195,10 @@ test("bounded concurrency preserves result order", async () => {
 
 test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
-  assert.equal(brief.sections.length, 5);
+  assert.deepEqual(brief.sections.map((section) => section.id),
+    ["memes", "slang", "people", "movies", "music", "products", "news"]);
   assert.ok(brief.sections.every((section) => section.items.length === 5));
-  assert.ok(brief.sections.every((section) => section.moreItems.length >= 1 && section.moreItems.length <= 5));
+  assert.ok(brief.sections.every((section) => section.moreItems.length <= 15));
   for (const section of brief.sections) {
     assert.ok(section.sources.length >= 2);
     assert.ok(section.sources.every((source) => source.label && new URL(source.url).protocol === "https:"));
@@ -203,6 +216,7 @@ test("keeps content and outbound links constrained", async () => {
     assert.ok(item.evidence.length >= 2);
     assert.ok(new Set(item.evidence.map((entry) => entry.source)).size >= 2);
     assert.ok(new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size >= 2);
+    if (item.imageSource) assert.equal(new URL(item.imageSource).protocol, "https:");
   }
   const memes = brief.sections.find((section) => section.id === "memes");
   assert.ok(memes.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.youtube.com")));
@@ -214,12 +228,12 @@ test("keeps content and outbound links constrained", async () => {
   const pollRanks = memes.items.map((item) => Number(item.metric.value.slice(1)));
   assert.deepEqual(pollRanks, [...pollRanks].sort((left, right) => left - right));
   assert.doesNotMatch(memes.items.map((item) => item.description).join(" "), /placed in Know Your Meme|reached Lessons in Meme Culture|has a Know Your Meme entry/i);
-  const creators = brief.sections.find((section) => section.id === "creators");
-  assert.ok(creators.items.every((item) => item.metric.label === "Wikipedia views · 30 days"));
-  assert.ok(creators.items.every((item) => !item.subtitle.includes("·")));
-  assert.ok(creators.moreItems.every((item) => !item.subtitle.includes("·")));
+  const people = brief.sections.find((section) => section.id === "people");
+  const allPeople = [...people.items, ...people.moreItems];
+  assert.ok(allPeople.every((item) => /^Wikipedia views · [A-Z][a-z]+$/.test(item.metric.label)));
+  assert.ok(allPeople.every((item) => !item.subtitle.includes("·")));
   const categoryCounts = new Map();
-  for (const item of creators.items) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
+  for (const item of allPeople) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
   assert.ok([...categoryCounts.values()].every((count) => count <= 2));
   const slang = brief.sections.find((section) => section.id === "slang");
   assert.ok(slang.items.every((item) => item.metric.label === "Know Your Meme page views"));
@@ -229,24 +243,36 @@ test("keeps content and outbound links constrained", async () => {
   assert.deepEqual(slangViews, [...slangViews].sort((left, right) => right - left));
   assert.match([...slang.items, ...slang.moreItems].find((item) => item.title === "TS PMO ICL").description, /this shit pisses me off/i);
   assert.match([...slang.items, ...slang.moreItems].find((item) => item.title === "Labubu Matcha Dubai Chocolate").description, /Labubu.*matcha.*Dubai chocolate/i);
-  const movies = brief.sections.find((section) => section.id === "watch");
+  const movies = brief.sections.find((section) => section.id === "movies");
   assert.equal(movies.title, "Movies");
   const allMovies = [...movies.items, ...movies.moreItems];
-  assert.ok(allMovies.every((item) => item.metric.label === "U.S. & Canada total gross"));
-  assert.ok(allMovies.every((item) => /^\$\d+(?:\.\d{1,2})?[BMK]?$/.test(item.metric.value)));
-  assert.ok(allMovies.every((item) => item.rating === "New" || /^\d+(?:\.\d)?$/.test(item.rating)));
+  assert.ok(allMovies.every((item) => /^Wikipedia views · [A-Z][a-z]+$/.test(item.metric.label)));
+  assert.ok(allMovies.every((item) => /^\d+(?:\.\d{1,2})?[MK]?$/.test(item.metric.value)));
+  assert.ok(allMovies.every((item) => item.rating === "Not rated" || /^\d+(?:\.\d)?$/.test(item.rating)));
   assert.ok(allMovies.every((item) => item.description.length >= 30));
-  assert.ok(movies.items.some((item) => item.title === "Toy Story 5"));
-  assert.ok(movies.items.every((item) => !/One Night Only|Super Troopers 3/.test(item.title)));
-  const songs = brief.sections.find((section) => section.id === "songs");
-  assert.match(songs.description, /first 10 Spotify Global Top 50 tracks/i);
-  const allSongs = [...songs.items, ...songs.moreItems];
+  const movieViews = allMovies.map((item) => Number(item.metric.value.replace("M", "e6").replace("K", "e3")));
+  assert.deepEqual(movieViews, [...movieViews].sort((left, right) => right - left));
+  const music = brief.sections.find((section) => section.id === "music");
+  assert.match(music.description, /first 10 tracks in Spotify’s Today’s Top Hits/i);
+  const allSongs = [...music.items, ...music.moreItems];
   assert.ok(allSongs.every((item) => item.metric.label === "Billboard Hot 100"));
   assert.ok(allSongs.every((item) => Number.isInteger(item.spotifyRank) && item.spotifyRank <= 50));
   assert.ok(allSongs.every((item) => /^[A-Za-z0-9]{22}$/.test(item.spotifyId)));
   const billboardRanks = allSongs.map((item) => Number(item.metric.value.slice(1)));
   assert.deepEqual(billboardRanks, [...billboardRanks].sort((left, right) => left - right));
   assert.ok(allSongs.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
+  const products = brief.sections.find((section) => section.id === "products");
+  const productRanks = [...products.items, ...products.moreItems].map((item) => Number(item.metric.value.match(/^#(\d+)/)[1]));
+  assert.deepEqual(productRanks, [...productRanks].sort((left, right) => left - right));
+  assert.ok([...products.items, ...products.moreItems].every((item) => new URL(item.url).hostname === "www.amazon.com"));
+  const news = brief.sections.find((section) => section.id === "news");
+  const volume = (value) => {
+    const match = value.match(/([\d.]+)\s*([KMB])?\+/i);
+    return Number(match[1]) * ({ K: 1e3, M: 1e6, B: 1e9 }[match[2]] ?? 1);
+  };
+  const newsVolumes = [...news.items, ...news.moreItems].map((item) => volume(item.metric.value));
+  assert.deepEqual(newsVolumes, [...newsVolumes].sort((left, right) => right - left));
+  assert.ok([...news.items, ...news.moreItems].every((item) => item.metric.label === "Google searches · 7 days"));
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);
   assert.doesNotMatch(JSON.stringify(brief), /caution|b\*{2,}|a\*{2,}/i);
   assert.doesNotMatch(JSON.stringify(brief), /"(?:signal|score)":/);

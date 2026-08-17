@@ -1,6 +1,7 @@
 import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { withHeadlessPage } from "./lib/headless-browser.mjs";
 import { fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -12,45 +13,25 @@ const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 
 const allowedHosts = new Set([
+  "accounts.spotify.com",
   "api.urbandictionary.com",
+  "api.spotify.com",
+  "en.wikipedia.org",
   "knowyourmeme.com",
+  "news.google.com",
   "open.spotify.com",
-  "raw.githubusercontent.com",
   "v3-cinemeta.strem.io",
   "trending.knowyourmeme.com",
+  "trends.google.com",
   "wikimedia.org",
   "pageviews.wmcloud.org",
+  "www.amazon.com",
+  "www.billboard.com",
   "www.imdb.com",
-  "www.boxofficemojo.com",
+  "www.googleapis.com",
+  "www.wikidata.org",
   "www.youtube.com",
 ]);
-
-const cultureMakers = [
-  { title: "MrBeast", article: "MrBeast", category: "digital", subtitle: "Digital creator", description: "The large-scale video creator and entrepreneur remains a useful benchmark for mainstream internet attention." },
-  { title: "IShowSpeed", article: "IShowSpeed", category: "digital", subtitle: "Streamer", description: "The streamer and entertainer draws attention across gaming, sports, music, and live-event culture." },
-  { title: "Kai Cenat", article: "Kai_Cenat", category: "digital", subtitle: "Streamer", description: "The streamer is measured alongside established film and music figures rather than in a short-form-only list." },
-  { title: "PewDiePie", article: "PewDiePie", category: "digital", subtitle: "Digital creator", description: "One of online video's most established creators remains in the field so sustained attention counts alongside sudden spikes." },
-  { title: "Markiplier", article: "Markiplier", category: "digital", subtitle: "Digital creator", description: "The creator and filmmaker bridges internet-native work and more traditional entertainment." },
-  { title: "KSI", article: "KSI", category: "digital", subtitle: "Digital creator", description: "The creator, musician, boxer, and entrepreneur represents attention that moves between several media." },
-  { title: "Emma Chamberlain", article: "Emma_Chamberlain", category: "digital", subtitle: "Digital creator", description: "The creator and podcaster represents internet-native influence outside gaming and spectacle channels." },
-  { title: "Marques Brownlee", article: "Marques_Brownlee", category: "digital", subtitle: "Technology creator", description: "The technology creator provides a durable benchmark for online attention outside entertainment fandoms." },
-  { title: "Christopher Nolan", article: "Christopher_Nolan", category: "filmmaker", subtitle: "Film director", description: "The Odyssey's record-setting theatrical run has put its director back at the center of film conversation." },
-  { title: "Zendaya", article: "Zendaya", category: "actor", subtitle: "Actor", description: "Her starring roles in the current releases Spider-Man: Brand New Day and The Odyssey are driving renewed attention." },
-  { title: "Tom Holland", article: "Tom_Holland", category: "actor", subtitle: "Actor", description: "His starring turns in Spider-Man: Brand New Day and The Odyssey are both in theaters now." },
-  { title: "Matt Damon", article: "Matt_Damon", category: "actor", subtitle: "Actor", description: "His lead performance as Odysseus in Christopher Nolan's The Odyssey is driving current interest." },
-  { title: "Dwayne Johnson", article: "Dwayne_Johnson", category: "actor", subtitle: "Actor", description: "His return as Maui in the live-action Moana has brought him back into current movie conversation." },
-  { title: "James Gunn", article: "James_Gunn", category: "filmmaker", subtitle: "Film director", description: "His continuing work leading DC Studios keeps his upcoming film and television slate in public discussion." },
-  { title: "Greta Gerwig", article: "Greta_Gerwig", category: "filmmaker", subtitle: "Film director", description: "Interest in her next directing project keeps the filmmaker in current movie conversation." },
-  { title: "Jordan Peele", article: "Jordan_Peele", category: "filmmaker", subtitle: "Film director", description: "Anticipation around his next film keeps the director and writer in current genre-film conversation." },
-  { title: "Shakira", article: "Shakira", category: "musician", subtitle: "Musician", description: "Her ongoing Las Mujeres Ya No Lloran World Tour and new World Cup song “Dai Dai” are driving fresh global attention." },
-  { title: "Ariana Grande", article: "Ariana_Grande", category: "musician", subtitle: "Musician", description: "Her new album Petal and its Billboard #2 single “hate that i made you love me” are driving her current interest." },
-  { title: "Taylor Swift", article: "Taylor_Swift", category: "musician", subtitle: "Singer-songwriter", description: "New music activity and sustained catalog attention continue to generate unusually high public interest." },
-  { title: "Justin Bieber", article: "Justin_Bieber", category: "musician", subtitle: "Musician", description: "Current music and public appearances have brought the singer back into widespread conversation." },
-  { title: "Olivia Rodrigo", article: "Olivia_Rodrigo", category: "musician", subtitle: "Musician", description: "Her current chart activity is keeping the singer-songwriter prominent across music coverage and fan discussion." },
-  { title: "Bad Bunny", article: "Bad_Bunny", category: "musician", subtitle: "Musician", description: "His current music and live appearances continue to drive global, Spanish-language attention." },
-  { title: "Bruno Mars", article: "Bruno_Mars", category: "musician", subtitle: "Musician", description: "Current charting collaborations and live performances are driving renewed interest in the musician." },
-  { title: "Morgan Wallen", article: "Morgan_Wallen", category: "musician", subtitle: "Singer-songwriter", description: "His current chart and touring activity keeps him near the center of country-music conversation." },
-];
 
 const annualSlangReviewUrl = "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025";
 const annualSlangCandidates = [
@@ -119,13 +100,10 @@ const annualSlangCandidates = [
   },
 ];
 
-const movieDetails = new Map([
-  ["Spider-Man: Brand New Day", { rating: "8.2", image: "/culture/media-spider-man.webp", subtitle: "Movie · in theaters", description: "The current Spider-Man release leads the weekend chart's cumulative North American grosses." }],
-  ["Toy Story 5", { rating: "7.5", image: "/culture/media-toy-story.webp", subtitle: "Movie · in theaters", description: "Eight weeks of ticket sales put Toy Story 5 ahead of newer weekend debuts when ranked by total gross." }],
-  ["The Odyssey", { rating: "8.3", image: "/culture/media-odyssey.webp", subtitle: "Movie · in theaters", description: "Christopher Nolan's epic remains one of the largest cumulative earners still present in the weekend top ten." }],
-  ["Minions & Monsters", { rating: "6.5", image: "/culture/media-minions-monsters.webp", subtitle: "Movie · in theaters", description: "The animated holdover outranks smaller new releases once the chart is sorted by total gross." }],
-  ["Moana", { rating: "5.6", image: "/culture/media-moana.webp", subtitle: "Movie · in theaters", description: "The live-action musical rounds out the five largest cumulative grosses in the current weekend pool." }],
-]);
+const limcChannelId = "UCaHT88aobpcvRFEuy4v5Clg";
+const spotifyPlaylistId = "37i9dQZF1DXcBWIGoYBM5M";
+const shoppingTrendsUrl = "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US";
+const newsTrendsUrl = "https://trends.google.com/trending?geo=US&hours=168&sort=search-volume";
 
 async function fetchText(rawUrl, options = {}) {
   const { buffer } = await fetchBytes(rawUrl, {
@@ -215,23 +193,6 @@ function googleTrendsExploreUrl(titles, range) {
   return url.toString();
 }
 
-function isoPageviewStamp(stamp) {
-  return `${stamp.slice(0, 4)}-${stamp.slice(4, 6)}-${stamp.slice(6, 8)}`;
-}
-
-function pageviewsComparisonUrl(people) {
-  const range = pageviewRange();
-  const url = new URL("https://pageviews.wmcloud.org/");
-  url.searchParams.set("project", "en.wikipedia.org");
-  url.searchParams.set("platform", "all-access");
-  url.searchParams.set("agent", "user");
-  url.searchParams.set("redirects", "0");
-  url.searchParams.set("start", isoPageviewStamp(range.start));
-  url.searchParams.set("end", isoPageviewStamp(range.end));
-  url.searchParams.set("pages", people.map((person) => person.article).join("|"));
-  return url.toString();
-}
-
 function parseViewCount(value) {
   const match = String(value).match(/([0-9.]+)\s*([KMB])?\s+views?/i);
   if (!match) return 0;
@@ -244,6 +205,7 @@ function previousCompleteMonth(offset = 0) {
   date.setUTCMonth(date.getUTCMonth() - 1 - offset);
   return {
     month: new Intl.DateTimeFormat("en-US", { month: "long", timeZone: "UTC" }).format(date),
+    monthNumber: String(date.getUTCMonth() + 1).padStart(2, "0"),
     year: date.getUTCFullYear(),
   };
 }
@@ -360,7 +322,7 @@ function isWithinTwoMonths(video) {
   return !/(?:3|4|5|6|7|8|9|10|11|12) months? ago|years? ago/i.test(video.age);
 }
 
-async function lessonsInMemeCultureRecent() {
+async function lessonsInMemeCultureRecentHtml() {
   const html = await fetchText("https://www.youtube.com/@LIMC/videos", { headers: { "user-agent": "Mozilla/5.0" } });
   const initialRaw = html.match(/var ytInitialData = (\{.*?\});<\/script>/s)?.[1]
     ?? html.match(/window\["ytInitialData"\] = (\{.*?\});/s)?.[1];
@@ -382,6 +344,56 @@ async function lessonsInMemeCultureRecent() {
     if (pageVideos.length && pageVideos.every((video) => !isWithinTwoMonths(video))) break;
   }
   return [...new Map(videos.filter(isWithinTwoMonths).map((video) => [video.id, video])).values()];
+}
+
+async function lessonsInMemeCultureRecentApi(apiKey) {
+  const channelUrl = new URL("https://www.googleapis.com/youtube/v3/channels");
+  channelUrl.search = new URLSearchParams({
+    part: "contentDetails",
+    id: limcChannelId,
+    key: apiKey,
+  });
+  const channel = JSON.parse(await fetchText(channelUrl));
+  const uploads = channel.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+  if (!uploads) throw new Error("YouTube Data API returned no LIMC uploads playlist");
+
+  const cutoff = Date.now() - 62 * 86_400_000;
+  const videos = [];
+  let pageToken;
+  for (let page = 0; page < 4; page += 1) {
+    const playlistUrl = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
+    playlistUrl.search = new URLSearchParams({
+      part: "snippet,contentDetails",
+      playlistId: uploads,
+      maxResults: "50",
+      key: apiKey,
+      ...(pageToken ? { pageToken } : {}),
+    });
+    const payload = JSON.parse(await fetchText(playlistUrl));
+    const pageItems = (payload.items ?? []).map((item) => ({
+      id: item.contentDetails?.videoId ?? item.snippet?.resourceId?.videoId,
+      title: item.snippet?.title ?? "",
+      publishedAt: item.contentDetails?.videoPublishedAt ?? item.snippet?.publishedAt,
+      views: 0,
+      age: "",
+    })).filter((video) => video.id && Number.isFinite(Date.parse(video.publishedAt)));
+    videos.push(...pageItems.filter((video) => Date.parse(video.publishedAt) >= cutoff));
+    if (!payload.nextPageToken || pageItems.some((video) => Date.parse(video.publishedAt) < cutoff)) break;
+    pageToken = payload.nextPageToken;
+  }
+  if (!videos.length) throw new Error("YouTube Data API returned no LIMC uploads from the past two months");
+  return videos;
+}
+
+async function lessonsInMemeCultureRecent() {
+  if (process.env.YOUTUBE_API_KEY) {
+    try {
+      return await lessonsInMemeCultureRecentApi(process.env.YOUTUBE_API_KEY);
+    } catch (error) {
+      console.warn(`YouTube Data API fallback: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  return lessonsInMemeCultureRecentHtml();
 }
 
 function memeVideoMatch(candidate, videos, context = "") {
@@ -475,12 +487,12 @@ async function updateMemes(brief, result, videos) {
   ];
   section.items = ordered.map(({ candidate, video, description }, index) => {
     const current = currentByUrl.get(candidate.url);
-    const title = current?.title ?? candidate.title;
+    const title = candidate.title;
     return {
       rank: index + 1,
       title,
       subtitle: `${result.month} poll finalist · LIMC covered`,
-      description: current?.description ?? description,
+      description,
       image: current?.image ?? `/culture/meme-${slugify(title)}.webp`,
       alt: current?.alt ?? `Visual example of the ${title} meme`,
       url: candidate.url,
@@ -495,7 +507,7 @@ async function updateMemes(brief, result, videos) {
   });
   section.moreItems = pollMatches.slice(5, 10).map(({ candidate, video, description }, index) => {
     const current = currentByUrl.get(candidate.url);
-    const title = current?.title ?? candidate.title;
+    const title = candidate.title;
     return {
       rank: index + 6,
       title,
@@ -584,290 +596,336 @@ function updateSlang(brief, pageviews) {
   section.moreLabel = `Show ranks 6–${allItems.length} by page views`;
 }
 
-async function wikipediaCreatorPageviews(items) {
-  const range = pageviewRange();
-  const pairs = await mapConcurrent(items, 3, async (item) => {
-    const url = `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/${encodeURIComponent(item.article)}/daily/${range.start}/${range.end}`;
-    const payload = JSON.parse(await fetchText(url));
-    const views = (payload?.items ?? []).reduce((total, day) => total + Number(day.views ?? 0), 0);
-    if (!Number.isFinite(views) || views <= 0) throw new Error(`Wikipedia returned no pageviews for ${item.title}`);
-    return [item.title, views];
-  });
-  return Object.fromEntries(pairs);
+function articleTitle(article) {
+  try {
+    return decodeURIComponent(article.replaceAll("_", " "));
+  } catch {
+    return article.replaceAll("_", " ");
+  }
 }
 
-function updateCreators(brief, pageviews) {
-  const section = brief.sections.find((entry) => entry.id === "creators");
+function claimIds(entity, property) {
+  return (entity?.claims?.[property] ?? [])
+    .map((claim) => claim.mainsnak?.datavalue?.value?.id)
+    .filter(Boolean);
+}
+
+function claimStrings(entity, property) {
+  return (entity?.claims?.[property] ?? [])
+    .map((claim) => claim.mainsnak?.datavalue?.value)
+    .filter((value) => typeof value === "string");
+}
+
+async function wikidataEntitiesForTitles(titles) {
+  const entities = new Map();
+  const unique = [...new Map(titles.map((title) => [normalize(title), title])).values()];
+  for (let index = 0; index < unique.length; index += 35) {
+    const url = new URL("https://www.wikidata.org/w/api.php");
+    url.search = new URLSearchParams({
+      action: "wbgetentities",
+      sites: "enwiki",
+      titles: unique.slice(index, index + 35).join("|"),
+      props: "descriptions|claims|sitelinks",
+      languages: "en",
+      format: "json",
+      origin: "*",
+    });
+    const payload = JSON.parse(await fetchText(url));
+    for (const entity of Object.values(payload.entities ?? {})) {
+      const title = entity.sitelinks?.enwiki?.title;
+      if (title) entities.set(normalize(title), entity);
+    }
+  }
+  return entities;
+}
+
+async function wikipediaPageDetails(titles) {
+  const pages = new Map();
+  for (let index = 0; index < titles.length; index += 20) {
+    const url = new URL("https://en.wikipedia.org/w/api.php");
+    url.search = new URLSearchParams({
+      action: "query",
+      prop: "extracts|pageimages",
+      titles: titles.slice(index, index + 20).join("|"),
+      exintro: "1",
+      explaintext: "1",
+      exsentences: "2",
+      piprop: "thumbnail|name",
+      pithumbsize: "900",
+      redirects: "1",
+      format: "json",
+      origin: "*",
+    });
+    const payload = JSON.parse(await fetchText(url));
+    for (const page of Object.values(payload.query?.pages ?? {})) {
+      if (page.title) pages.set(normalize(page.title), page);
+    }
+  }
+  return pages;
+}
+
+function topviewsToolUrl() {
+  return "https://pageviews.wmcloud.org/topviews/?project=en.wikipedia.org&platform=all-access&date=last-month&excludes=";
+}
+
+async function wikipediaMonthlyTop() {
+  const period = previousCompleteMonth();
+  const apiUrl = `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/${period.year}/${period.monthNumber}/all-days`;
+  const payload = JSON.parse(await fetchText(apiUrl));
+  const rows = (payload.items?.[0]?.articles ?? [])
+    .filter((row) => typeof row.article === "string" && !row.article.includes(":")
+      && Number.isFinite(Number(row.views)) && Number(row.views) > 0)
+    .map((row) => ({ ...row, title: articleTitle(row.article), views: Number(row.views) }));
+  if (rows.length < 500) throw new Error(`Wikimedia returned only ${rows.length} monthly top pages`);
+  const entities = await wikidataEntitiesForTitles(rows.slice(0, 1000).map((row) => row.title));
+  return { period, apiUrl, rows, entities };
+}
+
+function personCategory(description) {
+  const categories = [
+    ["social-media", "Social media", /\b(?:influencer|youtuber|streamer|content creator|social media|internet personality)\b/i],
+    ["sports", "Sports", /\b(?:association football player|footballer|football player|football manager|football administrator|soccer player|basketball player|baseball player|tennis player|golfer|athlete|boxer|wrestler|fighter|sportsperson|sports manager|sports administrator|sports executive|racing driver|coach)\b/i],
+    ["film", "Film", /\b(?:actor|actress|filmmaker|director|screenwriter|film producer|cinematographer)\b/i],
+    ["music", "Music", /\b(?:singer|musician|rapper|songwriter|composer|record producer|disc jockey|dj)\b/i],
+    ["business", "Business", /\b(?:businessperson|businessman|businesswoman|business magnate|entrepreneur|executive|chief executive|founder|industrialist|investor|billionaire|marketing)\b/i],
+    ["media", "Media", /\b(?:journalist|presenter|broadcaster|comedian|television personality|media personality)\b/i],
+    ["literature", "Literature", /\b(?:writer|author|novelist|poet|playwright)\b/i],
+    ["science-technology", "Science & technology", /\b(?:engineer|scientist|researcher|inventor|physician|academic)\b/i],
+  ];
+  const matches = categories
+    .map(([id, label, pattern], priority) => ({ id, label, priority, index: description.search(pattern) }))
+    .filter((match) => match.index >= 0)
+    .sort((left, right) => left.index - right.index || left.priority - right.priority);
+  return matches.length ? [matches[0].id, matches[0].label] : ["other", "Other"];
+}
+
+function eligiblePerson(entity) {
+  const description = entity?.descriptions?.en?.value ?? "";
+  if (!claimIds(entity, "P31").includes("Q5")
+    || !(entity?.claims?.P569?.length)
+    || entity?.claims?.P570?.length) return false;
+  if (claimIds(entity, "P106").includes("Q82955")) return false;
+  return !/\b(?:politician|president|prime minister|senator|governor|member of parliament|political candidate|monarch|king|queen)\b/i.test(description);
+}
+
+function conciseDescription(value, fallback) {
+  const clean = plainText(value ?? "");
+  if (!clean) return fallback;
+  return clean.length <= 420 ? clean : `${clean.slice(0, 417).replace(/\s+\S*$/, "")}…`;
+}
+
+async function updatePeople(brief, topviews) {
+  const section = brief.sections.find((entry) => entry.id === "people");
   if (!section) return;
-  const currentByTitle = new Map(
-    [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
-  );
-  if (!pageviews) return;
-  const ranked = cultureMakers
-    .filter((item) => Number.isFinite(pageviews[item.title]))
-    .sort((left, right) => pageviews[right.title] - pageviews[left.title]);
+  const eligible = topviews.rows.slice(0, 1000)
+    .map((row) => {
+      const entity = topviews.entities.get(normalize(row.title));
+      const [category, label] = personCategory(entity?.descriptions?.en?.value ?? "");
+      return { ...row, entity, category, label };
+    })
+    .filter((row) => eligiblePerson(row.entity));
+  if (eligible.length < 10) throw new Error(`Wikimedia topviews produced only ${eligible.length} eligible living non-politicians`);
   const selected = [];
   const categoryCounts = new Map();
-  for (const person of ranked) {
+  for (const person of eligible) {
     const count = categoryCounts.get(person.category) ?? 0;
     if (count >= 2) continue;
     selected.push(person);
     categoryCounts.set(person.category, count + 1);
-    if (selected.length === 5) break;
+    if (selected.length === 10) break;
   }
-  const leaders = selected;
-  if (leaders.length < 5) throw new Error("Fewer than five culture-makers had a direct popularity measure");
-  const selectedTitles = new Set(leaders.map((person) => person.title));
-  const continuation = ranked.filter((person) => !selectedTitles.has(person.title)).slice(0, 5);
-  if (!continuation.length) throw new Error("No additional culture-makers had a direct popularity measure");
-  const pageviewsUrl = pageviewsComparisonUrl(leaders);
-  const extendedPageviewsUrl = pageviewsComparisonUrl([...leaders, ...continuation]);
-  const trendsUrl = googleTrendsExploreUrl(leaders.map((person) => person.title), "today 1-m");
-  section.eyebrow = "People · past 30 days";
-  section.description = "People are ranked by 30-day English Wikipedia views, with no more than two actors, musicians, filmmakers, or digital creators in the five.";
-  section.sources = [
-    { label: "Wikipedia Pageviews · these five, 30 days", url: pageviewsUrl },
-    { label: "Google Trends · these five, 30 days", url: trendsUrl },
-  ];
-  section.items = leaders.map((person, index) => {
-    const current = currentByTitle.get(normalize(person.title));
-    const url = `https://en.wikipedia.org/wiki/${person.article}`;
-    return {
-      rank: index + 1,
-      title: person.title,
-      subtitle: person.subtitle,
-      description: person.description,
-      image: current?.image ?? `/culture/creator-${slugify(person.title)}.webp`,
-      alt: current?.alt ?? `Portrait of ${person.title}`,
-      url,
-      source: "Wikipedia",
-      metric: { label: "Wikipedia views · 30 days", value: formatCompact(pageviews[person.title]) },
-      evidence: [
-        { source: "Google Trends", url: googleTrendsExploreUrl([person.title], "today 1-m") },
-        { source: "Wikipedia Pageviews", url: pageviewsUrl },
-      ],
-      accent: accents[index],
-      category: person.category,
-    };
-  });
-  section.moreItems = continuation.map((person, index) => {
-    const current = currentByTitle.get(normalize(person.title));
-    return {
-      rank: index + 6,
-      title: person.title,
-      subtitle: person.subtitle,
-      description: person.description,
-      image: current?.image ?? `/culture/creator-${slugify(person.title)}.webp`,
-      alt: current?.alt ?? `Portrait of ${person.title}`,
-      url: `https://en.wikipedia.org/wiki/${person.article}`,
-      source: "Wikipedia",
-      metric: { label: "Wikipedia views · 30 days", value: formatCompact(pageviews[person.title]) },
-      evidence: [
-        { source: "Google Trends", url: googleTrendsExploreUrl([person.title], "today 1-m") },
-        { source: "Wikipedia Pageviews", url: extendedPageviewsUrl },
-      ],
-      accent: accents[(index + 5) % accents.length],
-      category: person.category,
-    };
-  });
-  section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank} by Wikipedia views`;
-}
-
-function pageviewRange() {
-  const end = new Date();
-  end.setUTCDate(end.getUTCDate() - 1);
-  const start = new Date(end);
-  start.setUTCDate(start.getUTCDate() - 29);
-  const stamp = (date) => `${date.getUTCFullYear()}${String(date.getUTCMonth() + 1).padStart(2, "0")}${String(date.getUTCDate()).padStart(2, "0")}`;
-  return { start: stamp(start), end: stamp(end) };
-}
-
-function previousCompletedSunday(offset = 0) {
-  const date = new Date();
-  const daysSinceSunday = date.getUTCDay() || 7;
-  date.setUTCDate(date.getUTCDate() - daysSinceSunday - (offset * 7));
-  date.setUTCHours(12, 0, 0, 0);
-  return date;
-}
-
-function isoWeekCode(date) {
-  const target = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
-  const day = (target.getUTCDay() + 6) % 7;
-  target.setUTCDate(target.getUTCDate() - day + 3);
-  const isoYear = target.getUTCFullYear();
-  const firstThursday = new Date(Date.UTC(isoYear, 0, 4));
-  firstThursday.setUTCDate(firstThursday.getUTCDate() - ((firstThursday.getUTCDay() + 6) % 7) + 3);
-  const week = 1 + Math.round((target - firstThursday) / 604_800_000);
-  return `${isoYear}W${String(week).padStart(2, "0")}`;
-}
-
-function weekendLabel(sunday) {
-  const friday = new Date(sunday);
-  friday.setUTCDate(friday.getUTCDate() - 2);
-  const month = new Intl.DateTimeFormat("en-US", { month: "long", timeZone: "UTC" });
-  const fridayMonth = month.format(friday);
-  const sundayMonth = month.format(sunday);
-  const dates = fridayMonth === sundayMonth
-    ? `${fridayMonth} ${friday.getUTCDate()}–${sunday.getUTCDate()}`
-    : `${fridayMonth} ${friday.getUTCDate()}–${sundayMonth} ${sunday.getUTCDate()}`;
-  return `${dates}, ${sunday.getUTCFullYear()}`;
-}
-
-function parseMoney(value) {
-  const amount = Number(String(value).replace(/[^0-9.]/g, ""));
-  return Number.isFinite(amount) ? amount : 0;
-}
-
-function formatMoney(value) {
-  const units = [
-    [1_000_000_000, "B"],
-    [1_000_000, "M"],
-    [1_000, "K"],
-  ];
-  const unit = units.find(([threshold]) => value >= threshold);
-  if (!unit) return `$${Math.round(value)}`;
-  const [threshold, suffix] = unit;
-  const scaled = value / threshold;
-  const digits = scaled >= 100 ? 0 : scaled >= 10 ? 1 : 2;
-  return `$${scaled.toFixed(digits).replace(/\.0+$/, "")}${suffix}`;
-}
-
-function parseWeekendRows(html) {
-  const table = html.match(/<table[^>]*mojo-body-table[^>]*>[\s\S]*?<\/table>/i)?.[0];
-  if (!table) throw new Error("Box Office Mojo returned no weekend table");
-  const rows = [];
-  for (const match of table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)) {
-    const cells = [...match[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((cell) => plainText(cell[1]));
-    const releasePath = match[1].match(/href="(\/release\/[^"?]+)[^\"]*"/i)?.[1];
-    if (cells.length < 10 || !releasePath) continue;
-    rows.push({
-      weekendRank: Number(cells[0]),
-      title: cells[2],
-      weekendGross: parseMoney(cells[3]),
-      totalGross: parseMoney(cells[8]),
-      releaseUrl: `https://www.boxofficemojo.com${releasePath}`,
-    });
-  }
-  if (rows.length < 10) throw new Error(`Box Office Mojo returned only ${rows.length} weekend titles`);
-  return rows;
-}
-
-async function cinemetaMovieDetails(imdbId) {
-  const payload = JSON.parse(await fetchText(`https://v3-cinemeta.strem.io/meta/movie/${imdbId}.json`));
-  const meta = payload.meta;
-  if (!meta?.name) throw new Error(`No movie metadata found for ${imdbId}`);
-  return {
-    rating: String(meta.imdbRating ?? "").trim() || "New",
-    description: meta.description ? plainText(meta.description) : null,
-  };
-}
-
-async function boxOfficeWeekend() {
-  let lastError;
-  for (let offset = 0; offset < 3; offset += 1) {
-    const sunday = previousCompletedSunday(offset);
-    const chartUrl = `https://www.boxofficemojo.com/weekend/${isoWeekCode(sunday)}/`;
-    try {
-      const rows = parseWeekendRows(await fetchText(chartUrl, { headers: { "user-agent": "Mozilla/5.0" } }))
-        .slice(0, 10)
-        .sort((left, right) => right.totalGross - left.totalGross);
-      const enriched = await mapConcurrent(rows, 4, async (row) => {
-        const html = await fetchText(row.releaseUrl, { headers: { "user-agent": "Mozilla/5.0" } });
-        const imdbId = html.match(/\/title\/(tt[0-9]{7,9})/i)?.[1];
-        if (!imdbId) throw new Error(`No IMDb title ID found for ${row.title}`);
-        const metadata = await cinemetaMovieDetails(imdbId);
-        return { ...row, ...metadata, imdbId, imdbUrl: `https://www.imdb.com/title/${imdbId}/` };
-      });
-      return { chartUrl, imdbChartUrl: "https://www.imdb.com/chart/boxoffice/", label: weekendLabel(sunday), rows: enriched };
-    } catch (error) {
-      lastError = error;
-    }
-  }
-  throw lastError ?? new Error("No completed box-office weekend was available");
-}
-
-function updateMovies(brief, chart) {
-  const section = brief.sections.find((entry) => entry.id === "watch");
-  if (!section) return;
+  if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people");
+  const details = await wikipediaPageDetails(selected.map((person) => person.title));
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
-  section.eyebrow = `IMDb U.S. box office · ${chart.label}`;
-  section.title = "Movies";
-  section.description = "The five largest cumulative U.S. and Canada grosses among IMDb's current weekend box-office top 10, re-sorted by total gross rather than weekend earnings.";
-  section.sources = [
-    { label: "IMDb · box office top 10", url: chart.imdbChartUrl },
-    { label: "Box Office Mojo · total gross", url: chart.chartUrl },
-  ];
-  const allItems = chart.rows.map((row, index) => {
-    const current = currentByTitle.get(normalize(row.title));
-    const details = movieDetails.get(row.title);
+  const allItems = selected.map((person, index) => {
+    const page = details.get(normalize(person.title));
+    const title = page?.title ?? person.title;
+    const current = currentByTitle.get(normalize(title));
+    const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}`;
     return {
       rank: index + 1,
-      title: row.title,
-      subtitle: details?.subtitle ?? current?.subtitle ?? "Movie · in theaters",
-      description: row.description ?? details?.description ?? `${row.title} ranks #${index + 1} by cumulative gross among the current weekend box-office top 10.`,
-      image: details?.image ?? current?.image ?? `/culture/media-${slugify(row.title)}.webp`,
-      alt: current?.alt ?? `${row.title} theatrical poster`,
-      url: row.imdbUrl,
-      source: "IMDb",
-      metric: { label: "U.S. & Canada total gross", value: formatMoney(row.totalGross) },
-      rating: row.rating ?? current?.rating ?? details?.rating ?? "New",
+      title,
+      subtitle: person.label,
+      description: conciseDescription(page?.extract, `${title} was among English Wikipedia's most-read people in ${topviews.period.month}.`),
+      image: current?.image ?? `/culture/person-${slugify(title)}.webp`,
+      imageSource: page?.thumbnail?.source,
+      alt: current?.alt ?? `Portrait of ${title}`,
+      url: wikipediaUrl,
+      source: "Wikipedia",
+      metric: { label: `Wikipedia views · ${topviews.period.month}`, value: formatCompact(person.views) },
       evidence: [
-        { source: "IMDb box office chart", url: chart.imdbChartUrl },
-        { source: "Box Office Mojo", url: row.releaseUrl },
+        { source: "Wikimedia monthly topviews", url: topviews.apiUrl },
+        { source: "Wikipedia article", url: wikipediaUrl },
       ],
-      accent: accents[index % accents.length],
+      accent: current?.accent ?? accents[index % accents.length],
+      category: person.category,
     };
   });
+  section.eyebrow = `${topviews.period.month} ${topviews.period.year} · Wikipedia topviews`;
+  section.title = "People";
+  section.description = "Last month's most-viewed English Wikipedia pages that represent living people, excluding politicians and allowing at most two people from each broad primary category.";
+  section.sources = [
+    { label: `Topviews · ${topviews.period.month} ${topviews.period.year}`, url: topviewsToolUrl() },
+    { label: "Wikimedia · monthly top-pages data", url: topviews.apiUrl },
+  ];
   section.items = allItems.slice(0, 5);
-  section.moreItems = allItems.slice(5, 10);
-  section.moreLabel = "Show ranks 6–10 by total gross";
+  section.moreItems = allItems.slice(5);
+  section.moreLabel = "Show ranks 6–10 by Wikipedia views";
 }
 
-function saturdayOnOrBefore(date) {
-  const result = new Date(date);
-  result.setUTCDate(result.getUTCDate() - ((result.getUTCDay() + 1) % 7));
-  return result.toISOString().slice(0, 10);
+function eligibleMovie(entity) {
+  const description = entity?.descriptions?.en?.value ?? "";
+  return /\bfilm\b/i.test(description)
+    && !/\b(?:film series|filmography|overview|list of films|events in film)\b/i.test(description);
+}
+
+function movieTitle(value) {
+  return value.replace(/\s+\((?:\d{4}\s+)?film\)$/i, "").trim();
+}
+
+async function cinemetaMovieDetails(imdbId) {
+  if (!imdbId) return null;
+  try {
+    const payload = JSON.parse(await fetchText(`https://v3-cinemeta.strem.io/meta/movie/${imdbId}.json`));
+    return payload.meta?.name ? {
+      rating: String(payload.meta.imdbRating ?? "").trim() || "Not rated",
+      description: payload.meta.description ? plainText(payload.meta.description) : null,
+    } : null;
+  } catch {
+    return null;
+  }
+}
+
+async function updateMovies(brief, topviews) {
+  const section = brief.sections.find((entry) => entry.id === "movies");
+  if (!section) return;
+  const selected = topviews.rows.slice(0, 1000)
+    .map((row) => ({ ...row, entity: topviews.entities.get(normalize(row.title)) }))
+    .filter((row) => eligibleMovie(row.entity))
+    .slice(0, 10);
+  if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten movie pages");
+  const details = await wikipediaPageDetails(selected.map((movie) => movie.title));
+  const metadata = await mapConcurrent(selected, 4, async (movie) => {
+    const imdbId = claimStrings(movie.entity, "P345").find((value) => /^tt\d{7,9}$/.test(value));
+    return { imdbId, cinemeta: await cinemetaMovieDetails(imdbId) };
+  });
+  const currentByTitle = new Map(
+    [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
+  );
+  const allItems = selected.map((movie, index) => {
+    const page = details.get(normalize(movie.title));
+    const title = movieTitle(page?.title ?? movie.title);
+    const current = currentByTitle.get(normalize(title));
+    const wikipediaTitle = page?.title ?? movie.title;
+    const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(wikipediaTitle.replaceAll(" ", "_"))}`;
+    const { imdbId, cinemeta } = metadata[index];
+    return {
+      rank: index + 1,
+      title,
+      subtitle: movie.entity?.descriptions?.en?.value?.match(/\b((?:19|20)\d{2})\b/)?.[1]
+        ? `${movie.entity.descriptions.en.value.match(/\b((?:19|20)\d{2})\b/)[1]} film`
+        : "Movie",
+      description: conciseDescription(page?.extract ?? cinemeta?.description, `${title} was among English Wikipedia's most-read movie pages in ${topviews.period.month}.`),
+      image: current?.image ?? `/culture/movie-${slugify(title)}.webp`,
+      imageSource: page?.thumbnail?.source,
+      alt: current?.alt ?? `${title} poster or lead image`,
+      url: imdbId ? `https://www.imdb.com/title/${imdbId}/` : wikipediaUrl,
+      source: imdbId ? "IMDb" : "Wikipedia",
+      metric: { label: `Wikipedia views · ${topviews.period.month}`, value: formatCompact(movie.views) },
+      rating: cinemeta?.rating ?? "Not rated",
+      evidence: [
+        { source: "Wikimedia monthly topviews", url: topviews.apiUrl },
+        { source: "Wikipedia article", url: wikipediaUrl },
+      ],
+      accent: current?.accent ?? accents[index % accents.length],
+    };
+  });
+  section.eyebrow = `${topviews.period.month} ${topviews.period.year} · Wikipedia topviews`;
+  section.title = "Movies";
+  section.description = "Movie pages from last month's English Wikipedia topviews, kept in descending page-view order. IMDb ratings are shown as context but do not affect rank.";
+  section.sources = [
+    { label: `Topviews · ${topviews.period.month} ${topviews.period.year}`, url: topviewsToolUrl() },
+    { label: "Wikimedia · monthly top-pages data", url: topviews.apiUrl },
+  ];
+  section.items = allItems.slice(0, 5);
+  section.moreItems = allItems.slice(5);
+  section.moreLabel = "Show ranks 6–10 by Wikipedia views";
 }
 
 async function billboardHot100() {
-  let date = new Date();
-  let lastError;
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    const stamp = saturdayOnOrBefore(date);
-    try {
-      const payload = JSON.parse(await fetchText(`https://raw.githubusercontent.com/mhollingshead/billboard-hot-100/main/date/${stamp}.json`));
-      const validRows = Array.isArray(payload.data)
-        ? payload.data.filter((row) => Number.isInteger(Number(row.this_week))
-          && Number(row.this_week) >= 1 && Number(row.this_week) <= 100
-          && typeof row.song === "string" && typeof row.artist === "string")
-        : [];
-      if (validRows.length < 20) throw new Error("Billboard mirror returned an incomplete chart");
-      return { date: payload.date ?? stamp, rows: payload.data };
-    } catch (error) {
-      lastError = error;
-      date.setUTCDate(date.getUTCDate() - 7);
-    }
+  const chartUrl = "https://www.billboard.com/charts/hot-100/";
+  const html = await fetchText(chartUrl, { headers: { "user-agent": "Mozilla/5.0" } });
+  const rows = [];
+  for (const match of html.matchAll(/<ul class="o-chart-results-list-row\b[\s\S]*?<\/ul>\s*<\/li>\s*<\/ul>/g)) {
+    const row = match[0];
+    const rank = Number(plainText(row.match(/<span class="c-label[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? ""));
+    const titleMatch = row.match(/<h3 id="title-of-a-story"[^>]*>([\s\S]*?)<\/h3>/);
+    const title = plainText(titleMatch?.[1] ?? "");
+    const afterTitle = titleMatch ? row.slice((titleMatch.index ?? 0) + titleMatch[0].length) : "";
+    const artist = plainText(afterTitle.match(/<span[^>]*class="[^"]*a-no-trucate[^"]*"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? "");
+    if (Number.isInteger(rank) && rank >= 1 && rank <= 100 && title) rows.push({ this_week: rank, song: title, artist });
   }
-  throw lastError ?? new Error("No recent Billboard chart was available");
+  if (rows.length !== 100) throw new Error(`Billboard returned ${rows.length} Hot 100 rows`);
+  const date = html.match(/chart-date-picker[^>]*\bdata-date="(\d{4}-\d{2}-\d{2})"/)?.[1];
+  if (!date) throw new Error("Billboard returned no chart date");
+  return { date, rows, chartUrl: `https://www.billboard.com/charts/hot-100/${date}/` };
 }
 
-async function spotifyTop50() {
-  const html = await fetchText("https://open.spotify.com/embed/playlist/37i9dQZEVXbMDoHDwVN2tF?theme=0", { headers: { "user-agent": "Mozilla/5.0" } });
+async function spotifyApiTracks() {
+  const id = process.env.SPOTIFY_CLIENT_ID;
+  const secret = process.env.SPOTIFY_CLIENT_SECRET;
+  if (!id || !secret) throw new Error("Spotify API credentials are not configured");
+  const token = JSON.parse(await fetchText("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      authorization: `Basic ${Buffer.from(`${id}:${secret}`).toString("base64")}`,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    body: "grant_type=client_credentials",
+  })).access_token;
+  if (!token) throw new Error("Spotify returned no access token");
+  const url = new URL(`https://api.spotify.com/v1/playlists/${spotifyPlaylistId}/items`);
+  url.search = new URLSearchParams({ limit: "50", market: "US", additional_types: "track" });
+  const payload = JSON.parse(await fetchText(url, { headers: { authorization: `Bearer ${token}` } }));
+  const tracks = (payload.items ?? []).map((entry) => entry.item ?? entry.track).filter(Boolean).map((track) => ({
+    id: track.id,
+    title: track.name,
+    artist: (track.artists ?? []).map((artist) => artist.name).join(", "),
+    image: track.album?.images?.[0]?.url,
+  }));
+  if (tracks.length < 20) throw new Error("Spotify API returned an incomplete editorial playlist");
+  return tracks;
+}
+
+async function spotifyEmbedTracks() {
+  const html = await fetchText(`https://open.spotify.com/embed/playlist/${spotifyPlaylistId}?theme=0`, { headers: { "user-agent": "Mozilla/5.0" } });
   const raw = html.match(/<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/)?.[1];
   if (!raw) throw new Error("Spotify returned no embedded playlist data");
   const tracks = JSON.parse(raw).props?.pageProps?.state?.data?.entity?.trackList ?? [];
-  if (tracks.length < 20) throw new Error("Spotify returned an incomplete Top 50 playlist");
+  if (tracks.length < 20) throw new Error("Spotify returned an incomplete editorial playlist");
   return tracks.map((track) => ({
     id: String(track.uri ?? "").split(":").at(-1),
     title: track.title,
     artist: plainText(track.subtitle ?? ""),
+    image: track.visualIdentity?.image?.[0]?.url ?? track.visualIdentity?.image,
   }));
 }
 
-function updateSongs(brief, chart, spotifyTracks) {
-  const section = brief.sections.find((entry) => entry.id === "songs");
+async function spotifyPlaylistTracks() {
+  if (process.env.SPOTIFY_CLIENT_ID && process.env.SPOTIFY_CLIENT_SECRET) {
+    try {
+      return await spotifyApiTracks();
+    } catch (error) {
+      console.warn(`Spotify Web API fallback: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  return spotifyEmbedTracks();
+}
+
+function updateMusic(brief, chart, spotifyTracks) {
+  const section = brief.sections.find((entry) => entry.id === "music");
   if (!section) return;
   const ignoredArtistTokens = new Set(["and", "feat", "featuring", "the", "with"]);
   const artistTokens = (value) => new Set(normalize(value).split(" ")
@@ -902,11 +960,12 @@ function updateSongs(brief, chart, spotifyTracks) {
       .filter((item) => item.spotifyId)
       .map((item) => [item.spotifyId, item]),
   );
-  section.eyebrow = "Spotify Global × Billboard";
-  section.description = "The first 10 Spotify Global Top 50 tracks that also appear on the Billboard Hot 100 are selected, then all 10 are ordered by Billboard position. Every track can play through Spotify's official embed.";
+  section.eyebrow = "Spotify Today’s Top Hits × Billboard";
+  section.title = "Music";
+  section.description = "The first 10 tracks in Spotify’s Today’s Top Hits that also appear on the Billboard Hot 100 are selected, then all 10 are ordered by Billboard position. Every track remains playable here.";
   section.sources = [
-    { label: "Spotify · Global Top 50", url: "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF" },
-    { label: `Billboard Hot 100 · ${chart.date}`, url: `https://www.billboard.com/charts/hot-100/${chart.date}/` },
+    { label: "Spotify · Today’s Top Hits", url: `https://open.spotify.com/playlist/${spotifyPlaylistId}` },
+    { label: `Billboard Hot 100 · ${chart.date}`, url: chart.chartUrl },
   ];
   const allItems = crossovers.map(({ row, track, spotifyRank }, index) => {
     const current = currentById.get(track.id);
@@ -914,15 +973,16 @@ function updateSongs(brief, chart, spotifyTracks) {
       rank: index + 1,
       title: track.title,
       subtitle: track.artist,
-      description: `${track.title} is #${spotifyRank} in Spotify's current global playlist and #${row.this_week} on the current Billboard Hot 100.`,
+      description: `${track.title} is #${spotifyRank} in Spotify’s current Today’s Top Hits playlist and #${row.this_week} on the current Billboard Hot 100.`,
       image: current?.image ?? `/culture/song-${slugify(`${track.title}-${track.artist}`)}.webp`,
+      imageSource: track.image,
       alt: current?.alt ?? `${track.title} artwork by ${track.artist}`,
       url: `https://open.spotify.com/track/${track.id}`,
       source: "Spotify",
       metric: { label: "Billboard Hot 100", value: `#${row.this_week}` },
       evidence: [
-        { source: "Spotify", url: "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF" },
-        { source: "Billboard", url: `https://www.billboard.com/charts/hot-100/${chart.date}/` },
+        { source: "Spotify", url: `https://open.spotify.com/playlist/${spotifyPlaylistId}` },
+        { source: "Billboard", url: chart.chartUrl },
       ],
       accent: accents[index % accents.length],
       spotifyId: track.id,
@@ -934,8 +994,318 @@ function updateSongs(brief, chart, spotifyTracks) {
   section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank}`;
 }
 
+function titleCase(value) {
+  const preferred = new Map([
+    ["gta", "GTA"], ["macbook", "MacBook"], ["iphone", "iPhone"], ["ipad", "iPad"],
+    ["nba", "NBA"], ["nfl", "NFL"], ["nhl", "NHL"], ["ps5", "PS5"], ["xbox", "Xbox"],
+  ]);
+  return value.replace(/\b[\w'-]+\b/g, (word) => preferred.get(word.toLowerCase())
+    ?? `${word[0].toUpperCase()}${word.slice(1)}`);
+}
+
+function parseShoppingRow(value) {
+  const match = String(value).replace(/\s+/g, " ").trim().match(/^(\d+)\s+(.+?)\s+(Breakout|\+[\d,]+%)$/i);
+  if (!match) return null;
+  return { rank: Number(match[1]), query: match[2].trim(), growth: match[3] };
+}
+
+async function googleShoppingRising() {
+  if (process.env.PRODUCT_TRENDS_SNAPSHOT) {
+    const rows = JSON.parse(process.env.PRODUCT_TRENDS_SNAPSHOT);
+    if (!Array.isArray(rows) || rows.length < 5) throw new Error("PRODUCT_TRENDS_SNAPSHOT is invalid");
+    return rows.map((row) => ({ rank: Number(row.rank), query: String(row.query), growth: String(row.growth) }));
+  }
+  return withHeadlessPage({
+    allowedHosts: new Set(["trends.google.com"]),
+    work: async (page) => {
+      await page.navigate(shoppingTrendsUrl, 5_000);
+      const firstText = await page.evaluate("document.body.innerText.slice(0, 180)");
+      if (/429|too many requests/i.test(firstText)) throw new Error("Google Shopping Trends rate-limited the daily browser");
+      const rows = [];
+      for (let pageNumber = 0; pageNumber < 6; pageNumber += 1) {
+        const values = await page.evaluate(`Array.from(document.querySelectorAll('a[href*="/trends/explore?q="]')).map((link) => link.innerText.replace(/\\s+/g, " ").trim()).filter(Boolean)`);
+        rows.push(...values.map(parseShoppingRow).filter(Boolean));
+        const advanced = await page.evaluate(`(() => { const button = Array.from(document.querySelectorAll("button")).find((entry) => entry.getAttribute("aria-label") === "Next" && !entry.disabled); if (!button) return false; button.click(); return true; })()`);
+        if (!advanced) break;
+        await page.wait(700);
+      }
+      const unique = [...new Map(rows.map((row) => [row.rank, row])).values()].sort((left, right) => left.rank - right.rank);
+      if (unique.length < 5) throw new Error(`Google Shopping Trends returned only ${unique.length} rising queries`);
+      return unique;
+    },
+  });
+}
+
+function queryVariants(value) {
+  const words = value.split(/\s+/).filter(Boolean);
+  return [...new Set([
+    value,
+    words.slice(0, 2).join(" "),
+    words.slice(0, 3).join(" "),
+  ].filter((entry) => entry.length >= 3))];
+}
+
+function queryEntityMatch(query, entities, predicate) {
+  return queryVariants(query).some((variant) => predicate(entities.get(normalize(variant))));
+}
+
+async function wikidataSearchIsPerson(value) {
+  const words = titleCase(value).split(/\s+/).filter(Boolean);
+  const variants = [...new Set([words.slice(0, 2).join(" "), words.join(" ")].filter((entry) => entry.length >= 3))];
+  for (const variant of variants) {
+    const url = new URL("https://www.wikidata.org/w/api.php");
+    url.search = new URLSearchParams({
+      action: "wbsearchentities",
+      search: variant,
+      language: "en",
+      uselang: "en",
+      limit: "3",
+      format: "json",
+      origin: "*",
+    });
+    const results = JSON.parse(await fetchText(url)).search ?? [];
+    const key = normalize(variant);
+    const match = results.find((result) => {
+      const label = normalize(result.label ?? "");
+      return label === key || label.startsWith(`${key} `);
+    });
+    if (!match?.id) continue;
+    const entityUrl = new URL("https://www.wikidata.org/w/api.php");
+    entityUrl.search = new URLSearchParams({
+      action: "wbgetentities",
+      ids: match.id,
+      props: "claims",
+      format: "json",
+      origin: "*",
+    });
+    const entity = JSON.parse(await fetchText(entityUrl)).entities?.[match.id];
+    if (claimIds(entity, "P31").includes("Q5")) return true;
+  }
+  return false;
+}
+
+async function filterProductQueries(rows) {
+  const entities = await wikidataEntitiesForTitles(rows.flatMap((row) => queryVariants(titleCase(row.query))));
+  const singleWordDescriptions = new Map(await mapConcurrent(
+    [...new Set(rows.filter((row) => !row.query.includes(" ")).map((row) => row.query))],
+    4,
+    async (query) => {
+      const url = new URL("https://www.wikidata.org/w/api.php");
+      url.search = new URLSearchParams({
+        action: "wbsearchentities",
+        search: query,
+        language: "en",
+        uselang: "en",
+        limit: "1",
+        format: "json",
+        origin: "*",
+      });
+      const result = (JSON.parse(await fetchText(url)).search ?? [])[0];
+      return [normalize(query), result?.description ?? ""];
+    },
+  ));
+  const generic = new Set(["books", "clothing", "facebook", "food", "shoes", "toys"]);
+  const seen = new Set();
+  return rows.filter((row) => {
+    const key = normalize(row.query).split(" ").sort().join(" ");
+    if (!key || key === "undefined" || seen.has(key)) return false;
+    seen.add(key);
+    if (generic.has(key) || /\b(?:marketplace|powerball|lottery|movie|film|trailer)\b/i.test(row.query)) return false;
+    if (queryEntityMatch(titleCase(row.query), entities, (entity) => claimIds(entity, "P31").includes("Q5") || eligibleMovie(entity))) return false;
+    if (!row.query.includes(" ")) {
+      const entity = entities.get(normalize(titleCase(row.query)));
+      const description = entity?.descriptions?.en?.value ?? singleWordDescriptions.get(normalize(row.query)) ?? "";
+      const productLike = /\b(?:computers?|devices?|products?|models?|consoles?|phones?|laptops?|vehicles?|beverages?|toys?|games?|books?|cameras?|watches|shoes|clothing)\b/i.test(description);
+      if (/\b(?:company|corporation|website|social network|online marketplace)\b/i.test(description)
+        || (/\bbrand\b/i.test(description) && !productLike)
+        || !productLike) return false;
+    }
+    return true;
+  });
+}
+
+function productTokens(value) {
+  return normalize(value).split(" ").filter((token) => token.length > 1 && !new Set(["for", "the", "with"]).has(token));
+}
+
+async function amazonProducts(rows) {
+  return withHeadlessPage({
+    allowedHosts: new Set(["www.amazon.com"]),
+    work: async (page) => {
+      const products = [];
+      for (const row of rows.slice(0, 20)) {
+        const searchUrl = new URL("https://www.amazon.com/s");
+        searchUrl.search = new URLSearchParams({ k: row.query, s: "exact-aware-popularity-rank" });
+        await page.navigate(searchUrl, 1_600);
+        const cards = await page.evaluate(`Array.from(document.querySelectorAll("[data-asin]")).map((card) => { const asin = card.getAttribute("data-asin"); const links = Array.from(card.querySelectorAll('a[href*="/dp/"]')); const titleLink = links.find((link) => (link.innerText || "").trim().length > 8); return { asin, title: (titleLink?.innerText || "").replace(/\\s+/g, " ").trim(), text: (card.innerText || "").replace(/\\s+/g, " ").trim(), image: card.querySelector("img.s-image")?.src || "" }; }).filter((card) => /^[A-Z0-9]{10}$/.test(card.asin) && card.title)`);
+        const tokens = productTokens(row.query);
+        const required = Math.max(1, tokens.length - (tokens.length >= 3 ? 1 : 0));
+        const match = cards.find((card) => tokens.filter((token) => normalize(card.text).split(" ").includes(token)).length >= required);
+        if (!match) {
+          console.warn(`Amazon match unavailable: #${row.rank} ${row.query}`);
+          continue;
+        }
+        products.push({
+          ...row,
+          ...match,
+          url: `https://www.amazon.com/dp/${match.asin}`,
+          searchUrl: searchUrl.href,
+        });
+        if (products.length === 10) break;
+      }
+      if (products.length < 5) throw new Error(`Only ${products.length} rising queries had a matching Amazon product`);
+      return products;
+    },
+  });
+}
+
+async function productLeaderboard() {
+  const rising = await googleShoppingRising();
+  const filtered = await filterProductQueries(rising);
+  console.log(`Eligible product queries: ${filtered.map((row) => `#${row.rank} ${row.query}`).join(" | ")}`);
+  return amazonProducts(filtered);
+}
+
+function updateProducts(brief, products) {
+  const section = brief.sections.find((entry) => entry.id === "products");
+  if (!section) return;
+  const currentByTitle = new Map(
+    [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
+  );
+  const allItems = products.map((product, index) => {
+    const title = titleCase(product.query);
+    const current = currentByTitle.get(normalize(title));
+    const listingDescription = conciseDescription(product.title, `${title} is a rising U.S. Google Shopping query with a matching Amazon listing.`);
+    return {
+      rank: index + 1,
+      title,
+      subtitle: "Product · Amazon match",
+      description: listingDescription.length >= 30
+        ? listingDescription
+        : `${listingDescription} is the Amazon match for the rising “${product.query}” shopping query.`,
+      image: current?.image ?? `/culture/product-${slugify(title)}.webp`,
+      imageSource: product.image,
+      alt: current?.alt ?? `${title} product listing image`,
+      url: product.url,
+      source: "Amazon",
+      metric: { label: "Google Shopping rising rank", value: `#${product.rank} · ${product.growth}` },
+      evidence: [
+        { source: "Google Shopping Trends", url: shoppingTrendsUrl },
+        { source: "Amazon listing", url: product.url },
+      ],
+      accent: current?.accent ?? accents[index % accents.length],
+    };
+  });
+  section.eyebrow = "U.S. Google Shopping · past 7 days";
+  section.title = "Products";
+  section.description = "Rising U.S. Google Shopping queries in source order, after removing people, media, brand-only terms, duplicates, and queries without a relevant Amazon product listing.";
+  section.sources = [
+    { label: "Google Shopping · rising queries, U.S., 7 days", url: shoppingTrendsUrl },
+    { label: "Amazon · best-selling match", url: products[0].searchUrl },
+  ];
+  section.items = allItems.slice(0, 5);
+  section.moreItems = allItems.slice(5);
+  section.moreLabel = allItems.length > 5 ? `Show ranks 6–${allItems.length}` : undefined;
+}
+
+function searchVolume(value) {
+  const match = String(value).match(/([\d.]+)\s*([KMB])?\+/i);
+  if (!match) return 0;
+  return Number(match[1]) * ({ K: 1e3, M: 1e6, B: 1e9 }[match[2]?.toUpperCase()] ?? 1);
+}
+
+async function googleTrendingNews() {
+  const html = await fetchText(newsTrendsUrl, { headers: { "user-agent": "Mozilla/5.0", "accept-language": "en-US,en;q=0.9" } });
+  const rows = [];
+  for (const match of html.matchAll(/<tr\b[^>]*class="[^"]*enOdEe-wZVHld-xMbwt[^"]*"[^>]*>[\s\S]*?<\/tr>/g)) {
+    const title = plainText(match[0].match(/class="mZ3RIc">([\s\S]*?)<\/div>/)?.[1] ?? "");
+    const volume = plainText(match[0].match(/class="lqv0Cb">([\s\S]*?)<\/div>/)?.[1] ?? "");
+    if (title && searchVolume(volume)) rows.push({ title, volume, searches: searchVolume(volume), sourceOrder: rows.length });
+  }
+  if (rows.length < 20) throw new Error(`Google Trending Now returned only ${rows.length} topics`);
+  const entities = await wikidataEntitiesForTitles(rows.flatMap((row) => queryVariants(titleCase(row.title))));
+  const sports = /\b(?:vs\.?|score|game|match|cup|league|nfl|nba|mlb|nhl|wnba|open 20\d{2}|warriors|fever|dream)\b/i;
+  const candidates = rows.filter((row) => !sports.test(row.title)
+    && !queryEntityMatch(titleCase(row.title), entities, (entity) => claimIds(entity, "P31").includes("Q5")));
+  const searchPersonFlags = await mapConcurrent(candidates, 4, (row) => wikidataSearchIsPerson(row.title));
+  const filtered = candidates.filter((_, index) => !searchPersonFlags[index])
+    .sort((left, right) => right.searches - left.searches || left.sourceOrder - right.sourceOrder)
+    .slice(0, 10);
+  if (filtered.length < 6) throw new Error(`Only ${filtered.length} non-person, non-sports news topics remained`);
+  return mapConcurrent(filtered, 4, async (row) => {
+    const newsUrl = new URL("https://news.google.com/rss/search");
+    newsUrl.search = new URLSearchParams({ q: row.title, hl: "en-US", gl: "US", ceid: "US:en" });
+    const rss = await fetchText(newsUrl);
+    const item = rss.match(/<item>([\s\S]*?)<\/item>/i)?.[1] ?? "";
+    const headline = plainText(item.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? row.title).replace(/\s+-\s+[^-]+$/, "");
+    const link = plainText(item.match(/<link>([\s\S]*?)<\/link>/i)?.[1] ?? "");
+    return { ...row, headline, link: link.startsWith("https://news.google.com/") ? link : newsUrl.href };
+  });
+}
+
+function updateNews(brief, topics) {
+  const section = brief.sections.find((entry) => entry.id === "news");
+  if (!section) return;
+  const currentByTitle = new Map(
+    [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
+  );
+  const allItems = topics.map((topic, index) => {
+    const title = titleCase(topic.title);
+    const current = currentByTitle.get(normalize(title));
+    const trendUrl = googleTrendsExploreUrl([topic.title], "now 7-d");
+    return {
+      rank: index + 1,
+      title,
+      subtitle: "News topic · past 7 days",
+      description: conciseDescription(topic.headline, `Search interest in ${topic.title} rose during the past seven days.`),
+      image: current?.image ?? `/culture/news-${slugify(title)}.webp`,
+      alt: current?.alt ?? `Visual summary card for ${title}`,
+      url: topic.link,
+      source: "Google News",
+      metric: { label: "Google searches · 7 days", value: topic.volume },
+      evidence: [
+        { source: "Google Trending Now", url: trendUrl },
+        { source: "Google News", url: topic.link },
+      ],
+      accent: current?.accent ?? accents[index % accents.length],
+    };
+  });
+  section.eyebrow = "U.S. Google Trends · past 7 days";
+  section.title = "News";
+  section.description = "The largest seven-day U.S. search-volume topics after removing people and sports, ranked by Google’s displayed search volume and linked to current coverage.";
+  section.sources = [
+    { label: "Google Trending Now · 7 days, search volume", url: newsTrendsUrl },
+    { label: "Google News · current coverage", url: topics[0].link },
+  ];
+  section.items = allItems.slice(0, 5);
+  section.moreItems = allItems.slice(5);
+  section.moreLabel = `Show ranks 6–${allItems.length}`;
+}
+
 function validateBrief(brief) {
-  if (brief.sections.length !== 5) throw new Error("Brief must have five boards");
+  const expected = ["memes", "slang", "people", "movies", "music", "products", "news"];
+  if (brief.sections.length !== expected.length
+    || brief.sections.some((section, index) => section.id !== expected[index])) {
+    throw new Error("Brief must contain the seven boards in the documented order");
+  }
+  const validateItems = (section, items, startRank) => items.forEach((item, index) => {
+    if (item.rank !== index + startRank) throw new Error(`${section.title} has non-sequential ranks`);
+    if (!item.description?.trim() || !item.alt?.trim() || !item.image?.startsWith("/culture/")
+      || !/^#[0-9a-f]{6}$/i.test(item.accent) || !item.url || new URL(item.url).protocol !== "https:") {
+      throw new Error(`${item.title} lacks complete card information`);
+    }
+    if (item.imageSource) {
+      const imageUrl = new URL(item.imageSource);
+      if (imageUrl.protocol !== "https:" || !imageUrl.hostname.match(/(?:\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/)) {
+        throw new Error(`${item.title} has an invalid source image`);
+      }
+    }
+    if (!Array.isArray(item.evidence)
+      || new Set(item.evidence.map((entry) => entry.source)).size < 2
+      || new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size < 2) {
+      throw new Error(`${item.title} lacks two distinct sources`);
+    }
+  });
   for (const section of brief.sections) {
     if (section.items.length !== 5) throw new Error(`${section.title} must have five entries`);
     if (!Array.isArray(section.sources) || section.sources.length < 2) {
@@ -946,65 +1316,28 @@ function validateBrief(brief) {
         throw new Error(`${section.title} has an invalid linked source`);
       }
     }
-    section.items.forEach((item, index) => {
-      if (item.rank !== index + 1) throw new Error(`${section.title} has non-sequential ranks`);
-      if (!item.description?.trim() || !item.alt?.trim() || !item.image?.startsWith("/culture/")
-        || !/^#[0-9a-f]{6}$/i.test(item.accent)) {
-        throw new Error(`${item.title} lacks complete card information`);
-      }
-      if (!Array.isArray(item.evidence)
-        || new Set(item.evidence.map((entry) => entry.source)).size < 2
-        || new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size < 2) {
-        throw new Error(`${item.title} lacks two distinct sources`);
-      }
-    });
-    if (!Array.isArray(section.moreItems) || !section.moreItems.length) {
-      throw new Error(`${section.title} must include an expandable continuation`);
-    }
+    validateItems(section, section.items, 1);
+    if (!Array.isArray(section.moreItems) || section.moreItems.length > 15) throw new Error(`${section.title} has an invalid continuation`);
     const topTitles = new Set(section.items.map((item) => normalize(item.title)));
-    section.moreItems.forEach((item, index) => {
-      if (item.rank !== index + 6) throw new Error(`${section.title} continuation ranks must begin at six`);
+    validateItems(section, section.moreItems, 6);
+    section.moreItems.forEach((item) => {
       if (topTitles.has(normalize(item.title))) throw new Error(`${section.title} continuation repeats ${item.title}`);
-      if (!item.url || new URL(item.url).protocol !== "https:") throw new Error(`${item.title} has an invalid continuation URL`);
-      if (!item.description?.trim() || !item.alt?.trim() || !item.image?.startsWith("/culture/")
-        || !/^#[0-9a-f]{6}$/i.test(item.accent)) {
-        throw new Error(`${item.title} continuation lacks complete card information`);
-      }
-      if (!Array.isArray(item.evidence)
-        || new Set(item.evidence.map((entry) => entry.source)).size < 2
-        || new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size < 2) {
-        throw new Error(`${item.title} continuation lacks two distinct sources`);
-      }
     });
   }
   const memes = brief.sections.find((section) => section.id === "memes");
-  const memePollRanks = memes?.items.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
+  const allMemes = [...memes.items, ...memes.moreItems];
+  const memePollRanks = allMemes.map((item) => Number(item.metric?.value?.slice(1)));
   if (memePollRanks.some((rank) => !Number.isInteger(rank))
     || memePollRanks.some((rank, index) => index > 0 && rank <= memePollRanks[index - 1])) {
     throw new Error("Memes must preserve the published Meme of the Month order");
   }
-  const additionalMemePollRanks = memes?.moreItems.map((item) => Number(item.metric?.value?.slice(1))) ?? [];
-  if (additionalMemePollRanks.some((rank) => !Number.isInteger(rank))
-    || additionalMemePollRanks.some((rank, index) => index > 0 && rank <= additionalMemePollRanks[index - 1])
-    || additionalMemePollRanks[0] <= memePollRanks.at(-1)) {
-    throw new Error("Additional memes must continue the filtered poll order");
-  }
-  const creators = brief.sections.find((section) => section.id === "creators");
-  const creatorCategoryCounts = new Map();
-  for (const item of creators?.items ?? []) {
-    const count = (creatorCategoryCounts.get(item.category) ?? 0) + 1;
-    creatorCategoryCounts.set(item.category, count);
-    if (!item.category || count > 2) throw new Error("No creator category may take more than two places");
-    if (item.metric?.label !== "Wikipedia views · 30 days") {
-      throw new Error("Creators must be ranked by Wikipedia views");
-    }
-    if (item.subtitle.includes("·")) {
-      throw new Error(`${item.title} must have one primary creator role`);
-    }
-  }
-  for (const item of creators?.moreItems ?? []) {
-    if (item.subtitle.includes("·") || item.metric?.label !== "Wikipedia views · 30 days") {
-      throw new Error(`${item.title} continuation must use one role and Wikipedia views`);
+  const people = brief.sections.find((section) => section.id === "people");
+  const peopleCategoryCounts = new Map();
+  for (const item of [...people.items, ...people.moreItems]) {
+    const count = (peopleCategoryCounts.get(item.category) ?? 0) + 1;
+    peopleCategoryCounts.set(item.category, count);
+    if (!item.category || count > 2 || !item.metric?.label.startsWith("Wikipedia views · ")) {
+      throw new Error("People must use one capped primary category and monthly Wikipedia views");
     }
   }
   const slang = brief.sections.find((section) => section.id === "slang");
@@ -1019,21 +1352,34 @@ function validateBrief(brief) {
   if (slangViews.some((views, index) => index > 0 && views > slangViews[index - 1])) {
     throw new Error("Slang must be ordered by Know Your Meme page views");
   }
-  const movies = brief.sections.find((section) => section.id === "watch");
-  for (const item of [...(movies?.items ?? []), ...(movies?.moreItems ?? [])]) {
-    if (item.metric?.label !== "U.S. & Canada total gross" || !item.rating) {
-      throw new Error(`${item.title} must show total gross and an IMDb rating state`);
+  const movies = brief.sections.find((section) => section.id === "movies");
+  for (const item of [...movies.items, ...movies.moreItems]) {
+    if (!item.metric?.label.startsWith("Wikipedia views · ") || !item.rating) {
+      throw new Error(`${item.title} must show monthly Wikipedia views and an IMDb rating state`);
     }
   }
-  const songs = brief.sections.find((section) => section.id === "songs");
-  const allSongs = [...(songs?.items ?? []), ...(songs?.moreItems ?? [])];
-  const billboardRanks = allSongs.map((item) => Number(item.metric?.value?.slice(1)));
+  const music = brief.sections.find((section) => section.id === "music");
+  const allMusic = [...music.items, ...music.moreItems];
+  const billboardRanks = allMusic.map((item) => Number(item.metric?.value?.slice(1)));
   if (billboardRanks.some((rank) => !Number.isInteger(rank))
     || billboardRanks.some((rank, index) => index > 0 && rank < billboardRanks[index - 1])) {
-    throw new Error("Songs must be ordered by Billboard Hot 100 position");
+    throw new Error("Music must be ordered by Billboard Hot 100 position");
   }
-  if (allSongs.some((item) => !/^[A-Za-z0-9]{22}$/.test(item.spotifyId ?? ""))) {
-    throw new Error("Every song must include a playable Spotify track ID");
+  if (allMusic.some((item) => !/^[A-Za-z0-9]{22}$/.test(item.spotifyId ?? ""))) {
+    throw new Error("Every music entry must include a playable Spotify track ID");
+  }
+  const products = brief.sections.find((section) => section.id === "products");
+  const productRanks = [...products.items, ...products.moreItems]
+    .map((item) => Number(item.metric?.value?.match(/^#(\d+)/)?.[1]));
+  if (productRanks.some((rank) => !Number.isInteger(rank))
+    || productRanks.some((rank, index) => index > 0 && rank <= productRanks[index - 1])) {
+    throw new Error("Products must preserve Google Shopping rising-query order");
+  }
+  const news = brief.sections.find((section) => section.id === "news");
+  const newsVolumes = [...news.items, ...news.moreItems].map((item) => searchVolume(item.metric?.value));
+  if (newsVolumes.some((volume) => !volume)
+    || newsVolumes.some((volume, index) => index > 0 && volume > newsVolumes[index - 1])) {
+    throw new Error("News must be ordered by seven-day Google search volume");
   }
   const serialized = JSON.stringify(brief);
   if (/tiktok/i.test(serialized)) throw new Error("The briefing must not contain TikTok data");
@@ -1043,6 +1389,39 @@ function validateBrief(brief) {
 }
 
 const brief = JSON.parse(await readFile(dataPath, "utf8"));
+const renames = new Map([["creators", "people"], ["watch", "movies"], ["songs", "music"]]);
+for (const section of brief.sections) {
+  if (renames.has(section.id)) section.id = renames.get(section.id);
+}
+const emptySection = (id, title, layout) => ({
+  id,
+  eyebrow: "Pending first daily refresh",
+  title,
+  description: "This board is populated by the validated daily ingestion job.",
+  sources: [
+    { label: "Google Trends", url: id === "products" ? shoppingTrendsUrl : newsTrendsUrl },
+    { label: id === "products" ? "Amazon" : "Google News", url: id === "products" ? "https://www.amazon.com/" : "https://news.google.com/" },
+  ],
+  layout,
+  items: [],
+  moreItems: [],
+});
+if (!brief.sections.some((section) => section.id === "products")) brief.sections.push(emptySection("products", "Products", "square"));
+if (!brief.sections.some((section) => section.id === "news")) brief.sections.push(emptySection("news", "News", "landscape"));
+const order = ["memes", "slang", "people", "movies", "music", "products", "news"];
+brief.sections.sort((left, right) => order.indexOf(left.id) - order.indexOf(right.id));
+for (const section of brief.sections) {
+  if (section.id === "people") {
+    section.title = "People";
+    section.layout = "square";
+  } else if (section.id === "movies") {
+    section.title = "Movies";
+    section.layout = "poster";
+  } else if (section.id === "music") {
+    section.title = "Music";
+    section.layout = "square";
+  }
+}
 for (const section of brief.sections) {
   if (section.sources.every((source) => typeof source === "string")) {
     const evidence = section.items[0]?.evidence ?? [];
@@ -1064,14 +1443,16 @@ const sourceResults = await Promise.all([
   safely("Know Your Meme annual slang review", () => fetchText(annualSlangReviewUrl)),
   safely("Know Your Meme slang pageviews", () => knowYourMemeSlangPageviews(annualSlangCandidates)),
   safely("Urban Dictionary", () => verifyUrbanDictionary(annualSlangCandidates)),
-  safely("Wikipedia creator pageviews", () => wikipediaCreatorPageviews(cultureMakers)),
-  safely("IMDb / Box Office Mojo", boxOfficeWeekend),
+  safely("Wikimedia monthly topviews", wikipediaMonthlyTop),
   safely("Billboard Hot 100", billboardHot100),
-  safely("Spotify Top 50 Global", spotifyTop50),
+  safely("Spotify Today’s Top Hits", spotifyPlaylistTracks),
+  safely("Google Shopping / Amazon", productLeaderboard),
+  safely("Google Trending Now / News", googleTrendingNews),
 ]);
 const byName = Object.fromEntries(sourceResults.map((result) => [result.name, result]));
 for (const result of sourceResults) console.log(`${result.ok ? "ok" : "failed"} ${result.name}${result.error ? `: ${result.error}` : ""}`);
-const failedSources = sourceResults.filter((result) => !result.ok);
+const optionalSources = new Set(["Google Shopping / Amazon"]);
+const failedSources = sourceResults.filter((result) => !result.ok && !optionalSources.has(result.name));
 if (failedSources.length) {
   console.error(`No snapshot was written because ${failedSources.length} required source check${failedSources.length === 1 ? "" : "s"} failed.`);
   process.exit(1);
@@ -1079,9 +1460,15 @@ if (failedSources.length) {
 
 await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons in Meme Culture"].value);
 updateSlang(brief, byName["Know Your Meme slang pageviews"].value);
-updateCreators(brief, byName["Wikipedia creator pageviews"].value);
-updateMovies(brief, byName["IMDb / Box Office Mojo"].value);
-updateSongs(brief, byName["Billboard Hot 100"].value, byName["Spotify Top 50 Global"].value);
+await updatePeople(brief, byName["Wikimedia monthly topviews"].value);
+await updateMovies(brief, byName["Wikimedia monthly topviews"].value);
+updateMusic(brief, byName["Billboard Hot 100"].value, byName["Spotify Today’s Top Hits"].value);
+if (byName["Google Shopping / Amazon"].ok) updateProducts(brief, byName["Google Shopping / Amazon"].value);
+else if (brief.sections.find((section) => section.id === "products")?.items.length !== 5) {
+  console.error("No previous Products snapshot is available to preserve.");
+  process.exit(1);
+}
+updateNews(brief, byName["Google Trending Now / News"].value);
 for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
 delete brief.pulse;
 
@@ -1089,7 +1476,8 @@ brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt }) => ({ name, ok,
 brief.generatedAt = now.toISOString();
 brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
 brief.status = "Checked today";
-brief.window = "Memes: latest complete month · other boards: rolling";
+brief.summary = "A five-minute, two-source briefing on the memes, slang, people, movies, music, products, and news shaping internet culture right now.";
+brief.window = "Memes: latest complete poll · People and Movies: last month · Products and News: past 7 days · Music: current charts";
 validateBrief(brief);
 
 const output = `${JSON.stringify(brief, null, 2)}\n`;

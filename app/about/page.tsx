@@ -10,17 +10,17 @@ const flow = [
   {
     number: "01",
     title: "Pull sources",
-    text: "Fetch ranking data from Know Your Meme, Lessons in Meme Culture, Urban Dictionary, Wikipedia, IMDb, Box Office Mojo, Cinemeta, Spotify, and Billboard; also link a configured Google Trends comparison.",
+    text: "Fetch the latest public rankings from Know Your Meme, YouTube, Wikimedia, Spotify, Billboard, Google Trends, Google News, and Amazon.",
   },
   {
     number: "02",
-    title: "Run once daily",
-    text: "At 10:17 UTC, one automated job downloads the source data. A visitor never triggers scraping.",
+    title: "Ingest at midnight Pacific",
+    text: "One automated job runs at 12:00 AM Pacific every day. Visitors never trigger source requests or scraping.",
   },
   {
     number: "03",
-    title: "Apply five rules",
-    text: "Each board uses its own explicit filter and ranking rule, listed below. There is no blended mystery score.",
+    title: "Apply seven rules",
+    text: "Each board is filtered and ordered by its own rule below. The displayed source metric determines the order; there is no blended score.",
   },
   {
     number: "04",
@@ -30,15 +30,15 @@ const flow = [
   {
     number: "05",
     title: "Publish the snapshot",
-    text: "Build static HTML and serve it from the edge until the next validated daily snapshot replaces it.",
+    text: "Build static HTML and serve it from the edge until the next validated daily snapshot is ready.",
   },
 ];
 
 const methods = [
   {
     board: "Memes",
-    sources: "Know Your Meme’s latest completed Meme of the Month result + Lessons in Meme Culture uploads from the past two months.",
-    rule: "Keep the poll’s published order, but remove any meme without a matching recent LIMC video. The first five become cards; the next matches appear in the expandable rows.",
+    sources: "Know Your Meme’s latest completed Meme of the Month result and Lessons in Meme Culture uploads from the previous two months. YouTube’s official Data API is used when a key is configured.",
+    rule: "Keep the poll’s published order and remove any meme without a matching LIMC upload. The site never substitutes the current month’s unfinished poll.",
     metric: "Meme of the Month poll place.",
   },
   {
@@ -48,22 +48,34 @@ const methods = [
     metric: "Lifetime views on each Know Your Meme entry.",
   },
   {
-    board: "Creators",
-    sources: "A maintained cross-media candidate list + 30 days of English Wikipedia pageviews + a linked Google Trends comparison.",
-    rule: "Order the maintained candidates by Wikipedia views, then allow no more than two people with the same primary profession in the top five. The next five remaining people are appended without changing those five cards.",
-    metric: "English Wikipedia views over the past 30 days.",
+    board: "People",
+    sources: "Wikimedia’s previous-month English Wikipedia Topviews data and Wikidata identity metadata.",
+    rule: "Walk down Topviews, keep living people, remove politicians, assign one broad primary category, and allow at most two people from any category. Keep the remaining view order.",
+    metric: "Previous-month English Wikipedia views.",
   },
   {
     board: "Movies",
-    sources: "IMDb’s current domestic weekend top 10 + the matching Box Office Mojo weekend table + Cinemeta’s IMDb-linked rating and synopsis metadata.",
-    rule: "Take those 10 movies, re-sort them by cumulative U.S. and Canada gross, show the first five as cards, and put ranks 6–10 in the expandable rows.",
-    metric: "Cumulative U.S. and Canada box office.",
+    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata for movie classification, and IMDb-linked metadata for rating context.",
+    rule: "Keep only movie pages from Topviews and preserve their page-view order. Ratings are displayed but do not affect rank.",
+    metric: "Previous-month English Wikipedia views.",
   },
   {
-    board: "Songs",
-    sources: "Spotify’s Global Top 50 playlist + the dated Billboard Hot 100.",
-    rule: "Select the first 10 Spotify-ranked tracks that also appear on Billboard, then order that complete 10-song set by Billboard position. The first five become cards and ranks 6–10 remain playable in the expandable rows.",
+    board: "Music",
+    sources: "Spotify’s Today’s Top Hits playlist and the dated Billboard Hot 100.",
+    rule: "Select the first 10 playlist tracks that also appear on the Hot 100, then order that same 10-track set by Billboard position. Every result remains playable with Spotify’s official embed.",
     metric: "Billboard Hot 100 position.",
+  },
+  {
+    board: "Products",
+    sources: "Google Shopping’s U.S. Rising queries for the past seven days and Amazon search results.",
+    rule: "Preserve Google’s Rising order after removing people, media, brand-only terms, duplicates, and queries without a relevant Amazon product listing. Link the selected Amazon listing directly.",
+    metric: "Google Shopping Rising-query rank and growth.",
+  },
+  {
+    board: "News",
+    sources: "Google Trending Now’s U.S. seven-day view and Google News coverage.",
+    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, and link each topic to current coverage.",
+    metric: "Seven-day Google search volume.",
   },
 ];
 
@@ -75,7 +87,7 @@ export default function AboutPage() {
         <h1>Sources in. Rankings out.</h1>
         <p>
           Once a day, what’s popular? pulls public data from the sites named
-          below, runs five documented ranking rules, saves one validated
+          below, runs seven documented ranking rules, saves one validated
           snapshot, and publishes that snapshot as a static page. That is the
           whole system.
         </p>
@@ -86,7 +98,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div className="section-intro compact">
             <p className="eyebrow">Overall flow</p>
-            <h2 id="flow-title">One ingestion run. Five rankings. One page.</h2>
+            <h2 id="flow-title">One daily ingestion. Seven rankings. One page.</h2>
           </div>
           <ol className="flowchart">
             {flow.map((step, index) => (
@@ -105,7 +117,7 @@ export default function AboutPage() {
 
       <section className="algorithm-section wrap" aria-labelledby="algorithm-title">
         <div className="section-intro compact">
-          <p className="eyebrow">The five algorithms</p>
+          <p className="eyebrow">The seven algorithms</p>
           <h2 id="algorithm-title">Exactly how each list is made.</h2>
         </div>
         <div className="algorithm-grid">
@@ -130,10 +142,12 @@ export default function AboutPage() {
             <h2>The last good snapshot stays live.</h2>
           </div>
           <p>
-            If a source is down, rate-limited, or produces invalid data, the
-            updater does not publish a partial replacement. Visitors continue
-            receiving the previous pre-rendered page. There is no runtime
-            database query, personalized feed, or request-time scraper.
+            If a required source is down, rate-limited, or produces invalid
+            data, the updater publishes nothing and visitors keep the previous
+            pre-rendered page. If Google Shopping alone is unavailable, its
+            last validated Products board is retained while the other boards
+            may refresh. There is no runtime database query, personalized feed,
+            or request-time scraper.
           </p>
         </div>
       </section>

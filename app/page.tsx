@@ -3,13 +3,6 @@ import { Leaderboard } from "./components/leaderboard";
 import { SongBoard } from "./components/song-board";
 
 export default function Home() {
-  const regularBoards = cultureBrief.sections.filter(
-    (section) => section.id !== "songs",
-  );
-  const songBoard = cultureBrief.sections.find(
-    (section) => section.id === "songs",
-  );
-
   return (
     <main id="main-content" tabIndex={-1}>
       <section className="hero wrap" aria-labelledby="hero-title">
@@ -41,10 +34,9 @@ export default function Home() {
       </section>
 
       <section className="boards wrap" id="boards" aria-label="Culture leaderboards">
-        {regularBoards.map((section) => (
-          <Leaderboard key={section.id} section={section} />
-        ))}
-        {songBoard ? <SongBoard section={songBoard} /> : null}
+        {cultureBrief.sections.map((section) => section.id === "music"
+          ? <SongBoard key={section.id} section={section} />
+          : <Leaderboard key={section.id} section={section} />)}
       </section>
     </main>
   );

@@ -25,25 +25,38 @@ npm test
 
 ## How rankings are made
 
-Once daily, `scripts/update-trends.mjs` verifies every required source and writes
-`data/trends.json` atomically. If any source fails, no new snapshot is published.
+At 12:00 AM Pacific each day, `scripts/update-trends.mjs` verifies its required
+sources and writes `data/trends.json` atomically. A bad run cannot replace the
+last validated snapshot.
 
 - Memes preserve the latest completed Know Your Meme Meme of the Month order,
   filtered to entries covered by Lessons in Meme Culture in the past two months.
 - Slang comes from Know Your Meme’s annual review, is verified with Urban
   Dictionary, and is ordered by lifetime Know Your Meme entry views.
-- Creators are ordered by 30-day English Wikipedia views, with at most two
-  people from one primary profession in the top five; each list links a
-  configured Google Trends comparison for independent context.
-- Movies are IMDb’s weekend top 10 re-ordered by cumulative U.S./Canada gross
-  from Box Office Mojo, with IMDb-linked Cinemeta metadata.
-- Songs are the first 10 Spotify Global Top 50 tracks also on the Billboard Hot
-  100, then all 10 are ordered by Billboard position.
+- People come from the previous month’s English Wikipedia Topviews list. The
+  updater keeps living non-politicians, assigns one broad primary category, and
+  allows at most two people from each category while preserving view order.
+- Movies are movie pages in the same previous-month Topviews list, ordered by
+  page views. IMDb-linked ratings are context only.
+- Music selects the first 10 Spotify Today’s Top Hits tracks that also appear on
+  the Billboard Hot 100, then orders that same set by Billboard position.
+- Products preserve the order of U.S. Google Shopping Rising queries from the
+  past seven days after removing people, media, brand-only terms, duplicates,
+  and anything without a relevant Amazon listing.
+- News uses U.S. Google Trending Now over seven days, excludes people and
+  sports, and orders the remainder by Google’s displayed search volume.
 
 Every entry has evidence from at least two distinct approved source hosts.
 `scripts/cache-images.mjs` validates the snapshot, downloads only missing or
 invalid art through HTTPS allowlists, converts it to bounded local WebP files,
 and preserves a last-known-good image when an upstream host fails.
+
+The YouTube Data API is used for Lessons in Meme Culture when
+`YOUTUBE_API_KEY` is configured; otherwise the updater reads YouTube’s public
+channel response. `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` enable the
+official Spotify attempt, with Spotify’s official playlist embed as the
+read-only fallback. `PRODUCT_TRENDS_SNAPSHOT` is an optional JSON recovery input
+for Google Shopping when its public page rate-limits automation.
 
 ## Architecture and maintenance
 

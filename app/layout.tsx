@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s — what’s popular?",
   },
   description:
-    "A five-minute daily briefing on the memes, slang, creators, movies, and songs shaping internet culture.",
+    "A five-minute daily briefing on the memes, slang, people, movies, music, products, and news shaping internet culture.",
   applicationName: "what’s popular?",
   alternates: { canonical: "/" },
   openGraph: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "what’s popular?",
     title: "what’s popular? — Internet culture, caught up",
     description:
-      "The finite daily briefing on memes, slang, creators, movies, and songs.",
+      "The finite daily briefing on memes, slang, people, movies, music, products, and news.",
     url: "/",
     images: [
       {

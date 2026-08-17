@@ -13,7 +13,9 @@ const TIMEOUT_MS = 18_000;
 const pageHosts = new Set([
   "en.wikipedia.org",
   "knowyourmeme.com",
+  "news.google.com",
   "open.spotify.com",
+  "www.amazon.com",
   "www.imdb.com",
 ]);
 
@@ -24,6 +26,7 @@ const imageHosts = new Set([
 
 const allowedImageSuffixes = [
   ".kym-cdn.com",
+  ".media-amazon.com",
   ".scdn.co",
   ".wikimedia.org",
 ];
@@ -31,7 +34,7 @@ const allowedImageSuffixes = [
 const assets = [];
 
 const brief = JSON.parse(await readFile(path.join(root, "data", "trends.json"), "utf8"));
-if (!Array.isArray(brief.sections) || brief.sections.length !== 5
+if (!Array.isArray(brief.sections) || brief.sections.length !== 7
   || brief.sections.some((section) => !Array.isArray(section.items) || section.items.length !== 5)) {
   throw new Error("Refusing to modify cached images for an invalid briefing");
 }
@@ -51,12 +54,16 @@ for (const section of brief.sections) {
   for (const item of [...section.items, ...(section.moreItems ?? [])]) {
     const file = path.basename(item.image);
     if (knownFiles.has(file)) continue;
-    const imdbId = section.id === "watch" ? item.url.match(/tt[0-9]{7,9}/)?.[0] : null;
+    const imdbId = section.id === "movies" ? item.url.match(/tt[0-9]{7,9}/)?.[0] : null;
     assets.push({
       file,
       title: item.title,
       page: item.url,
-      ...(imdbId ? { direct: `https://images.metahub.space/poster/medium/${imdbId}/img` } : {}),
+      ...(item.imageSource
+        ? { direct: item.imageSource }
+        : imdbId
+          ? { direct: `https://images.metahub.space/poster/medium/${imdbId}/img` }
+          : {}),
       shape: section.layout,
     });
     knownFiles.add(file);
