@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Products and News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-17T17:26:51.849Z",
+  "generatedAt": "2026-08-17T18:47:12.399Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -279,16 +279,16 @@
     },
     {
       "id": "slang",
-      "eyebrow": "Annual slang review · by page views",
+      "eyebrow": "2025 annual slang review · by page views",
       "title": "Slang",
-      "description": "Terms from Know Your Meme's annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.",
+      "description": "Terms from Know Your Meme's latest annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.",
       "sources": [
         {
-          "label": "Know Your Meme · annual slang review",
+          "label": "Know Your Meme · 2025 annual slang review",
           "url": "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025"
         },
         {
-          "label": "Urban Dictionary · 67 / six-seven",
+          "label": "Urban Dictionary · 67 / Six-Seven",
           "url": "https://www.urbandictionary.com/define.php?term=67"
         }
       ],
@@ -296,16 +296,16 @@
       "items": [
         {
           "rank": 1,
-          "title": "67 / six-seven",
-          "subtitle": "A deliberately ambiguous number catchphrase",
-          "description": "A call-and-response built around saying “six-seven,” often with a palms-up gesture. Its lack of one fixed meaning is the joke, so people use it as a deliberately contextless reply.",
+          "title": "67 / Six-Seven",
+          "subtitle": "2025 annual review term",
+          "description": "67 Meme refers to a series of memes about a lyric in the song \"Doot Doot\" by Skrilla featuring G Herbo, a hip-hop song released in December 2024, that was popularized on social media and Instagram Reels in January 2025.",
           "image": "/culture/slang-67.webp",
           "alt": "The number 67 as used in the six-seven meme",
           "url": "https://knowyourmeme.com/memes/67-meme",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,176"
+            "value": "1,001,218"
           },
           "evidence": [
             {
@@ -322,15 +322,15 @@
         {
           "rank": 2,
           "title": "Dead Rose Emoji",
-          "subtitle": "The wilted rose used as ironic punctuation",
-          "description": "The wilted rose emoji 🥀 became an ironic alternative to the broken-heart emoji. People append it to dramatic, embarrassing, disappointed, or mock-heartbroken remarks.",
+          "subtitle": "2025 annual review term",
+          "description": "The Dead Rose Emoji refers to the 🥀 emoji that depicts a wilted rose. It's used online to represent being damaged or heartbroken, earnestly shared by emo internet users.",
           "image": "/culture/slang-dead-rose-emoji.webp",
           "alt": "Visual example of Dead Rose Emoji",
           "url": "https://knowyourmeme.com/memes/dead-rose-emoji",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,386"
+            "value": "114,418"
           },
           "evidence": [
             {
@@ -339,23 +339,23 @@
             },
             {
               "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=dead%20rose"
+              "url": "https://www.urbandictionary.com/define.php?term=Dead%20Rose"
             }
           ],
           "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "Aura farming",
-          "subtitle": "Performing effortless cool for status",
-          "description": "Aura farming means doing something calculated to look effortlessly cool and build imaginary social status. The phrase captions dramatic entrances, poses, edits, and knowingly over-styled behavior.",
+          "title": "Aura Farming",
+          "subtitle": "2025 annual review term",
+          "description": "Aura Farming refers to an act of constantly trying to look \"cool\" or \"badass\" to build \"aura moments.\" The expression is derived from the \" aura \" internet slang term and gained viral usage on X / Twitter, Instagram and social media in mid-September 2024.",
           "image": "/culture/slang-aura-farming.webp",
           "alt": "Stylized scene representing aura farming",
           "url": "https://knowyourmeme.com/memes/aura-farming",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,775"
+            "value": "99,781"
           },
           "evidence": [
             {
@@ -364,7 +364,7 @@
             },
             {
               "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=aurafarming"
+              "url": "https://www.urbandictionary.com/define.php?term=aura%20farming"
             }
           ],
           "accent": "#57d5a4"
@@ -372,15 +372,15 @@
         {
           "rank": 4,
           "title": "SYBAU",
-          "subtitle": "An aggressive request to be quiet",
-          "description": "SYBAU expands to “shut your bitch ass up.” It is used as a blunt dismissal or exaggerated reaction, often as an acronym so the punchline lands only after someone decodes it.",
+          "subtitle": "2025 annual review term",
+          "description": "SYBAU is a slang term and acronym meaning \"shut your bitch ass up.\" The acronym has been used online since as early as 2003 when it was first defined on Urban Dictionary, spreading over the following years.",
           "image": "/culture/slang-sybau.webp",
           "alt": "Reaction image associated with the acronym SYBAU",
           "url": "https://knowyourmeme.com/memes/sybau",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,485"
+            "value": "76,494"
           },
           "evidence": [
             {
@@ -389,7 +389,7 @@
             },
             {
               "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=sybau"
+              "url": "https://www.urbandictionary.com/define.php?term=SYBAU"
             }
           ],
           "accent": "#5ab0ff"
@@ -397,15 +397,15 @@
         {
           "rank": 5,
           "title": "Labubu Matcha Dubai Chocolate",
-          "subtitle": "A pileup of 2025 consumer-trend buzzwords",
-          "description": "Labubu is a toothy collectible toy, matcha is a powdered green-tea drink, and Dubai chocolate is a pistachio-filled chocolate bar. Stringing them together parodies algorithm-driven consumer trends.",
+          "subtitle": "2025 annual review term",
+          "description": "Labubu Matcha Dubai Chocolate refers to a slang overload trend involving the overuse and spamming of trendy, mid-2025 fads and crazes like Labubu Toys, matcha drinks and Dubai Chocolate Bars.",
           "image": "/culture/slang-labubu-matcha-dubai-chocolate.webp",
           "alt": "Visual example of Labubu Matcha Dubai Chocolate",
           "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,549"
+            "value": "55,552"
           },
           "evidence": [
             {
@@ -414,7 +414,7 @@
             },
             {
               "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=labubu"
+              "url": "https://www.urbandictionary.com/define.php?term=Labubu"
             }
           ],
           "accent": "#ff6b57"
@@ -424,15 +424,15 @@
         {
           "rank": 6,
           "title": "Clanker",
-          "subtitle": "A derogatory word for robots",
-          "description": "A Star Wars insult for battle droids that returned as a joking slur for robots and AI. People use it to mock a machine, chatbot, or conspicuously automated behavior.",
+          "subtitle": "2025 annual review term",
+          "description": "Clanker is a slang term and a robophobic slur for droids and robots, originating from the Star Wars franchise. After initially appearing in the video game Star Wars: Republic Commando and The Clone Wars in the mid-to-late 2000s, the slang began seeing use online and in memes during the 2010s.",
           "image": "/culture/slang-clanker.webp",
           "alt": "A battle droid associated with the slang term clanker",
           "url": "https://knowyourmeme.com/memes/clanker",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,890"
+            "value": "46,893"
           },
           "evidence": [
             {
@@ -449,8 +449,8 @@
         {
           "rank": 7,
           "title": "TS PMO ICL",
-          "subtitle": "An intentionally overloaded slang acronym",
-          "description": "TS PMO ICL expands to “this shit pisses me off, I can’t lie.” People use it sincerely, or pile it into deliberately overloaded captions that parody compressed internet slang.",
+          "subtitle": "2025 annual review term",
+          "description": "TS means “this shit”; PMO means “piss me off”; and ICL means “I can't lie”. TS PMO ICL, also spelled TSPMO ICL, refers to a Slang Overload trend of overusing slang abbreviations like TS, PMO and ICL, among others, to form nonsensical, brainrot posts that satirize the slang's use.",
           "image": "/culture/slang-ts-pmo-icl.webp",
           "alt": "Visual example of TS PMO ICL",
           "url": "https://knowyourmeme.com/memes/ts-pmo-icl",
@@ -474,15 +474,15 @@
         {
           "rank": 8,
           "title": "Performative Male",
-          "subtitle": "Someone visibly curating an appealing persona",
-          "description": "A performative male conspicuously reads feminist books, drinks matcha, carries a tote bag, or wears wired earbuds to appear sensitive and attractive. The label mocks an obviously curated personality.",
+          "subtitle": "2025 annual review term",
+          "description": "Performative Male is an internet slang term used to describe a man whose actions, hobbies and personality traits appear inauthentic and seem to revolve around \"performing\" for other people's worldviews, tastes and interests, specifically catering to the female gaze.",
           "image": "/culture/slang-performative-male.webp",
           "alt": "Visual example of Performative Male",
           "url": "https://knowyourmeme.com/memes/performative-male",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,348"
+            "value": "27,351"
           },
           "evidence": [
             {
@@ -499,15 +499,15 @@
         {
           "rank": 9,
           "title": "Chopped",
-          "subtitle": "Unattractive, damaged, or badly done",
-          "description": "Calling someone or something “chopped” means it looks unattractive, damaged, or badly put together. It appears in blunt reactions, appearance jokes, and before-and-after comparisons.",
+          "subtitle": "2025 annual review term",
+          "description": "Chopped is a slang term with multiple definitions, but in memes, it predominantly means \"ugly\" when used to describe people. It's been used online since the early 2010s but gained a predominant presence online starting in the early 2020s.",
           "image": "/culture/slang-chopped.webp",
           "alt": "Reaction image associated with chopped slang",
           "url": "https://knowyourmeme.com/memes/chopped-slang",
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,499"
+            "value": "18,500"
           },
           "evidence": [
             {
@@ -516,7 +516,7 @@
             },
             {
               "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=Chopped"
+              "url": "https://www.urbandictionary.com/define.php?term=chopped"
             }
           ],
           "accent": "#5ab0ff"
@@ -545,7 +545,7 @@
           "rank": 1,
           "title": "Erling Haaland",
           "subtitle": "Sports",
-          "description": "Erling Haaland is a Norwegian footballer for Manchester City and Norway. Recent attention centered on Norway’s run at the 2026 World Cup.",
+          "description": "Erling Haaland is a Norwegian footballer. The Erling Haaland boom: Norway's 'pop-up economy' during the World Cup revealed in Visa data.",
           "image": "/culture/person-erling-haaland.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Erling Haaland",
@@ -565,8 +565,8 @@
               "url": "https://en.wikipedia.org/wiki/Erling_Haaland"
             },
             {
-              "source": "AP News via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNYk1hYXg5YlZqNHdDYjVUVXlfc0lTQnFwb2ZlV1I1SEJiZHIzazRlNXpJVFNURDdsejg4U0FwZlJYa0dRaVdxUHNuTXd5QktXVXJHeFhmLU9GWVB4TDF1VFluODhEWDhyb21LOGFUTnZ1ODBfc2dXTUxXRk9MT0dhWHAtUTE3cFBmaUtQa3BiZGxJRXVwNmxFS1E0bFB6ZmExYVdISnRuV2p3UUU?oc=5"
+              "source": "Fortune via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOb1k4clYxbjJQa2l0U3ZVNGZGUnQtaUw3U3diT0p2dnJlaDdTdGhnWGdyYjd2REx0SjVieHZoRm1VdWxwcHhadllJTmw0YVdZZXVRY0R6aEg2SFRmaDJYc21hTkI0SzFvSDR4ZkJFYWdXWm00empLVFdwQktvTUI1Q2V0SlJ3LUZvekNz?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -576,7 +576,7 @@
           "rank": 2,
           "title": "Lamine Yamal",
           "subtitle": "Sports",
-          "description": "Lamine Yamal is a Spanish winger for Barcelona and Spain. He drew renewed attention during Spain’s 2026 World Cup campaign.",
+          "description": "Lamine Yamal is a Spanish footballer.",
           "image": "/culture/person-lamine-yamal.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Lamine Yamal",
@@ -594,10 +594,6 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Lamine_Yamal"
-            },
-            {
-              "source": "The New York Times via Google News",
-              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQSU5uTXZpaDFIaXhNczBtbzB0NEl4Um1TYXFZaVBGNkpvdVczVTFRVkVTTnBZT2duVV9iVXRncEF0d3pnWmxxbjZHQW9ZUUNfemlFeFpFMTJZUVpqVXZxVW50NE9GY3hMajJ0ck1IeWVadVE5NVhlWnV0X3RHZU84MlJIOWNnRGpwWFpYR0hPMXgzUXdYOXVQVQ?oc=5"
             }
           ],
           "accent": "#9b8cff",
@@ -607,7 +603,7 @@
           "rank": 3,
           "title": "Christopher Nolan",
           "subtitle": "Film",
-          "description": "Christopher Nolan is a British-American filmmaker. His adaptation of The Odyssey reached theaters in July 2026.",
+          "description": "Christopher Nolan is an English and American filmmaker.",
           "image": "/culture/creator-christopher-nolan.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/ChristopherNolan-byPhilipRomano_%28cropped%29.jpg/960px-ChristopherNolan-byPhilipRomano_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Christopher Nolan",
@@ -625,10 +621,6 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
-            },
-            {
-              "source": "The New York Times via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPSDJLdVBDTFZZaWI2cU1udUsyeUt3SGlLa2hYcmxpLUxBSmstck8xRUhmRE1iNHFfV0VWdjlIUVlrYXlPYnI3MEpFbzRZUlQ5T1ZNMWJsYl9NdUF2V3pjVTdCRGE3MDhHZnBTRHJxSUNpLWtNVTJyZFZXS05zUjRKUXdWUXMtX1g3bGtr?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -638,7 +630,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya is an American actor and singer. The July release of The Odyssey returned her to current film coverage.",
+          "description": "Zendaya is an American actress and singer.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -656,10 +648,6 @@
             {
               "source": "Wikipedia article",
               "url": "https://en.wikipedia.org/wiki/Zendaya"
-            },
-            {
-              "source": "Forbes via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNMWNNODRaeVp1WWZNcW5VbmIyRHFRbkVUU2U5a0thR2MweTc3U05nRnlBSXNvQnhXdGptQjM5ZTNXNUlWaHpaN1lyLUdPQ2FvV2VMNjg4QXZsMDVHVkhnLXBqczRqTzVnMEpmRElmeHpVSHBrU0ZlVlJrSU5OdmRQVkNRLXVxRGJnWHJjTmtxR3d6d0tneU1rUE1EMFRaNmhfT1VlLXFpdXVBYmdEcktqeElLczZZWUd0cnptUl9Kcno?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -669,7 +657,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is a Colombian singer-songwriter. She returned to global attention as part of the 2026 World Cup final halftime show.",
+          "description": "Shakira is a Colombian singer-songwriter. Justin Bieber Joins Madonna, BTS and Shakira for FIFA World Cup Final Halftime Show.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -702,7 +690,7 @@
           "rank": 6,
           "title": "Sonam Wangchuk",
           "subtitle": "Science & technology",
-          "description": "Sonam Wangchuk is an Indian engineer, educator, and activist. Recent attention followed his role in youth-led protests against India’s government.",
+          "description": "Sonam Wangchuk is an Indian engineer, innovator and education reformist. Sonam Wangchuk: the 59-year-old who rallied India's Gen Z against Modi and won.",
           "image": "/culture/person-sonam-wangchuk.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Sonam_Wangchuk%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Sonam Wangchuk",
@@ -733,7 +721,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Swift is an American singer-songwriter. Her latest single, “I Knew It, I Knew You,” set a new Adult Pop Airplay record.",
+          "description": "Taylor Swift is an American singer-songwriter. Taylor Swift has solo night out in London as Travis Kelce returns to Chiefs practice post-wedding.",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -753,8 +741,8 @@
               "url": "https://en.wikipedia.org/wiki/Taylor_Swift"
             },
             {
-              "source": "Billboard via Google News",
-              "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQckQtMExhV3VBZzJ1VGJFR3VBOTlCSXpPLVRyNmJ6cnZCRnBwUzBoZ0FPeVNZMnNfS2ZsQVQ3OE43N0dmZ1FRVDB0S2VxXy14YzB0RTBCWFdPTWxycDhGbHRWblU4di1sMExIR3gycGpoRzhrMXBBeE5MZzdrYnBOME5lNnJZTDhpNXNGdkJfV29iZFp6QUJLbHJLaFJOQnRob2dXMENqYjFUSnh1V1A5dU4zeUZadw?oc=5"
+              "source": "Page Six via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOcnlpeGNYWTVvblFCU0pzQXRUenBZVzlqWHNHVXNoWDJvX2JSVi1TUE44bE1faFk5a3AzVXotYV9BcDhnRFVrVXFUY2JVdnoyODltVmU4dnhYV3FpNURheXNMeVY0YnlGaTEyTnFScFBDdE5yaWpKTEQydHlTNThvWlZZRW02cTkzR0lGLV9HQzk3QnM5ZmxCLVdGMXdYakdwQ2RGd2YySHo1LVNFVkxsV1gwRkd4TjdRMkowMnE0eDBsdE9pZFl1Z0xZbk9HX0N2?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -764,7 +752,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeff Bezos is the founder of Amazon. A consortium backed by him recently bought a stake in Liverpool Football Club.",
+          "description": "Jeff Bezos is an American business magnate. Liverpool owners sell stake to Jeff Bezos-backed consortium.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -795,7 +783,7 @@
           "rank": 9,
           "title": "Andrew Tate",
           "subtitle": "Business",
-          "description": "Andrew Tate is a social media personality and former kickboxer. He and his brother remained jailed pending their next extradition hearing.",
+          "description": "Andrew Tate is an American-British businessman, former kickboxer, dating coach and manosphere influencer. Arrest Timeline: Extradition Hearing Monday.",
           "image": "/culture/person-andrew-tate.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Andrew Tate",
@@ -815,8 +803,8 @@
               "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
             },
             {
-              "source": "The Guardian via Google News",
-              "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQOTBtVUhuWXpfdDFyMzEzLTJmQUpHRzBlRDVweExmZVp5RmljNXF3cHlLQTQ4Z1pBNkcwQVVFc1dsNmE3dkR3NU5ld1h3UjU0MFNOZFQ4M0pFX1VHZFhuYzIxcW9reHROc01GYUJfdTdqSkNndlhXaVhObzd2X000NXgwZzVqUm9nNzdKTnRxbGxYM1VmaFFqQXZR?oc=5"
+              "source": "Forbes via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQQm5iNmd0VjdhaHpINE92ZmJKMEhGUWFIaFk0aVhzd0RFSDlGVzR3bXYtaXBJdjRaeGJ0NnNjOEtCRlpCUzdfdGNmbnFKeGNZU1lxNzRySmVMOURoN3kwVC1hU3N1eF9iRmNDTU92bUlienY4UEN2YUM5WnNwVklyT1lPNlhZb3FSSV9XRjM4S2xTeGV1RnRfMXAwdnV2V05LNXZtb3VlbUN4TW5WTHRNRTRKNXFXbW5sM05tbE0zOXR6Zw?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -826,7 +814,7 @@
           "rank": 10,
           "title": "Amelia Dimoldenberg",
           "subtitle": "Media",
-          "description": "Amelia Dimoldenberg is an English comedian, writer, and presenter. Her Formula One interview series Passenger Princess returned for a second season this month.",
+          "description": "Amelia Dimoldenberg is an English journalist and comedian. Amelia Dimoldenberg’s F1 Series ‘Passenger Princess’ Returning for Season 2 This Month.",
           "image": "/culture/person-amelia-dimoldenberg.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Amelia Dimoldenberg",
@@ -877,7 +865,7 @@
           "rank": 1,
           "title": "The Odyssey",
           "subtitle": "2026 film",
-          "description": "The Odyssey is an action-fantasy film about Odysseus’s dangerous journey home after the Trojan War and the mythical beings he encounters along the way.",
+          "description": "The Odyssey is an action/adventure/fantasy film. After the Trojan War, Odysseus faces a dangerous voyage back to Ithaca, meeting creatures like the Cyclops Polyphemus, Sirens, and Calypso along the way.",
           "image": "/culture/media-odyssey.webp",
           "alt": "The Odyssey 2026 theatrical poster",
           "url": "https://www.imdb.com/title/tt33764258/",
@@ -897,8 +885,8 @@
               "url": "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
             },
             {
-              "source": "NPR via Google News",
-              "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNTVliNVB1RWktMy1PYndsN09aS3BpcUpPVWtRZW5DRmhiZjlTRDE3UHVKcTY3amhZWklPczBac3hFUWpYYmpHOXVqYm83emhaSi13LVNtd09RU2REY2tGdU1WWnA3QU1QMGc0VF9iVnRZN19DVTFqcURhM0NLWmxsdVoxV25mWEJ1M280SGQ3bnM?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt33764258/"
             }
           ],
           "accent": "#9b8cff"
@@ -907,7 +895,7 @@
           "rank": 2,
           "title": "Obsession",
           "subtitle": "2025 film",
-          "description": "Obsession is a supernatural horror film about a man whose magical wish makes his friend fall violently and uncontrollably in love with him.",
+          "description": "Obsession is a horror/romance/thriller film. Baron \"Bear\" Bailey breaks a novelty charm to force his co-worker Nikki Freeman to love him, but the supernatural compulsion warps her mind into violent obsession, trapping him in a nightmare he cannot wish away.",
           "image": "/culture/movie-obsession.webp",
           "alt": "Obsession poster or lead image",
           "url": "https://www.imdb.com/title/tt37287335/",
@@ -927,8 +915,8 @@
               "url": "https://en.wikipedia.org/wiki/Obsession_(2025_film)"
             },
             {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNMnhyQ0lyY0sxSkU1cjVYaHE4RmhJV2c4enBCWnBFMzFVTU9XaWFkVTB3WUc4SjFMc1liQ3E5R1ZheXlzMmlqanBPMkg3ekVnd0VmbGtmNlNOWTU4N1BrbFQ1eVhHV3FMNDVEOGpTZ0xyam0wSHA1TndlNTlRaktGZEQ3WHZ2M1d4NkhiZFZiUjlDRE5GLXIxZ0pCWTR5Q1hfRjJ1Ni05WQ?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt37287335/"
             }
           ],
           "accent": "#9b8cff"
@@ -937,7 +925,7 @@
           "rank": 3,
           "title": "Project Hail Mary",
           "subtitle": "2026 film",
-          "description": "Project Hail Mary is a science-fiction film about a teacher who wakes alone on a spacecraft and must stop a threat that is killing the Sun.",
+          "description": "Project Hail Mary is an adventure/comedy/drama film. A science teacher wakes up alone on a spaceship. As his memory returns, he uncovers a mission to stop a mysterious substance killing Earth's sun, and realizes that an unexpected friendship may be the key.",
           "image": "/culture/movie-project-hail-mary.webp",
           "alt": "Project Hail Mary poster or lead image",
           "url": "https://www.imdb.com/title/tt12042730/",
@@ -957,8 +945,8 @@
               "url": "https://en.wikipedia.org/wiki/Project_Hail_Mary_(film)"
             },
             {
-              "source": "The New York Times via Google News",
-              "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNR1gwZDdha19DZUctZVRCQWxMMGlKUURxeG8wMUJyajF6M2hjbUw5d2dBQzBtdU1HMlVoS0wxcFRmTkFPcG9sZmRnUmVydXIyMkR2b1ZHNkNja05NMGpQeXE5ZFlRdU5RVWc5NlpjbkhuS1hJcTZ4bS1UdjRVQlJlem5vd1ZuQQ?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt12042730/"
             }
           ],
           "accent": "#57d5a4"
@@ -967,7 +955,7 @@
           "rank": 4,
           "title": "Backrooms",
           "subtitle": "2026 film",
-          "description": "Backrooms is a psychological horror film about a therapist entering a dimension of endless liminal spaces to find a missing patient.",
+          "description": "Backrooms is a horror/sci-fi/thriller film. After a therapist's patient disappears into a dimension beyond reality, she must venture into the unknown to save him.",
           "image": "/culture/movie-backrooms.webp",
           "alt": "Backrooms poster or lead image",
           "url": "https://www.imdb.com/title/tt26657236/",
@@ -987,8 +975,8 @@
               "url": "https://en.wikipedia.org/wiki/Backrooms_(film)"
             },
             {
-              "source": "The Hollywood Reporter via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPeExPYXNNX1FjZ0NwWF9sS0hCbTVCSkZhSlRJYmFSdjJMWDVrOWJzd0w1UzkyVHVBYUVhSHNoVk9RZ0I3eFdONXYtay1vUjdlUjhCUk5wemxFYk9xcEg3N290MHo0NnNnbUFqUzhXdm9aSFRzQ09ZSXVxeTl3Vk5tYzdielE4bTJHQ2NUSmQxQ0JIRFdUWU5GUWNUdGxoOHVQRXBBMHlZMUM0X2g0SWc2YnczMVBVX242emItRXdXeG8?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt26657236/"
             }
           ],
           "accent": "#5ab0ff"
@@ -997,7 +985,7 @@
           "rank": 5,
           "title": "Alpha",
           "subtitle": "Movie",
-          "description": "Alpha is an action-thriller film about an assassin raised as a super-soldier who joins her long-lost sister to confront the commander who created her.",
+          "description": "Alpha is a 2026 Indian Hindi-language action thriller film directed by Shiv Rawail, in his feature film debut, and produced by Aditya Chopra under Yash Raj Films.",
           "image": "/culture/movie-alpha.webp",
           "alt": "Alpha poster or lead image",
           "url": "https://www.imdb.com/title/tt28363783/",
@@ -1017,8 +1005,8 @@
               "url": "https://en.wikipedia.org/wiki/Alpha_(2026_film)"
             },
             {
-              "source": "theplaylist.net via Google News",
-              "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOZmZsSmxvdHlhQkhxdElUMmtLR1MtWFdTZjVkZEhNSGxXZHhVRjhXXzJkUXFLNU5fLWM0RENHaV9SckJvNVZWN1F1Sl9hc0ZETlRUT0p4MWZvWWM5NlB5aXJQcGRYR19wN0czV0VxNnVjeDdFSnZtMkdRTHhUWTJhYkk3NHkwVjV5SFV4M3BhRG0?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt28363783/"
             }
           ],
           "accent": "#ff6b57"
@@ -1029,7 +1017,7 @@
           "rank": 6,
           "title": "Supergirl",
           "subtitle": "2026 film",
-          "description": "Supergirl is a superhero film about Kara Zor-El crossing space with an unlikely companion on a journey of vengeance and justice.",
+          "description": "Supergirl is an action/adventure/drama film. Kara Zor-El, aka Supergirl, joins forces with an unlikely companion on an interstellar journey of vengeance and justice when an unexpected adversary strikes too close to home.",
           "image": "/culture/movie-supergirl.webp",
           "alt": "Supergirl poster or lead image",
           "url": "https://www.imdb.com/title/tt8814476/",
@@ -1049,8 +1037,8 @@
               "url": "https://en.wikipedia.org/wiki/Supergirl_(2026_film)"
             },
             {
-              "source": "The Worldwide Guide To Movie Locations via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1USUEwakZRMEFZQ09IMEw1eFVfdVBtRUhDZ3dJaWhlNlUtelFfQ1B4OXN2UVhTY0V5SzJpSmNJNXB3UFVlZE1UZ3hwVmJ5ZVk3bzRkVXE3aWxkREhEQVpHWVdvMFV0Zw?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt8814476/"
             }
           ],
           "accent": "#ffc857"
@@ -1059,7 +1047,7 @@
           "rank": 7,
           "title": "Jana Nayagan",
           "subtitle": "Movie",
-          "description": "Jana Nayagan is a Tamil action-drama film about a former police officer who raises a fallen friend’s daughter and helps her pursue an army career.",
+          "description": "Jana Nayagan is an action/thriller film. Thalapthy Vijay is adamant about getting even with a powerful businessman who cost him money. He is prepared to square off against the formidable foe and resolve their issues amicably.",
           "image": "/culture/movie-jana-nayagan.webp",
           "alt": "Jana Nayagan poster or lead image",
           "url": "https://www.imdb.com/title/tt33379543/",
@@ -1079,8 +1067,8 @@
               "url": "https://en.wikipedia.org/wiki/Jana_Nayagan"
             },
             {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPTF9aaUtGd083dnhCNlF1R2lzZHZiTjFXR2FKZk1ORUtvWE1JY1Z6VFQ4c01DOTBmMV9NcWlLaTRpLURYSFpnSk9NcXF6dXUzdTdZVGJxc1ZWNHhqdjBabXdJZUJEY1U4TXphZHlwaWw2TjhjTDlNd0kyb0R2OTRGNGhaWGY5VVlWanlsdEZrdXgzeXc3N3BGcGxEbFo5WnRCT01UYllENjU?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt33379543/"
             }
           ],
           "accent": "#9b8cff"
@@ -1089,7 +1077,7 @@
           "rank": 8,
           "title": "Evil Dead Burn",
           "subtitle": "2026 film",
-          "description": "Evil Dead Burn is a supernatural horror film about a grieving widow whose in-laws begin transforming into Deadites.",
+          "description": "Evil Dead Burn is a fantasy/horror/mystery film. After the loss of her husband, a woman seeks solace with her in-laws. As one by one they transform into deadites, she comes to discover that the vows she took in life - survive even in death.",
           "image": "/culture/media-evil-dead-burn.webp",
           "alt": "Evil Dead Burn theatrical poster",
           "url": "https://www.imdb.com/title/tt31170389/",
@@ -1109,8 +1097,8 @@
               "url": "https://en.wikipedia.org/wiki/Evil_Dead_Burn"
             },
             {
-              "source": "The Hollywood Reporter via Google News",
-              "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOaVhIcTJfY1daM01wWVZBTmZBZmhteVR0eF9JenBGM0lwbE1ZdU40UDFXWi1uV3pLM1NFNWZUS2hOcUtQQ2dRZm81bEdvSWVRN05ablFrSk1nRHVscktOaWh1TDE1cUtnaUVQNDcwamZncFV3RUdBc3R5S2ZRWVNxUmY2ZEt2MWZpRTRKUlR4MjZ4Zw?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt31170389/"
             }
           ],
           "accent": "#9b8cff"
@@ -1119,7 +1107,7 @@
           "rank": 9,
           "title": "Masters of the Universe",
           "subtitle": "2026 film",
-          "description": "Masters of the Universe is a fantasy-adventure film about Prince Adam returning to Eternia with the Sword of Power to challenge the tyrant who destroyed his family.",
+          "description": "Masters of the Universe is an action/adventure/fantasy film. Prince Adam discovers that the strange memories shaping his life are real when the lost Sword of Power resurfaces, forcing him to return to Eternia and challenge the tyrant who shattered his family and kingdom.",
           "image": "/culture/movie-masters-of-the-universe.webp",
           "alt": "Masters of the Universe poster or lead image",
           "url": "https://www.imdb.com/title/tt0427340/",
@@ -1139,8 +1127,8 @@
               "url": "https://en.wikipedia.org/wiki/Masters_of_the_Universe_(2026_film)"
             },
             {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQV3BQMld2dmtpRW5Jem5laXpyTUJyWnBsb0ZJdkdsRlhlNVg2WmlKTjJ1Rkh4Qk9MVVVDQW5TX0l2QlBGblRuYkthZTNyd3ppNUZXd1FiTC1KbGN1U0hMR2RKU3VVQVZvMVczOWhDX3JENV9oWE4xSU5scGFDclZ4Zk9IWlJNZ2RpZE90M2Foc1RJd3FaamdLTUxoMDl4ei1YMjhrTnItM0c?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt0427340/"
             }
           ],
           "accent": "#5ab0ff"
@@ -1149,7 +1137,7 @@
           "rank": 10,
           "title": "Toy Story 5",
           "subtitle": "2026 film",
-          "description": "Toy Story 5 is an animated comedy film about Woody, Buzz, Jessie, and the other toys facing electronics as a new threat to playtime.",
+          "description": "Toy Story 5 is an animation/adventure/comedy film. Woody, Buzz, Jessie and the rest of the gang's jobs are challenged when they're introduced to electronics, a new threat to playtime.",
           "image": "/culture/media-toy-story.webp",
           "alt": "Toy Story 5 theatrical poster",
           "url": "https://www.imdb.com/title/tt29355505/",
@@ -1169,8 +1157,8 @@
               "url": "https://en.wikipedia.org/wiki/Toy_Story_5"
             },
             {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPQVNoUHRQWGF3U0dxb1R6M1p6OGstVWFkQ2szQnVtd1ROSHpVRS1rYmxTb1NraWpGdWpwZ0xWRG9fWFRPRWFva1JLdzBZTWF4bWRJRGVBZzBjREVTeFF6d3V2TjVPN3Mwa0hUUHpwRElaZnRrZHdBR1hKTnVEN09yTE1ZcmViLW5RXzBYSll0SUpqVElo?oc=5"
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt29355505/"
             }
           ],
           "accent": "#ffc857"
@@ -1199,7 +1187,7 @@
           "rank": 1,
           "title": "Choosin' Texas",
           "subtitle": "Ella Langley",
-          "description": "“Choosin’ Texas” is a country song by Ella Langley. Its sustained chart breakthrough has kept the 2025 single prominent into 2026.",
+          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025.",
           "image": "/culture/song-choosin-texas-ella-langley.webp",
           "alt": "Choosin' Texas artwork by Ella Langley",
           "url": "https://open.spotify.com/track/65DbTqJKhbwqYbZ1Okr0rc",
@@ -1216,10 +1204,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Forbes via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOU3VWcUVkcEF0Q0VRanpBaUJ4ZVFzSVdlN0pSWUFsVHFhU1lJTGh1X2RYMm5pengyMVhJQ0F2MTRaQ3Rmb2wwWFVjVW9Tb2d6VF9kclo1ZlN1WEhnQ1BLRVdQVkVwNkpRdFNMSXRONGUxMk1nVTRLSERBUmY3NUVhSXRiQjJ0SW91WUZtbm14T0RtcWtVRmNOSms5THpubFh0SW1mb0pkUjVTN3FqUFA5ekZabGxMN2lLTzl4Sl85b2pSZDhNaWNQLWp1UXBnWk1oYkxMSg?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -1230,7 +1214,7 @@
           "rank": 2,
           "title": "hate that i made you love me",
           "subtitle": "Ariana Grande",
-          "description": "“hate that i made you love me” is a pop single Ariana Grande released in May 2026 as part of her current run of new music.",
+          "description": "“hate that i made you love me” is a track by Ariana Grande, released May 29, 2026.",
           "image": "/culture/song-hate-that-i-made-you-love-me-ariana-grande.webp",
           "alt": "hate that i made you love me artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/20jbSiX29FDX4oQxBXyUEi",
@@ -1247,10 +1231,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Billboard via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPQVluaEFVZUNaZXo2UElGZDRYY2s4c25kSDFoaWJNNlZORHowaFNVNXlWU09tb3R3WjZlRmFkN2xwSHo5eFF6MVRKeHdKRzdITnBnNFZOYXZEWEtOMmhqanJzalZLUE82bGJLeTUxWjNzRy1fb2lLWVYxbjMtRkZoYk1vRUV4aDRqN1BPQmxtUUxPZV9XanJOUjNWYm9SSV9WcjYwRm5WaW05aGM?oc=5"
             }
           ],
           "accent": "#9b8cff",
@@ -1261,7 +1241,7 @@
           "rank": 3,
           "title": "petal",
           "subtitle": "Ariana Grande",
-          "description": "“petal” is the title track of Ariana Grande’s album released on July 31, 2026, putting it at the center of the album’s launch.",
+          "description": "“petal” is a track by Ariana Grande, released Jul 31, 2026.",
           "image": "/culture/song-petal-ariana-grande.webp",
           "alt": "petal artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
@@ -1278,10 +1258,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOUHhsMlpUTHpoRl9FNHQzXzN5YUJnYmlkN2YyeTFaY0ExOU5RcTdNWUV4YlEyRUZiVk9qWTJnajZFYkRZRnI0MnN4TXoyT1BfckdjaDFxZWJRbDdnT1NrZlY1anY5YUp1dXdyQ18tV2g0SnBjRUNGUFBsendiRGd3M0NNcFVvMG5rY1VZekRCZ2NVbENOSGhlUA?oc=5"
             }
           ],
           "accent": "#57d5a4",
@@ -1292,7 +1268,7 @@
           "rank": 4,
           "title": "Man I Need",
           "subtitle": "Olivia Dean",
-          "description": "“Man I Need” is a soul-pop single by Olivia Dean. A Grammy performance and a recent wave of short-form edits renewed attention around the song.",
+          "description": "“Man I Need” is a track by Olivia Dean, released Aug 15, 2025.",
           "image": "/culture/song-man-i-need-olivia-dean.webp",
           "alt": "Man I Need artwork by Olivia Dean",
           "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
@@ -1309,10 +1285,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "uDiscoverMusic via Google News",
-              "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5ZNVhxYXBYeWRiQ2M5Y0tHLXU0SW11cHBoS0lIWHVtVHNpSEhNSGNjRzlsS01pYzNEN09xaGt6YV9yeXpVcXdlLV9RRk1feEZUUDNYYmxxdzNTYmdFNTZxRTQtSzdRRnBEOTV6S3FsN1RCdFk2bG9ERg?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -1323,7 +1295,7 @@
           "rank": 5,
           "title": "stupid song",
           "subtitle": "Olivia Rodrigo",
-          "description": "“stupid song” is a track from Olivia Rodrigo’s June 2026 album you seem pretty sad for a girl so in love.",
+          "description": "“stupid song” is a track by Olivia Rodrigo, released Jun 12, 2026.",
           "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
           "alt": "stupid song artwork by Olivia Rodrigo",
           "url": "https://open.spotify.com/track/4LfCY65LvojKjWEnU7fNN4",
@@ -1340,10 +1312,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Billboard via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE13Y1Z1dzh5U2VpR0dlSGxoOUNJSHQ2N2w0NzFUNDZwTzFZTjlmTGt4QUFmVXpnRjhYMkhyVFY4Vmg4d2dHSnE5cF9ncC1kaDNqT2tGNFdWRWRUU1c5NjJxVWVn?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -1356,7 +1324,7 @@
           "rank": 6,
           "title": "Earrings",
           "subtitle": "Malcolm Todd",
-          "description": "“Earrings” is an alternative R&B song from Malcolm Todd’s 2024 mixtape Sweet Boy. It became a sleeper hit after a new wave of online sharing in 2026.",
+          "description": "“Earrings” is a track by Malcolm Todd, released Apr 5, 2024.",
           "image": "/culture/song-earrings-malcolm-todd.webp",
           "alt": "Earrings artwork by Malcolm Todd",
           "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
@@ -1373,10 +1341,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "The Guardian via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPOGc4XzU5NWV6VDV0OUY1SE5PYW4zcUEwa2dLSjRJejV4anEtQTZLUlJkQVFZMTlLQk5sRlJyYkp2a3FZcjBvQ1B1bjRCVjNmN2dUWHkzQ2twVTNQV0JQZkhYSjA1czlSTkFuMkZnZmRFVTRUZVB1LTVrUWtKM25rbXNYQ3cxUnBHWl9pUXA2YU1GNmRGWHQ5YW1MbTJBdlpreXRZSWxaZjhTTzJSQXZzblBkejdQOXF5a0hvOWVKcURpNEtwWWJILXA2ajJ0RHhjYm1NMmVERUFDNmM?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -1387,7 +1351,7 @@
           "rank": 7,
           "title": "Babydoll",
           "subtitle": "Dominic Fike",
-          "description": "“Babydoll” is a 2018 song by Dominic Fike that found a new audience through social video in early 2026 and was reissued as a single.",
+          "description": "“Babydoll” is a track by Dominic Fike, released Oct 16, 2018.",
           "image": "/culture/song-babydoll-dominic-fike.webp",
           "alt": "Babydoll artwork by Dominic Fike",
           "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
@@ -1404,10 +1368,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Forbes via Google News",
-              "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWHF5enZzY3hLOWFVWE02OF83SGctMThLWWFXR1NuQ0FaTS1NTktTY0dPVzRNQ3g2eU5odmF6VVZuWW04WVlnR1ZfN1IzVkhTQXhjeHdtUEc3dzNDRC14OGRTOVlpR0FDSXFGNTdOYTkwTzZYZTYxWUFwZkxSV0dobzdBbF9GbFBGMlVKTzJGMXJ6Y2tEMDBBbmVwcWVlU25UTWxQSVBjREZ3VS1BcVU1LTJQZ3pQbC1MSXFIUA?oc=5"
             }
           ],
           "accent": "#9b8cff",
@@ -1418,7 +1378,7 @@
           "rank": 8,
           "title": "Animal",
           "subtitle": "KATSEYE",
-          "description": "“Animal” is a KATSEYE single released in July 2026. Ed Sheeran wrote it after the group’s song “Gnarly” prompted him to contact them.",
+          "description": "“Animal” is a track by KATSEYE, released Jul 24, 2026. Ed Sheeran Reveals KATSEYE’s ‘Gnarly’ Inspired Him to Reach Out & Write ‘Animal’.",
           "image": "/culture/song-animal-katseye.webp",
           "alt": "Animal artwork by KATSEYE",
           "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
@@ -1449,7 +1409,7 @@
           "rank": 9,
           "title": "Loser",
           "subtitle": "Tame Impala",
-          "description": "“Loser” is a Tame Impala song from the album Deadbeat. Its use in Spider-Man brought the 2025 track renewed attention.",
+          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. 'Loser' Lyrics: Tame Impala's 'Deadbeat' Track Finds Second Wind After Being Featured In 'Spider-Man: Brand New Day'.",
           "image": "/culture/song-loser-tame-impala.webp",
           "alt": "Loser artwork by Tame Impala",
           "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
@@ -1468,8 +1428,8 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             },
             {
-              "source": "Billboard via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMEVWeHVrVjNmYUZGX250bThydmFpMUd4ZDdVTndlMDNHdU9uYTc1ZVQtVGd3T1JEQkRVZktOdFFTQmFkUzFhYU5Pb2Y3WGZVRHN6VUNNS2FTZ3R5XzlpdWZpZmtnaHAzS1VaSjVFV1A0WE5zWHZ5ZmpWSFUwQ0o0TjdRSC1IWlFyLTFzbTQtTHM3UTNsRHFNaGJ6NURoSG1zb0E?oc=5"
+              "source": "justjared.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTkpVeVVtV05jVTlpUnUzZmpGd3IwNGZuelN1Q1dFUFlWdjRuU0ktU0JFSGVYazdueWNja0tvY0gyTDUwaGQwMEl1V08xNWhjRmwwN0NHbWxLZmhzbkRLZVVPVlk5QWp3N0duUzdhT1VMaHA0V0VpNng4ZmQ2UkJxN3dZakVaeEY3dXUtcEppaE5VdUZYMXU5R0hTcW5NdWtHbFBMQkpjczZrS08xWFV1bEU0OHpEa3BUUC1MZGRjamtVYkYxLWhZQVZnNmpkMU1VYVNoUVY3c01jZlJ3dHc?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -1480,7 +1440,7 @@
           "rank": 10,
           "title": "Self Aware",
           "subtitle": "Temper City",
-          "description": "“Self Aware” is the debut single by alternative-rock band Temper City. It spread through social video after its February 2026 release.",
+          "description": "“Self Aware” is a track by Temper City, released Feb 15, 2026.",
           "image": "/culture/song-self-aware-temper-city.webp",
           "alt": "Self Aware artwork by Temper City",
           "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
@@ -1497,10 +1457,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            },
-            {
-              "source": "Billboard via Google News",
-              "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZWQwcm14NkQxcmxsdm82Wk80bEs0QlBERjgtQU9ibVpOTU5VZFNhakZTMmlOcGdtQnFYaWFyYkVuUUU4clY5c1Z6amp0LTc0bTZjeVlYWl8tSXdjY1JXa1hmX3NoNkxnMlJqdmZIX0txaWxCRkhUbERMLXlwcWVyVWdvNmpzQ3o4dHl0MjhsS3dUZ3JNYmdrdG1Ca3FmNVFjb3EwbTNsdHJKR2x3REFhSEVB?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -1522,7 +1478,7 @@
         },
         {
           "label": "Amazon · best-selling match",
-          "url": "https://www.amazon.com/s?k=rechargeable+laptop+battery&s=exact-aware-popularity-rank"
+          "url": "https://www.amazon.com/s?k=Rechargeable+Laptop+Battery&s=exact-aware-popularity-rank"
         }
       ],
       "layout": "square",
@@ -1531,7 +1487,7 @@
           "rank": 1,
           "title": "Rechargeable Laptop Battery",
           "subtitle": "Product · Amazon match",
-          "description": "A rechargeable laptop battery is a portable power bank that can charge a laptop away from an outlet, making it useful for travel and school days.",
+          "description": "Rechargeable Laptop Battery refers here to the NOBIS Portable Charger 45W 20000mAh Power Bank Fast Charging.",
           "image": "/culture/product-rechargeable-laptop-battery.webp",
           "imageSource": "https://m.media-amazon.com/images/I/61gijWn1ygL._AC_UY218_.jpg",
           "alt": "Rechargeable Laptop Battery product listing image",
@@ -1557,7 +1513,7 @@
           "rank": 2,
           "title": "Electric Shock Gloves",
           "subtitle": "Product · Amazon match",
-          "description": "Electric shock gloves are wearable devices designed to deliver an electric charge. A proposal to issue them to ICE officers prompted scrutiny over potential misuse.",
+          "description": "Electric Shock Gloves refers here to the DongChu Insulated Electrician Gloves 1000V Coated Work Gloves for Electrical Maintenance, Non-slip Prevent Shock, Home Repair, Outlet Replacement, DIY Projects, Large. ICE Is Buying Up to $20 Million Worth of Electric Shock Gloves.",
           "image": "/culture/product-electric-shock-gloves.webp",
           "imageSource": "https://m.media-amazon.com/images/I/7179jynLTKL._AC_UL320_.jpg",
           "alt": "Electric Shock Gloves product listing image",
@@ -1577,8 +1533,8 @@
               "url": "https://www.amazon.com/dp/B0F6CLTH41"
             },
             {
-              "source": "PBS via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNS1lsclpYS2ZaLWM2OF9KUW9Ra3V6Y1o5Ny1ybTZrNTZJdEZ2N0p5cGJPUk9VWDdtalZFcWJpbDFxWnhnWENpUkxTOVFSdXY3NUlIVnFGNGNhUWhXVml1Q3Y3ZnpTWTBxQkxLNEpJSDZESmJYZXVqV1VScWxHenVxS3VsRWplZGIzWW5FaVlLUjJCSFVoNGhSYUNtODNUdVFNLV9XdXZXSjV1RV94c1lkWTJuVWNEMjB5MFE?oc=5"
+              "source": "Truthout via Google News",
+              "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOeGNUZnRQZGtBYng4TFNFT05XXy1pc2F3VjNQU3lhUFQ5UDZ5SkxMYjBRNEI3czYyQnhWYkFCeHEtYVlyX2g2YlpMbzVJVU9HdFAxMEQ2MDJ6TXA1QjI3RXhrb09HMm1XTHYyQUNWR1l3dWJlUmM1OHJnNkxnY0I0VkZqWDdWMlhhV3o1MHlpZjRjN0l6TGhr?oc=5"
             }
           ],
           "accent": "#9b8cff"
@@ -1587,7 +1543,7 @@
           "rank": 3,
           "title": "Alani Potion Pack",
           "subtitle": "Product · Amazon match",
-          "description": "Alani Nu’s Potion Pack is a case of its seasonal Witch’s Brew energy drink. Interest returned as the limited flavor came back for the Halloween season.",
+          "description": "Alani Potion Pack refers here to the Alani Nu Witch's Brew Sugar Free Energy Drink (Pack of 12).",
           "image": "/culture/product-alani-potion-pack.webp",
           "imageSource": "https://m.media-amazon.com/images/I/81q-7p+ikoL._AC_UL320_.jpg",
           "alt": "Alani Potion Pack product listing image",
@@ -1613,7 +1569,7 @@
           "rank": 4,
           "title": "Madden 27",
           "subtitle": "Product · Amazon match",
-          "description": "Madden NFL 27 is EA Sports’ current American-football video game. It launched worldwide on August 13, 2026.",
+          "description": "Madden 27 refers here to the EA Sports Madden NFL 27 - Standard Edition PS5. 'Madden NFL 27' sells hyperrealism in EA's goal to make 'a scouting report' for the league.",
           "image": "/culture/product-madden-27.webp",
           "imageSource": "https://m.media-amazon.com/images/I/61i4mpAfgRL._AC_UY218_.jpg",
           "alt": "Madden 27 product listing image",
@@ -1633,8 +1589,8 @@
               "url": "https://www.amazon.com/dp/B0H2K3RD7C"
             },
             {
-              "source": "Forbes via Google News",
-              "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZ1plY0JYVjd2MkJTMFh3bTV0dDRvYjUzZS0xdmV6TUhVWnBneWpiUkxYOVNFSmE4MkozeUxGbW5GcHVnUkZ0QmNKSHNzUERSN1JDSmxOcE5nNkJtSktGdUhqUlFGQjZLaUpqMVREcWpkTTlXd0NmYUxuZ1IwT3ZaTEtmWUVjaHRka0Z5ei1ocThiNnIxVm55VjhVN01GblJWeV9XN2NSMGNsdlFoMzU0?oc=5"
+              "source": "NFL.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPSzkxNks0S050eW5adE5zOWd6bklBMHBlLTVzeXRtOTQ2Ny1FVnhaVld2QzNLN3NJdEtHYjAyNzJkd2tCVHV5SDFQTW9QUnZGREl0QVZHbTNrNGlkamxJM3M5eXpReWdqaXpqQmQxbUtTdk1oOWxUZWd0QkhZWFVpR3hnRDZDeldIc1RBYXF6Tk0yLUxsVnhuMjQweGpJWFVyS2ZfLTlHYkU1ajl2RXBMRw?oc=5"
             }
           ],
           "accent": "#5ab0ff"
@@ -1643,7 +1599,7 @@
           "rank": 5,
           "title": "MacBook",
           "subtitle": "Product · Amazon match",
-          "description": "MacBook is Apple’s laptop line. The current M5 models returned to attention after recent price increases and retailer discounts.",
+          "description": "MacBook refers here to the Apple 2026 MacBook Air 13-inch Laptop with M5 chip.",
           "image": "/culture/product-macbook.webp",
           "imageSource": "https://m.media-amazon.com/images/I/71pkfQGcMKL._AC_UY218_.jpg",
           "alt": "MacBook product listing image",
@@ -1661,10 +1617,6 @@
             {
               "source": "Amazon listing",
               "url": "https://www.amazon.com/dp/B0GR1JTFP8"
-            },
-            {
-              "source": "Engadget via Google News",
-              "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOTW5zWFFxTlNGMTVuNjQyVDR2Qzh1ZnBqazlqNmRaOUpGZXprMFE1RHNycXVzX0pzUnZIamJaVVJhbE1pbnYtZkhhWFNENkoxNTlIQlZGQ203Y0ZoX1NOeUdQRGtwVENQNG8xUGRWa0hZX2hjU0lxMXJHYmp0VmstajJRVmd0LVU?oc=5"
             }
           ],
           "accent": "#ff6b57"
@@ -1675,7 +1627,7 @@
           "rank": 6,
           "title": "Switch 2",
           "subtitle": "Product · Amazon match",
-          "description": "Nintendo Switch 2 is Nintendo’s current hybrid game console. A dispute over whether U.S. buyers are entitled to tariff refunds recently put it back in the news.",
+          "description": "Switch 2 refers here to the Nintendo Switch 2 System. Cyber Gadget to Release CYBER Gaming Controller 6B TMR for Switch 2 in Late September!",
           "image": "/culture/product-switch-2.webp",
           "imageSource": "https://m.media-amazon.com/images/I/714-Fh3ngmL._AC_UY218_.jpg",
           "alt": "Switch 2 product listing image",
@@ -1695,8 +1647,8 @@
               "url": "https://www.amazon.com/dp/B0F3GWXLTS"
             },
             {
-              "source": "IGN via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNcEpCQnR3RVd3c0tOWFd4YWVSdFZwZE1NWUkyQjltVG40MTQ3ZTlUb0RrWExfT3kxSjA4X25yQi1oT0toYnQ1a3Q0RnY2OVprVE9CSkpFTUd6RDdyTDg2YmpLLTNmcTFCbDBfX242QmFJUlVQeE04MVlYenRwS3M1YjNjS1NpZXgyZlpzRmVIUHpuWkRhR3JZTmw4NFAtNzMwNFN5M1FvVHFDNzBiYUpadG5CTU1iRDRSc1p6VF9Oc21CS0EtekMweC00R2xZTDZlajNGVVMydDRMT1g0V2dFQ2pPaGMwaHlSSDA3RA?oc=5"
+              "source": "Saiga NAK via Google News",
+              "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9EdVZsWWVMOUxUWlhFYnV3WDhOcTNEWDdKd0VxYUl6bzdwbzd4dG50T0luUVduMHMyTkhfa0ZmVkwxNHBwUmlHNGFNX20tSHBvTjh2RkItTGw1MzhWaVlqVERnUWRNcmltMzNiUkVLc2RQRjhB0gF6QVVfeXFMTzg0cGVXMnhOaHRVQUFFRm5yTk5OcEI2RGlmQXFFdllZdjBYR1FwaEFJc3hhOFgyZzZ6c1hFTXlhcHlYeFV5Z1dCb2NhN0RZXy02UnEyUzYxcjRJNHBDcWlBWnRyeXJMZjZxV0VXRXVDakppVkxWN1d2c3c?oc=5"
             }
           ],
           "accent": "#ffc857"
@@ -1716,7 +1668,7 @@
         },
         {
           "label": "Google News · current coverage",
-          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSDBScmFyM1g0SmsxdHVXaG1sendZUWhYalk0TzFLVXBTS1lEUndwQ2JhbGFvSUFNT1V2TC1DcElyR3NwY2gxUF9rYTdfTU12NElXdlZwRzNDTk9EV2tFZ002dklUbDI0VDFvRmZxWkF1R0x1Z1NUaXdETkpFaFNuS1REdHVYbTR1djRyWVRPZVB4MmNaTjhUZTJLUUJTU0hOUWFoTDB2ZmE4bXlLVW9YdjBZcGtwX205czdNOVp2aG9QMU9fSFJYbm51WXh1dw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQekVaYmRiX0ZlLS1wSmx4UGNFZnVkMnlmdFFWWXpSWE80X3ZBcEdiNkZzOGlKb0NwajRDOUtWUTkzRm85RGJlb1hLVi1ZejZIS3kzVlNnQzhMT0RadFhpQlh2ZkFWaDVXLUYwMUVSTjNpeWJjeERFVnB1RmJiV3ZFUnVkMXhpTm1VdTlsSG9YWDlxUFJvR0lad29faklGTXYtdjJWbGJnRUtWYllZ?oc=5"
         }
       ],
       "layout": "landscape",
@@ -1724,12 +1676,11 @@
         {
           "rank": 1,
           "title": "Rebel Creamery Ice Cream Lawsuit",
-          "subtitle": "News · Aug 16, 2026",
-          "description": "Rebel Creamery is a low-carb ice cream maker. It filed for bankruptcy after losing a $23.8 million packaging dispute.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "Rebel Ice Cream filed for Chapter 11 bankruptcy after 2021 lawsuit.",
           "image": "/culture/news-rebel-creamery-ice-cream-lawsuit.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ice_cream_with_whipped_cream%2C_chocolate_syrup%2C_and_a_wafer_%28cropped%29.jpg/1280px-Ice_cream_with_whipped_cream%2C_chocolate_syrup%2C_and_a_wafer_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "Ice cream, representing Rebel Creamery Ice Cream Lawsuit",
-          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSDBScmFyM1g0SmsxdHVXaG1sendZUWhYalk0TzFLVXBTS1lEUndwQ2JhbGFvSUFNT1V2TC1DcElyR3NwY2gxUF9rYTdfTU12NElXdlZwRzNDTk9EV2tFZ002dklUbDI0VDFvRmZxWkF1R0x1Z1NUaXdETkpFaFNuS1REdHVYbTR1djRyWVRPZVB4MmNaTjhUZTJLUUJTU0hOUWFoTDB2ZmE4bXlLVW9YdjBZcGtwX205czdNOVp2aG9QMU9fSFJYbm51WXh1dw?oc=5",
+          "alt": "Representative image for Rebel Creamery Ice Cream Lawsuit",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQekVaYmRiX0ZlLS1wSmx4UGNFZnVkMnlmdFFWWXpSWE80X3ZBcEdiNkZzOGlKb0NwajRDOUtWUTkzRm85RGJlb1hLVi1ZejZIS3kzVlNnQzhMT0RadFhpQlh2ZkFWaDVXLUYwMUVSTjNpeWJjeERFVnB1RmJiV3ZFUnVkMXhpTm1VdTlsSG9YWDlxUFJvR0lad29faklGTXYtdjJWbGJnRUtWYllZ?oc=5",
           "source": "Google News",
           "metric": {
             "label": "Google search volume",
@@ -1741,12 +1692,8 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+ice+cream+lawsuit"
             },
             {
-              "source": "New York Post via Google News",
-              "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQSDBScmFyM1g0SmsxdHVXaG1sendZUWhYalk0TzFLVXBTS1lEUndwQ2JhbGFvSUFNT1V2TC1DcElyR3NwY2gxUF9rYTdfTU12NElXdlZwRzNDTk9EV2tFZ002dklUbDI0VDFvRmZxWkF1R0x1Z1NUaXdETkpFaFNuS1REdHVYbTR1djRyWVRPZVB4MmNaTjhUZTJLUUJTU0hOUWFoTDB2ZmE4bXlLVW9YdjBZcGtwX205czdNOVp2aG9QMU9fSFJYbm51WXh1dw?oc=5"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/Ice_cream"
+              "source": "Cincinnati Enquirer via Google News",
+              "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQekVaYmRiX0ZlLS1wSmx4UGNFZnVkMnlmdFFWWXpSWE80X3ZBcEdiNkZzOGlKb0NwajRDOUtWUTkzRm85RGJlb1hLVi1ZejZIS3kzVlNnQzhMT0RadFhpQlh2ZkFWaDVXLUYwMUVSTjNpeWJjeERFVnB1RmJiV3ZFUnVkMXhpTm1VdTlsSG9YWDlxUFJvR0lad29faklGTXYtdjJWbGJnRUtWYllZ?oc=5"
             }
           ],
           "accent": "#ffc857"
@@ -1754,12 +1701,12 @@
         {
           "rank": 2,
           "title": "Hawaii Hurricane",
-          "subtitle": "News · Aug 16, 2026",
-          "description": "Hurricane Lala weakened to a tropical storm after reaching Hawaii, but continued to bring dangerous flooding across the islands.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "A Hawaiian hurricane is a tropical cyclone that forms in the Pacific Ocean and affects the Hawaiian Islands. Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "image": "/culture/news-hawaii-hurricane.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Hawaii_hurricane_tracks.png/1280px-Hawaii_hurricane_tracks.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "alt": "File:Hawaii hurricane tracks.png, representing Hawaii Hurricane",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMW1xU1o5QWFSNWhmUTVrTkttQXdnejk4aDlnUHluWVYwZ2NzeS1IcWZFWE1TN0FXdUhTdzJheFJRSzZCaHdvWWZfMzdTTHVxajJDRlZ2THVTUlRNZDItWFBFR0Z2VlZ2MW9qcFV4d3hfdVZWcG9BcVlqZzgzbEZJa3p1ODhudC1ZSnZxQUhmRkZBNWNRYWRuaTlyd3I4RnRzakNwZE1oYWVFbFRrZFZyVTlwTWhUUdIBuwFBVV95cUxPYlFrSlhwRGNXajl1enpnNHoxLUsxRl9DNlVGS2tmRVFxenE5WEtYaHJMT1JhRzg2c3NTZjhxQkotUXRWcVJ5U2hHYVhjTVhvMnpqUVNoTllXeDNiU3lHYURoRDNqNkp2Wk1ReEVKX2VuVUdhdkFIZmdMbVhIT0tlWngyMXpLdjZGQl9lajNEeVQ2aGFLYVdJcmZ0eTQtY3hUVWtTRzE3aXV0UDZSc1JjVHc0Tm85cXBSWnE0?oc=5",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Iniki_1992-09-11_1931Z.jpg/1280px-Iniki_1992-09-11_1931Z.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "List of Hawaii hurricanes, representing Hawaii Hurricane",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcExoaTdvVmtRUGpDcUdzNW9sclZzb09qZENkOTF1TWlOOFY0d0taeF9MWUNiVlI3ZnE1MXdMMUxhcHBvR2VYV2ZuS3FKQ1o1NklrM0k2MmNuWnlldEY3TndTeFZ3SFk1dm8wX1U4enJZQ3p0bVZCdVdZLVlpWHJFV2w5REtVdU1tVTdRTEY1RktzQnpnQjU0ZzJaMmpZbU9r0gGmAUFVX3lxTE10Tm1LQmt0ZFE0SG1JazQtSHliMm1wSUk5dTZmRW9lN1BnLUZybURUeU9TMlZzRXlXa0VFODdyOXM0OXVfYXVvTnV3cUYzdFFwZnlGaGVRci1sTWhBYnBKVXM0MXN1OVl3SjJuS1AzYTBDMC1VTUphRkYzREhfb1VRU2NuT19LS0h6UVNYNVNmYWpEU05kb1dhQWFjWkRXeXlJSXBGQkE?oc=5",
           "source": "Google News",
           "metric": {
             "label": "Google search volume",
@@ -1771,12 +1718,16 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hawaii+hurricane"
             },
             {
-              "source": "Al Jazeera via Google News",
-              "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMW1xU1o5QWFSNWhmUTVrTkttQXdnejk4aDlnUHluWVYwZ2NzeS1IcWZFWE1TN0FXdUhTdzJheFJRSzZCaHdvWWZfMzdTTHVxajJDRlZ2THVTUlRNZDItWFBFR0Z2VlZ2MW9qcFV4d3hfdVZWcG9BcVlqZzgzbEZJa3p1ODhudC1ZSnZxQUhmRkZBNWNRYWRuaTlyd3I4RnRzakNwZE1oYWVFbFRrZFZyVTlwTWhUUdIBuwFBVV95cUxPYlFrSlhwRGNXajl1enpnNHoxLUsxRl9DNlVGS2tmRVFxenE5WEtYaHJMT1JhRzg2c3NTZjhxQkotUXRWcVJ5U2hHYVhjTVhvMnpqUVNoTllXeDNiU3lHYURoRDNqNkp2Wk1ReEVKX2VuVUdhdkFIZmdMbVhIT0tlWngyMXpLdjZGQl9lajNEeVQ2aGFLYVdJcmZ0eTQtY3hUVWtTRzE3aXV0UDZSc1JjVHc0Tm85cXBSWnE0?oc=5"
+              "source": "ABC7 Bay Area via Google News",
+              "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcExoaTdvVmtRUGpDcUdzNW9sclZzb09qZENkOTF1TWlOOFY0d0taeF9MWUNiVlI3ZnE1MXdMMUxhcHBvR2VYV2ZuS3FKQ1o1NklrM0k2MmNuWnlldEY3TndTeFZ3SFk1dm8wX1U4enJZQ3p0bVZCdVdZLVlpWHJFV2w5REtVdU1tVTdRTEY1RktzQnpnQjU0ZzJaMmpZbU9r0gGmAUFVX3lxTE10Tm1LQmt0ZFE0SG1JazQtSHliMm1wSUk5dTZmRW9lN1BnLUZybURUeU9TMlZzRXlXa0VFODdyOXM0OXVfYXVvTnV3cUYzdFFwZnlGaGVRci1sTWhBYnBKVXM0MXN1OVl3SjJuS1AzYTBDMC1VTUphRkYzREhfb1VRU2NuT19LS0h6UVNYNVNmYWpEU05kb1dhQWFjWkRXeXlJSXBGQkE?oc=5"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/List_of_Hawaii_hurricanes"
             },
             {
               "source": "Wikimedia image context",
-              "url": "https://commons.wikimedia.org/wiki/File:Hawaii_hurricane_tracks.png"
+              "url": "https://en.wikipedia.org/wiki/List_of_Hawaii_hurricanes"
             }
           ],
           "accent": "#9b8cff"
@@ -1785,10 +1736,10 @@
           "rank": 3,
           "title": "Egg Recall",
           "subtitle": "News · Aug 15, 2026",
-          "description": "A salmonella outbreak prompted a large egg recall across the southern and southwestern United States.",
+          "description": "Massive egg recall in US south and south-west due to salmonella outbreak.",
           "image": "/culture/news-egg-recall.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Chicken_egg01_monovular.jpg/1280px-Chicken_egg01_monovular.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "Egg white, representing Egg Recall",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/An_omelette_prepared_with_egg_substitute.jpg/1280px-An_omelette_prepared_with_egg_substitute.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:An omelette prepared with egg substitute.jpg, representing Egg Recall",
           "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMGdEMXVZNFFYajJxemE4Z1IxZWZ1OFJrQlBFY3d6cEVRZkg0ZFIyeTh0eW8wUEVlTGRqVkZQVVViajBkTVNCU3J6WEJFN2J0c1cxaHN4cS1lc3Z3dDhrX3NOWUlXZVRtRzl3ek5ZX0dvTE5Dbk5mSkFyblpiNENkY3hDWHg1N01namNCaDJueGZkNHJHb3JvdHJ3S21GeGxpTXNybg?oc=5",
           "source": "Google News",
           "metric": {
@@ -1806,7 +1757,7 @@
             },
             {
               "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/Egg_white"
+              "url": "https://commons.wikimedia.org/wiki/File:An_omelette_prepared_with_egg_substitute.jpg"
             }
           ],
           "accent": "#5ab0ff"
@@ -1815,10 +1766,9 @@
           "rank": 4,
           "title": "GTA 6 August 27 Presentation",
           "subtitle": "News · Aug 6, 2026",
-          "description": "Grand Theft Auto VI is Rockstar Games’ upcoming open-world crime game. A new gameplay trailer was announced for an August 27 presentation on Netflix.",
+          "description": "GTA 6 Gameplay Trailer Announced for Netflix on August 27.",
           "image": "/culture/news-gta-6-august-27-presentation.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Grand_Theft_Auto_logo_series.svg/1280px-Grand_Theft_Auto_logo_series.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "Grand Theft Auto, representing GTA 6 August 27 Presentation",
+          "alt": "Representative image for GTA 6 August 27 Presentation",
           "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5",
           "source": "Google News",
           "metric": {
@@ -1833,10 +1783,6 @@
             {
               "source": "VICE via Google News",
               "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5"
-            },
-            {
-              "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto"
             }
           ],
           "accent": "#57d5a4"
@@ -1845,10 +1791,10 @@
           "rank": 5,
           "title": "Have I Been Flocked",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Have I Been Flocked is a public-records search site that lets people check whether their license plate appears in released Flock Safety logs. Flock Safety is a surveillance technology company facing scrutiny over its automated license-plate network and documented misuse.",
+          "description": "Flock Group Inc., doing business as Flock Safety, is a privately held American manufacturer and operator of surveillance hardware and software, particularly automated license plate recognition (ALPR). ‘Have I Been Flocked’ site lets you check.",
           "image": "/culture/news-have-i-been-flocked.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/0/06/FrenchNumberPlates.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "alt": "Automatic number-plate recognition, representing Have I Been Flocked",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Flock_Safety_camera.jpg/1280px-Flock_Safety_camera.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Flock Safety camera.jpg, representing Have I Been Flocked",
           "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMW4yQUxobnlNbmtfT0VyUVg5U3VyVTYxcnpUa0E2bUV5aG02R0JfdDRKalZ5WVREdkZUNXVTdmxZY3FQT0RlNmlQaTVMUENZUFozRk4ydzNsc1NMY0gwM1E1a2gxT3JfSGxLTjVZMU1PLVNjOWRZaUNwRW00NHJvdUlhZG1kM1Z6S1FEV1I5Z0xEZHBXQkhuSVBiT2JaRGdYc2MyeUdkc3hMckR6N2hMTnZDNm1jYkNFQW5tY1FmZTV6dw?oc=5",
           "source": "Google News",
           "metric": {
@@ -1865,12 +1811,12 @@
               "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMW4yQUxobnlNbmtfT0VyUVg5U3VyVTYxcnpUa0E2bUV5aG02R0JfdDRKalZ5WVREdkZUNXVTdmxZY3FQT0RlNmlQaTVMUENZUFozRk4ydzNsc1NMY0gwM1E1a2gxT3JfSGxLTjVZMU1PLVNjOWRZaUNwRW00NHJvdUlhZG1kM1Z6S1FEV1I5Z0xEZHBXQkhuSVBiT2JaRGdYc2MyeUdkc3hMckR6N2hMTnZDNm1jYkNFQW5tY1FmZTV6dw?oc=5"
             },
             {
-              "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/Automatic_number-plate_recognition"
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/Flock_Safety"
             },
             {
-              "source": "Flock Safety context",
-              "url": "https://en.wikipedia.org/wiki/Flock_Safety"
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Flock_Safety_camera.jpg"
             }
           ],
           "accent": "#ffc857"
@@ -1881,9 +1827,10 @@
           "rank": 6,
           "title": "Frozen 3",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Frozen 3 is the next film in Disney’s animated musical franchise. A new first look revealed Anna’s wedding and a new villain.",
+          "description": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
           "image": "/culture/news-frozen-3.webp",
-          "alt": "Representative image for Frozen 3",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Frozen_charlie_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "alt": "File:Frozen charlie 3.jpg, representing Frozen 3",
           "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5",
           "source": "Google News",
           "metric": {
@@ -1898,6 +1845,10 @@
             {
               "source": "Deadline via Google News",
               "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Frozen_charlie_3.jpg"
             }
           ],
           "accent": "#9b8cff"
@@ -1906,7 +1857,7 @@
           "rank": 7,
           "title": "D23",
           "subtitle": "News · Aug 15, 2026",
-          "description": "D23 is Disney’s official fan convention. This year’s event brought announcements and first looks for X-Men, Avengers: Doomsday, Coco 2, and a live-action Tangled.",
+          "description": "D23: The Official Disney Fan Club, also known as simply D23, is the official fan club for the Walt Disney Company. Everything Announced At D23: New X-Men Cast, 'Avengers: Doomsday' Teaser, 'Coco 2,' 'Tangled' Live Action First Look & More.",
           "image": "/culture/news-d23.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Disney_D23_logo_2023.svg/1280px-Disney_D23_logo_2023.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "D23 (Disney), representing D23",
@@ -1926,6 +1877,10 @@
               "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE80X29FS1BITzczM3JfaElPWVlfaFJzREpHeXl2bmYwNnNIcFRCSTd3QlRjaW1vNG5LV3R5dmNid3NDdUpTbW9ydktPOGxMczFDZnBJdF9zYXVQRUdWMDlaYmtBcnFhOE14VHNmMEhqSVRjTkZXX3hpckt1eFJGX28?oc=5"
             },
             {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/D23_(Disney)"
+            },
+            {
               "source": "Wikimedia image context",
               "url": "https://en.wikipedia.org/wiki/D23_(Disney)"
             }
@@ -1936,10 +1891,10 @@
           "rank": 8,
           "title": "Coco 2",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Coco 2 is Pixar’s sequel to its 2017 animated film. A first look revealed a teenage Miguel and a planned November 2029 release.",
+          "description": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
           "image": "/culture/news-coco-2.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Disney%27s_Coco_logo.png/1280px-Disney%27s_Coco_logo.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "Coco (franchise), representing Coco 2",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cocos_nucifera_from_Villupuram_dt_IMG_3891.JPG/1280px-Cocos_nucifera_from_Villupuram_dt_IMG_3891.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Cocos nucifera from Villupuram dt IMG 3891.JPG, representing Coco 2",
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5",
           "source": "Google News",
           "metric": {
@@ -1957,7 +1912,7 @@
             },
             {
               "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/Coco_(franchise)"
+              "url": "https://commons.wikimedia.org/wiki/File:Cocos_nucifera_from_Villupuram_dt_IMG_3891.JPG"
             }
           ],
           "accent": "#5ab0ff"
@@ -1966,15 +1921,15 @@
           "rank": 9,
           "title": "Supreme Court",
           "subtitle": "News · Aug 11, 2026",
-          "description": "The U.S. Supreme Court returned to attention as President Trump continued challenging rulings that blocked parts of his administration’s agenda.",
+          "description": "The Supreme Court of the United States (SCOTUS) is the highest court in the federal judiciary of the United States. Trump refuses to back down as Supreme Court blocks major policies.",
           "image": "/culture/news-supreme-court.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Seal_of_the_United_States_Supreme_Court.svg/1280px-Seal_of_the_United_States_Supreme_Court.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "alt": "Associate Justice of the Supreme Court of the United States, representing Supreme Court",
+          "alt": "Supreme Court of the United States, representing Supreme Court",
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOXpuRXFHajY5R3E1amZfVVJQNUNqT1UydlVYaEJoYmhHOTJUSE9xZUFZOHgyOUd4NVNFT2JiR3pkbS1EaEpyU05YcU1GZGlZVC1zSTNNOGtFQXpiZVR3OGhrY2ZNUEJfeG11eXU0Yk9Qb0tWN0NDR0FlMUo1NUh4MEtnY25Hd214cnZYbWR6MVhLZEloMmZ0X2I0WTNDZ1F1T2cyZDhacHdWQml5MjExbGl2YnF1dlY1ZHVrdFVrLVE?oc=5",
           "source": "Google News",
           "metric": {
             "label": "Google search volume",
-            "value": "100K+"
+            "value": "50K+"
           },
           "evidence": [
             {
@@ -1986,8 +1941,12 @@
               "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOXpuRXFHajY5R3E1amZfVVJQNUNqT1UydlVYaEJoYmhHOTJUSE9xZUFZOHgyOUd4NVNFT2JiR3pkbS1EaEpyU05YcU1GZGlZVC1zSTNNOGtFQXpiZVR3OGhrY2ZNUEJfeG11eXU0Yk9Qb0tWN0NDR0FlMUo1NUh4MEtnY25Hd214cnZYbWR6MVhLZEloMmZ0X2I0WTNDZ1F1T2cyZDhacHdWQml5MjExbGl2YnF1dlY1ZHVrdFVrLVE?oc=5"
             },
             {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States"
+            },
+            {
               "source": "Wikimedia image context",
-              "url": "https://en.wikipedia.org/wiki/Associate_Justice_of_the_Supreme_Court_of_the_United_States"
+              "url": "https://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States"
             }
           ],
           "accent": "#ff6b57"
@@ -2000,52 +1959,52 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.379Z"
+      "checkedAt": "2026-08-17T18:47:12.717Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.896Z"
+      "checkedAt": "2026-08-17T18:47:13.679Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.349Z"
+      "checkedAt": "2026-08-17T18:47:13.445Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.975Z"
+      "checkedAt": "2026-08-17T18:47:14.421Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.291Z"
+      "checkedAt": "2026-08-17T18:47:14.005Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-17T17:27:36.625Z"
+      "checkedAt": "2026-08-17T18:47:58.853Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.271Z"
+      "checkedAt": "2026-08-17T18:47:12.672Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:52.347Z"
+      "checkedAt": "2026-08-17T18:47:12.945Z"
     },
     {
       "name": "Google Shopping / Amazon",
-      "ok": true,
-      "checkedAt": "2026-08-17T17:27:15.856Z"
+      "ok": false,
+      "checkedAt": "2026-08-17T18:47:19.777Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-17T17:26:56.063Z"
+      "checkedAt": "2026-08-17T18:47:18.624Z"
     }
   ]
 }

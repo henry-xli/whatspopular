@@ -46,15 +46,15 @@ last validated snapshot.
 - News uses U.S. Google Trending Now over seven days, excludes people and
   sports, and orders the remainder by Google’s displayed search volume.
 
-Descriptions do not repeat the ranking metric shown on each card. People and
-products combine a plain-language identity with neutral recent coverage; movies
-use a short genre and plot premise; music uses release context plus a factual
-recent event when available; and news defines unfamiliar subjects before
-summarizing the current event. Question-style, editorial, and personality-led
-headlines are rejected. News entries use the selected article’s publication
-date and a topic-matched Wikimedia image; if no relevant reusable image exists,
-the image pipeline creates a local title card instead of accepting an unrelated
-result.
+Descriptions do not repeat the ranking metric shown on each card and have no
+per-entry overrides. The updater derives identity or premise text from current
+Wikidata, Wikipedia, Cinemeta, Spotify, or Amazon metadata, then adds a factual
+recent-news sentence when one is available. Google Trends related queries and
+ranked Wikipedia search results disambiguate unfamiliar news topics. Question-
+style, editorial, and personality-led headline fragments are rejected. News
+entries use the selected article’s publication date and a source-matched
+Wikimedia image; if no relevant reusable image exists, the image pipeline makes
+a local title card instead of accepting an unrelated result.
 
 Every entry has evidence from at least two distinct approved source hosts.
 `scripts/cache-images.mjs` validates the snapshot, downloads only missing or

@@ -79,8 +79,6 @@ test("renders the complete finite culture briefing", async () => {
     brief.sections.find((section) => section.id === "music").items.length
       + brief.sections.find((section) => section.id === "music").moreItems.length);
   assert.match(html, /Show ranks 6/);
-  assert.match(html, /this shit pisses me off/i);
-  assert.match(html, /toothy collectible toy/i);
 });
 
 test("renders the About flowchart", async () => {
@@ -226,7 +224,6 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(memes.items.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "knowyourmeme.com")));
   assert.ok(memes.moreItems.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.youtube.com")));
   assert.ok(memes.moreItems.every((item) => item.description.length >= 40));
-  assert.doesNotMatch(memes.items.map((item) => item.title).join(" "), /Pirate Gaster/i);
   assert.ok(memes.items.every((item) => /Meme of the Month$/.test(item.metric.label)));
   const pollRanks = memes.items.map((item) => Number(item.metric.value.slice(1)));
   assert.deepEqual(pollRanks, [...pollRanks].sort((left, right) => left - right));
@@ -245,8 +242,7 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(slang.moreItems.every((item) => item.metric.label === "Know Your Meme page views"));
   const slangViews = [...slang.items, ...slang.moreItems].map((item) => Number(item.metric.value.replaceAll(",", "")));
   assert.deepEqual(slangViews, [...slangViews].sort((left, right) => right - left));
-  assert.match([...slang.items, ...slang.moreItems].find((item) => item.title === "TS PMO ICL").description, /this shit pisses me off/i);
-  assert.match([...slang.items, ...slang.moreItems].find((item) => item.title === "Labubu Matcha Dubai Chocolate").description, /Labubu.*matcha.*Dubai chocolate/i);
+  assert.ok([...slang.items, ...slang.moreItems].every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.urbandictionary.com")));
   const movies = brief.sections.find((section) => section.id === "movies");
   assert.equal(movies.title, "Movies");
   const allMovies = [...movies.items, ...movies.moreItems];
@@ -256,7 +252,6 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allMovies.every((item) => item.description.length >= 30));
   assert.ok(allMovies.every((item) => /\bfilm\b/i.test(item.description)));
   assert.ok(allMovies.every((item) => !/Wikipedia views|most-read movie pages/i.test(item.description)));
-  assert.doesNotMatch(allMovies.map((item) => item.description).join(" "), /thank Zeus|only Christopher Nolan could/i);
   const movieViews = allMovies.map((item) => Number(item.metric.value.replace("M", "e6").replace("K", "e3")));
   assert.deepEqual(movieViews, [...movieViews].sort((left, right) => right - left));
   const music = brief.sections.find((section) => section.id === "music");
@@ -285,8 +280,11 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok([...news.items, ...news.moreItems].every((item) => /^News(?: · [A-Z][a-z]{2} \d{1,2}, \d{4})?$/.test(item.subtitle)));
   assert.ok([...news.items, ...news.moreItems].every((item) => !/past 7 days/i.test(item.subtitle)));
   assert.ok([...news.items, ...news.moreItems].every((item) => !/U\.S\. Google searches|search volume|placing it #/i.test(item.description)));
-  const flocked = [...news.items, ...news.moreItems].find((item) => item.title === "Have I Been Flocked");
-  assert.match(flocked.description, /Flock Safety.*surveillance.*license-plate|license plate.*Flock Safety.*surveillance/i);
+  assert.ok([...news.items, ...news.moreItems].every((item) => item.description.length >= 24 && item.description.length <= 360));
+  const updater = await readFile(new URL("../scripts/update-trends.mjs", import.meta.url), "utf8");
+  assert.match(updater, /data-term/);
+  assert.match(updater, /parseAnnualSlangReview/);
+  assert.doesNotMatch(updater, /annualSlangCandidates|summaryQuery\s*=/);
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);
   assert.doesNotMatch(JSON.stringify(brief), /caution|b\*{2,}|a\*{2,}/i);
   assert.doesNotMatch(JSON.stringify(brief), /"(?:signal|score)":/);

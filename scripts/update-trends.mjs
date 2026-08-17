@@ -34,73 +34,6 @@ const allowedHosts = new Set([
   "www.youtube.com",
 ]);
 
-const annualSlangReviewUrl = "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025";
-const annualSlangCandidates = [
-  {
-    title: "67 / six-seven",
-    subtitle: "A deliberately ambiguous number catchphrase",
-    description: "A call-and-response built around saying “six-seven,” often with a palms-up gesture. Its lack of one fixed meaning is the joke, so people use it as a deliberately contextless reply.",
-    url: "https://knowyourmeme.com/memes/67-meme",
-    urbanTerm: "67",
-  },
-  {
-    title: "Clanker",
-    subtitle: "A derogatory word for robots",
-    description: "A Star Wars insult for battle droids that returned as a joking slur for robots and AI. People use it to mock a machine, chatbot, or conspicuously automated behavior.",
-    url: "https://knowyourmeme.com/memes/clanker",
-    urbanTerm: "clanker",
-  },
-  {
-    title: "Chopped",
-    subtitle: "Unattractive, damaged, or badly done",
-    description: "Calling someone or something “chopped” means it looks unattractive, damaged, or badly put together. It appears in blunt reactions, appearance jokes, and before-and-after comparisons.",
-    url: "https://knowyourmeme.com/memes/chopped-slang",
-    urbanTerm: "Chopped",
-  },
-  {
-    title: "Aura farming",
-    subtitle: "Performing effortless cool for status",
-    description: "Aura farming means doing something calculated to look effortlessly cool and build imaginary social status. The phrase captions dramatic entrances, poses, edits, and knowingly over-styled behavior.",
-    url: "https://knowyourmeme.com/memes/aura-farming",
-    urbanTerm: "aurafarming",
-  },
-  {
-    title: "SYBAU",
-    subtitle: "An aggressive request to be quiet",
-    description: "SYBAU expands to “shut your bitch ass up.” It is used as a blunt dismissal or exaggerated reaction, often as an acronym so the punchline lands only after someone decodes it.",
-    url: "https://knowyourmeme.com/memes/sybau",
-    urbanTerm: "sybau",
-  },
-  {
-    title: "TS PMO ICL",
-    subtitle: "An intentionally overloaded slang acronym",
-    description: "TS PMO ICL expands to “this shit pisses me off, I can’t lie.” People use it sincerely, or pile it into deliberately overloaded captions that parody compressed internet slang.",
-    url: "https://knowyourmeme.com/memes/ts-pmo-icl",
-    urbanTerm: "TS PMO ICL",
-  },
-  {
-    title: "Performative Male",
-    subtitle: "Someone visibly curating an appealing persona",
-    description: "A performative male conspicuously reads feminist books, drinks matcha, carries a tote bag, or wears wired earbuds to appear sensitive and attractive. The label mocks an obviously curated personality.",
-    url: "https://knowyourmeme.com/memes/performative-male",
-    urbanTerm: "Performative Male",
-  },
-  {
-    title: "Dead Rose Emoji",
-    subtitle: "The wilted rose used as ironic punctuation",
-    description: "The wilted rose emoji 🥀 became an ironic alternative to the broken-heart emoji. People append it to dramatic, embarrassing, disappointed, or mock-heartbroken remarks.",
-    url: "https://knowyourmeme.com/memes/dead-rose-emoji",
-    urbanTerm: "dead rose",
-  },
-  {
-    title: "Labubu Matcha Dubai Chocolate",
-    subtitle: "A pileup of 2025 consumer-trend buzzwords",
-    description: "Labubu is a toothy collectible toy, matcha is a powdered green-tea drink, and Dubai chocolate is a pistachio-filled chocolate bar. Stringing them together parodies algorithm-driven consumer trends.",
-    url: "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate",
-    urbanTerm: "labubu",
-  },
-];
-
 const limcChannelId = "UCaHT88aobpcvRFEuy4v5Clg";
 const spotifyPlaylistId = "37i9dQZF1DXcBWIGoYBM5M";
 const shoppingTrendsUrl = "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US";
@@ -452,6 +385,22 @@ function conciseKymDescription(html) {
   return [context, usage && usage !== context ? usage : null].filter(Boolean).join(" ");
 }
 
+function acronymDefinitions(title, html) {
+  const terms = title.split(/\s+/).filter((term) => /^[A-Z]{2,}$/.test(term));
+  if (terms.length < 2) return "";
+  const about = plainText(html.match(/<h2[^>]*id=['"]about['"][^>]*>[\s\S]*?<\/h2>([\s\S]*?)(?=<h2\b)/i)?.[1] ?? "");
+  const expansions = terms.map((term) => {
+    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const match = about.match(new RegExp(`\\b${escaped}\\b(?:,\\s+which)?\\s+means\\s+["“]([^"”]+)`, "i"));
+    const definition = match?.[1]?.replace(/[,.;:\s]+$/, "");
+    return definition ? `${term} means “${definition}”` : null;
+  });
+  if (expansions.some((definition) => !definition)) return "";
+  return `${expansions.length === 2
+    ? expansions.join("; and ")
+    : `${expansions.slice(0, -1).join("; ")}; and ${expansions.at(-1)}`}.`;
+}
+
 function kymMatchContext(html) {
   const about = html.match(/<h2[^>]*id=['"]about['"][^>]*>[\s\S]*?<\/h2>([\s\S]*?)(?=<h2\b)/i)?.[1] ?? "";
   return plainText(about);
@@ -529,67 +478,127 @@ async function updateMemes(brief, result, videos) {
   section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank}`;
 }
 
-async function verifyUrbanDictionary(items) {
-  const results = await mapConcurrent(items, 4, async (item) => {
-    const payload = JSON.parse(await fetchText(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(item.urbanTerm ?? item.title)}`));
-    return Array.isArray(payload.list) && payload.list.length > 0;
-  });
-  if (!results.every(Boolean)) throw new Error("At least one slang term had no Urban Dictionary result");
-  return results.length;
+function parseAnnualSlangReview(html) {
+  const headings = [...html.matchAll(/<h2\b[^>]*id=["']([^"']+)["'][^>]*>([\s\S]*?)<\/h2>/gi)];
+  const candidates = [];
+  for (let index = 0; index < headings.length; index += 1) {
+    const heading = plainText(headings[index][2]);
+    const body = html.slice((headings[index].index ?? 0) + headings[index][0].length, headings[index + 1]?.index ?? html.length);
+    const headingTokens = topicTokens(heading);
+    const links = [...body.matchAll(/<a\b[^>]*href=["'](https:\/\/knowyourmeme\.com\/memes\/[^"']+|\/memes\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+      .map((match, linkIndex) => {
+        const text = plainText(match[2]);
+        const url = new URL(match[1], "https://knowyourmeme.com").href;
+        const overlap = overlapCount(headingTokens, topicTokens(`${text} ${url.split("/").at(-1)}`));
+        const exact = normalize(text) === normalize(heading);
+        const sectionPenalty = /\/memes\/(?:cultures|people|sites)\//i.test(url) ? 80 : 0;
+        return { text, url, linkIndex, score: (exact ? 100 : 0) + overlap * 24 - linkIndex - sectionPenalty };
+      })
+      .filter((link) => link.text && link.score > 0)
+      .sort((left, right) => right.score - left.score);
+    const primary = links[0];
+    if (!primary) continue;
+    const title = !heading.includes("/") && primary.text.split(/\s+/).length > heading.split(/\s+/).length
+      ? primary.text
+      : heading;
+    candidates.push({ title, url: primary.url, urbanTerm: primary.text });
+  }
+  const unique = [...new Map(candidates.map((candidate) => [candidate.url, candidate])).values()];
+  if (unique.length < 5) throw new Error(`Know Your Meme annual review exposed only ${unique.length} slang entries`);
+  return unique;
 }
 
-async function knowYourMemeSlangPageviews(items) {
+async function latestAnnualSlangReview() {
+  const year = new Date().getUTCFullYear();
+  let lastError;
+  for (const candidateYear of [year, year - 1, year - 2]) {
+    const url = `https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-${candidateYear}`;
+    try {
+      const html = await fetchText(url);
+      return { year: candidateYear, url, candidates: parseAnnualSlangReview(html) };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError ?? new Error("No recent Know Your Meme annual slang review was available");
+}
+
+async function verifyUrbanDictionary(items) {
+  const pairs = await mapConcurrent(items, 4, async (item) => {
+    const words = item.title.split(/\s+/).filter(Boolean);
+    const withoutGenericNouns = words.filter((word) => !/^(?:emoji|meme|slang|term)$/i.test(word)).join(" ");
+    const variants = [...new Set([
+      item.urbanTerm,
+      item.title,
+      withoutGenericNouns,
+      words.slice(0, 2).join(" "),
+      words[0],
+    ].filter(Boolean))];
+    for (const term of variants) {
+      const payload = JSON.parse(await fetchText(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(term)}`));
+      if (Array.isArray(payload.list) && payload.list.length > 0) return [item.title, term];
+    }
+    return [item.title, null];
+  });
+  const terms = Object.fromEntries(pairs);
+  const missing = items.filter((item) => !terms[item.title]).map((item) => item.title);
+  if (missing.length) throw new Error(`Urban Dictionary had no result for: ${missing.join(", ")}`);
+  return terms;
+}
+
+async function knowYourMemeSlangDetails(items) {
   const pairs = await mapConcurrent(items, 4, async (item) => {
     const html = await fetchText(item.url);
     const raw = html.match(/<dd\s+class=['"]views['"]\s+title=['"]([0-9,]+)\s+Views['"]/i)?.[1];
     if (!raw) throw new Error(`Know Your Meme exposed no page-view count for ${item.title}`);
-    return [item.title, Number(raw.replaceAll(",", ""))];
+    const definitions = acronymDefinitions(item.title, html);
+    return [item.title, {
+      description: conciseSentences(`${definitions} ${conciseKymDescription(html)}`, 320),
+      views: Number(raw.replaceAll(",", "")),
+    }];
   });
   return Object.fromEntries(pairs);
 }
 
-function updateSlang(brief, pageviews) {
+function updateSlang(brief, review, details, urbanTerms) {
   const section = brief.sections.find((entry) => entry.id === "slang");
   if (!section) return;
-  if (!pageviews) return;
-  const currentByTitle = new Map(
-    [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
-  );
-  const ranked = annualSlangCandidates
-    .filter((item) => Number.isFinite(pageviews[item.title]))
-    .sort((left, right) => pageviews[right.title] - pageviews[left.title]);
-  if (ranked.length !== annualSlangCandidates.length) {
+  const currentItems = [...section.items, ...(section.moreItems ?? [])];
+  const currentByTitle = new Map(currentItems.map((item) => [normalize(item.title), item]));
+  const currentByUrl = new Map(currentItems.map((item) => [item.url, item]));
+  const ranked = review.candidates
+    .filter((item) => Number.isFinite(details[item.title]?.views))
+    .sort((left, right) => details[right.title].views - details[left.title].views);
+  if (ranked.length !== review.candidates.length) {
     throw new Error("At least one annual slang term had no Know Your Meme page-view count");
   }
   const allItems = ranked.map((candidate, index) => {
-    const current = currentByTitle.get(normalize(candidate.title));
+    const current = currentByUrl.get(candidate.url) ?? currentByTitle.get(normalize(candidate.title));
+    const urbanTerm = urbanTerms[candidate.title];
     return {
       rank: index + 1,
       title: candidate.title,
-      subtitle: candidate.subtitle,
-      description: candidate.description,
+      subtitle: `${review.year} annual review term`,
+      description: details[candidate.title].description,
       image: current?.image ?? `/culture/slang-${slugify(candidate.title)}.webp`,
       alt: current?.alt ?? `Visual example of ${candidate.title}`,
       url: candidate.url,
       source: "Know Your Meme",
-      metric: { label: "Know Your Meme page views", value: formatInteger(pageviews[candidate.title]) },
+      metric: { label: "Know Your Meme page views", value: formatInteger(details[candidate.title].views) },
       evidence: [
         { source: "Know Your Meme entry", url: candidate.url },
-        { source: "Urban Dictionary", url: `https://www.urbandictionary.com/define.php?term=${encodeURIComponent(candidate.urbanTerm)}` },
+        { source: "Urban Dictionary", url: `https://www.urbandictionary.com/define.php?term=${encodeURIComponent(urbanTerm)}` },
       ],
       accent: accents[index % accents.length],
     };
   });
-  section.eyebrow = "Annual slang review · by page views";
-  section.description = "Terms from Know Your Meme's annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.";
+  section.eyebrow = `${review.year} annual slang review · by page views`;
+  section.description = "Terms from Know Your Meme's latest annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.";
   section.sources = [
-    {
-      label: "Know Your Meme · annual slang review",
-      url: annualSlangReviewUrl,
-    },
+    { label: `Know Your Meme · ${review.year} annual slang review`, url: review.url },
     {
       label: `Urban Dictionary · ${ranked[0].title}`,
-      url: `https://www.urbandictionary.com/define.php?term=${encodeURIComponent(ranked[0].urbanTerm)}`,
+      url: `https://www.urbandictionary.com/define.php?term=${encodeURIComponent(urbanTerms[ranked[0].title])}`,
     },
   ];
   section.items = allItems.slice(0, 5);
@@ -715,16 +724,31 @@ function ensureSentence(value) {
   return /[.!?][\"'’”)]?$/.test(clean) ? clean : `${clean}.`;
 }
 
+const sentenceSegmenter = new Intl.Segmenter("en", { granularity: "sentence" });
+
+function sentences(value) {
+  const clean = plainText(value ?? "");
+  return clean ? [...sentenceSegmenter.segment(clean)].map(({ segment }) => segment.trim()).filter(Boolean) : [];
+}
+
 function conciseSentences(value, maxLength = 320) {
   const clean = plainText(value ?? "");
   if (!clean) return "";
-  const sentences = clean.match(/[^.!?]+[.!?][\"'’”)]?/g) ?? [ensureSentence(clean)];
+  const parts = sentences(clean);
   let result = "";
-  for (const sentence of sentences) {
+  for (const sentence of parts) {
     const candidate = `${result} ${sentence.trim()}`.trim();
     if (candidate.length > maxLength && result) break;
     if (candidate.length > maxLength) {
-      const clipped = candidate.slice(0, maxLength + 1).replace(/\s+\S*$/, "").replace(/[,:;\s]+$/, "");
+      const prefix = candidate.slice(0, maxLength + 1);
+      const boundaries = [
+        ...[...prefix.matchAll(/[,;:](?=\s)/g)].map((match) => match.index ?? -1),
+        ...[...prefix.matchAll(/\s+(?:and|but|while)\s+(?:a|an|the)\b/gi)].map((match) => match.index ?? -1),
+      ];
+      const boundary = boundaries.filter((index) => index >= maxLength * 0.55).sort((left, right) => left - right).at(-1);
+      const clipped = (boundary ? prefix.slice(0, boundary) : prefix.replace(/\s+\S*$/, ""))
+        .replace(/\s+\b(?:a|an|and|as|at|by|for|from|in|of|on|or|the|to|with)\b$/i, "")
+        .replace(/[,:;\s]+$/, "");
       return ensureSentence(clipped);
     }
     result = candidate;
@@ -733,28 +757,27 @@ function conciseSentences(value, maxLength = 320) {
 }
 
 const copiedMetricPattern = /\b(?:billboard hot 100|google shopping|google searches?|search volume|spotify(?:'|’)?s today(?:'|’)?s top hits|wikipedia (?:article )?(?:drew|views?))\b|\branking it #\d+|\bplacing it #\d+/i;
-const editorialHeadlinePattern = /\b(?:babygirl|best|favorite|hot take|machine|must-see|opinion|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\bonly .{0,50} could\b|\bgets? .{0,30} treatment\b/i;
+const editorialHeadlinePattern = /^(?:forget|inside|meet|why)\b|\b(?:admit it|babygirl|best|cover by|favorite|hot take|joke on|must-see|opinion|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\beverything (?:else )?(?:you )?need to know\b|\bonly .{0,50} could\b|\bgets? .{0,30} treatment\b/i;
+const eventHeadlinePattern = /\b(?:announc|appoint|arrest|ban|block|buy|cancel|cement|charg|clos|confirm|crash|damag|debut|discount|dismis|file|first look|join|launch|leav|let|open|order|recall|reject|releas|renew|resign|return|reveal|rise|rally|sell|sign|sicken|surge|suspend|teas|unveil|win|won)\w*\b/i;
 
-function factualHeadline(value, { rejectChartPlacement = false } = {}) {
-  let clean = plainText(value ?? "")
+function factualHeadline(value, { rejectChartPlacement = false, requireEvent = false } = {}) {
+  const clean = plainText(value ?? "")
     .replace(/^(?:exclusive|opinion|review)\s*[|:]\s*/i, "")
     .replace(/\s+-\s+The Athletic$/i, "")
     .trim();
-  if (!clean || clean.length < 24 || clean.length > 240 || copiedMetricPattern.test(clean)
-    || editorialHeadlinePattern.test(clean) || /\?/.test(clean)) return "";
-  if (rejectChartPlacement && /\b(?:billboard|charts?|no\.?\s*\d+|number one|#\d+)\b/i.test(clean)) return "";
-  clean = clean
-    .replace(/\s+draws outrage and fears of misuse$/i, " has prompted scrutiny over potential misuse")
-    .replace(/\s+stormed the charts in parallel$/i, " released music at the same time")
-    .trim();
-  return conciseSentences(clean, 240);
-}
-
-function reusableDescription(item) {
-  const description = item?.description?.trim() ?? "";
-  return description && !copiedMetricPattern.test(description) && !editorialHeadlinePattern.test(description)
-    ? description
-    : "";
+  const factual = sentences(clean).filter((sentence) => sentence.length >= 24
+    && sentence.length <= 240
+    && !sentence.includes("?")
+    && !/\b(?:No|vs)\.$/i.test(sentence)
+    && !/^\d+\s+(?:and|as|but|in|on|to|with)\b/i.test(sentence)
+    && !copiedMetricPattern.test(sentence)
+    && !editorialHeadlinePattern.test(sentence)
+    && (!requireEvent || eventHeadlinePattern.test(sentence))
+    && !(rejectChartPlacement && /\b(?:billboard|charts?|no\.?\s*\d+|number one|#\d+)\b/i.test(sentence)))
+    .map((sentence) => sentence
+      .replace(/\s+draws outrage and fears of misuse$/i, " has prompted scrutiny over potential misuse")
+      .trim());
+  return conciseSentences(factual.join(" "), 240);
 }
 
 function personIdentity(title, description, categoryLabel) {
@@ -768,13 +791,10 @@ function personIdentity(title, description, categoryLabel) {
   return ensureSentence(`${title} is ${article} ${identity}`);
 }
 
-function recentDescription(identity, headline, existing, options = {}) {
-  const { preferExisting = false, ...headlineOptions } = options;
-  const previous = reusableDescription(existing);
-  if (preferExisting && previous) return previous;
-  const context = factualHeadline(headline, headlineOptions);
+function recentDescription(identity, headline, options = {}) {
+  const context = factualHeadline(headline, options);
   if (context) return `${identity} ${context}`;
-  return previous || identity;
+  return identity;
 }
 
 function publicationDateLabel(value) {
@@ -791,8 +811,8 @@ function publicationDateLabel(value) {
 
 const googleNewsCache = new Map();
 
-async function googleNewsContext(query, days = 45) {
-  const key = `${normalize(query)}:${days}`;
+async function googleNewsContext(query, days = 45, { requireEvent = false } = {}) {
+  const key = `${normalize(query)}:${days}:${requireEvent}`;
   if (googleNewsCache.has(key)) return googleNewsCache.get(key);
   const request = (async () => {
     const newsUrl = new URL("https://news.google.com/rss/search");
@@ -838,20 +858,44 @@ async function googleNewsContext(query, days = 45) {
         overlap,
         score,
       };
-    }).filter((item) => item.headline && item.overlap >= Math.min(2, Math.max(1, queryTokens.size)));
+    }).filter((item) => item.headline && factualHeadline(item.headline, { requireEvent })
+      && item.overlap >= Math.min(2, Math.max(1, queryTokens.size)));
     return items.sort((left, right) => right.score - left.score)[0] ?? null;
   })();
   googleNewsCache.set(key, request);
   return request;
 }
 
-async function wikipediaRepresentativeImage(query) {
-  const imageQuery = query.replace(/\bGTA\s*6\b/i, "Grand Theft Auto VI");
+const topicStopWords = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "been", "by", "for", "from", "have", "how", "i", "in", "is", "it",
+  "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december",
+  "latest", "lawsuit", "news", "of", "on", "or", "presentation", "recall", "the", "to", "update", "was", "were", "what", "when", "with",
+]);
+
+function topicStem(token) {
+  if (token.length > 5 && token.endsWith("ies")) return `${token.slice(0, -3)}y`;
+  if (token.length > 5 && token.endsWith("ing")) return token.slice(0, -3).replace(/(.)\1$/, "$1");
+  if (token.length > 4 && token.endsWith("ed")) return token.slice(0, -2).replace(/(.)\1$/, "$1");
+  if (token.length > 4 && token.endsWith("s") && !token.endsWith("ss")) return token.slice(0, -1);
+  return token;
+}
+
+function topicTokens(value) {
+  return new Set(normalize(value).split(" ")
+    .filter((token) => (token.length >= 3 || /\d/.test(token)) && !topicStopWords.has(token))
+    .map(topicStem));
+}
+
+function overlapCount(left, right) {
+  return [...left].filter((token) => right.has(token)).length;
+}
+
+async function wikipediaSearch(query) {
   const searchUrl = new URL("https://en.wikipedia.org/w/api.php");
   searchUrl.search = new URLSearchParams({
     action: "query",
     generator: "search",
-    gsrsearch: imageQuery,
+    gsrsearch: query,
     gsrlimit: "6",
     prop: "pageimages|extracts|info",
     piprop: "thumbnail",
@@ -862,92 +906,120 @@ async function wikipediaRepresentativeImage(query) {
     format: "json",
     origin: "*",
   });
-  const queryTokens = new Set(normalize(imageQuery).split(" ")
-    .filter((token) => token.length >= 3 || /\d/.test(token))
-    .filter((token) => !new Set(["august", "been", "have", "lawsuit", "presentation", "recall"]).has(token)));
   const wikipedia = JSON.parse(await fetchText(searchUrl));
-  const pages = Object.values(wikipedia.query?.pages ?? {}).filter((page) => page.thumbnail?.source);
-  const pageScores = (page) => {
-    const titleTokens = new Set(normalize(page.title ?? "").split(" "));
-    const extractTokens = new Set(normalize(page.extract ?? "").split(" "));
-    const titleOverlap = [...queryTokens].filter((token) => titleTokens.has(token)).length;
-    const score = [...queryTokens].reduce((total, token) => total
-      + (titleTokens.has(token) ? 12 : 0) + (extractTokens.has(token) ? 1 : 0), 0);
-    return { titleOverlap, score };
-  };
-  const page = pages.sort((left, right) => pageScores(right).score - pageScores(left).score)[0];
-  const requiredTitleOverlap = Math.min(2, Math.max(1, queryTokens.size));
-  if (page && pageScores(page).titleOverlap >= requiredTitleOverlap) {
-    return { imageSource: page.thumbnail.source, pageUrl: page.fullurl, title: page.title };
-  }
-
-  const sequelBase = imageQuery.match(/^(.+?)\s+\d+$/)?.[1];
-  if (sequelBase) return wikipediaRepresentativeImage(`${sequelBase} franchise`);
-
-  if (![...queryTokens].some((token) => /^(?:court|egg|hurricane|storm)$/.test(token))) return null;
-
-  const commonsUrl = new URL("https://commons.wikimedia.org/w/api.php");
-  commonsUrl.search = new URLSearchParams({
-    action: "query",
-    generator: "search",
-    gsrsearch: imageQuery,
-    gsrnamespace: "6",
-    gsrlimit: "8",
-    prop: "imageinfo",
-    iiprop: "url|mime",
-    iiurlwidth: "1200",
-    format: "json",
-    origin: "*",
-  });
-  const commons = JSON.parse(await fetchText(commonsUrl));
-  const files = Object.values(commons.query?.pages ?? {}).map((entry) => ({
-    ...entry,
-    info: entry.imageinfo?.[0],
-  })).filter((entry) => entry.info?.thumburl && /^image\/(?:jpeg|png|webp)$/i.test(entry.info.mime ?? ""));
-  const scoredFiles = files.map((entry) => {
-    const titleTokens = new Set(normalize(entry.title ?? "").split(" "));
-    const overlap = [...queryTokens].filter((token) => titleTokens.has(token)).length;
-    const genericPenalty = /\b(?:coat of arms|diagram|flag|icon|logo|map|seal)\b/i.test(entry.title ?? "") ? 5 : 0;
-    return { entry, score: overlap * 10 - genericPenalty };
-  }).sort((left, right) => right.score - left.score);
-  return scoredFiles[0]?.score >= requiredTitleOverlap * 10
-    ? { imageSource: scoredFiles[0].entry.info.thumburl, pageUrl: scoredFiles[0].entry.info.descriptionurl, title: scoredFiles[0].entry.title }
-    : null;
+  return Object.values(wikipedia.query?.pages ?? {}).filter((page) => page.extract && page.fullurl);
 }
 
-async function wikipediaTopicSummary(query) {
-  const searchUrl = new URL("https://en.wikipedia.org/w/api.php");
-  searchUrl.search = new URLSearchParams({
-    action: "query",
-    generator: "search",
-    gsrsearch: query,
-    gsrlimit: "6",
-    prop: "extracts|info",
-    exintro: "1",
-    explaintext: "1",
-    exsentences: "2",
-    inprop: "url",
-    format: "json",
-    origin: "*",
-  });
-  const tokens = new Set(normalize(query).split(" ").filter((token) => token.length >= 3 || /\d/.test(token)));
-  const wikipedia = JSON.parse(await fetchText(searchUrl));
-  const pages = Object.values(wikipedia.query?.pages ?? {}).filter((page) => page.extract && page.fullurl);
-  const scored = pages.map((page) => {
-    const titleTokens = new Set(normalize(page.title ?? "").split(" "));
-    const extractTokens = new Set(normalize(page.extract ?? "").split(" "));
-    const titleOverlap = [...tokens].filter((token) => titleTokens.has(token)).length;
-    const score = [...tokens].reduce((total, token) => total
-      + (titleTokens.has(token) ? 12 : 0) + (extractTokens.has(token) ? 1 : 0), 0);
-    return { page, titleOverlap, score };
+async function wikipediaTopicContext(queryCandidates) {
+  const queries = [...new Map(queryCandidates
+    .map((query) => plainText(query ?? "").slice(0, 180))
+    .filter(Boolean)
+    .map((query) => [normalize(query), query])).values()].slice(0, 4);
+  if (!queries.length) return null;
+  const results = await mapConcurrent(queries, 3, async (query, queryIndex) => ({
+    queryIndex,
+    pages: await wikipediaSearch(query),
+  }));
+  const primaryTokens = topicTokens(queries[0]);
+  const sourceTokens = topicTokens(queries.join(" "));
+  const candidates = new Map();
+  for (const { queryIndex, pages } of results) {
+    for (const page of pages) {
+      const key = String(page.pageid);
+      const occurrence = { queryIndex, rank: Number(page.index) || 7 };
+      const current = candidates.get(key);
+      if (!current) candidates.set(key, { page, occurrences: [occurrence] });
+      else current.occurrences.push(occurrence);
+    }
+  }
+  const currentYear = new Date().getUTCFullYear();
+  const scored = [...candidates.values()].map(({ page, occurrences }) => {
+    const titleTokens = topicTokens(page.title ?? "");
+    const documentTokens = topicTokens(`${page.title ?? ""} ${page.extract ?? ""}`);
+    const primaryOverlap = overlapCount(primaryTokens, documentTokens);
+    const primaryTitleOverlap = overlapCount(primaryTokens, titleTokens);
+    const titleOverlap = overlapCount(sourceTokens, titleTokens);
+    const sourceOverlap = overlapCount(sourceTokens, documentTokens);
+    const occurrenceScores = occurrences.map((occurrence) => {
+      const queryTokens = topicTokens(queries[occurrence.queryIndex]);
+      const queryOverlap = overlapCount(queryTokens, documentTokens);
+      const rankScore = Math.max(0, 7 - occurrence.rank) * Math.min(8, Math.max(1, queryTokens.size));
+      return { ...occurrence, queryOverlap, rankScore };
+    });
+    const bestOccurrence = [...occurrenceScores].sort((left, right) => right.rankScore - left.rankScore)[0];
+    const years = [...String(page.title ?? "").matchAll(/\b((?:19|20)\d{2})\b/g)].map((match) => Number(match[1]));
+    const stalePenalty = years.some((year) => year < currentYear - 1 && !queries.some((query) => query.includes(String(year)))) ? 80 : 0;
+    const genericPenalty = /^(?:list of|outline of)|\(disambiguation\)$|\bmay refer to\b/i.test(`${page.title ?? ""} ${page.extract ?? ""}`) ? 120 : 0;
+    const occurrenceScore = occurrenceScores.reduce((total, occurrence) => total + occurrence.rankScore, 0);
+    const score = primaryOverlap * 24 + titleOverlap * 10 + sourceOverlap * 2
+      + occurrenceScore + occurrences.length * 6
+      - stalePenalty - genericPenalty;
+    return {
+      page,
+      bestOccurrence,
+      occurrenceScores,
+      primaryOverlap,
+      primaryTitleOverlap,
+      sourceOverlap,
+      titleOverlap,
+      titleTokens,
+      stale: stalePenalty > 0,
+      score,
+    };
   }).sort((left, right) => right.score - left.score);
-  const best = scored[0];
-  if (!best || best.titleOverlap < Math.min(2, Math.max(1, tokens.size))) return null;
+  const requiredPrimaryOverlap = Math.min(2, Math.max(1, primaryTokens.size));
+  const best = scored.find((candidate) => {
+    if (candidate.stale || /\bmay refer to\b/i.test(candidate.page.extract ?? "")) return false;
+    const primaryTitleCoverage = candidate.primaryTitleOverlap / Math.max(1, candidate.titleTokens.size);
+    return candidate.occurrenceScores.some((occurrence) => occurrence.queryIndex === 0 && occurrence.rank <= 2)
+      && candidate.primaryOverlap >= requiredPrimaryOverlap
+      && candidate.primaryTitleOverlap >= requiredPrimaryOverlap
+      && primaryTitleCoverage >= 0.5;
+  });
+  if (!best) return null;
+  const firstSentence = sentences(best.page.extract)[0] ?? "";
+  const subordinate = firstSentence.search(/,\s+(?:which (?:is|was|were)|directed by|produced by|screenplay by|written by)\b/i);
+  const definition = subordinate >= 80 ? ensureSentence(firstSentence.slice(0, subordinate)) : firstSentence;
   return {
     title: best.page.title,
-    extract: conciseSentences(best.page.extract, 220),
+    extract: conciseSentences(definition, 220),
     pageUrl: best.page.fullurl,
+    imageSource: best.page.thumbnail?.source,
   };
+}
+
+async function commonsRepresentativeImage(queryCandidates) {
+  const queries = queryCandidates.map((query) => plainText(query ?? "")).filter(Boolean).slice(0, 3);
+  const sourceTokens = topicTokens(queries.join(" "));
+  const results = await mapConcurrent(queries, 3, async (query, queryIndex) => {
+    const commonsUrl = new URL("https://commons.wikimedia.org/w/api.php");
+    commonsUrl.search = new URLSearchParams({
+      action: "query",
+      generator: "search",
+      gsrsearch: query,
+      gsrnamespace: "6",
+      gsrlimit: "6",
+      prop: "imageinfo",
+      iiprop: "url|mime",
+      iiurlwidth: "1200",
+      format: "json",
+      origin: "*",
+    });
+    const commons = JSON.parse(await fetchText(commonsUrl));
+    return Object.values(commons.query?.pages ?? {}).map((entry) => ({ ...entry, queryIndex, info: entry.imageinfo?.[0] }));
+  });
+  const candidates = results.flat().filter((entry) => entry.info?.thumburl
+    && /^image\/(?:jpeg|png|webp)$/i.test(entry.info.mime ?? ""))
+    .map((entry) => {
+      const overlap = overlapCount(sourceTokens, topicTokens(entry.title ?? ""));
+      const genericPenalty = /\b(?:coat of arms|diagram|flag|icon|logo|map|seal)\b/i.test(entry.title ?? "") ? 8 : 0;
+      return { entry, score: overlap * 10 - entry.queryIndex * 2 - genericPenalty };
+    }).sort((left, right) => right.score - left.score);
+  return candidates[0]?.score >= 10 ? {
+    imageSource: candidates[0].entry.info.thumburl,
+    pageUrl: candidates[0].entry.info.descriptionurl,
+    title: candidates[0].entry.title,
+  } : null;
 }
 
 async function updatePeople(brief, topviews) {
@@ -973,7 +1045,7 @@ async function updatePeople(brief, topviews) {
   if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people");
   const details = await wikipediaPageDetails(selected.map((person) => person.title));
   const contexts = await mapConcurrent(selected, 4, (person) =>
-    googleNewsContext(`"${person.title}"`, 45).catch(() => null));
+    googleNewsContext(`"${person.title}"`, 45, { requireEvent: true }).catch(() => null));
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
@@ -988,9 +1060,7 @@ async function updatePeople(brief, topviews) {
       rank: index + 1,
       title,
       subtitle: person.label,
-      description: recentDescription(identity, context?.headline, current, {
-        preferExisting: current?.evidence?.some((entry) => entry.url === context?.link),
-      }),
+      description: recentDescription(identity, context?.headline, { requireEvent: true }),
       image: current?.image ?? `/culture/person-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `Portrait of ${title}`,
@@ -1220,10 +1290,13 @@ async function updateMusic(brief, chart, spotifyTracks) {
   const crossovers = [...spotifySelected]
     .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
   const descriptions = await mapConcurrent(crossovers, 4, async ({ track }) => {
-    const [context, details] = await Promise.all([
-      googleNewsContext(`"${track.title}" "${track.artist}"`, 30).catch(() => null),
+    const [candidateContext, details] = await Promise.all([
+      googleNewsContext(`"${track.title}" "${track.artist}"`, 30, { requireEvent: true }).catch(() => null),
       spotifyTrackDetails(track.id),
     ]);
+    const context = candidateContext && normalize(candidateContext.headline).includes(normalize(track.title))
+      ? candidateContext
+      : null;
     return { context, details };
   });
   const currentById = new Map(
@@ -1247,10 +1320,7 @@ async function updateMusic(brief, chart, spotifyTracks) {
       rank: index + 1,
       title: track.title,
       subtitle: track.artist,
-      description: recentDescription(identity, context?.headline, current, {
-        preferExisting: current?.evidence?.some((entry) => entry.url === context?.link),
-        rejectChartPlacement: true,
-      }),
+      description: recentDescription(identity, context?.headline, { rejectChartPlacement: true, requireEvent: true }),
       image: current?.image ?? `/culture/song-${slugify(`${track.title}-${track.artist}`)}.webp`,
       imageSource: track.image,
       alt: current?.alt ?? `${track.title} artwork by ${track.artist}`,
@@ -1444,6 +1514,50 @@ async function productLeaderboard() {
   return amazonProducts(filtered);
 }
 
+function amazonProductIdentity(query, listingTitle) {
+  let product = plainText(listingTitle ?? "")
+    .replace(/^Amazon\.com\s*:\s*/i, "")
+    .replace(/\s*:\s*Amazon\.com\s*:?\s*$/i, "")
+    .split("|")[0]
+    .trim();
+  const colon = product.indexOf(":");
+  if (colon >= 12) product = product.slice(0, colon).trim();
+  product = product.length > 170
+    ? product.slice(0, 171).replace(/\s+\S*$/, "").replace(/[,;:\s]+$/, "")
+    : product;
+  const title = titleCase(query);
+  if (!product || normalize(product) === normalize(title)) return ensureSentence(`${title} is a consumer product`);
+  return ensureSentence(`${title} refers here to the ${product}`);
+}
+
+async function amazonListingTitle(url) {
+  const html = await fetchText(url, { headers: { "user-agent": "Mozilla/5.0", "accept-language": "en-US,en;q=0.9" } });
+  return plainText(html.match(/<meta\s+(?:property|name)="og:title"\s+content="([^"]+)"/i)?.[1]
+    ?? html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]
+    ?? "");
+}
+
+async function refreshExistingProducts(brief) {
+  const section = brief.sections.find((entry) => entry.id === "products");
+  const existing = [...(section?.items ?? []), ...(section?.moreItems ?? [])];
+  if (existing.length < 5) throw new Error("No previous Products snapshot is available to refresh");
+  const listingTitles = await mapConcurrent(existing, 4, (item) => amazonListingTitle(item.url).catch(() => ""));
+  return existing.map((item, index) => {
+    const match = item.metric?.value?.match(/^#(\d+)\s*·\s*(.+)$/);
+    const searchUrl = new URL("https://www.amazon.com/s");
+    searchUrl.search = new URLSearchParams({ k: item.title, s: "exact-aware-popularity-rank" });
+    return {
+      query: item.title,
+      rank: Number(match?.[1] ?? item.rank),
+      growth: match?.[2] ?? "Rising",
+      title: listingTitles[index] || item.title,
+      image: item.imageSource,
+      url: item.url,
+      searchUrl: searchUrl.href,
+    };
+  });
+}
+
 async function updateProducts(brief, products) {
   const section = brief.sections.find((entry) => entry.id === "products");
   if (!section) return;
@@ -1457,7 +1571,7 @@ async function updateProducts(brief, products) {
         .map((token) => `"${token}"`)
         .join(" ")
       : "";
-    return googleNewsContext(`"${product.query}" ${qualifiers} product`, 30).catch(() => null);
+    return googleNewsContext(`"${product.query}" ${qualifiers} product`, 30, { requireEvent: true }).catch(() => null);
   });
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
@@ -1466,23 +1580,12 @@ async function updateProducts(brief, products) {
     const title = titleCase(product.query);
     const current = currentByTitle.get(normalize(title));
     const context = contexts[index];
-    const definitions = [
-      [/rechargeable laptop battery/i, "A rechargeable laptop battery is a portable power bank that can charge a laptop away from an outlet."],
-      [/electric shock gloves/i, "Electric shock gloves are wearable devices designed to deliver an electric charge."],
-      [/alani potion pack/i, "Alani Nu’s Potion Pack is a limited variety pack of flavored energy drinks."],
-      [/madden\s*(?:nfl\s*)?27/i, "Madden NFL 27 is EA Sports’ current American-football video game."],
-      [/\bmacbook\b/i, "A MacBook is a laptop computer made by Apple."],
-      [/switch\s*2/i, "Nintendo Switch 2 is Nintendo’s current hybrid game console."],
-    ];
-    const identity = definitions.find(([pattern]) => pattern.test(product.query))?.[1]
-      ?? conciseSentences(`The linked Amazon product is ${product.title}`, 180);
+    const identity = amazonProductIdentity(product.query, product.title);
     return {
       rank: index + 1,
       title,
       subtitle: "Product · Amazon match",
-      description: recentDescription(identity, context?.headline, current, {
-        preferExisting: current?.evidence?.some((entry) => entry.url === context?.link),
-      }),
+      description: recentDescription(identity, context?.headline, { requireEvent: true }),
       image: current?.image ?? `/culture/product-${slugify(title)}.webp`,
       imageSource: product.image,
       alt: current?.alt ?? `${title} product listing image`,
@@ -1502,7 +1605,7 @@ async function updateProducts(brief, products) {
   section.description = "Rising U.S. Google Shopping queries in source order, after removing people, media, brand-only terms, duplicates, and queries without a relevant Amazon product listing.";
   section.sources = [
     { label: "Google Shopping · rising queries, U.S., 7 days", url: shoppingTrendsUrl },
-    { label: "Amazon · best-selling match", url: products[0].searchUrl },
+    { label: "Amazon · best-selling match", url: products[0].searchUrl ?? products[0].url },
   ];
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5);
@@ -1519,14 +1622,22 @@ async function googleTrendingNews() {
   const html = await fetchText(newsTrendsUrl, { headers: { "user-agent": "Mozilla/5.0", "accept-language": "en-US,en;q=0.9" } });
   const rows = [];
   for (const match of html.matchAll(/<tr\b[^>]*class="[^"]*enOdEe-wZVHld-xMbwt[^"]*"[^>]*>[\s\S]*?<\/tr>/g)) {
-    const title = plainText(match[0].match(/class="mZ3RIc">([\s\S]*?)<\/div>/)?.[1] ?? "");
-    const volume = plainText(match[0].match(/class="lqv0Cb">([\s\S]*?)<\/div>/)?.[1] ?? "");
-    if (title && searchVolume(volume)) rows.push({ title, volume, searches: searchVolume(volume), sourceOrder: rows.length });
+    const rowHtml = match[0];
+    const title = plainText(rowHtml.match(/class="mZ3RIc">([\s\S]*?)<\/div>/)?.[1] ?? "");
+    const volume = plainText(rowHtml.match(/class="lqv0Cb">([\s\S]*?)<\/div>/)?.[1] ?? "");
+    const relatedTerms = [...new Map([...rowHtml.matchAll(/\bdata-term=(?:"([^"]+)"|'([^']+)'|([^\s>]+))/gi)]
+      .map((term) => plainText(term[1] ?? term[2] ?? term[3] ?? ""))
+      .filter((term) => term && normalize(term) !== normalize(title))
+      .map((term) => [normalize(term), term])).values()].slice(0, 5);
+    if (title && searchVolume(volume)) {
+      rows.push({ title, volume, relatedTerms, searches: searchVolume(volume), sourceOrder: rows.length });
+    }
   }
   if (rows.length < 20) throw new Error(`Google Trending Now returned only ${rows.length} topics`);
   const entities = await wikidataEntitiesForTitles(rows.flatMap((row) => queryVariants(titleCase(row.title))));
   const sports = /\b(?:vs\.?|score|game|match|cup|league|nfl|nba|mlb|nhl|wnba|open 20\d{2}|warriors|fever|dream)\b/i;
-  const candidates = rows.filter((row) => !sports.test(row.title)
+  const personClue = /\b(?:actor|actress|author|director|founder|founding member|musician|player|rapper|singer|social-media star|streamer|youtuber)\b/i;
+  const candidates = rows.filter((row) => !sports.test(row.title) && !personClue.test(row.title)
     && !queryEntityMatch(titleCase(row.title), entities, (entity) => claimIds(entity, "P31").includes("Q5")));
   const searchPersonFlags = await mapConcurrent(candidates, 4, (row) => wikidataSearchIsPerson(row.title));
   const filtered = candidates.filter((_, index) => !searchPersonFlags[index])
@@ -1534,30 +1645,14 @@ async function googleTrendingNews() {
     .slice(0, 10);
   if (filtered.length < 6) throw new Error(`Only ${filtered.length} non-person, non-sports news topics remained`);
   return mapConcurrent(filtered, 4, async (row) => {
-    const context = await googleNewsContext(row.title, 14).catch(() => null);
-    const summaryQuery = /have i been flocked/i.test(row.title)
-      ? "Flock Safety"
-      : /\bGTA\s*6\b/i.test(row.title)
-        ? "Grand Theft Auto VI"
-        : /^D23$/i.test(row.title)
-          ? "D23 Disney"
-          : /^(?:Frozen|Coco)\s*\d+$/i.test(row.title)
-            ? `${row.title.replace(/\s*\d+$/, "")} franchise`
-            : /^Supreme Court$/i.test(row.title)
-              ? "Supreme Court of the United States"
-              : context?.headline?.match(/\bHurricane\s+[A-Z][a-z]+\b/)?.[0] ?? null;
-    const [topicRepresentative, topicSummary] = await Promise.all([
-      wikipediaRepresentativeImage(row.title).catch(() => null),
-      summaryQuery ? wikipediaTopicSummary(summaryQuery).catch(() => null) : null,
-    ]);
-    const contextImageQuery = context?.headline && /license plate/i.test(context.headline)
-      ? "automatic license plate recognition"
-      : context?.headline && /ice cream/i.test(context.headline)
-        ? "ice cream"
-        : context?.headline;
-    const representative = topicRepresentative ?? (contextImageQuery
-      ? await wikipediaRepresentativeImage(contextImageQuery).catch(() => null)
-      : null);
+    const context = await googleNewsContext(row.title, 14, { requireEvent: true }).catch(() => null);
+    const topicQueries = [row.title, ...row.relatedTerms, context?.headline].filter(Boolean);
+    const topicSummary = await wikipediaTopicContext(topicQueries).catch(() => null);
+    const representative = topicSummary?.imageSource ? {
+      imageSource: topicSummary.imageSource,
+      pageUrl: topicSummary.pageUrl,
+      title: topicSummary.title,
+    } : await commonsRepresentativeImage(topicQueries).catch(() => null);
     const fallbackUrl = new URL("https://news.google.com/search");
     fallbackUrl.search = new URLSearchParams({ q: row.title, hl: "en-US", gl: "US", ceid: "US:en" });
     return {
@@ -1575,20 +1670,13 @@ async function googleTrendingNews() {
   });
 }
 
-function newsDescription(topic, title, existing) {
-  if (/have i been flocked/i.test(title)) {
-    return "Have I Been Flocked is a public-records search site that lets people check whether their license plate appears in released Flock Safety logs. Flock Safety is a surveillance technology company facing scrutiny over its automated license-plate network and documented misuse.";
-  }
-  const previous = reusableDescription(existing);
-  if (previous && existing.evidence?.some((entry) => entry.url === topic.link)) return previous;
-  const definition = topic.topicSummary && normalize(topic.topicSummary).includes(normalize(title).split(" ")[0])
-    ? conciseSentences(topic.topicSummary, 220)
-    : "";
+function newsDescription(topic, title) {
+  const definition = conciseSentences(topic.topicSummary, 220);
   const event = factualHeadline(topic.headline);
-  if (definition && event && !normalize(definition).includes(normalize(event).slice(0, 60))) {
+  if (definition && event && !normalize(definition).includes(normalize(event).slice(0, 48))) {
     return conciseSentences(`${definition} ${event}`, 360);
   }
-  return event || definition || previous || ensureSentence(title);
+  return event || definition || ensureSentence(title);
 }
 
 function updateNews(brief, topics) {
@@ -1606,7 +1694,7 @@ function updateNews(brief, topics) {
       rank: index + 1,
       title,
       subtitle: published ? `News · ${published}` : "News",
-      description: newsDescription(topic, title, current),
+      description: newsDescription(topic, title),
       image: current?.image ?? `/culture/news-${slugify(title)}.webp`,
       imageSource: topic.imageSource,
       alt: topic.imageTitle ? `${topic.imageTitle}, representing ${title}` : `Representative image for ${title}`,
@@ -1792,18 +1880,35 @@ if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().sl
   process.exit(0);
 }
 
-const sourceResults = await Promise.all([
+const independentSourcePromises = [
   safely("Know Your Meme result", latestMemeResult),
   safely("Lessons in Meme Culture", lessonsInMemeCultureRecent),
-  safely("Know Your Meme annual slang review", () => fetchText(annualSlangReviewUrl)),
-  safely("Know Your Meme slang pageviews", () => knowYourMemeSlangPageviews(annualSlangCandidates)),
-  safely("Urban Dictionary", () => verifyUrbanDictionary(annualSlangCandidates)),
   safely("Wikimedia monthly topviews", wikipediaMonthlyTop),
   safely("Billboard Hot 100", billboardHot100),
   safely("Spotify Today’s Top Hits", spotifyPlaylistTracks),
   safely("Google Shopping / Amazon", productLeaderboard),
   safely("Google Trending Now / News", googleTrendingNews),
+];
+const slangReviewResult = await safely("Know Your Meme annual slang review", latestAnnualSlangReview);
+const slangCandidates = slangReviewResult.value?.candidates ?? [];
+const [memeResult, limcResult, topviewsResult, billboardResult, spotifyResult, productsResult, newsResult,
+  slangDetailsResult, urbanDictionaryResult] = await Promise.all([
+  ...independentSourcePromises,
+  safely("Know Your Meme slang pageviews", () => knowYourMemeSlangDetails(slangCandidates)),
+  safely("Urban Dictionary", () => verifyUrbanDictionary(slangCandidates)),
 ]);
+const sourceResults = [
+  memeResult,
+  limcResult,
+  slangReviewResult,
+  slangDetailsResult,
+  urbanDictionaryResult,
+  topviewsResult,
+  billboardResult,
+  spotifyResult,
+  productsResult,
+  newsResult,
+];
 const byName = Object.fromEntries(sourceResults.map((result) => [result.name, result]));
 for (const result of sourceResults) console.log(`${result.ok ? "ok" : "failed"} ${result.name}${result.error ? `: ${result.error}` : ""}`);
 const optionalSources = new Set(["Google Shopping / Amazon"]);
@@ -1814,15 +1919,17 @@ if (failedSources.length) {
 }
 
 await updateMemes(brief, byName["Know Your Meme result"].value, byName["Lessons in Meme Culture"].value);
-updateSlang(brief, byName["Know Your Meme slang pageviews"].value);
+updateSlang(
+  brief,
+  byName["Know Your Meme annual slang review"].value,
+  byName["Know Your Meme slang pageviews"].value,
+  byName["Urban Dictionary"].value,
+);
 await updatePeople(brief, byName["Wikimedia monthly topviews"].value);
 await updateMovies(brief, byName["Wikimedia monthly topviews"].value);
 await updateMusic(brief, byName["Billboard Hot 100"].value, byName["Spotify Today’s Top Hits"].value);
 if (byName["Google Shopping / Amazon"].ok) await updateProducts(brief, byName["Google Shopping / Amazon"].value);
-else if (brief.sections.find((section) => section.id === "products")?.items.length !== 5) {
-  console.error("No previous Products snapshot is available to preserve.");
-  process.exit(1);
-}
+else await updateProducts(brief, await refreshExistingProducts(brief));
 updateNews(brief, byName["Google Trending Now / News"].value);
 for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
 delete brief.pulse;
