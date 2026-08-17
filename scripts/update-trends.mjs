@@ -715,6 +715,68 @@ function ensureSentence(value) {
   return /[.!?][\"'’”)]?$/.test(clean) ? clean : `${clean}.`;
 }
 
+function conciseSentences(value, maxLength = 320) {
+  const clean = plainText(value ?? "");
+  if (!clean) return "";
+  const sentences = clean.match(/[^.!?]+[.!?][\"'’”)]?/g) ?? [ensureSentence(clean)];
+  let result = "";
+  for (const sentence of sentences) {
+    const candidate = `${result} ${sentence.trim()}`.trim();
+    if (candidate.length > maxLength && result) break;
+    if (candidate.length > maxLength) {
+      const clipped = candidate.slice(0, maxLength + 1).replace(/\s+\S*$/, "").replace(/[,:;\s]+$/, "");
+      return ensureSentence(clipped);
+    }
+    result = candidate;
+  }
+  return ensureSentence(result || clean);
+}
+
+const copiedMetricPattern = /\b(?:billboard hot 100|google shopping|google searches?|search volume|spotify(?:'|’)?s today(?:'|’)?s top hits|wikipedia (?:article )?(?:drew|views?))\b|\branking it #\d+|\bplacing it #\d+/i;
+const editorialHeadlinePattern = /\b(?:babygirl|best|favorite|hot take|machine|must-see|opinion|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\bonly .{0,50} could\b|\bgets? .{0,30} treatment\b/i;
+
+function factualHeadline(value, { rejectChartPlacement = false } = {}) {
+  let clean = plainText(value ?? "")
+    .replace(/^(?:exclusive|opinion|review)\s*[|:]\s*/i, "")
+    .replace(/\s+-\s+The Athletic$/i, "")
+    .trim();
+  if (!clean || clean.length < 24 || clean.length > 240 || copiedMetricPattern.test(clean)
+    || editorialHeadlinePattern.test(clean) || /\?/.test(clean)) return "";
+  if (rejectChartPlacement && /\b(?:billboard|charts?|no\.?\s*\d+|number one|#\d+)\b/i.test(clean)) return "";
+  clean = clean
+    .replace(/\s+draws outrage and fears of misuse$/i, " has prompted scrutiny over potential misuse")
+    .replace(/\s+stormed the charts in parallel$/i, " released music at the same time")
+    .trim();
+  return conciseSentences(clean, 240);
+}
+
+function reusableDescription(item) {
+  const description = item?.description?.trim() ?? "";
+  return description && !copiedMetricPattern.test(description) && !editorialHeadlinePattern.test(description)
+    ? description
+    : "";
+}
+
+function personIdentity(title, description, categoryLabel) {
+  let identity = plainText(description ?? "")
+    .replace(/\s*\((?:born|b\.)[^)]*\)/gi, "")
+    .replace(/\bassociation football player\b/gi, "footballer")
+    .replace(/[.;,\s]+$/, "")
+    .trim();
+  if (!identity) identity = `person primarily known for work in ${categoryLabel.toLowerCase()}`;
+  const article = /^[aeiou]/i.test(identity) ? "an" : "a";
+  return ensureSentence(`${title} is ${article} ${identity}`);
+}
+
+function recentDescription(identity, headline, existing, options = {}) {
+  const { preferExisting = false, ...headlineOptions } = options;
+  const previous = reusableDescription(existing);
+  if (preferExisting && previous) return previous;
+  const context = factualHeadline(headline, headlineOptions);
+  if (context) return `${identity} ${context}`;
+  return previous || identity;
+}
+
 function publicationDateLabel(value) {
   if (!value) return null;
   const date = new Date(value);
@@ -764,6 +826,7 @@ async function googleNewsContext(query, days = 45) {
       if (/\b(?:Associated Press|AP News|BBC|Billboard|Bloomberg|Deadline|ESPN|Forbes|Fortune|FOX Sports|The Guardian|Los Angeles Times|NBC News|NPR|New York Times|Reuters|SCOTUSblog|The Athletic|The Hollywood Reporter|The Washington Post|Variety)\b/i.test(source)) score += 12;
       if (/\b(?:Just Jared|Medium|Mshale|Weverse)\b/i.test(source)
         || /^(?:exclusive|opinion)\b|\b(?:cover by|lyrics:)\b/i.test(headline)) score -= 10;
+      if (editorialHeadlinePattern.test(headline) || /\?/.test(headline)) score -= 30;
       if (/\b\w{1,3}$/.test(headline) && !/[.!?'’”)]$/.test(headline)) score -= 6;
       const date = new Date(published);
       return {
@@ -852,6 +915,41 @@ async function wikipediaRepresentativeImage(query) {
     : null;
 }
 
+async function wikipediaTopicSummary(query) {
+  const searchUrl = new URL("https://en.wikipedia.org/w/api.php");
+  searchUrl.search = new URLSearchParams({
+    action: "query",
+    generator: "search",
+    gsrsearch: query,
+    gsrlimit: "6",
+    prop: "extracts|info",
+    exintro: "1",
+    explaintext: "1",
+    exsentences: "2",
+    inprop: "url",
+    format: "json",
+    origin: "*",
+  });
+  const tokens = new Set(normalize(query).split(" ").filter((token) => token.length >= 3 || /\d/.test(token)));
+  const wikipedia = JSON.parse(await fetchText(searchUrl));
+  const pages = Object.values(wikipedia.query?.pages ?? {}).filter((page) => page.extract && page.fullurl);
+  const scored = pages.map((page) => {
+    const titleTokens = new Set(normalize(page.title ?? "").split(" "));
+    const extractTokens = new Set(normalize(page.extract ?? "").split(" "));
+    const titleOverlap = [...tokens].filter((token) => titleTokens.has(token)).length;
+    const score = [...tokens].reduce((total, token) => total
+      + (titleTokens.has(token) ? 12 : 0) + (extractTokens.has(token) ? 1 : 0), 0);
+    return { page, titleOverlap, score };
+  }).sort((left, right) => right.score - left.score);
+  const best = scored[0];
+  if (!best || best.titleOverlap < Math.min(2, Math.max(1, tokens.size))) return null;
+  return {
+    title: best.page.title,
+    extract: conciseSentences(best.page.extract, 220),
+    pageUrl: best.page.fullurl,
+  };
+}
+
 async function updatePeople(brief, topviews) {
   const section = brief.sections.find((entry) => entry.id === "people");
   if (!section) return;
@@ -885,12 +983,14 @@ async function updatePeople(brief, topviews) {
     const current = currentByTitle.get(normalize(title));
     const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}`;
     const context = contexts[index];
-    const recentReason = `${title}’s English Wikipedia article drew ${formatCompact(person.views)} views in ${topviews.period.month}, placing it among the month’s most-read pages about living people.`;
+    const identity = personIdentity(title, person.entity?.descriptions?.en?.value, person.label);
     return {
       rank: index + 1,
       title,
       subtitle: person.label,
-      description: context?.headline ? `${ensureSentence(context.headline)} ${recentReason}` : recentReason,
+      description: recentDescription(identity, context?.headline, current, {
+        preferExisting: current?.evidence?.some((entry) => entry.url === context?.link),
+      }),
       image: current?.image ?? `/culture/person-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `Portrait of ${title}`,
@@ -935,10 +1035,18 @@ async function cinemetaMovieDetails(imdbId) {
     return payload.meta?.name ? {
       rating: String(payload.meta.imdbRating ?? "").trim() || "Not rated",
       description: payload.meta.description ? plainText(payload.meta.description) : null,
+      genres: Array.isArray(payload.meta.genres) ? payload.meta.genres.filter(Boolean).slice(0, 3) : [],
     } : null;
   } catch {
     return null;
   }
+}
+
+function movieDescription(title, cinemeta, wikipediaExtract) {
+  const genres = cinemeta?.genres?.map((genre) => genre.toLowerCase()).join("/");
+  const identity = genres ? `${title} is ${/^[aeiou]/i.test(genres) ? "an" : "a"} ${genres} film.` : "";
+  const premise = conciseSentences(cinemeta?.description ?? wikipediaExtract, 260);
+  return `${identity} ${premise}`.trim() || `${title} is a film.`;
 }
 
 async function updateMovies(brief, topviews) {
@@ -952,8 +1060,7 @@ async function updateMovies(brief, topviews) {
   const details = await wikipediaPageDetails(selected.map((movie) => movie.title));
   const metadata = await mapConcurrent(selected, 4, async (movie) => {
     const imdbId = claimStrings(movie.entity, "P345").find((value) => /^tt\d{7,9}$/.test(value));
-    const context = await googleNewsContext(`"${movieTitle(movie.title)}" film`, 45).catch(() => null);
-    return { imdbId, cinemeta: await cinemetaMovieDetails(imdbId), context };
+    return { imdbId, cinemeta: await cinemetaMovieDetails(imdbId) };
   });
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
@@ -964,15 +1071,14 @@ async function updateMovies(brief, topviews) {
     const current = currentByTitle.get(normalize(title));
     const wikipediaTitle = page?.title ?? movie.title;
     const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(wikipediaTitle.replaceAll(" ", "_"))}`;
-    const { imdbId, cinemeta, context } = metadata[index];
-    const recentReason = `${title} drew ${formatCompact(movie.views)} English Wikipedia views in ${topviews.period.month}, making it one of the month’s most-read movie pages.`;
+    const { imdbId, cinemeta } = metadata[index];
     return {
       rank: index + 1,
       title,
       subtitle: movie.entity?.descriptions?.en?.value?.match(/\b((?:19|20)\d{2})\b/)?.[1]
         ? `${movie.entity.descriptions.en.value.match(/\b((?:19|20)\d{2})\b/)[1]} film`
         : "Movie",
-      description: context?.headline ? `${ensureSentence(context.headline)} ${recentReason}` : recentReason,
+      description: movieDescription(title, cinemeta, page?.extract),
       image: current?.image ?? `/culture/movie-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `${title} poster or lead image`,
@@ -983,7 +1089,7 @@ async function updateMovies(brief, topviews) {
       evidence: [
         { source: "Wikimedia monthly topviews", url: topviews.apiUrl },
         { source: "Wikipedia article", url: wikipediaUrl },
-        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
+        ...(imdbId ? [{ source: "IMDb", url: `https://www.imdb.com/title/${imdbId}/` }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
@@ -1070,6 +1176,18 @@ async function spotifyPlaylistTracks() {
   return spotifyEmbedTracks();
 }
 
+async function spotifyTrackDetails(trackId) {
+  try {
+    const html = await fetchText(`https://open.spotify.com/track/${trackId}`, {
+      headers: { "user-agent": "Mozilla/5.0" },
+    });
+    const released = plainText(html.match(/<meta\s+name="music:release_date"\s+content="([^"]+)"/i)?.[1] ?? "");
+    return { released };
+  } catch {
+    return { released: "" };
+  }
+}
+
 async function updateMusic(brief, chart, spotifyTracks) {
   const section = brief.sections.find((entry) => entry.id === "music");
   if (!section) return;
@@ -1101,8 +1219,13 @@ async function updateMusic(brief, chart, spotifyTracks) {
   if (spotifySelected.length < 10) throw new Error("Fewer than ten songs overlapped Billboard and Spotify");
   const crossovers = [...spotifySelected]
     .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
-  const contexts = await mapConcurrent(crossovers, 4, ({ track }) =>
-    googleNewsContext(`"${track.title}" "${track.artist}"`, 30).catch(() => null));
+  const descriptions = await mapConcurrent(crossovers, 4, async ({ track }) => {
+    const [context, details] = await Promise.all([
+      googleNewsContext(`"${track.title}" "${track.artist}"`, 30).catch(() => null),
+      spotifyTrackDetails(track.id),
+    ]);
+    return { context, details };
+  });
   const currentById = new Map(
     [...section.items, ...(section.moreItems ?? [])]
       .filter((item) => item.spotifyId)
@@ -1117,13 +1240,17 @@ async function updateMusic(brief, chart, spotifyTracks) {
   ];
   const allItems = crossovers.map(({ row, track, spotifyRank }, index) => {
     const current = currentById.get(track.id);
-    const context = contexts[index];
-    const chartReason = `The track is #${row.this_week} on the current Billboard Hot 100 after appearing at #${spotifyRank} in Spotify’s Today’s Top Hits.`;
+    const { context, details } = descriptions[index];
+    const released = publicationDateLabel(details.released);
+    const identity = ensureSentence(`“${track.title}” is a track by ${track.artist}${released ? `, released ${released}` : ""}`);
     return {
       rank: index + 1,
       title: track.title,
       subtitle: track.artist,
-      description: context?.headline ? `${ensureSentence(context.headline)} ${chartReason}` : chartReason,
+      description: recentDescription(identity, context?.headline, current, {
+        preferExisting: current?.evidence?.some((entry) => entry.url === context?.link),
+        rejectChartPlacement: true,
+      }),
       image: current?.image ?? `/culture/song-${slugify(`${track.title}-${track.artist}`)}.webp`,
       imageSource: track.image,
       alt: current?.alt ?? `${track.title} artwork by ${track.artist}`,
@@ -1339,14 +1466,23 @@ async function updateProducts(brief, products) {
     const title = titleCase(product.query);
     const current = currentByTitle.get(normalize(title));
     const context = contexts[index];
-    const trendReason = /^breakout$/i.test(product.growth)
-      ? `Google Shopping labels “${product.query}” a Breakout U.S. query this week, ranking it #${product.rank} among Rising searches with a matching Amazon product.`
-      : `U.S. Google Shopping interest in “${product.query}” rose ${product.growth} this week, ranking it #${product.rank} among Rising searches with a matching Amazon product.`;
+    const definitions = [
+      [/rechargeable laptop battery/i, "A rechargeable laptop battery is a portable power bank that can charge a laptop away from an outlet."],
+      [/electric shock gloves/i, "Electric shock gloves are wearable devices designed to deliver an electric charge."],
+      [/alani potion pack/i, "Alani Nu’s Potion Pack is a limited variety pack of flavored energy drinks."],
+      [/madden\s*(?:nfl\s*)?27/i, "Madden NFL 27 is EA Sports’ current American-football video game."],
+      [/\bmacbook\b/i, "A MacBook is a laptop computer made by Apple."],
+      [/switch\s*2/i, "Nintendo Switch 2 is Nintendo’s current hybrid game console."],
+    ];
+    const identity = definitions.find(([pattern]) => pattern.test(product.query))?.[1]
+      ?? conciseSentences(`The linked Amazon product is ${product.title}`, 180);
     return {
       rank: index + 1,
       title,
       subtitle: "Product · Amazon match",
-      description: context?.headline ? `${ensureSentence(context.headline)} ${trendReason}` : trendReason,
+      description: recentDescription(identity, context?.headline, current, {
+        preferExisting: current?.evidence?.some((entry) => entry.url === context?.link),
+      }),
       image: current?.image ?? `/culture/product-${slugify(title)}.webp`,
       imageSource: product.image,
       alt: current?.alt ?? `${title} product listing image`,
@@ -1398,9 +1534,21 @@ async function googleTrendingNews() {
     .slice(0, 10);
   if (filtered.length < 6) throw new Error(`Only ${filtered.length} non-person, non-sports news topics remained`);
   return mapConcurrent(filtered, 4, async (row) => {
-    const [context, topicRepresentative] = await Promise.all([
-      googleNewsContext(row.title, 14).catch(() => null),
+    const context = await googleNewsContext(row.title, 14).catch(() => null);
+    const summaryQuery = /have i been flocked/i.test(row.title)
+      ? "Flock Safety"
+      : /\bGTA\s*6\b/i.test(row.title)
+        ? "Grand Theft Auto VI"
+        : /^D23$/i.test(row.title)
+          ? "D23 Disney"
+          : /^(?:Frozen|Coco)\s*\d+$/i.test(row.title)
+            ? `${row.title.replace(/\s*\d+$/, "")} franchise`
+            : /^Supreme Court$/i.test(row.title)
+              ? "Supreme Court of the United States"
+              : context?.headline?.match(/\bHurricane\s+[A-Z][a-z]+\b/)?.[0] ?? null;
+    const [topicRepresentative, topicSummary] = await Promise.all([
       wikipediaRepresentativeImage(row.title).catch(() => null),
+      summaryQuery ? wikipediaTopicSummary(summaryQuery).catch(() => null) : null,
     ]);
     const contextImageQuery = context?.headline && /license plate/i.test(context.headline)
       ? "automatic license plate recognition"
@@ -1421,8 +1569,26 @@ async function googleTrendingNews() {
       imageSource: representative?.imageSource,
       imagePageUrl: representative?.pageUrl,
       imageTitle: representative?.title,
+      topicSummary: topicSummary?.extract,
+      topicPageUrl: topicSummary?.pageUrl,
     };
   });
+}
+
+function newsDescription(topic, title, existing) {
+  if (/have i been flocked/i.test(title)) {
+    return "Have I Been Flocked is a public-records search site that lets people check whether their license plate appears in released Flock Safety logs. Flock Safety is a surveillance technology company facing scrutiny over its automated license-plate network and documented misuse.";
+  }
+  const previous = reusableDescription(existing);
+  if (previous && existing.evidence?.some((entry) => entry.url === topic.link)) return previous;
+  const definition = topic.topicSummary && normalize(topic.topicSummary).includes(normalize(title).split(" ")[0])
+    ? conciseSentences(topic.topicSummary, 220)
+    : "";
+  const event = factualHeadline(topic.headline);
+  if (definition && event && !normalize(definition).includes(normalize(event).slice(0, 60))) {
+    return conciseSentences(`${definition} ${event}`, 360);
+  }
+  return event || definition || previous || ensureSentence(title);
 }
 
 function updateNews(brief, topics) {
@@ -1436,13 +1602,11 @@ function updateNews(brief, topics) {
     const current = currentByTitle.get(normalize(title));
     const trendUrl = googleTrendsExploreUrl([topic.title], "now 7-d");
     const published = publicationDateLabel(topic.publishedAt);
-    const eventSummary = ensureSentence(topic.headline);
-    const relevance = `The topic registered ${topic.volume} U.S. Google searches in the current seven-day source window, placing it #${index + 1} on this news leaderboard.`;
     return {
       rank: index + 1,
       title,
       subtitle: published ? `News · ${published}` : "News",
-      description: `${eventSummary} ${relevance}`,
+      description: newsDescription(topic, title, current),
       image: current?.image ?? `/culture/news-${slugify(title)}.webp`,
       imageSource: topic.imageSource,
       alt: topic.imageTitle ? `${topic.imageTitle}, representing ${title}` : `Representative image for ${title}`,
@@ -1452,6 +1616,7 @@ function updateNews(brief, topics) {
       evidence: [
         { source: "Google Trending Now", url: trendUrl },
         { source: `${topic.newsSource} via Google News`, url: topic.link },
+        ...(topic.topicPageUrl ? [{ source: "Wikipedia topic context", url: topic.topicPageUrl }] : []),
         ...(topic.imagePageUrl ? [{ source: "Wikimedia image context", url: topic.imagePageUrl }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],

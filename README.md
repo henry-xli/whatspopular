@@ -46,11 +46,15 @@ last validated snapshot.
 - News uses U.S. Google Trending Now over seven days, excludes people and
   sports, and orders the remainder by Google’s displayed search volume.
 
-People, Movies, Music, and Products add a matching recent Google News headline
-when one is available so descriptions explain the current attention without
-changing rank. News entries use the selected article’s publication date and a
-topic-matched Wikimedia image; if no relevant reusable image exists, the image
-pipeline creates a local title card instead of accepting an unrelated result.
+Descriptions do not repeat the ranking metric shown on each card. People and
+products combine a plain-language identity with neutral recent coverage; movies
+use a short genre and plot premise; music uses release context plus a factual
+recent event when available; and news defines unfamiliar subjects before
+summarizing the current event. Question-style, editorial, and personality-led
+headlines are rejected. News entries use the selected article’s publication
+date and a topic-matched Wikimedia image; if no relevant reusable image exists,
+the image pipeline creates a local title card instead of accepting an unrelated
+result.
 
 Every entry has evidence from at least two distinct approved source hosts.
 `scripts/cache-images.mjs` validates the snapshot, downloads only missing or
