@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete month · other boards: rolling",
-  "generatedAt": "2026-08-16T10:42:45.854Z",
+  "generatedAt": "2026-08-17T10:49:41.243Z",
   "summary": "A five-minute, two-source briefing on the jokes, language, people, screens, and songs shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,000,278"
+            "value": "1,000,985"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,278"
+            "value": "114,360"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,594"
+            "value": "99,732"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,400"
+            "value": "76,467"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,516"
+            "value": "55,546"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,826"
+            "value": "46,870"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,527"
+            "value": "43,536"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,306"
+            "value": "27,336"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,437"
+            "value": "18,492"
           },
           "evidence": [
             {
@@ -1107,9 +1107,36 @@
       "items": [
         {
           "rank": 1,
+          "title": "Choosin' Texas",
+          "subtitle": "Ella Langley",
+          "description": "Choosin' Texas is #12 in Spotify's current global playlist and #1 on the current Billboard Hot 100.",
+          "image": "/culture/song-choosin-texas-ella-langley.webp",
+          "alt": "Choosin' Texas artwork by Ella Langley",
+          "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#1"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
+            }
+          ],
+          "accent": "#ffc857",
+          "spotifyId": "7scFxt9VhL4FJwuPSfRlfN",
+          "spotifyRank": 12
+        },
+        {
+          "rank": 2,
           "title": "hate that i made you love me",
           "subtitle": "Ariana Grande",
-          "description": "hate that i made you love me is #4 in Spotify's current global playlist and #2 on the current Billboard Hot 100.",
+          "description": "hate that i made you love me is #7 in Spotify's current global playlist and #2 on the current Billboard Hot 100.",
           "image": "/culture/song-hate-love.webp",
           "alt": "hate that i made you love me artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/3iy2QuCtCzpWnR6tia39AB",
@@ -1128,36 +1155,9 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             }
           ],
-          "accent": "#ffc857",
-          "spotifyId": "3iy2QuCtCzpWnR6tia39AB",
-          "spotifyRank": 4
-        },
-        {
-          "rank": 2,
-          "title": "petal",
-          "subtitle": "Ariana Grande",
-          "description": "petal is #14 in Spotify's current global playlist and #4 on the current Billboard Hot 100.",
-          "image": "/culture/song-petal-ariana-grande.webp",
-          "alt": "petal artwork by Ariana Grande",
-          "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
-          "source": "Spotify",
-          "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#4"
-          },
-          "evidence": [
-            {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF"
-            },
-            {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
-            }
-          ],
           "accent": "#9b8cff",
-          "spotifyId": "70pVCVMGjmIWPbWXDwf11e",
-          "spotifyRank": 14
+          "spotifyId": "3iy2QuCtCzpWnR6tia39AB",
+          "spotifyRank": 7
         },
         {
           "rank": 3,
@@ -1190,7 +1190,7 @@
           "rank": 4,
           "title": "Earrings",
           "subtitle": "Malcolm Todd",
-          "description": "Earrings is #6 in Spotify's current global playlist and #28 on the current Billboard Hot 100.",
+          "description": "Earrings is #5 in Spotify's current global playlist and #28 on the current Billboard Hot 100.",
           "image": "/culture/song-earrings-malcolm-todd.webp",
           "alt": "Earrings artwork by Malcolm Todd",
           "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
@@ -1211,13 +1211,13 @@
           ],
           "accent": "#5ab0ff",
           "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ",
-          "spotifyRank": 6
+          "spotifyRank": 5
         },
         {
           "rank": 5,
           "title": "Babydoll",
           "subtitle": "Dominic Fike",
-          "description": "Babydoll is #9 in Spotify's current global playlist and #29 on the current Billboard Hot 100.",
+          "description": "Babydoll is #10 in Spotify's current global playlist and #29 on the current Billboard Hot 100.",
           "image": "/culture/song-babydoll-dominic-fike.webp",
           "alt": "Babydoll artwork by Dominic Fike",
           "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
@@ -1238,7 +1238,7 @@
           ],
           "accent": "#ff6b57",
           "spotifyId": "7yNf9YjeO5JXUE3JEBgnYc",
-          "spotifyRank": 9
+          "spotifyRank": 10
         }
       ],
       "moreItems": [
@@ -1246,7 +1246,7 @@
           "rank": 6,
           "title": "the cure",
           "subtitle": "Olivia Rodrigo",
-          "description": "the cure is #13 in Spotify's current global playlist and #34 on the current Billboard Hot 100.",
+          "description": "the cure is #14 in Spotify's current global playlist and #34 on the current Billboard Hot 100.",
           "image": "/culture/song-the-cure-olivia-rodrigo.webp",
           "alt": "the cure artwork by Olivia Rodrigo",
           "url": "https://open.spotify.com/track/55pBIZO1cqoldeqpp5WR7H",
@@ -1267,13 +1267,13 @@
           ],
           "accent": "#ffc857",
           "spotifyId": "55pBIZO1cqoldeqpp5WR7H",
-          "spotifyRank": 13
+          "spotifyRank": 14
         },
         {
           "rank": 7,
           "title": "Animal",
           "subtitle": "KATSEYE",
-          "description": "Animal is #5 in Spotify's current global playlist and #35 on the current Billboard Hot 100.",
+          "description": "Animal is #6 in Spotify's current global playlist and #35 on the current Billboard Hot 100.",
           "image": "/culture/song-animal-katseye.webp",
           "alt": "Animal artwork by KATSEYE",
           "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
@@ -1294,7 +1294,7 @@
           ],
           "accent": "#9b8cff",
           "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX",
-          "spotifyRank": 5
+          "spotifyRank": 6
         },
         {
           "rank": 8,
@@ -1327,7 +1327,7 @@
           "rank": 9,
           "title": "Self Aware",
           "subtitle": "Temper City",
-          "description": "Self Aware is #8 in Spotify's current global playlist and #47 on the current Billboard Hot 100.",
+          "description": "Self Aware is #9 in Spotify's current global playlist and #47 on the current Billboard Hot 100.",
           "image": "/culture/song-self-aware-temper-city.webp",
           "alt": "Self Aware artwork by Temper City",
           "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
@@ -1348,13 +1348,13 @@
           ],
           "accent": "#5ab0ff",
           "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT",
-          "spotifyRank": 8
+          "spotifyRank": 9
         },
         {
           "rank": 10,
           "title": "SWIM",
           "subtitle": "BTS",
-          "description": "SWIM is #10 in Spotify's current global playlist and #91 on the current Billboard Hot 100.",
+          "description": "SWIM is #11 in Spotify's current global playlist and #91 on the current Billboard Hot 100.",
           "image": "/culture/song-swim-bts.webp",
           "alt": "SWIM artwork by BTS",
           "url": "https://open.spotify.com/track/68lbSrXDORS51pmyjZv712",
@@ -1375,7 +1375,7 @@
           ],
           "accent": "#ff6b57",
           "spotifyId": "68lbSrXDORS51pmyjZv712",
-          "spotifyRank": 10
+          "spotifyRank": 11
         }
       ],
       "moreLabel": "Show ranks 6–10"
@@ -1385,54 +1385,54 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:46.076Z"
+      "checkedAt": "2026-08-17T10:49:41.667Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:47.022Z"
+      "checkedAt": "2026-08-17T10:49:42.170Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:46.569Z"
+      "checkedAt": "2026-08-17T10:49:42.096Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:46.758Z"
+      "checkedAt": "2026-08-17T10:49:42.048Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:46.461Z"
+      "checkedAt": "2026-08-17T10:49:41.874Z"
     },
     {
       "name": "Google Trends creators",
       "ok": false,
-      "checkedAt": "2026-08-16T10:42:46.351Z",
+      "checkedAt": "2026-08-17T10:49:41.990Z",
       "error": "429 from trends.google.com"
     },
     {
       "name": "Wikipedia creator pageviews",
       "ok": false,
-      "checkedAt": "2026-08-16T10:42:46.445Z",
+      "checkedAt": "2026-08-17T10:49:43.752Z",
       "error": "404 from wikimedia.org"
     },
     {
       "name": "IMDb / Box Office Mojo",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:50.720Z"
+      "checkedAt": "2026-08-17T10:49:44.931Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:46.344Z"
+      "checkedAt": "2026-08-17T10:49:41.880Z"
     },
     {
       "name": "Spotify Top 50 Global",
       "ok": true,
-      "checkedAt": "2026-08-16T10:42:46.611Z"
+      "checkedAt": "2026-08-17T10:49:42.113Z"
     }
   ]
 }
