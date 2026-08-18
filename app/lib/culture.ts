@@ -24,6 +24,7 @@ export type CultureItem = {
   }>;
   accent: string;
   rating?: string;
+  ratingLabel?: string;
   spotifyId?: string;
   spotifyRank?: number;
   category?: string;
@@ -61,6 +62,7 @@ const allowedLinkHosts = new Set([
   "knowyourmeme.com",
   "news.google.com",
   "open.spotify.com",
+  "openlibrary.org",
   "trends.google.com",
   "trending.knowyourmeme.com",
   "wikimedia.org",
@@ -135,7 +137,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   if (typeof item.accent !== "string" || !/^#[0-9a-f]{6}$/i.test(item.accent)) {
     throw new Error(`${item.title} has an invalid accent color`);
   }
-  externalUrl(item.url, item.title, sectionId === "news");
+  externalUrl(item.url, item.title, sectionId === "news" || sectionId === "products");
   if (!Array.isArray(item.evidence) || item.evidence.length < 2 || item.evidence.length > 6) {
     throw new Error(`${item.title} must have two to six sources of evidence`);
   }
@@ -146,7 +148,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
     const evidence = value as Record<string, unknown>;
     assertText(evidence.source, `${item.title} evidence label`, 120);
     evidenceSources.add(evidence.source.toLocaleLowerCase("en-US"));
-    evidenceHosts.add(externalUrl(evidence.url, `${item.title} evidence`, sectionId === "news").hostname);
+    evidenceHosts.add(externalUrl(evidence.url, `${item.title} evidence`, sectionId === "news" || sectionId === "products").hostname);
   }
   if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
     throw new Error(`${item.title} evidence must come from distinct sources`);
@@ -158,6 +160,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
     assertText(metric.value, `${item.title} metric value`, 60);
   }
   if (item.rating !== undefined) assertText(item.rating, `${item.title} rating`, 20);
+  if (item.ratingLabel !== undefined) assertText(item.ratingLabel, `${item.title} rating source`, 40);
   if (item.category !== undefined) assertText(item.category, `${item.title} category`, 40);
   if (item.spotifyId !== undefined && (typeof item.spotifyId !== "string" || !/^[A-Za-z0-9]{22}$/.test(item.spotifyId))) {
     throw new Error(`${item.title} has an invalid Spotify track ID`);
@@ -199,8 +202,9 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     for (const field of ["eyebrow", "title", "description"] as const) {
       assertText(section[field], `${expectedId} ${field}`, field === "description" ? 1000 : 180);
     }
-    if (!Array.isArray(section.sources) || section.sources.length < 2 || section.sources.length > 6) {
-      throw new Error(`${section.title} must list two to six sources`);
+    const maxSources = expectedId === "products" ? 10 : 6;
+    if (!Array.isArray(section.sources) || section.sources.length < 2 || section.sources.length > maxSources) {
+      throw new Error(`${section.title} must list two to ${maxSources} sources`);
     }
     for (const value of section.sources) {
       if (!value || typeof value !== "object") throw new Error(`${section.title} has an invalid source`);
@@ -268,10 +272,11 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
   }
 
   const products = items("products");
-  const productRanks = products.map((item) => Number(item.metric?.value.match(/^#(\d+)/)?.[1]));
-  if (products.some((item) => item.metric?.label !== "Google Shopping rising rank")
-    || productRanks.some((rank, index) => !Number.isInteger(rank) || (index > 0 && rank <= productRanks[index - 1]))) {
-    throw new Error("Products must preserve Google Shopping rising-query order");
+  if (products.some((item) => item.metric?.label !== "Independent viral sources"
+      || !/^\d+ sources?$/.test(item.metric?.value ?? "")
+      || Number(item.metric?.value.match(/^\d+/)?.[0]) < 2
+      || !/Viral product/i.test(item.subtitle ?? ""))) {
+    throw new Error("Products must have at least two recent independent viral sources");
   }
 
   const volume = (value: string | undefined) => {

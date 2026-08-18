@@ -50,7 +50,7 @@ test("renders the complete finite culture briefing", async () => {
     && (index === 0 || position > boardPositions[index - 1])));
   assert.match(html, /Know Your Meme page views/);
   assert.match(html, /Wikipedia views · [A-Z][a-z]+/);
-  assert.match(html, /Google Shopping rising rank/);
+  assert.match(html, /Independent viral sources/);
   assert.match(html, /Google search volume/);
   assert.match(html, /Billboard Hot 100/);
   assert.match(html, /class="source-list"[^>]*>[\s\S]*?<a /);
@@ -223,6 +223,10 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <p>The move affects stores nationwide and has prompted new guidance for consumers.</p></article>
   `);
   assert.match(intro, /recall after officials found a contamination risk/);
+  assert.doesNotMatch(extractArticleIntro(`
+    <article><p>See more of our coverage and sign up for our newsletter to receive updates.</p>
+    <p>Officials opened an investigation after the incident was reported at several locations.</p></article>
+  `), /See more of our coverage/i);
   assert.throws(() => publicHttpsUrl("http://example.com/image.jpg"), /non-public/);
   assert.throws(() => publicHttpsUrl("https://127.0.0.1/image.jpg"), /non-public/);
 });
@@ -316,6 +320,8 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allBooks.every((item) => /^Goodreads · /.test(item.subtitle)));
   assert.ok(allBooks.every((item) => new URL(item.url).hostname === "www.goodreads.com"));
   assert.ok(allBooks.every((item) => new URL(item.imageSource).hostname === "i.gr-assets.com"));
+  assert.ok(allBooks.every((item) => item.ratingLabel === "Goodreads" && /^\d(?:\.\d{2})$/.test(item.rating)));
+  assert.ok(allBooks.every((item) => !/^\w+(?:\s+\w+)* is a book by /i.test(item.description)));
   assert.ok(allBooks.every((item) => !/\b(?:may refer to|was a rock band|television sitcom|American actor|any disturbed state)\b/i.test(item.description)));
   const bookReaders = allBooks.map((item) => Number(item.metric.value.replaceAll(",", "")));
   assert.deepEqual(bookReaders, [...bookReaders].sort((left, right) => right - left));
@@ -330,10 +336,10 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allSongs.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
   assert.ok(allSongs.every((item) => !/Billboard Hot 100|Spotify’s Today’s Top Hits|\b#\d+\b/i.test(item.description)));
   const products = brief.sections.find((section) => section.id === "products");
-  const productRanks = [...products.items, ...products.moreItems].map((item) => Number(item.metric.value.match(/^#(\d+)/)[1]));
-  assert.deepEqual(productRanks, [...productRanks].sort((left, right) => left - right));
+  const productSources = [...products.items, ...products.moreItems].map((item) => Number(item.metric.value.match(/^(\d+) sources?$/)[1]));
+  assert.ok(productSources.every((count) => count >= 2));
   assert.ok([...products.items, ...products.moreItems].every((item) => new URL(item.url).hostname === "www.amazon.com"));
-  assert.ok([...products.items, ...products.moreItems].every((item) => !/Google Shopping|ranking it #|rose \+\d/i.test(item.description)));
+  assert.ok([...products.items, ...products.moreItems].every((item) => !/Google Shopping|ranking it #|rose \+\d|TikTok/i.test(item.description)));
   const news = brief.sections.find((section) => section.id === "news");
   const volume = (value) => {
     const match = value.match(/([\d.]+)\s*([KMB])?\+/i);

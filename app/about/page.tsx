@@ -61,9 +61,9 @@ const methods = [
   },
   {
     board: "Books",
-    sources: "Goodreads’ U.S. most-read books page for the latest month, plus Wikipedia or current Google News coverage for context.",
-    rule: "Keep the first ten Goodreads entries in the published order. The site uses that list’s monthly reader count as the metric and never blends in a separate score.",
-    metric: "Goodreads monthly readers.",
+    sources: "Goodreads’ U.S. most-read books page and each linked Goodreads book page, with Open Library or Wikipedia as a plot-premise fallback and current Google News coverage for context.",
+    rule: "Keep the first ten Goodreads entries in the published order. Use each book page’s average star rating and plot-premise copy; monthly readers remain the ranking metric and are never blended with another score.",
+    metric: "Goodreads monthly readers and average star rating.",
   },
   {
     board: "Music",
@@ -73,9 +73,9 @@ const methods = [
   },
   {
     board: "Products",
-    sources: "Google Shopping’s U.S. Rising queries for the past seven days, Amazon search results, and matching recent Google News coverage when available.",
-    rule: "Preserve Google’s Rising order after removing people, media, brand-only terms, duplicates, and queries without a relevant Amazon product listing. Link the selected Amazon listing directly; recent coverage only explains the spike.",
-    metric: "Google Shopping Rising-query rank and growth.",
+    sources: "Amazon Movers & Shakers across six retail categories, Amazon listing search, and recent Google News coverage about viral products.",
+    rule: "Require explicit recent viral-demand coverage plus an Amazon match. Combine social evidence, Amazon sales-rank movement when available, freshness, independent confirmations, and scarcity; retail movement alone never qualifies and stale or controversy-only coverage is downranked.",
+    metric: "Independent recent viral-source count; Amazon movement is a ranking input when available.",
   },
   {
     board: "News",
@@ -150,7 +150,7 @@ export default function AboutPage() {
           <p>
             If a required source is down, rate-limited, or produces invalid
             data, the updater publishes nothing and visitors keep the previous
-            pre-rendered page. If Google Shopping alone is unavailable, its
+            pre-rendered page. If product discovery alone is unavailable, the
             last validated Products board is retained while the other boards
             may refresh. There is no runtime database query, personalized feed,
             or request-time scraper.

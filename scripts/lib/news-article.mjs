@@ -230,7 +230,7 @@ export async function resolveGoogleNewsArticle(rawUrl) {
   return publicHttpsUrl(rpcResult(response.buffer.toString("utf8")), "publisher article").href;
 }
 
-export async function linkedArticleMetadata(articleUrl) {
+export async function linkedArticleMetadata(articleUrl, { allowMissingImage = false } = {}) {
   const initialUrl = publicHttpsUrl(articleUrl, "publisher article");
   const page = await fetchBytes(initialUrl.href, {
     isAllowedHost: (hostname) => relatedArticleHost(hostname, initialUrl.hostname),
@@ -250,7 +250,13 @@ export async function linkedArticleMetadata(articleUrl) {
     throw new Error(`Unexpected publisher content type ${page.contentType}`);
   }
   const html = page.buffer.toString("utf8");
-  const metadata = extractArticleImage(html, page.finalUrl);
-  await assertPublicHostname(new URL(metadata.imageSource).hostname);
-  return { url: page.finalUrl, intro: extractArticleIntro(html), ...metadata };
+  const intro = extractArticleIntro(html);
+  try {
+    const metadata = extractArticleImage(html, page.finalUrl);
+    await assertPublicHostname(new URL(metadata.imageSource).hostname);
+    return { url: page.finalUrl, intro, ...metadata };
+  } catch (error) {
+    if (!allowMissingImage) throw error;
+    return { url: page.finalUrl, intro };
+  }
 }

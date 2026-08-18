@@ -63,7 +63,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                         <span className="expanded-rating">
                           <StarIcon />
                           <strong>{item.rating}</strong>
-                          <small>{item.rating === "New" ? "just opened" : "IMDb"}</small>
+                          <small>{item.ratingLabel ?? (item.rating === "New" ? "just opened" : "IMDb")}</small>
                         </span>
                       ) : null}
                       {item.metric ? (

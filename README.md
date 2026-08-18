@@ -39,12 +39,17 @@ last validated snapshot.
 - Movies are movie pages in the same previous-month Topviews list, ordered by
   page views. IMDb-linked ratings are context only.
 - Books preserve the first ten entries on Goodreads’ U.S. most-read-books page
-  for the latest month, ordered by the page’s monthly reader count.
+  for the latest month, ordered by the page’s monthly reader count. Each card
+  also uses the linked Goodreads book page for its average star rating and plot
+  premise, with Open Library or Wikipedia as a fallback when Goodreads blocks a
+  detail page.
 - Music selects the first 10 Spotify Today’s Top Hits tracks that also appear on
   the Billboard Hot 100, then orders that same set by Billboard position.
-- Products preserve the order of U.S. Google Shopping Rising queries from the
-  past seven days after removing people, media, brand-only terms, duplicates,
-  and anything without a relevant Amazon listing.
+- Products start with Amazon Movers & Shakers across six retail categories and
+  recent Google News coverage about viral products. Retail movement alone is
+  not enough: a product needs explicit recent demand/social evidence and an
+  Amazon match. Ranking combines social signal, Amazon velocity when present,
+  freshness, independent confirmations, and scarcity/restock language.
 - News uses U.S. Google Trending Now over seven days, excludes people and
   sports, and orders the remainder by Google’s displayed search volume.
 
@@ -69,8 +74,8 @@ The YouTube Data API is used for Lessons in Meme Culture when
 `YOUTUBE_API_KEY` is configured; otherwise the updater reads YouTube’s public
 channel response. `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` enable the
 official Spotify attempt, with Spotify’s official playlist embed as the
-read-only fallback. `PRODUCT_TRENDS_SNAPSHOT` is an optional JSON recovery input
-for Google Shopping when its public page rate-limits automation.
+read-only fallback. `PRODUCT_MOVERS_SNAPSHOT` is an optional JSON recovery input
+for Amazon Movers & Shakers when its public page rate-limits automation.
 
 ## Architecture and maintenance
 

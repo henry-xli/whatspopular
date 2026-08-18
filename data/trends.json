@@ -1,8 +1,8 @@
 {
   "edition": "August 2026",
   "status": "Checked today",
-  "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products and News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-17T21:40:08.849Z",
+  "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
+  "generatedAt": "2026-08-18T07:01:51.900Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,304"
+            "value": "1,001,578"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,434"
+            "value": "114,461"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,806"
+            "value": "99,879"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,499"
+            "value": "76,547"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,554"
+            "value": "55,569"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,899"
+            "value": "46,916"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,542"
+            "value": "43,546"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,354"
+            "value": "27,367"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,506"
+            "value": "18,521"
           },
           "evidence": [
             {
@@ -545,7 +545,7 @@
           "rank": 1,
           "title": "Erling Haaland",
           "subtitle": "Sports",
-          "description": "Erling Haaland is a Norwegian footballer. The Erling Haaland boom: Norway's 'pop-up economy' during the World Cup revealed in Visa data.",
+          "description": "Erling Haaland is a Norwegian footballer. When Erling Haaland is expected to return to Man City training after starring at World Cup.",
           "image": "/culture/person-erling-haaland.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Erling Haaland",
@@ -565,8 +565,8 @@
               "url": "https://en.wikipedia.org/wiki/Erling_Haaland"
             },
             {
-              "source": "Fortune via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOb1k4clYxbjJQa2l0U3ZVNGZGUnQtaUw3U3diT0p2dnJlaDdTdGhnWGdyYjd2REx0SjVieHZoRm1VdWxwcHhadllJTmw0YVdZZXVRY0R6aEg2SFRmaDJYc21hTkI0SzFvSDR4ZkJFYWdXWm00empLVFdwQktvTUI1Q2V0SlJ3LUZvekNz?oc=5"
+              "source": "sports.yahoo.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQQzY4WC0wdncwbVRjbjducENMTVMxdFlyLXo0TTBSM1ZFaDZ4WUpCcFQya1J0cWFjMVBRajQyck43bnNCVGg5bE9XOGlHUFR2eFlvVk1HRDhpS2dybXUwTjhoczliTktiSXBReHJ1RHhYR0ROUEwydVFxTzhEYmxSX0R2UFF6VGpoa0Rz?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -661,7 +661,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is a Colombian singer-songwriter. Shakira’s 20-Year-Old Song Debuts And Continues Her Massive 2026.",
+          "description": "Shakira is a Colombian singer-songwriter. Shakira makes surprise visit to earthquake-damaged Colombia and commits to building new schools.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -681,8 +681,8 @@
               "url": "https://en.wikipedia.org/wiki/Shakira"
             },
             {
-              "source": "Forbes via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNUW42YmFZaGNCd2J4dHYyRzVEVVhwdEQ5ZWpmWFJKUnhEcGl6UE55b3lKN0puWktuN3JSd3EtZGdKYmktRHRGMkxNUERkM2NPRlhvTGtRWFVtZTZXT0RSSjd3MFdybTNfaS1DREdycVNJdTFEUVg3Y2JUUHVIUXN3cXJYLXNxY3pHN0hGdVdLRndOLWZfM3I3ckFwTEtqdUd5QUJHWmpKNnI2N2hsNC1BU0lMbDJUNG9F?oc=5"
+              "source": "ABC News - Breaking News, Latest News and Videos via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSzhRV3BxMk4yWDNuSzVBUWZpRzNrN2xYN3UzeHlMLW5TR3h2aGtTU0gxUGg2Zk55UVVsXzRkaFJxM0NzdHVtTFVOZnE0b1hINFR5TklJdFdGU2k3TWVuMmV3Y0hCSDNEeVlNbl9ZbHF0eHNDWUw0NUkwVTFNWHJpNkhiaTNUYVdyckYyRjJ4RFlxMlpiWDVCdXJnMmpjeFRGN0hYT0JzVU9Xc1d1VXo1UzVnMNIBuAFBVV95cUxNTEhYZUNKXzZHTm55aFFQV2pYRWY5Zk1OeE1TZWtzSnBRblFZcU53bWJRZWNpdlF6bW1rNmRWbmo2dlZQR0owc0g5QURqYUpBaHBVTGdCcjk1MnZXSlJYM1NzRmxoZEV1S2VhME1XRzJuakdaUlRXWk9CZlJicl9lUFE5VEtWUERrR2s3c3ZxNV9WcWFqRG5HU2N3ZTB1TGx3Rklwbm5CWmoxNkt3UFE4S3ZyYWNPNWww?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -756,7 +756,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeff Bezos is an American business magnate. Liverpool owners sell stake to Jeff Bezos-backed consortium.",
+          "description": "Jeff Bezos is an American business magnate. Jeff Bezos just filed to sell $4 billion in Amazon.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -776,8 +776,8 @@
               "url": "https://en.wikipedia.org/wiki/Jeff_Bezos"
             },
             {
-              "source": "ESPN via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNR2FyMzZEVFEtVk9WVVljYmxGUm54Z2w3YjY0NjlPclNuazZkTS1mRkozalF1VUNMX1lWSGFVUm9Za3RRLUVHVC10SHp6c0J0Yjk3dm5WX1FsS0J3ZEI5OTZjbnk2VUlnbG9KUmI1RGk0UTdhTWU4S2ZtYzB0ZDJhM1RsbklVM2R6OXFNS1NJUzJVR0U3VGZDejZGbE9mNmx0N0Y1UDh5TExfTHN3NERzZUkyOA?oc=5"
+              "source": "cnbc.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPOE9XY19fa1dCUDZsbTlDOXF1MFI3OVpwTkNPbHc1RThHRWowTU5FTWh2cm54ZUpFR21rR3VJckVBMi1vd1k1T0RPOTh3SFZRcncxVFZiQnZqc2lybEpZX0M3T3k3V09SUUc0dVdzRU5GVHdlNUZ1Zkd3Zkc4UlFDeXNFWUlHSDZYRzR2OFZxdE4td1A5VmVYSVFtZkNYdklkTXVZX1YxMTQxUk13TGfSAbMBQVVfeXFMT2VDSmhpTDBleWdWSkluc2c0X0loSFFGRm9GZE5QT1VDbFdhZ2F6NGFPOE4zcXZicEdtc1JiMVlIakxLLXVmSi1pQ3AzMVhWS3Q2VWlxOGVWUTVKVkpqTV9PY1lpTWVRRTZ1dUQ0V0dWU3hoZEUyU0NjZ05xekt0UDVlcnRGUGcyX0lVSmdiczczSXVjcXhxWWd0cGRYUi1wNnZRa25NcHpEYUxERlRxOXhSaEk?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -787,7 +787,7 @@
           "rank": 9,
           "title": "Andrew Tate",
           "subtitle": "Business",
-          "description": "Andrew Tate is an American-British businessman, former kickboxer, dating coach and manosphere influencer. Arrest Timeline: Extradition Hearing Monday.",
+          "description": "Andrew Tate is an American-British businessman, former kickboxer, dating coach and manosphere influencer. Andrew and Tristan Tate arrested in Miami on rape and sex trafficking charges.",
           "image": "/culture/person-andrew-tate.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Andrew Tate",
@@ -807,8 +807,8 @@
               "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
             },
             {
-              "source": "Forbes via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQQm5iNmd0VjdhaHpINE92ZmJKMEhGUWFIaFk0aVhzd0RFSDlGVzR3bXYtaXBJdjRaeGJ0NnNjOEtCRlpCUzdfdGNmbnFKeGNZU1lxNzRySmVMOURoN3kwVC1hU3N1eF9iRmNDTU92bUlienY4UEN2YUM5WnNwVklyT1lPNlhZb3FSSV9XRjM4S2xTeGV1RnRfMXAwdnV2V05LNXZtb3VlbUN4TW5WTHRNRTRKNXFXbW5sM05tbE0zOXR6Zw?oc=5"
+              "source": "PBS via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPTkRoYXNlSXR6Qk14QzNwQkd2NXJGUGUxQWdYQk8xc3pQLXV0aDdYemZmVWRVRTFqTTVUSnhVTEtqQld6M09xd1F1STg2WVpJYWlCRmw2MnVnbnZPU2tSS1AyVVBkbWxJYUtwWHVVMXhUUHNic09GT05FVXNmOENrSkJEQjFVdVR4TkoxT2wwX3M4MzVmSWhWVFRHQktKc1RYQXRWb3ZkMmJDOV9wSFZkZXRLZUlhamZYZ0U2MkphNTRwcHJnV21ZOHprMNIB0AFBVV95cUxNemNySVlXNFc3RzZvSktIbEwyUHFnbEtKUVlkOE5yVWRjald6ak5ENmJ6ZHpVUDA0V1ZVWjY2OFN2TUQ3RGE4LVVoYmJqbDZTbGJHbHphc0hYZTJuY0FLQTZkTFNYLUFYeGhJWEwxRm9TRDJaQ0VndkxMeHg0YldEaG9tQV9Fc2ZnUnE4TV85RHZmWWRXQ1UxRFVWckdwZVRxOGxXQ0ViYms3bnotZGYxNzZyMlRpdWcweDQ5RjhJQ0FWMFdfUkpCQ1JlQ0dKdmwz?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -818,7 +818,7 @@
           "rank": 10,
           "title": "Amelia Dimoldenberg",
           "subtitle": "Media",
-          "description": "Amelia Dimoldenberg is an English journalist and comedian. Amelia Dimoldenberg’s F1 Series ‘Passenger Princess’ Returning for Season 2 This Month.",
+          "description": "Amelia Dimoldenberg is an English journalist and comedian. The A-Lister Amelia Dimoldenberg Won't Interview Again.",
           "image": "/culture/person-amelia-dimoldenberg.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Amelia Dimoldenberg",
@@ -838,8 +838,8 @@
               "url": "https://en.wikipedia.org/wiki/Amelia_Dimoldenberg"
             },
             {
-              "source": "Variety via Google News",
-              "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPWWpxaDlENE51aUxLNVlqS2NQenVUQUZZR3pCYjlsLXZtT1ZaOWhVSGhTX1ViQlJLYWdHYzhuSHoyWTYwUjVvQ3hyOWZNbVBUNFFmU3FKY1JDWTB6d2RINFRaRWs2bkVPOXdieEF0UjZmN3M4MWtucVg4N2tzdkpoaldMeFp3UVQyS0lKWmlOUFhQZ2xDQ1poU3hqRXJwMGNLcWFmQkExdV80Q0lPZ2ZLcXd3?oc=5"
+              "source": "BuzzFeed via Google News",
+              "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQeDRwVHdGWnNkQlNHZ2Z0RkVKZHFVT1BPaE9LWXBHamQ1WG1kX3NYVndNRzFxOUJEckxhd0NTMDQ1X0dCOXlxXzlpdzNJOFk1MTNmMjlubUlUeG9mYXdva1kyVzNpYXJ4Wno1QmJzcGFrRFhKc2pyMWpIY2QtOUVoTWV3UW4zSXN6cVNtNm9uX0IxVFg2bFVZZXo0VQ?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -1191,7 +1191,7 @@
           "rank": 1,
           "title": "Yesteryear",
           "subtitle": "Goodreads · Caro Claire Burke",
-          "description": "Yesteryear is a book by Caro Claire Burke.",
+          "description": "Natalie lives a traditional lifestyle – and her followers are sick with envy. Her charming farmhouse on her working ranch is artfully cluttered, her husband is a handsome cowboy, her homemade sourdough boules are each more beautiful than the last.",
           "image": "/culture/book-yesteryear.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
           "alt": "Cover of Yesteryear by Caro Claire Burke",
@@ -1201,10 +1201,20 @@
             "label": "Goodreads monthly readers",
             "value": "128,619"
           },
+          "rating": "3.90",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/238226942-yesteryear"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL45177696W"
             },
             {
               "source": "Google News book coverage",
@@ -1217,7 +1227,7 @@
           "rank": 2,
           "title": "The Calamity Club",
           "subtitle": "Goodreads · Kathryn Stockett",
-          "description": "The Calamity Club is a historical fiction novel by American author Kathryn Stockett, published by Spiegel & Grau on May 5, 2026. It is Stockett's second novel, appearing seventeen years after her debut The Help (2009). Kathryn Stockett Reflects on 'The Help' Criticism as She Releases New Novel.",
+          "description": "In 1933 Oxford, Mississippi, Prohibition is on the wane, and the Great Depression is tightening its grip. Poor and rich folks alike have fallen on hard times, even as the old social order remains. For women on the margins, the options are few and the price of dignity and self-determination is unbearably high. Kathryn Stockett Reflects on 'The Help' Criticism as She Releases New Novel.",
           "image": "/culture/book-the-calamity-club.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1763049143i/228820257.jpg",
           "alt": "Cover of The Calamity Club by Kathryn Stockett",
@@ -1227,10 +1237,20 @@
             "label": "Goodreads monthly readers",
             "value": "93,277"
           },
+          "rating": "4.62",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/228820257-the-calamity-club"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL45732307W"
             },
             {
               "source": "Wikipedia book context",
@@ -1247,7 +1267,7 @@
           "rank": 3,
           "title": "Theo of Golden",
           "subtitle": "Goodreads · Allen Levi",
-          "description": "Theo of Golden is a novel by American author Allen Levi. It was first self-published in 2023 and later republished by Atria Books, an imprint of Simon & Schuster, in 2025. The novel later appeared on The New York Times Best Seller list.",
+          "description": "One spring morning, a stranger arrives in the small southern city of Golden. No one knows where he has come from…or why… His name is Theo. And he asks a lot more questions than he answers.",
           "image": "/culture/book-theo-of-golden.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761744192i/242376245.jpg",
           "alt": "Cover of Theo of Golden by Allen Levi",
@@ -1257,10 +1277,16 @@
             "label": "Goodreads monthly readers",
             "value": "56,182"
           },
+          "rating": "4.45",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/242376245-theo-of-golden"
             },
             {
               "source": "Wikipedia book context",
@@ -1273,7 +1299,7 @@
           "rank": 4,
           "title": "The Divorce",
           "subtitle": "Goodreads · Freida McFadden",
-          "description": "The Divorce is a book by Freida McFadden.",
+          "description": "What is a happily ever after really worth? Naomi was living the quintessential love story. Boy meets girl. They fall in love, get married, buy a dream house, start a family… Then―he kicks her out, hires the city’s best divorce lawyers, drains their accounts, and takes up with a 20-something.",
           "image": "/culture/book-the-divorce.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783i/244403162.jpg",
           "alt": "Cover of The Divorce by Freida McFadden",
@@ -1283,10 +1309,16 @@
             "label": "Goodreads monthly readers",
             "value": "51,829"
           },
+          "rating": "3.88",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/244403162-the-divorce"
             },
             {
               "source": "Google News book coverage",
@@ -1299,7 +1331,7 @@
           "rank": 5,
           "title": "The Correspondent",
           "subtitle": "Goodreads · Virginia Evans",
-          "description": "The Correspondent is a book by Virginia Evans. 'The Correspondent' Author Virginia Evans Wins 2026 Women's Prize for Fiction.",
+          "description": "“Imagine, the letters one has sent out into the world, the letters received back in turn, are like the pieces of a magnificent puzzle.... Bestselling Author Virginia Evans on Patience in Publishing and the Power of Handwritten Letters.",
           "image": "/culture/book-the-correspondent.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1735235942i/223001257.jpg",
           "alt": "Cover of The Correspondent by Virginia Evans",
@@ -1309,18 +1341,28 @@
             "label": "Goodreads monthly readers",
             "value": "48,325"
           },
+          "rating": "4.44",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
             },
             {
-              "source": "Google News book coverage",
-              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNbEtmZW01RG1xVHdXZnJhcng3aG1xcHE3M2owbTdZUmJXbTJPX3VPb2JBeFhOcEJMVW5lM0NfMHZmQlNqa0lwMmg3VDJKQ3hEcG9wcTh2VUVrOHlyR0RYUXB6bUhKQm1lcFMtbWxhUk16cmJMYmg4a1ZMNklvMHA4VjF1Ym5xWVBWZFpFc2xJQnFrX2NaM0tRRXFjMmJlZkgyLXZxUQ?oc=5"
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/223001257-the-correspondent"
             },
             {
-              "source": "People.com via Google News",
-              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNbEtmZW01RG1xVHdXZnJhcng3aG1xcHE3M2owbTdZUmJXbTJPX3VPb2JBeFhOcEJMVW5lM0NfMHZmQlNqa0lwMmg3VDJKQ3hEcG9wcTh2VUVrOHlyR0RYUXB6bUhKQm1lcFMtbWxhUk16cmJMYmg4a1ZMNklvMHA4VjF1Ym5xWVBWZFpFc2xJQnFrX2NaM0tRRXFjMmJlZkgyLXZxUQ?oc=5"
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL42414694W"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1RaWpQQWZtRnZocjlMYjYySVp6amd4UXZObmtBU3NJV015STdVbHNxSEF4eHpBczg5MngtMElxZ3NvRC1uZWJKUERmbFhXX1hS?oc=5"
+            },
+            {
+              "source": "Garden & Gun via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1RaWpQQWZtRnZocjlMYjYySVp6amd4UXZObmtBU3NJV015STdVbHNxSEF4eHpBczg5MngtMElxZ3NvRC1uZWJKUERmbFhXX1hS?oc=5"
             }
           ],
           "accent": "#ff6b57"
@@ -1331,7 +1373,7 @@
           "rank": 6,
           "title": "Mad Mabel",
           "subtitle": "Goodreads · Sally Hepworth",
-          "description": "Mad Mabel is a book by Sally Hepworth.",
+          "description": "a twist-filled, darkly funny mystery about the two kinds of people no one ever expects to be murderers: little girls and old ladies. Meet Mad Mabel. Elsie Mabel Fitzpatrick is eighty-one years old.",
           "image": "/culture/book-mad-mabel.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775070793i/231127044.jpg",
           "alt": "Cover of Mad Mabel by Sally Hepworth",
@@ -1341,10 +1383,20 @@
             "label": "Goodreads monthly readers",
             "value": "47,032"
           },
+          "rating": "4.37",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/231127044-mad-mabel"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL44477870W"
             },
             {
               "source": "Google News book coverage",
@@ -1357,7 +1409,7 @@
           "rank": 7,
           "title": "Whistler",
           "subtitle": "Goodreads · Ann Patchett",
-          "description": "Whistler is a book by Ann Patchett. Ann Patchett Returns to New York in “Whistler”.",
+          "description": "a moving, luminous novel that reminds us of the sweetness and impermanence of life and the power of connection to defy time. Ann Patchett Returns to New York in “Whistler”.",
           "image": "/culture/book-whistler.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761863582i/242693052.jpg",
           "alt": "Cover of Whistler by Ann Patchett",
@@ -1367,10 +1419,16 @@
             "label": "Goodreads monthly readers",
             "value": "44,631"
           },
+          "rating": "4.38",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/242693052-whistler"
             },
             {
               "source": "Google News book coverage",
@@ -1387,7 +1445,7 @@
           "rank": 8,
           "title": "Dungeon Crawler Carl (Dungeon Crawler Carl, #1)",
           "subtitle": "Goodreads · Matt Dinniman",
-          "description": "Dungeon Crawler Carl is a science fantasy LitRPG book series written by American author Matt Dinniman. Initially self published by Dinniman via online publisher Royal Road, it and its seven sequels were acquired by Ace Books in 2024.",
+          "description": "The apocalypse will be televised! Welcome to the first book in the wildly popular and addictive Dungeon Crawler Carl series—now with bonus material exclusive to this print edition. You know what’s worse than breaking up with your girlfriend? Being stuck with her prize-winning show cat.",
           "image": "/culture/book-dungeon-crawler-carl-dungeon-crawler-carl-1.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1715780755i/211721806.jpg",
           "alt": "Cover of Dungeon Crawler Carl (Dungeon Crawler Carl, #1) by Matt Dinniman",
@@ -1397,10 +1455,20 @@
             "label": "Goodreads monthly readers",
             "value": "43,424"
           },
+          "rating": "4.44",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/211721806-dungeon-crawler-carl"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL24593432W"
             },
             {
               "source": "Wikipedia book context",
@@ -1413,7 +1481,7 @@
           "rank": 9,
           "title": "Our Perfect Storm",
           "subtitle": "Goodreads · Carley Fortune",
-          "description": "Our Perfect Storm is a book by Carley Fortune. Carley Fortune's Reveals How 'Our Perfect Storm' Was Influenced By Laurie & Jo From 'Little Women'.",
+          "description": "Best friends have one week in paradise to fix their friendship or fall apart in this heart-stopping, utterly romantic new novel from the #1 New York Times bestselling author of Every Summer After and One Golden Summer. Frankie and George have been best friends since they were eight years old. Carley Fortune's Reveals How 'Our Perfect Storm' Was Influenced By Laurie & Jo From 'Little Women'.",
           "image": "/culture/book-our-perfect-storm.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756350403i/239703816.jpg",
           "alt": "Cover of Our Perfect Storm by Carley Fortune",
@@ -1423,10 +1491,20 @@
             "label": "Goodreads monthly readers",
             "value": "42,408"
           },
+          "rating": "4.01",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/239703816-our-perfect-storm"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL45398621W"
             },
             {
               "source": "Google News book coverage",
@@ -1443,7 +1521,7 @@
           "rank": 10,
           "title": "Dolly All the Time",
           "subtitle": "Goodreads · Annabel Monaghan",
-          "description": "Dolly All the Time is a book by Annabel Monaghan. Celebrate the Release of \"Dolly All The Time\" with Annabel Monaghan!",
+          "description": "If they start by pretending, can they end with something real? Dolly Brick has never met a problem she couldn’t solve. Not when her mom left when she was twelve, and not at thirty-nine when she moves with her son back to Whitfield, Rhode Island, for the summer to keep her dad and brother from losing the family home. Celebrate the Release of \"Dolly All The Time\" with Annabel Monaghan!",
           "image": "/culture/book-dolly-all-the-time.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1757041312i/240687665.jpg",
           "alt": "Cover of Dolly All the Time by Annabel Monaghan",
@@ -1453,10 +1531,16 @@
             "label": "Goodreads monthly readers",
             "value": "38,103"
           },
+          "rating": "4.33",
+          "ratingLabel": "Goodreads",
           "evidence": [
             {
               "source": "Goodreads most read this month",
               "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/240687665-dolly-all-the-time"
             },
             {
               "source": "Google News book coverage",
@@ -1719,7 +1803,7 @@
           "rank": 9,
           "title": "Loser",
           "subtitle": "Tame Impala",
-          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. ‘Loser’ Lyrics: Tame Impala’s ‘Deadbeat’ Track Finds Second Wind After Being Featured In ‘Spider-Man: Brand New Day’.",
+          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. 'Loser' Lyrics: Tame Impala's 'Deadbeat' Track Finds Second Wind After Being Featured In 'Spider-Man: Brand New Day'.",
           "image": "/culture/song-loser-tame-impala.webp",
           "alt": "Loser artwork by Tame Impala",
           "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
@@ -1738,8 +1822,8 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-15/"
             },
             {
-              "source": "IMDb via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9ERVY0Z1hBZ3VHNzNVTElyWnJLb1JndnF2S0VDNG9PT0dZWXJXREIyMUtUU3htWTFveldYOUVDekJ2VFFzVXU0Y0t6cDZRZnVvS1Y3ZVg0ZVlrVWpxakptczhEUUsyUQ?oc=5"
+              "source": "Just Jared via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTkpVeVVtV05jVTlpUnUzZmpGd3IwNGZuelN1Q1dFUFlWdjRuU0ktU0JFSGVYazdueWNja0tvY0gyTDUwaGQwMEl1V08xNWhjRmwwN0NHbWxLZmhzbkRLZVVPVlk5QWp3N0duUzdhT1VMaHA0V0VpNng4ZmQ2UkJxN3dZakVaeEY3dXUtcEppaE5VdUZYMXU5R0hTcW5NdWtHbFBMQkpjczZrS08xWFV1bEU0OHpEa3BUUC1MZGRjamtVYkYxLWhZQVZnNmpkMU1VYVNoUVY3c01jZlJ3dHc?oc=5"
             }
           ],
           "accent": "#5ab0ff",
@@ -1778,193 +1862,317 @@
     },
     {
       "id": "products",
-      "eyebrow": "U.S. Google Shopping · past 7 days",
+      "eyebrow": "Social trend evidence · past 90 days",
       "title": "Products",
-      "description": "Rising U.S. Google Shopping queries in source order, after removing people, media, brand-only terms, duplicates, and queries without a relevant Amazon product listing.",
+      "description": "Products with recent, explicit viral-demand coverage and a matching Amazon listing. Candidates combine social evidence, Amazon Movers & Shakers velocity when available, freshness, independent confirmations, and scarcity signals; retail movement alone never qualifies a product.",
       "sources": [
         {
-          "label": "Google Shopping · rising queries, U.S., 7 days",
-          "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
+          "label": "Amazon Movers & Shakers · Toys & Games",
+          "url": "https://www.amazon.com/gp/movers-and-shakers/toys"
+        },
+        {
+          "label": "Amazon Movers & Shakers · Beauty",
+          "url": "https://www.amazon.com/gp/movers-and-shakers/beauty"
+        },
+        {
+          "label": "Amazon Movers & Shakers · Clothing, Shoes & Jewelry",
+          "url": "https://www.amazon.com/gp/movers-and-shakers/clothing"
+        },
+        {
+          "label": "Amazon Movers & Shakers · Home & Kitchen",
+          "url": "https://www.amazon.com/gp/movers-and-shakers/home-garden"
+        },
+        {
+          "label": "Amazon Movers & Shakers · Electronics",
+          "url": "https://www.amazon.com/gp/movers-and-shakers/electronics"
+        },
+        {
+          "label": "Amazon Movers & Shakers · Sports & Outdoors",
+          "url": "https://www.amazon.com/gp/movers-and-shakers/sporting-goods"
+        },
+        {
+          "label": "Google News · viral product coverage, 90 days",
+          "url": "https://news.google.com/search?q=viral+products+when%3A90d&hl=en-US&gl=US&ceid=US%3Aen"
         },
         {
           "label": "Amazon · best-selling match",
-          "url": "https://www.amazon.com/s?k=Rechargeable+Laptop+Battery&s=exact-aware-popularity-rank"
+          "url": "https://www.amazon.com/s?k=Laneige+beauty+skin&s=exact-aware-popularity-rank"
         }
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "Rechargeable Laptop Battery",
-          "subtitle": "Product · Amazon match",
-          "description": "Rechargeable Laptop Battery refers here to the NOBIS Portable Charger 45W 20000mAh Power Bank Fast Charging.",
-          "image": "/culture/product-rechargeable-laptop-battery.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/61gijWn1ygL._AC_UY218_.jpg",
-          "alt": "Rechargeable Laptop Battery product listing image",
-          "url": "https://www.amazon.com/dp/B0D63HF7Z4",
+          "title": "Laneige",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Laneige refers here to the Lip Sleeping Mask. Amazon Is Overflowing With Viral Beauty Products From Dyson, Laneige, and Medicube, Starting at $4",
+          "image": "/culture/product-laneige.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/51ky4+ZgoVL._AC_UL320_.jpg",
+          "alt": "Laneige product listing image",
+          "url": "https://www.amazon.com/dp/B0F6L69CPF",
           "source": "Amazon",
           "metric": {
-            "label": "Google Shopping rising rank",
-            "value": "#4 · +450%"
+            "label": "Independent viral sources",
+            "value": "4 sources"
           },
           "evidence": [
             {
-              "source": "Google Shopping Trends",
-              "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0F6L69CPF"
             },
             {
+              "source": "Byrdie via Google News",
+              "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE11dEpWa2dIZ2wtOWpyY3ZqbXBRSzc3MWRVSzdxRVd6QkpDbzBfSUJLdjluMjFkX3VkT1V1RldtU2Yydm4wY1ZxWnZHcl9WNTN3MURCeFA1T0I0a0hUUzJHWThwRGUtNU9Cd2xTalVOZk9XdGs?oc=5"
+            },
+            {
+              "source": "Byrdie via Google News",
+              "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE11dEpWa2dIZ2wtOWpyY3ZqbXBRSzc3MWRVSzdxRVd6QkpDbzBfSUJLdjluMjFkX3VkT1V1RldtU2Yydm4wY1ZxWnZHcl9WNTN3MURCeFA1T0I0a0hUUzJHWThwRGUtNU9Cd2xTalVOZk9XdGs?oc=5"
+            },
+            {
+              "source": "NBC News via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQRUxpNG1yU21xcUw3eTYycF9ZTHlBODRmaU9tb3E4NnBDU3o3cXNkbUdEM3lFV2JBS3NaSUNWWUQ3LTBIdVB4RXJYdHZTYXdwSUNUQXU4OGxWbGpTZUQtbVpXX0t3eG9BU1lOQWNJY25JelFGLWJUTXpmck1oQURuNXlhenptX2ZDYjlnRHp1V09LeTlQSUo0eVA5THJEQkVGRzJ3?oc=5"
+            }
+          ],
+          "accent": "#ff6b57"
+        },
+        {
+          "rank": 2,
+          "title": "Medicube",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Medicube refers here to the PDRN Pink Collagen Volume Multi Balm Stick - Face & Body Balm. We tested more than a dozen viral Medicube products — these are the ones actually worth it",
+          "image": "/culture/product-medicube.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/613iSS1QL9L._AC_UL320_.jpg",
+          "alt": "Medicube product listing image",
+          "url": "https://www.amazon.com/dp/B0GHMZXX8Y",
+          "source": "Amazon",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "6 sources"
+          },
+          "evidence": [
+            {
               "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0D63HF7Z4"
+              "url": "https://www.amazon.com/dp/B0GHMZXX8Y"
+            },
+            {
+              "source": "Byrdie via Google News",
+              "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE11dEpWa2dIZ2wtOWpyY3ZqbXBRSzc3MWRVSzdxRVd6QkpDbzBfSUJLdjluMjFkX3VkT1V1RldtU2Yydm4wY1ZxWnZHcl9WNTN3MURCeFA1T0I0a0hUUzJHWThwRGUtNU9Cd2xTalVOZk9XdGs?oc=5"
+            },
+            {
+              "source": "NBC News via Google News",
+              "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBkT1NralB4YzNQSklyUVNfcVdBMDRCMG1FdXJQWERnaXpxRDlyZUlTYlVDSTNDS05HWFlad3ZVR1d3RFYzdXF0TXgxQkNNOU5XOEwwbUk3ZDBLSzRBTGI1NjlVXzBBTEdLdGY4dWxndkdla2hacGM4akQ0X0c?oc=5"
+            },
+            {
+              "source": "FOX 2 via Google News",
+              "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNRzRtckRObmtvQXFTampfTDdZb2FXdFphXzVWem9oZlBqRzRGMERkcWlPcC1BMndnT0o4UzlNSVE0WnZyWlNoSTNpdGdpTURRdnRyWG5CQUwzaDViNzJNbzRPYlJUcnhLRWVxUmpyVktEa3JhVmV1Q1VkQUIyNzdQUU10MDBLSzZxdHdnMlFoOS1NWE1JX21OadIBngFBVV95cUxQeTd5VVR4bm03UDh6ZEt0M0xJeXFhc1JqZkNlRWVvZVZBX2tpVTlPM1M1QUlFYUdPcDFScXFxb1c4TWpFRC16d3h0MlNFUDZjNHgyT0NYT011aXMtcWl5SGd2eEtvZW92bEtqVDM3ZmdFMmxWZTlzSmY2aGJUdEJnWWdveHJBalRjanFKd1VMdGJfdFF0N2diQWhYUm5lUQ?oc=5"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 3,
+          "title": "Mystery Squishy Dumplings",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Mystery Squishy Dumplings refers here to the 2 Pack Bread Squishy Slow Rise Toys, Dumpling Squishy Fidget Toys for Kids & Adults,Stress Relief Squeeze Toy, Gifts for Office, Party Favors, Back to School. From Viral Toy Craze to Lifestyle Brand: Earthbound Brands to Expand Mystery Squishy Dumplings by RMS",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/71cI1fqZqQL._AC_UL320_.jpg",
+          "alt": "Mystery Squishy Dumplings product listing image",
+          "url": "https://www.amazon.com/dp/B0GXDRHWG3",
+          "source": "Amazon",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0GXDRHWG3"
+            },
+            {
+              "source": "Business Wire via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxOaTlWSlB4LWItV0VfUjYwREl6YWptUzZWUTA2OXA2N1lGTkNTTC1sMnpTTEpKR184SVZ6dnZDRWNaZk1KOHpCcVNSM3Y2RVVFakVQVUpWMnhKTEhya1hVMzJYQjJva3dta1B5amt6VTZNZ1FPRjF5QVJvZHVlajdnMTZwVjBXcndVZ05kQlhCLWY4dW9YT2tsNXRSWVhoS0I4NFUta0xkRWphQk1Ha2wtNTZFQldoMlFVcHZGZkhQQVY0MmxMOHFqcldhU0JOdGNWWi1yRGtYVjh3cThaSDlWaGFaalhiV3dpNGY1d093?oc=5"
+            },
+            {
+              "source": "Yahoo Finance Singapore via Google News",
+              "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPRWlBb0VzU1ZCdkgyT3BhaExTbEVvM2d5bU9jM21ReThhRllxR3ZqUnJCaUs1MTczSExJd3Z6WG5oRDRBc2hFYWQxb2tPVUdxRFhiMzlVVE80U09vdjhlemVMZy0yMkJsZWt0SlB1THlyZi1mX2NYUk5aY281azM1UUpNMENTdnM?oc=5"
+            },
+            {
+              "source": "Business Wire via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxOaTlWSlB4LWItV0VfUjYwREl6YWptUzZWUTA2OXA2N1lGTkNTTC1sMnpTTEpKR184SVZ6dnZDRWNaZk1KOHpCcVNSM3Y2RVVFakVQVUpWMnhKTEhya1hVMzJYQjJva3dta1B5amt6VTZNZ1FPRjF5QVJvZHVlajdnMTZwVjBXcndVZ05kQlhCLWY4dW9YT2tsNXRSWVhoS0I4NFUta0xkRWphQk1Ha2wtNTZFQldoMlFVcHZGZkhQQVY0MmxMOHFqcldhU0JOdGNWWi1yRGtYVjh3cThaSDlWaGFaalhiV3dpNGY1d093?oc=5"
+            }
+          ],
+          "accent": "#ff6b57"
+        },
+        {
+          "rank": 4,
+          "title": "NeeDohs",
+          "subtitle": "Viral product · Amazon match",
+          "description": "NeeDohs refers here to the NeeDoh Funky Pups – Squishy Sensory Toy – Soft Dough Filling – Color May Vary; One Dog Per Pack. NeeDoh craze reaches Phoenix as Valley sixth-grader turns viral toy hunt into summer side hustle",
+          "image": "/culture/product-needohs.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/7161JNgvkfL._AC_UL320_.jpg",
+          "alt": "NeeDohs product listing image",
+          "url": "https://www.amazon.com/dp/B0B4HVVN8B",
+          "source": "Amazon",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "9 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0B4HVVN8B"
+            },
+            {
+              "source": "facebook.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQNmdRUXhZNkJhc2dNeGtBVzRkWF9wZVVUeDEwLXpPZ05GcFFjRVlFcTVMcFFGZkdFX0ozZ05ONmp4MDZRMjhvQVZfMjlfdHlmOXM3NEhTUEpaeUlLN0Q5UGZURl9Tb0lJVk1BSEZaQ0s1MXRMVUVmWGFkaGRHLURsT05sWHEtTXVqVWhyaGdOQlljVHgwRHVJWmMzV25lcWFnSjlPZG8xSGdhS3pwNGQ2bUM3SG1fb0I1ZWkzbjVld0xCclUxcnRZZFVJNTdkcmxHcklfcXpMVVJWNGJFVjNuYQ?oc=5"
+            },
+            {
+              "source": "ABC7 New York via Google News",
+              "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNNnB0VEhHOG9SQXZxMC1DVkxWOFFYZGV0UHJHaE5SUkFjX1J2dWVibzhlZ2VPTGZoRmp2bkItdXJqcUtPbkFQTXlZS3NDMzljUjhPVmsyN2xCWFJtb253RWNYMURxdVRLMkxzQ0pqOGJ5Y0E3b0Fjd2lTMENvT0RDTDJPbGYxTmt3bmhzQ19wZTUtUXVVMlpoWUZaQmhXUQ?oc=5"
+            },
+            {
+              "source": "ABC15 Arizona via Google News",
+              "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQVFdCNVpPSVpWZUNYajZMU05odUV2eDBYLUNLelpid3U0Q2xJRWVTSThycHU0UW0xbGFrOXg5aWhROFFkOTRVcWtpS2pBZklDZi1hRzVtLTJIdE45WGhVUWxwVWlNRTE2ZUE5VUxubUdHVzJPQmZmc1Ywa1VJTHJ3aXBHZjYyRGhvUm1qbXJobDZKN2dxSno0ZHNHRnNQbkp6TzZQeXV3b2l5elBQSmhJTld0U3k2TzQwMmQxeWNJUGU0YnFoZmZsNG9yaDFCZEU?oc=5"
             }
           ],
           "accent": "#ffc857"
         },
         {
-          "rank": 2,
-          "title": "Electric Shock Gloves",
-          "subtitle": "Product · Amazon match",
-          "description": "Electric Shock Gloves refers here to the DongChu Insulated Electrician Gloves 1000V Coated Work Gloves for Electrical Maintenance, Non-slip Prevent Shock, Home Repair, Outlet Replacement, DIY Projects, Large. ICE Is Buying Up to $20 Million Worth of Electric Shock Gloves.",
-          "image": "/culture/product-electric-shock-gloves.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/7179jynLTKL._AC_UL320_.jpg",
-          "alt": "Electric Shock Gloves product listing image",
-          "url": "https://www.amazon.com/dp/B0F6CLTH41",
+          "rank": 5,
+          "title": "Dyson",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Dyson refers here to the Cylindrical Comb for Dyson Vented Barrel Brush 1.4 Inch - 35mm, for Multi-Styler Hair Beauty Hair Curling Tools. Amazon Is Overflowing With Viral Beauty Products From Dyson, Laneige, and Medicube, Starting at $4",
+          "image": "/culture/product-dyson.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/61lKSYkiJIL._AC_UL320_.jpg",
+          "alt": "Dyson product listing image",
+          "url": "https://www.amazon.com/dp/B0BZDGG7HM",
           "source": "Amazon",
           "metric": {
-            "label": "Google Shopping rising rank",
-            "value": "#6 · +250%"
+            "label": "Independent viral sources",
+            "value": "3 sources"
           },
           "evidence": [
             {
-              "source": "Google Shopping Trends",
-              "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
-            },
-            {
               "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0F6CLTH41"
+              "url": "https://www.amazon.com/dp/B0BZDGG7HM"
             },
             {
-              "source": "Truthout via Google News",
-              "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOeGNUZnRQZGtBYng4TFNFT05XXy1pc2F3VjNQU3lhUFQ5UDZ5SkxMYjBRNEI3czYyQnhWYkFCeHEtYVlyX2g2YlpMbzVJVU9HdFAxMEQ2MDJ6TXA1QjI3RXhrb09HMm1XTHYyQUNWR1l3dWJlUmM1OHJnNkxnY0I0VkZqWDdWMlhhV3o1MHlpZjRjN0l6TGhr?oc=5"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 3,
-          "title": "Alani Potion Pack",
-          "subtitle": "Product · Amazon match",
-          "description": "Alani Potion Pack refers here to the Alani Nu Witch's Brew Sugar Free Energy Drink (Pack of 12).",
-          "image": "/culture/product-alani-potion-pack.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/81q-7p+ikoL._AC_UL320_.jpg",
-          "alt": "Alani Potion Pack product listing image",
-          "url": "https://www.amazon.com/dp/B0GT6NCWYV",
-          "source": "Amazon",
-          "metric": {
-            "label": "Google Shopping rising rank",
-            "value": "#7 · +190%"
-          },
-          "evidence": [
-            {
-              "source": "Google Shopping Trends",
-              "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
+              "source": "Byrdie via Google News",
+              "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE11dEpWa2dIZ2wtOWpyY3ZqbXBRSzc3MWRVSzdxRVd6QkpDbzBfSUJLdjluMjFkX3VkT1V1RldtU2Yydm4wY1ZxWnZHcl9WNTN3MURCeFA1T0I0a0hUUzJHWThwRGUtNU9Cd2xTalVOZk9XdGs?oc=5"
             },
             {
-              "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0GT6NCWYV"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 4,
-          "title": "Madden 27",
-          "subtitle": "Product · Amazon match",
-          "description": "Madden 27 refers here to the EA Sports Madden NFL 27 - Standard Edition PS5. 'Madden NFL 27' sells hyperrealism in EA's goal to make 'a scouting report' for the league.",
-          "image": "/culture/product-madden-27.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/61i4mpAfgRL._AC_UY218_.jpg",
-          "alt": "Madden 27 product listing image",
-          "url": "https://www.amazon.com/dp/B0H2K3RD7C",
-          "source": "Amazon",
-          "metric": {
-            "label": "Google Shopping rising rank",
-            "value": "#9 · +130%"
-          },
-          "evidence": [
-            {
-              "source": "Google Shopping Trends",
-              "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
+              "source": "Byrdie via Google News",
+              "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE11dEpWa2dIZ2wtOWpyY3ZqbXBRSzc3MWRVSzdxRVd6QkpDbzBfSUJLdjluMjFkX3VkT1V1RldtU2Yydm4wY1ZxWnZHcl9WNTN3MURCeFA1T0I0a0hUUzJHWThwRGUtNU9Cd2xTalVOZk9XdGs?oc=5"
             },
             {
-              "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0H2K3RD7C"
-            },
-            {
-              "source": "NFL.com via Google News",
-              "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPSzkxNks0S050eW5adE5zOWd6bklBMHBlLTVzeXRtOTQ2Ny1FVnhaVld2QzNLN3NJdEtHYjAyNzJkd2tCVHV5SDFQTW9QUnZGREl0QVZHbTNrNGlkamxJM3M5eXpReWdqaXpqQmQxbUtTdk1oOWxUZWd0QkhZWFVpR3hnRDZDeldIc1RBYXF6Tk0yLUxsVnhuMjQweGpJWFVyS2ZfLTlHYkU1ajl2RXBMRw?oc=5"
+              "source": "Byrdie via Google News",
+              "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE05N1lBWDZVQ2I3OWR6NDZiNXlfWG1QRUhsajF6MTlyUjB6S3FhV01rTTNRM2VEYnlEWnpTTFdYNkVON0h2c3BnbDJYQ2VlemNIRkNUTGEyV19tNEtHOG41aFpHODJ0TmJRZ2w2X3dyckczUQ?oc=5"
             }
           ],
           "accent": "#5ab0ff"
-        },
-        {
-          "rank": 5,
-          "title": "MacBook",
-          "subtitle": "Product · Amazon match",
-          "description": "MacBook refers here to the Apple 2026 MacBook Air 13-inch Laptop with M5 chip.",
-          "image": "/culture/product-macbook.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/71pkfQGcMKL._AC_UY218_.jpg",
-          "alt": "MacBook product listing image",
-          "url": "https://www.amazon.com/dp/B0GR1JTFP8",
-          "source": "Amazon",
-          "metric": {
-            "label": "Google Shopping rising rank",
-            "value": "#12 · +50%"
-          },
-          "evidence": [
-            {
-              "source": "Google Shopping Trends",
-              "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
-            },
-            {
-              "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0GR1JTFP8"
-            }
-          ],
-          "accent": "#ff6b57"
         }
       ],
       "moreItems": [
         {
           "rank": 6,
-          "title": "Switch 2",
-          "subtitle": "Product · Amazon match",
-          "description": "Switch 2 refers here to the Nintendo Switch 2 System. Cyber Gadget to Release CYBER Gaming Controller 6B TMR for Switch 2 in Late September!",
-          "image": "/culture/product-switch-2.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/714-Fh3ngmL._AC_UY218_.jpg",
-          "alt": "Switch 2 product listing image",
-          "url": "https://www.amazon.com/dp/B0F3GWXLTS",
+          "title": "Trader Joe's Mini Tote Bag",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Trader Joe's Mini Tote Bag refers here to the trader joe striped pink mini tote bag. Trader Joe’s restocks popular blue canvas tote bag at a higher price",
+          "image": "/culture/product-trader-joe-s-mini-tote-bag.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/61czpW2rBmL._AC_UL320_.jpg",
+          "alt": "Trader Joe's Mini Tote Bag product listing image",
+          "url": "https://www.amazon.com/dp/B0H6NFGGBZ",
           "source": "Amazon",
           "metric": {
-            "label": "Google Shopping rising rank",
-            "value": "#15 · +40%"
+            "label": "Independent viral sources",
+            "value": "3 sources"
           },
           "evidence": [
             {
-              "source": "Google Shopping Trends",
-              "url": "https://trends.google.com/trends/explore?date=now%207-d&gprop=froogle&geo=US"
-            },
-            {
               "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0F3GWXLTS"
+              "url": "https://www.amazon.com/dp/B0H6NFGGBZ"
             },
             {
-              "source": "Saiga NAK via Google News",
-              "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9EdVZsWWVMOUxUWlhFYnV3WDhOcTNEWDdKd0VxYUl6bzdwbzd4dG50T0luUVduMHMyTkhfa0ZmVkwxNHBwUmlHNGFNX20tSHBvTjh2RkItTGw1MzhWaVlqVERnUWRNcmltMzNiUkVLc2RQRjhB0gF6QVVfeXFMTzg0cGVXMnhOaHRVQUFFRm5yTk5OcEI2RGlmQXFFdllZdjBYR1FwaEFJc3hhOFgyZzZ6c1hFTXlhcHlYeFV5Z1dCb2NhN0RZXy02UnEyUzYxcjRJNHBDcWlBWnRyeXJMZjZxV0VXRXVDakppVkxWN1d2c3c?oc=5"
+              "source": "Bergen Record via Google News",
+              "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOMUhuQ3M5SmdfMk9NSERfdUJnS3BEeTFqZmVoeUc5MUhfNURJeklSaEZQZm5fSHRRQTRlcUduN1BrQlA0ZWs2SVpKMDVZVDFwZldjS0x2b2tmb29nUGNfUFJPay10OHdjdlUzTFJIWTFHaXRFc3NkYm5uR1ZNUTUzUExXQVBzQnRhWE8wMmUzRVpUakJQRHJBY3hFNHhPejMzRTZCTHo3dFktdDlDd1E3TkIyWUxYVjNQN1pzdjdCQ2VGakhsekE?oc=5"
+            },
+            {
+              "source": "Bergen Record via Google News",
+              "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOMUhuQ3M5SmdfMk9NSERfdUJnS3BEeTFqZmVoeUc5MUhfNURJeklSaEZQZm5fSHRRQTRlcUduN1BrQlA0ZWs2SVpKMDVZVDFwZldjS0x2b2tmb29nUGNfUFJPay10OHdjdlUzTFJIWTFHaXRFc3NkYm5uR1ZNUTUzUExXQVBzQnRhWE8wMmUzRVpUakJQRHJBY3hFNHhPejMzRTZCTHo3dFktdDlDd1E3TkIyWUxYVjNQN1pzdjdCQ2VGakhsekE?oc=5"
+            },
+            {
+              "source": "newsweek.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPTENIanc0dTZjM3VtLUMyRngzb2Z4T29ITkV1MUo4SkluVTFEWTNEWGRqcUMtZ1NyaUNIeDZyWm9yUTh1RFY0Qjc2UGNUTDNWQzV2RG9IWm5ha2Q3NjREbnExMjJueGduSzduQ3VOazJMSEczcy05NFV4SVRxQWR3MEYzVE9nUDFHaVBaYWQyY2hpblJacW5kMWFITk10UzZjc09Na25EZ0lIV0lP?oc=5"
             }
           ],
-          "accent": "#ffc857"
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 7,
+          "title": "Coach",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Coach refers here to the Shoe Charm. These viral Coach bags are now up to £135 off - here are our top picks",
+          "image": "/culture/product-coach.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/614JuV7y8HL._AC_UL320_.jpg",
+          "alt": "Coach product listing image",
+          "url": "https://www.amazon.com/dp/B0FHBZQDF3",
+          "source": "Amazon",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "3 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0FHBZQDF3"
+            },
+            {
+              "source": "Good Morning America via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQLXV6LWZ1Q2w5Sms0QUF1b0IybmNzQzdhbGt1MHlWa0xIOHp2czA2dDBsVFFqUlNYR1RlaWpEYlJFVFYza0szOVpPMFVsOVlXNGRtOExfYVlfang4Vmp2OE5Vb0RWSUtoNmc0d1NaZ0I5QTJ2QVlqRERuYXIxV2FzQUR6MDJoS2l3WjBpTFVza296VGlsQVM0M21GcUI2cThZQnppcS1rMVLSAa4BQVVfeXFMT1BVcFpkYXYyUmc2dnBjNUNxNU1tZTFHeG5ITFc5aUNxazBfY3ZjZUh5dnVlUTlEeGQyZXpWaXhkY2JmbS03S3Q0U1MwNDFmS3VTblZuYUV2ZTc3MF9zLWFKX3hNeDBHbHhvZUNKM2pTSFVIZUg3N194SlBmR1ROeWtMNS0xRXBJSHBEbVdDU193bzFaVVRWYTl5b04ybkxvbjl2RkdyV28zcmYxZVhn?oc=5"
+            },
+            {
+              "source": "L'OFFICIEL USA via Google News",
+              "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQTjhEWWRoZm50MkxVWi1YMVlfQnFlbzZ1eEljNUxKcDdfRFVacE4zNlI5TmotR09sVlVINlkxM0ttVkloZUM0NlpjdTJTTEhiQjFwUGtKNTdUMFlzWVcyeFkxa2ZVZzVTSVlib0lqMVF0WS1kdmlEY3QwVmpsRzlIRW82WHBvWmFHNnBGNEdIYXVBQzNtS0Zv?oc=5"
+            },
+            {
+              "source": "The Independent via Google News",
+              "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOWFIdFMzckNZTUFYcFRneEFBRXlXNUxCWW1DN0ZxTm12SXZZQUY1OS05c2t3R09GZVBVQ2t2Umw1Mm0yQzBtYmZmZjN4REJNOGYtSTNsTlBVN1dibDBuOFVJMzIzeUxSdVRBbXJMdWpHVHR6NEdiZ1RXSmt0NENpSjFKOGdPSnRVVmdtZ1hwM3lrUUhSc0d1RDhqM1dHMmppYk5oOHpHSHNUX1gzTmVySFAxdUZfUQ?oc=5"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 8,
+          "title": "Clinique",
+          "subtitle": "Viral product · Amazon match",
+          "description": "Clinique refers here to the +2 more colors. Find out why the cult-favorite Clinique lipstick is trending again",
+          "image": "/culture/product-clinique.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/61UFIZmbKpL._AC_UL320_.jpg",
+          "alt": "Clinique product listing image",
+          "url": "https://www.amazon.com/dp/B0032RMX3U",
+          "source": "Amazon",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0032RMX3U"
+            },
+            {
+              "source": "TODAY.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNbWpJRkczZjRDcGkxUlBESWNZN1MxMUtseUpIeXA5cEotX19GLVJONm9DQjdEZGpkWDdJNElhRENDUklEVVUzMmhMcklPaHlveWxBc2tVZF9ldVVHZFhqNHc5aDJUcWFrb2hQWmlEdHJ3TkYyVFZlZEc0WElpTXdEMThqVQ?oc=5"
+            },
+            {
+              "source": "10best.usatoday.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNSmN2UWhUMjJGbkpWd0xqR1c1MGVrNDJBQ2toTU42d0pET0hQWHdnQ3BRTDZ6amJiYjB5NlRJMmxKYmFwckRleGI3eWJ5djZsa2NPNlZMRE1CNl93TkV6V3FTMklEbzRlMU1JT0tBVDJRVTk1aDlpYzZUdzYwN2h0NFo2TW1ELU1YRmFfcUhDOVg?oc=5"
+            }
+          ],
+          "accent": "#ff6b57"
         }
       ],
-      "moreLabel": "Show ranks 6–6"
+      "moreLabel": "Show ranks 6–8"
     },
     {
       "id": "news",
@@ -1978,23 +2186,21 @@
         },
         {
           "label": "Google News · current coverage",
-          "url": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/"
+          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNVnkwWkFZV2NJVzZvYjBDRmZTRFpTcTFpQW1pNTdGUUJobzZaVVAxQ1p1VTl3UXRzazFhbld0T3A1M2pSRTl0clUzU1RrcUFTclZSbmU1Z1VSVzZSNjBGY0VrOFE0WERQRmtFWkF6QTRyelVtNXhHem9rb2V0T2tQaUJlYTF5aVFjNk5UVl8tbzJielVsbTBhN3pFWVFBRlN5T0FWcXB2cjhKRnZ5WU5iLWpjUzlHdy1XZm53SEpKbDE2endRWVpsUEJoTWNTdEJtdl9EZzVEck5JY1dLTjh2Z0JQTDlraFpSSExJ?oc=5"
         }
       ],
       "layout": "landscape",
       "items": [
         {
           "rank": 1,
-          "title": "Rebel Creamery Ice Cream Lawsuit",
+          "title": "Rebel Creamery LLC",
           "subtitle": "News · Aug 17, 2026",
-          "description": "Rebel Ice Cream, a major ice cream brand in your local grocery store, has filed for bankruptcy after a $23.8 million judgment in a trademark lawsuit. Rebel Ice Cream filed for Chapter 11 bankruptcy after 2021 lawsuit.",
-          "image": "/culture/news-rebel-creamery-ice-cream-lawsuit.webp",
-          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/17/PLSJ/91334761007-screenshot-rebel-ice-cream.jpg?crop=776,435,x6,y0&width=776&height=435&format=pjpg&auto=webp",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/",
-          "alt": "Lead image from Cincinnati Enquirer's coverage of Rebel Creamery Ice Cream Lawsuit",
-          "url": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/",
-          "source": "Cincinnati Enquirer",
+          "description": "Rebel Ice Cream filed for Chapter 11 bankruptcy after 2021 lawsuit. Rebel Creamery Files for Chapter 11 After Losing Lawsuit to Van Leeuwen.",
+          "image": "/culture/news-rebel-creamery-llc.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/0/06/Bankruptcies_filed_by_type_per_year.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "alt": "File:Bankruptcies filed by type per year.webp",
+          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNVnkwWkFZV2NJVzZvYjBDRmZTRFpTcTFpQW1pNTdGUUJobzZaVVAxQ1p1VTl3UXRzazFhbld0T3A1M2pSRTl0clUzU1RrcUFTclZSbmU1Z1VSVzZSNjBGY0VrOFE0WERQRmtFWkF6QTRyelVtNXhHem9rb2V0T2tQaUJlYTF5aVFjNk5UVl8tbzJielVsbTBhN3pFWVFBRlN5T0FWcXB2cjhKRnZ5WU5iLWpjUzlHdy1XZm53SEpKbDE2endRWVpsUEJoTWNTdEJtdl9EZzVEck5JY1dLTjh2Z0JQTDlraFpSSExJ?oc=5",
+          "source": "foodprocessing.com",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -2002,11 +2208,15 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+ice+cream+lawsuit"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+llc"
             },
             {
-              "source": "Cincinnati Enquirer via Google News",
-              "url": "https://www.cincinnati.com/story/grocery/2026/08/17/rebel-creamery-ice-cream-lawsuit-bankruptcy/91334664007/"
+              "source": "foodprocessing.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNVnkwWkFZV2NJVzZvYjBDRmZTRFpTcTFpQW1pNTdGUUJobzZaVVAxQ1p1VTl3UXRzazFhbld0T3A1M2pSRTl0clUzU1RrcUFTclZSbmU1Z1VSVzZSNjBGY0VrOFE0WERQRmtFWkF6QTRyelVtNXhHem9rb2V0T2tQaUJlYTF5aVFjNk5UVl8tbzJielVsbTBhN3pFWVFBRlN5T0FWcXB2cjhKRnZ5WU5iLWpjUzlHdy1XZm53SEpKbDE2endRWVpsUEJoTWNTdEJtdl9EZzVEck5JY1dLTjh2Z0JQTDlraFpSSExJ?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Bankruptcies_filed_by_type_per_year.webp"
             }
           ],
           "accent": "#ffc857"
@@ -2015,13 +2225,11 @@
           "rank": 2,
           "title": "Hawaii Hurricane",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Authorities warned of potentially life-threatening conditions, including flooding and mudslides. Some residents stayed off roads while others used sandbags and other measures to protect their homes. \"I'm kind of nervous about it. But we are going to hunker down we are going to stay safe,\" said Hilo resident Maxine.",
+          "description": "Lala is again a tropical storm, sending drenching rain and winds across Hawaii. Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "image": "/culture/news-hawaii-hurricane.webp",
-          "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
-          "alt": "Lead image from ABC7 Bay Area's coverage of Hawaii Hurricane",
-          "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Staring_Down_Hurricane_Florence.jpg/1280px-Staring_Down_Hurricane_Florence.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Staring Down Hurricane Florence.jpg",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcExoaTdvVmtRUGpDcUdzNW9sclZzb09qZENkOTF1TWlOOFY0d0taeF9MWUNiVlI3ZnE1MXdMMUxhcHBvR2VYV2ZuS3FKQ1o1NklrM0k2MmNuWnlldEY3TndTeFZ3SFk1dm8wX1U4enJZQ3p0bVZCdVdZLVlpWHJFV2w5REtVdU1tVTdRTEY1RktzQnpnQjU0ZzJaMmpZbU9r0gGmAUFVX3lxTE10Tm1LQmt0ZFE0SG1JazQtSHliMm1wSUk5dTZmRW9lN1BnLUZybURUeU9TMlZzRXlXa0VFODdyOXM0OXVfYXVvTnV3cUYzdFFwZnlGaGVRci1sTWhBYnBKVXM0MXN1OVl3SjJuS1AzYTBDMC1VTUphRkYzREhfb1VRU2NuT19LS0h6UVNYNVNmYWpEU05kb1dhQWFjWkRXeXlJSXBGQkE?oc=5",
           "source": "ABC7 Bay Area",
           "metric": {
             "label": "Google search volume",
@@ -2034,11 +2242,11 @@
             },
             {
               "source": "ABC7 Bay Area via Google News",
-              "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/"
+              "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcExoaTdvVmtRUGpDcUdzNW9sclZzb09qZENkOTF1TWlOOFY0d0taeF9MWUNiVlI3ZnE1MXdMMUxhcHBvR2VYV2ZuS3FKQ1o1NklrM0k2MmNuWnlldEY3TndTeFZ3SFk1dm8wX1U4enJZQ3p0bVZCdVdZLVlpWHJFV2w5REtVdU1tVTdRTEY1RktzQnpnQjU0ZzJaMmpZbU9r0gGmAUFVX3lxTE10Tm1LQmt0ZFE0SG1JazQtSHliMm1wSUk5dTZmRW9lN1BnLUZybURUeU9TMlZzRXlXa0VFODdyOXM0OXVfYXVvTnV3cUYzdFFwZnlGaGVRci1sTWhBYnBKVXM0MXN1OVl3SjJuS1AzYTBDMC1VTUphRkYzREhfb1VRU2NuT19LS0h6UVNYNVNmYWpEU05kb1dhQWFjWkRXeXlJSXBGQkE?oc=5"
             },
             {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/List_of_Hawaii_hurricanes"
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Staring_Down_Hurricane_Florence.jpg"
             }
           ],
           "accent": "#9b8cff"
@@ -2047,13 +2255,11 @@
           "rank": 3,
           "title": "Egg Recall",
           "subtitle": "News · Aug 15, 2026",
-          "description": "An egg recall linked to a salmonella outbreak was upgraded to the highest possible risk level by the U.S. Food and Drug Administration (FDA) on Wednesday. Classifies Egg Recall as Class I, for Highest Health Risk.",
+          "description": "Salmonella Egg Recall Is Now Class I, the FDA’s Highest Risk Level.",
           "image": "/culture/news-egg-recall.webp",
-          "imageSource": "https://static.time.com/v3/assets/bltea6093859af6183b/blt3242cef68ca452f2/6a808bde46e4363cddee31ce/GettyImages-2225112800.jpg?branch=production&width=2400&quality=75&auto=webp&crop=16:9",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://time.com/article/2026/08/15/eggs-recalled-for-salmonella-upgraded-to-highest-fda-risk-level/",
-          "alt": "GettyImages-2225112800.jpg",
-          "url": "https://time.com/article/2026/08/15/eggs-recalled-for-salmonella-upgraded-to-highest-fda-risk-level/",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Salmonella_enterica_serovar_typhimurium_01.jpg/1280px-Salmonella_enterica_serovar_typhimurium_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Salmonella enterica serovar typhimurium 01.jpg",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQQXI0dkd6LXNkV2oyZUJGd2MxOS1xb0g2QzlwTWJiRlpJdFlYUUFtRklmbkNCVnhtUEFibzVfbk4zLU9fX0lUbzJiclBKMklON1V3QWFhdVVWNzhKckNINXc0aHZuN3ZQS0QzZW9aOFlmMUdtUHhDWWJKeGZwWkgwQzBZZFlaVUJGUTU5amJBVTJPM2drVnRTb2JLN0tUNDlRMVE?oc=5",
           "source": "Time Magazine",
           "metric": {
             "label": "Google search volume",
@@ -2066,22 +2272,54 @@
             },
             {
               "source": "Time Magazine via Google News",
-              "url": "https://time.com/article/2026/08/15/eggs-recalled-for-salmonella-upgraded-to-highest-fda-risk-level/"
+              "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQQXI0dkd6LXNkV2oyZUJGd2MxOS1xb0g2QzlwTWJiRlpJdFlYUUFtRklmbkNCVnhtUEFibzVfbk4zLU9fX0lUbzJiclBKMklON1V3QWFhdVVWNzhKckNINXc0aHZuN3ZQS0QzZW9aOFlmMUdtUHhDWWJKeGZwWkgwQzBZZFlaVUJGUTU5amJBVTJPM2drVnRTb2JLN0tUNDlRMVE?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Salmonella_enterica_serovar_typhimurium_01.jpg"
             }
           ],
           "accent": "#5ab0ff"
         },
         {
           "rank": 4,
+          "title": "Reacher Season 4",
+          "subtitle": "News · Aug 10, 2026",
+          "description": "‘Reacher’ Season 4 Cast Guide: Who’s Who in the Prime Video Action Series. ‘Reacher’ Season 4 Release Schedule: When Every Episode Drops on Prime Video.",
+          "image": "/culture/news-reacher-season-4.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/1/18/Reacher_%28Series%29_Logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "alt": "File:Reacher (Series) Logo.png",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQcFJRbGtIWVlMeXdjUEdtSUk5ZE95LWkyMjdsVUlEcG1sOWF4bHNRZ3lCLV92Ny1ENEd5ZEVVTWFHaUcwcFdkQTdud0tWZzFvNGp6SHc2WlRmeUZBN0s1RXJPVkNwS0J3RUFqZGJZMGdWVXhzdmZpMHZNS1BjbEttZw?oc=5",
+          "source": "Men's Journal",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=reacher+season+4"
+            },
+            {
+              "source": "Men's Journal via Google News",
+              "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQcFJRbGtIWVlMeXdjUEdtSUk5ZE95LWkyMjdsVUlEcG1sOWF4bHNRZ3lCLV92Ny1ENEd5ZEVVTWFHaUcwcFdkQTdud0tWZzFvNGp6SHc2WlRmeUZBN0s1RXJPVkNwS0J3RUFqZGJZMGdWVXhzdmZpMHZNS1BjbEttZw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Reacher_(Series)_Logo.png"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 5,
           "title": "GTA 6 August 27 Presentation",
           "subtitle": "News · Aug 6, 2026",
-          "description": "The GTA 6 gameplay trailer and extended look premieres on Netflix on August 27, six hours before its Rockstar Games YouTube release. Rockstar Games has announced that an extended look at GTA 6 is coming to Netflix on August 27. GTA 6 Gameplay Trailer Announced for Netflix on August 27.",
+          "description": "macOS 27 Golden Gate developer beta 6 now available to developers. GTA 6 Gameplay Trailer Announced for Netflix on August 27.",
           "image": "/culture/news-gta-6-august-27-presentation.webp",
-          "imageSource": "https://www.vice.com/wp-content/uploads/sites/2/2026/08/GTA-6-Gameplay-Trailer-Announced-for-Netflix-on-August-27.jpg?w=1280",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.vice.com/en/article/gta-6-gameplay-trailer-netflix-august-27/",
-          "alt": "Lead image from VICE's coverage of GTA 6 August 27 Presentation",
-          "url": "https://www.vice.com/en/article/gta-6-gameplay-trailer-netflix-august-27/",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/2016_Open_Beatz_-_GTA_-_by_2eight_-DSC_3504.jpg/1280px-2016_Open_Beatz_-_GTA_-_by_2eight_-DSC_3504.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:2016 Open Beatz - GTA - by 2eight -DSC 3504.jpg",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5",
           "source": "VICE",
           "metric": {
             "label": "Google search volume",
@@ -2094,88 +2332,26 @@
             },
             {
               "source": "VICE via Google News",
-              "url": "https://www.vice.com/en/article/gta-6-gameplay-trailer-netflix-august-27/"
+              "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5wOG5McGtwejN3dDZRMm1vUWhkaFh2YnZ1c1V3bW0wdHN3d3VESURZTjJaSFhiOHp2SER1ckVQWlRMNGdJS0VPOUhvUEU0WkNtbzdKQjlRVjNTN2hMd2JXVGtSLXR6SVltdWRtV3NfcERxYWVMZ2RLSXNZVlg2Zw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:2016_Open_Beatz_-_GTA_-_by_2eight_-DSC_3504.jpg"
             }
           ],
           "accent": "#57d5a4"
-        },
-        {
-          "rank": 5,
-          "title": "Have I Been Flocked",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "The “Have I Been Flocked” site compiles Flock audit logs and allows drivers to see if their license plate has been run by law enforcement agencies’ Flock camera systems. ‘Have I Been Flocked’ site lets you check.",
-          "image": "/culture/news-have-i-been-flocked.webp",
-          "imageSource": "https://nypost.com/wp-content/uploads/sites/2/2026/08/137493657.jpg?quality=75&strip=all&w=1200",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/",
-          "alt": "Lead image from New York Post's coverage of Have I Been Flocked",
-          "url": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/",
-          "source": "New York Post",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=have+i+been+flocked"
-            },
-            {
-              "source": "New York Post via Google News",
-              "url": "https://nypost.com/2026/08/15/us-news/have-i-been-flocked-site-lets-drivers-check-if-their-cars-have-been-recorded-searched/"
-            },
-            {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/Flock_Safety"
-            }
-          ],
-          "accent": "#ffc857"
         }
       ],
       "moreItems": [
         {
           "rank": 6,
-          "title": "Reacher Season 4",
-          "subtitle": "News · Aug 12, 2026",
-          "description": "Get ready for more action and more Alan Ritchson in “Reacher” Season 4, which premieres Wednesday, Aug. 12 on Prime. ‘Reacher’ Season 4 Release Schedule: When Every Episode Drops on Prime Video.",
-          "image": "/culture/news-reacher-season-4.webp",
-          "imageSource": "https://variety.com/wp-content/uploads/2026/08/RCHR_S4_FG_00273900_Still261_3000.jpg?w=1000&h=563&crop=1",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://variety.com/lists/reacher-season-4-cast-characters/",
-          "alt": "'Reacher' Season 4",
-          "url": "https://variety.com/lists/reacher-season-4-cast-characters/",
-          "source": "Variety",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=reacher+season+4"
-            },
-            {
-              "source": "Variety via Google News",
-              "url": "https://variety.com/lists/reacher-season-4-cast-characters/"
-            },
-            {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/Reacher_season_4"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 7,
           "title": "Frozen 3",
           "subtitle": "News · Aug 15, 2026",
-          "description": "The filled Honda Center got a look at Frozen 3 — and let’s just say, there is quite a lot in store. First of all, are those wedding bells, we hear? Indeed, they are! 'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
+          "description": "‘Frozen 3’ First Details: Anna and Kristoff Get Married, Olaf Gets a Girlfriend and a New Villain Emerges. 'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
           "image": "/culture/news-frozen-3.webp",
-          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
-          "alt": "Frozen 2",
-          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Alexander_Kristoff_-_2023_UCI_Road_World_Championships_%28Men%27s_road_race%29.jpg/1280px-Alexander_Kristoff_-_2023_UCI_Road_World_Championships_%28Men%27s_road_race%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Alexander Kristoff - 2023 UCI Road World Championships (Men's road race).jpg",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5",
           "source": "Deadline",
           "metric": {
             "label": "Google search volume",
@@ -2188,20 +2364,55 @@
             },
             {
               "source": "Deadline via Google News",
-              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
+              "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPLWcza1hJTXBEQ2FfaXBOLVRfaTU0cXZsaWhZQjNhQ2huOWRYbEg3YVdBb1lEek9YVG9YMVlIeC1jNXVFdW84aXp1MFhBZ2tyZGd6ZkwtY2g5SU5TMHNrOFIxbnROandYQkhJbVRWS0QwSWl2ckdEdHlYYzJsLVdhUG5zcWpFaVQyUjltSlBobw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Alexander_Kristoff_-_2023_UCI_Road_World_Championships_(Men%27s_road_race).jpg"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 7,
+          "title": "Unicorn Frappuccino",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "Starbucks Brought Back the Unicorn Frappuccino, And It Sent Me into a Nostalgia-Maxxing Spiral. Starbucks Unicorn Frappuccino® return drives record weekend, with more than 2 million beverages sold.",
+          "image": "/culture/news-unicorn-frappuccino.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Starbucks_matcha_jelly_mountain_frappuccino_%281%29.jpg/1280px-Starbucks_matcha_jelly_mountain_frappuccino_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Starbucks matcha jelly mountain frappuccino (1).jpg",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQbmJsNDVLYURyVkZOeUxIR0FoWThtTVNCeHU0VWJoSVVOMTVEUklmTVdOaTIwY0p0ekt2dDRiTTVVMzQ4SzdtOWZTcVY2VmVJUHIydWxmdVlLai0wcmZ6bmhhZXVPSFJsdVJkSEZHRHpFd0FwdnhrUkZpTVdwSjNkdWhVUERyT2xVUFhSb2FaWkQzV0MwRHFTZzNLamxvUll4TVg0Uk1PZkdjR3BjZVJ6WVBxY1Y2TUNXMGY0eTNLaS1FcXV5VDZjdmczMDZhUDcyZGZpcw?oc=5",
+          "source": "Starbucks",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=unicorn+frappuccino"
+            },
+            {
+              "source": "Starbucks via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQbmJsNDVLYURyVkZOeUxIR0FoWThtTVNCeHU0VWJoSVVOMTVEUklmTVdOaTIwY0p0ekt2dDRiTTVVMzQ4SzdtOWZTcVY2VmVJUHIydWxmdVlLai0wcmZ6bmhhZXVPSFJsdVJkSEZHRHpFd0FwdnhrUkZpTVdwSjNkdWhVUERyT2xVUFhSb2FaWkQzV0MwRHFTZzNLamxvUll4TVg0Uk1PZkdjR3BjZVJ6WVBxY1Y2TUNXMGY0eTNLaS1FcXV5VDZjdmczMDZhUDcyZGZpcw?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Starbucks_matcha_jelly_mountain_frappuccino_(1).jpg"
             }
           ],
           "accent": "#9b8cff"
         },
         {
           "rank": 8,
-          "title": "Years Of Trump Support Came Undone In 15 Minutes In An Airport",
-          "subtitle": "News",
-          "description": "years of trump support came undone in 15 minutes in an airport.",
-          "image": "/culture/news-years-of-trump-support-came-undone-in-15-minutes-in-an-airport.webp",
-          "alt": "Representative image for Years Of Trump Support Came Undone In 15 Minutes In An Airport",
-          "url": "https://news.google.com/search?q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport&hl=en-US&gl=US&ceid=US%3Aen",
-          "source": "Google News",
+          "title": "Pima County Sheriff's Department",
+          "subtitle": "News · Aug 7, 2026",
+          "description": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says. Released Nancy Guthrie ransom notes generated 'slight increase' in tips: Sheriff's department.",
+          "image": "/culture/news-pima-county-sheriff-s-department.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Aimee_Semple_McPherson%27s_alleged_ransom_note.jpg/1280px-Aimee_Semple_McPherson%27s_alleged_ransom_note.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Aimee Semple McPherson's alleged ransom note.jpg",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVjJWLVpFMnE3UWM0V1BUTFdXVjE4bDRjY3NRVjcza1NPNElOWTItcVowLWRtN1doUmtiSlNUWVUzWUJmQlRhMm16MWFYMlNrTGIwTkJfNzZ1SjVwOGdjRnctZ1Z3SXdJWmpyb0JSb18wUUw1aDhudEgwejFNMU4xX2lvc0ZjVF9VZzhnY3h0c2dGWjV0OEQ3UEdKSThZLUtOQXFmT3YzZXVvS3BVSlphY3RxQkZsUXJkTzBpanlpczI?oc=5",
+          "source": "ABC7 Bay Area",
           "metric": {
             "label": "Google search volume",
             "value": "100K+"
@@ -2209,26 +2420,28 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=pima+county+sheriff%27s+department"
             },
             {
-              "source": "Google News via Google News",
-              "url": "https://news.google.com/search?q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport&hl=en-US&gl=US&ceid=US%3Aen"
+              "source": "ABC7 Bay Area via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVjJWLVpFMnE3UWM0V1BUTFdXVjE4bDRjY3NRVjcza1NPNElOWTItcVowLWRtN1doUmtiSlNUWVUzWUJmQlRhMm16MWFYMlNrTGIwTkJfNzZ1SjVwOGdjRnctZ1Z3SXdJWmpyb0JSb18wUUw1aDhudEgwejFNMU4xX2lvc0ZjVF9VZzhnY3h0c2dGWjV0OEQ3UEdKSThZLUtOQXFmT3YzZXVvS3BVSlphY3RxQkZsUXJkTzBpanlpczI?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Aimee_Semple_McPherson%27s_alleged_ransom_note.jpg"
             }
           ],
-          "accent": "#57d5a4"
+          "accent": "#9b8cff"
         },
         {
           "rank": 9,
           "title": "Coco 2",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Miguel is back in the Land of the Dead in the first look at “ Coco 2.” At D23, Disney revealed new concept art from the film, which depicts a teenage Miguel alongside his beloved dog, Dante. ‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
+          "description": "Pixar gives us our first look at 'Coco 2'. ‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
           "image": "/culture/news-coco-2.webp",
-          "imageSource": "https://variety.com/wp-content/uploads/2026/08/Image-1.png?w=1000&h=563&crop=1",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/",
-          "alt": "coco 2 first look teen miguel",
-          "url": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Nicole_%22Coco%22_Austin_at_the_Tribeca_Film_Festival_2.jpg/1280px-Nicole_%22Coco%22_Austin_at_the_Tribeca_Film_Festival_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Nicole \"Coco\" Austin at the Tribeca Film Festival 2.jpg",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5",
           "source": "Variety",
           "metric": {
             "label": "Google search volume",
@@ -2241,70 +2454,104 @@
             },
             {
               "source": "Variety via Google News",
-              "url": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/"
+              "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbmoxUGc4bGwybWtHaDJzV0p0R2E0WnBvcFdhaFlmUUxGVk1xOWNhM1hIZE8yM1VZVjd4SkpudzJNYmVYeUFMRElTNkV3eFJoeTZZY3hpXzhGcGQ3Y3hKVUhwSFBpSFhtcDFWbEthMUs2Wl9yQ04ycnFTRGZQeUh6LXpEMDkwdmtYNmcyeFJLUkpCYW01a0xab3B0Mk0?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Nicole_%22Coco%22_Austin_at_the_Tribeca_Film_Festival_2.jpg"
             }
           ],
           "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Years Of Trump Support Came Undone In 15 Minutes In An Airport",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "Trump Said to Have Secretly Used Military Jet to Leave Turkey Amid Threats From Iran. Years of Trump Support Came Undone in 15 Minutes in an Airport.",
+          "image": "/culture/news-years-of-trump-support-came-undone-in-15-minutes-in-an-airport.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Washington_Dulles_International_Airport_at_Dusk.jpg/1280px-Washington_Dulles_International_Airport_at_Dusk.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Washington Dulles International Airport at Dusk.jpg",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE00TjMtZ0FneTdkYTZSUnFaNmprTmNucC01NWRGWlVnZXJYNVVxVjVIaWtNSlhwLUZqMkh0enE0QWp6STBhZHhkNzNsQlgwNVJweXZ0MDZWWUg1bTNCMGlwN005N013WmtGWlNPZWVhX2U0amxkNjlpcTdR?oc=5",
+          "source": "The New York Times",
+          "metric": {
+            "label": "Google search volume",
+            "value": "100K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=years+of+trump+support+came+undone+in+15+minutes+in+an+airport"
+            },
+            {
+              "source": "The New York Times via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE00TjMtZ0FneTdkYTZSUnFaNmprTmNucC01NWRGWlVnZXJYNVVxVjVIaWtNSlhwLUZqMkh0enE0QWp6STBhZHhkNzNsQlgwNVJweXZ0MDZWWUg1bTNCMGlwN005N013WmtGWlNPZWVhX2U0amxkNjlpcTdR?oc=5"
+            },
+            {
+              "source": "Wikimedia image context",
+              "url": "https://commons.wikimedia.org/wiki/File:Washington_Dulles_International_Airport_at_Dusk.jpg"
+            }
+          ],
+          "accent": "#57d5a4"
         }
       ],
-      "moreLabel": "Show ranks 6–9"
+      "moreLabel": "Show ranks 6–10"
     }
   ],
   "sourceHealth": [
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:09.230Z"
+      "checkedAt": "2026-08-18T07:01:52.280Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:09.894Z"
+      "checkedAt": "2026-08-18T07:01:52.910Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:09.758Z"
+      "checkedAt": "2026-08-18T07:01:52.827Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:10.759Z"
+      "checkedAt": "2026-08-18T07:01:53.926Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:10.215Z"
+      "checkedAt": "2026-08-18T07:01:53.516Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-17T21:41:20.698Z"
+      "checkedAt": "2026-08-18T07:02:32.459Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:09.357Z"
+      "checkedAt": "2026-08-18T07:01:52.232Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:09.327Z"
+      "checkedAt": "2026-08-18T07:01:52.250Z"
     },
     {
       "name": "Goodreads monthly most read",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:11.089Z"
+      "checkedAt": "2026-08-18T07:01:53.524Z"
     },
     {
-      "name": "Google Shopping / Amazon",
-      "ok": false,
-      "checkedAt": "2026-08-17T21:40:16.648Z"
+      "name": "Viral product discovery",
+      "ok": true,
+      "checkedAt": "2026-08-18T07:02:50.192Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-17T21:40:22.781Z"
+      "checkedAt": "2026-08-18T07:02:18.191Z"
     }
   ]
 }

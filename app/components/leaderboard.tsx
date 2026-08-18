@@ -60,7 +60,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
                   <div className="rating-row">
                     <StarIcon />
                     <strong>{item.rating}</strong>
-                    <small>{item.rating === "New" ? "just opened" : "IMDb"}</small>
+                    <small>{item.ratingLabel ?? (item.rating === "New" ? "just opened" : "IMDb")}</small>
                   </div>
                 ) : null}
                 <p className="card-description">{item.description}</p>
