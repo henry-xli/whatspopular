@@ -148,7 +148,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
     const evidence = value as Record<string, unknown>;
     assertText(evidence.source, `${item.title} evidence label`, 120);
     evidenceSources.add(evidence.source.toLocaleLowerCase("en-US"));
-    evidenceHosts.add(externalUrl(evidence.url, `${item.title} evidence`, sectionId === "news" || sectionId === "products").hostname);
+    evidenceHosts.add(externalUrl(evidence.url, `${item.title} evidence`, true).hostname);
   }
   if (evidenceSources.size < 2 || evidenceHosts.size < 2) {
     throw new Error(`${item.title} evidence must come from distinct sources`);

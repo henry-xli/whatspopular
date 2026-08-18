@@ -29,6 +29,7 @@ const allowedHosts = new Set([
   "wikimedia.org",
   "pageviews.wmcloud.org",
   "www.amazon.com",
+  "www.bing.com",
   "www.billboard.com",
   "www.goodreads.com",
   "www.imdb.com",
@@ -67,8 +68,6 @@ const productDiscoveryQueries = [
   "viral collectibles",
   "viral skincare products",
   "viral bags and accessories",
-  "squishy dumpling toys",
-  "viral dumpling squishies",
   "viral restock handbags",
   "viral Amazon beauty",
 ];
@@ -695,11 +694,16 @@ function metaContent(html, names) {
 }
 
 function goodreadsPlotDescription(html) {
-  const description = cleanGoodreadsPremise(conciseSentences(metaContent(html, ["og:description"])
-    || metaContent(html, ["description"]), 300));
+  const marker = html.search(/data-testid=["']description["']/i);
+  const pageDescription = marker >= 0
+    ? html.slice(marker, marker + 24_000).match(/<span[^>]*class=["']Formatted["'][^>]*>([\s\S]*?)<\/span>/i)?.[1]
+    : "";
+  const description = cleanGoodreadsPremise(
+    plainText(pageDescription || metaContent(html, ["og:description"]) || metaContent(html, ["description"])).slice(0, 4_000),
+  );
   if (!description || description.length < 60
     || /^(?:[^.]{1,100}\s+)?is a book by\b/i.test(description)
-    || /\b(?:read [\d,.]+[km]? reviews?|world(?:'|’)?s largest community for readers)\b/i.test(description)) return "";
+    || /\b(?:before I read (?:his|her|their) (?:novels|books?)|I fell in love with (?:creative writing|reading)|read [\d,.]+[km]? reviews?|site is protected|world(?:'|’)?s largest community for readers)\b/i.test(description)) return "";
   return description;
 }
 
@@ -712,14 +716,81 @@ function cleanGoodreadsPremise(value) {
   description = description
     .replace(/^From\s+[^.!?]{1,180},\s+(?:comes|is)\s+/i, "")
     .replace(/^The acclaimed,?\s+(?:prize-winning\s+)?[^.!?]{1,160}\s+returns with\s+/i, "")
+    .replace(/^\s*\*{2,}[^*\n]{10,240}\*{2,}\s*/s, "")
+    .replace(/^\s*(?:\*{0,3}["“'])(?=[A-Z])[^\n]{20,320}?(?:["”']\*{0,3})\s*/s, "")
     .trim();
   return description;
 }
 
+const bookIdentityPattern = /\b(?:is|was) (?:a|an) (?:novel|book|series|work)\b/i;
+const bookBoilerplatePattern = /\b(?:this site is protected|goodreads choice award|nominee|new york times bestselling author|first began writing|joined forces to write|self[- ]published|republished by|published by|the author)\b/i;
+const bookMarketingPattern = /^\s*(?:a|an|the)\s+(?:acclaimed|darkly|funny|gripping|haunting|heart|luminous|moving|new|prize|romantic|thrilling|twist)\b/i;
+const plotTurnPattern = /\b(?:after|arrives?|but|discovers?|falls?|forced|must|one morning|returns?|sent|stranded|then|until|wakes?|where|while|when)\b/i;
+const plotSpecificityPattern = /\b(?:\d{4}|century|dungeon|escape|family|forgiveness|game show|husband|investigat|letters?|marriage|murder|mystery|revolution|social media|surviv|time travel|timeline|wakes? up|war|wife)\b/i;
+const plotPriorityPattern = /\b(?:century|escape|game show|murder|sent|surviv|time travel|wakes?|wedding|wife)\b/i;
+
+function plotPremise(value, maxLength = 420) {
+  let parts = sentences(value)
+    .filter((sentence) => sentence.length >= 24)
+    .filter((sentence) => !/^\s*(?:goodreads choice award|nominee|from [^.!?]{1,160}(?:bestselling|new york times))\b/i.test(sentence));
+  if (!parts.length) return "";
+  if (parts.length > 1 && parts[0].length < 48 && !plotTurnPattern.test(parts[0])) parts = parts.slice(1);
+  const narrative = parts.filter((sentence) => !bookIdentityPattern.test(sentence) || plotTurnPattern.test(sentence) || plotSpecificityPattern.test(sentence))
+    .filter((sentence) => !bookMarketingPattern.test(sentence) || parts.length === 1)
+    .filter((sentence) => !/^\s*["“].*["”]\s*$/.test(sentence) || parts.length === 1);
+  const usable = narrative.length ? narrative : parts;
+  const turnIndex = usable.slice(1).findIndex((sentence) => plotTurnPattern.test(sentence));
+  const specificityIndex = turnIndex < 0
+    ? usable.slice(1).findIndex((sentence) => plotSpecificityPattern.test(sentence))
+    : -1;
+  const pivotIndex = turnIndex >= 0 ? turnIndex + 1 : specificityIndex >= 0 ? specificityIndex + 1 : -1;
+  const ordered = [usable[0], ...(pivotIndex >= 0 ? [usable[pivotIndex]] : []), ...usable.slice(1).filter((_, index) => index + 1 !== pivotIndex)];
+  const selected = [];
+  for (const sentence of ordered) {
+    if (selected.includes(sentence)) continue;
+    const candidate = `${selected.join(" ")} ${sentence}`.trim();
+    if (candidate.length > maxLength && selected.length) continue;
+    selected.push(sentence);
+    if (selected.length >= 3) break;
+  }
+  return conciseSentences(selected.join(" "), maxLength);
+}
+
 function bookPremiseDescription(...descriptions) {
-  const usable = descriptions.map((description) => conciseSentences(description, 320)).filter((description) => description.length >= 60);
-  const premise = usable.find((description) => !/^\s*(?:goodreads choice award|winner|nominee|from [^.!?]{1,160}(?:bestselling|new york times)|the acclaimed|the prize-winning)\b/i.test(description));
-  return premise ?? usable[0] ?? "";
+  const candidates = descriptions
+    .map((description, index) => ({
+      index,
+      premise: plotPremise(cleanGoodreadsPremise(description ?? "")),
+    }))
+    .filter(({ premise }) => premise.length >= 60
+      && !/^\s*(?:goodreads choice award|winner|nominee|from [^.!?]{1,160}(?:bestselling|new york times)|the acclaimed|the prize-winning)\b/i.test(premise))
+    .map((candidate) => ({
+      ...candidate,
+      score: candidate.premise.length
+        + ([90, 70, 25, -20][candidate.index] ?? 0)
+        + (plotTurnPattern.test(candidate.premise) ? 90 : 0)
+        + (plotSpecificityPattern.test(candidate.premise) ? 120 : 0)
+        + (plotPriorityPattern.test(candidate.premise) ? 180 : 0)
+        + Math.min(sentences(candidate.premise).length, 3) * 8
+        - (/^\s*(?:["“]|\*{1,3}["'])/.test(candidate.premise) ? 200 : 0)
+        - (bookIdentityPattern.test(candidate.premise) && !plotTurnPattern.test(candidate.premise) ? 220 : 0)
+        - (bookBoilerplatePattern.test(candidate.premise) ? 140 : 0),
+    }))
+    .sort((left, right) => right.score - left.score);
+  const best = candidates[0]?.premise ?? "";
+  if (!best) return "";
+  const detailPattern = /\b(?:century|sent back|time travel)\b/i;
+  const detail = candidates
+    .map((candidate) => candidate.premise)
+    .filter((premise) => !detailPattern.test(best) && detailPattern.test(premise))
+    .flatMap((premise) => sentences(premise))
+    .find((sentence) => detailPattern.test(sentence));
+  const merged = detail ? conciseSentences(`${detail} ${best}`, 420) : best;
+  const mergedParts = sentences(merged);
+  const unquoted = mergedParts.length > 1 && /^\s*["“]/.test(mergedParts[0])
+    ? mergedParts.slice(1).join(" ")
+    : merged;
+  return unquoted.replace(/^\s*["“][\s\S]*?["”]\s*/s, "").trim();
 }
 
 async function goodreadsBookContext(book) {
@@ -738,8 +809,8 @@ function goodreadsBodyDescription(body) {
   const marker = body.indexOf("Rate this book");
   const end = marker >= 0 ? body.indexOf("Show more", marker) : -1;
   const block = marker >= 0 ? body.slice(marker + "Rate this book".length, end > marker ? end : marker + 3_000) : body;
-  const description = cleanGoodreadsPremise(conciseSentences(block, 320));
-  return description.length >= 60 && !/\b(?:ratings?|reviews?|want to read|kindle unlimited|genres?)\b/i.test(description)
+  const description = cleanGoodreadsPremise(plainText(block).slice(0, 4_000));
+  return description.length >= 60 && !/\b(?:before I read (?:his|her|their) (?:novels|books?)|I fell in love with (?:creative writing|reading)|ratings?|reviews?|want to read|kindle unlimited|genres?|site is protected)\b/i.test(description)
     ? description
     : "";
 }
@@ -784,7 +855,8 @@ async function bookWikipediaContext(book) {
   const exact = pages.find((page) => {
     const pageTitle = normalize(page.title);
     const extract = page.extract ?? "";
-    const titleMatch = titleKeys.some((key) => pageTitle === key);
+    const titleMatch = titleKeys.some((key) => pageTitle === key
+      || (pageTitle.startsWith(`${key} `) && /\b(?:book|novel|short story)\b/i.test(pageTitle)));
     const unrelated = /\b(?:may refer to|disambiguation|was a rock band|television sitcom|american actor|is any disturbed state|is a journalist who|is a type of weather)\b/i.test(extract);
     return titleMatch && !unrelated;
   });
@@ -822,22 +894,21 @@ async function openLibraryBookContext(book) {
         description = typeof work.first_sentence === "object" ? work.first_sentence.value : work.first_sentence;
       }
     }
-    const premise = conciseSentences(plainText(description ?? match.first_sentence?.[0] ?? ""), 300);
+    const premise = plainText(description ?? match.first_sentence?.[0] ?? "").slice(0, 4_000);
     return premise.length >= 45 ? { description: premise, pageUrl: workUrl } : null;
   })().catch(() => null);
   openLibraryBookCache.set(key, request);
   return request;
 }
 
-function bookDescription(book, wikipedia, context, goodreads, openLibrary, article) {
-  const identity = bookPremiseDescription(
+function bookDescription(book, wikipedia, context, goodreads, openLibrary, article, fallback) {
+  return bookPremiseDescription(
     goodreads?.description,
     openLibrary?.description,
     wikipedia?.extract,
     article?.intro,
-  )
-    || ensureSentence(`${book.title} is a book by ${book.author}`);
-  return recentDescription(identity, context?.headline, { requireEvent: true });
+    fallback,
+  ) || ensureSentence(`${book.title} is a book by ${book.author}`);
 }
 
 async function updateBooks(brief, result) {
@@ -862,12 +933,12 @@ async function updateBooks(brief, result) {
     const goodreadsContext = goodreads[index];
     const openLibraryContext = openLibrary[index];
     const article = articles[index];
-    const newsUrl = context?.link ?? googleNewsSearchUrl(`${book.title} ${book.author}`);
+    const newsUrl = article?.url ?? context?.link ?? googleNewsSearchUrl(`${book.title} ${book.author}`);
     return {
       rank: index + 1,
       title: book.title,
       subtitle: `Goodreads · ${book.author}`,
-      description: bookDescription(book, wiki, context, goodreadsContext, openLibraryContext, article),
+      description: bookDescription(book, wiki, context, goodreadsContext, openLibraryContext, article, current?.description),
       image: current?.image ?? `/culture/book-${slugify(book.title)}.webp`,
       imageSource: book.image,
       alt: current?.alt ?? `Cover of ${book.title} by ${book.author}`,
@@ -883,7 +954,7 @@ async function updateBooks(brief, result) {
         wiki
           ? { source: "Wikipedia book context", url: wiki.pageUrl }
           : { source: "Google News book coverage", url: newsUrl },
-        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
+        ...(context ? [{ source: article?.context?.source ?? context.source, url: newsUrl }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
@@ -1051,16 +1122,17 @@ function conciseSentences(value, maxLength = 320) {
 }
 
 const copiedMetricPattern = /\b(?:billboard hot 100|google shopping|google searches?|search volume|spotify(?:'|’)?s today(?:'|’)?s top hits|wikipedia (?:article )?(?:drew|views?))\b|\branking it #\d+|\bplacing it #\d+/i;
-const editorialHeadlinePattern = /^(?:forget|inside|meet|why)\b|\b(?:admit it|babygirl|best|cover by|favorite|hot take|joke on|must-see|opinion|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\beverything (?:else )?(?:you )?need to know\b|\bonly .{0,50} could\b|\bgets? .{0,30} treatment\b/i;
-const eventHeadlinePattern = /\b(?:announc|appoint|arrest|ban|block|buy|cancel|cement|charg|clos|confirm|crash|damag|debut|discount|dismis|file|first look|join|launch|leav|let|open|order|recall|reject|releas|renew|resign|return|reveal|rise|rally|sell|sign|sicken|surge|suspend|teas|unveil|win|won)\w*\b/i;
+const editorialHeadlinePattern = /^(?:forget|inside|meet|why)\b|\b(?:admit it|babygirl|best|cover by|favorite|homerist|hot take|joke on|must-see|opinion|reacts?|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\beverything (?:else )?(?:you )?need to know\b|\bonly .{0,50} could\b|\bgets? .{0,30} treatment\b/i;
+const eventHeadlinePattern = /\b(?:announc|appoint|arrest|appear|award|ban|block|break|buy|cancel|cast|cement|charg|clos|confirm|crash|damag|debut|direct|discount|dismis|file|first look|gross|join|launch|leav|let|match|open|order|perform|pledge|premier|qualif|recall|reject|releas|renew|resign|return|reveal|rise|rally|say|sell|sign|sicken|surge|suspend|teas|tournament|tour|unveil|win|won|world cup)\w*\b/i;
 
-function factualHeadline(value, { rejectChartPlacement = false, requireEvent = false } = {}) {
+function factualHeadline(value, { rejectChartPlacement = false, requireEvent = false, maxLength = 240 } = {}) {
   const clean = plainText(value ?? "")
     .replace(/^(?:exclusive|opinion|review)\s*[|:]\s*/i, "")
     .replace(/\s+-\s+The Athletic$/i, "")
     .trim();
   const factual = sentences(clean).filter((sentence) => sentence.length >= 24
-    && sentence.length <= 240
+      && sentence.length <= maxLength
+    && !/(?:…|\.\.\.)\s*$/.test(sentence)
     && !sentence.includes("?")
     && !/\b(?:No|vs)\.$/i.test(sentence)
     && !/^\d+\s+(?:and|as|but|in|on|to|with)\b/i.test(sentence)
@@ -1071,7 +1143,7 @@ function factualHeadline(value, { rejectChartPlacement = false, requireEvent = f
     .map((sentence) => sentence
       .replace(/\s+draws outrage and fears of misuse$/i, " has prompted scrutiny over potential misuse")
       .trim());
-  return conciseSentences(factual.join(" "), 240);
+  return conciseSentences(factual.join(" "), maxLength);
 }
 
 function personIdentity(title, description, categoryLabel) {
@@ -1089,6 +1161,32 @@ function recentDescription(identity, headline, options = {}) {
   const context = factualHeadline(headline, options);
   if (context) return `${identity} ${context}`;
   return identity;
+}
+
+function personRecentDescription(title, identity, article, context) {
+  const candidates = [
+    article?.intro,
+    context?.headline,
+    ...(context?.alternates ?? []).map((candidate) => candidate.headline),
+  ];
+  const titleTokens = new Set(normalize(title).split(" ").filter((token) => token.length >= 3));
+  const recent = candidates.map((value) => {
+    const raw = plainText(value);
+    const event = eventHeadlinePattern.test(raw);
+    const fallback = conciseSentences(value, 320);
+    const text = factualHeadline(value, { requireEvent: event, maxLength: 320 })
+      || (/(?:…|\.\.\.)\s*$/.test(fallback) ? "" : fallback);
+    const overlap = [...titleTokens].filter((token) => normalize(text).split(" ").includes(token)).length;
+    return { text, overlap, event };
+  }).filter((candidate) => candidate.text && !copiedMetricPattern.test(candidate.text))
+    .filter((candidate) => !(normalize(candidate.text).startsWith(`${normalize(title)} is `)
+      && candidate.text.length < 180))
+    .sort((left, right) => Number(right.event) - Number(left.event)
+      || right.overlap - left.overlap
+      || right.text.length - left.text.length)
+    .find((candidate) => candidate.overlap > 0);
+  if (!recent) return identity;
+  return `${identity} ${recent.text}`;
 }
 
 function publicationDateLabel(value) {
@@ -1121,7 +1219,9 @@ async function googleNewsContext(query, days = 45, { requireEvent = false } = {}
       && !new Set(["and", "for", "from", "news", "film", "movie", "product", "song", "shopping", "the", "with"]).has(token)));
     const items = [...rss.matchAll(/<item>([\s\S]*?)<\/item>/gi)].slice(0, 8).map((match, index) => {
       const item = match[1];
-      const source = plainText(item.match(/<source\b[^>]*>([\s\S]*?)<\/source>/i)?.[1] ?? "");
+      const sourceTag = item.match(/<source\b([^>]*)>([\s\S]*?)<\/source>/i);
+      const source = plainText(sourceTag?.[2] ?? "");
+      const sourceUrl = sourceTag?.[1]?.match(/\burl=["']([^"']+)/i)?.[1] ?? "";
       const rawHeadline = plainText(item.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "");
       const headline = (source && rawHeadline.endsWith(` - ${source}`)
         ? rawHeadline.slice(0, -source.length - 3).trim()
@@ -1148,6 +1248,7 @@ async function googleNewsContext(query, days = 45, { requireEvent = false } = {}
         link: link.startsWith("https://news.google.com/") ? link : newsUrl.href,
         publishedAt: Number.isNaN(date.getTime()) ? null : date.toISOString(),
         source: source || "Google News",
+        sourceUrl: /^https:\/\//i.test(sourceUrl) ? sourceUrl : null,
         feedUrl: newsUrl.href,
         sourceOrder: index,
         overlap,
@@ -1163,6 +1264,89 @@ async function googleNewsContext(query, days = 45, { requireEvent = false } = {}
     } : null;
   })();
   googleNewsCache.set(key, request);
+  return request;
+}
+
+const bingArticleCache = new Map();
+
+function decodeBingResultUrl(rawUrl) {
+  try {
+    const url = new URL(rawUrl, "https://www.bing.com");
+    if (url.hostname !== "www.bing.com") return publicHttpsUrl(url.href, "search result").href;
+    const encoded = url.searchParams.get("u");
+    if (!encoded) return null;
+    const payload = encoded.startsWith("a1") ? encoded.slice(2) : encoded;
+    const decoded = Buffer.from(payload.replaceAll("-", "+").replaceAll("_", "/"), "base64").toString("utf8");
+    return /^https:\/\//i.test(decoded) ? publicHttpsUrl(decoded, "search result").href : null;
+  } catch {
+    return null;
+  }
+}
+
+function sameArticleDomain(left, right) {
+  if (!left || !right) return false;
+  try {
+    const leftHost = new URL(left).hostname.replace(/^www\./i, "").toLowerCase();
+    const rightHost = new URL(right).hostname.replace(/^www\./i, "").toLowerCase();
+    return leftHost === rightHost || leftHost.endsWith(`.${rightHost}`) || rightHost.endsWith(`.${leftHost}`);
+  } catch {
+    return false;
+  }
+}
+
+function usableArticleUrl(rawUrl) {
+  try {
+    const url = new URL(rawUrl);
+    if (url.protocol !== "https:" || url.pathname === "/" || url.pathname.length < 8) return false;
+    return !/(?:^|\.)bing\.com$|(?:^|\.)google\.com$|(?:^|\.)wikipedia\.org$|(?:^|\.)youtube\.com$|(?:^|\.)instagram\.com$|(?:^|\.)facebook\.com$|(?:^|\.)linkedin\.com$|(?:^|\.)twitter\.com$|(?:^|\.)x\.com$|(?:^|\.)tiktok\.com$/i.test(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
+async function bingSearchArticles(headline, sourceUrl) {
+  const sourceHost = (() => {
+    try {
+      return new URL(sourceUrl).hostname.replace(/^www\./i, "").toLowerCase();
+    } catch {
+      return "";
+    }
+  })();
+  const key = normalize(`${headline} ${sourceHost}`);
+  if (bingArticleCache.has(key)) return bingArticleCache.get(key);
+  const request = (async () => {
+    const queries = [
+      sourceHost ? `site:${sourceHost} ${headline}` : headline,
+      headline,
+    ];
+    const pages = await mapConcurrent([...new Set(queries)], 2, async (query) => {
+      const searchUrl = new URL("https://www.bing.com/search");
+      searchUrl.search = new URLSearchParams({ q: query, count: "10", setlang: "en-US" });
+      return fetchText(searchUrl, { headers: { "user-agent": "Mozilla/5.0" } }).catch(() => "");
+    });
+    const headlineTokens = new Set(normalize(headline).split(" ").filter((token) => token.length >= 4));
+    const candidates = [];
+    for (const html of pages) {
+      for (const match of html.matchAll(/<h2\b[^>]*>\s*<a\b([^>]*)>([\s\S]*?)<\/a>\s*<\/h2>/gi)) {
+        const href = match[1].match(/\bhref\s*=\s*["']([^"']+)/i)?.[1];
+        const url = href ? decodeBingResultUrl(decodeHtml(href)) : null;
+        if (!url || !usableArticleUrl(url)) continue;
+        const title = plainText(match[2]);
+        const urlTokens = normalize(new URL(url).pathname).split(" ");
+        const titleOverlap = [...headlineTokens].filter((token) => normalize(title).split(" ").includes(token)).length;
+        const urlOverlap = [...headlineTokens].filter((token) => urlTokens.includes(token)).length;
+        const overlap = Math.max(titleOverlap, urlOverlap);
+        const domainMatch = sameArticleDomain(url, sourceUrl);
+        candidates.push({ url, title, overlap, domainMatch });
+      }
+    }
+    const minimumOverlap = Math.min(2, headlineTokens.size);
+    return [...new Map(candidates.map((candidate) => [candidate.url, candidate])).values()]
+      .filter((candidate) => candidate.overlap >= minimumOverlap)
+      .sort((left, right) => right.overlap - left.overlap
+        || Number(right.domainMatch) - Number(left.domainMatch));
+  })().catch(() => []);
+  bingArticleCache.set(key, request);
   return request;
 }
 
@@ -1369,7 +1553,10 @@ async function updatePeople(brief, topviews) {
   if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people");
   const details = await wikipediaPageDetails(selected.map((person) => person.title));
   const contexts = await mapConcurrent(selected, 4, (person) =>
-    googleNewsContext(`"${person.title}"`, 45, { requireEvent: true }).catch(() => null));
+    googleNewsContext(`"${person.title}"`, 45, { requireEvent: true })
+      .catch(() => null)
+      .then((context) => context ?? googleNewsContext(`"${person.title}"`, 45, { requireEvent: false }).catch(() => null)));
+  const articles = await mapConcurrent(contexts, 2, (context) => linkedNewsArticle(context));
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
@@ -1379,12 +1566,13 @@ async function updatePeople(brief, topviews) {
     const current = currentByTitle.get(normalize(title));
     const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}`;
     const context = contexts[index];
+    const article = articles[index];
     const identity = personIdentity(title, person.entity?.descriptions?.en?.value, person.label);
     return {
       rank: index + 1,
       title,
       subtitle: person.label,
-      description: recentDescription(identity, context?.headline, { requireEvent: true }),
+      description: personRecentDescription(title, identity, article, context),
       image: current?.image ?? `/culture/person-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `Portrait of ${title}`,
@@ -1394,7 +1582,9 @@ async function updatePeople(brief, topviews) {
       evidence: [
         { source: "Wikimedia monthly topviews", url: topviews.apiUrl },
         { source: "Wikipedia article", url: wikipediaUrl },
-        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
+        ...(article?.url
+          ? [{ source: `${article.context?.source ?? context?.source ?? "Current coverage"}`, url: article.url }]
+          : context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
       ],
       accent: current?.accent ?? accents[index % accents.length],
       category: person.category,
@@ -1749,7 +1939,7 @@ const genericProductWords = new Set([
   "more", "new", "one", "parents", "popular", "prime", "sale", "section", "shop", "starting", "story", "stories",
   "things", "today", "top", "trend", "trending", "viral", "warning", "what", "where", "why", "years",
   "about", "actually", "collectible", "collectibles", "doctors", "experts", "everything", "how", "hype", "inside", "internet", "job", "just", "know", "officials",
-  "again", "america", "bag", "box", "cake", "china", "cup", "dot", "eagle", "found", "jack", "june", "kids", "knicks", "meet", "memorial", "now", "olive", "online", "only", "people", "picks", "places", "products", "psst", "retailer", "retail", "right", "rms", "shoppers", "skin", "skincare", "stock", "target", "toys", "tried", "under", "video", "world", "worth", "young",
+  "again", "america", "bag", "brand", "brands", "box", "buys", "cake", "china", "concern", "concerns", "cup", "dot", "eagle", "earthbound", "found", "get", "give", "good", "great", "health", "hot", "jack", "june", "kids", "knicks", "lifestyle", "look", "make", "makes", "meet", "memorial", "now", "olive", "online", "only", "people", "picks", "places", "products", "psst", "raises", "retailer", "retail", "right", "rms", "shoppers", "skin", "skincare", "stock", "target", "things", "toys", "tried", "under", "use", "using", "video", "world", "worth", "young",
 ]);
 const productIdentityPattern = /\b(?:bag|brush|candle|card|cube|dumpling|gadget|gloss|lip|mascara|mug|phone|plush|serum|skincare|squish(?:y)?|toy|tote|tracker|watch|wearable)\b/i;
 const genericProductPhrasePattern = /^(?:beauty product|portable fan|summer dress|squishy(?: toy)?(?: trend| craze)?|squishy dumpling(?:s|[’']? toys?)?|toy trend|toy craze|tri state parents|viral gadget|viral product|product trend|right now|tote bag nationwide|tote bag|body oil|hair mascara)$/i;
@@ -2258,13 +2448,28 @@ async function googleTrendingNews() {
 async function linkedNewsArticle(context) {
   if (!context) return null;
   let primary = null;
+  const unusableIntroPattern = /\b(?:we delve into|what it means for you|let['’]s explore|fascinating topic|in today['’]s fast-paced|discover how a .* lawsuit)\b/i;
+  const usableImage = (value) => Boolean(value) && !/(?:gravatar|avatar|favicon|sprite|placeholder|default[-_ ]?image|\blogo\b)/i.test(value);
   for (const candidate of [context, ...(context.alternates ?? [])]) {
-    const articleUrl = await resolveGoogleNewsArticle(candidate.link).catch(() => null);
-    if (!articleUrl) continue;
-    if (!primary) primary = { context, url: articleUrl };
-    const metadata = await linkedArticleMetadata(articleUrl, { allowMissingImage: true }).catch(() => null);
-    if (candidate === context && metadata?.imageSource) return { context: candidate, ...metadata };
-    if (candidate === context && metadata?.intro) primary = { context: candidate, ...metadata };
+    const resolvedUrl = await resolveGoogleNewsArticle(candidate.link).catch(() => null);
+    const fallbackResults = await bingSearchArticles(candidate.headline, candidate.sourceUrl);
+    const searchResults = [...new Map([
+      ...(resolvedUrl ? [{ url: resolvedUrl }] : []),
+      ...fallbackResults,
+    ].map((result) => [result.url, result])).values()];
+    for (const result of searchResults.slice(0, 8)) {
+      const articleUrl = result.url;
+      const metadata = await linkedArticleMetadata(articleUrl, { allowMissingImage: true }).catch(() => null);
+      if (!metadata) {
+        if (!primary && usableArticleUrl(articleUrl)) primary = { context: candidate, url: articleUrl };
+        continue;
+      }
+      const intro = metadata.intro && !unusableIntroPattern.test(metadata.intro) ? metadata.intro : "";
+      const article = { context: candidate, ...metadata, intro, imageSource: usableImage(metadata.imageSource) ? metadata.imageSource : undefined };
+      if (!primary) primary = article;
+      if (article.imageSource) return article;
+      if (!primary.intro && intro) primary = article;
+    }
   }
   return primary;
 }
@@ -2345,6 +2550,9 @@ function validateBrief(brief) {
     if (!item.description?.trim() || !item.alt?.trim() || !item.image?.startsWith("/culture/")
       || !/^#[0-9a-f]{6}$/i.test(item.accent) || !item.url || new URL(item.url).protocol !== "https:") {
       throw new Error(`${item.title} lacks complete card information`);
+    }
+    if (section.id === "news" && new URL(item.url).hostname === "news.google.com") {
+      throw new Error(`${item.title} still points to a Google News redirect`);
     }
     if (item.imageSource) {
       const imageUrl = new URL(item.imageSource);

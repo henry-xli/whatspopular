@@ -144,7 +144,7 @@ export function extractArticleIntro(html) {
     ?? html;
   const paragraphs = [...scope.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
     .map((match) => articleText(match[1]))
-    .filter((text) => text.length >= 45 && text.length <= 600)
+    .filter((text) => text.length >= 45 && text.length <= 1_000)
     .filter((text) => !/^(?:advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i.test(text))
     .filter((text) => !/\b(?:see more of our coverage|our coverage|in your search results|click here|download our app|follow us|sign up for our|subscribe to our)\b/i.test(text))
     .filter((text, index, values) => values.indexOf(text) === index)
@@ -153,10 +153,10 @@ export function extractArticleIntro(html) {
   let result = "";
   for (const paragraph of paragraphs) {
     const candidate = `${result} ${paragraph}`.trim();
-    if (candidate.length > 520 && result) break;
+    if (candidate.length > 900 && result) break;
     result = candidate;
   }
-  return result.slice(0, 560).replace(/\s+\S*$/, "").trim();
+  return result.slice(0, 860).replace(/\s+\S*$/, "").trim();
 }
 
 function relatedArticleHost(candidate, expected) {
