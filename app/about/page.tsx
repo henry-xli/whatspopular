@@ -25,7 +25,7 @@ const flow = [
   {
     number: "04",
     title: "Validate and cache",
-    text: "Require two source hosts and no more than three linked references per entry or board, validate every link, write one JSON snapshot, and download images as local WebP files.",
+    text: "Use selected source excerpts for optional AI copy editing, validate every returned description, fall back safely when it is unavailable, require two source hosts and no more than three linked references, then write one JSON snapshot and local WebP images.",
   },
   {
     number: "05",
@@ -49,19 +49,19 @@ const methods = [
   },
   {
     board: "People",
-    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata identity metadata, and matching recent Google News coverage for the description.",
-    rule: "Walk down Topviews, keep living people, remove politicians, assign one broad primary category, and allow at most two people from any category. Keep the remaining view order; recent coverage never changes rank.",
+    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata identity metadata, and matching recent Google News coverage. An optional daily AI copy pass receives these selected excerpts.",
+    rule: "Walk down Topviews, keep living people, remove politicians, assign one broad primary category, and allow at most two people from any category. Keep the remaining view order; coverage and AI copy never change rank.",
     metric: "Previous-month English Wikipedia views.",
   },
   {
     board: "Movies",
-    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata for movie classification, IMDb-linked rating metadata, and matching recent Google News coverage.",
-    rule: "Keep only movie pages from Topviews and preserve their page-view order. Ratings and recent coverage add context but do not affect rank.",
+    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata for movie classification, IMDb-linked rating metadata, matching recent Google News coverage, and optional AI copy editing from those excerpts.",
+    rule: "Keep only movie pages from Topviews and preserve their page-view order. Ratings, plot copy, and recent coverage add context but do not affect rank.",
     metric: "Previous-month English Wikipedia views.",
   },
   {
     board: "Books",
-    sources: "Goodreads’ U.S. most-read books page and each linked Goodreads book page, with Open Library or Wikipedia as a plot-premise fallback and current Google News coverage for context.",
+    sources: "Goodreads’ U.S. most-read books page and each linked Goodreads book page, with Open Library or Wikipedia as a plot-premise fallback, current Google News coverage, and optional AI copy editing from those excerpts.",
     rule: "Keep the first ten Goodreads entries in the published order. Use each book page’s average star rating and plot-premise copy; monthly readers remain the ranking metric and are never blended with another score.",
     metric: "Goodreads monthly readers and average star rating.",
   },
@@ -73,14 +73,14 @@ const methods = [
   },
   {
     board: "Products",
-    sources: "Amazon Movers & Shakers across six retail categories, Amazon listing search, and recent Google News coverage about viral products.",
+    sources: "Amazon Movers & Shakers across six retail categories, Amazon listing search, recent Google News coverage about viral products, and optional AI copy editing from those excerpts.",
     rule: "Require explicit recent viral-demand coverage plus an Amazon match. Combine social evidence, Amazon sales-rank movement when available, freshness, independent confirmations, and scarcity; retail movement alone never qualifies and stale or controversy-only coverage is downranked.",
     metric: "Independent recent viral-source count; Amazon movement is a ranking input when available.",
   },
   {
     board: "News",
-    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, each linked publisher article’s opening paragraphs and lead image, and Wikimedia only as an image fallback.",
-    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link directly to current coverage, and use the article’s opening text for a concise event description when safely available.",
+    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, each linked publisher article’s opening paragraphs and lead image, Wikimedia only as an image fallback, and optional AI copy editing from those excerpts.",
+    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link directly to current coverage, and use the article’s opening text or validated AI copy for a concise event description.",
     metric: "Seven-day Google search volume.",
   },
 ];

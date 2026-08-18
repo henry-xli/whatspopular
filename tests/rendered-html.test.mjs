@@ -3,6 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { buildDescriptionPrompt, generateDescriptionBatch, parseDescriptionOutput } from "../scripts/lib/ai-descriptions.mjs";
 import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/lib/news-article.mjs";
 import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/lib/runtime.mjs";
 
@@ -20,6 +21,56 @@ async function render(pathname = "/", init = {}) {
     { waitUntil() {}, passThroughOnException() {} },
   );
 }
+
+test("builds and validates source-grounded AI descriptions", () => {
+  const prompt = buildDescriptionPrompt("people", [{
+    id: "people-1",
+    title: "Example Person",
+    role: "Actor",
+    sourceSnippets: [{ source: "Publisher", text: "The person appeared in a new film this summer." }],
+  }]);
+  assert.match(prompt, /SOURCE DATA BEGIN/);
+  assert.match(prompt, /untrusted reference data/i);
+  assert.match(prompt, /recent event or coverage/i);
+  const parsed = parseDescriptionOutput({
+    output_text: JSON.stringify({ descriptions: [
+      { id: "people-1", description: "Example Person is an actor whose new film role has brought them renewed attention this summer." },
+      { id: "unexpected", description: "This must be ignored." },
+    ] }),
+  }, ["people-1"]);
+  assert.equal(parsed.get("people-1"), "Example Person is an actor whose new film role has brought them renewed attention this summer.");
+  assert.equal(parsed.has("unexpected"), false);
+});
+
+test("uses a bounded structured request for an enabled AI description batch", async () => {
+  const originalFetch = globalThis.fetch;
+  let request;
+  globalThis.fetch = async (url, init) => {
+    request = { url, init };
+    return new Response(JSON.stringify({
+      output_text: JSON.stringify({ descriptions: [
+        { id: "movies-1", description: "A stranded explorer must solve a dangerous mystery to get home." },
+      ] }),
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  try {
+    const result = await generateDescriptionBatch("movies", [{
+      id: "movies-1",
+      title: "Example Film",
+      role: "Movie",
+      sourceSnippets: [{ source: "Wikipedia", text: "An explorer wakes on a distant world." }],
+    }], { apiKey: "test-key", timeoutMs: 1_000 });
+    assert.equal(result.size, 1);
+    assert.match(String(request.url), /^https:\/\/api\.openai\.com\/v1\/responses$/);
+    assert.equal(request.init.headers.get("authorization"), "Bearer test-key");
+    const body = JSON.parse(request.init.body);
+    assert.equal(body.text.format.type, "json_schema");
+    assert.equal(body.text.format.strict, true);
+    assert.match(body.input, /SOURCE DATA BEGIN/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
 
 test("renders the complete finite culture briefing", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));

@@ -2,6 +2,7 @@ import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { gunzipSync } from "node:zlib";
+import { generateDescriptionBatch } from "./lib/ai-descriptions.mjs";
 import { withHeadlessPage } from "./lib/headless-browser.mjs";
 import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./lib/news-article.mjs";
 import { fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
@@ -13,6 +14,7 @@ const force = process.argv.includes("--force");
 const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
+const aiDescriptionContexts = new WeakMap();
 
 const allowedHosts = new Set([
   "accounts.spotify.com",
@@ -105,6 +107,20 @@ async function safely(name, work) {
       error: error instanceof Error ? error.message.slice(0, 180) : String(error).slice(0, 180),
     };
   }
+}
+
+function rememberAiDescriptionContext(item, sectionId, snippets) {
+  aiDescriptionContexts.set(item, {
+    sectionId,
+    snippets: snippets
+      .map((snippet) => ({
+        source: String(snippet.source ?? "").trim(),
+        text: plainText(snippet.text ?? "").replace(/\s+/g, " ").trim(),
+      }))
+      .filter((snippet) => snippet.source && snippet.text)
+      .slice(0, 6),
+  });
+  return item;
 }
 
 function decodeHtml(value) {
@@ -956,7 +972,7 @@ async function updateBooks(brief, result) {
     const openLibraryContext = openLibrary[index];
     const article = articles[index];
     const newsUrl = article?.url ?? context?.link ?? googleNewsSearchUrl(`${book.title} ${book.author}`);
-    return {
+    const item = {
       rank: index + 1,
       title: book.title,
       subtitle: `Goodreads · ${book.author}`,
@@ -980,6 +996,14 @@ async function updateBooks(brief, result) {
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
+    rememberAiDescriptionContext(item, "books", [
+      { source: "Goodreads book page", text: goodreadsContext?.description },
+      { source: "Open Library book record", text: openLibraryContext?.description },
+      { source: "Wikipedia book context", text: wiki?.extract },
+      { source: article?.context?.source ?? context?.source ?? "Current book coverage", text: article?.intro },
+      { source: article?.context?.source ?? context?.source ?? "Current book headline", text: article?.context?.headline },
+    ]);
+    return item;
   });
   section.eyebrow = "Goodreads · most read this month · U.S.";
   section.title = "Books";
@@ -1607,7 +1631,7 @@ async function updatePeople(brief, topviews) {
     const context = contexts[index];
     const article = articles[index];
     const identity = personIdentity(title, person.entity?.descriptions?.en?.value, person.label);
-    return {
+    const item = {
       rank: index + 1,
       title,
       subtitle: person.label,
@@ -1628,6 +1652,13 @@ async function updatePeople(brief, topviews) {
       accent: current?.accent ?? accents[index % accents.length],
       category: person.category,
     };
+    rememberAiDescriptionContext(item, "people", [
+      { source: "Wikipedia biography", text: page?.extract },
+      { source: article?.context?.source ?? context?.source ?? "Recent coverage", text: article?.intro },
+      { source: article?.context?.source ?? context?.source ?? "Recent headline", text: article?.context?.headline },
+      ...(context?.alternates ?? []).map((candidate) => ({ source: candidate.source ?? "Related coverage", text: candidate.headline })),
+    ]);
+    return item;
   });
   section.eyebrow = `${topviews.period.month} ${topviews.period.year} · Wikipedia topviews`;
   section.title = "People";
@@ -1756,7 +1787,7 @@ async function updateMovies(brief, topviews) {
     const wikipediaPageTitle = page?.title ?? wikipediaTitle;
     const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(wikipediaPageTitle.replaceAll(" ", "_"))}`;
     const { imdbId, cinemeta } = metadata[index];
-    return {
+    const item = {
       rank: index + 1,
       title,
       subtitle: movie.entity?.descriptions?.en?.value?.match(/\b((?:19|20)\d{2})\b/)?.[1]
@@ -1777,6 +1808,12 @@ async function updateMovies(brief, topviews) {
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
+    rememberAiDescriptionContext(item, "movies", [
+      { source: "Cinemeta film synopsis", text: cinemeta?.description },
+      { source: "Wikipedia film article", text: page?.extract },
+      { source: "Recent film coverage", text: recentContexts[index] },
+    ]);
+    return item;
   });
   section.eyebrow = `${topviews.period.month} ${topviews.period.year} · Wikipedia topviews`;
   section.title = "Movies";
@@ -2484,7 +2521,7 @@ async function updateProducts(brief, products) {
     const moverEvidence = product.mover
       ? [{ source: `Amazon Movers & Shakers · ${product.mover.category}`, url: product.mover.sourceUrl }]
       : [];
-    return {
+    const item = {
       rank: index + 1,
       title,
       subtitle: "Product",
@@ -2502,6 +2539,19 @@ async function updateProducts(brief, products) {
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
+    rememberAiDescriptionContext(item, "products", [
+      { source: "Amazon listing", text: product.title },
+      { source: product.bestEvidence?.source ?? "Best recent product coverage", text: product.bestEvidence?.intro || product.bestEvidence?.headline },
+      ...(product.evidence ?? []).map((evidence) => ({
+        source: evidence.source ?? "Recent product coverage",
+        text: evidence.intro || evidence.headline,
+      })),
+      ...(product.observations ?? []).map((observation) => ({
+        source: observation.source ?? "Recent product coverage",
+        text: observation.headline,
+      })),
+    ]);
+    return item;
   });
   section.eyebrow = "Social trend evidence · past 90 days";
   section.title = "Products";
@@ -2706,7 +2756,7 @@ function updateNews(brief, topics) {
     const current = currentByTitle.get(normalize(title));
     const trendUrl = googleTrendsExploreUrl([topic.title], "now 7-d");
     const published = publicationDateLabel(topic.publishedAt);
-    return {
+    const item = {
       rank: index + 1,
       title,
       subtitle: published ? `News · ${published}` : "News",
@@ -2729,6 +2779,13 @@ function updateNews(brief, topics) {
       ],
       accent: current?.accent ?? accents[index % accents.length],
     };
+    rememberAiDescriptionContext(item, "news", [
+      { source: topic.newsSource ?? "Publisher article", text: topic.articleIntro },
+      { source: "Publisher headline", text: topic.headline },
+      { source: "Wikipedia topic context", text: topic.topicSummary },
+      { source: "Related current coverage", text: topic.relatedHeadline },
+    ]);
+    return item;
   });
   section.eyebrow = "U.S. Google Trends · past 7 days";
   section.title = "News";
@@ -2740,6 +2797,56 @@ function updateNews(brief, topics) {
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5);
   section.moreLabel = `Show ranks 6–${allItems.length}`;
+}
+
+const aiDescriptionSectionIds = ["people", "movies", "books", "products", "news"];
+const unusableAiDescriptionPattern = /\b(?:as an ai|i cannot|i can’t|insufficient information|source snippets|ranking metric|page views|search volume|billboard hot 100|know your meme|goodreads monthly readers)\b/i;
+
+async function updateAiDescriptions(brief) {
+  if (!process.env.OPENAI_API_KEY?.trim()) {
+    console.log("AI descriptions skipped: OPENAI_API_KEY is not configured; deterministic descriptions remain active.");
+    return { enabled: false, applied: 0, sections: 0 };
+  }
+  const jobs = aiDescriptionSectionIds.map((sectionId) => {
+    const section = brief.sections.find((entry) => entry.id === sectionId);
+    const items = section ? [...section.items, ...(section.moreItems ?? [])] : [];
+    const records = items.map((item) => {
+      const context = aiDescriptionContexts.get(item);
+      return {
+        id: `${sectionId}-${item.rank}`,
+        title: item.title,
+        role: item.subtitle,
+        sourceSnippets: context?.snippets?.length
+          ? context.snippets
+          : [{ source: "Existing validated context", text: item.description }],
+      };
+    });
+    return { sectionId, items, records };
+  }).filter((job) => job.items.length && job.records.length);
+  const results = await mapConcurrent(jobs, 2, async (job) => {
+    try {
+      const generated = await generateDescriptionBatch(job.sectionId, job.records);
+      let applied = 0;
+      for (const record of job.records) {
+        const description = generated.get(record.id);
+        if (!description || unusableAiDescriptionPattern.test(description)) continue;
+        const item = job.items.find((candidate) => `${job.sectionId}-${candidate.rank}` === record.id);
+        if (!item) continue;
+        item.description = description;
+        applied += 1;
+      }
+      if (applied < job.items.length) {
+        console.warn(`AI descriptions returned ${applied}/${job.items.length} usable ${job.sectionId} entries; deterministic fallbacks retained for the rest.`);
+      }
+      return { sectionId: job.sectionId, applied, ok: true };
+    } catch (error) {
+      console.warn(`AI descriptions unavailable for ${job.sectionId}; deterministic fallbacks retained: ${error instanceof Error ? error.message : String(error)}`);
+      return { sectionId: job.sectionId, applied: 0, ok: false };
+    }
+  });
+  const applied = results.reduce((total, result) => total + result.applied, 0);
+  console.log(`AI descriptions applied to ${applied} entries across ${results.filter((result) => result.applied > 0).length} boards.`);
+  return { enabled: true, applied, sections: results.filter((result) => result.applied > 0).length };
 }
 
 function validateBrief(brief) {
@@ -2978,6 +3085,7 @@ await updateMusic(brief, byName["Billboard Hot 100"].value, byName["Spotify Toda
 await updateBooks(brief, byName["Goodreads monthly most read"].value);
 if (byName["Viral product discovery"].ok) await updateProducts(brief, byName["Viral product discovery"].value);
 updateNews(brief, byName["Google Trending Now / News"].value);
+await updateAiDescriptions(brief);
 for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
 delete brief.pulse;
 

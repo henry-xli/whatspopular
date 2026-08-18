@@ -54,15 +54,29 @@ last validated snapshot.
   sports, and orders the remainder by Google’s displayed search volume.
 
 Descriptions do not repeat the ranking metric shown on each card and have no
-per-entry overrides. The updater derives identity or premise text from current
-Wikidata, Wikipedia, IMDb/Cinemeta, Spotify, or Amazon metadata, then adds a factual
-recent-news sentence when one is available. Google Trends related queries and
-ranked Wikipedia search results disambiguate unfamiliar news topics. Question-
-style, editorial, and personality-led headline fragments are rejected. News
-entries use the selected publisher article’s direct URL, publication date,
-opening paragraphs, and lead image metadata. Topic-matched Wikimedia imagery is
-used only when the article does not expose a usable image; the final fallback is
-a local title card.
+per-entry overrides. The updater first derives identity or premise context from
+current Wikidata, Wikipedia, IMDb/Cinemeta, Goodreads, Open Library, Spotify, or
+Amazon metadata and the selected publisher excerpts. When `OPENAI_API_KEY` is
+configured, five bounded Responses API batches rewrite the People, Movies,
+Books, Products, and News descriptions once during ingestion: films and books
+receive plot premises, while people, products, and news receive a concise reason
+for their recent relevance. Source snippets are treated as untrusted data,
+structured output is validated, and each failed or missing result keeps its
+deterministic fallback. The key is never shipped to the browser. Google Trends
+related queries and ranked Wikipedia search results disambiguate unfamiliar
+news topics. Question-style, editorial, and personality-led headline fragments
+are rejected. News entries use the selected publisher article’s direct URL,
+publication date, opening paragraphs, and lead image metadata. Topic-matched
+Wikimedia imagery is used only when the article does not expose a usable image;
+the final fallback is a local title card.
+
+The daily AI copy pass is optional and has no effect on ranking or visitor
+traffic. To enable it, add an `OPENAI_API_KEY` repository secret under GitHub
+Settings → Secrets and variables → Actions. The workflow uses the cost-sensitive
+`gpt-5.6-luna` model by default; an optional `OPENAI_DESCRIPTION_MODEL`
+repository variable can select another available text model. If the secret is
+absent or the API is unavailable, ingestion remains fully functional with the
+deterministic copy.
 
 Every entry has evidence from at least two distinct source hosts, with no more
 than three linked evidence items or leaderboard source links.
