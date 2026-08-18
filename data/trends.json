@@ -2447,14 +2447,14 @@
     }
   ],
   "quiz": {
-    "durationSeconds": 60,
+    "durationSeconds": 15,
     "questions": [
       {
         "id": "memes-1",
         "topicId": "memes",
         "topic": "Memes",
         "itemTitle": "Jimothy the raccoon",
-        "prompt": "Which topic matches this description? \"Jimothy is a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars.\"",
+        "prompt": "Which meme is linked to this origin or use? \"this entry is a wild this entry with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of this entry spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars.\"",
         "answers": [
           "Jimothy the raccoon",
           "Kwebbelkop Laughing / YourRAGE Laugh",
@@ -2468,7 +2468,7 @@
         "topicId": "memes",
         "topic": "Memes",
         "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh",
-        "prompt": "Which topic matches this description? \"Kwebbelkop Laughing or YourRAGE Laugh refers to a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like Dutch YouTuber Kwebbelkop.\"",
+        "prompt": "Which meme is linked to this origin or use? \"this entry or this entry refers to a viral sound effect of YouTuber and Twitch streamer this entry loudly this entry in an exaggerated manner, which is often described as sounding like Dutch YouTuber this entry.\"",
         "answers": [
           "Kwebbelkop Laughing / YourRAGE Laugh",
           "Jimothy the raccoon",
@@ -2482,7 +2482,7 @@
         "topicId": "memes",
         "topic": "Memes",
         "itemTitle": "Hatsune Miku World Cup Custody Battle",
-        "prompt": "Which topic matches this description? \"Hatsune Miku World Cup Custody Battle is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku.\"",
+        "prompt": "Which meme is linked to this origin or use? \"this entry is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"this entry\" of the Japanese virtual singer this entry.\"",
         "answers": [
           "Hatsune Miku World Cup Custody Battle",
           "Jimothy the raccoon",
@@ -2496,7 +2496,7 @@
         "topicId": "people",
         "topic": "People",
         "itemTitle": "Erling Haaland",
-        "prompt": "Which topic matches this description? \"Erling Haaland is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and finishing. He is in focus after starring for Norway at the 2026 World Cup, where the team reached the quarterfinals.\"",
+        "prompt": "Which person is linked to this recent detail? \"this entry is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and finishing. He is in focus after starring for Norway at the 2026 World Cup, where the team reached the quarterfinals.\"",
         "answers": [
           "Erling Haaland",
           "Lamine Yamal",
@@ -2510,7 +2510,7 @@
         "topicId": "people",
         "topic": "People",
         "itemTitle": "Lamine Yamal",
-        "prompt": "Which topic matches this description? \"Lamine Yamal is a Barcelona and Spain winger who became a leading young footballer. He is currently in coverage after breakup rumors involving influencer Inés García prompted him to respond on social media following Spain’s 2026 World Cup victory.\"",
+        "prompt": "Which person is linked to this recent detail? \"this entry is a Barcelona and Spain winger who became a leading young footballer. He is currently in coverage after breakup rumors involving influencer Inés García prompted him to respond on social media following Spain’s 2026 World Cup victory.\"",
         "answers": [
           "Lamine Yamal",
           "Erling Haaland",
@@ -2524,7 +2524,7 @@
         "topicId": "people",
         "topic": "People",
         "itemTitle": "Christopher Nolan",
-        "prompt": "Which topic matches this description? \"Christopher Nolan is a filmmaker known for blockbuster films with complex storytelling. He is in focus as his Homer adaptation, The Odyssey, reaches theaters, with Nolan also saying his next film will be at least three years away.\"",
+        "prompt": "Which person is linked to this recent detail? \"this entry is a filmmaker known for blockbuster films with complex storytelling. He is in focus as his Homer adaptation, The Odyssey, reaches theaters, with this entry also saying his next film will be at least three years away.\"",
         "answers": [
           "Christopher Nolan",
           "Erling Haaland",
@@ -2538,7 +2538,7 @@
         "topicId": "movies",
         "topic": "Movies",
         "itemTitle": "The Odyssey",
-        "prompt": "Which topic matches this description? \"An epic fantasy follows Odysseus on a perilous journey home to Ithaca after the Trojan War, where he encounters mythical beings while trying to reunite with Penelope.\"",
+        "prompt": "Which film has this premise detail? \"An epic fantasy follows Odysseus on a perilous journey home to Ithaca after the Trojan War, where he encounters mythical beings while trying to reunite with Penelope.\"",
         "answers": [
           "The Odyssey",
           "Obsession",
@@ -2552,7 +2552,7 @@
         "topicId": "movies",
         "topic": "Movies",
         "itemTitle": "Obsession",
-        "prompt": "Which topic matches this description? \"A supernatural horror film follows Bear, a music-store employee who uses a magical toy to make Nikki love him, only for her affection to become a violent obsession.\"",
+        "prompt": "Which film has this premise detail? \"A supernatural horror film follows Bear, a music-store employee who uses a magical toy to make Nikki love him, only for her affection to become a violent this entry.\"",
         "answers": [
           "Obsession",
           "The Odyssey",
@@ -2566,7 +2566,7 @@
         "topicId": "movies",
         "topic": "Movies",
         "itemTitle": "Project Hail Mary",
-        "prompt": "Which topic matches this description? \"A science-fiction film follows teacher Ryland Grace, who awakens alone on a spaceship with no memory and must uncover a mission to stop a mysterious substance killing Earth's sun.\"",
+        "prompt": "Which film has this premise detail? \"A science-fiction film follows teacher Ryland Grace, who awakens alone on a spaceship with no memory and must uncover a mission to stop a mysterious substance killing Earth's sun.\"",
         "answers": [
           "Project Hail Mary",
           "The Odyssey",
@@ -2580,7 +2580,7 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "Yesteryear",
-        "prompt": "Which topic matches this description? \"Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a disturbing version of her life—possibly in the 19th century. She must uncover what happened and escape.\"",
+        "prompt": "Which entry is linked to this detail? \"Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a disturbing version of her life—possibly in the 19th century. She must uncover what happened and escape.\"",
         "answers": [
           "Yesteryear",
           "The Calamity Club",
@@ -2594,7 +2594,7 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "The Calamity Club",
-        "prompt": "Which topic matches this description? \"In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Together, they devise a dangerous plan to take control of their lives.\"",
+        "prompt": "Which entry is linked to this detail? \"In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Together, they devise a dangerous plan to take control of their lives.\"",
         "answers": [
           "The Calamity Club",
           "Yesteryear",
@@ -2608,7 +2608,7 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "Theo of Golden",
-        "prompt": "Which topic matches this description? \"A mysterious stranger named Theo arrives in the small Southern city of Golden and begins returning a local artist’s pencil portraits to their rightful owners. Each exchange reveals a story and changes a life.\"",
+        "prompt": "Which entry is linked to this detail? \"A mysterious stranger named this entry arrives in the small Southern city of this entry and begins returning a local artist’s pencil portraits to their rightful owners. Each exchange reveals a story and changes a life.\"",
         "answers": [
           "Theo of Golden",
           "Yesteryear",
@@ -2622,7 +2622,7 @@
         "topicId": "music",
         "topic": "Music",
         "itemTitle": "Choosin' Texas",
-        "prompt": "Which topic matches this description? \"\"Choosin' Texas\" is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘Choosin’ Texas’.\"",
+        "prompt": "Which track is linked to this context? \"\"this entry\" is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘this entry’ this entry’.\"",
         "answers": [
           "Choosin' Texas",
           "hate that i made you love me",
@@ -2636,7 +2636,7 @@
         "topicId": "music",
         "topic": "Music",
         "itemTitle": "hate that i made you love me",
-        "prompt": "Which topic matches this description? \"\"hate that i made you love me\" is a track by Ariana Grande, released May 29, 2026.\"",
+        "prompt": "Which track is linked to this context? \"\"this entry\" is a track by Ariana Grande, released May 29, 2026.\"",
         "answers": [
           "hate that i made you love me",
           "Choosin' Texas",
@@ -2650,7 +2650,7 @@
         "topicId": "music",
         "topic": "Music",
         "itemTitle": "Man I Need",
-        "prompt": "Which topic matches this description? \"\"Man I Need\" is a track by Olivia Dean, released Aug 15, 2025.\"",
+        "prompt": "Which track is linked to this context? \"\"this entry\" is a track by Olivia Dean, released Aug 15, 2025.\"",
         "answers": [
           "Man I Need",
           "Choosin' Texas",
@@ -2664,7 +2664,7 @@
         "topicId": "products",
         "topic": "Products",
         "itemTitle": "Laneige",
-        "prompt": "Which topic matches this description? \"Laneige refers to the Lip Sleeping Mask, recently featured among viral beauty products alongside items from Dyson and Medicube.\"",
+        "prompt": "Which product is linked to this buying context? \"this entry refers to the Lip Sleeping Mask, recently featured among viral beauty products alongside items from Dyson and Medicube.\"",
         "answers": [
           "Laneige",
           "Medicube",
@@ -2678,7 +2678,7 @@
         "topicId": "products",
         "topic": "Products",
         "itemTitle": "Medicube",
-        "prompt": "Which topic matches this description? \"Medicube refers to the PDRN Pink Collagen Volume Multi Balm Stick for the face and body, recently featured among viral Medicube products.\"",
+        "prompt": "Which product is linked to this buying context? \"this entry refers to the PDRN Pink Collagen Volume Multi Balm Stick for the face and body, recently featured among viral this entry products.\"",
         "answers": [
           "Medicube",
           "Laneige",
@@ -2692,7 +2692,7 @@
         "topicId": "products",
         "topic": "Products",
         "itemTitle": "NeeDohs",
-        "prompt": "Which topic matches this description? \"NeeDohs refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them.\"",
+        "prompt": "Which product is linked to this buying context? \"this entry refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them.\"",
         "answers": [
           "NeeDohs",
           "Laneige",
@@ -2706,7 +2706,7 @@
         "topicId": "news",
         "topic": "News",
         "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-        "prompt": "Which topic matches this description? \"The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. The recalled eggs have been linked to an outbreak that sickened nearly 100 people.\"",
+        "prompt": "Which news item is described by this development? \"The FDA has classified July’s nationwide egg this entry as this entry I, its highest severity level, because of this entry risk. The recalled eggs have been linked to an outbreak that sickened nearly 100 people.\"",
         "answers": [
           "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
           "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
@@ -2720,7 +2720,7 @@
         "topicId": "news",
         "topic": "News",
         "itemTitle": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-        "prompt": "Which topic matches this description? \"Hurricane Lala brought threats of flooding, mudslides, heavy rain and strong winds to Hawaii’s Big Island, prompting residents to stay off roads, protect their homes and hunker down.\"",
+        "prompt": "Which news item is described by this development? \"this entry brought threats of flooding, mudslides, heavy rain and strong winds to this entry’s Big this entry, prompting this entry to stay off roads, protect their homes and hunker this entry.\"",
         "answers": [
           "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
@@ -2734,7 +2734,7 @@
         "topicId": "news",
         "topic": "News",
         "itemTitle": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-        "prompt": "Which topic matches this description? \"Human remains found about 15 miles from Nancy Guthrie’s home in Arizona do not appear connected to her disappearance at this time, according to the Pima County Sheriff’s Department.\"",
+        "prompt": "Which news item is described by this development? \"this entry found about 15 this entry from this entry’s this entry in Arizona do not appear this entry to her disappearance at this time, according to the Pima County this entry’s this entry.\"",
         "answers": [
           "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
           "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",

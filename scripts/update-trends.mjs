@@ -17,7 +17,7 @@ const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 const aiDescriptionContexts = new WeakMap();
 const quizSectionIds = ["memes", "people", "movies", "books", "music", "products", "news"];
-const quizDurationSeconds = 60;
+const quizDurationSeconds = 15;
 
 const allowedHosts = new Set([
   "accounts.spotify.com",
@@ -2859,12 +2859,46 @@ async function updateAiDescriptions(brief) {
   return { enabled: true, applied, sections: results.filter((result) => result.applied > 0).length };
 }
 
-function quizPromptFallback(description) {
-  const context = conciseSentences(description, 260).replace(/[“”]/g, '"').trim();
-  return `Which topic matches this description? "${context}"`;
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function redactQuizTitle(value, title) {
+  const genericWords = new Set(["this", "that", "with", "from", "your", "world", "meme", "film", "movie", "book", "song", "the", "and", "of", "in", "on", "for", "a", "an", "to"]);
+  const terms = [
+    title.trim(),
+    ...title.split(/[^A-Za-z0-9]+/).filter((word) => word.length >= 4 && !genericWords.has(word.toLowerCase())),
+  ].filter(Boolean).sort((left, right) => right.length - left.length);
+  return terms.reduce((result, term) => result.replace(new RegExp(`\\b${escapeRegExp(term)}\\b`, "ig"), "this entry"), value)
+    .replace(/\bthis entry(?:\s+this entry)+\b/gi, "this entry")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function quizPromptFallback(description, title, topicId) {
+  const context = redactQuizTitle(conciseSentences(description, 260)
+    .replace(/[“”]/g, '"')
+    .trim(), title);
+  const prompts = {
+    people: "Which person is linked to this recent detail?",
+    movies: "Which film has this premise detail?",
+    music: "Which track is linked to this context?",
+    products: "Which product is linked to this buying context?",
+    news: "Which news item is described by this development?",
+    memes: "Which meme is linked to this origin or use?",
+  };
+  return `${prompts[topicId] ?? "Which entry is linked to this detail?"} "${context}"`;
 }
 
 const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
+
+function usableQuizPrompt(prompt, record) {
+  if (!prompt || unusableQuizPromptPattern.test(prompt)) return false;
+  const title = normalize(record.title);
+  const question = normalize(prompt);
+  return !title || title.length < 4 || !question.includes(title);
+}
 
 function quizRecords(brief) {
   const records = [];
@@ -2907,9 +2941,9 @@ async function updateQuiz(brief) {
     topicId: record.topicId,
     topic: record.topic,
     itemTitle: record.title,
-    prompt: generated.get(record.id) && !unusableQuizPromptPattern.test(generated.get(record.id))
+    prompt: generated.get(record.id) && usableQuizPrompt(generated.get(record.id), record)
       ? generated.get(record.id)
-      : quizPromptFallback(record.description),
+      : quizPromptFallback(record.description, record.title, record.topicId),
     answers: record.answerChoices,
     correctAnswer: record.title,
   }));
@@ -3042,7 +3076,7 @@ function validateBrief(brief) {
   }
   if (!brief.quiz || brief.quiz.durationSeconds !== quizDurationSeconds
       || !Array.isArray(brief.quiz.questions) || brief.quiz.questions.length !== 21) {
-    throw new Error("Quiz must contain 21 questions and a 60-second duration");
+    throw new Error("Quiz must contain 21 questions and a 15-second duration per question");
   }
   const quizCounts = new Map();
   const quizIds = new Set();

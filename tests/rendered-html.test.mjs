@@ -82,6 +82,8 @@ test("builds source-grounded quiz prompts with a fixed answer set", () => {
   }]);
   assert.match(prompt, /QUIZ DATA BEGIN/);
   assert.match(prompt, /only the supplied description/i);
+  assert.match(prompt, /harder, niche detail-recall/i);
+  assert.doesNotMatch(prompt, /which topic matches a description/i);
   const parsed = parseQuizOutput({
     output_text: JSON.stringify({ questions: [
       { id: "people-1", prompt: "Which topic recently appeared in a new film?" },
@@ -102,6 +104,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(homeHtml, /How trendy are you\?/);
   assert.match(homeHtml, />Quiz me</);
   assert.match(homeHtml, />Explore/);
+  assert.match(homeHtml, /class="is-active" href="\/">Home<\/a>/);
   assert.match(homeHtml, /One daily snapshot\. Eight boards\. One quiz\./);
   assert.doesNotMatch(homeHtml, /Catch me up|How this works/);
   assert.equal(response.status, 200);
@@ -113,6 +116,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(response.headers.get("cache-control") ?? "", /s-maxage=86400/);
 
   const html = await response.text();
+  assert.match(html, /class="is-active" href="\/explore">Explore<\/a>/);
   assert.match(html, /Everything worth knowing at a glance/);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
@@ -159,7 +163,7 @@ test("renders the complete finite culture briefing", async () => {
     brief.sections.find((section) => section.id === "music").items.length
       + brief.sections.find((section) => section.id === "music").moreItems.length);
   assert.match(html, /Show ranks 6/);
-  assert.equal(brief.quiz.durationSeconds, 60);
+  assert.equal(brief.quiz.durationSeconds, 15);
   assert.equal(brief.quiz.questions.length, 21);
 });
 
@@ -336,7 +340,7 @@ test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   assert.deepEqual(brief.sections.map((section) => section.id),
     ["memes", "slang", "people", "movies", "books", "music", "products", "news"]);
-  assert.equal(brief.quiz.durationSeconds, 60);
+  assert.equal(brief.quiz.durationSeconds, 15);
   assert.equal(brief.quiz.questions.length, 21);
   const quizCounts = new Map();
   for (const question of brief.quiz.questions) {

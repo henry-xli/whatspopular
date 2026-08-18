@@ -309,8 +309,8 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
 
   if (!candidate.quiz || typeof candidate.quiz !== "object") throw new Error("Culture brief is missing its quiz");
   const quiz = candidate.quiz as Record<string, unknown>;
-  if (quiz.durationSeconds !== 60 || !Array.isArray(quiz.questions) || quiz.questions.length !== 21) {
-    throw new Error("Culture quiz must contain 21 questions and last 60 seconds");
+  if (quiz.durationSeconds !== 15 || !Array.isArray(quiz.questions) || quiz.questions.length !== 21) {
+    throw new Error("Culture quiz must contain 21 questions and give each question 15 seconds");
   }
   const quizBoardIds = ["memes", "people", "movies", "books", "music", "products", "news"];
   const quizCounts = new Map<string, number>();

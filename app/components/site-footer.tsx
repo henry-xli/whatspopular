@@ -11,8 +11,8 @@ export function SiteFooter() {
         </div>
         <div>
           <strong>Explore</strong>
+          <a href="/">Home</a>
           <a href="/explore">Today’s boards</a>
-          <a href="/about">How it works</a>
           <a href="https://buymeacoffee.com/0wtynrfutb" target="_blank" rel="noopener noreferrer">Support the site</a>
         </div>
         <div>

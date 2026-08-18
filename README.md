@@ -61,8 +61,10 @@ configured, six bounded Responses API batches rewrite the People, Movies,
 Books, Products, and News descriptions and create quiz prompts once during
 ingestion: films and books receive plot premises, while people, products, and
 news receive a concise reason for their recent relevance. The quiz stores 21
-questions (three from every non-slang board), four choices per question, and a
-60-second duration in the same snapshot. Source snippets are treated as
+questions (three from every non-slang board), four choices per question, and
+15 seconds per question in the same snapshot. Each prompt tests a specific
+detail from the matching description rather than asking which topic matches a
+description. Source snippets are treated as
 untrusted data, structured output is validated, and each failed or missing
 result keeps its deterministic fallback. The key is never shipped to the
 browser. Google Trends

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CultureQuizQuestion } from "../culture";
 
 const QUESTION_COUNT = 5;
@@ -46,47 +46,64 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
   const [responses, setResponses] = useState<Array<string | null>>([]);
   const [deadline, setDeadline] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(durationSeconds);
+  const [revealed, setRevealed] = useState(false);
+  const advanceTimer = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
+  }, []);
 
   useEffect(() => {
-    if (status !== "active" || deadline === null) return undefined;
+    if (status !== "active" || deadline === null || revealed) return undefined;
     const update = () => {
       const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
       setTimeLeft(remaining);
       if (remaining === 0) {
         setStatus("complete");
         setDeadline(null);
+        setRevealed(false);
       }
     };
     update();
     const timer = window.setInterval(update, 1000);
     return () => window.clearInterval(timer);
-  }, [deadline, status]);
+  }, [deadline, revealed, status]);
 
   function startQuiz() {
-    setRound(selectRound(questions));
+    if (!questions.length) return;
+    if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
+    const nextRound = selectRound(questions);
+    setRound(nextRound);
     setResponses([]);
     setCurrent(0);
     setTimeLeft(durationSeconds);
+    setRevealed(false);
     setDeadline(Date.now() + durationSeconds * 1000);
     setStatus("active");
   }
 
   function chooseAnswer(answer: string) {
-    if (status !== "active") return;
+    if (status !== "active" || revealed || !question) return;
     setResponses((previous) => {
       const next = [...previous];
       next[current] = answer;
       return next;
     });
-  }
-
-  function nextQuestion() {
-    if (current >= round.length - 1) {
-      setStatus("complete");
-      setDeadline(null);
-      return;
-    }
-    setCurrent((previous) => previous + 1);
+    setRevealed(true);
+    advanceTimer.current = window.setTimeout(() => {
+      advanceTimer.current = null;
+      setRevealed(false);
+      setCurrent((previous) => {
+        if (previous >= round.length - 1) {
+          setStatus("complete");
+          setDeadline(null);
+          return previous;
+        }
+        setTimeLeft(durationSeconds);
+        setDeadline(Date.now() + durationSeconds * 1000);
+        return previous + 1;
+      });
+    }, 2_000);
   }
 
   const question = round[current];
@@ -119,20 +136,27 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
             {question.shuffledAnswers.map((answer) => (
               <button
                 key={answer}
-                className={`quiz-answer${selectedAnswer === answer ? " is-selected" : ""}`}
+                className={`quiz-answer${selectedAnswer === answer ? " is-selected" : ""}${revealed && answer === question.correctAnswer ? " is-correct" : ""}${revealed && selectedAnswer === answer && answer !== question.correctAnswer ? " is-wrong" : ""}`}
                 type="button"
                 onClick={() => chooseAnswer(answer)}
+                disabled={revealed}
                 aria-pressed={selectedAnswer === answer}
               >
-                {answer}
+                <span>{answer}</span>
+                {revealed && answer === question.correctAnswer ? (
+                  <span className="quiz-answer-mark" aria-hidden="true">✓</span>
+                ) : null}
               </button>
             ))}
           </fieldset>
           <div className="quiz-controls">
-            <span>{selectedAnswer ? "Answer selected" : "Choose one answer"}</span>
-            <button className="button button-primary" type="button" onClick={nextQuestion} disabled={!selectedAnswer}>
-              {current === round.length - 1 ? "Finish" : "Next"}
-            </button>
+            <span aria-live="polite">
+              {revealed
+                ? selectedAnswer === question.correctAnswer
+                  ? "Correct — next question in 2 seconds"
+                  : "Not quite — next question in 2 seconds"
+                : "Choose one answer"}
+            </span>
           </div>
         </section>
       ) : null}
