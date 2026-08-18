@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-18T19:21:03.712Z",
+  "generatedAt": "2026-08-18T20:03:39.593Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,996"
+            "value": "1,002,041"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,518"
+            "value": "114,519"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,969"
+            "value": "99,976"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,579"
+            "value": "76,581"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,592"
+            "value": "55,593"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,936"
+            "value": "46,938"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,553"
+            "value": "43,554"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,381"
+            "value": "27,389"
           },
           "evidence": [
             {
@@ -545,7 +545,7 @@
           "rank": 1,
           "title": "Erling Haaland",
           "subtitle": "Sports",
-          "description": "Erling Haaland is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and prolific finishing. He drew renewed attention after starring for Norway at the 2026 World Cup.",
+          "description": "Erling Haaland is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and finishing. He is in focus after starring for Norway at the 2026 World Cup, where the team reached the quarterfinals.",
           "image": "/culture/person-erling-haaland.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Erling Haaland",
@@ -576,7 +576,7 @@
           "rank": 2,
           "title": "Lamine Yamal",
           "subtitle": "Sports",
-          "description": "Lamine Yamal is a Spanish winger for Barcelona and the Spain national team, known as one of football’s leading young players. He recently attracted coverage over breakup rumors involving influencer Inés García and his social-media response.",
+          "description": "Lamine Yamal is a Barcelona and Spain winger who became a leading young footballer. He is currently in coverage after breakup rumors involving influencer Inés García prompted him to respond on social media following Spain’s 2026 World Cup victory.",
           "image": "/culture/person-lamine-yamal.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Lamine Yamal",
@@ -607,7 +607,7 @@
           "rank": 3,
           "title": "Christopher Nolan",
           "subtitle": "Film",
-          "description": "Christopher Nolan is a British-American filmmaker known for blockbuster films with complex storytelling. He is currently in the spotlight for the release of his Homer adaptation, “The Odyssey,” and his statement that his next film may be at least three years away.",
+          "description": "Christopher Nolan is a filmmaker known for blockbuster films with complex storytelling. He is in focus as his Homer adaptation, The Odyssey, reaches theaters, with Nolan also saying his next film will be at least three years away.",
           "image": "/culture/creator-christopher-nolan.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/ChristopherNolan-byPhilipRomano_%28cropped%29.jpg/960px-ChristopherNolan-byPhilipRomano_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Christopher Nolan",
@@ -638,7 +638,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya is an American actress and singer known for television roles and blockbuster films. She recently drew coverage as “Spider-Man: Brand New Day” and “The Odyssey,” both starring her and Tom Holland, dominated the 2026 box office.",
+          "description": "Zendaya is an actor known for television roles and blockbuster films. She is in current coverage after reportedly holding a private wedding celebration with Tom Holland at a country estate in Surrey, England.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -658,8 +658,8 @@
               "url": "https://en.wikipedia.org/wiki/Zendaya"
             },
             {
-              "source": "Forbes",
-              "url": "https://www.forbes.com/sites/hannahabraham/2026/08/03/zendaya-and-tom-holland-are-officially-2026s-highest-grossing-couple/"
+              "source": "pagesix.com",
+              "url": "https://pagesix.com/2026/08/06/celebrity-news/zendaya-and-tom-holland-have-private-wedding-celebration-at-sprawling-uk-country-estate/"
             }
           ],
           "accent": "#ffc857",
@@ -669,7 +669,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is a Colombian singer-songwriter, dancer and producer known for bringing Latin music to a global audience. She recently pledged to help build at least 10 schools in earthquake-damaged Chocó, Colombia.",
+          "description": "Shakira is a Colombian singer-songwriter, dancer and producer known for helping popularize Latin music globally. She is in focus after bringing Tyla, Ed Sheeran and Burna Boy onstage at her first show after the FIFA World Cup in New York City.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -702,7 +702,7 @@
           "rank": 6,
           "title": "Sonam Wangchuk",
           "subtitle": "Science & technology",
-          "description": "Sonam Wangchuk is an Indian engineer, educator and activist who founded SECMOL in Ladakh. He recently ended a 26-day hunger strike after negotiations with federal ministers, while related “cockroach” protests continued.",
+          "description": "Sonam Wangchuk is an Indian engineer, educator and activist who founded SECMOL in Ladakh. He recently ended a 26-day hunger strike, while demonstrators said their protests would continue.",
           "image": "/culture/person-sonam-wangchuk.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Sonam_Wangchuk%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Sonam Wangchuk",
@@ -733,7 +733,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Swift is an American singer-songwriter known for autobiographical songwriting and repeated artistic reinvention. She recently set a record with her 16th No. 1 on Billboard’s Adult Pop Airplay chart.",
+          "description": "Taylor Swift is an American singer-songwriter known for autobiographical songwriting and repeated artistic reinvention. She is in coverage after earning her 16th No. 1 on Billboard’s Adult Pop Airplay chart with “I Knew It, I Knew You.”",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -764,7 +764,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeff Bezos is the founder and former CEO of Amazon. He recently became relevant through a consortium backed by him acquiring close to a 40% stake in Liverpool Football Club.",
+          "description": "Jeff Bezos is the founder and former CEO of Amazon. He is in focus after a consortium backed by him acquired close to 40% of Liverpool Football Club, with an option to buy a controlling stake.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -784,7 +784,7 @@
               "url": "https://en.wikipedia.org/wiki/Jeff_Bezos"
             },
             {
-              "source": "The New York Times",
+              "source": "nytimes.com",
               "url": "https://www.nytimes.com/athletic/7521009/2026/08/18/liverpool-sale-stake-jeff-bezos-takeover/"
             }
           ],
@@ -795,7 +795,7 @@
           "rank": 9,
           "title": "Andrew Tate",
           "subtitle": "Business",
-          "description": "Andrew Tate is a social-media personality and former professional kickboxer known for controversial manosphere commentary. He recently made headlines after he and his brother Tristan were arrested in Miami on rape and sex-trafficking charges while fighting extradition.",
+          "description": "Andrew Tate is a social media personality and former professional kickboxer known for controversial manosphere commentary. He is currently in the news after U.S. authorities arrested him and his brother Tristan in Miami amid further U.K. charges and an extradition fight.",
           "image": "/culture/person-andrew-tate.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Andrew Tate",
@@ -815,8 +815,8 @@
               "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
             },
             {
-              "source": "PBS",
-              "url": "https://www.pbs.org/newshour/world/andrew-and-tristan-tate-arrested-in-miami-on-rape-and-sex-trafficking-charges-heres-what-to-know"
+              "source": "Forbes",
+              "url": "https://www.forbes.com/sites/conormurray/2026/07/27/andrew-tates-miami-arrest-timeline-hearing-on-extradition-process-today/"
             }
           ],
           "accent": "#5ab0ff",
@@ -826,7 +826,7 @@
           "rank": 10,
           "title": "Amelia Dimoldenberg",
           "subtitle": "Media",
-          "description": "Amelia Dimoldenberg is a comedian, writer and presenter best known for creating and hosting “Chicken Shop Date.” Her Formula 1 interview series, “Passenger Princess,” is returning to YouTube for a second season.",
+          "description": "Amelia Dimoldenberg is a comedian and presenter best known for creating and hosting the celebrity interview series Chicken Shop Date. She is in focus as her Formula 1 series Passenger Princess returns to YouTube for a second season.",
           "image": "/culture/person-amelia-dimoldenberg.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Amelia Dimoldenberg",
@@ -877,7 +877,7 @@
           "rank": 1,
           "title": "The Odyssey",
           "subtitle": "2026 film",
-          "description": "An epic action fantasy following Odysseus, the king of Ithaca, on a perilous voyage home after the Trojan War as he faces mythical beings and tries to reunite with Penelope.",
+          "description": "An epic fantasy follows Odysseus on a perilous journey home to Ithaca after the Trojan War, where he encounters mythical beings while trying to reunite with Penelope.",
           "image": "/culture/media-odyssey.webp",
           "alt": "The Odyssey 2026 theatrical poster",
           "url": "https://www.imdb.com/title/tt33764258/",
@@ -907,7 +907,7 @@
           "rank": 2,
           "title": "Obsession",
           "subtitle": "2025 film",
-          "description": "A supernatural horror film about Bear, a music store employee who uses a magical toy to make his co-worker Nikki love him, only for the wish to turn her into a violent obsession.",
+          "description": "A supernatural horror film follows Bear, a music-store employee who uses a magical toy to make Nikki love him, only for her affection to become a violent obsession.",
           "image": "/culture/movie-obsession.webp",
           "alt": "Obsession poster or lead image",
           "url": "https://www.imdb.com/title/tt37287335/",
@@ -937,7 +937,7 @@
           "rank": 3,
           "title": "Project Hail Mary",
           "subtitle": "2026 film",
-          "description": "A science-fiction film following teacher Ryland Grace, who awakens on a spaceship with no memory and must uncover his mission to stop a mysterious substance killing Earth's sun.",
+          "description": "A science-fiction film follows teacher Ryland Grace, who awakens alone on a spaceship with no memory and must uncover a mission to stop a mysterious substance killing Earth's sun.",
           "image": "/culture/movie-project-hail-mary.webp",
           "alt": "Project Hail Mary poster or lead image",
           "url": "https://www.imdb.com/title/tt12042730/",
@@ -967,7 +967,7 @@
           "rank": 4,
           "title": "Backrooms",
           "subtitle": "2026 film",
-          "description": "A science-fiction psychological horror film about therapist Mary, who discovers an endless dimension beneath a furniture store and ventures into it after her patient disappears.",
+          "description": "A psychological science-fiction horror film follows therapist Mary after she and her patient discover an endless dimension of liminal spaces beneath a furniture store.",
           "image": "/culture/movie-backrooms.webp",
           "alt": "Backrooms poster or lead image",
           "url": "https://www.imdb.com/title/tt26657236/",
@@ -997,7 +997,7 @@
           "rank": 5,
           "title": "Alpha",
           "subtitle": "Movie",
-          "description": "An action thriller following a highly trained assassin raised as a super-soldier who teams up with her long-lost sister after discovering the truth about her stolen childhood, confronting her creator and his illicit military program.",
+          "description": "An action thriller follows a highly trained assassin raised as a super-soldier who discovers the truth about her stolen childhood and joins her long-lost sister to destroy her creator's military program.",
           "image": "/culture/movie-alpha.webp",
           "alt": "Alpha poster or lead image",
           "url": "https://www.imdb.com/title/tt28363783/",
@@ -1029,7 +1029,7 @@
           "rank": 6,
           "title": "Supergirl",
           "subtitle": "2026 film",
-          "description": "A superhero film following Kara Zor-El, or Supergirl, as she travels across the galaxy with an unlikely companion to hunt an adversary who harmed her dog, Krypto.",
+          "description": "A superhero film follows Kara Zor-El, or Supergirl, as she travels across the galaxy with an unlikely companion to hunt an adversary who harmed her dog, Krypto.",
           "image": "/culture/movie-supergirl.webp",
           "alt": "Supergirl poster or lead image",
           "url": "https://www.imdb.com/title/tt8814476/",
@@ -1059,7 +1059,7 @@
           "rank": 7,
           "title": "Jana Nayagan",
           "subtitle": "Movie",
-          "description": "An action drama about a former Indian Police Service officer who raises a deceased friend's daughter and encourages her to pursue a career in the Indian Army, then confronts corrupt individuals as he enters politics.",
+          "description": "An action drama follows a former Indian Police Service officer who raises a deceased friend's daughter and confronts corrupt individuals as he pursues a political career.",
           "image": "/culture/movie-jana-nayagan.webp",
           "alt": "Jana Nayagan poster or lead image",
           "url": "https://www.imdb.com/title/tt33379543/",
@@ -1089,7 +1089,7 @@
           "rank": 8,
           "title": "Evil Dead Burn",
           "subtitle": "2026 film",
-          "description": "A supernatural horror sequel about a woman who seeks refuge with her in-laws after her husband's death, only to face the family members as they gradually turn into Deadites.",
+          "description": "A supernatural horror film follows a woman who seeks refuge with her in-laws after her husband's death, only to watch family members transform into Deadites.",
           "image": "/culture/media-evil-dead-burn.webp",
           "alt": "Evil Dead Burn theatrical poster",
           "url": "https://www.imdb.com/title/tt31170389/",
@@ -1119,7 +1119,7 @@
           "rank": 9,
           "title": "Masters of the Universe",
           "subtitle": "2026 film",
-          "description": "A sword-and-sorcery film following Prince Adam as he returns to Eternia, becomes He-Man, and fights Skeletor's evil forces to save his home.",
+          "description": "A sword-and-sorcery film follows Prince Adam as he returns to Eternia, becomes He-Man, and faces Skeletor's forces to save his home.",
           "image": "/culture/movie-masters-of-the-universe.webp",
           "alt": "Masters of the Universe poster or lead image",
           "url": "https://www.imdb.com/title/tt0427340/",
@@ -1149,7 +1149,7 @@
           "rank": 10,
           "title": "Toy Story 5",
           "subtitle": "2026 film",
-          "description": "An animated comedy-drama following Jessie, Woody, Buzz, and the other toys as they struggle with electronics after Bonnie's new favorite plaything, a tablet, challenges their place in playtime.",
+          "description": "An animated comedy-drama follows Woody, Buzz, Jessie, and the other toys as they struggle with electronics after a tablet becomes Bonnie's new favorite plaything.",
           "image": "/culture/media-toy-story.webp",
           "alt": "Toy Story 5 theatrical poster",
           "url": "https://www.imdb.com/title/tt29355505/",
@@ -1199,7 +1199,7 @@
           "rank": 1,
           "title": "Yesteryear",
           "subtitle": "Goodreads · Caro Claire Burke",
-          "description": "Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a horrifying version of her familiar life. Unsure whether it is a hoax, reality show, or something else, she tries to escape.",
+          "description": "Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a disturbing version of her life—possibly in the 19th century. She must uncover what happened and escape.",
           "image": "/culture/book-yesteryear.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
           "alt": "Cover of Yesteryear by Caro Claire Burke",
@@ -1231,7 +1231,7 @@
           "rank": 2,
           "title": "The Calamity Club",
           "subtitle": "Goodreads · Kathryn Stockett",
-          "description": "In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Together, they devise an audacious plan to take control of their lives, risking dangerous consequences in a society that limits women’s freedom.",
+          "description": "In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Together, they devise a dangerous plan to take control of their lives.",
           "image": "/culture/book-the-calamity-club.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1763049143i/228820257.jpg",
           "alt": "Cover of The Calamity Club by Kathryn Stockett",
@@ -1263,7 +1263,7 @@
           "rank": 3,
           "title": "Theo of Golden",
           "subtitle": "Goodreads · Allen Levi",
-          "description": "A mysterious stranger named Theo arrives in the small southern city of Golden and begins buying pencil portraits from a local coffeehouse. Returning each portrait to its rightful owner sparks stories, friendships, and changes in people’s lives.",
+          "description": "A mysterious stranger named Theo arrives in the small Southern city of Golden and begins returning a local artist’s pencil portraits to their rightful owners. Each exchange reveals a story and changes a life.",
           "image": "/culture/book-theo-of-golden.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761744192i/242376245.jpg",
           "alt": "Cover of Theo of Golden by Allen Levi",
@@ -1295,7 +1295,7 @@
           "rank": 4,
           "title": "Mad Mabel",
           "subtitle": "Goodreads · Sally Hepworth",
-          "description": "Eighty-one-year-old Elsie Mabel Fitzpatrick has lived on Kenny Lane for six decades while concealing a disturbing past. When a curious young girl befriends her, secrets about Elsie’s history—and the deaths surrounding her—begin to surface.",
+          "description": "Eighty-one-year-old Elsie Mabel Fitzpatrick has hidden a troubling history on her idyllic street. When a curious young girl befriends her, secrets about Elsie’s past—and the identity of “Mad Mabel”—begin to surface.",
           "image": "/culture/book-mad-mabel.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775070793i/231127044.jpg",
           "alt": "Cover of Mad Mabel by Sally Hepworth",
@@ -1327,7 +1327,7 @@
           "rank": 5,
           "title": "The Correspondent",
           "subtitle": "Goodreads · Virginia Evans",
-          "description": "Retired lawyer Sybil Van Antwerp has spent her life writing letters to people both near and far. When correspondence from her past forces her to confront a painful period, she must face an unsent letter and find a way to forgive.",
+          "description": "Retired lawyer Sybil Van Antwerp has spent her life writing letters, including one she never sends. When correspondence from her past forces her to confront a painful period, she must find forgiveness before she can move forward.",
           "image": "/culture/book-the-correspondent.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1735235942i/223001257.jpg",
           "alt": "Cover of The Correspondent by Virginia Evans",
@@ -1361,7 +1361,7 @@
           "rank": 6,
           "title": "The Divorce",
           "subtitle": "Goodreads · Freida McFadden",
-          "description": "Naomi believes she is living a quintessential love story until her husband throws her out, hires powerful divorce lawyers, drains their accounts, and begins a relationship with a younger woman.",
+          "description": "Naomi believes she is living a quintessential love story until her husband throws her out, hires powerful divorce lawyers, drains their accounts, and starts dating a younger woman.",
           "image": "/culture/book-the-divorce.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783i/244403162.jpg",
           "alt": "Cover of The Divorce by Freida McFadden",
@@ -1389,7 +1389,7 @@
           "rank": 7,
           "title": "Whistler",
           "subtitle": "Goodreads · Ann Patchett",
-          "description": "The supplied snippets do not establish the plot of Whistler.",
+          "description": "Ann Patchett returns to New York in this novel.",
           "image": "/culture/book-whistler.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761863582i/242693052.jpg",
           "alt": "Cover of Whistler by Ann Patchett",
@@ -1411,8 +1411,8 @@
               "url": "https://chireviewofbooks.com/2026/06/12/ann-patchett-returns-to-new-york-in-whistler/"
             },
             {
-              "source": "Goodreads book page",
-              "url": "https://www.goodreads.com/book/show/242693052-whistler"
+              "source": "chireviewofbooks.com",
+              "url": "https://chireviewofbooks.com/2026/06/12/ann-patchett-returns-to-new-york-in-whistler/"
             }
           ],
           "accent": "#9b8cff"
@@ -1421,7 +1421,7 @@
           "rank": 8,
           "title": "Dungeon Crawler Carl (Dungeon Crawler Carl, #1)",
           "subtitle": "Goodreads · Matt Dinniman",
-          "description": "After aliens destroy human civilization, Coast Guard veteran Carl and his ex-girlfriend’s cat, Princess Donut, are trapped in a global, trap-filled dungeon. To survive, they must descend through its levels while entertaining viewers of a sadistic intergalactic game show.",
+          "description": "After Earth’s buildings and people are transformed into an enormous global dungeon, a man and his ex-girlfriend’s cat are forced into a televised survival game. They must descend through timed levels of monsters and traps while winning viewers and followers.",
           "image": "/culture/book-dungeon-crawler-carl-dungeon-crawler-carl-1.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1715780755i/211721806.jpg",
           "alt": "Cover of Dungeon Crawler Carl (Dungeon Crawler Carl, #1) by Matt Dinniman",
@@ -1453,7 +1453,7 @@
           "rank": 9,
           "title": "Our Perfect Storm",
           "subtitle": "Goodreads · Carley Fortune",
-          "description": "After Frankie’s fiancé abandons her on the morning after their wedding festivities, her lifelong best friend George proposes an unconventional cure: taking the honeymoon together to Tofino. The trip forces them to confront what they mean to each other.",
+          "description": "After Frankie’s fiancé abandons her on the morning after their wedding festivities, her longtime best friend George takes her on the honeymoon they never had. Their week in Tofino tests whether their friendship can become something more.",
           "image": "/culture/book-our-perfect-storm.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756350403i/239703816.jpg",
           "alt": "Cover of Our Perfect Storm by Carley Fortune",
@@ -1485,7 +1485,7 @@
           "rank": 10,
           "title": "Dolly All the Time",
           "subtitle": "Goodreads · Annabel Monaghan",
-          "description": "The supplied snippets do not establish the plot of Dolly All the Time.",
+          "description": "When Dolly Brick returns to Rhode Island to help save her family home, she assists Stewart Whitfield after a humiliating breakup. Their arrangement of pretend romance grows complicated as Dolly begins to fall for him and considers relying on someone else.",
           "image": "/culture/book-dolly-all-the-time.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1757041312i/240687665.jpg",
           "alt": "Cover of Dolly All the Time by Annabel Monaghan",
@@ -1507,8 +1507,8 @@
               "url": "https://ctexaminer.com/events/author-talk-marian-schembari-a-little-less-broken-at-athena-books/"
             },
             {
-              "source": "CT Examiner",
-              "url": "https://ctexaminer.com/events/author-talk-marian-schembari-a-little-less-broken-at-athena-books/"
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/240687665-dolly-all-the-time"
             }
           ],
           "accent": "#ff6b57"
@@ -1724,7 +1724,7 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
             },
             {
-              "source": "justjared.com via Google News",
+              "source": "Just Jared via Google News",
               "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTkpVeVVtV05jVTlpUnUzZmpGd3IwNGZuelN1Q1dFUFlWdjRuU0ktU0JFSGVYazdueWNja0tvY0gyTDUwaGQwMEl1V08xNWhjRmwwN0NHbWxLZmhzbkRLZVVPVlk5QWp3N0duUzdhT1VMaHA0V0VpNng4ZmQ2UkJxN3dZakVaeEY3dXUtcEppaE5VdUZYMXU5R0hTcW5NdWtHbFBMQkpjczZrS08xWFV1bEU0OHpEa3BUUC1MZGRjamtVYkYxLWhZQVZnNmpkMU1VYVNoUVY3c01jZlJ3dHc?oc=5"
             }
           ],
@@ -1782,7 +1782,7 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
             },
             {
-              "source": "rollingstone.com via Google News",
+              "source": "Rolling Stone via Google News",
               "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPREtHY0s0MkNoM2tyNXF4WU04VXE3Sk1mTUVMQXlWdE5KRUpTNjRwSWRnSTUxMXJudHVLb2xsdjdFdWdtN0xocTlwX1JsUlhuNTF5ZzZSdUJRUGc5Y191RFVMQnFuRmFYM2pQUDJkSmhnVndTVGxad20yRVFBMWg4V1BUUXY3NkE0dzMxQzFDYjRGemdrYy1tMHNVbTRZRTA1aEtXVjFKU3pIdw?oc=5"
             }
           ],
@@ -1845,7 +1845,7 @@
           "rank": 1,
           "title": "Laneige",
           "subtitle": "Product",
-          "description": "Laneige refers to the Lip Sleeping Mask, recently included among viral beauty products from Laneige, Dyson, and Medicube.",
+          "description": "Laneige refers to the Lip Sleeping Mask, recently featured among viral beauty products alongside items from Dyson and Medicube.",
           "image": "/culture/product-laneige.webp",
           "imageSource": "https://m.media-amazon.com/images/I/51ky4+ZgoVL._AC_UL320_.jpg",
           "alt": "Laneige product listing image",
@@ -1875,7 +1875,7 @@
           "rank": 2,
           "title": "Medicube",
           "subtitle": "Product",
-          "description": "Medicube refers to the PDRN Pink Collagen Volume Multi Balm Stick for face and body, recently featured among viral Medicube products.",
+          "description": "Medicube refers to the PDRN Pink Collagen Volume Multi Balm Stick for the face and body, recently featured among viral Medicube products.",
           "image": "/culture/product-medicube.webp",
           "imageSource": "https://m.media-amazon.com/images/I/613iSS1QL9L._AC_UL320_.jpg",
           "alt": "Medicube product listing image",
@@ -1905,7 +1905,7 @@
           "rank": 3,
           "title": "NeeDohs",
           "subtitle": "Product",
-          "description": "NeeDohs refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has drawn children, parents, and collectors into long waits to buy them.",
+          "description": "NeeDohs refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them.",
           "image": "/culture/product-needohs.webp",
           "imageSource": "https://m.media-amazon.com/images/I/7161JNgvkfL._AC_UL320_.jpg",
           "alt": "NeeDohs product listing image",
@@ -1935,7 +1935,7 @@
           "rank": 4,
           "title": "Dyson",
           "subtitle": "Product",
-          "description": "Dyson refers to the 35mm Cylindrical Comb for the Dyson Vented Barrel Brush and Multi-Styler, recently included among viral beauty products.",
+          "description": "Dyson refers to the 35mm Cylindrical Comb for the Dyson Vented Barrel Brush and Multi-Styler, recently featured among viral beauty products.",
           "image": "/culture/product-dyson.webp",
           "imageSource": "https://m.media-amazon.com/images/I/61lKSYkiJIL._AC_UL320_.jpg",
           "alt": "Dyson product listing image",
@@ -1965,7 +1965,7 @@
           "rank": 5,
           "title": "Mystery Squishy Dumplings",
           "subtitle": "Product",
-          "description": "Mystery Squishy Dumplings are two-pack slow-rise bread squishy fidget toys for kids and adults. Their social-media-fueled squishy trend is expanding through a global lifestyle and character licensing program.",
+          "description": "Mystery Squishy Dumplings are two-pack, slow-rise bread squishy fidget toys for kids and adults. Their social-media-fueled popularity is expanding through a global lifestyle and character licensing program.",
           "image": "/culture/product-mystery-squishy-dumplings.webp",
           "imageSource": "https://m.media-amazon.com/images/I/71cI1fqZqQL._AC_UL320_.jpg",
           "alt": "Mystery Squishy Dumplings product listing image",
@@ -1997,7 +1997,7 @@
           "rank": 6,
           "title": "Trader Joe's Mini Tote Bag",
           "subtitle": "Product",
-          "description": "The Trader Joe’s Mini Tote Bag refers to the blue striped mini tote. It drew renewed attention after the popular Trader Joe’s canvas tote returned for a limited-time restock.",
+          "description": "The Trader Joe’s Mini Tote Bag is the blue-striped mini tote, which drew renewed attention after the popular Trader Joe’s canvas tote returned for a limited-time restock.",
           "image": "/culture/product-trader-joe-s-mini-tote-bag.webp",
           "imageSource": "https://m.media-amazon.com/images/I/71yPwAIlSUL._AC_UL320_.jpg",
           "alt": "Trader Joe's Mini Tote Bag product listing image",
@@ -2098,23 +2098,23 @@
         },
         {
           "label": "Google News · current coverage",
-          "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak"
+          "url": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597"
         }
       ],
       "layout": "landscape",
       "items": [
         {
           "rank": 1,
-          "title": "Massive egg recall in US south and south-west due to salmonella outbreak.",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "About 1.6 million dozen eggs from Texas have been recalled under the FDA’s highest-risk warning as officials investigate a salmonella outbreak that has sickened nearly 100 people.",
-          "image": "/culture/news-massive-egg-recall-in-us-south-and-south-west-due-to-salmonella-.webp",
-          "imageSource": "https://i.guim.co.uk/img/media/8db29763d7dd93fbeef64134375888b2dd0a1629/997_0_4972_3979/master/4972.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=d05bc90d1ef8d6986ec3a21734018645",
+          "title": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "subtitle": "News · Aug 14, 2026",
+          "description": "The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. The recalled eggs have been linked to an outbreak that sickened nearly 100 people.",
+          "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
+          "imageSource": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2026-06/eggs-daily-healthy-as06252026-df99dd.jpg",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
-          "alt": "Lead image from The Guardian's coverage of Massive egg recall in US south and south-west due to salmonella outbreak.",
-          "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
-          "source": "The Guardian",
+          "imageSourcePageUrl": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597",
+          "alt": "Lead image from TODAY.com's coverage of Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "url": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597",
+          "source": "TODAY.com",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -2125,24 +2125,24 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
             },
             {
-              "source": "The Guardian via Google News",
-              "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak"
+              "source": "TODAY.com via Google News",
+              "url": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597"
             }
           ],
-          "accent": "#9b8cff"
+          "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "title": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Hurricane Lala passed the Big Island without making a direct hit, while officials urged O‘ahu residents to stay safe as the storm approached.",
-          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
-          "imageSource": "https://www.civilbeat.org/wp-content/uploads/2026/08/9511.jpg",
+          "description": "Hurricane Lala brought threats of flooding, mudslides, heavy rain and strong winds to Hawaii’s Big Island, prompting residents to stay off roads, protect their homes and hunker down.",
+          "image": "/culture/news-hurricane-lala-leaves-big-island-residents-in-hawaii-hunkered-do.webp",
+          "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
-          "alt": "Lead image from Honolulu Civil Beat's coverage of Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
-          "source": "Honolulu Civil Beat",
+          "imageSourcePageUrl": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "alt": "Lead image from ABC7 Bay Area's coverage of Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "source": "ABC7 Bay Area",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -2150,11 +2150,11 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hawaii+hurricane"
             },
             {
-              "source": "Honolulu Civil Beat via Google News",
-              "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/"
+              "source": "ABC7 Bay Area via Google News",
+              "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/"
             }
           ],
           "accent": "#9b8cff"
@@ -2163,7 +2163,7 @@
           "rank": 3,
           "title": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
           "subtitle": "News · Aug 17, 2026",
-          "description": "Human remains found in an Arizona desert area about 15 miles from Nancy Guthrie’s home have no apparent connection to her disappearance so far, according to the sheriff’s department.",
+          "description": "Human remains found about 15 miles from Nancy Guthrie’s home in Arizona do not appear connected to her disappearance at this time, according to the Pima County Sheriff’s Department.",
           "image": "/culture/news-human-remains-discovered-miles-from-nancy-guthrie-s-home-not-con.webp",
           "imageSource": "https://bloximages.newyork1.vip.townnews.com/news8000.com/content/tncms/assets/v3/editorial/7/d9/7d90fb5c-911f-51b7-9d0a-1da8920e5ec9/6a836a04545f7.image.jpg?crop=1763%2C926%2C0%2C124&resize=1200%2C630&order=crop%2Cresize",
           "imageSourceKind": "article",
@@ -2191,7 +2191,7 @@
           "rank": 4,
           "title": "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic.",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Disney unveiled the first trailer for Frozen 3, showing Anna and Elsa entering a dangerous frozen world; related details indicate Anna and Kristoff will marry.",
+          "description": "Disney unveiled the first trailer for Frozen 3, showing Anna and Elsa entering a dangerous frozen world. Related details indicate Anna and Kristoff will marry, while the film introduces new magic and a villain.",
           "image": "/culture/news-frozen-3-trailer-reveals-anna-s-royal-wedding-and-a-new-icy-magi.webp",
           "imageSource": "https://www.cnet.com/wp-content/uploads/sites/2/112082.jpeg",
           "imageSourceKind": "article",
@@ -2219,7 +2219,7 @@
           "rank": 5,
           "title": "Despite 'New' Updates, Flock's Creepy Cameras Remain Major Civil Liberties Threat.",
           "subtitle": "News · Aug 13, 2026",
-          "description": "Flock Safety announced changes after criticism of its network of more than 120,000 automatic license plate readers, but the ACLU says the updates do not resolve major privacy concerns.",
+          "description": "Flock Safety announced changes to its mass-surveillance operations after criticism of its more than 120,000 automatic license plate readers. The ACLU says the updates do not resolve major privacy and civil-liberties concerns.",
           "image": "/culture/news-despite-new-updates-flock-s-creepy-cameras-remain-major-civil-li.webp",
           "imageSource": "https://assets.aclu.org/live/uploads/2026/08/flock-camera-safety-sign-s.jpg",
           "imageSourceKind": "article",
@@ -2249,7 +2249,7 @@
           "rank": 6,
           "title": "Starbucks Unicorn Frappuccino® return drives record weekend, with more than 2 million beverages sold.",
           "subtitle": "News · Aug 14, 2026",
-          "description": "Starbucks brought back its limited-edition Unicorn Frappuccino for one weekend, reviving the brightly colored drink that became an internet sensation in 2017.",
+          "description": "Starbucks brought back its brightly colored Unicorn Frappuccino for a limited weekend return, reviving the drink that became an internet sensation in 2017. More than 2 million beverages were sold during the promotion.",
           "image": "/culture/news-starbucks-unicorn-frappuccino-return-drives-record-weekend-with-.webp",
           "imageSource": "https://assets.purewow.com/wp-content/uploads/2026/08/unicorn-frappuccino-today.png",
           "imageSourceKind": "article",
@@ -2277,7 +2277,7 @@
           "rank": 7,
           "title": "DREYER'S GRAND ICE CREAM, INC. ISSUES VOLUNTARY RECALL ON SELECT OUTSHINE FRUIT BARS DUE TO POSSIBLE FOREIGN MATTER CONTAMINATION.",
           "subtitle": "News · Aug 16, 2026",
-          "description": "Dreyer’s is voluntarily recalling select Outshine fruit bars distributed nationwide because they may contain glass. Affected flavors include Strawberry, Watermelon, Grape, Tangerine and Black Cherry.",
+          "description": "Dreyer’s is voluntarily recalling select Outshine fruit bars sold nationwide because they may contain glass. The affected flavors include Strawberry, Watermelon, Grape, Tangerine and Black Cherry.",
           "image": "/culture/news-dreyer-s-grand-ice-cream-inc-issues-voluntary-recall-on-select-o.webp",
           "imageSource": "https://mmx.prnewswire.com/media/MS1970267/Screenshot-2026-08-16-133136.jpg?id=OA2888423&p=facebook",
           "imageSourceKind": "article",
@@ -2303,37 +2303,9 @@
         },
         {
           "rank": 8,
-          "title": "Kathy Hilton Michael Jackson Secrets + Diana Jenkins Threatens Hayden Panettiere Answers Revealed Mom (zFptgStxTM).",
-          "subtitle": "News · Aug 17, 2026",
-          "description": "Hayden Panettiere’s memoir has renewed attention on her past friendship with Diana Jenkins, who denied claims connected to an incident described in the book.",
-          "image": "/culture/news-kathy-hilton-michael-jackson-secrets-diana-jenkins-threatens-hay.webp",
-          "imageSource": "https://cdn.realitytvshrine.com/uploads/2026/08/Ellie-New-Featured-Images-2026-08-17T091755.648.png",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://thetab.com/realityshrine/2026/08/17/hayden-panettiere-spoke-out-about-her-weird-friendship-with-rhobhs-diana-jenkins-in-book/",
-          "alt": "Lead image from The Tab's coverage of Kathy Hilton Michael Jackson Secrets + Diana Jenkins Threatens Hayden Panettiere Answers Revealed Mom (zFptgStxTM).",
-          "url": "https://thetab.com/realityshrine/2026/08/17/hayden-panettiere-spoke-out-about-her-weird-friendship-with-rhobhs-diana-jenkins-in-book/",
-          "source": "The Tab",
-          "metric": {
-            "label": "Google search volume",
-            "value": "100K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=diana+jenkins"
-            },
-            {
-              "source": "The Tab via Google News",
-              "url": "https://thetab.com/realityshrine/2026/08/17/hayden-panettiere-spoke-out-about-her-weird-friendship-with-rhobhs-diana-jenkins-in-book/"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 9,
           "title": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
           "subtitle": "News · Aug 15, 2026",
-          "description": "Pixar revealed first concept art for Coco 2, showing a teenage Miguel with Dante in the Land of the Dead. The sequel is scheduled for theaters in November 2029.",
+          "description": "Pixar revealed concept art for Coco 2, showing a teenage Miguel with his dog Dante in the Land of the Dead. The sequel is scheduled for theaters in November 2029.",
           "image": "/culture/news-coco-2-first-look-miguel-becomes-a-teenager-in-pixar-sequel-set-.webp",
           "imageSource": "https://variety.com/wp-content/uploads/2026/08/Image-1.png?w=1000&h=563&crop=1",
           "imageSourceKind": "article",
@@ -2358,17 +2330,45 @@
           "accent": "#57d5a4"
         },
         {
-          "rank": 10,
-          "title": "How to check if you qualify for State Farm’s $5B cash-back payout.",
+          "rank": 9,
+          "title": "Kathy Hilton Michael Jackson Secrets + Diana Jenkins Threatens Hayden Panettiere Answers Revealed Mom (zFptgStxTM).",
           "subtitle": "News · Aug 17, 2026",
-          "description": "State Farm has begun sending a $5 billion cash-back dividend to millions of policyholders. Because the insurer is mutually owned, eligible customers can check whether they qualify and when to expect payment.",
-          "image": "/culture/news-how-to-check-if-you-qualify-for-state-farm-s-5b-cash-back-payout.webp",
-          "imageSource": "https://gray-kctv-prod.gtv-cdn.com/resizer/v2/7QSYCYXIXRFRBAGNGZ5LJMQFIQ.png?auth=1250c15e83fa8522e5daf07574c924e9039dc0b70ae77c4fd69b58754433ef20&width=1200&height=600&smart=true",
+          "description": "Hayden Panettiere’s memoir renewed attention on her past friendship with former Real Housewives of Beverly Hills cast member Diana Jenkins. Jenkins has denied claims related to an incident Panettiere described involving an unnamed friend.",
+          "image": "/culture/news-kathy-hilton-michael-jackson-secrets-diana-jenkins-threatens-hay.webp",
+          "imageSource": "https://cdn.realitytvshrine.com/uploads/2026/08/Ellie-New-Featured-Images-2026-08-17T091755.648.png",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.kctv5.com/2026/08/17/how-check-if-you-qualify-state-farms-5b-cash-back-payout/",
-          "alt": "Lead image from KCTV's coverage of How to check if you qualify for State Farm’s $5B cash-back payout.",
-          "url": "https://www.kctv5.com/2026/08/17/how-check-if-you-qualify-state-farms-5b-cash-back-payout/",
-          "source": "KCTV",
+          "imageSourcePageUrl": "https://thetab.com/realityshrine/2026/08/17/hayden-panettiere-spoke-out-about-her-weird-friendship-with-rhobhs-diana-jenkins-in-book/",
+          "alt": "Lead image from The Tab's coverage of Kathy Hilton Michael Jackson Secrets + Diana Jenkins Threatens Hayden Panettiere Answers Revealed Mom (zFptgStxTM).",
+          "url": "https://thetab.com/realityshrine/2026/08/17/hayden-panettiere-spoke-out-about-her-weird-friendship-with-rhobhs-diana-jenkins-in-book/",
+          "source": "The Tab",
+          "metric": {
+            "label": "Google search volume",
+            "value": "100K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=diana+jenkins"
+            },
+            {
+              "source": "The Tab via Google News",
+              "url": "https://thetab.com/realityshrine/2026/08/17/hayden-panettiere-spoke-out-about-her-weird-friendship-with-rhobhs-diana-jenkins-in-book/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Harris Teeter Is Closing Stores in 2026: See an Updated List of Doomed Locations.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "Kroger plans to close 60 stores across its grocery banners by the end of 2026, including at least six Harris Teeter locations in Virginia, Maryland and North Carolina, as it reduces its footprint.",
+          "image": "/culture/news-harris-teeter-is-closing-stores-in-2026-see-an-updated-list-of-d.webp",
+          "imageSource": "https://eciks.org/wp-content/uploads/2026/08/harris-teeter-60-store-closures-2026.webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://eciks.org/21539-harris-teeter-60-store-closures-2026",
+          "alt": "Lead image from eciks.org's coverage of Harris Teeter Is Closing Stores in 2026: See an Updated List of Doomed Locations.",
+          "url": "https://eciks.org/21539-harris-teeter-60-store-closures-2026",
+          "source": "eciks.org",
           "metric": {
             "label": "Google search volume",
             "value": "50K+"
@@ -2376,14 +2376,14 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=state+farm+dividend"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=harris+teeter+2026+store+closures"
             },
             {
-              "source": "KCTV via Google News",
-              "url": "https://www.kctv5.com/2026/08/17/how-check-if-you-qualify-state-farms-5b-cash-back-payout/"
+              "source": "eciks.org via Google News",
+              "url": "https://eciks.org/21539-harris-teeter-60-store-closures-2026"
             }
           ],
-          "accent": "#57d5a4"
+          "accent": "#ff6b57"
         }
       ],
       "moreLabel": "Show ranks 6–10"
@@ -2393,57 +2393,57 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:04.336Z"
+      "checkedAt": "2026-08-18T20:03:39.825Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:04.847Z"
+      "checkedAt": "2026-08-18T20:03:40.633Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:04.827Z"
+      "checkedAt": "2026-08-18T20:03:40.579Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:07.049Z"
+      "checkedAt": "2026-08-18T20:03:41.404Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:05.345Z"
+      "checkedAt": "2026-08-18T20:03:41.279Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:59.317Z"
+      "checkedAt": "2026-08-18T20:04:25.276Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:04.096Z"
+      "checkedAt": "2026-08-18T20:03:39.901Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:05.071Z"
+      "checkedAt": "2026-08-18T20:03:39.835Z"
     },
     {
       "name": "Goodreads monthly most read",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:05.823Z"
+      "checkedAt": "2026-08-18T20:03:40.877Z"
     },
     {
       "name": "Viral product discovery",
       "ok": false,
-      "checkedAt": "2026-08-18T19:21:41.895Z"
+      "checkedAt": "2026-08-18T20:04:13.190Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-18T19:21:12.404Z"
+      "checkedAt": "2026-08-18T20:03:49.317Z"
     }
   ]
 }
