@@ -61,7 +61,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                     <div className="expanded-facts">
                       {item.rating ? (
                         <span className="expanded-rating">
-                          <StarIcon />
+                          {/^[0-9]{1,2}(?:\.\d+)?$/.test(item.rating) ? <StarIcon /> : null}
                           <strong>{item.rating}</strong>
                           <small>{item.ratingLabel ?? (item.rating === "New" ? "just opened" : "IMDb")}</small>
                         </span>

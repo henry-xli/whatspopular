@@ -25,7 +25,7 @@ const flow = [
   {
     number: "04",
     title: "Validate and cache",
-    text: "Require two source hosts per entry, validate every link, write one JSON snapshot, and download images as local WebP files.",
+    text: "Require two source hosts and no more than three linked references per entry or board, validate every link, write one JSON snapshot, and download images as local WebP files.",
   },
   {
     number: "05",

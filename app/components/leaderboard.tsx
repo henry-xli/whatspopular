@@ -58,7 +58,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
                 <p className="subtitle">{item.subtitle}</p>
                 {item.rating ? (
                   <div className="rating-row">
-                    <StarIcon />
+                    {/^\d{1,2}(?:\.\d+)?$/.test(item.rating) ? <StarIcon /> : null}
                     <strong>{item.rating}</strong>
                     <small>{item.ratingLabel ?? (item.rating === "New" ? "just opened" : "IMDb")}</small>
                   </div>

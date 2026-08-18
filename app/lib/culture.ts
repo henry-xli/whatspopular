@@ -138,8 +138,8 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
     throw new Error(`${item.title} has an invalid accent color`);
   }
   externalUrl(item.url, item.title, sectionId === "news" || sectionId === "products");
-  if (!Array.isArray(item.evidence) || item.evidence.length < 2 || item.evidence.length > 6) {
-    throw new Error(`${item.title} must have two to six sources of evidence`);
+  if (!Array.isArray(item.evidence) || item.evidence.length < 2 || item.evidence.length > 3) {
+    throw new Error(`${item.title} must have two to three sources of evidence`);
   }
   const evidenceSources = new Set<string>();
   const evidenceHosts = new Set<string>();
@@ -202,7 +202,7 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     for (const field of ["eyebrow", "title", "description"] as const) {
       assertText(section[field], `${expectedId} ${field}`, field === "description" ? 1000 : 180);
     }
-    const maxSources = expectedId === "products" ? 10 : 6;
+    const maxSources = 3;
     if (!Array.isArray(section.sources) || section.sources.length < 2 || section.sources.length > maxSources) {
       throw new Error(`${section.title} must list two to ${maxSources} sources`);
     }
@@ -275,7 +275,7 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
   if (products.some((item) => item.metric?.label !== "Independent viral sources"
       || !/^\d+ sources?$/.test(item.metric?.value ?? "")
       || Number(item.metric?.value.match(/^\d+/)?.[0]) < 2
-      || !/Viral product/i.test(item.subtitle ?? ""))) {
+      || item.subtitle !== "Product")) {
     throw new Error("Products must have at least two recent independent viral sources");
   }
 

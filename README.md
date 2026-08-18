@@ -55,7 +55,7 @@ last validated snapshot.
 
 Descriptions do not repeat the ranking metric shown on each card and have no
 per-entry overrides. The updater derives identity or premise text from current
-Wikidata, Wikipedia, Cinemeta, Spotify, or Amazon metadata, then adds a factual
+Wikidata, Wikipedia, IMDb/Cinemeta, Spotify, or Amazon metadata, then adds a factual
 recent-news sentence when one is available. Google Trends related queries and
 ranked Wikipedia search results disambiguate unfamiliar news topics. Question-
 style, editorial, and personality-led headline fragments are rejected. News
@@ -64,7 +64,8 @@ opening paragraphs, and lead image metadata. Topic-matched Wikimedia imagery is
 used only when the article does not expose a usable image; the final fallback is
 a local title card.
 
-Every entry has evidence from at least two distinct source hosts.
+Every entry has evidence from at least two distinct source hosts, with no more
+than three linked evidence items or leaderboard source links.
 `scripts/cache-images.mjs` validates the snapshot, refreshes News art daily,
 downloads other art only when missing or invalid, and converts everything to
 bounded local WebP files. Publisher hosts and redirects are checked before any

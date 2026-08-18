@@ -261,7 +261,7 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(brief.sections.every((section) => section.items.length === 5));
   assert.ok(brief.sections.every((section) => section.moreItems.length <= 15));
   for (const section of brief.sections) {
-    assert.ok(section.sources.length >= 2);
+    assert.ok(section.sources.length >= 2 && section.sources.length <= 3);
     assert.ok(section.sources.every((source) => source.label && new URL(source.url).protocol === "https:"));
     assert.deepEqual(section.moreItems.map((item) => item.rank), section.moreItems.map((_, index) => index + 6));
     assert.ok(section.moreItems.every((item) => !section.items.some((topItem) => topItem.title === item.title)));
@@ -274,7 +274,7 @@ test("keeps content and outbound links constrained", async () => {
     assert.ok(item.description.length >= 30);
     assert.ok(item.alt.length >= 5);
     assert.match(item.accent, /^#[0-9a-f]{6}$/i);
-    assert.ok(item.evidence.length >= 2);
+    assert.ok(item.evidence.length >= 2 && item.evidence.length <= 3);
     assert.ok(new Set(item.evidence.map((entry) => entry.source)).size >= 2);
     assert.ok(new Set(item.evidence.map((entry) => new URL(entry.url).hostname)).size >= 2);
     if (item.imageSource) assert.equal(new URL(item.imageSource).protocol, "https:");
