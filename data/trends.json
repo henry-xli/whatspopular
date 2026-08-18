@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-18T16:26:20.760Z",
+  "generatedAt": "2026-08-18T18:39:21.418Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,001,895"
+            "value": "1,001,974"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,504"
+            "value": "114,517"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "99,936"
+            "value": "99,964"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,571"
+            "value": "76,575"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,586"
+            "value": "55,591"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,929"
+            "value": "46,936"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,551"
+            "value": "43,553"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,530"
+            "value": "18,534"
           },
           "evidence": [
             {
@@ -723,7 +723,7 @@
             },
             {
               "source": "Reuters",
-              "url": "https://www.reuters.com/world/india/sonam-wangchuk-indian-activist-rallying-gen-z-against-modi-2026-07-20/"
+              "url": "https://frontline.thehindu.com/politics/sonam-wangchuk-hunger-strike/article71223988.ece"
             }
           ],
           "accent": "#ffc857",
@@ -733,7 +733,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Swift is primarily known as a singer. Taylor Swift Praises Phoebe Bridgers’ New Album ‘Lost Weekend,’ Calls It an ‘Absolute Triumph in Every Way’.",
+          "description": "Taylor Swift is primarily known as a singer. Taylor Swift ropes a record-breaking 16th No. 1 on Billboard ’s Adult Pop Airplay chart as ”I Knew It, I Knew You” jumps three spots to the top of the Aug. 22-dated ranking. Swift one-ups Maroon 5 for the mark, dating to the chart’s debut in Billboard in March 1996.",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -877,7 +877,7 @@
           "rank": 1,
           "title": "The Odyssey",
           "subtitle": "2026 film",
-          "description": "The Odyssey is a film. In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway).",
+          "description": "The Odyssey is an action/adventure/fantasy film. In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway).",
           "image": "/culture/media-odyssey.webp",
           "alt": "The Odyssey 2026 theatrical poster",
           "url": "https://www.imdb.com/title/tt33764258/",
@@ -907,7 +907,7 @@
           "rank": 2,
           "title": "Obsession",
           "subtitle": "2025 film",
-          "description": "Obsession is a film. The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed.",
+          "description": "Obsession is a horror/romance/thriller film. The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed.",
           "image": "/culture/movie-obsession.webp",
           "alt": "Obsession poster or lead image",
           "url": "https://www.imdb.com/title/tt37287335/",
@@ -916,7 +916,7 @@
             "label": "Wikipedia views · July",
             "value": "4.4M"
           },
-          "rating": "7.8",
+          "rating": "7.9",
           "evidence": [
             {
               "source": "Wikimedia monthly topviews",
@@ -937,7 +937,7 @@
           "rank": 3,
           "title": "Project Hail Mary",
           "subtitle": "2026 film",
-          "description": "Project Hail Mary is a film. The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there.",
+          "description": "Project Hail Mary is an adventure/comedy/drama film. The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. As his memory returns, he uncovers a mission to stop a mysterious substance killing Earth's sun, and realizes that an unexpected friendship may be the key.",
           "image": "/culture/movie-project-hail-mary.webp",
           "alt": "Project Hail Mary poster or lead image",
           "url": "https://www.imdb.com/title/tt12042730/",
@@ -967,7 +967,7 @@
           "rank": 4,
           "title": "Backrooms",
           "subtitle": "2026 film",
-          "description": "Backrooms is a film. In the film, Clark (Chiwetel Ejiofor), a furniture store owner, and his therapist Mary (Renate Reinsve), discover a dimension of seemingly endless liminal spaces accessed through the store's basement.",
+          "description": "Backrooms is a horror/sci-fi/thriller film. In the film, Clark (Chiwetel Ejiofor), a furniture store owner, and his therapist Mary (Renate Reinsve), discover a dimension of seemingly endless liminal spaces accessed through the store's basement.",
           "image": "/culture/movie-backrooms.webp",
           "alt": "Backrooms poster or lead image",
           "url": "https://www.imdb.com/title/tt26657236/",
@@ -976,7 +976,7 @@
             "label": "Wikipedia views · July",
             "value": "1.73M"
           },
-          "rating": "6.8",
+          "rating": "7.0",
           "evidence": [
             {
               "source": "Wikimedia monthly topviews",
@@ -1029,7 +1029,7 @@
           "rank": 6,
           "title": "Supergirl",
           "subtitle": "2026 film",
-          "description": "Supergirl is a film. In the film, Kara embarks on a journey across the galaxy to hunt down an adversary who has harmed her pet dog Krypto.",
+          "description": "Supergirl is an action/adventure/drama film. Kara Zor-El, aka Supergirl, joins forces with an unlikely companion on an interstellar journey of vengeance and justice when an unexpected adversary strikes too close to home. In the film, Kara embarks on a journey across the galaxy to hunt down an adversary who has harmed her pet dog Krypto.",
           "image": "/culture/movie-supergirl.webp",
           "alt": "Supergirl poster or lead image",
           "url": "https://www.imdb.com/title/tt8814476/",
@@ -1059,7 +1059,7 @@
           "rank": 7,
           "title": "Jana Nayagan",
           "subtitle": "Movie",
-          "description": "Jana Nayagan is a film. A partial remake of the 2023 Telugu film Bhagavanth Kesari, it follows a former Indian Police Service officer who raises the daughter of a deceased friend and encourages her to overcome childhood trauma and pursue a career in the Indian Army.",
+          "description": "Jana Nayagan is an action/thriller film. A partial remake of the 2023 Telugu film Bhagavanth Kesari, it follows a former Indian Police Service officer who raises the daughter of a deceased friend and encourages her to overcome childhood trauma and pursue a career in the Indian Army.",
           "image": "/culture/movie-jana-nayagan.webp",
           "alt": "Jana Nayagan poster or lead image",
           "url": "https://www.imdb.com/title/tt33379543/",
@@ -1089,7 +1089,7 @@
           "rank": 8,
           "title": "Evil Dead Burn",
           "subtitle": "2026 film",
-          "description": "Evil Dead Burn is a film. As the family comes together in a secluded house, the gathering becomes a \"family reunion from hell\" as members gradually turn into Deadites.",
+          "description": "Evil Dead Burn is a fantasy/horror/mystery film. As one by one they transform into deadites, she comes to discover that the vows she took in life - survive even in death. After the loss of her husband, a woman seeks solace with her in-laws.",
           "image": "/culture/media-evil-dead-burn.webp",
           "alt": "Evil Dead Burn theatrical poster",
           "url": "https://www.imdb.com/title/tt31170389/",
@@ -1119,7 +1119,7 @@
           "rank": 9,
           "title": "Masters of the Universe",
           "subtitle": "2026 film",
-          "description": "Masters of the Universe is a film. Its plot follows Prince Adam (Galitzine) as he returns to his home planet, Eternia, to take his destiny as He-Man, and save his home from the evil forces of Skeletor (Leto). It is the second live-action film adaptation after the 1987 film.",
+          "description": "Masters of the Universe is an action/adventure/fantasy film. Prince Adam discovers that the strange memories shaping his life are real when the lost Sword of Power resurfaces, forcing him to return to Eternia and challenge the tyrant who shattered his family and kingdom.",
           "image": "/culture/movie-masters-of-the-universe.webp",
           "alt": "Masters of the Universe poster or lead image",
           "url": "https://www.imdb.com/title/tt0427340/",
@@ -1149,7 +1149,7 @@
           "rank": 10,
           "title": "Toy Story 5",
           "subtitle": "2026 film",
-          "description": "Toy Story 5 is a film. Set two years after the fourth film, it follows Jessie as she, Woody, Buzz Lightyear and the other toys deal with the presence of Lilypad, a tablet and the new favorite plaything of Bonnie. While Hanks referred to Toy Story 4 as the final film in the franchise in 2019, the possibility of a fifth film had not been ruled out.",
+          "description": "Toy Story 5 is an animation/adventure/comedy film. Set two years after the fourth film, it follows Jessie as she, Woody, Buzz Lightyear and the other toys deal with the presence of Lilypad, a tablet and the new favorite plaything of Bonnie. While Hanks referred to Toy Story 4 as the final film in the franchise in 2019, the possibility of a fifth film had not been ruled out.",
           "image": "/culture/media-toy-story.webp",
           "alt": "Toy Story 5 theatrical poster",
           "url": "https://www.imdb.com/title/tt29355505/",
@@ -1199,7 +1199,7 @@
           "rank": 1,
           "title": "Yesteryear",
           "subtitle": "Goodreads · Caro Claire Burke",
-          "description": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and her followers are sick with envy. Then, one morning, Natalie wakes up in a strange, horrible version of reality.",
+          "description": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and has the social media accounts to prove it. Then, one morning, Natalie wakes up in a strange, horrible version of reality.",
           "image": "/culture/book-yesteryear.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
           "alt": "Cover of Yesteryear by Caro Claire Burke",
@@ -1381,10 +1381,6 @@
             {
               "source": "Google News book coverage",
               "url": "https://news.google.com/search?q=The+Divorce+Freida+McFadden&hl=en-US&gl=US&ceid=US%3Aen"
-            },
-            {
-              "source": "Goodreads book page",
-              "url": "https://www.goodreads.com/book/show/244403162-the-divorce"
             }
           ],
           "accent": "#5ab0ff"
@@ -2116,9 +2112,9 @@
           "imageSource": "https://i.guim.co.uk/img/media/8db29763d7dd93fbeef64134375888b2dd0a1629/997_0_4972_3979/master/4972.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=d05bc90d1ef8d6986ec3a21734018645",
           "imageSourceKind": "article",
           "imageSourcePageUrl": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
-          "alt": "Lead image from The Guardian's coverage of Massive egg recall in US south and south-west due to salmonella outbreak.",
+          "alt": "Lead image from theguardian.com's coverage of Massive egg recall in US south and south-west due to salmonella outbreak.",
           "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak",
-          "source": "The Guardian",
+          "source": "theguardian.com",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -2129,7 +2125,7 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
             },
             {
-              "source": "The Guardian via Google News",
+              "source": "theguardian.com via Google News",
               "url": "https://www.theguardian.com/us-news/2026/aug/15/egg-recall-us-south-and-south-west-salmonella-outbreak"
             }
           ],
@@ -2137,16 +2133,16 @@
         },
         {
           "rank": 2,
-          "title": "Maker of ice cream sold at grocery stores nationwide files for bankruptcy as it appeals $23.8M judgment.",
-          "subtitle": "News · Aug 16, 2026",
-          "description": "Rebel Creamery has filed for Chapter 11 bankruptcy protection in Utah, reporting approximately $13.78 million in assets and $23.85 million in liabilities as it appeals a $23.785 million judgment awarded to rival Van Leeuwen Ice Cream in a trade-dress dispute.",
-          "image": "/culture/news-maker-of-ice-cream-sold-at-grocery-stores-nationwide-files-for-b.webp",
-          "imageSource": "https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2026/08/0/0/walmart-frozen-aisle.jpg?ve=1&tl=1",
+          "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "City urges residents to stay safe as Hurricane Lala approaches O‘ahu. Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
+          "imageSource": "https://www.civilbeat.org/wp-content/uploads/2026/08/9511.jpg",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.foxbusiness.com/economy/maker-ice-cream-sold-grocery-stores-nationwide-files-bankruptcy-appeals-judgment",
-          "alt": "Lead image from Fox Business's coverage of Maker of ice cream sold at grocery stores nationwide files for bankruptcy as it appeals $23.8M judgment.",
-          "url": "https://www.foxbusiness.com/economy/maker-ice-cream-sold-grocery-stores-nationwide-files-bankruptcy-appeals-judgment",
-          "source": "Fox Business",
+          "imageSourcePageUrl": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
+          "alt": "Lead image from Honolulu Civil Beat's coverage of Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
+          "source": "Honolulu Civil Beat",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -2154,55 +2150,27 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+ice+cream+lawsuit"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
             },
             {
-              "source": "Fox Business via Google News",
-              "url": "https://www.foxbusiness.com/economy/maker-ice-cream-sold-grocery-stores-nationwide-files-bankruptcy-appeals-judgment"
+              "source": "Honolulu Civil Beat via Google News",
+              "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/"
             }
           ],
-          "accent": "#ffc857"
+          "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "Authorities warned of potentially life-threatening conditions, including flooding and mudslides. Some residents stayed off roads while others used sandbags and other measures to protect their homes. \"I'm kind of nervous about it. But we are going to hunker down we are going to stay safe,\" said Hilo resident Maxine.",
-          "image": "/culture/news-hurricane-lala-leaves-big-island-residents-in-hawaii-hunkered-do.webp",
-          "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
-          "alt": "Lead image from ABC7 Bay Area's coverage of Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
-          "source": "ABC7 Bay Area",
-          "metric": {
-            "label": "Google search volume",
-            "value": "500K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hawaii+hurricane"
-            },
-            {
-              "source": "ABC7 Bay Area via Google News",
-              "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
           "title": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-          "subtitle": "News · Aug 17, 2026",
-          "description": "Human remains have been found in a desert area near West Ajo Way and South La Cholla Boulevard in Arizona, approximately 15 miles from the home of Nancy Guthrie, according to the Pima County Sheriff’s Department.",
+          "subtitle": "News · Aug 18, 2026",
+          "description": "Pima County Sheriff Chris Nanos shared an update on the link between Nancy Guthrie’s missing persons case and human remains found near her Arizona home. The Pima County Sheriff’s Department is speaking out about a troubling discovery.",
           "image": "/culture/news-human-remains-discovered-miles-from-nancy-guthrie-s-home-not-con.webp",
-          "imageSource": "https://bloximages.newyork1.vip.townnews.com/news8000.com/content/tncms/assets/v3/editorial/7/d9/7d90fb5c-911f-51b7-9d0a-1da8920e5ec9/6a836a04545f7.image.jpg?crop=1763%2C926%2C0%2C124&resize=1200%2C630&order=crop%2Cresize",
+          "imageSource": "https://akns-images.eonline.com/eol_images/Entire_Site/20260202/597bb3f7-4f15-4b3d-b2cf-a45e419923bc_1770063647.jpg?fit=around%7C1200:1200&output-quality=90&crop=1200:1200;center,top",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.news8000.com/news/national-world/human-remains-discovered-miles-from-nancy-guthrie-s-home-not-connected-to-case-so-far/article_22bb0416-20d0-59d5-b140-ffda2c4bf208.html",
-          "alt": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says",
-          "url": "https://www.news8000.com/news/national-world/human-remains-discovered-miles-from-nancy-guthrie-s-home-not-connected-to-case-so-far/article_22bb0416-20d0-59d5-b140-ffda2c4bf208.html",
-          "source": "CNN",
+          "imageSourcePageUrl": "https://www.eonline.com/news/1435136/pima-county-sheriff-addresses-human-remains-found-near-nancy-guthries-home",
+          "alt": "Lead image from E! News's coverage of Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
+          "url": "https://www.eonline.com/news/1435136/pima-county-sheriff-addresses-human-remains-found-near-nancy-guthries-home",
+          "source": "E! News",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2213,24 +2181,24 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=pima+county+sheriff%27s+department"
             },
             {
-              "source": "CNN via Google News",
-              "url": "https://www.news8000.com/news/national-world/human-remains-discovered-miles-from-nancy-guthrie-s-home-not-connected-to-case-so-far/article_22bb0416-20d0-59d5-b140-ffda2c4bf208.html"
+              "source": "E! News via Google News",
+              "url": "https://www.eonline.com/news/1435136/pima-county-sheriff-addresses-human-remains-found-near-nancy-guthries-home"
             }
           ],
           "accent": "#5ab0ff"
         },
         {
-          "rank": 5,
-          "title": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
+          "rank": 4,
+          "title": "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic.",
           "subtitle": "News · Aug 15, 2026",
-          "description": "The filled Honda Center got a look at Frozen 3 — and let’s just say, there is quite a lot in store. First of all, are those wedding bells, we hear? Indeed, they are!",
-          "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
-          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
+          "description": "Anna and Elsa appear to be heading through a portal into a world of icy crystal butterflies next year, according to the first trailer for the third installment in the juggernaut Frozen franchise.&nbsp; Unveiled during Disney’s biennial fan convention D23 in Anaheim on Friday night.",
+          "image": "/culture/news-frozen-3-trailer-reveals-anna-s-royal-wedding-and-a-new-icy-magi.webp",
+          "imageSource": "https://www.cnet.com/wp-content/uploads/sites/2/112082.jpeg",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
-          "alt": "Frozen 2",
-          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
-          "source": "Deadline",
+          "imageSourcePageUrl": "https://www.cnet.com/culture/entertainment/frozen-3-trailer-reveals-annas-royal-wedding-and-a-new-icy-magic/",
+          "alt": "A pair of women speak onstage with Frozen III behind them on a screen. They are standing in front of a huge crowd.",
+          "url": "https://www.cnet.com/culture/entertainment/frozen-3-trailer-reveals-annas-royal-wedding-and-a-new-icy-magic/",
+          "source": "CNET",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2241,44 +2209,14 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
             },
             {
-              "source": "Deadline via Google News",
-              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
+              "source": "CNET via Google News",
+              "url": "https://www.cnet.com/culture/entertainment/frozen-3-trailer-reveals-annas-royal-wedding-and-a-new-icy-magic/"
             }
           ],
-          "accent": "#ff6b57"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
-          "title": "Despite 'New' Updates, Flock's Creepy Cameras Remain Major Civil Liberties Threat.",
-          "subtitle": "News · Aug 13, 2026",
-          "description": "Surveillance company Flock Safety announced several operational changes in response to a torrent of criticism and overwhelming public opposition to its mass government surveillance product. Despite 'New' Updates, Flock's Creepy Cameras Remain Major Civil Liberties Threat.",
-          "image": "/culture/news-despite-new-updates-flock-s-creepy-cameras-remain-major-civil-li.webp",
-          "imageSource": "https://assets.aclu.org/live/uploads/2026/08/flock-camera-safety-sign-s.jpg",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.aclu.org/news/privacy-technology/despite-new-updates-flocks-creepy-cameras-remain-major-civil-liberties-threat",
-          "alt": "Lead image from American Civil Liberties Union's coverage of Despite 'New' Updates, Flock's Creepy Cameras Remain Major Civil Liberties Threat.",
-          "url": "https://www.aclu.org/news/privacy-technology/despite-new-updates-flocks-creepy-cameras-remain-major-civil-liberties-threat",
-          "source": "American Civil Liberties Union",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=flock+cameras"
-            },
-            {
-              "source": "American Civil Liberties Union via Google News",
-              "url": "https://www.aclu.org/news/privacy-technology/despite-new-updates-flocks-creepy-cameras-remain-major-civil-liberties-threat"
-            }
-          ],
-          "accent": "#ffc857"
+          "accent": "#5ab0ff"
         },
         {
-          "rank": 7,
+          "rank": 5,
           "title": "Starbucks Unicorn Frappuccino® return drives record weekend, with more than 2 million beverages sold.",
           "subtitle": "News · Aug 14, 2026",
           "description": "If you missed out on the chance to relive 2017 at Coachella, when Starbucks released the Unicorn Frappuccino to festival-goers, you're in luck: The mystical Frapp is back for one weekend only. Starbucks Unicorn Frappuccino® return drives record weekend, with more than 2 million beverages sold.",
@@ -2304,9 +2242,11 @@
             }
           ],
           "accent": "#9b8cff"
-        },
+        }
+      ],
+      "moreItems": [
         {
-          "rank": 8,
+          "rank": 6,
           "title": "DREYER'S GRAND ICE CREAM, INC. ISSUES VOLUNTARY RECALL ON SELECT OUTSHINE FRUIT BARS DUE TO POSSIBLE FOREIGN MATTER CONTAMINATION.",
           "subtitle": "News · Aug 16, 2026",
           "description": "WALNUT CREEK, Calif., Aug. 16, 2026 /PRNewswire/ -- August 16, 2026 - Dreyer's Grand Ice Cream, Inc.&nbsp;is voluntarily recalling&nbsp;a limited number of select flavors of Outshine Fruit Bars due to possible foreign material contamination with glass.",
@@ -2334,7 +2274,7 @@
           "accent": "#9b8cff"
         },
         {
-          "rank": 9,
+          "rank": 7,
           "title": "‘Coco 2’ First Look: Miguel Becomes a Teenager in Pixar Sequel Set for November 2029.",
           "subtitle": "News · Aug 15, 2026",
           "description": "Miguel is back in the Land of the Dead in the first look at “ Coco 2.” At D23, Disney revealed new concept art from the film, which depicts a teenage Miguel alongside his beloved dog, Dante.",
@@ -2344,7 +2284,7 @@
           "imageSourcePageUrl": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/",
           "alt": "coco 2 first look teen miguel",
           "url": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/",
-          "source": "variety.com",
+          "source": "Variety",
           "metric": {
             "label": "Google search volume",
             "value": "100K+"
@@ -2355,11 +2295,67 @@
               "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=coco+2"
             },
             {
-              "source": "variety.com via Google News",
+              "source": "Variety via Google News",
               "url": "https://variety.com/2026/film/news/coco-2-disney-first-look-teen-miguel-release-date-1236834203/"
             }
           ],
           "accent": "#57d5a4"
+        },
+        {
+          "rank": 8,
+          "title": "How to check if you qualify for State Farm’s $5B cash-back payout.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "KANSAS CITY, Mo. Have you checked your mailbox, or your inbox, lately? There may be a surprise waiting for you. State Farm Mutual Automobile Insurance Company announced it started sending out a $5 billion cash-back dividend to millions of policyholders.",
+          "image": "/culture/news-how-to-check-if-you-qualify-for-state-farm-s-5b-cash-back-payout.webp",
+          "imageSource": "https://gray-kctv-prod.gtv-cdn.com/resizer/v2/7QSYCYXIXRFRBAGNGZ5LJMQFIQ.png?auth=1250c15e83fa8522e5daf07574c924e9039dc0b70ae77c4fd69b58754433ef20&width=1200&height=600&smart=true",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.kctv5.com/2026/08/17/how-check-if-you-qualify-state-farms-5b-cash-back-payout/",
+          "alt": "Lead image from KCTV's coverage of How to check if you qualify for State Farm’s $5B cash-back payout.",
+          "url": "https://www.kctv5.com/2026/08/17/how-check-if-you-qualify-state-farms-5b-cash-back-payout/",
+          "source": "KCTV",
+          "metric": {
+            "label": "Google search volume",
+            "value": "50K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=state+farm+dividend"
+            },
+            {
+              "source": "KCTV via Google News",
+              "url": "https://www.kctv5.com/2026/08/17/how-check-if-you-qualify-state-farms-5b-cash-back-payout/"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Harris Teeter Is Closing Stores in 2026: See an Updated List of Doomed Locations.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "Harris Teeter is closing 60 stores by the end of 2026 as Kroger trims its grocery footprint, with 39 locations across nine banners already shuttered as of mid-August. Harris Teeter, one of Kroger’s 20-plus grocery banners, has confirmed six closures so far, affecting stores in Virginia, Maryland, and North Carolina.",
+          "image": "/culture/news-harris-teeter-is-closing-stores-in-2026-see-an-updated-list-of-d.webp",
+          "imageSource": "https://eciks.org/wp-content/uploads/2026/08/harris-teeter-60-store-closures-2026.webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://eciks.org/21539-harris-teeter-60-store-closures-2026",
+          "alt": "Lead image from eciks.org's coverage of Harris Teeter Is Closing Stores in 2026: See an Updated List of Doomed Locations.",
+          "url": "https://eciks.org/21539-harris-teeter-60-store-closures-2026",
+          "source": "eciks.org",
+          "metric": {
+            "label": "Google search volume",
+            "value": "50K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=harris+teeter+2026+store+closures"
+            },
+            {
+              "source": "eciks.org via Google News",
+              "url": "https://eciks.org/21539-harris-teeter-60-store-closures-2026"
+            }
+          ],
+          "accent": "#5ab0ff"
         },
         {
           "rank": 10,
@@ -2397,57 +2393,57 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:21.159Z"
+      "checkedAt": "2026-08-18T18:39:22.059Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:21.825Z"
+      "checkedAt": "2026-08-18T18:39:22.309Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:21.683Z"
+      "checkedAt": "2026-08-18T18:39:22.743Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:22.467Z"
+      "checkedAt": "2026-08-18T18:39:24.040Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:21.948Z"
+      "checkedAt": "2026-08-18T18:39:23.118Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-18T16:27:03.167Z"
+      "checkedAt": "2026-08-18T18:40:05.203Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:20.980Z"
+      "checkedAt": "2026-08-18T18:39:21.612Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:21.042Z"
+      "checkedAt": "2026-08-18T18:39:21.833Z"
     },
     {
       "name": "Goodreads monthly most read",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:22.224Z"
+      "checkedAt": "2026-08-18T18:39:22.551Z"
     },
     {
       "name": "Viral product discovery",
-      "ok": true,
-      "checkedAt": "2026-08-18T16:27:08.231Z"
+      "ok": false,
+      "checkedAt": "2026-08-18T18:39:54.447Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-18T16:26:29.188Z"
+      "checkedAt": "2026-08-18T18:40:03.502Z"
     }
   ]
 }
