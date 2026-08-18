@@ -104,7 +104,8 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(homeHtml, /How trendy are you\?/);
   assert.match(homeHtml, />Quiz me</);
   assert.match(homeHtml, />Explore/);
-  assert.match(homeHtml, /class="is-active" href="\/">Home<\/a>/);
+  assert.match(homeHtml, /class="is-active" href="\/"[^>]*>Home<\/a>/);
+  assert.match(homeHtml, /aria-current="page"/);
   assert.match(homeHtml, /One daily snapshot\. Eight boards\. One quiz\./);
   assert.doesNotMatch(homeHtml, /Catch me up|How this works/);
   assert.equal(response.status, 200);
@@ -116,7 +117,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(response.headers.get("cache-control") ?? "", /s-maxage=86400/);
 
   const html = await response.text();
-  assert.match(html, /class="is-active" href="\/explore">Explore<\/a>/);
+  assert.match(html, /class="is-active" href="\/explore"[^>]*>Explore<\/a>/);
   assert.match(html, /Everything worth knowing at a glance/);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
