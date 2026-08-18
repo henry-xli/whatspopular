@@ -2496,7 +2496,7 @@
         "topicId": "people",
         "topic": "People",
         "itemTitle": "Erling Haaland",
-        "prompt": "Which topic matches this description? \"Erling Haaland is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and prolific finishing. He drew renewed attention after starring for Norway at the 2026 World Cup.\"",
+        "prompt": "Which topic matches this description? \"Erling Haaland is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and finishing. He is in focus after starring for Norway at the 2026 World Cup, where the team reached the quarterfinals.\"",
         "answers": [
           "Erling Haaland",
           "Lamine Yamal",
@@ -2510,7 +2510,7 @@
         "topicId": "people",
         "topic": "People",
         "itemTitle": "Lamine Yamal",
-        "prompt": "Which topic matches this description? \"Lamine Yamal is a Spanish winger for Barcelona and the Spain national team, known as one of football’s leading young players. He recently attracted coverage over breakup rumors involving influencer Inés García and his social-media response.\"",
+        "prompt": "Which topic matches this description? \"Lamine Yamal is a Barcelona and Spain winger who became a leading young footballer. He is currently in coverage after breakup rumors involving influencer Inés García prompted him to respond on social media following Spain’s 2026 World Cup victory.\"",
         "answers": [
           "Lamine Yamal",
           "Erling Haaland",
@@ -2524,7 +2524,7 @@
         "topicId": "people",
         "topic": "People",
         "itemTitle": "Christopher Nolan",
-        "prompt": "Which topic matches this description? \"Christopher Nolan is a British-American filmmaker known for blockbuster films with complex storytelling.\"",
+        "prompt": "Which topic matches this description? \"Christopher Nolan is a filmmaker known for blockbuster films with complex storytelling. He is in focus as his Homer adaptation, The Odyssey, reaches theaters, with Nolan also saying his next film will be at least three years away.\"",
         "answers": [
           "Christopher Nolan",
           "Erling Haaland",
@@ -2538,7 +2538,7 @@
         "topicId": "movies",
         "topic": "Movies",
         "itemTitle": "The Odyssey",
-        "prompt": "Which topic matches this description? \"An epic action fantasy following Odysseus, the king of Ithaca, on a perilous voyage home after the Trojan War as he faces mythical beings and tries to reunite with Penelope.\"",
+        "prompt": "Which topic matches this description? \"An epic fantasy follows Odysseus on a perilous journey home to Ithaca after the Trojan War, where he encounters mythical beings while trying to reunite with Penelope.\"",
         "answers": [
           "The Odyssey",
           "Obsession",
@@ -2552,7 +2552,7 @@
         "topicId": "movies",
         "topic": "Movies",
         "itemTitle": "Obsession",
-        "prompt": "Which topic matches this description? \"A supernatural horror film about Bear, a music store employee who uses a magical toy to make his co-worker Nikki love him, only for the wish to turn her into a violent obsession.\"",
+        "prompt": "Which topic matches this description? \"A supernatural horror film follows Bear, a music-store employee who uses a magical toy to make Nikki love him, only for her affection to become a violent obsession.\"",
         "answers": [
           "Obsession",
           "The Odyssey",
@@ -2566,7 +2566,7 @@
         "topicId": "movies",
         "topic": "Movies",
         "itemTitle": "Project Hail Mary",
-        "prompt": "Which topic matches this description? \"A science-fiction film following teacher Ryland Grace, who awakens on a spaceship with no memory and must uncover his mission to stop a mysterious substance killing Earth's sun.\"",
+        "prompt": "Which topic matches this description? \"A science-fiction film follows teacher Ryland Grace, who awakens alone on a spaceship with no memory and must uncover a mission to stop a mysterious substance killing Earth's sun.\"",
         "answers": [
           "Project Hail Mary",
           "The Odyssey",
@@ -2580,7 +2580,7 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "Yesteryear",
-        "prompt": "Which topic matches this description? \"Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a horrifying version of her familiar life. Unsure whether it is a hoax, reality show, or something else, she tries to escape.\"",
+        "prompt": "Which topic matches this description? \"Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a disturbing version of her life—possibly in the 19th century. She must uncover what happened and escape.\"",
         "answers": [
           "Yesteryear",
           "The Calamity Club",
@@ -2594,7 +2594,7 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "The Calamity Club",
-        "prompt": "Which topic matches this description? \"In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood.\"",
+        "prompt": "Which topic matches this description? \"In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Together, they devise a dangerous plan to take control of their lives.\"",
         "answers": [
           "The Calamity Club",
           "Yesteryear",
@@ -2608,7 +2608,7 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "Theo of Golden",
-        "prompt": "Which topic matches this description? \"A mysterious stranger named Theo arrives in the small southern city of Golden and begins buying pencil portraits from a local coffeehouse. Returning each portrait to its rightful owner sparks stories, friendships, and changes in people’s lives.\"",
+        "prompt": "Which topic matches this description? \"A mysterious stranger named Theo arrives in the small Southern city of Golden and begins returning a local artist’s pencil portraits to their rightful owners. Each exchange reveals a story and changes a life.\"",
         "answers": [
           "Theo of Golden",
           "Yesteryear",
@@ -2664,7 +2664,7 @@
         "topicId": "products",
         "topic": "Products",
         "itemTitle": "Laneige",
-        "prompt": "Which topic matches this description? \"Laneige refers to the Lip Sleeping Mask, recently included among viral beauty products from Laneige, Dyson, and Medicube.\"",
+        "prompt": "Which topic matches this description? \"Laneige refers to the Lip Sleeping Mask, recently featured among viral beauty products alongside items from Dyson and Medicube.\"",
         "answers": [
           "Laneige",
           "Medicube",
@@ -2678,7 +2678,7 @@
         "topicId": "products",
         "topic": "Products",
         "itemTitle": "Medicube",
-        "prompt": "Which topic matches this description? \"Medicube refers to the PDRN Pink Collagen Volume Multi Balm Stick for face and body, recently featured among viral Medicube products.\"",
+        "prompt": "Which topic matches this description? \"Medicube refers to the PDRN Pink Collagen Volume Multi Balm Stick for the face and body, recently featured among viral Medicube products.\"",
         "answers": [
           "Medicube",
           "Laneige",
@@ -2692,7 +2692,7 @@
         "topicId": "products",
         "topic": "Products",
         "itemTitle": "NeeDohs",
-        "prompt": "Which topic matches this description? \"NeeDohs refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has drawn children, parents, and collectors into long waits to buy them.\"",
+        "prompt": "Which topic matches this description? \"NeeDohs refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them.\"",
         "answers": [
           "NeeDohs",
           "Laneige",
@@ -2705,40 +2705,40 @@
         "id": "news-1",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Massive egg recall in US south and south-west due to salmonella outbreak.",
-        "prompt": "Which topic matches this description? \"About 1.6 million dozen eggs from Texas have been recalled under the FDA’s highest-risk warning as officials investigate a salmonella outbreak that has sickened nearly 100 people.\"",
+        "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+        "prompt": "Which topic matches this description? \"The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. The recalled eggs have been linked to an outbreak that sickened nearly 100 people.\"",
         "answers": [
-          "Massive egg recall in US south and south-west due to salmonella outbreak.",
-          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
           "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
         ],
-        "correctAnswer": "Massive egg recall in US south and south-west due to salmonella outbreak."
+        "correctAnswer": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
       },
       {
         "id": "news-2",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-        "prompt": "Which topic matches this description? \"Hurricane Lala passed the Big Island without making a direct hit, while officials urged O‘ahu residents to stay safe as the storm approached.\"",
+        "itemTitle": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+        "prompt": "Which topic matches this description? \"Hurricane Lala brought threats of flooding, mudslides, heavy rain and strong winds to Hawaii’s Big Island, prompting residents to stay off roads, protect their homes and hunker down.\"",
         "answers": [
-          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "Massive egg recall in US south and south-west due to salmonella outbreak.",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
           "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
           "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
         ],
-        "correctAnswer": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
+        "correctAnswer": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
       },
       {
         "id": "news-3",
         "topicId": "news",
         "topic": "News",
         "itemTitle": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-        "prompt": "Which topic matches this description? \"Human remains found in an Arizona desert area about 15 miles from Nancy Guthrie’s home have no apparent connection to her disappearance so far, according to the sheriff’s department.\"",
+        "prompt": "Which topic matches this description? \"Human remains found about 15 miles from Nancy Guthrie’s home in Arizona do not appear connected to her disappearance at this time, according to the Pima County Sheriff’s Department.\"",
         "answers": [
           "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-          "Massive egg recall in US south and south-west due to salmonella outbreak.",
-          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
         ],
         "correctAnswer": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says."
