@@ -2863,17 +2863,8 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function redactQuizTitle(value, title, topicId) {
+function redactQuizTitle(value, title) {
   const genericWords = new Set(["this", "that", "with", "from", "your", "world", "meme", "film", "movie", "book", "song", "the", "and", "of", "in", "on", "for", "a", "an", "to"]);
-  const replacement = {
-    memes: "this meme",
-    people: "this person",
-    movies: "this film",
-    books: "this book",
-    music: "this track",
-    products: "this product",
-    news: "this story",
-  }[topicId] ?? "this entry";
   const significantWords = title.split(/[^A-Za-z0-9]+/)
     .filter((word) => word.length >= 4 && !genericWords.has(word.toLowerCase()));
   const phrases = [title.trim()];
@@ -2894,10 +2885,14 @@ function redactQuizTitle(value, title, topicId) {
       return result.replace(new RegExp(pattern, flags), marker);
     }, value)
     .replace(new RegExp(`${marker}(?:\\s+(?:or|and|/)\\s*${marker})+`, "g"), marker)
-    .replaceAll(marker, replacement)
-    .replace(new RegExp(`^${escapeRegExp(replacement)}\\s+(?:is|refers to|was|has been|brought|found|describes?)\\s+`, "i"), "")
-    .replace(/\bthis (meme|person|film|book|track|product|story|entry)\s+(?:meme|person|film|book|track|product|story|entry|products?)\b/gi, "this $1")
-    .replace(/\bnamed this book\b/gi, "named a stranger")
+    .replaceAll(marker, "it")
+    .replace(/^\s*["'“”‘’]*\s*(?:it\s*["'“”‘’]*\s+)?(?:is|refers to|was|has been|brought|found|describes?)\s+/i, "")
+    .replace(/\bnamed\s+it\s+(?=arrives?\b)/gi, "")
+    .replace(/\b(?:YouTuber|streamer|singer|artist|creator|virtual singer)\s+it\b/gi, (match) => match.replace(/\s+it$/i, ""))
+    .replace(/\b(viral|trending)\s+it\s+products?\b/gi, "$1 products")
+    .replace(/\bfrom\s+(?:it['’]s|['’]s)\b/gi, "from her")
+    .replace(/[“”‘’]it[“”‘’]/gi, "it")
+    .replace(/["“”‘’]\s*["“”‘’]/g, "")
     .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/\s{2,}/g, " ")
     .trim();
@@ -2907,7 +2902,7 @@ function redactQuizTitle(value, title, topicId) {
 function quizPromptFallback(description, title, topicId) {
   const context = redactQuizTitle(conciseSentences(description, 300)
     .replace(/[“”]/g, '"')
-    .trim(), title, topicId);
+    .trim(), title);
   const prompts = {
     people: "A recent development put this person back in focus: ",
     movies: "The premise of this film turns on a specific situation: ",
@@ -2918,7 +2913,15 @@ function quizPromptFallback(description, title, topicId) {
     memes: "This meme took off through a distinctive origin or recent use: ",
   };
   const lead = prompts[topicId] ?? "This entry is defined by a concrete detail: ";
-  const questionSuffix = topicId === "books" || topicId === "movies" ? " Which title is it?" : " Which entry is it?";
+  const questionSuffix = {
+    memes: " Which meme fits that context?",
+    people: " Which person fits that recent context?",
+    movies: " Which film fits that premise?",
+    books: " Which book fits that premise?",
+    music: " Which track fits that context?",
+    products: " Which product fits that buying trend?",
+    news: " Which story fits that development?",
+  }[topicId] ?? " Which choice fits that detail?";
   return `${lead}${context}${questionSuffix}`;
 }
 
