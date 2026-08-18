@@ -1,6 +1,6 @@
+import { AboutFlow } from "./components/about-flow";
+import { Quiz } from "./components/quiz";
 import { cultureBrief, formatUpdatedAt } from "./culture";
-import { Leaderboard } from "./components/leaderboard";
-import { SongBoard } from "./components/song-board";
 
 export default function Home() {
   return (
@@ -8,19 +8,14 @@ export default function Home() {
       <section className="hero wrap" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow">The {cultureBrief.edition} culture briefing</p>
-          <h1 id="hero-title">
-            Internet culture,
-            <span>minus the infinite scroll.</span>
-          </h1>
-          <p className="hero-deck">{cultureBrief.summary}</p>
+          <h1 id="hero-title">How trendy are you?</h1>
           <div className="hero-actions">
-            <a className="button button-primary" href="#boards">
-              Catch me up <span aria-hidden="true">↓</span>
-            </a>
-            <a className="button button-quiet" href="/about">
-              How this works
+            <Quiz questions={cultureBrief.quiz.questions} durationSeconds={cultureBrief.quiz.durationSeconds} />
+            <a className="button button-quiet" href="/explore">
+              Explore <span aria-hidden="true">→</span>
             </a>
           </div>
+          <p className="hero-deck">{cultureBrief.summary}</p>
           <div className="freshness" aria-label="Brief freshness">
             <span className="live-dot" aria-hidden="true" />
             <span>{cultureBrief.status}</span>
@@ -30,14 +25,9 @@ export default function Home() {
             </time>
           </div>
         </div>
-
       </section>
 
-      <section className="boards wrap" id="boards" aria-label="Culture leaderboards">
-        {cultureBrief.sections.map((section) => section.id === "music"
-          ? <SongBoard key={section.id} section={section} />
-          : <Leaderboard key={section.id} section={section} />)}
-      </section>
+      <AboutFlow id="about" />
     </main>
   );
 }

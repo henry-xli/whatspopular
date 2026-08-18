@@ -2445,5 +2445,304 @@
       "ok": true,
       "checkedAt": "2026-08-18T19:21:12.404Z"
     }
-  ]
+  ],
+  "quiz": {
+    "durationSeconds": 60,
+    "questions": [
+      {
+        "id": "memes-1",
+        "topicId": "memes",
+        "topic": "Memes",
+        "itemTitle": "Jimothy the raccoon",
+        "prompt": "Which topic matches this description? \"Jimothy is a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars.\"",
+        "answers": [
+          "Jimothy the raccoon",
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Hatsune Miku World Cup Custody Battle",
+          "Mbappé Special"
+        ],
+        "correctAnswer": "Jimothy the raccoon"
+      },
+      {
+        "id": "memes-2",
+        "topicId": "memes",
+        "topic": "Memes",
+        "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh",
+        "prompt": "Which topic matches this description? \"Kwebbelkop Laughing or YourRAGE Laugh refers to a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like Dutch YouTuber Kwebbelkop.\"",
+        "answers": [
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Jimothy the raccoon",
+          "Hatsune Miku World Cup Custody Battle",
+          "Mbappé Special"
+        ],
+        "correctAnswer": "Kwebbelkop Laughing / YourRAGE Laugh"
+      },
+      {
+        "id": "memes-3",
+        "topicId": "memes",
+        "topic": "Memes",
+        "itemTitle": "Hatsune Miku World Cup Custody Battle",
+        "prompt": "Which topic matches this description? \"Hatsune Miku World Cup Custody Battle is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku.\"",
+        "answers": [
+          "Hatsune Miku World Cup Custody Battle",
+          "Jimothy the raccoon",
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Mbappé Special"
+        ],
+        "correctAnswer": "Hatsune Miku World Cup Custody Battle"
+      },
+      {
+        "id": "people-1",
+        "topicId": "people",
+        "topic": "People",
+        "itemTitle": "Erling Haaland",
+        "prompt": "Which topic matches this description? \"Erling Haaland is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and prolific finishing. He drew renewed attention after starring for Norway at the 2026 World Cup.\"",
+        "answers": [
+          "Erling Haaland",
+          "Lamine Yamal",
+          "Christopher Nolan",
+          "Zendaya"
+        ],
+        "correctAnswer": "Erling Haaland"
+      },
+      {
+        "id": "people-2",
+        "topicId": "people",
+        "topic": "People",
+        "itemTitle": "Lamine Yamal",
+        "prompt": "Which topic matches this description? \"Lamine Yamal is a Spanish winger for Barcelona and the Spain national team, known as one of football’s leading young players. He recently attracted coverage over breakup rumors involving influencer Inés García and his social-media response.\"",
+        "answers": [
+          "Lamine Yamal",
+          "Erling Haaland",
+          "Christopher Nolan",
+          "Zendaya"
+        ],
+        "correctAnswer": "Lamine Yamal"
+      },
+      {
+        "id": "people-3",
+        "topicId": "people",
+        "topic": "People",
+        "itemTitle": "Christopher Nolan",
+        "prompt": "Which topic matches this description? \"Christopher Nolan is a British-American filmmaker known for blockbuster films with complex storytelling.\"",
+        "answers": [
+          "Christopher Nolan",
+          "Erling Haaland",
+          "Lamine Yamal",
+          "Zendaya"
+        ],
+        "correctAnswer": "Christopher Nolan"
+      },
+      {
+        "id": "movies-1",
+        "topicId": "movies",
+        "topic": "Movies",
+        "itemTitle": "The Odyssey",
+        "prompt": "Which topic matches this description? \"An epic action fantasy following Odysseus, the king of Ithaca, on a perilous voyage home after the Trojan War as he faces mythical beings and tries to reunite with Penelope.\"",
+        "answers": [
+          "The Odyssey",
+          "Obsession",
+          "Project Hail Mary",
+          "Backrooms"
+        ],
+        "correctAnswer": "The Odyssey"
+      },
+      {
+        "id": "movies-2",
+        "topicId": "movies",
+        "topic": "Movies",
+        "itemTitle": "Obsession",
+        "prompt": "Which topic matches this description? \"A supernatural horror film about Bear, a music store employee who uses a magical toy to make his co-worker Nikki love him, only for the wish to turn her into a violent obsession.\"",
+        "answers": [
+          "Obsession",
+          "The Odyssey",
+          "Project Hail Mary",
+          "Backrooms"
+        ],
+        "correctAnswer": "Obsession"
+      },
+      {
+        "id": "movies-3",
+        "topicId": "movies",
+        "topic": "Movies",
+        "itemTitle": "Project Hail Mary",
+        "prompt": "Which topic matches this description? \"A science-fiction film following teacher Ryland Grace, who awakens on a spaceship with no memory and must uncover his mission to stop a mysterious substance killing Earth's sun.\"",
+        "answers": [
+          "Project Hail Mary",
+          "The Odyssey",
+          "Obsession",
+          "Backrooms"
+        ],
+        "correctAnswer": "Project Hail Mary"
+      },
+      {
+        "id": "books-1",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "Yesteryear",
+        "prompt": "Which topic matches this description? \"Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a horrifying version of her familiar life. Unsure whether it is a hoax, reality show, or something else, she tries to escape.\"",
+        "answers": [
+          "Yesteryear",
+          "The Calamity Club",
+          "Theo of Golden",
+          "Mad Mabel"
+        ],
+        "correctAnswer": "Yesteryear"
+      },
+      {
+        "id": "books-2",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "The Calamity Club",
+        "prompt": "Which topic matches this description? \"In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood.\"",
+        "answers": [
+          "The Calamity Club",
+          "Yesteryear",
+          "Theo of Golden",
+          "Mad Mabel"
+        ],
+        "correctAnswer": "The Calamity Club"
+      },
+      {
+        "id": "books-3",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "Theo of Golden",
+        "prompt": "Which topic matches this description? \"A mysterious stranger named Theo arrives in the small southern city of Golden and begins buying pencil portraits from a local coffeehouse. Returning each portrait to its rightful owner sparks stories, friendships, and changes in people’s lives.\"",
+        "answers": [
+          "Theo of Golden",
+          "Yesteryear",
+          "The Calamity Club",
+          "Mad Mabel"
+        ],
+        "correctAnswer": "Theo of Golden"
+      },
+      {
+        "id": "music-1",
+        "topicId": "music",
+        "topic": "Music",
+        "itemTitle": "Choosin' Texas",
+        "prompt": "Which topic matches this description? \"\"Choosin' Texas\" is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘Choosin’ Texas’.\"",
+        "answers": [
+          "Choosin' Texas",
+          "hate that i made you love me",
+          "Man I Need",
+          "stupid song"
+        ],
+        "correctAnswer": "Choosin' Texas"
+      },
+      {
+        "id": "music-2",
+        "topicId": "music",
+        "topic": "Music",
+        "itemTitle": "hate that i made you love me",
+        "prompt": "Which topic matches this description? \"\"hate that i made you love me\" is a track by Ariana Grande, released May 29, 2026.\"",
+        "answers": [
+          "hate that i made you love me",
+          "Choosin' Texas",
+          "Man I Need",
+          "stupid song"
+        ],
+        "correctAnswer": "hate that i made you love me"
+      },
+      {
+        "id": "music-3",
+        "topicId": "music",
+        "topic": "Music",
+        "itemTitle": "Man I Need",
+        "prompt": "Which topic matches this description? \"\"Man I Need\" is a track by Olivia Dean, released Aug 15, 2025.\"",
+        "answers": [
+          "Man I Need",
+          "Choosin' Texas",
+          "hate that i made you love me",
+          "stupid song"
+        ],
+        "correctAnswer": "Man I Need"
+      },
+      {
+        "id": "products-1",
+        "topicId": "products",
+        "topic": "Products",
+        "itemTitle": "Laneige",
+        "prompt": "Which topic matches this description? \"Laneige refers to the Lip Sleeping Mask, recently included among viral beauty products from Laneige, Dyson, and Medicube.\"",
+        "answers": [
+          "Laneige",
+          "Medicube",
+          "NeeDohs",
+          "Dyson"
+        ],
+        "correctAnswer": "Laneige"
+      },
+      {
+        "id": "products-2",
+        "topicId": "products",
+        "topic": "Products",
+        "itemTitle": "Medicube",
+        "prompt": "Which topic matches this description? \"Medicube refers to the PDRN Pink Collagen Volume Multi Balm Stick for face and body, recently featured among viral Medicube products.\"",
+        "answers": [
+          "Medicube",
+          "Laneige",
+          "NeeDohs",
+          "Dyson"
+        ],
+        "correctAnswer": "Medicube"
+      },
+      {
+        "id": "products-3",
+        "topicId": "products",
+        "topic": "Products",
+        "itemTitle": "NeeDohs",
+        "prompt": "Which topic matches this description? \"NeeDohs refers to the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has drawn children, parents, and collectors into long waits to buy them.\"",
+        "answers": [
+          "NeeDohs",
+          "Laneige",
+          "Medicube",
+          "Dyson"
+        ],
+        "correctAnswer": "NeeDohs"
+      },
+      {
+        "id": "news-1",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Massive egg recall in US south and south-west due to salmonella outbreak.",
+        "prompt": "Which topic matches this description? \"About 1.6 million dozen eggs from Texas have been recalled under the FDA’s highest-risk warning as officials investigate a salmonella outbreak that has sickened nearly 100 people.\"",
+        "answers": [
+          "Massive egg recall in US south and south-west due to salmonella outbreak.",
+          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
+          "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
+        ],
+        "correctAnswer": "Massive egg recall in US south and south-west due to salmonella outbreak."
+      },
+      {
+        "id": "news-2",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+        "prompt": "Which topic matches this description? \"Hurricane Lala passed the Big Island without making a direct hit, while officials urged O‘ahu residents to stay safe as the storm approached.\"",
+        "answers": [
+          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "Massive egg recall in US south and south-west due to salmonella outbreak.",
+          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
+          "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
+        ],
+        "correctAnswer": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
+      },
+      {
+        "id": "news-3",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
+        "prompt": "Which topic matches this description? \"Human remains found in an Arizona desert area about 15 miles from Nancy Guthrie’s home have no apparent connection to her disappearance so far, according to the sheriff’s department.\"",
+        "answers": [
+          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
+          "Massive egg recall in US south and south-west due to salmonella outbreak.",
+          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
+        ],
+        "correctAnswer": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says."
+      }
+    ]
+  }
 }

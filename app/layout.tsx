@@ -6,33 +6,33 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://whatspopular.com"),
   title: {
-    default: "what’s popular? — Internet culture, caught up",
+    default: "How trendy are you? — what’s popular?",
     template: "%s — what’s popular?",
   },
   description:
-    "A five-minute daily briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture.",
+    "Quiz yourself on the memes, slang, people, movies, books, music, products, and news shaping internet culture.",
   applicationName: "what’s popular?",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "what’s popular?",
-    title: "what’s popular? — Internet culture, caught up",
+    title: "How trendy are you? — what’s popular?",
     description:
-      "The finite daily briefing on memes, slang, people, movies, books, music, products, and news.",
+      "A finite daily briefing and quiz on what the internet is talking about.",
     url: "/",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "what’s popular? — internet culture, minus the infinite scroll.",
+        alt: "what’s popular? — How trendy are you?",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "what’s popular? — Internet culture, caught up",
-    description: "The finite daily briefing on what the internet is talking about.",
+    title: "How trendy are you? — what’s popular?",
+    description: "A finite daily briefing and quiz on what the internet is talking about.",
     images: ["/og.jpg"],
   },
   icons: {

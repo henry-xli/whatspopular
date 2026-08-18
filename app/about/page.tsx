@@ -1,162 +1,26 @@
 import type { Metadata } from "next";
+import { AboutFlow } from "../components/about-flow";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "The exact sources, ranking rules, and daily publishing flow behind what’s popular?.",
+  description: "A concise overview of the daily source, validation, and publishing flow behind what’s popular?.",
   alternates: { canonical: "/about" },
 };
-
-const flow = [
-  {
-    number: "01",
-    title: "Pull sources",
-    text: "Fetch the latest public rankings from Know Your Meme, YouTube, Wikimedia, Spotify, Billboard, Goodreads, Google Trends, Google News, and Amazon.",
-  },
-  {
-    number: "02",
-    title: "Ingest at midnight Pacific",
-    text: "One automated job runs at 12:00 AM Pacific every day. Visitors never trigger source requests or scraping.",
-  },
-  {
-    number: "03",
-    title: "Apply eight rules",
-    text: "Each board is filtered and ordered by its own rule below. The displayed source metric determines the order; there is no blended score.",
-  },
-  {
-    number: "04",
-    title: "Validate and cache",
-    text: "Use selected source excerpts for optional AI copy editing, validate every returned description, fall back safely when it is unavailable, require two source hosts and no more than three linked references, then write one JSON snapshot and local WebP images.",
-  },
-  {
-    number: "05",
-    title: "Publish the snapshot",
-    text: "Build static HTML and serve it from the edge until the next validated daily snapshot is ready.",
-  },
-];
-
-const methods = [
-  {
-    board: "Memes",
-    sources: "Know Your Meme’s latest completed Meme of the Month result and Lessons in Meme Culture uploads from the previous two months. YouTube’s official Data API is used when a key is configured.",
-    rule: "Keep the poll’s published order and remove any meme without a matching LIMC upload. The site never substitutes the current month’s unfinished poll.",
-    metric: "Meme of the Month poll place.",
-  },
-  {
-    board: "Slang",
-    sources: "Know Your Meme’s annual slang review + the lifetime view count on each Know Your Meme entry + Urban Dictionary.",
-    rule: "Use every term in the annual review, verify that it has a matching Urban Dictionary usage, then order the complete list from most to least Know Your Meme entry views.",
-    metric: "Lifetime views on each Know Your Meme entry.",
-  },
-  {
-    board: "People",
-    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata identity metadata, and matching recent Google News coverage. An optional daily AI copy pass receives these selected excerpts.",
-    rule: "Walk down Topviews, keep living people, remove politicians, assign one broad primary category, and allow at most two people from any category. Keep the remaining view order; coverage and AI copy never change rank.",
-    metric: "Previous-month English Wikipedia views.",
-  },
-  {
-    board: "Movies",
-    sources: "Wikimedia’s previous-month English Wikipedia Topviews data, Wikidata for movie classification, IMDb-linked rating metadata, matching recent Google News coverage, and optional AI copy editing from those excerpts.",
-    rule: "Keep only movie pages from Topviews and preserve their page-view order. Ratings, plot copy, and recent coverage add context but do not affect rank.",
-    metric: "Previous-month English Wikipedia views.",
-  },
-  {
-    board: "Books",
-    sources: "Goodreads’ U.S. most-read books page and each linked Goodreads book page, with Open Library or Wikipedia as a plot-premise fallback, current Google News coverage, and optional AI copy editing from those excerpts.",
-    rule: "Keep the first ten Goodreads entries in the published order. Use each book page’s average star rating and plot-premise copy; monthly readers remain the ranking metric and are never blended with another score.",
-    metric: "Goodreads monthly readers and average star rating.",
-  },
-  {
-    board: "Music",
-    sources: "Spotify’s Today’s Top Hits playlist, the dated Billboard Hot 100, and matching recent Google News coverage for the description.",
-    rule: "Select the first 10 playlist tracks that also appear on the Hot 100, then order that same 10-track set by Billboard position. Recent coverage does not affect rank, and every result remains playable with Spotify’s official embed.",
-    metric: "Billboard Hot 100 position.",
-  },
-  {
-    board: "Products",
-    sources: "Amazon Movers & Shakers across six retail categories, Amazon listing search, recent Google News coverage about viral products, and optional AI copy editing from those excerpts.",
-    rule: "Require explicit recent viral-demand coverage plus an Amazon match. Combine social evidence, Amazon sales-rank movement when available, freshness, independent confirmations, and scarcity; retail movement alone never qualifies and stale or controversy-only coverage is downranked.",
-    metric: "Independent recent viral-source count; Amazon movement is a ranking input when available.",
-  },
-  {
-    board: "News",
-    sources: "Google Trending Now’s U.S. seven-day view, Google News coverage and publication dates, each linked publisher article’s opening paragraphs and lead image, Wikimedia only as an image fallback, and optional AI copy editing from those excerpts.",
-    rule: "Remove people and sports, sort the remaining topics by Google’s displayed search volume, link directly to current coverage, and use the article’s opening text or validated AI copy for a concise event description.",
-    metric: "Seven-day Google search volume.",
-  },
-];
 
 export default function AboutPage() {
   return (
     <main className="about-page" id="main-content" tabIndex={-1}>
       <section className="about-hero wrap">
-        <p className="eyebrow">How the site works</p>
-        <h1>Sources in. Rankings out.</h1>
+        <p className="eyebrow">About the briefing</p>
+        <h1>Sources in. Context out.</h1>
         <p>
-          Once a day, what’s popular? pulls public data from the sites named
-          below, runs eight documented ranking rules, saves one validated
-          snapshot, and publishes that snapshot as a static page. That is the
-          whole system.
+          Once a day, what’s popular? pulls public data, builds the eight
+          leaderboards shown on Explore, prepares the fixed quiz pool, and
+          publishes one validated snapshot. The site does not scrape or call
+          an AI service when someone visits.
         </p>
-        <a className="button button-primary" href="/">Read today’s briefing</a>
       </section>
-
-      <section className="flow-section" aria-labelledby="flow-title">
-        <div className="wrap">
-          <div className="section-intro compact">
-            <p className="eyebrow">Overall flow</p>
-            <h2 id="flow-title">One daily ingestion. Eight rankings. One page.</h2>
-          </div>
-          <ol className="flowchart">
-            {flow.map((step, index) => (
-              <li key={step.number}>
-                <article>
-                  <span>{step.number}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                </article>
-                {index < flow.length - 1 ? <span className="flow-arrow" aria-hidden="true">→</span> : null}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="algorithm-section wrap" aria-labelledby="algorithm-title">
-        <div className="section-intro compact">
-          <p className="eyebrow">The eight algorithms</p>
-          <h2 id="algorithm-title">Exactly how each list is made.</h2>
-        </div>
-        <div className="algorithm-grid">
-          {methods.map((method, index) => (
-            <article key={method.board}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{method.board}</h3>
-              <dl>
-                <div><dt>Sources</dt><dd>{method.sources}</dd></div>
-                <div><dt>Rule</dt><dd>{method.rule}</dd></div>
-                <div><dt>Shown metric</dt><dd>{method.metric}</dd></div>
-              </dl>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="infrastructure">
-        <div className="wrap infrastructure-grid">
-          <div>
-            <p className="eyebrow">What happens on failure</p>
-            <h2>The last good snapshot stays live.</h2>
-          </div>
-          <p>
-            If a required source is down, rate-limited, or produces invalid
-            data, the updater publishes nothing and visitors keep the previous
-            pre-rendered page. If product discovery alone is unavailable, the
-            last validated Products board is retained while the other boards
-            may refresh. There is no runtime database query, personalized feed,
-            or request-time scraper.
-          </p>
-        </div>
-      </section>
+      <AboutFlow full />
     </main>
   );
 }

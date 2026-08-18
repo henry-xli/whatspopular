@@ -316,6 +316,144 @@ img {
   margin-top: 30px;
 }
 
+.quiz-panel {
+  flex: 1 0 100%;
+  width: min(100%, 780px);
+  padding: 26px;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.quiz-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.quiz-panel-heading .eyebrow {
+  margin-bottom: 10px;
+}
+
+.quiz-panel h2,
+.quiz-result h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.quiz-timer {
+  display: grid;
+  min-width: 54px;
+  min-height: 54px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--purple-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.quiz-timer.is-low {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+.quiz-topic {
+  margin: 25px 0 8px;
+  color: var(--purple-dark);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.quiz-question {
+  max-width: 680px;
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.25;
+}
+
+.quiz-answers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  padding: 0;
+  margin: 22px 0 0;
+  border: 0;
+}
+
+.quiz-answer {
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.quiz-answer:hover,
+.quiz-answer:focus-visible,
+.quiz-answer.is-selected {
+  border-color: var(--purple);
+  background: color-mix(in srgb, var(--purple) 12%, var(--paper));
+}
+
+.quiz-answer:hover {
+  transform: translateY(-2px);
+}
+
+.quiz-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.quiz-controls > span,
+.quiz-result > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.quiz-result {
+  max-width: 640px;
+}
+
+.quiz-result > p {
+  margin-top: 12px;
+  font-size: 0.94rem;
+}
+
+.quiz-result .quiz-controls {
+  justify-content: flex-start;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
 .button {
   display: inline-flex;
   min-height: 48px;
@@ -390,6 +528,39 @@ img {
 
 .boards {
   padding-block: 28px 130px;
+}
+
+.explore-hero {
+  padding-block: 92px 40px;
+}
+
+.explore-hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.3rem, 7vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  line-height: 0.86;
+}
+
+.explore-hero > p:last-child {
+  max-width: 620px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .section-intro {
@@ -1162,6 +1333,13 @@ a.culture-card:hover {
   margin-bottom: 16px;
 }
 
+.section-intro.compact > p:last-child {
+  max-width: 680px;
+  margin: 24px auto 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .flowchart {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1225,78 +1403,6 @@ a.culture-card:hover {
   place-items: center;
   color: var(--muted);
   font-weight: 800;
-}
-
-.algorithm-section {
-  padding-block: 125px 135px;
-}
-
-.algorithm-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.algorithm-grid > article {
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  background: var(--card);
-}
-
-.algorithm-grid > article:last-child {
-  grid-column: 1 / -1;
-}
-
-.algorithm-grid > article > span {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border-radius: 11px;
-  background: var(--purple);
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 700;
-}
-
-.algorithm-grid > article:nth-child(2) > span { background: var(--coral); color: #17151c; }
-.algorithm-grid > article:nth-child(3) > span { background: var(--yellow); color: #17151c; }
-.algorithm-grid > article:nth-child(4) > span { background: var(--lime); color: #17151c; }
-.algorithm-grid > article:nth-child(5) > span { background: var(--ink); color: var(--paper); }
-
-.algorithm-grid h3 {
-  margin: 22px 0 18px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: -0.045em;
-}
-
-.algorithm-grid dl,
-.algorithm-grid dd {
-  margin: 0;
-}
-
-.algorithm-grid dl > div {
-  display: grid;
-  grid-template-columns: 105px 1fr;
-  gap: 18px;
-  padding-block: 13px;
-  border-top: 1px solid var(--line);
-}
-
-.algorithm-grid dt {
-  color: var(--purple-dark);
-  font-size: 0.62rem;
-  font-weight: 900;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.algorithm-grid dd {
-  color: var(--muted);
-  font-size: 0.84rem;
 }
 
 .infrastructure {
@@ -1388,6 +1494,32 @@ a.culture-card:hover {
 
   .hero h1 {
     font-size: clamp(4rem, 21vw, 6.2rem);
+  }
+
+  .quiz-panel {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .quiz-answers {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quiz-controls .button {
+    width: 100%;
+  }
+
+  .explore-hero {
+    padding-block: 62px 22px;
+  }
+
+  .explore-hero h1 {
+    font-size: clamp(3.3rem, 18vw, 5.6rem);
   }
 
   .boards {
@@ -1510,18 +1642,6 @@ a.culture-card:hover {
     min-height: 0;
   }
 
-  .algorithm-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .algorithm-grid > article:last-child {
-    grid-column: auto;
-  }
-
-  .algorithm-grid dl > div {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
 }
 
 @media (max-width: 480px) {

@@ -47,6 +47,21 @@ export type CultureSection = {
   moreLabel?: string;
 };
 
+export type CultureQuizQuestion = {
+  id: string;
+  topicId: string;
+  topic: string;
+  itemTitle: string;
+  prompt: string;
+  answers: string[];
+  correctAnswer: string;
+};
+
+export type CultureQuiz = {
+  durationSeconds: number;
+  questions: CultureQuizQuestion[];
+};
+
 export type CultureBrief = {
   edition: string;
   status: string;
@@ -54,6 +69,7 @@ export type CultureBrief = {
   generatedAt: string;
   summary: string;
   sections: CultureSection[];
+  quiz: CultureQuiz;
 };
 
 const allowedLinkHosts = new Set([
@@ -289,6 +305,43 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
       || !/^News(?: · [A-Z][a-z]{2} \d{1,2}, \d{4})?$/.test(item.subtitle))
     || newsVolumes.some((views, index) => !views || (index > 0 && views > newsVolumes[index - 1]))) {
     throw new Error("News must be ordered by seven-day Google search volume");
+  }
+
+  if (!candidate.quiz || typeof candidate.quiz !== "object") throw new Error("Culture brief is missing its quiz");
+  const quiz = candidate.quiz as Record<string, unknown>;
+  if (quiz.durationSeconds !== 60 || !Array.isArray(quiz.questions) || quiz.questions.length !== 21) {
+    throw new Error("Culture quiz must contain 21 questions and last 60 seconds");
+  }
+  const quizBoardIds = ["memes", "people", "movies", "books", "music", "products", "news"];
+  const quizCounts = new Map<string, number>();
+  const quizIds = new Set<string>();
+  for (const value of quiz.questions) {
+    if (!value || typeof value !== "object") throw new Error("Culture quiz contains an invalid question");
+    const question = value as Record<string, unknown>;
+    assertText(question.id, "Quiz question id", 80);
+    if (quizIds.has(question.id)) throw new Error("Culture quiz contains duplicate questions");
+    quizIds.add(question.id);
+    assertText(question.topicId, "Quiz topic id", 40);
+    if (!quizBoardIds.includes(question.topicId)) throw new Error("Culture quiz contains a slang question");
+    assertText(question.topic, "Quiz topic", 100);
+    assertText(question.itemTitle, "Quiz item title", 160);
+    assertText(question.prompt, "Quiz prompt", 360);
+    if (!Array.isArray(question.answers) || question.answers.length !== 4
+      || new Set(question.answers).size !== 4) throw new Error("Each quiz question must have four unique answers");
+    question.answers.forEach((answer, index) => assertText(answer, `Quiz answer ${index + 1}`, 160));
+    assertText(question.correctAnswer, "Quiz correct answer", 160);
+    if (!question.answers.includes(question.correctAnswer)) throw new Error("Quiz correct answer is not an answer choice");
+    quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
+    const section = brief.sections.find((entry) => entry.id === question.topicId);
+    const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])].slice(0, 3) : [];
+    if (!section || question.topic !== section.title
+      || !sourceItems.some((item) => item.title === question.itemTitle)
+      || question.correctAnswer !== question.itemTitle) {
+      throw new Error("Quiz question is not grounded in a board's first three entries");
+    }
+  }
+  if (quizBoardIds.some((id) => quizCounts.get(id) !== 3)) {
+    throw new Error("Culture quiz must contain three questions for each non-slang board");
   }
 }
 

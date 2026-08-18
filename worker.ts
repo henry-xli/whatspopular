@@ -50,7 +50,7 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const isHtmlNavigation = request.method === "GET"
-      && (url.pathname === "/" || url.pathname === "/about")
+      && (url.pathname === "/" || url.pathname === "/about" || url.pathname === "/explore")
       && !request.headers.has("rsc")
       && !request.headers.has("next-router-state-tree")
       && ((request.headers.get("accept") ?? "").includes("text/html")

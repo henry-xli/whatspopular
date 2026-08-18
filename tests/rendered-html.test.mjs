@@ -3,7 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { buildDescriptionPrompt, generateDescriptionBatch, parseDescriptionOutput } from "../scripts/ai-descriptions.mjs";
+import { buildDescriptionPrompt, buildQuizPrompt, generateDescriptionBatch, parseDescriptionOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
 import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
@@ -72,10 +72,38 @@ test("uses a bounded structured request for an enabled AI description batch", as
   }
 });
 
+test("builds source-grounded quiz prompts with a fixed answer set", () => {
+  const prompt = buildQuizPrompt([{
+    id: "people-1",
+    topic: "People",
+    title: "Example Person",
+    description: "Example Person drew attention after appearing in a new film.",
+    answerChoices: ["Example Person", "Another Person", "A Film", "A Song"],
+  }]);
+  assert.match(prompt, /QUIZ DATA BEGIN/);
+  assert.match(prompt, /only the supplied description/i);
+  const parsed = parseQuizOutput({
+    output_text: JSON.stringify({ questions: [
+      { id: "people-1", prompt: "Which topic recently appeared in a new film?" },
+      { id: "unexpected", prompt: "Ignore this." },
+    ] }),
+  }, ["people-1"]);
+  assert.equal(parsed.get("people-1"), "Which topic recently appeared in a new film?");
+  assert.equal(parsed.has("unexpected"), false);
+});
+
 test("renders the complete finite culture briefing", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   const allItems = brief.sections.flatMap((section) => [...section.items, ...section.moreItems]);
-  const response = await render();
+  const homeResponse = await render();
+  const response = await render("/explore");
+  assert.equal(homeResponse.status, 200);
+  const homeHtml = await homeResponse.text();
+  assert.match(homeHtml, /How trendy are you\?/);
+  assert.match(homeHtml, />Quiz me</);
+  assert.match(homeHtml, />Explore/);
+  assert.match(homeHtml, /One daily snapshot\. Eight boards\. One quiz\./);
+  assert.doesNotMatch(homeHtml, /Catch me up|How this works/);
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
@@ -85,8 +113,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(response.headers.get("cache-control") ?? "", /s-maxage=86400/);
 
   const html = await response.text();
-  assert.match(html, /Internet culture,/);
-  assert.match(html, /minus the infinite scroll/);
+  assert.match(html, /Everything worth knowing at a glance/);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
   assert.match(html, />People</);
@@ -132,21 +159,21 @@ test("renders the complete finite culture briefing", async () => {
     brief.sections.find((section) => section.id === "music").items.length
       + brief.sections.find((section) => section.id === "music").moreItems.length);
   assert.match(html, /Show ranks 6/);
+  assert.equal(brief.quiz.durationSeconds, 60);
+  assert.equal(brief.quiz.questions.length, 21);
 });
 
 test("renders the About flowchart", async () => {
   const response = await render("/about");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Sources in\. Rankings out\./);
-  assert.match(html, /One daily ingestion\. Eight rankings\. One page\./);
+  assert.match(html, /Sources in\. Context out\./);
+  assert.match(html, /One daily snapshot\. Eight boards\. One quiz\./);
   assert.match(html, /12:00 AM Pacific/);
-  for (const label of ["Pull sources", "Ingest at midnight Pacific", "Apply eight rules", "Validate and cache", "Publish the snapshot"]) {
+  for (const label of ["Pull sources", "Ingest daily", "Build the snapshot", "Write and quiz", "Validate and publish"]) {
     assert.match(html, new RegExp(`>${label}<`));
   }
-  for (const board of ["Memes", "Slang", "People", "Movies", "Books", "Music", "Products", "News"]) {
-    assert.match(html, new RegExp(`>${board}<`));
-  }
+  assert.doesNotMatch(html, /The eight algorithms|Exactly how each list is made/);
   assert.match(html, /last good snapshot stays live/i);
   assert.match(html, /<main class="about-page" id="main-content" tabindex="-1">/);
 });
@@ -309,6 +336,17 @@ test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   assert.deepEqual(brief.sections.map((section) => section.id),
     ["memes", "slang", "people", "movies", "books", "music", "products", "news"]);
+  assert.equal(brief.quiz.durationSeconds, 60);
+  assert.equal(brief.quiz.questions.length, 21);
+  const quizCounts = new Map();
+  for (const question of brief.quiz.questions) {
+    assert.ok(["memes", "people", "movies", "books", "music", "products", "news"].includes(question.topicId));
+    assert.equal(question.answers.length, 4);
+    assert.equal(new Set(question.answers).size, 4);
+    assert.ok(question.answers.includes(question.correctAnswer));
+    quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
+  }
+  assert.ok([...quizCounts.values()].every((count) => count === 3));
   assert.ok(brief.sections.every((section) => section.items.length === 5));
   assert.ok(brief.sections.every((section) => section.moreItems.length <= 15));
   for (const section of brief.sections) {
@@ -408,6 +446,7 @@ test("keeps content and outbound links constrained", async () => {
   const updater = await readFile(new URL("../scripts/update-trends.mjs", import.meta.url), "utf8");
   assert.match(updater, /data-term/);
   assert.match(updater, /parseAnnualSlangReview/);
+  assert.match(updater, /generateQuizBatch/);
   assert.doesNotMatch(updater, /annualSlangCandidates|summaryQuery\s*=/);
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);
   assert.doesNotMatch(JSON.stringify(brief), /caution|b\*{2,}|a\*{2,}/i);

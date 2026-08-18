@@ -2,7 +2,7 @@ import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { gunzipSync } from "node:zlib";
-import { generateDescriptionBatch } from "./ai-descriptions.mjs";
+import { generateDescriptionBatch, generateQuizBatch } from "./ai-descriptions.mjs";
 import { withHeadlessPage } from "./headless-browser.mjs";
 import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./news-article.mjs";
 import { fetchBytes, mapConcurrent } from "./runtime.mjs";
@@ -11,10 +11,13 @@ const root = path.resolve(import.meta.dirname, "..");
 const dataPath = path.join(root, "data", "trends.json");
 const dryRun = process.argv.includes("--dry-run");
 const force = process.argv.includes("--force");
+const quizOnly = process.argv.includes("--quiz-only");
 const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 const aiDescriptionContexts = new WeakMap();
+const quizSectionIds = ["memes", "people", "movies", "books", "music", "products", "news"];
+const quizDurationSeconds = 60;
 
 const allowedHosts = new Set([
   "accounts.spotify.com",
@@ -2195,6 +2198,13 @@ function sanitizeBriefSocialMentions(brief) {
     }
     for (const source of section.sources ?? []) source.label = sanitizeSocialText(source.label);
   }
+  for (const question of brief.quiz?.questions ?? []) {
+    question.topic = sanitizeSocialText(question.topic);
+    question.itemTitle = sanitizeSocialText(question.itemTitle);
+    question.prompt = sanitizeSocialText(question.prompt);
+    question.answers = question.answers.map((answer) => sanitizeSocialText(answer));
+    question.correctAnswer = sanitizeSocialText(question.correctAnswer);
+  }
 }
 
 function capLinkedSources(brief) {
@@ -2849,6 +2859,64 @@ async function updateAiDescriptions(brief) {
   return { enabled: true, applied, sections: results.filter((result) => result.applied > 0).length };
 }
 
+function quizPromptFallback(description) {
+  const context = conciseSentences(description, 260).replace(/[“”]/g, '"').trim();
+  return `Which topic matches this description? "${context}"`;
+}
+
+const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
+
+function quizRecords(brief) {
+  const records = [];
+  for (const sectionId of quizSectionIds) {
+    const section = brief.sections.find((entry) => entry.id === sectionId);
+    if (!section) throw new Error(`Quiz source board ${sectionId} is missing`);
+    const allItems = [...section.items, ...(section.moreItems ?? [])];
+    for (const item of allItems.slice(0, 3)) {
+      const distractors = allItems
+        .filter((candidate) => candidate.title !== item.title)
+        .map((candidate) => candidate.title);
+      const answerChoices = [...new Set([item.title, ...distractors])].slice(0, 4);
+      if (answerChoices.length < 4) throw new Error(`${section.title} does not have four quiz choices`);
+      records.push({
+        id: `${sectionId}-${item.rank}`,
+        topicId: sectionId,
+        topic: section.title,
+        title: item.title,
+        description: item.description,
+        answerChoices,
+      });
+    }
+  }
+  if (records.length !== 21) throw new Error(`Quiz must contain 21 source records, received ${records.length}`);
+  return records;
+}
+
+async function updateQuiz(brief) {
+  const records = quizRecords(brief);
+  let generated = new Map();
+  if (process.env.OPENAI_API_KEY?.trim()) {
+    try {
+      generated = await generateQuizBatch(records);
+    } catch (error) {
+      console.warn(`AI quiz prompts unavailable; deterministic prompts retained: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  const questions = records.map((record) => ({
+    id: record.id,
+    topicId: record.topicId,
+    topic: record.topic,
+    itemTitle: record.title,
+    prompt: generated.get(record.id) && !unusableQuizPromptPattern.test(generated.get(record.id))
+      ? generated.get(record.id)
+      : quizPromptFallback(record.description),
+    answers: record.answerChoices,
+    correctAnswer: record.title,
+  }));
+  brief.quiz = { durationSeconds: quizDurationSeconds, questions };
+  console.log(`Quiz questions prepared: ${questions.length} (${generated.size ? `${generated.size} AI prompts` : "deterministic prompts"}).`);
+}
+
 function validateBrief(brief) {
   const expected = ["memes", "slang", "people", "movies", "books", "music", "products", "news"];
   if (brief.sections.length !== expected.length
@@ -2972,6 +3040,36 @@ function validateBrief(brief) {
     || newsVolumes.some((volume, index) => index > 0 && volume > newsVolumes[index - 1])) {
     throw new Error("News must be ordered by seven-day Google search volume");
   }
+  if (!brief.quiz || brief.quiz.durationSeconds !== quizDurationSeconds
+      || !Array.isArray(brief.quiz.questions) || brief.quiz.questions.length !== 21) {
+    throw new Error("Quiz must contain 21 questions and a 60-second duration");
+  }
+  const quizCounts = new Map();
+  const quizIds = new Set();
+  for (const question of brief.quiz.questions) {
+    if (!question || typeof question !== "object" || quizIds.has(question.id)
+        || typeof question.id !== "string" || typeof question.topicId !== "string"
+        || !quizSectionIds.includes(question.topicId) || typeof question.topic !== "string"
+        || typeof question.itemTitle !== "string" || typeof question.prompt !== "string"
+        || question.prompt.length < 20 || question.prompt.length > 360
+        || !Array.isArray(question.answers) || question.answers.length !== 4
+        || new Set(question.answers).size !== 4 || question.answers.some((answer) => typeof answer !== "string" || !answer.trim())
+        || typeof question.correctAnswer !== "string" || !question.answers.includes(question.correctAnswer)) {
+      throw new Error("Quiz contains an invalid question");
+    }
+    quizIds.add(question.id);
+    quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
+    const section = brief.sections.find((entry) => entry.id === question.topicId);
+    const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])].slice(0, 3) : [];
+    if (!sourceItems.some((item) => item.title === question.itemTitle)
+        || question.correctAnswer !== question.itemTitle
+        || question.topic !== section?.title) {
+      throw new Error("Quiz question is not grounded in one of the board's first three entries");
+    }
+  }
+  if (quizSectionIds.some((sectionId) => quizCounts.get(sectionId) !== 3)) {
+    throw new Error("Quiz must contain three questions from every non-slang board");
+  }
   const serialized = JSON.stringify(brief);
   if (/tiktok/i.test(serialized)) throw new Error("The briefing must not contain TikTok data");
   if (/socialblade|socialcounts/i.test(serialized)) throw new Error("The briefing must not contain platform-growth ranking data");
@@ -3026,6 +3124,24 @@ for (const section of brief.sections) {
     }));
   }
 }
+
+if (quizOnly) {
+  await updateQuiz(brief);
+  sanitizeBriefSocialMentions(brief);
+  validateBrief(brief);
+  const output = `${JSON.stringify(brief, null, 2)}\n`;
+  const temporaryPath = `${dataPath}.${process.pid}.next`;
+  try {
+    await writeFile(temporaryPath, output, { mode: 0o644, flag: "wx" });
+    await rename(temporaryPath, dataPath);
+  } finally {
+    await unlink(temporaryPath).catch((error) => {
+      if (error?.code !== "ENOENT") throw error;
+    });
+  }
+  process.exit(0);
+}
+
 const now = new Date();
 if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().slice(0, 10)) {
   console.log(`Already refreshed on ${now.toISOString().slice(0, 10)}; use --force to run again.`);
@@ -3086,6 +3202,7 @@ await updateBooks(brief, byName["Goodreads monthly most read"].value);
 if (byName["Viral product discovery"].ok) await updateProducts(brief, byName["Viral product discovery"].value);
 updateNews(brief, byName["Google Trending Now / News"].value);
 await updateAiDescriptions(brief);
+await updateQuiz(brief);
 for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
 delete brief.pulse;
 

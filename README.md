@@ -1,8 +1,8 @@
 # what’s popular?
 
-A finite daily briefing on internet culture. Visitors receive pre-rendered HTML
-and local images; there is no account, feed, runtime database query, or
-request-time scraper.
+A finite daily briefing and quiz on internet culture. Visitors receive
+pre-rendered HTML and local images; there is no account, feed, runtime database
+query, or request-time scraper.
 
 ## Develop
 
@@ -57,12 +57,15 @@ Descriptions do not repeat the ranking metric shown on each card and have no
 per-entry overrides. The updater first derives identity or premise context from
 current Wikidata, Wikipedia, IMDb/Cinemeta, Goodreads, Open Library, Spotify, or
 Amazon metadata and the selected publisher excerpts. When `OPENAI_API_KEY` is
-configured, five bounded Responses API batches rewrite the People, Movies,
-Books, Products, and News descriptions once during ingestion: films and books
-receive plot premises, while people, products, and news receive a concise reason
-for their recent relevance. Source snippets are treated as untrusted data,
-structured output is validated, and each failed or missing result keeps its
-deterministic fallback. The key is never shipped to the browser. Google Trends
+configured, six bounded Responses API batches rewrite the People, Movies,
+Books, Products, and News descriptions and create quiz prompts once during
+ingestion: films and books receive plot premises, while people, products, and
+news receive a concise reason for their recent relevance. The quiz stores 21
+questions (three from every non-slang board), four choices per question, and a
+60-second duration in the same snapshot. Source snippets are treated as
+untrusted data, structured output is validated, and each failed or missing
+result keeps its deterministic fallback. The key is never shipped to the
+browser. Google Trends
 related queries and ranked Wikipedia search results disambiguate unfamiliar
 news topics. Question-style, editorial, and personality-led headline fragments
 are rejected. News entries use the selected publisher article’s direct URL,
@@ -76,7 +79,9 @@ Settings → Secrets and variables → Actions. The workflow uses the cost-sensi
 `gpt-5.6-luna` model by default; an optional `OPENAI_DESCRIPTION_MODEL`
 repository variable can select another available text model. If the secret is
 absent or the API is unavailable, ingestion remains fully functional with the
-deterministic copy.
+deterministic copy and quiz prompts. `npm run content:quiz` regenerates the
+quiz pool from the descriptions already in the snapshot without fetching any
+external source.
 
 Every entry has evidence from at least two distinct source hosts, with no more
 than three linked evidence items or leaderboard source links.
@@ -95,7 +100,9 @@ for Amazon Movers & Shakers when its public page rate-limits automation.
 ## Architecture and maintenance
 
 - `app/` contains pages, components, styles, and runtime data validation; the
-  shared culture model lives in `app/culture.ts`.
+  shared culture model lives in `app/culture.ts`. `/` is the quiz-first home
+  page, `/explore` contains the leaderboards, and `/about` contains the flow
+  explanation.
 - `data/trends.json` is the single preprocessed content snapshot.
 - `scripts/` contains the daily ingestion, source adapters, AI copy pass, and
   image pipeline. The helpers are kept flat so the pipeline is easy to find.

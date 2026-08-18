@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "content:images": "node scripts/cache-images.mjs",
     "content:update": "node scripts/update-trends.mjs",
+    "content:quiz": "node scripts/update-trends.mjs --quiz-only",
     "content:refresh": "npm run content:update && npm run content:images"
   },
   "dependencies": {

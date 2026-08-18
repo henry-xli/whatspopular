@@ -9,7 +9,7 @@ export function SiteHeader() {
           <span>what’s popular?</span>
         </a>
         <nav aria-label="Main navigation">
-          <a href="/#boards">Boards</a>
+          <a href="/explore">Explore</a>
           <a href="/about">About</a>
           <ThemeToggle />
         </nav>
