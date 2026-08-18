@@ -159,6 +159,7 @@ test("renders the complete finite culture briefing", async () => {
     brief.sections.reduce((count, section) => count + section.moreItems.length, 0));
   assert.doesNotMatch(html, /class="expanded-source"|↗|▶/);
   assert.match(html, /class="ui-icon ui-icon-external/);
+  assert.match(html, /<svg class="ui-icon ui-icon-external/);
   assert.match(html, /class="ui-icon ui-icon-play/);
   assert.equal((html.match(/aria-label="Play /g) ?? []).length,
     brief.sections.find((section) => section.id === "music").items.length

@@ -712,28 +712,9 @@ img {
   line-height: 1;
 }
 
-.ui-icon-external::before {
-  position: absolute;
-  top: 0.53em;
-  left: 0.1em;
-  width: 0.74em;
-  height: 1.5px;
-  border-radius: 999px;
-  background: currentColor;
-  transform: rotate(-45deg);
-  transform-origin: right center;
-  content: "";
-}
-
-.ui-icon-external::after {
-  position: absolute;
-  top: 0.08em;
-  right: 0.04em;
-  width: 0.36em;
-  height: 0.36em;
-  border-top: 1.5px solid currentColor;
-  border-right: 1.5px solid currentColor;
-  content: "";
+.ui-icon-external {
+  display: block;
+  overflow: visible;
 }
 
 .ui-icon-play {
