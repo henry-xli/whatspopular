@@ -54,7 +54,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-slideshow-track {
+  .hero-slideshow-track,
+  .hero-spotlight {
     transition: none;
   }
 }
@@ -306,8 +307,8 @@ img {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--paper-deep) 97%, transparent) 0%, color-mix(in srgb, var(--paper-deep) 84%, transparent) 42%, color-mix(in srgb, var(--paper-deep) 40%, transparent) 100%),
-    linear-gradient(180deg, color-mix(in srgb, var(--paper-deep) 18%, transparent), color-mix(in srgb, var(--paper-deep) 72%, transparent));
+    linear-gradient(90deg, color-mix(in srgb, var(--paper-deep) 93%, transparent) 0%, color-mix(in srgb, var(--paper-deep) 74%, transparent) 42%, color-mix(in srgb, var(--paper-deep) 32%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--paper-deep) 12%, transparent), color-mix(in srgb, var(--paper-deep) 62%, transparent));
   content: "";
 }
 
@@ -328,8 +329,8 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.72) contrast(0.92);
-  opacity: 0.58;
+  filter: saturate(0.78) contrast(0.95);
+  opacity: 0.74;
 }
 
 .hero-spotlight {
@@ -346,6 +347,14 @@ img {
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   pointer-events: auto;
+  transition: opacity 0.2s ease, visibility 0s linear 0s;
+}
+
+.hero:has(.quiz-panel) .hero-spotlight {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0s, 0.2s;
 }
 
 .hero-spotlight-label {
@@ -1620,8 +1629,8 @@ a.culture-card:hover {
 
   .hero-slideshow::after {
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--paper-deep) 94%, transparent) 0%, color-mix(in srgb, var(--paper-deep) 60%, transparent) 54%, color-mix(in srgb, var(--paper-deep) 86%, transparent) 100%),
-      linear-gradient(90deg, color-mix(in srgb, var(--paper-deep) 92%, transparent), color-mix(in srgb, var(--paper-deep) 35%, transparent));
+      linear-gradient(180deg, color-mix(in srgb, var(--paper-deep) 88%, transparent) 0%, color-mix(in srgb, var(--paper-deep) 48%, transparent) 54%, color-mix(in srgb, var(--paper-deep) 76%, transparent) 100%),
+      linear-gradient(90deg, color-mix(in srgb, var(--paper-deep) 84%, transparent), color-mix(in srgb, var(--paper-deep) 26%, transparent));
   }
 
   .hero-spotlight {

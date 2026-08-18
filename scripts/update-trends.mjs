@@ -2863,41 +2863,73 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function redactQuizTitle(value, title) {
+function redactQuizTitle(value, title, topicId) {
   const genericWords = new Set(["this", "that", "with", "from", "your", "world", "meme", "film", "movie", "book", "song", "the", "and", "of", "in", "on", "for", "a", "an", "to"]);
-  const terms = [
-    title.trim(),
-    ...title.split(/[^A-Za-z0-9]+/).filter((word) => word.length >= 4 && !genericWords.has(word.toLowerCase())),
-  ].filter(Boolean).sort((left, right) => right.length - left.length);
-  return terms.reduce((result, term) => result.replace(new RegExp(`\\b${escapeRegExp(term)}\\b`, "ig"), "this entry"), value)
-    .replace(/\bthis entry(?:\s+this entry)+\b/gi, "this entry")
+  const replacement = {
+    memes: "this meme",
+    people: "this person",
+    movies: "this film",
+    books: "this book",
+    music: "this track",
+    products: "this product",
+    news: "this story",
+  }[topicId] ?? "this entry";
+  const significantWords = title.split(/[^A-Za-z0-9]+/)
+    .filter((word) => word.length >= 4 && !genericWords.has(word.toLowerCase()));
+  const phrases = [title.trim()];
+  if (significantWords.length > 1) {
+    for (let index = 0; index < significantWords.length - 1; index += 1) {
+      phrases.push(`${significantWords[index]} ${significantWords[index + 1]}`);
+    }
+    phrases.push(significantWords[0]);
+  }
+  const marker = "__QUIZ_TITLE__";
+  const redacted = [...new Set(phrases.filter(Boolean))].sort((left, right) => right.length - left.length)
+    .reduce((result, phrase) => {
+      const words = phrase.split(/\s+/).filter(Boolean);
+      const pattern = words.length > 1
+        ? words.map((word) => escapeRegExp(word)).join("[^A-Za-z0-9]+")
+        : `\\b${escapeRegExp(phrase)}\\b`;
+      const flags = words.length > 1 ? "gi" : "g";
+      return result.replace(new RegExp(pattern, flags), marker);
+    }, value)
+    .replace(new RegExp(`${marker}(?:\\s+(?:or|and|/)\\s*${marker})+`, "g"), marker)
+    .replaceAll(marker, replacement)
+    .replace(new RegExp(`^${escapeRegExp(replacement)}\\s+(?:is|refers to|was|has been|brought|found|describes?)\\s+`, "i"), "")
+    .replace(/\bthis (meme|person|film|book|track|product|story|entry)\s+(?:meme|person|film|book|track|product|story|entry|products?)\b/gi, "this $1")
+    .replace(/\bnamed this book\b/gi, "named a stranger")
     .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/\s{2,}/g, " ")
     .trim();
+  return redacted;
 }
 
 function quizPromptFallback(description, title, topicId) {
-  const context = redactQuizTitle(conciseSentences(description, 260)
+  const context = redactQuizTitle(conciseSentences(description, 300)
     .replace(/[“”]/g, '"')
-    .trim(), title);
+    .trim(), title, topicId);
   const prompts = {
-    people: "Which person is linked to this recent detail?",
-    movies: "Which film has this premise detail?",
-    music: "Which track is linked to this context?",
-    products: "Which product is linked to this buying context?",
-    news: "Which news item is described by this development?",
-    memes: "Which meme is linked to this origin or use?",
+    people: "A recent development put this person back in focus: ",
+    movies: "The premise of this film turns on a specific situation: ",
+    books: "The plot of this book turns on a specific situation: ",
+    music: "This track has been drawing attention in a recent musical context: ",
+    products: "A recent buying or social trend has made this product stand out: ",
+    news: "This recent news story centers on a concrete development: ",
+    memes: "This meme took off through a distinctive origin or recent use: ",
   };
-  return `${prompts[topicId] ?? "Which entry is linked to this detail?"} "${context}"`;
+  const lead = prompts[topicId] ?? "This entry is defined by a concrete detail: ";
+  const questionSuffix = topicId === "books" || topicId === "movies" ? " Which title is it?" : " Which entry is it?";
+  return `${lead}${context}${questionSuffix}`;
 }
 
 const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
+const genericQuizPromptPattern = /^(?:which (?:topic|entry|item) (?:matches|is linked to|is described by|is associated with)|which (?:person|film|movie|book|track|song|product|news item|meme) is linked to this|which entry is linked to this)/i;
 
 function usableQuizPrompt(prompt, record) {
-  if (!prompt || unusableQuizPromptPattern.test(prompt)) return false;
+  if (!prompt || unusableQuizPromptPattern.test(prompt) || genericQuizPromptPattern.test(prompt.trim())) return false;
   const title = normalize(record.title);
   const question = normalize(prompt);
-  return !title || title.length < 4 || !question.includes(title);
+  return (!title || title.length < 4 || !question.includes(title)) && prompt.trim().length >= 55;
 }
 
 function quizRecords(brief) {
@@ -2918,6 +2950,15 @@ function quizRecords(brief) {
         topic: section.title,
         title: item.title,
         description: item.description,
+        focus: {
+          memes: "Anchor the question in the meme's concrete origin, format, or recent use.",
+          people: "Anchor the question in the concrete recent event, role, appearance, or coverage that put the person in focus now.",
+          movies: "Anchor the question in a specific plot premise detail and any supported recent release context.",
+          books: "Anchor the question in a specific plot-premise detail only; do not ask about current popularity.",
+          music: "Anchor the question in the concrete recent release, performance, cover, or cultural context that made the track relevant now.",
+          products: "Anchor the question in the recent buying, collecting, unboxing, restock, recommendation, or social-trend behavior making the product relevant now.",
+          news: "Anchor the question in the concrete recent event or development, including its consequence or why it mattered.",
+        }[sectionId],
         answerChoices,
       });
     }
