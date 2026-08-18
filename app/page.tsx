@@ -1,4 +1,4 @@
-import { cultureBrief, formatUpdatedAt } from "./lib/culture";
+import { cultureBrief, formatUpdatedAt } from "./culture";
 import { Leaderboard } from "./components/leaderboard";
 import { SongBoard } from "./components/song-board";
 

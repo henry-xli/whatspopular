@@ -3,9 +3,9 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { buildDescriptionPrompt, generateDescriptionBatch, parseDescriptionOutput } from "../scripts/lib/ai-descriptions.mjs";
-import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/lib/news-article.mjs";
-import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/lib/runtime.mjs";
+import { buildDescriptionPrompt, generateDescriptionBatch, parseDescriptionOutput } from "../scripts/ai-descriptions.mjs";
+import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/news-article.mjs";
+import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);

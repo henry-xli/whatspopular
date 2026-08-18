@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, rename, stat, unlink } from "node:fs/promises
 import path from "node:path";
 import process from "node:process";
 import sharp from "sharp";
-import { assertPublicHostname, fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
+import { assertPublicHostname, fetchBytes, mapConcurrent } from "./runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const outputRoot = path.join(root, "public", "culture");

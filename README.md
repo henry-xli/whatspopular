@@ -94,10 +94,12 @@ for Amazon Movers & Shakers when its public page rate-limits automation.
 
 ## Architecture and maintenance
 
-- `app/` contains the pages, components, styles, and runtime data validation.
+- `app/` contains pages, components, styles, and runtime data validation; the
+  shared culture model lives in `app/culture.ts`.
 - `data/trends.json` is the single preprocessed content snapshot.
-- `scripts/` contains the daily ingestion and image pipeline.
-- `worker/index.ts` applies edge caching and production security headers.
+- `scripts/` contains the daily ingestion, source adapters, AI copy pass, and
+  image pipeline. The helpers are kept flat so the pipeline is easy to find.
+- `worker.ts` applies edge caching and production security headers.
 - `tests/` checks rendered content, headers, links, media, and data invariants.
 - `.github/workflows/update-daily.yml` refreshes, verifies, and commits once daily.
 
@@ -107,6 +109,10 @@ stale-while-revalidate. Error responses, React server requests, and unsafe HTTP
 methods are never cached. Spotify audio loads only after a play action, and the
 Buy Me a Coffee widget is deferred until the document has been parsed.
 
-The project targets the Cloudflare-compatible vinext runtime and OpenAI Sites.
-The deployment project is recorded in `.openai/hosting.json`; the custom
-`whatspopular.com` domain must be configured in the owning Cloudflare account.
+The project targets the Cloudflare-compatible vinext runtime and managed Sites
+hosting. The deployment project pointer is kept in the neutral root-level
+`hosting.json`; the build copies it into `dist/.openai/hosting.json` only in the
+deployment artifact because the Sites packaging format requires that location.
+The source repository therefore contains no provider metadata directory. The
+custom `whatspopular.com` domain must be configured in the owning Cloudflare
+account.

@@ -1,4 +1,4 @@
-import rawBrief from "../../data/trends.json";
+import rawBrief from "../data/trends.json";
 
 export type CultureLayout = "landscape" | "poster" | "square";
 

@@ -2,10 +2,10 @@ import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { gunzipSync } from "node:zlib";
-import { generateDescriptionBatch } from "./lib/ai-descriptions.mjs";
-import { withHeadlessPage } from "./lib/headless-browser.mjs";
-import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./lib/news-article.mjs";
-import { fetchBytes, mapConcurrent } from "./lib/runtime.mjs";
+import { generateDescriptionBatch } from "./ai-descriptions.mjs";
+import { withHeadlessPage } from "./headless-browser.mjs";
+import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./news-article.mjs";
+import { fetchBytes, mapConcurrent } from "./runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const dataPath = path.join(root, "data", "trends.json");

@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { CultureSection } from "../lib/culture";
+import type { CultureSection } from "../culture";
 import { CloseIcon, ExternalLinkIcon, PlayIcon, StarIcon } from "./icons";
 
 type ExpandedRankingProps = {

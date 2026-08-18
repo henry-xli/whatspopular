@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
-import type { CultureSection } from "../lib/culture";
+import type { CultureSection } from "../culture";
 import { ExpandedRanking } from "./expanded-ranking";
 import { CloseIcon, ExternalLinkIcon, PlayIcon } from "./icons";
 
