@@ -104,6 +104,11 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(homeHtml, /How trendy are you\?/);
   assert.match(homeHtml, />Quiz me</);
   assert.match(homeHtml, />Explore/);
+  assert.match(homeHtml, /class="hero-visuals"/);
+  assert.match(homeHtml, /class="hero-slideshow"/);
+  assert.equal((homeHtml.match(/class="hero-slide"/g) ?? []).length, 16);
+  assert.match(homeHtml, /class="hero-spotlight"/);
+  assert.match(homeHtml, /Standout ·/);
   assert.match(homeHtml, /class="is-active" href="\/"[^>]*>Home<\/a>/);
   assert.match(homeHtml, /aria-current="page"/);
   assert.match(homeHtml, /One daily snapshot\. Eight boards\. One quiz\./);
