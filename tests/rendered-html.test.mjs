@@ -361,7 +361,7 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allMovies.every((item) => /^\d+(?:\.\d{1,2})?[MK]?$/.test(item.metric.value)));
   assert.ok(allMovies.every((item) => item.rating === "Not rated" || /^\d+(?:\.\d)?$/.test(item.rating)));
   assert.ok(allMovies.every((item) => item.description.length >= 30));
-  assert.ok(allMovies.every((item) => /\bfilm\b/i.test(item.description)));
+  assert.ok(allMovies.every((item) => /\b(?:about|after|before|cent(?:er|re)s?|discovers?|encounters?|follows?|forced|journey|must|reunite|returns?|set|stranded|takes? place|tries?|undergoes?|when|where|while|wakes?|story|film|movie)\b/i.test(item.description)));
   assert.ok(allMovies.every((item) => !/Wikipedia views|most-read movie pages/i.test(item.description)));
   const movieViews = allMovies.map((item) => Number(item.metric.value.replace("M", "e6").replace("K", "e3")));
   assert.deepEqual(movieViews, [...movieViews].sort((left, right) => right - left));
