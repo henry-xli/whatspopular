@@ -100,12 +100,15 @@ function assertText(value: unknown, label: string, maximum = 800): asserts value
   }
 }
 
+const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
+
 function validQuizPrompt(prompt: string) {
   const sentenceCount = prompt.match(/[^.!?]+[.!?]+/g)?.length ?? 0;
   return prompt.trim().endsWith("?")
     && sentenceCount >= 1 && sentenceCount <= 2
     && prompt.trim().length >= 40 && prompt.trim().length <= 480
-    && !/\.\.\.|…/.test(prompt);
+    && !/\.\.\.|…/.test(prompt)
+    && !unusableQuizPromptPattern.test(prompt);
 }
 
 function publicHostname(hostname: string) {

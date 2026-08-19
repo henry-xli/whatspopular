@@ -1272,6 +1272,8 @@ a.culture-card:hover {
 
 .song-expanded-entry .expanded-art {
   width: 112px;
+  height: auto;
+  min-height: 0;
   aspect-ratio: 1;
   align-self: start;
 }
