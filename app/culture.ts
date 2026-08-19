@@ -9,7 +9,7 @@ export type CultureItem = {
   description: string;
   image: string;
   imageSource?: string;
-  imageSourceKind?: "article";
+  imageSourceKind?: "article" | "commerce";
   imageSourcePageUrl?: string;
   alt: string;
   url: string;
@@ -104,7 +104,8 @@ const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked
 
 function validQuizPrompt(prompt: string) {
   if (/[.!?]\s+[a-z]/.test(prompt)) return false;
-  const sentenceCount = prompt.match(/[^.!?]+[.!?]+/g)?.length ?? 0;
+  const sentenceCount = prompt.replace(/\b(?:u\.s|e\.g|i\.e)\./gi, (match) => match.replaceAll(".", ""))
+    .match(/[^.!?]+[.!?]+/g)?.length ?? 0;
   return prompt.trim().endsWith("?")
     && sentenceCount >= 1 && sentenceCount <= 2
     && prompt.trim().length >= 40 && prompt.trim().length <= 480

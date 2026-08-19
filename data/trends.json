@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-19T07:04:31.335Z",
+  "generatedAt": "2026-08-19T16:33:43.867Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,002,378"
+            "value": "1,002,681"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,601"
+            "value": "114,646"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "100,081"
+            "value": "100,188"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,626"
+            "value": "76,654"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,611"
+            "value": "55,618"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,960"
+            "value": "46,973"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,564"
+            "value": "43,571"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,399"
+            "value": "27,420"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,563"
+            "value": "18,578"
           },
           "evidence": [
             {
@@ -596,7 +596,7 @@
               "url": "https://en.wikipedia.org/wiki/Lamine_Yamal"
             },
             {
-              "source": "FOX Sports",
+              "source": "ESPN",
               "url": "https://www.fcbarcelona.com/en/football/first-team/players/129404/---------------lamine-yamal"
             }
           ],
@@ -627,7 +627,7 @@
               "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
             },
             {
-              "source": "christianitytoday.com",
+              "source": "Jacobin",
               "url": "https://www.imdb.com/name/nm0634240/"
             }
           ],
@@ -638,7 +638,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya is primarily known as an actress. Zendaya and Tom Holland Own 95 Percent of the Domestic Box Office. The Reason Isn't What You Think.",
+          "description": "Zendaya is primarily known as an actress. Zendaya and Tom Holland's Spider-Man: Brand New Day might finally have come to a close at home in London.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -658,8 +658,8 @@
               "url": "https://en.wikipedia.org/wiki/Zendaya"
             },
             {
-              "source": "Vogue via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPN0NuS1JuLUc0TDFBWjN1aHJfc04tMnoyTm93SXQ2dGN5Q1R5bUNWV2hHZkJ1eDNPM29nN185ZC1lcF9NYWk0SE94YmFUNTVjUWlPd2VHQjRzNGJ1Vm5SSlpIdDNLY1IxSE5XMFpOQlRJRXotYjRPYUo5V3UtTWxTWkxrYVZwOW9VaHRj?oc=5"
+              "source": "people.com",
+              "url": "https://www.britannica.com/biography/Zendaya"
             }
           ],
           "accent": "#ffc857",
@@ -669,7 +669,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is primarily known as a singer. Justin Bieber Joins Madonna, BTS and Shakira for FIFA World Cup Final Halftime Show.",
+          "description": "Shakira is primarily known as a singer. Shakira makes surprise visit to earthquake-damaged Colombia and commits to building new schools.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -689,8 +689,8 @@
               "url": "https://en.wikipedia.org/wiki/Shakira"
             },
             {
-              "source": "Variety",
-              "url": "https://www.imdb.com/name/nm3595501/"
+              "source": "ABC News - Breaking News, Latest News and Videos via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSzhRV3BxMk4yWDNuSzVBUWZpRzNrN2xYN3UzeHlMLW5TR3h2aGtTU0gxUGg2Zk55UVVsXzRkaFJxM0NzdHVtTFVOZnE0b1hINFR5TklJdFdGU2k3TWVuMmV3Y0hCSDNEeVlNbl9ZbHF0eHNDWUw0NUkwVTFNWHJpNkhiaTNUYVdyckYyRjJ4RFlxMlpiWDVCdXJnMmpjeFRGN0hYT0JzVU9Xc1d1VXo1UzVnMNIBuAFBVV95cUxNTEhYZUNKXzZHTm55aFFQV2pYRWY5Zk1OeE1TZWtzSnBRblFZcU53bWJRZWNpdlF6bW1rNmRWbmo2dlZQR0owc0g5QURqYUpBaHBVTGdCcjk1MnZXSlJYM1NzRmxoZEV1S2VhME1XRzJuakdaUlRXWk9CZlJicl9lUFE5VEtWUERrR2s3c3ZxNV9WcWFqRG5HU2N3ZTB1TGx3Rklwbm5CWmoxNkt3UFE4S3ZyYWNPNWww?oc=5"
             }
           ],
           "accent": "#ff6b57",
@@ -754,7 +754,7 @@
             },
             {
               "source": "Billboard",
-              "url": "https://www.palmbeachpost.com/picture-gallery/news/local/boca/2026/07/01/see-photos-taylor-swift-and-travis-kelce-in-south-florida/90758857007/"
+              "url": "https://entertainmentnow.com/taylor-swift/"
             }
           ],
           "accent": "#57d5a4",
@@ -764,7 +764,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeff Bezos is primarily known as a business. Group including Jeff Bezos buys minority stake in Liverpool FC, with option to become controlling owner.",
+          "description": "Jeff Bezos is primarily known as a business. Investor Group Including Jeff Bezos Buys Liverpool FC Stake In Multibillion-Dollar Deal.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -815,7 +815,7 @@
               "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
             },
             {
-              "source": "BBC",
+              "source": "UN News",
               "url": "https://www.forbes.com/sites/saradorn/2026/07/19/tate-brothers-arrested-in-florida-what-we-know-about-their-trump-ties/"
             }
           ],
@@ -1199,7 +1199,7 @@
           "rank": 1,
           "title": "Yesteryear",
           "subtitle": "Goodreads · Caro Claire Burke",
-          "description": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and has the social media accounts to prove it. Then, one morning, Natalie wakes up in a strange, horrible version of reality.",
+          "description": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and her followers are sick with envy. Then, one morning, Natalie wakes up in a strange, horrible version of reality.",
           "image": "/culture/book-yesteryear.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
           "alt": "Cover of Yesteryear by Caro Claire Burke",
@@ -1852,191 +1852,175 @@
           "label": "Google News · viral product coverage, 90 days",
           "url": "https://news.google.com/search?q=viral+products+when%3A90d&hl=en-US&gl=US&ceid=US%3Aen"
         },
-        {
-          "label": "Validated product source pages",
-          "url": "https://www.starbucks.com/menu/product/2122238/iced"
-        }
+      {
+        "label": "Amazon · best-selling match",
+        "url": "https://www.amazon.com/dp/B0H6NDDD55"
+      }
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
-          "title": "Starbucks' Unicorn Frappuccino",
+          "title": "Trader Joe's Mini Tote Bag",
           "subtitle": "Product",
-          "description": "Starbucks' Unicorn Frappuccino is a consumer product. Starbucks Announces Limited Return of the Viral Unicorn Frappuccino for One Weekend.",
-          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
-          "alt": "Starbucks' Unicorn Frappuccino product listing image",
-          "url": "https://www.starbucks.com/menu/product/2122238/iced",
-          "source": "Recent source page",
+          "description": "The Trader Joe’s Mini Tote Bag is a blue-striped mini tote. It drew renewed attention after the popular canvas tote returned for a limited-time restock, sending shoppers queuing for it.",
+          "image": "/culture/product-trader-joe-s-mini-tote-bag.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/71yPwAIlSUL._AC_UL320_.jpg",
+          "imageSourceKind": "commerce",
+          "imageSourcePageUrl": "https://www.amazon.com/dp/B0H6NDDD55",
+          "alt": "Trader Joe's Mini Tote Bag product listing image",
+          "url": "https://www.amazon.com/dp/B0H6NDDD55",
+          "source": "Amazon listing",
           "metric": {
             "label": "Independent viral sources",
-            "value": "4 sources"
+            "value": "3 sources"
           },
           "evidence": [
             {
-              "source": "Recent source page",
-              "url": "https://www.starbucks.com/menu/product/2122238/iced"
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0H6NDDD55"
             },
             {
-              "source": "Cincinnati Enquirer publisher via Google News",
-              "url": "https://www.cincinnati.com/"
+              "source": "Bergen Record",
+              "url": "https://www.northjersey.com/story/shopping/2026/06/17/trader-joes-mini-tote-bags-create-big-crowds-in-north-jersey/90588064007/"
             },
             {
-              "source": "The Coloradoan publisher via Google News",
-              "url": "https://www.coloradoan.com/"
+              "source": "Newsweek",
+              "url": "https://www.newsweek.com/trader-joes-mini-tote-bag-new-design-has-shoppers-queuing-around-the-block-12095957"
             }
           ],
-          "accent": "#ff6b57"
+          "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "Galaxy Z Fold 8",
+          "title": "Starbucks' Unicorn Frappuccino",
           "subtitle": "Product",
-          "description": "Galaxy Z Fold 8 is a consumer product. Samsung Galaxy Z Fold8 Ultra, Galaxy Z Fold8, Galaxy Z Flip8 Post Record Pre-Orders in India.",
-          "image": "/culture/product-galaxy-z-fold-8.webp",
-          "alt": "Galaxy Z Fold 8 product listing image",
-          "url": "https://www.samsung.com/us/smartphones/?msockid=21c922d499d06c6628ae356e98776d63",
-          "source": "Recent source page",
+          "description": "Starbucks' Unicorn Frappuccino is a blended drink. A viral color-changing drink from 2017 is returning to Starbucks, but you'll need to act fast to get one. The Seattle-based coffeehouse giant is bringing back the Unicorn Frappuccino \"for one magical weekend to close out the summer,\" according to a statement from the company.",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/14/NREC/91300639007-starbucks-unicorn-frappuccino.png?crop=1999,1125,x0,y437&width=1999&height=1125&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/",
+          "alt": "Starbucks' Unicorn Frappuccino product listing image",
+          "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank",
+          "source": "Amazon product search",
           "metric": {
             "label": "Independent viral sources",
-            "value": "17 sources"
+            "value": "6 sources"
           },
           "evidence": [
             {
-              "source": "Recent source page",
-              "url": "https://www.samsung.com/us/smartphones/?msockid=21c922d499d06c6628ae356e98776d63"
+              "source": "Amazon product search",
+              "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank"
             },
             {
-              "source": "samsung.com publisher via Google News",
-              "url": "https://news.samsung.com/"
+              "source": "Cincinnati Enquirer",
+              "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/"
             },
             {
-              "source": "Zamin.uz publisher via Google News",
-              "url": "https://zamin.uz/"
+              "source": "KTLA",
+              "url": "https://ktla.com/news/nationworld/starbucks-to-bring-back-unicorn-frappuccino-for-one-weekend-in-august/"
             }
           ],
-          "accent": "#ff6b57"
+          "accent": "#9b8cff"
         },
         {
           "rank": 3,
-          "title": "Labubu",
+          "title": "Mystery Squishy Dumplings",
           "subtitle": "Product",
-          "description": "Labubu is a consumer product. Is NeeDoh the new Labubu? The obsession with these viral squishies and the class action suit you should know about.",
-          "image": "/culture/product-labubu.webp",
-          "alt": "Labubu product listing image",
-          "url": "https://www.popmart.com/us/search/labubu",
-          "source": "Recent source page",
+          "description": "Mystery Squishy Dumplings are two-pack, slow-rise bread squishy fidget toys for kids and adults. Their social-media-fueled popularity is expanding through a global lifestyle and character licensing program.",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/71cI1fqZqQL._AC_UL320_.jpg",
+          "imageSourceKind": "commerce",
+          "imageSourcePageUrl": "https://www.amazon.com/dp/B0GXDRHWG3",
+          "alt": "Mystery Squishy Dumplings product listing image",
+          "url": "https://www.amazon.com/dp/B0GXDRHWG3",
+          "source": "Amazon listing",
           "metric": {
             "label": "Independent viral sources",
             "value": "2 sources"
           },
           "evidence": [
             {
-              "source": "Recent source page",
-              "url": "https://www.popmart.com/us/search/labubu"
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0GXDRHWG3"
             },
             {
-              "source": "indiatoday.in publisher via Google News",
-              "url": "https://www.indiatoday.in/"
+              "source": "Business Wire",
+              "url": "https://www.businesswire.com/news/home/20260804845782/en/From-Viral-Toy-Craze-to-Lifestyle-Brand-Earthbound-Brands-to-Expand-Mystery-Squishy-Dumplings-by-RMS"
             },
             {
-              "source": "NBC News publisher via Google News",
-              "url": "https://www.nbcnews.com/"
+              "source": "Yahoo Finance Singapore",
+              "url": "https://sg.finance.yahoo.com/news/viral-toy-craze-lifestyle-brand-171500666.html"
             }
           ],
-          "accent": "#57d5a4"
+          "accent": "#ff6b57"
         },
         {
           "rank": 4,
-          "title": "Medicube Serum",
+          "title": "NeeDoh Toy",
           "subtitle": "Product",
-          "description": "Medicube Serum is a consumer product. This viral Medicube serum is the closest I've got to 'glass skin', and it's £11.90 today.",
-          "image": "/culture/product-medicube-serum.webp",
-          "alt": "Medicube Serum product listing image",
-          "url": "https://medicube.us/products/txa-niacinamide-serum",
-          "source": "Recent source page",
+          "description": "NeeDoh Toy is a collectible toy. NeeDoh craze hits San Mateo County in force: Toy stores are struggling to keep up with demand for the tactile, squishy toys.",
+          "image": "/culture/product-needoh-toy.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/7161JNgvkfL._AC_UL320_.jpg",
+          "imageSourceKind": "commerce",
+          "imageSourcePageUrl": "https://www.amazon.com/dp/B0B4HVVN8B",
+          "alt": "NeeDoh Toy product listing image",
+          "url": "https://www.amazon.com/dp/B0B4HVVN8B",
+          "source": "Amazon listing",
           "metric": {
             "label": "Independent viral sources",
             "value": "4 sources"
           },
           "evidence": [
             {
-              "source": "Recent source page",
-              "url": "https://medicube.us/products/txa-niacinamide-serum"
+          "source": "Amazon listing",
+          "url": "https://www.amazon.com/dp/B0B4HVVN8B"
+        },
+            {
+              "source": "San Mateo Daily Journal",
+              "url": "https://www.smdailyjournal.com/news/local/needoh-craze-hits-san-mateo-county-in-force-toy-stores-are-struggling-to-keep-up/article_8fa97e45-d79f-4eec-be70-ce86555731a5.html"
             },
             {
-              "source": "Glamour UK publisher via Google News",
-              "url": "https://www.glamourmagazine.co.uk/"
-            },
-            {
-              "source": "Recent product coverage via Google News",
-              "url": "https://medicube.us/products/txa-niacinamide-serum"
+              "source": "GamesRadar+",
+              "url": "https://www.gamesradar.com/toys-collectibles/where-to-buy-needoh-the-viral-toy-sensation/"
             }
           ],
-          "accent": "#9b8cff"
+          "accent": "#ffc857"
         },
         {
           "rank": 5,
-          "title": "Defining 2026 Skincare",
+          "title": "Samsung Galaxy Z Fold 8",
           "subtitle": "Product",
-          "description": "Defining 2026 Skincare is a consumer product. This $20 viral medicube PDRN multi-stick replaces your $100 skincare regimen.",
-          "image": "/culture/product-defining-2026-skincare.webp",
-          "alt": "Defining 2026 Skincare product listing image",
-          "url": "https://www.glamour.com/gallery/best-pdrn-serums",
-          "source": "Recent source page",
+          "description": "Samsung Galaxy Z Fold 8 is a foldable smartphone. Samsung (005930) next-generation flagship foldable phones have gotten off to a strong start in Taiwan's market. Samsung Electronics Taiwan today (August 11) opened early-bird pre-order priority pickup.",
+          "image": "/culture/product-samsung-galaxy-z-fold-8.webp",
+          "imageSource": "https://img.biggo.com/1_YCH8aXtAEizaa_lptwUkF9RlcfmvjTcyQkunZCuqc/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYWdlL2FpX2dlbmVyYXRlZC8yMDI2LTA4Lzk1MjE3YWE0LTM4ODctNGVmZi04NDIxLTIxYjBiYzdlZDQ1ZF8xNzg2NDMzNTYxX2RlZmF1bHQuanBn.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://finance.biggo.com/news/95217aa4-3887-4eff-8421-21b0bc7ed45d",
+          "alt": "Samsung Galaxy Z Fold 8 product listing image",
+          "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank",
+          "source": "Amazon product search",
           "metric": {
             "label": "Independent viral sources",
-            "value": "3 sources"
+            "value": "5 sources"
           },
           "evidence": [
             {
-              "source": "Recent source page",
-              "url": "https://www.glamour.com/gallery/best-pdrn-serums"
+              "source": "Amazon product search",
+              "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank"
             },
             {
-              "source": "New York Post publisher via Google News",
-              "url": "https://nypost.com/"
+              "source": "finance.biggo.com",
+              "url": "https://finance.biggo.com/news/95217aa4-3887-4eff-8421-21b0bc7ed45d"
             },
             {
-              "source": "Recent product coverage via Google News",
-              "url": "https://www.glamour.com/gallery/best-pdrn-serums"
+              "source": "Gadget Hacks",
+              "url": "https://samsung.gadgethacks.com/news/samsung-galaxy-z-fold-8-wide-foldable-successor-explained/"
             }
           ],
-          "accent": "#ff6b57"
+          "accent": "#ffc857"
         }
       ],
-      "moreItems": [
-        {
-          "rank": 6,
-          "title": "Dyson V8 Absolute Cordless Vacuum",
-          "subtitle": "Product",
-          "description": "Dyson V8 Absolute Cordless Vacuum is a consumer product. Walmart Drops The Viral Dyson V8 Absolute Cordless Vacuum to Clearance-Level Pricing.",
-          "image": "/culture/product-dyson-v8-absolute-cordless-vacuum.webp",
-          "alt": "Dyson V8 Absolute Cordless Vacuum product listing image",
-          "url": "https://www.amazon.com/Dyson-Absolute-Cordless-Rotating-Microfiber/dp/B0D8BVSYQ7",
-          "source": "Recent source page",
-          "metric": {
-            "label": "Independent viral sources",
-            "value": "3 sources"
-          },
-          "evidence": [
-            {
-              "source": "Recent source page",
-              "url": "https://www.amazon.com/Dyson-Absolute-Cordless-Rotating-Microfiber/dp/B0D8BVSYQ7"
-            },
-            {
-              "source": "bobvila.com publisher via Google News",
-              "url": "https://www.bobvila.com/"
-            },
-            {
-              "source": "Recent product coverage via Google News",
-              "url": "https://www.amazon.com/Dyson-Absolute-Cordless-Rotating-Microfiber/dp/B0D8BVSYQ7"
-            }
-          ],
-          "accent": "#5ab0ff"
-        }
-      ],
-      "moreLabel": "Show ranks 6–6"
+      "moreItems": []
     },
     {
       "id": "news",
@@ -2050,7 +2034,7 @@
         },
         {
           "label": "Google News · current coverage",
-          "url": "https://www.the-world-now.com/hurricane-tracker"
+          "url": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/"
         }
       ],
       "layout": "landscape",
@@ -2058,7 +2042,7 @@
         {
           "rank": 1,
           "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "subtitle": "News · Aug 16, 2026",
+          "subtitle": "News",
           "description": "Monitor active hurricanes, tropical storms, and cyclones across all ocean basins. Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
           "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
           "imageSource": "https://www.the-world-now.com/theworldnowheader.png",
@@ -2074,7 +2058,7 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Hurricane+Lala+Passes+Big+Island%3A+Hawai%CA%BBi+Spared+From+Direct+Hit."
             },
             {
               "source": "Al Jazeera via Google News",
@@ -2085,37 +2069,9 @@
         },
         {
           "rank": 2,
-          "title": "City to close non-essential offices and services Monday following Hurricane Lala.",
-          "subtitle": "News",
-          "description": "Monitor active hurricanes, tropical storms, and cyclones across all ocean basins. City to close non-essential offices and services Monday following Hurricane Lala.",
-          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
-          "imageSource": "https://www.the-world-now.com/theworldnowheader.png",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.the-world-now.com/hurricane-tracker",
-          "alt": "The World Now - Real-Time Global Events",
-          "url": "https://www.the-world-now.com/hurricane-tracker",
-          "source": "ABC7 Bay Area",
-          "metric": {
-            "label": "Google search volume",
-            "value": "500K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=City+to+close+non-essential+offices+and+services+Monday+following+Hurricane+Lala."
-            },
-            {
-              "source": "ABC7 Bay Area via Google News",
-              "url": "https://www.the-world-now.com/hurricane-tracker"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 3,
           "title": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
           "subtitle": "News",
-          "description": "The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. The recalled eggs have been linked to an outbreak that sickened nearly 100 people. Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "description": "A massive egg recall due to salmonella risk issued in July has received the highest severity class by the U.S. Food and Drug Administration. Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
           "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
           "imageSource": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2026-06/eggs-daily-healthy-as06252026-df99dd.jpg",
           "imageSourceKind": "article",
@@ -2135,6 +2091,34 @@
             {
               "source": "TODAY.com via Google News",
               "url": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 3,
+          "title": "City to close non-essential offices and services Monday following Hurricane Lala.",
+          "subtitle": "News",
+          "description": "Hurricane Lala: Body Of 93-Year-Old Woman Found In Nāʻālehu Field. City to close non-essential offices and services Monday following Hurricane Lala.",
+          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
+          "imageSource": "https://www.honolulu.gov/mayor/wp-content/uploads/sites/12/2026/08/LALA-PRESSER-SLIDES-4-1.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.honolulu.gov/mayor/city-to-close-non-essential-offices-and-services-monday-following-hurricane-lala/",
+          "alt": "Lead image from honolulu.gov's coverage of City to close non-essential offices and services Monday following Hurricane Lala.",
+          "url": "https://www.honolulu.gov/mayor/city-to-close-non-essential-offices-and-services-monday-following-hurricane-lala/",
+          "source": "honolulu.gov",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=City+to+close+non-essential+offices+and+services+Monday+following+Hurricane+Lala."
+            },
+            {
+              "source": "honolulu.gov via Google News",
+              "url": "https://www.honolulu.gov/mayor/city-to-close-non-essential-offices-and-services-monday-following-hurricane-lala/"
             }
           ],
           "accent": "#ffc857"
@@ -2169,16 +2153,16 @@
         },
         {
           "rank": 5,
-          "title": "'GTA 6' Leak Shows New Unofficial Gameplay Ahead of Netflix Reveal.",
-          "subtitle": "News · Aug 18, 2026",
-          "description": "Two legit-seeming clips and a world map are out there, if you know where to look. Grand Theft Auto fans will have to wait until later this month for a deep dive into the next game in the series, which will premiere on Netflix before hitting YouTube later that day (though probably much sooner on unofficial channels).",
-          "image": "/culture/news-gta-6-leak-shows-new-unofficial-gameplay-ahead-of-netflix-reveal.webp",
-          "imageSource": "https://www.engadget.com/img/gallery/gta-6-gameplay-leaked-ahead-of-its-new-trailer-and-rockstar-is-taking-down-the-videos/l-intro-1787084868.jpg",
+          "title": "Released Nancy Guthrie ransom notes generated 'slight increase' in tips: Sheriff's department.",
+          "subtitle": "News · Aug 7, 2026",
+          "description": "The recent release of two credible ransom notes sent to Nancy Guthrie 's family in the days after her abduction generated a \"slight increase\" in tips, but none that have cracked the case, authorities told ABC News.",
+          "image": "/culture/news-released-nancy-guthrie-ransom-notes-generated-slight-increase-in.webp",
+          "imageSource": "https://cdn.abcotvs.com/dip/images/19641130_AP26212715366773.jpg?w=1600",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.engadget.com/2239548/gta-6-gameplay-leak-august-2026/",
-          "alt": "Lead image from Engadget's coverage of 'GTA 6' Leak Shows New Unofficial Gameplay Ahead of Netflix Reveal.",
-          "url": "https://www.engadget.com/2239548/gta-6-gameplay-leak-august-2026/",
-          "source": "Engadget",
+          "imageSourcePageUrl": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/",
+          "alt": "Lead image from ABC7 New York's coverage of Released Nancy Guthrie ransom notes generated 'slight increase' in tips: Sheriff's department.",
+          "url": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/",
+          "source": "ABC7 New York",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2186,28 +2170,60 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=gta+6+leaks"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=pima+county+sheriff%27s+department"
             },
             {
-              "source": "Engadget via Google News",
-              "url": "https://www.engadget.com/2239548/gta-6-gameplay-leak-august-2026/"
+              "source": "ABC7 New York via Google News",
+              "url": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/"
             }
           ],
-          "accent": "#ff6b57"
+          "accent": "#ffc857"
         }
       ],
       "moreItems": [
         {
           "rank": 6,
-          "title": "Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
-          "subtitle": "News",
-          "description": "Flock's cameras and drones are spreading throughout the country. Some cities are pushing back. I found the details you should know. Flock surveillance cameras and drones are now common. Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
-          "image": "/culture/news-flock-announces-privacy-updates-to-its-car-tracking-cameras.webp",
-          "imageSource": "https://www.cnet.com/wp-content/uploads/sites/2/20f18d29-c3e9-47d3-8467-1a0ba718fa78.png",
+          "title": "Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
+          "subtitle": "News · Aug 19, 2026",
+          "description": "Florida Lt. Gov. Jay Collins said Monday that if Byron Donalds is the nominee of the Republican Party in the race for governor, that Donalds would lose the November election to a Democrat. FOX 13's Evan Axelbank reports. ST PETERSBURG, Fla - Florida Lt. Gov.",
+          "image": "/culture/news-byron-donalds-david-jolly-to-face-off-in-florida-governor-s-race.webp",
+          "imageSource": "https://images.foxtv.com/static.fox13news.com/www.fox13news.com/content/uploads/2026/04/1200/630/collins-and-donalds.jpg?ve=1&tl=1",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.cnet.com/home/security/when-flock-comes-to-town-why-cities-are-axing-the-controversial-surveillance-technology/",
-          "alt": "When Flock Comes to Town: How These AI Cameras Work and What to Do About Them",
-          "url": "https://www.cnet.com/home/security/when-flock-comes-to-town-why-cities-are-axing-the-controversial-surveillance-technology/",
+          "imageSourcePageUrl": "https://www.fox13news.com/news/florida-governors-race-jay-collins-claims-byron-donalds-would-lose-democrat-david-jolly",
+          "alt": "Lead image from CBS News's coverage of Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
+          "url": "https://www.fox13news.com/news/florida-governors-race-jay-collins-claims-byron-donalds-would-lose-democrat-david-jolly",
+          "source": "CBS News",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=florida+governor+race"
+            },
+            {
+              "source": "CBS News via Google News",
+              "url": "https://www.fox13news.com/news/florida-governors-race-jay-collins-claims-byron-donalds-would-lose-democrat-david-jolly"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/David_Jolly"
+            }
+          ],
+          "accent": "#ff6b57"
+        },
+        {
+          "rank": 7,
+          "title": "Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
+          "subtitle": "News · Aug 13, 2026",
+          "description": "Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
+          "image": "/culture/news-flock-announces-privacy-updates-to-its-car-tracking-cameras.webp",
+          "imageSource": "https://roselawgroupreporter.com/wp-content/uploads/2026/08/washington-state-trooper-vehicle-with-lights-on-pu-2026-06-22-15-25-09-utc.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://roselawgroupreporter.com/2026/08/flock-announces-privacy-updates-to-its-car-tracking-cameras-following-national-criticism/",
+          "alt": "Lead image from The New York Times's coverage of Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
+          "url": "https://roselawgroupreporter.com/2026/08/flock-announces-privacy-updates-to-its-car-tracking-cameras-following-national-criticism/",
           "source": "The New York Times",
           "metric": {
             "label": "Google search volume",
@@ -2216,55 +2232,27 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Flock+Announces+Privacy+Updates+to+Its+Car-Tracking+Cameras."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=flock+cameras"
             },
             {
               "source": "The New York Times via Google News",
-              "url": "https://www.cnet.com/home/security/when-flock-comes-to-town-why-cities-are-axing-the-controversial-surveillance-technology/"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 7,
-          "title": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-          "subtitle": "News",
-          "description": "Human remains found about 15 miles from Nancy Guthrie’s home in Arizona do not appear connected to her disappearance at this time, according to the Pima County Sheriff’s Department.",
-          "image": "/culture/news-human-remains-discovered-miles-from-nancy-guthrie-s-home-not-con.webp",
-          "imageSource": "https://bloximages.newyork1.vip.townnews.com/news8000.com/content/tncms/assets/v3/editorial/7/d9/7d90fb5c-911f-51b7-9d0a-1da8920e5ec9/6a836a04545f7.image.jpg?crop=1763%2C926%2C0%2C124&resize=1200%2C630&order=crop%2Cresize",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.news8000.com/news/national-world/human-remains-discovered-miles-from-nancy-guthrie-s-home-not-connected-to-case-so-far/article_22bb0416-20d0-59d5-b140-ffda2c4bf208.html",
-          "alt": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says",
-          "url": "https://www.news8000.com/news/national-world/human-remains-discovered-miles-from-nancy-guthrie-s-home-not-connected-to-case-so-far/article_22bb0416-20d0-59d5-b140-ffda2c4bf208.html",
-          "source": "CNN",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Human+remains+discovered+miles+from+Nancy+Guthrie%E2%80%99s+home+not+connected+to+case+so+far%2C+sheriff%E2%80%99s+department+says."
-            },
-            {
-              "source": "CNN via Google News",
-              "url": "https://www.news8000.com/news/national-world/human-remains-discovered-miles-from-nancy-guthrie-s-home-not-connected-to-case-so-far/article_22bb0416-20d0-59d5-b140-ffda2c4bf208.html"
+              "url": "https://roselawgroupreporter.com/2026/08/flock-announces-privacy-updates-to-its-car-tracking-cameras-following-national-criticism/"
             }
           ],
           "accent": "#5ab0ff"
         },
         {
           "rank": 8,
-          "title": "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic.",
-          "subtitle": "News",
-          "description": "Disney unveiled the first trailer for Frozen 3, showing Anna and Elsa entering a dangerous frozen world. Related details indicate Anna and Kristoff will marry, while the film introduces new magic and a villain.",
-          "image": "/culture/news-frozen-3-trailer-reveals-anna-s-royal-wedding-and-a-new-icy-magi.webp",
-          "imageSource": "https://www.cnet.com/wp-content/uploads/sites/2/112082.jpeg",
+          "title": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "The filled Honda Center got a look at Frozen 3 — and let’s just say, there is quite a lot in store. First of all, are those wedding bells, we hear? Indeed, they are!",
+          "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
+          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.cnet.com/culture/entertainment/frozen-3-trailer-reveals-annas-royal-wedding-and-a-new-icy-magic/",
-          "alt": "A pair of women speak onstage with Frozen III behind them on a screen. They are standing in front of a huge crowd.",
-          "url": "https://www.cnet.com/culture/entertainment/frozen-3-trailer-reveals-annas-royal-wedding-and-a-new-icy-magic/",
-          "source": "CNET",
+          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "alt": "Frozen 2",
+          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "source": "Deadline",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2272,27 +2260,25 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Frozen+3+Trailer+Reveals+Anna%E2%80%99s+Royal+Wedding+and+A+New+Icy+Magic."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
             },
             {
-              "source": "CNET via Google News",
-              "url": "https://www.cnet.com/culture/entertainment/frozen-3-trailer-reveals-annas-royal-wedding-and-a-new-icy-magic/"
+              "source": "Deadline via Google News",
+              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
             }
           ],
-          "accent": "#5ab0ff"
+          "accent": "#57d5a4"
         },
         {
           "rank": 9,
-          "title": "Despite 'New' Updates, Flock's Creepy Cameras Remain Major Civil Liberties Threat.",
+          "title": "Human remains discovered miles from Nancy Guthrie's home not connected to case so far, sheriff's department says.",
           "subtitle": "News",
-          "description": "Flock Safety announced changes to its mass-surveillance operations after criticism of its more than 120,000 automatic license plate readers. The ACLU says the updates do not resolve major privacy and civil-liberties concerns.",
-          "image": "/culture/news-despite-new-updates-flock-s-creepy-cameras-remain-major-civil-li.webp",
-          "imageSource": "https://assets.aclu.org/live/uploads/2026/08/flock-camera-safety-sign-s.jpg",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.aclu.org/news/privacy-technology/despite-new-updates-flocks-creepy-cameras-remain-major-civil-liberties-threat",
-          "alt": "Lead image from American Civil Liberties Union's coverage of Despite 'New' Updates, Flock's Creepy Cameras Remain Major Civil Liberties Threat.",
-          "url": "https://www.aclu.org/news/privacy-technology/despite-new-updates-flocks-creepy-cameras-remain-major-civil-liberties-threat",
-          "source": "American Civil Liberties Union",
+          "description": "Human Resources 400 S. Ft. Harrison Ave. Human remains discovered miles from Nancy Guthrie's home not connected to case so far, sheriff's department says.",
+          "image": "/culture/news-human-remains-discovered-miles-from-nancy-guthrie-s-home-not-con.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg/1280px-Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Palm Beach County Park Lantana Airport by Don Ramey Logan.jpg",
+          "url": "https://pinellas.gov/jobs-career-opportunities/",
+          "source": "Pinellas County (.gov)",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2300,27 +2286,25 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Despite+%27New%27+Updates%2C+Flock%27s+Creepy+Cameras+Remain+Major+Civil+Liberties+Threat."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Human+remains+discovered+miles+from+Nancy+Guthrie%27s+home+not+connected+to+case+so+far%2C+sheriff%27s+department+says."
             },
             {
-              "source": "American Civil Liberties Union via Google News",
-              "url": "https://www.aclu.org/news/privacy-technology/despite-new-updates-flocks-creepy-cameras-remain-major-civil-liberties-threat"
+              "source": "Pinellas County (.gov) via Google News",
+              "url": "https://pinellas.gov/jobs-career-opportunities/"
             }
           ],
           "accent": "#ff6b57"
         },
         {
           "rank": 10,
-          "title": "Starbucks Unicorn Frappuccino® return drives record weekend, with more than 2 million beverages sold.",
+          "title": "Remains found miles from Nancy Guthrie home with ‘no indication’ of connection to case so far, sheriff’s department says.",
           "subtitle": "News",
-          "description": "Starbucks brought back its brightly colored Unicorn Frappuccino for a limited weekend return, reviving the drink that became an internet sensation in 2017. More than 2 million beverages were sold during the promotion.",
-          "image": "/culture/news-starbucks-unicorn-frappuccino-return-drives-record-weekend-with-.webp",
-          "imageSource": "https://assets.purewow.com/wp-content/uploads/2026/08/unicorn-frappuccino-today.png",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.purewow.com/food/starbucks-unicorn-frappuccino-review-2026",
-          "alt": "Lead image from PureWow's coverage of Starbucks Unicorn Frappuccino® return drives record weekend, with more than 2 million beverages sold.",
-          "url": "https://www.purewow.com/food/starbucks-unicorn-frappuccino-review-2026",
-          "source": "PureWow",
+          "description": "Human Resources 400 S. Ft. Harrison Ave. Remains found miles from Nancy Guthrie home with ‘no indication’ of connection to case so far, sheriff’s department says.",
+          "image": "/culture/news-remains-found-miles-from-nancy-guthrie-home-with-no-indication-o.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg/1280px-Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "alt": "File:Palm Beach County Park Lantana Airport by Don Ramey Logan.jpg",
+          "url": "https://pinellas.gov/jobs-career-opportunities/",
+          "source": "Pinellas County (.gov)",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2328,11 +2312,11 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Starbucks+Unicorn+Frappuccino%C2%AE+return+drives+record+weekend%2C+with+more+than+2+million+beverages+sold."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Remains+found+miles+from+Nancy+Guthrie+home+with+%E2%80%98no+indication%E2%80%99+of+connection+to+case+so+far%2C+sheriff%E2%80%99s+department+says."
             },
             {
-              "source": "PureWow via Google News",
-              "url": "https://www.purewow.com/food/starbucks-unicorn-frappuccino-review-2026"
+              "source": "Pinellas County (.gov) via Google News",
+              "url": "https://pinellas.gov/jobs-career-opportunities/"
             }
           ],
           "accent": "#9b8cff"
@@ -2345,57 +2329,58 @@
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:31.721Z"
+      "checkedAt": "2026-08-19T16:33:44.457Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:32.122Z"
+      "checkedAt": "2026-08-19T16:33:45.167Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:32.373Z"
+      "checkedAt": "2026-08-19T16:33:45.201Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:33.810Z"
+      "checkedAt": "2026-08-19T16:33:46.509Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:32.904Z"
+      "checkedAt": "2026-08-19T16:33:45.701Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-19T07:05:18.725Z"
+      "checkedAt": "2026-08-19T16:34:34.412Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:31.601Z"
+      "checkedAt": "2026-08-19T16:33:44.612Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:31.823Z"
+      "checkedAt": "2026-08-19T16:33:44.454Z"
     },
     {
       "name": "Goodreads monthly most read",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:32.536Z"
+      "checkedAt": "2026-08-19T16:33:46.117Z"
     },
     {
       "name": "Viral product discovery",
-      "ok": true,
-      "checkedAt": "2026-08-19T07:06:49.715Z"
+      "ok": false,
+      "checkedAt": "2026-08-19T16:35:01.577Z",
+      "error": "Only 2 qualifying products had a matching Amazon or validated source page"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-19T07:04:49.241Z"
+      "checkedAt": "2026-08-19T16:34:32.823Z"
     }
   ],
   "quiz": {
@@ -2573,8 +2558,8 @@
         "prompt": "This story covers it. Which story matches this description?",
         "answers": [
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "City to close non-essential offices and services Monday following Hurricane Lala.",
           "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "City to close non-essential offices and services Monday following Hurricane Lala.",
           "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
         ],
         "correctAnswer": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
@@ -2582,6 +2567,20 @@
         "topicId": "news",
         "topic": "News",
         "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
+      },
+      {
+        "prompt": "A massive egg recall due to salmonella risk issued in July has received the highest severity class by the U.S. Which story matches this description?",
+        "answers": [
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "City to close non-essential offices and services Monday following Hurricane Lala.",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
+        ],
+        "correctAnswer": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+        "id": "news-2",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
       },
       {
         "prompt": "This story covers it. Which story matches this description?",
@@ -2592,24 +2591,10 @@
           "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
         ],
         "correctAnswer": "City to close non-essential offices and services Monday following Hurricane Lala.",
-        "id": "news-2",
-        "topicId": "news",
-        "topic": "News",
-        "itemTitle": "City to close non-essential offices and services Monday following Hurricane Lala."
-      },
-      {
-        "prompt": "The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. Which story matches this description?",
-        "answers": [
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "City to close non-essential offices and services Monday following Hurricane Lala.",
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
-        ],
-        "correctAnswer": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
         "id": "news-3",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
+        "itemTitle": "City to close non-essential offices and services Monday following Hurricane Lala."
       }
     ]
   }

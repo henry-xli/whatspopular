@@ -454,15 +454,20 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allSongs.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
   assert.ok(allSongs.every((item) => !/Billboard Hot 100|Spotify’s Today’s Top Hits|\b#\d+\b/i.test(item.description)));
   const products = brief.sections.find((section) => section.id === "products");
-  const productSources = [...products.items, ...products.moreItems].map((item) => Number(item.metric.value.match(/^(\d+) sources?$/)[1]));
-  assert.ok(productSources.every((count) => count >= 2));
-  assert.ok([...products.items, ...products.moreItems].every((item) => {
+  const allProducts = [...products.items, ...products.moreItems];
+  assert.ok(allProducts.every((item) => (item.metric.label === "Independent viral sources"
+    && /^\d+ sources?$/.test(item.metric.value)
+    && Number(item.metric.value.match(/^(\d+)/)[1]) >= 2)
+    || (item.metric.label === "Recent viral source + Amazon velocity"
+      && item.metric.value === "1 source + Amazon velocity")));
+  assert.ok(allProducts.every((item) => !/\bis a consumer product\./i.test(item.description)));
+  assert.ok(allProducts.every((item) => /\b(?:backorder|buying|collect(?:ing|or)?|craze|demand|expansion|frenzy|global|launch|opening|popular|pre[- ]?order|recommend|release|restock|return|rollout|selling|sold out|trend(?:ing)?|unbox(?:ing)?|viral)\b/i.test(item.description)));
+  assert.ok(allProducts.every((item) => {
     const url = new URL(item.url);
-    return url.hostname === "www.amazon.com"
-      || (url.protocol === "https:" && !/(?:^|\.)google\.com$|(?:^|\.)tiktok\.com$/i.test(url.hostname));
+    return url.hostname === "www.amazon.com" && item.imageSource;
   }));
-  assert.ok([...products.items, ...products.moreItems].every((item) => item.evidence.every((entry) => new URL(entry.url).hostname !== "news.google.com")));
-  assert.ok([...products.items, ...products.moreItems].every((item) => !/Google Shopping|ranking it #|rose \+\d|TikTok/i.test(item.description)));
+  assert.ok(allProducts.every((item) => item.evidence.every((entry) => new URL(entry.url).hostname !== "news.google.com")));
+  assert.ok(allProducts.every((item) => !/Google Shopping|ranking it #|rose \+\d|TikTok/i.test(item.description)));
   const news = brief.sections.find((section) => section.id === "news");
   const volume = (value) => {
     const match = value.match(/([\d.]+)\s*([KMB])?\+/i);

@@ -106,11 +106,137 @@ function extractOgImage(html, baseUrl) {
   throw new Error("No social preview image was found");
 }
 
+function decodeHtml(value) {
+  return String(value ?? "")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&#x2f;/gi, "/");
+}
+
+function normalize(value) {
+  return decodeHtml(value).normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function htmlAttributes(tag) {
+  const attributes = {};
+  for (const match of tag.matchAll(/([^\s=/>]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)) {
+    attributes[match[1].toLowerCase()] = decodeHtml(match[2] ?? match[3] ?? match[4] ?? "");
+  }
+  return attributes;
+}
+
+function safeImageUrl(rawUrl, baseUrl) {
+  if (!rawUrl || rawUrl.length > 4096) return null;
+  try {
+    const url = new URL(rawUrl.trim().replace(/^data:/i, ""), baseUrl);
+    return url.protocol === "https:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function imageCandidatesFromValue(value, output, depth = 0) {
+  if (depth > 8 || value === null || value === undefined || output.length > 80) return;
+  if (typeof value === "string") {
+    output.push(value);
+    return;
+  }
+  if (Array.isArray(value)) {
+    for (const entry of value) imageCandidatesFromValue(entry, output, depth + 1);
+    return;
+  }
+  if (typeof value !== "object") return;
+  for (const [key, entry] of Object.entries(value)) {
+    if (/^(?:image|contentUrl|thumbnailUrl)$/i.test(key)) imageCandidatesFromValue(entry, output, depth + 1);
+    else if (depth < 4 && /^(?:@graph|mainEntity|itemListElement|offers)$/i.test(key)) imageCandidatesFromValue(entry, output, depth + 1);
+  }
+}
+
+function productImageUrlScore(candidate, titleTokens) {
+  const searchable = normalize(`${candidate.alt} ${candidate.src} ${candidate.className}`);
+  const matches = titleTokens.filter((token) => searchable.split(" ").includes(token)).length;
+  const logoLike = /\b(?:avatar|favicon|icon|logo|logos|placeholder|sprite|wordmark|badge|banner)\b/i.test(searchable);
+  const productCue = /\b(?:product|gallery|detail|variant|media|thumbnail|pdp|zoom)\b/i.test(searchable);
+  return matches * 16 + (candidate.isProductData ? 42 : 0) + (productCue ? 8 : 0) - (logoLike ? 100 : 0);
+}
+
+function extractProductImage(html, baseUrl, title) {
+  const titleTokens = normalize(title).split(" ").filter((token) => token.length > 2
+    && !new Set(["the", "and", "for", "with", "product", "item", "consumer"]).has(token));
+  const candidates = [];
+  const add = (rawUrl, metadata = {}) => {
+    const url = safeImageUrl(rawUrl, baseUrl);
+    if (!url) return;
+    candidates.push({ url, ...metadata, score: productImageUrlScore({ ...metadata, src: url }, titleTokens) });
+  };
+  for (const tag of html.match(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi) ?? []) {
+    const body = tag.replace(/^<script\b[^>]*>/i, "").replace(/<\/script>$/i, "").trim();
+    try {
+      const data = JSON.parse(decodeHtml(body));
+      const values = [];
+      imageCandidatesFromValue(data, values);
+      for (const value of values) add(value, { alt: title, className: "product structured-data", isProductData: true });
+    } catch {
+      // Malformed structured data is common; image tags remain usable.
+    }
+  }
+  for (const tag of html.match(/<img\b[^>]*>/gi) ?? []) {
+    const attrs = htmlAttributes(tag);
+    const srcset = attrs.srcset ?? attrs["data-srcset"] ?? "";
+    const srcsetUrl = srcset.split(",").map((entry) => entry.trim().split(/\s+/)[0]).filter(Boolean).at(-1);
+    add(attrs.src ?? attrs["data-src"] ?? attrs["data-lazy-src"] ?? attrs["data-original"] ?? srcsetUrl, {
+      alt: attrs.alt ?? "",
+      className: `${attrs.class ?? ""} ${attrs.id ?? ""}`,
+    });
+    const dynamic = attrs["data-a-dynamic-image"];
+    if (dynamic) {
+      try {
+        for (const value of Object.keys(JSON.parse(dynamic))) add(value, { alt: attrs.alt ?? "", className: "product dynamic-image" });
+      } catch {
+        // Amazon sometimes emits truncated JSON in an image attribute.
+      }
+    }
+  }
+  for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
+    const attrs = htmlAttributes(tag);
+    const key = (attrs.property ?? attrs.name ?? "").toLowerCase();
+    if (/^(?:og:image(?::url|:secure_url)?|twitter:image(?::src)?)$/.test(key)) {
+      add(attrs.content, { alt: attrs["og:image:alt"] ?? "", className: "social-preview" });
+    }
+  }
+  const unique = [...new Map(candidates.map((candidate) => [candidate.url, candidate])).values()]
+    .filter((candidate) => !/\b(?:avatar|favicon|icon|logo|logos|placeholder|sprite|wordmark)\b/i.test(normalize(`${candidate.url} ${candidate.alt} ${candidate.className}`)))
+    .sort((left, right) => right.score - left.score);
+  if (!unique.length || unique[0].score < 0) throw new Error("No product-specific image was found");
+  return unique[0].url;
+}
+
 async function resolveImage(asset) {
-  if (asset.direct) return asset.direct;
   const allowPublicHost = asset.section === "products";
+  const productPage = asset.section === "products" && (() => {
+    try {
+      const url = new URL(asset.page);
+      return url.hostname === "www.amazon.com" && (/^\/s(?:\/|$)/i.test(url.pathname) || /^\/dp\//i.test(url.pathname));
+    } catch {
+      return false;
+    }
+  })();
+  if (productPage && asset.directKind !== "commerce") {
+    try {
+      const page = await fetchLimited(asset.page, "page", undefined, allowPublicHost);
+      const productImage = extractProductImage(page.buffer.toString("utf8"), page.finalUrl, asset.title);
+      if (productImage) return productImage;
+    } catch {
+      // Amazon often serves a consent or bot-check page; keep the validated source image below.
+    }
+  }
+  if (asset.direct) return asset.direct;
   const page = await fetchLimited(asset.page, "page", undefined, allowPublicHost);
-  return extractOgImage(page.buffer.toString("utf8"), page.finalUrl);
+  const html = page.buffer.toString("utf8");
+  if (asset.section === "products") return extractProductImage(html, page.finalUrl, asset.title);
+  return extractOgImage(html, page.finalUrl);
 }
 
 async function validImage(file, shape, format = "webp") {

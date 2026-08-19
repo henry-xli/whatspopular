@@ -46,19 +46,20 @@ last validated snapshot.
 - Music selects the first 10 Spotify Today’s Top Hits tracks that also appear on
   the Billboard Hot 100, then orders that same set by Billboard position.
 - Products start with Amazon Movers & Shakers across six retail categories and
-  recent Google News coverage about products with explicit demand signals. The
-  discovery pass also looks for launch demand, preorders, backorders, sold-out
-  or restock language, collecting, unboxing, and popular-demand coverage across
-  product categories. Retail movement alone never qualifies a product: a
-  candidate needs recent demand evidence plus either positive retail movement
-  or two independent confirming sources. Amazon is matched first; when a
-  product has no usable Amazon result, a resolved publisher source page is used
-  as a safe fallback. Names are normalized across model-number formatting and
-  aliases before scoring by demand, retail velocity, freshness, confirmations,
-  and scarcity. Broad discovery terms are expanded with exact searches for
-  named brands and mover candidates, so a generic headline can resolve to the
-  specific product family named in independent coverage; headline fragments,
-  category-only phrases, and duplicate aliases are removed before matching.
+  recent web coverage with explicit buying, collecting, restock, launch, or
+  sold-out demand language. Retail movement alone never qualifies a product:
+  the candidate must have current demand evidence and either positive retail
+  movement or two independent confirming publisher sources. Evidence is
+  resolved to direct publisher articles; comparison/roundup snippets that are
+  really about another product, editorial headings, retailer names, and
+  duplicate product families are discarded. Amazon is matched first; Amazon
+  search results are used when a specific listing is unavailable, with a
+  validated publisher commerce page retained as supporting evidence. Names are normalized across
+  model-number formatting and aliases before scoring by demand, retail
+  velocity, freshness, confirmations, and scarcity. Product copy identifies
+  the product type and summarizes the recent demand context; a product page’s
+  structured-data/gallery image is preferred over a brand logo, with the
+  article image used only when it is the relevant product image.
 - News uses U.S. Google Trending Now over seven days, excludes people and
   sports, and orders the remainder by Google’s displayed search volume.
 
@@ -96,7 +97,8 @@ deterministic copy and quiz prompts. `npm run content:quiz` regenerates the
 quiz pool from the descriptions already in the snapshot without fetching any
 external source.
 
-Every entry has evidence from at least two distinct source hosts, with no more
+Every entry has evidence from at least two distinct source hosts (or one
+recent viral source plus independently recorded Amazon velocity), with no more
 than three linked evidence items or leaderboard source links.
 `scripts/cache-images.mjs` validates the snapshot, refreshes News and Products
 art daily, downloads other art only when missing or invalid, and converts
