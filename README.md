@@ -1,6 +1,6 @@
 # what’s popular?
 
-A finite daily briefing and quiz on internet culture. Visitors receive
+A finite 48-hour briefing and quiz on internet culture. Visitors receive
 pre-rendered HTML and local images; there is no account, feed, runtime database
 query, or request-time scraper.
 
@@ -25,9 +25,9 @@ npm test
 
 ## How rankings are made
 
-At 12:00 AM Pacific each day, `scripts/update-trends.mjs` verifies its required
-sources and writes `data/trends.json` atomically. A bad run cannot replace the
-last validated snapshot.
+At 12:00 PM Pacific every 48 hours, `scripts/update-trends.mjs` verifies its
+required sources and writes `data/trends.json` atomically. A bad run cannot
+replace the last validated snapshot.
 
 - Memes preserve the latest completed Know Your Meme Meme of the Month order,
   filtered to entries covered by Lessons in Meme Culture in the past two months.
@@ -60,8 +60,10 @@ last validated snapshot.
   the product type and summarizes the recent demand context; a product page’s
   structured-data/gallery image is preferred over a brand logo, with the
   article image used only when it is the relevant product image.
-- News uses U.S. Google Trending Now over seven days, excludes people and
-  sports, and orders the remainder by Google’s displayed search volume.
+- News reads the complete structured U.S. Google Trending Now feed over seven
+  days (not only the visible table rows), excludes people and sports, resolves
+  current article context, and orders the remainder by Google’s displayed
+  search volume.
 
 Descriptions do not repeat the ranking metric shown on each card and have no
 per-entry overrides. The updater first derives identity or premise context from
@@ -87,7 +89,7 @@ publication date, opening paragraphs, and lead image metadata. Topic-matched
 Wikimedia imagery is used only when the article does not expose a usable image;
 the final fallback is a local title card.
 
-The daily AI copy pass is optional and has no effect on ranking or visitor
+The AI copy pass is optional and has no effect on ranking or visitor
 traffic. To enable it, add an `OPENAI_API_KEY` repository secret under GitHub
 Settings → Secrets and variables → Actions. The workflow uses the cost-sensitive
 `gpt-5.6-luna` model by default; an optional `OPENAI_DESCRIPTION_MODEL`
@@ -109,7 +111,7 @@ Every entry has evidence from at least two distinct source hosts (or one
 recent viral source plus independently recorded Amazon velocity), with no more
 than three linked evidence items or leaderboard source links.
 `scripts/cache-images.mjs` validates the snapshot, refreshes News and Products
-art daily, downloads other art only when missing or invalid, and converts
+art at each ingestion, downloads other art only when missing or invalid, and converts
 everything to bounded local WebP files. Product pages and selected publisher
 metadata are DNS-validated before an image is fetched, and a last-known-good
 image survives upstream failure.
@@ -129,11 +131,11 @@ for Amazon Movers & Shakers when its public page rate-limits automation;
   page, `/explore` contains the leaderboards, and `/about` contains the flow
   explanation.
 - `data/trends.json` is the single preprocessed content snapshot.
-- `scripts/` contains the daily ingestion, source adapters, AI copy pass, and
+- `scripts/` contains the 48-hour ingestion, source adapters, AI copy pass, and
   image pipeline. The helpers are kept flat so the pipeline is easy to find.
 - `worker.ts` applies edge caching and production security headers.
 - `tests/` checks rendered content, headers, links, media, and data invariants.
-- `.github/workflows/update-daily.yml` refreshes, verifies, and commits once daily.
+- `.github/workflows/update-daily.yml` refreshes, verifies, and commits every 48 hours.
 
 Content-hashed application assets cache immutably; successful HTML navigations
 use a deployment-versioned edge cache, and local media uses

@@ -6,8 +6,8 @@ const flow = [
   },
   {
     number: "02",
-    title: "Ingest daily",
-    text: "One automated job runs at 12:00 AM Pacific. Visitors never trigger scraping or source requests.",
+    title: "Ingest every 48 hours",
+    text: "One automated job runs at 12:00 PM Pacific on alternating days. Visitors never trigger scraping or source requests.",
   },
   {
     number: "03",
@@ -38,8 +38,8 @@ export function AboutFlow({ full = false, id }: AboutFlowProps) {
         <div className="wrap">
           <div className="section-intro compact">
             <p className="eyebrow">About the briefing</p>
-            <h2 id="flow-title">One daily snapshot. Eight boards. One quiz.</h2>
-            <p>what’s popular? turns public cultural signals into a finite briefing, then keeps the same snapshot available to every visitor until the next daily refresh.</p>
+            <h2 id="flow-title">One 48-hour snapshot. Eight boards. One quiz.</h2>
+            <p>what’s popular? turns public cultural signals into a finite briefing, then keeps the same snapshot available to every visitor until the next 48-hour refresh.</p>
           </div>
           <ol className="flowchart">
             {flow.map((step, index) => (

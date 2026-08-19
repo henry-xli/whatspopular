@@ -50,6 +50,7 @@ const allowedHosts = new Set([
 const limcChannelId = "UCaHT88aobpcvRFEuy4v5Clg";
 const spotifyPlaylistId = "37i9dQZF1DXcBWIGoYBM5M";
 const newsTrendsUrl = "https://trends.google.com/trending?geo=US&hours=168&sort=search-volume";
+const googleNewsHomeUrl = "https://news.google.com/";
 const goodreadsMostReadUrl = "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m";
 const amazonMoverCategories = [
   ["Toys & Games", "toys-and-games"],
@@ -3270,8 +3271,66 @@ function searchVolume(value) {
   return Number(match[1]) * ({ K: 1e3, M: 1e6, B: 1e9 }[match[2]?.toUpperCase()] ?? 1);
 }
 
-async function googleTrendingNews() {
-  const html = await fetchText(newsTrendsUrl, { headers: { "user-agent": "Mozilla/5.0", "accept-language": "en-US,en;q=0.9" } });
+function balancedJsonArray(source, fromIndex) {
+  const start = source.indexOf("[", fromIndex);
+  if (start < 0) return null;
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = start; index < source.length; index += 1) {
+    const character = source[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (character === "\\") escaped = true;
+      else if (character === '"') inString = false;
+      continue;
+    }
+    if (character === '"') {
+      inString = true;
+    } else if (character === "[") {
+      depth += 1;
+    } else if (character === "]") {
+      depth -= 1;
+      if (depth === 0) return source.slice(start, index + 1);
+    }
+  }
+  return null;
+}
+
+function googleSearchVolumeLabel(value) {
+  return Number.isFinite(value) && value > 0 ? `${formatCompact(value)}+` : "";
+}
+
+function embeddedGoogleTrendingRows(html) {
+  const callback = /AF_initDataCallback\(\{\s*key:\s*['"]ds:0['"][\s\S]*?\bdata\s*:\s*/i.exec(html);
+  if (!callback) return [];
+  const rawData = balancedJsonArray(html, callback.index + callback[0].length);
+  if (!rawData) return [];
+  let data;
+  try {
+    data = JSON.parse(rawData);
+  } catch {
+    return [];
+  }
+  const entries = Array.isArray(data?.[1]) ? data[1] : [];
+  return entries.map((entry, sourceOrder) => {
+    const title = plainText(entry?.[0] ?? "");
+    const searches = Number(entry?.[6]);
+    const relatedTerms = [...new Map((Array.isArray(entry?.[9]) ? entry[9] : [])
+      .map((term) => plainText(term))
+      .filter((term) => term && normalize(term) !== normalize(title))
+      .map((term) => [normalize(term), term])).values()].slice(0, 5);
+    return {
+      title,
+      volume: googleSearchVolumeLabel(searches),
+      relatedTerms,
+      searches,
+      sourceOrder,
+    };
+  }).filter((row) => row.title && row.volume && row.searches > 0);
+}
+
+function tableGoogleTrendingRows(html) {
   const rows = [];
   for (const match of html.matchAll(/<tr\b[^>]*class="[^"]*enOdEe-wZVHld-xMbwt[^"]*"[^>]*>[\s\S]*?<\/tr>/g)) {
     const rowHtml = match[0];
@@ -3285,14 +3344,34 @@ async function googleTrendingNews() {
       rows.push({ title, volume, relatedTerms, searches: searchVolume(volume), sourceOrder: rows.length });
     }
   }
+  return rows;
+}
+
+async function googleTrendingNews() {
+  const html = await fetchText(newsTrendsUrl, { headers: { "user-agent": "Mozilla/5.0", "accept-language": "en-US,en;q=0.9" } });
+  const rows = [...new Map([
+    ...embeddedGoogleTrendingRows(html),
+    ...tableGoogleTrendingRows(html),
+  ].map((row) => [normalize(row.title), row])).values()];
   if (rows.length < 20) throw new Error(`Google Trending Now returned only ${rows.length} topics`);
-  const entities = await wikidataEntitiesForTitles(rows.flatMap((row) => queryVariants(titleCase(row.title))));
+  // Google embeds the complete ranked feed, while the visible table is only a
+  // short window. Resolve enough of the highest-volume rows to remove people
+  // and sports without issuing thousands of metadata requests.
+  const discoveryRows = rows
+    .slice()
+    .sort((left, right) => right.searches - left.searches || left.sourceOrder - right.sourceOrder)
+    .slice(0, 300);
+  const entities = await wikidataEntitiesForTitles(discoveryRows.flatMap((row) => queryVariants(titleCase(row.title))));
   const sports = /\b(?:vs\.?|score|game|match|cup|league|nfl|nba|mlb|nhl|wnba|open 20\d{2}|warriors|fever|dream)\b/i;
   const personClue = /\b(?:actor|actress|author|director|founder|founding member|musician|player|rapper|singer|social-media star|streamer|youtuber)\b/i;
-  const candidates = rows.filter((row) => !sports.test(row.title) && !personClue.test(row.title)
+  const candidates = discoveryRows.filter((row) => !sports.test(row.title) && !personClue.test(row.title)
     && !queryEntityMatch(titleCase(row.title), entities, (entity) => claimIds(entity, "P31").includes("Q5")));
-  const searchPersonFlags = await mapConcurrent(candidates, 4, (row) => wikidataSearchIsPerson(row.title));
-  const filtered = candidates.filter((_, index) => !searchPersonFlags[index])
+  const personCheckCandidates = candidates
+    .slice()
+    .sort((left, right) => right.searches - left.searches || left.sourceOrder - right.sourceOrder)
+    .slice(0, 120);
+  const searchPersonFlags = await mapConcurrent(personCheckCandidates, 4, (row) => wikidataSearchIsPerson(row.title));
+  const filtered = personCheckCandidates.filter((_, index) => !searchPersonFlags[index])
     .sort((left, right) => right.searches - left.searches || left.sourceOrder - right.sourceOrder)
     .slice(0, 10);
   if (filtered.length < 6) throw new Error(`Only ${filtered.length} non-person, non-sports news topics remained`);
@@ -3539,7 +3618,7 @@ function updateNews(brief, topics) {
   section.description = "The largest seven-day U.S. search-volume topics after removing people and sports, ranked by Google’s displayed search volume and linked to current coverage.";
   section.sources = [
     { label: "Google Trending Now · 7 days, search volume", url: newsTrendsUrl },
-    { label: "Google News · current coverage", url: topics[0].link },
+    { label: "Google News · article context", url: googleNewsHomeUrl },
   ];
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5);
@@ -4013,12 +4092,12 @@ for (const section of brief.sections) {
 }
 const emptySection = (id, title, layout) => ({
   id,
-  eyebrow: "Pending first daily refresh",
+  eyebrow: "Pending first 48-hour refresh",
   title,
-  description: "This board is populated by the validated daily ingestion job.",
+  description: "This board is populated by the validated 48-hour ingestion job.",
   sources: [
     { label: id === "products" ? "Amazon Movers & Shakers" : "Google Trends", url: id === "products" ? amazonMoverCategories[0].url : newsTrendsUrl },
-    { label: id === "products" ? "Google News viral coverage" : "Google News", url: id === "products" ? productDiscoveryUrl : "https://news.google.com/" },
+    { label: id === "products" ? "Google News viral coverage" : "Google News", url: id === "products" ? productDiscoveryUrl : googleNewsHomeUrl },
   ],
   layout,
   items: [],

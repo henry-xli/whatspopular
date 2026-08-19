@@ -2,17 +2,17 @@ name: Refresh culture briefing
 
 on:
   schedule:
-    # GitHub cron is UTC. Run at both possible UTC offsets, then keep only
-    # the invocation that lands at midnight in America/Los_Angeles.
-    - cron: "0 7 * * *"
-    - cron: "0 8 * * *"
+    # GitHub cron is UTC. Trigger both possible UTC offsets, then keep only
+    # the invocation that lands at noon Pacific on an alternating epoch day.
+    - cron: "0 19 * * *"
+    - cron: "0 20 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: daily-culture-refresh
+  group: culture-refresh
   cancel-in-progress: false
 
 jobs:
@@ -24,7 +24,11 @@ jobs:
       - name: Check Pacific ingestion time
         id: timing
         run: |
-          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$(TZ=America/Los_Angeles date +%H)" == "00" ]]; then
+          pacific_hour="$(TZ=America/Los_Angeles date +%H)"
+          epoch_day=$(( $(date +%s) / 86400 ))
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          elif [[ "$pacific_hour" == "12" && $((epoch_day % 2)) -eq 0 ]]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
           else
             echo "run=false" >> "$GITHUB_OUTPUT"
@@ -64,5 +68,5 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add data/trends.json public/culture public/icon.png
           git diff --cached --quiet && exit 0
-          git commit -m "Refresh daily culture briefing"
+          git commit -m "Refresh 48-hour culture briefing"
           git push origin main

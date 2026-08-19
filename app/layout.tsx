@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "what’s popular?",
     title: "How trendy are you? — what’s popular?",
     description:
-      "A finite daily briefing and quiz on what the internet is talking about.",
+      "A finite 48-hour briefing and quiz on what the internet is talking about.",
     url: "/",
     images: [
       {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "How trendy are you? — what’s popular?",
-    description: "A finite daily briefing and quiz on what the internet is talking about.",
+    description: "A finite 48-hour briefing and quiz on what the internet is talking about.",
     images: ["/og.jpg"],
   },
   icons: {

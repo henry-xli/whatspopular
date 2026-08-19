@@ -2033,8 +2033,8 @@
           "url": "https://trends.google.com/trending?geo=US&hours=168&sort=search-volume"
         },
         {
-          "label": "Google News · current coverage",
-          "url": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/"
+          "label": "Google News · article context",
+          "url": "https://news.google.com/"
         }
       ],
       "layout": "landscape",
