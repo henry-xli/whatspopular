@@ -1265,21 +1265,19 @@ a.culture-card:hover {
   position: relative;
 }
 
-.song-expanded-entry .expanded-entry-main {
-  min-height: 172px;
-  align-items: stretch;
+.song-expanded-entry {
+  --song-expanded-art-size: clamp(128px, 14vw, 140px);
 }
 
-.song-expanded-entry .expanded-art {
-  width: 112px;
-  height: auto;
+.song-expanded-entry .expanded-entry-main {
+  grid-template-columns: 42px var(--song-expanded-art-size) minmax(0, 1fr) 18px;
   min-height: 0;
-  aspect-ratio: 1;
-  align-self: start;
+  align-items: start;
 }
 
 .song-expanded-entry .expanded-copy {
-  justify-content: center;
+  min-height: var(--song-expanded-art-size);
+  justify-content: flex-start;
 }
 
 .expanded-song-release {
@@ -1320,6 +1318,14 @@ a.culture-card:hover {
 .expanded-entry.layout-square .expanded-art {
   width: 88px;
   aspect-ratio: 1;
+}
+
+.song-expanded-entry.layout-square .expanded-art {
+  width: var(--song-expanded-art-size);
+  height: var(--song-expanded-art-size);
+  min-height: 0;
+  aspect-ratio: 1;
+  align-self: start;
 }
 
 .expanded-art img {
@@ -1870,6 +1876,20 @@ a.culture-card:hover {
     width: 68px;
   }
 
+  .song-expanded-entry {
+    --song-expanded-art-size: max(68px, min(140px, calc(100vw - 250px)));
+  }
+
+  .song-expanded-entry .expanded-entry-main {
+    grid-template-columns: 36px var(--song-expanded-art-size) minmax(0, 1fr) 16px;
+    min-height: 0;
+  }
+
+  .song-expanded-entry.layout-square .expanded-art {
+    width: var(--song-expanded-art-size);
+    height: var(--song-expanded-art-size);
+  }
+
   .expanded-rank {
     width: 32px;
     height: 32px;
@@ -1953,6 +1973,19 @@ a.culture-card:hover {
 
   .expanded-entry.layout-poster .expanded-art {
     width: 58px;
+  }
+
+  .song-expanded-entry {
+    --song-expanded-art-size: max(68px, min(140px, calc(100vw - 250px)));
+  }
+
+  .song-expanded-entry .expanded-entry-main {
+    grid-template-columns: 32px var(--song-expanded-art-size) minmax(0, 1fr) 14px;
+  }
+
+  .song-expanded-entry.layout-square .expanded-art {
+    width: var(--song-expanded-art-size);
+    height: var(--song-expanded-art-size);
   }
 
   #bmc-iframe {

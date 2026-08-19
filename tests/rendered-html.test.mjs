@@ -77,11 +77,12 @@ test("builds complete description-matching quiz prompts with fixed answer sets",
     id: "people-1",
     topic: "People",
     title: "Example Person",
-    description: "Example Person drew attention after appearing in a new film.",
+    quizContext: "Example Person drew attention after appearing in a new film.",
     answerChoices: ["Example Person", "Another Person", "A Film", "A Song"],
   }]);
   assert.match(prompt, /QUIZ DATA BEGIN/);
-  assert.match(prompt, /only the supplied target description/i);
+  assert.match(prompt, /only the supplied target_context/i);
+  assert.doesNotMatch(prompt, /target_description/);
   assert.match(prompt, /one or two complete sentences/i);
   assert.match(prompt, /exactly four answers/i);
   assert.doesNotMatch(prompt, /which topic matches a description/i);
@@ -181,7 +182,7 @@ test("renders the complete finite culture briefing", async () => {
       + brief.sections.find((section) => section.id === "music").moreItems.length);
   assert.match(html, /Show ranks 6/);
   assert.equal(brief.quiz.durationSeconds, 15);
-  assert.equal(brief.quiz.questions.length, 21);
+  assert.equal(brief.quiz.questions.length, 15);
 });
 
 test("renders the About flowchart", async () => {
@@ -358,10 +359,10 @@ test("keeps content and outbound links constrained", async () => {
   assert.deepEqual(brief.sections.map((section) => section.id),
     ["memes", "slang", "people", "movies", "books", "music", "products", "news"]);
   assert.equal(brief.quiz.durationSeconds, 15);
-  assert.equal(brief.quiz.questions.length, 21);
+  assert.equal(brief.quiz.questions.length, 15);
   const quizCounts = new Map();
   for (const question of brief.quiz.questions) {
-    assert.ok(["memes", "people", "movies", "books", "music", "products", "news"].includes(question.topicId));
+    assert.ok(["memes", "people", "movies", "books", "news"].includes(question.topicId));
     assert.equal(question.answers.length, 4);
     assert.equal(new Set(question.answers).size, 4);
     assert.ok(question.answers.includes(question.correctAnswer));

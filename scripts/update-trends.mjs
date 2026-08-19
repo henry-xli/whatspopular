@@ -16,7 +16,8 @@ const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 const aiDescriptionContexts = new WeakMap();
-const quizSectionIds = ["memes", "people", "movies", "books", "music", "products", "news"];
+const quizSectionIds = ["memes", "people", "movies", "books", "news"];
+const quizQuestionCount = quizSectionIds.length * 3;
 const quizDurationSeconds = 15;
 
 const allowedHosts = new Set([
@@ -2904,9 +2905,27 @@ function redactQuizTitle(value, title) {
   return redacted;
 }
 
+const quizRecentSignalPattern = /\b(?:recent|recently|currently|now|today|this\s+(?:week|month|year)|in\s+20\d{2}|during|after|following|since|coverage|focus|attention|viral|trending|spread|became|emerged|prompted|respond(?:ed|ing)|popular|reaches?|reached|released|opening|premier\w*|outbreak|recall\w*|disappear\w*|classif\w*|hurricane|flood\w*|hunker\w*|restock\w*|sold\s+out|world\s+cup|social\s+media)\b/gi;
+
+function quizContextFor(description, topicId) {
+  const parts = sentences(description);
+  if (!parts.length) return ensureSentence(description);
+  if (topicId === "movies" || topicId === "books") {
+    return ensureSentence(parts[0]);
+  }
+  const ranked = parts
+    .map((sentence, index) => ({ sentence, index, score: (sentence.match(quizRecentSignalPattern) ?? []).length }))
+    .sort((left, right) => right.score - left.score || right.index - left.index);
+  const topScore = ranked[0]?.score ?? 0;
+  const selected = topScore
+    ? ranked.filter((entry) => entry.score === topScore).sort((left, right) => left.index - right.index)[0]?.sentence
+    : parts.at(-1);
+  return conciseSentences(selected ?? parts[0], 420);
+}
+
 function quizDescriptionClue(description, title, topicId) {
-  const firstSentence = sentences(description)[0] ?? ensureSentence(description);
-  let redacted = redactQuizTitle(firstSentence, title)
+  const context = conciseSentences(description, 420) || ensureSentence(description);
+  let redacted = redactQuizTitle(context, title)
     .replace(/^\s*["'“”‘’]+|["'“”‘’]+\s*$/g, "")
     .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
@@ -2917,12 +2936,12 @@ function quizDescriptionClue(description, title, topicId) {
   // still reads naturally without revealing the answer title.
   const dependentStart = /^(?:about|after|before|because|from|in|near|of|on|or|to|under|when|where|while|with|and|but|for)\b/i;
   if (dependentStart.test(redacted)) {
-    redacted = firstSentence.trim();
+    redacted = context.trim();
   } else if (/^[a-z]/.test(redacted)) {
     const prefix = topicId === "news" ? "This story covers " : "This is ";
     redacted = `${prefix}${redacted}`;
   }
-  return ensureSentence(redacted || firstSentence);
+  return ensureSentence(redacted || context);
 }
 
 function quizPromptFallback(description, title, topicId, answerChoices = []) {
@@ -2982,21 +3001,19 @@ function quizRecords(brief) {
         topicId: sectionId,
         topic: section.title,
         title: item.title,
-        description: item.description,
+        quizContext: quizContextFor(item.description, sectionId),
         focus: {
-          memes: "Anchor the question in the meme's concrete origin, format, or recent use.",
-          people: "Anchor the question in the concrete recent event, role, appearance, or coverage that put the person in focus now.",
-          movies: "Anchor the question in a specific plot premise detail and any supported recent release context.",
-          books: "Anchor the question in a specific plot-premise detail only; do not ask about current popularity.",
-          music: "Anchor the question in the concrete recent release, performance, cover, or cultural context that made the track relevant now.",
-          products: "Anchor the question in the recent buying, collecting, unboxing, restock, recommendation, or social-trend behavior making the product relevant now.",
-          news: "Anchor the question in the concrete recent event or development, including its consequence or why it mattered.",
+          memes: "Use the concrete recent spread, format, or cultural moment in the supplied context, not a generic description of the subject.",
+          people: "Use the concrete recent event, appearance, response, or coverage in the supplied context, not the person's generic occupation.",
+          movies: "Use a specific plot-premise detail from the supplied context.",
+          books: "Use a specific plot-premise detail from the supplied context.",
+          news: "Use the concrete recent event or development in the supplied context, including its consequence when present.",
         }[sectionId],
         answerChoices,
       });
     }
   }
-  if (records.length !== 21) throw new Error(`Quiz must contain 21 source records, received ${records.length}`);
+  if (records.length !== quizQuestionCount) throw new Error(`Quiz must contain ${quizQuestionCount} source records, received ${records.length}`);
   return records;
 }
 
@@ -3014,7 +3031,7 @@ async function updateQuiz(brief) {
     ...(() => {
       const generatedQuestion = generated.get(record.id);
       if (usableGeneratedQuizQuestion(generatedQuestion, record)) return generatedQuestion;
-      return quizPromptFallback(record.description, record.title, record.topicId, record.answerChoices);
+      return quizPromptFallback(record.quizContext, record.title, record.topicId, record.answerChoices);
     })(),
     id: record.id,
     topicId: record.topicId,
@@ -3149,8 +3166,8 @@ function validateBrief(brief) {
     throw new Error("News must be ordered by seven-day Google search volume");
   }
   if (!brief.quiz || brief.quiz.durationSeconds !== quizDurationSeconds
-      || !Array.isArray(brief.quiz.questions) || brief.quiz.questions.length !== 21) {
-    throw new Error("Quiz must contain 21 questions and a 15-second duration per question");
+      || !Array.isArray(brief.quiz.questions) || brief.quiz.questions.length !== quizQuestionCount) {
+    throw new Error(`Quiz must contain ${quizQuestionCount} questions and a 15-second duration per question`);
   }
   const quizCounts = new Map();
   const quizIds = new Set();

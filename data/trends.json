@@ -2450,7 +2450,7 @@
     "durationSeconds": 15,
     "questions": [
       {
-        "prompt": "This is a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Which meme matches this description?",
+        "prompt": "Videos of it spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
         "answers": [
           "Jimothy the raccoon",
           "Kwebbelkop Laughing / YourRAGE Laugh",
@@ -2464,7 +2464,7 @@
         "itemTitle": "Jimothy the raccoon"
       },
       {
-        "prompt": "This is a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like another creator. Which meme matches this description?",
+        "prompt": "In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits. Which meme matches this description?",
         "answers": [
           "Kwebbelkop Laughing / YourRAGE Laugh",
           "Jimothy the raccoon",
@@ -2492,7 +2492,7 @@
         "itemTitle": "Hatsune Miku World Cup Custody Battle"
       },
       {
-        "prompt": "This is a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and finishing. Which person matches this description?",
+        "prompt": "He is in focus after starring for Norway at the 2026 World Cup, where the team reached the quarterfinals. Which person matches this description?",
         "answers": [
           "Erling Haaland",
           "Lamine Yamal",
@@ -2506,7 +2506,7 @@
         "itemTitle": "Erling Haaland"
       },
       {
-        "prompt": "This is a Barcelona and Spain winger who became a leading young footballer. Which person matches this description?",
+        "prompt": "He is currently in coverage after breakup rumors involving influencer Inés García prompted him to respond on social media following Spain’s 2026 World Cup victory. Which person matches this description?",
         "answers": [
           "Lamine Yamal",
           "Erling Haaland",
@@ -2520,7 +2520,7 @@
         "itemTitle": "Lamine Yamal"
       },
       {
-        "prompt": "This is a filmmaker known for blockbuster films with complex storytelling. Which person matches this description?",
+        "prompt": "He is in focus as his Homer adaptation, The Odyssey, reaches theaters, with Nolan also saying his next film will be at least three years away. Which person matches this description?",
         "answers": [
           "Christopher Nolan",
           "Erling Haaland",
@@ -2616,90 +2616,6 @@
         "topicId": "books",
         "topic": "Books",
         "itemTitle": "Theo of Golden"
-      },
-      {
-        "prompt": "This is a track by Ella Langley, released Oct 17, 2025. Which track matches this description?",
-        "answers": [
-          "Choosin' Texas",
-          "hate that i made you love me",
-          "Man I Need",
-          "stupid song"
-        ],
-        "correctAnswer": "Choosin' Texas",
-        "id": "music-1",
-        "topicId": "music",
-        "topic": "Music",
-        "itemTitle": "Choosin' Texas"
-      },
-      {
-        "prompt": "This is a track by Ariana Grande, released May 29, 2026. Which track matches this description?",
-        "answers": [
-          "hate that i made you love me",
-          "Choosin' Texas",
-          "Man I Need",
-          "stupid song"
-        ],
-        "correctAnswer": "hate that i made you love me",
-        "id": "music-2",
-        "topicId": "music",
-        "topic": "Music",
-        "itemTitle": "hate that i made you love me"
-      },
-      {
-        "prompt": "This is a track by Olivia Dean, released Aug 15, 2025. Which track matches this description?",
-        "answers": [
-          "Man I Need",
-          "Choosin' Texas",
-          "hate that i made you love me",
-          "stupid song"
-        ],
-        "correctAnswer": "Man I Need",
-        "id": "music-3",
-        "topicId": "music",
-        "topic": "Music",
-        "itemTitle": "Man I Need"
-      },
-      {
-        "prompt": "This is the Lip Sleeping Mask, recently featured among viral beauty products alongside items from Dyson and Medicube. Which product matches this description?",
-        "answers": [
-          "Laneige",
-          "Medicube",
-          "NeeDohs",
-          "Dyson"
-        ],
-        "correctAnswer": "Laneige",
-        "id": "products-1",
-        "topicId": "products",
-        "topic": "Products",
-        "itemTitle": "Laneige"
-      },
-      {
-        "prompt": "This is the PDRN Pink Collagen Volume Multi Balm Stick for the face and body, recently featured among viral products. Which product matches this description?",
-        "answers": [
-          "Medicube",
-          "Laneige",
-          "NeeDohs",
-          "Dyson"
-        ],
-        "correctAnswer": "Medicube",
-        "id": "products-2",
-        "topicId": "products",
-        "topic": "Products",
-        "itemTitle": "Medicube"
-      },
-      {
-        "prompt": "This is the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them. Which product matches this description?",
-        "answers": [
-          "NeeDohs",
-          "Laneige",
-          "Medicube",
-          "Dyson"
-        ],
-        "correctAnswer": "NeeDohs",
-        "id": "products-3",
-        "topicId": "products",
-        "topic": "Products",
-        "itemTitle": "NeeDohs"
       },
       {
         "prompt": "The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. Which story matches this description?",
