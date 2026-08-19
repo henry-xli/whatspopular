@@ -1078,16 +1078,41 @@ a.culture-card:hover {
 
 .song-card {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  min-height: 268px;
 }
 
 .song-card .card-art::after {
-  height: 55%;
+  inset: 0;
+  height: auto;
+  background: linear-gradient(90deg, transparent 50%, rgba(12, 10, 16, 0.34));
+}
+
+.song-card .card-art {
+  height: 100%;
+  min-height: 268px;
+  aspect-ratio: auto;
+}
+
+.song-card .card-copy {
+  min-height: 0;
+  justify-content: center;
+  padding: 22px 16px;
+}
+
+.song-release {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
 }
 
 .play-button {
   position: absolute;
-  right: 13px;
-  bottom: 13px;
+  top: 50%;
+  right: 50%;
+  bottom: auto;
   z-index: 3;
   display: grid;
   width: 48px;
@@ -1100,11 +1125,12 @@ a.culture-card:hover {
   color: #17151c;
   cursor: pointer;
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.22);
+  transform: translate(50%, -50%);
   transition: transform 0.2s ease;
 }
 
 .play-button:hover {
-  transform: scale(1.08);
+  transform: translate(50%, -50%) scale(1.08);
 }
 
 .play-button span {
@@ -1239,6 +1265,28 @@ a.culture-card:hover {
 
 .expanded-entry {
   position: relative;
+}
+
+.song-expanded-entry .expanded-entry-main {
+  min-height: 172px;
+  align-items: stretch;
+}
+
+.song-expanded-entry .expanded-art {
+  width: 112px;
+  height: auto;
+  aspect-ratio: auto;
+  align-self: stretch;
+}
+
+.song-expanded-entry .expanded-copy {
+  justify-content: center;
+}
+
+.expanded-song-release {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
 }
 
 .expanded-entry-main {
@@ -1402,6 +1450,17 @@ a.culture-card:hover {
 
 .expanded-play:hover,
 .expanded-play:focus-visible {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.song-expanded-entry .expanded-play {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+}
+
+.song-expanded-entry .expanded-play:hover,
+.song-expanded-entry .expanded-play:focus-visible {
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -1771,6 +1830,19 @@ a.culture-card:hover {
   .card-copy,
   .layout-poster .card-copy {
     min-height: 230px;
+  }
+
+  .song-card {
+    min-height: 232px;
+  }
+
+  .song-card .card-art {
+    min-height: 232px;
+  }
+
+  .song-card .card-copy {
+    min-height: 0;
+    padding: 16px 12px;
   }
 
   .expanded-entry-main {

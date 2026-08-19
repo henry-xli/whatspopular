@@ -27,6 +27,7 @@ export type CultureItem = {
   ratingLabel?: string;
   spotifyId?: string;
   spotifyRank?: number;
+  releaseDate?: string;
   category?: string;
 };
 
@@ -97,6 +98,39 @@ function assertText(value: unknown, label: string, maximum = 800): asserts value
     || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value)) {
     throw new Error(`${label} is missing, too long, or contains control characters`);
   }
+}
+
+const quizAnswerStopWords = new Set([
+  "about", "after", "again", "also", "been", "being", "came", "does", "from", "have", "into", "just",
+  "more", "most", "only", "over", "that", "their", "them", "then", "there", "these", "they", "this",
+  "through", "under", "were", "what", "when", "where", "which", "while", "with", "would", "your",
+]);
+
+function normalizedQuizText(value: string) {
+  return value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function quizAnswerGrounded(answer: string, description: string) {
+  const normalizedAnswer = normalizedQuizText(answer);
+  const normalizedDescription = normalizedQuizText(description);
+  if (!normalizedAnswer || !normalizedDescription) return false;
+  if (normalizedDescription.includes(normalizedAnswer)) return true;
+  const descriptionTokens = new Set(normalizedDescription.split(" ").filter((token) => token.length >= 3 && !quizAnswerStopWords.has(token)));
+  return normalizedAnswer.split(" ").some((token) => token.length >= 3 && !quizAnswerStopWords.has(token) && descriptionTokens.has(token));
+}
+
+const genericQuizPromptPattern = /^(?:which (?:topic|entry|item) (?:matches|is linked to|is described by|is associated with)|which (?:person|film|movie|book|track|song|product|news item|meme) is linked to this|which entry is linked to this)/i;
+
+function validQuizPrompt(prompt: string, title: string) {
+  const normalizedTitle = normalizedQuizText(title);
+  const normalizedPrompt = normalizedQuizText(prompt);
+  const titleWords = normalizedTitle.split(" ").filter(Boolean);
+  const wordCount = prompt.trim().split(/\s+/).length;
+  return !genericQuizPromptPattern.test(prompt.trim())
+    && !/\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i.test(prompt)
+    && (!normalizedTitle || normalizedTitle.length < 4 || titleWords.length < 2 || !normalizedPrompt.includes(normalizedTitle))
+    && prompt.trim().endsWith("?")
+    && wordCount >= 8 && wordCount <= 38;
 }
 
 function publicHostname(hostname: string) {
@@ -177,6 +211,7 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   }
   if (item.rating !== undefined) assertText(item.rating, `${item.title} rating`, 20);
   if (item.ratingLabel !== undefined) assertText(item.ratingLabel, `${item.title} rating source`, 40);
+  if (item.releaseDate !== undefined) assertText(item.releaseDate, `${item.title} release date`, 60);
   if (item.category !== undefined) assertText(item.category, `${item.title} category`, 40);
   if (item.spotifyId !== undefined && (typeof item.spotifyId !== "string" || !/^[A-Za-z0-9]{22}$/.test(item.spotifyId))) {
     throw new Error(`${item.title} has an invalid Spotify track ID`);
@@ -334,9 +369,11 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
     const section = brief.sections.find((entry) => entry.id === question.topicId);
     const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])].slice(0, 3) : [];
+    const sourceItem = sourceItems.find((item) => item.title === question.itemTitle);
     if (!section || question.topic !== section.title
-      || !sourceItems.some((item) => item.title === question.itemTitle)
-      || question.correctAnswer !== question.itemTitle) {
+      || !sourceItem
+      || !validQuizPrompt(question.prompt, sourceItem.title)
+      || !quizAnswerGrounded(question.correctAnswer, sourceItem.description)) {
       throw new Error("Quiz question is not grounded in a board's first three entries");
     }
   }
@@ -358,4 +395,11 @@ export function formatUpdatedAt(isoDate: string) {
     timeZone: "UTC",
     timeZoneName: "short"
   }).format(new Date(isoDate));
+}
+
+export function releaseDateFor(item: Pick<CultureItem, "releaseDate" | "description">) {
+  const explicit = item.releaseDate?.trim();
+  if (explicit) return explicit;
+  const match = item.description.match(/\breleased\s+([^.!?]+)/i)?.[1]?.trim();
+  return match || "Release date unavailable";
 }

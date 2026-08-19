@@ -1989,6 +1989,7 @@ async function updateMusic(brief, chart, spotifyTracks) {
       accent: accents[index % accents.length],
       spotifyId: track.id,
       spotifyRank,
+      ...(released ? { releaseDate: released } : {}),
     };
   });
   section.items = allItems.slice(0, 5);
@@ -2899,30 +2900,148 @@ function redactQuizTitle(value, title) {
   return redacted;
 }
 
-function quizPromptFallback(description, title, topicId) {
-  const context = redactQuizTitle(conciseSentences(description, 300)
-    .replace(/[“”]/g, '"')
-    .trim(), title);
-  const prompts = {
-    people: "A recent development put this person back in focus: ",
-    movies: "The premise of this film turns on a specific situation: ",
-    books: "The plot of this book turns on a specific situation: ",
-    music: "This track has been drawing attention in a recent musical context: ",
-    products: "A recent buying or social trend has made this product stand out: ",
-    news: "This recent news story centers on a concrete development: ",
-    memes: "This meme took off through a distinctive origin or recent use: ",
+const quizAnswerStopWords = new Set([
+  "about", "after", "again", "also", "been", "being", "came", "does", "from", "have", "into", "just",
+  "more", "most", "only", "over", "that", "their", "them", "then", "there", "these", "they", "this",
+  "through", "under", "were", "what", "when", "where", "which", "while", "with", "would", "your",
+]);
+
+function quizMeaningfulTokens(value) {
+  return normalize(value).split(" ").filter((token) => token.length >= 3 && !quizAnswerStopWords.has(token));
+}
+
+function quizAnswerGrounded(answer, description) {
+  const normalizedAnswer = normalize(answer);
+  const normalizedDescription = normalize(description);
+  if (!normalizedAnswer || !normalizedDescription) return false;
+  if (normalizedDescription.includes(normalizedAnswer)) return true;
+  const descriptionTokens = new Set(quizMeaningfulTokens(description));
+  return quizMeaningfulTokens(answer).some((token) => descriptionTokens.has(token));
+}
+
+function quizFactCandidate(description, topicId) {
+  const text = conciseSentences(description, 300).replace(/[“”]/g, '"').trim();
+  const patterns = {
+    people: [
+      [/involving\s+(?:an?\s+)?(?:influencer|actor|artist|creator|director|singer|streamer|youtuber)?\s*([^,.!?]+?)(?=\s+(?:prompted|led|caused|after|following)\b|[,.!?])/, "Who was involved in the breakup rumors?", "another person", "person"],
+      [/\bfor\s+([A-Z][A-Za-z’'-]+)\s+at\s+(?:the\s+)?\d{4}\s+World Cup\b/i, "Which team did the footballer star for at the World Cup?", "a team", "team"],
+      [/(?:adaptation|film)\s*,?\s*([^.!?]+?)(?:,)?\s+reaches?\s+theaters?/i, "Which film adaptation is reaching theaters?", "a film", "film"],
+    ],
+    movies: [
+      [/(?:home|journey)\s+to\s+([^,.!?]+?)(?=\s+(?:after|where|while|with|as)\b|[,.!?])/i, "Where is the character trying to go?", "a destination", "place"],
+      [/\bstop\s+(?:a|an|the)\s+([^,.!?]+?)\s+killing\s+/i, "What mysterious force threatens the story's world?", "force", "threat"],
+      [/uses?\s+a\s+magical\s+([^,.!?]+?)(?=\s+to\b|[,.!?])/i, "What magical object drives the plot?", "new object", "object"],
+    ],
+    books: [
+      [/(?:wakes?|awakens?)\s+in\s+(?:a|an|the)\s+([^—,.!?]+?)(?=\s+(?:she|he|they|and|where|to)\b|[—,.!?])/i, "What setting does the protagonist wake into?", "another setting", "setting"],
+      [/(?:arrives?|returns?)\s+in\s+([^,.!?]+?)(?=\s+(?:and|where|to)\b|[,.!?])/i, "Where does the story begin?", "another setting", "setting"],
+      [/(?:in)\s+([^,.!?]+?),\s+[^.]{0,100}\b(?:orphan|sisterhood|stranger|artist)\b/i, "Where is the story set?", "another setting", "setting"],
+    ],
+    music: [
+      [/(?:track|song)\s+by\s+([^,.!?]+?)(?=\s+(?:released|after|with|and)\b|[,.!?])/i, "Who recorded the track?", "an artist", "artist"],
+      [/\breleased\s+([^,.!?]+?)(?=\s+(?:and|after|with)\b|[,.!?])/i, "When was the track released?", "a date", "date"],
+    ],
+    products: [
+      [/(?:refers to|is)\s+(?:the|a|an)\s+([^,.!?]+?(?:\s+and\s+body)?)(?=\s+(?:whose|recently|that|and)\b|[,.!?])/i, "Which product is being described?", "this product", "product"],
+      [/(?:led|prompted)\s+[^,.!?]*?\bto\s+([^,.!?]+?)(?=\s+(?:to|and|as)\b|[,.!?])/i, "What behavior shows the product's demand?", "that behavior", "behavior"],
+    ],
+    news: [
+      [/(?:about|nearly|roughly)\s+(\d+\s+miles?)\b/i, "How far from home were the remains found?", "that distance", "distance"],
+      [/(?:classified|rated|listed)\s+[^,.!?]*?\bas\s+([^,.!?]+?)(?=\s+(?:because|after|for|and)\b|[,.!?])/i, "How did officials classify the development?", "that level", "classification"],
+      [/\bbrought\s+([^.!?]+?)\s+to\s+/i, "What immediate impact did the event have?", "several impacts", "impact"],
+      [/(?:found|discovered)\s+([^,.!?]+?)\s+(?:about|near|from)\s+/i, "What was discovered in the case?", "the finding", "finding"],
+    ],
+    memes: [
+      [/(?:lives|based|originated)\s+in\s+([^,.!?]+?)(?=\s+(?:Videos|Posts|and|where)\b|[,.!?])/i, "Where did this meme's subject originate?", "a location", "place"],
+      [/sounding\s+like\s+(?:a\s+)?(?:Dutch\s+)?YouTuber\s+([^,.!?]+)/i, "Whose laugh does the sound resemble?", "another creator", "person"],
+      [/(?:used|depicting|treat)\s+([^,.!?]+?)(?=\s+(?:in|until|as|and)\b|[,.!?])/i, "What distinctive idea does the meme use?", "a specific idea", "idea"],
+    ],
   };
-  const lead = prompts[topicId] ?? "This entry is defined by a concrete detail: ";
-  const questionSuffix = {
-    memes: " Which meme fits that context?",
-    people: " Which person fits that recent context?",
-    movies: " Which film fits that premise?",
-    books: " Which book fits that premise?",
-    music: " Which track fits that context?",
-    products: " Which product fits that buying trend?",
-    news: " Which story fits that development?",
-  }[topicId] ?? " Which choice fits that detail?";
-  return `${lead}${context}${questionSuffix}`;
+  for (const [pattern, prompt, replacement, kind] of patterns[topicId] ?? []) {
+    const answer = text.match(pattern)?.[1]
+      ?.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, "")
+      .replace(/[,:;]+$/g, "")
+      .trim();
+    if (answer && answer.length >= 2 && answer.length <= 120 && quizMeaningfulTokens(answer).length) {
+      return { answer, prompt, replacement, kind };
+    }
+  }
+  return null;
+}
+
+function redactQuizAnswer(value, answer, replacement = "the answer") {
+  return value.replace(new RegExp(escapeRegExp(answer), "i"), replacement)
+    .replace(/\b(a|an|the)\s+(a|an|the)\b/gi, "$2")
+    .replace(/\b(a|an|the)\s+(another|different|new)\b/gi, "$2")
+    .replace(/\bthe\s+this product\b/gi, "this product")
+    .replace(/\bthe\s+the development\b/gi, "the development")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function compactQuizContext(description, title, answer = "") {
+  const sentences = conciseSentences(description, 260)
+    .replace(/[“”]/g, '"')
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+  const recentPattern = /\b(?:recent|recently|currently|coverage|attention|viral|trending|after|following|reaches?|arrives?|released|popular|spread|prompted|response|responded)\b/i;
+  const normalizedAnswer = normalize(answer);
+  const ordered = [...sentences].sort((left, right) => {
+    const leftHasAnswer = normalizedAnswer && normalize(left).includes(normalizedAnswer) ? 1 : 0;
+    const rightHasAnswer = normalizedAnswer && normalize(right).includes(normalizedAnswer) ? 1 : 0;
+    return rightHasAnswer - leftHasAnswer || Number(recentPattern.test(right)) - Number(recentPattern.test(left));
+  });
+  const selected = ordered[0] ?? "";
+  const words = selected.split(/\s+/).filter(Boolean);
+  const answerWords = normalizedAnswer.split(" ").filter(Boolean);
+  const answerIndex = answerWords.length
+    ? words.findIndex((_, index) => normalize(words.slice(index, index + answerWords.length).join(" ")) === normalizedAnswer)
+    : -1;
+  const start = answerIndex >= 0 ? Math.max(0, answerIndex - 10) : 0;
+  let context = redactQuizTitle(words.slice(start, start + 28).join(" "), title).trim();
+  const trackMatch = context.match(/\b(?:is\s+)?a\s+track\s+by\b/i);
+  if (trackMatch && trackMatch.index && trackMatch.index > 0) {
+    context = `A track by${context.slice(trackMatch.index + trackMatch[0].length)}`;
+  }
+  return context ? `${context[0].toLocaleUpperCase("en-US")}${context.slice(1)}` : context;
+}
+
+function quizPromptFallback(description, title, topicId, relatedDescriptions = [], fallbackChoices = []) {
+  const fact = quizFactCandidate(description, topicId);
+  const redactedTitle = compactQuizContext(description, title, fact?.answer);
+  if (!fact) {
+    const context = redactedTitle.replace(/[.!?]+$/, "");
+    const prompt = `${context}. Which ${topicId === "people" ? "person" : topicId === "movies" ? "film" : topicId === "books" ? "book" : topicId === "music" ? "track" : topicId === "products" ? "product" : topicId === "news" ? "story" : "meme"} is described?`;
+    return { prompt, answers: [...new Set([title, ...fallbackChoices, ...relatedDescriptions.map((entry) => entry.entry)])].slice(0, 4), correctAnswer: title };
+  }
+  const replacement = fact.replacement ?? {
+    people: "another person",
+    movies: "a destination",
+    books: "a different setting",
+    music: "an artist",
+    products: "this product",
+    news: "the development",
+    memes: "a specific idea",
+  }[topicId] ?? "the answer";
+  const contextText = redactQuizAnswer(redactedTitle, fact.answer, replacement)
+    .replace(/,\s+(?:a|an|the)\s+(?:film|movie)\s*,/gi, ",")
+    .replace(/[.!?]+$/, "");
+  const context = contextText ? `${contextText[0].toLocaleUpperCase("en-US")}${contextText.slice(1)}` : contextText;
+  const prompt = `${context}. ${fact.prompt}`;
+  const relatedFacts = relatedDescriptions
+    .map((entry) => quizFactCandidate(entry.description, topicId))
+    .filter((candidate) => candidate?.answer && (!fact.kind || candidate.kind === fact.kind))
+    .map((candidate) => candidate.answer);
+  const answers = [...new Set([fact.answer, ...relatedFacts, ...fallbackChoices, ...relatedDescriptions.map((entry) => entry.entry), title])]
+    .filter((answer) => answer && answer !== fact.answer)
+    .slice(0, 3);
+  return {
+    prompt,
+    answers: [fact.answer, ...answers],
+    correctAnswer: fact.answer,
+  };
 }
 
 const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
@@ -2932,7 +3051,24 @@ function usableQuizPrompt(prompt, record) {
   if (!prompt || unusableQuizPromptPattern.test(prompt) || genericQuizPromptPattern.test(prompt.trim())) return false;
   const title = normalize(record.title);
   const question = normalize(prompt);
-  return (!title || title.length < 4 || !question.includes(title)) && prompt.trim().length >= 55;
+  const wordCount = prompt.trim().split(/\s+/).length;
+  const titleWords = title.split(" ").filter(Boolean);
+  return (!title || title.length < 4 || titleWords.length < 2 || !question.includes(title))
+    && prompt.trim().endsWith("?")
+    && wordCount >= 8 && wordCount <= 38;
+}
+
+function usableGeneratedQuizQuestion(candidate, record) {
+  if (!candidate || typeof candidate !== "object") return false;
+  const answers = Array.isArray(candidate.answers) ? candidate.answers : [];
+  return usableQuizPrompt(candidate.prompt, record)
+    && answers.length === 4
+    && new Set(answers).size === 4
+    && answers.every((answer) => typeof answer === "string" && answer.trim().length >= 1 && answer.length <= 160)
+    && typeof candidate.correctAnswer === "string"
+    && answers.includes(candidate.correctAnswer)
+    && normalize(candidate.correctAnswer) !== normalize(record.title)
+    && quizAnswerGrounded(candidate.correctAnswer, record.description);
 }
 
 function quizRecords(brief) {
@@ -2962,6 +3098,9 @@ function quizRecords(brief) {
           products: "Anchor the question in the recent buying, collecting, unboxing, restock, recommendation, or social-trend behavior making the product relevant now.",
           news: "Anchor the question in the concrete recent event or development, including its consequence or why it mattered.",
         }[sectionId],
+        relatedDescriptions: allItems.slice(0, 3)
+          .filter((candidate) => candidate.title !== item.title)
+          .map((candidate) => ({ entry: candidate.title, description: candidate.description })),
         answerChoices,
       });
     }
@@ -2981,15 +3120,15 @@ async function updateQuiz(brief) {
     }
   }
   const questions = records.map((record) => ({
+    ...(() => {
+      const generatedQuestion = generated.get(record.id);
+      if (usableGeneratedQuizQuestion(generatedQuestion, record)) return generatedQuestion;
+      return quizPromptFallback(record.description, record.title, record.topicId, record.relatedDescriptions, record.answerChoices);
+    })(),
     id: record.id,
     topicId: record.topicId,
     topic: record.topic,
     itemTitle: record.title,
-    prompt: generated.get(record.id) && usableQuizPrompt(generated.get(record.id), record)
-      ? generated.get(record.id)
-      : quizPromptFallback(record.description, record.title, record.topicId),
-    answers: record.answerChoices,
-    correctAnswer: record.title,
   }));
   brief.quiz = { durationSeconds: quizDurationSeconds, questions };
   console.log(`Quiz questions prepared: ${questions.length} (${generated.size ? `${generated.size} AI prompts` : "deterministic prompts"}).`);
@@ -3139,10 +3278,12 @@ function validateBrief(brief) {
     quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
     const section = brief.sections.find((entry) => entry.id === question.topicId);
     const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])].slice(0, 3) : [];
-    if (!sourceItems.some((item) => item.title === question.itemTitle)
-        || question.correctAnswer !== question.itemTitle
+    const sourceItem = sourceItems.find((item) => item.title === question.itemTitle);
+    if (!sourceItem
+        || !usableQuizPrompt(question.prompt, sourceItem)
+        || !quizAnswerGrounded(question.correctAnswer, sourceItem.description)
         || question.topic !== section?.title) {
-      throw new Error("Quiz question is not grounded in one of the board's first three entries");
+      throw new Error(`Quiz question ${question.id} is not grounded in one of the board's first three entries`);
     }
   }
   if (quizSectionIds.some((sectionId) => quizCounts.get(sectionId) !== 3)) {

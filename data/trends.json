@@ -2450,298 +2450,298 @@
     "durationSeconds": 15,
     "questions": [
       {
+        "prompt": "A wild raccoon with short spine syndrome who lives in a location. Where did this meme's subject originate?",
+        "answers": [
+          "Seattle's Ballard neighborhood",
+          "Jimothy the raccoon",
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Hatsune Miku World Cup Custody Battle"
+        ],
+        "correctAnswer": "Seattle's Ballard neighborhood",
         "id": "memes-1",
         "topicId": "memes",
         "topic": "Memes",
-        "itemTitle": "Jimothy the raccoon",
-        "prompt": "This meme took off through a distinctive origin or recent use: a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of it spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme fits that context?",
-        "answers": [
-          "Jimothy the raccoon",
-          "Kwebbelkop Laughing / YourRAGE Laugh",
-          "Hatsune Miku World Cup Custody Battle",
-          "Mbappé Special"
-        ],
-        "correctAnswer": "Jimothy the raccoon"
+        "itemTitle": "Jimothy the raccoon"
       },
       {
+        "prompt": "A viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as. Whose laugh does the sound resemble?",
+        "answers": [
+          "Kwebbelkop",
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Jimothy the raccoon",
+          "Hatsune Miku World Cup Custody Battle"
+        ],
+        "correctAnswer": "Kwebbelkop",
         "id": "memes-2",
         "topicId": "memes",
         "topic": "Memes",
-        "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh",
-        "prompt": "This meme took off through a distinctive origin or recent use: a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like Dutch YouTuber. Which meme fits that context?",
-        "answers": [
-          "Kwebbelkop Laughing / YourRAGE Laugh",
-          "Jimothy the raccoon",
-          "Hatsune Miku World Cup Custody Battle",
-          "Mbappé Special"
-        ],
-        "correctAnswer": "Kwebbelkop Laughing / YourRAGE Laugh"
+        "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh"
       },
       {
+        "prompt": "FIFA World Cup in which social media users jokingly treat a specific idea as battles for the \"custody\" of the Japanese virtual singer. What distinctive idea does the meme use?",
+        "answers": [
+          "tournament matches",
+          "Hatsune Miku World Cup Custody Battle",
+          "Jimothy the raccoon",
+          "Kwebbelkop Laughing / YourRAGE Laugh"
+        ],
+        "correctAnswer": "tournament matches",
         "id": "memes-3",
         "topicId": "memes",
         "topic": "Memes",
-        "itemTitle": "Hatsune Miku World Cup Custody Battle",
-        "prompt": "This meme took off through a distinctive origin or recent use: a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer. Which meme fits that context?",
-        "answers": [
-          "Hatsune Miku World Cup Custody Battle",
-          "Jimothy the raccoon",
-          "Kwebbelkop Laughing / YourRAGE Laugh",
-          "Mbappé Special"
-        ],
-        "correctAnswer": "Hatsune Miku World Cup Custody Battle"
+        "itemTitle": "Hatsune Miku World Cup Custody Battle"
       },
       {
+        "prompt": "He is in focus after starring for a team at the 2026 World Cup, where the team reached the quarterfinals. Which team did the footballer star for at the World Cup?",
+        "answers": [
+          "Norway",
+          "Erling Haaland",
+          "Lamine Yamal",
+          "Christopher Nolan"
+        ],
+        "correctAnswer": "Norway",
         "id": "people-1",
         "topicId": "people",
         "topic": "People",
-        "itemTitle": "Erling Haaland",
-        "prompt": "A recent development put this person back in focus: a Norwegian striker for Manchester City and the Norway national team, known for his speed, strength and finishing. He is in focus after starring for Norway at the 2026 World Cup, where the team reached the quarterfinals. Which person fits that recent context?",
-        "answers": [
-          "Erling Haaland",
-          "Lamine Yamal",
-          "Christopher Nolan",
-          "Zendaya"
-        ],
-        "correctAnswer": "Erling Haaland"
+        "itemTitle": "Erling Haaland"
       },
       {
+        "prompt": "He is currently in coverage after breakup rumors involving influencer another person prompted him to respond on social media following Spain’s 2026 World Cup victory. Who was involved in the breakup rumors?",
+        "answers": [
+          "Inés García",
+          "Lamine Yamal",
+          "Erling Haaland",
+          "Christopher Nolan"
+        ],
+        "correctAnswer": "Inés García",
         "id": "people-2",
         "topicId": "people",
         "topic": "People",
-        "itemTitle": "Lamine Yamal",
-        "prompt": "A recent development put this person back in focus: a Barcelona and Spain winger who became a leading young footballer. He is currently in coverage after breakup rumors involving influencer Inés García prompted him to respond on social media following Spain’s 2026 World Cup victory. Which person fits that recent context?",
-        "answers": [
-          "Lamine Yamal",
-          "Erling Haaland",
-          "Christopher Nolan",
-          "Zendaya"
-        ],
-        "correctAnswer": "Lamine Yamal"
+        "itemTitle": "Lamine Yamal"
       },
       {
+        "prompt": "He is in focus as his Homer adaptation, reaches theaters, with Nolan also saying his next film will be at least three years away. Which film adaptation is reaching theaters?",
+        "answers": [
+          "The Odyssey",
+          "Christopher Nolan",
+          "Erling Haaland",
+          "Lamine Yamal"
+        ],
+        "correctAnswer": "The Odyssey",
         "id": "people-3",
         "topicId": "people",
         "topic": "People",
-        "itemTitle": "Christopher Nolan",
-        "prompt": "A recent development put this person back in focus: a filmmaker known for blockbuster films with complex storytelling. He is in focus as his Homer adaptation, The Odyssey, reaches theaters, with Nolan also saying his next film will be at least three years away. Which person fits that recent context?",
-        "answers": [
-          "Christopher Nolan",
-          "Erling Haaland",
-          "Lamine Yamal",
-          "Zendaya"
-        ],
-        "correctAnswer": "Christopher Nolan"
+        "itemTitle": "Christopher Nolan"
       },
       {
+        "prompt": "Epic fantasy follows Odysseus on a perilous journey home to a destination after the Trojan War, where he encounters mythical beings while trying to reunite with Penelope. Where is the character trying to go?",
+        "answers": [
+          "Ithaca",
+          "The Odyssey",
+          "Obsession",
+          "Project Hail Mary"
+        ],
+        "correctAnswer": "Ithaca",
         "id": "movies-1",
         "topicId": "movies",
         "topic": "Movies",
-        "itemTitle": "The Odyssey",
-        "prompt": "The premise of this film turns on a specific situation: An epic fantasy follows Odysseus on a perilous journey home to Ithaca after the Trojan War, where he encounters mythical beings while trying to reunite with Penelope. Which film fits that premise?",
-        "answers": [
-          "The Odyssey",
-          "Obsession",
-          "Project Hail Mary",
-          "Backrooms"
-        ],
-        "correctAnswer": "The Odyssey"
+        "itemTitle": "The Odyssey"
       },
       {
+        "prompt": "Film follows Bear, a music-store employee who uses a magical new object to make Nikki love him, only for her affection to become a violent obsession. What magical object drives the plot?",
+        "answers": [
+          "toy",
+          "Obsession",
+          "The Odyssey",
+          "Project Hail Mary"
+        ],
+        "correctAnswer": "toy",
         "id": "movies-2",
         "topicId": "movies",
         "topic": "Movies",
-        "itemTitle": "Obsession",
-        "prompt": "The premise of this film turns on a specific situation: A supernatural horror film follows Bear, a music-store employee who uses a magical toy to make Nikki love him, only for her affection to become a violent obsession. Which film fits that premise?",
-        "answers": [
-          "Obsession",
-          "The Odyssey",
-          "Project Hail Mary",
-          "Backrooms"
-        ],
-        "correctAnswer": "Obsession"
+        "itemTitle": "Obsession"
       },
       {
+        "prompt": "No memory and must uncover a mission to stop a force killing Earth's sun. What mysterious force threatens the story's world?",
+        "answers": [
+          "mysterious substance",
+          "Project Hail Mary",
+          "The Odyssey",
+          "Obsession"
+        ],
+        "correctAnswer": "mysterious substance",
         "id": "movies-3",
         "topicId": "movies",
         "topic": "Movies",
-        "itemTitle": "Project Hail Mary",
-        "prompt": "The premise of this film turns on a specific situation: A science-fiction film follows teacher Ryland Grace, who awakens alone on a spaceship with no memory and must uncover a mission to stop a mysterious substance killing Earth's sun. Which film fits that premise?",
-        "answers": [
-          "Project Hail Mary",
-          "The Odyssey",
-          "Obsession",
-          "Backrooms"
-        ],
-        "correctAnswer": "Project Hail Mary"
+        "itemTitle": "Project Hail Mary"
       },
       {
+        "prompt": "Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in another setting—possibly in the 19th century. What setting does the protagonist wake into?",
+        "answers": [
+          "disturbing version of her life",
+          "Depression-era Oxford",
+          "the small Southern city of Golden",
+          "Yesteryear"
+        ],
+        "correctAnswer": "disturbing version of her life",
         "id": "books-1",
         "topicId": "books",
         "topic": "Books",
-        "itemTitle": "Yesteryear",
-        "prompt": "The plot of this book turns on a specific situation: Natalie, a tradwife social-media influencer living on a seemingly perfect ranch, wakes in a disturbing version of her life—possibly in the 19th century. She must uncover what happened and escape. Which book fits that premise?",
-        "answers": [
-          "Yesteryear",
-          "The Calamity Club",
-          "Theo of Golden",
-          "Mad Mabel"
-        ],
-        "correctAnswer": "Yesteryear"
+        "itemTitle": "Yesteryear"
       },
       {
+        "prompt": "In another setting, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Where is the story set?",
+        "answers": [
+          "Depression-era Oxford",
+          "disturbing version of her life",
+          "the small Southern city of Golden",
+          "The Calamity Club"
+        ],
+        "correctAnswer": "Depression-era Oxford",
         "id": "books-2",
         "topicId": "books",
         "topic": "Books",
-        "itemTitle": "The Calamity Club",
-        "prompt": "The plot of this book turns on a specific situation: In Depression-era Oxford, Mississippi, orphan Meg, outspoken Birdie, and desperate Charlie form an unlikely sisterhood. Together, they devise a dangerous plan to take control of their lives. Which book fits that premise?",
-        "answers": [
-          "The Calamity Club",
-          "Yesteryear",
-          "Theo of Golden",
-          "Mad Mabel"
-        ],
-        "correctAnswer": "The Calamity Club"
+        "itemTitle": "The Calamity Club"
       },
       {
+        "prompt": "A mysterious stranger arrives in another setting and begins returning a local artist’s pencil portraits to their rightful owners. Where does the story begin?",
+        "answers": [
+          "the small Southern city of Golden",
+          "disturbing version of her life",
+          "Depression-era Oxford",
+          "Theo of Golden"
+        ],
+        "correctAnswer": "the small Southern city of Golden",
         "id": "books-3",
         "topicId": "books",
         "topic": "Books",
-        "itemTitle": "Theo of Golden",
-        "prompt": "The plot of this book turns on a specific situation: A mysterious stranger arrives in the small Southern city of Golden and begins returning a local artist’s pencil portraits to their rightful owners. Each exchange reveals a story and changes a life. Which book fits that premise?",
-        "answers": [
-          "Theo of Golden",
-          "Yesteryear",
-          "The Calamity Club",
-          "Mad Mabel"
-        ],
-        "correctAnswer": "Theo of Golden"
+        "itemTitle": "Theo of Golden"
       },
       {
+        "prompt": "A track by an artist, released Oct 17, 2025. Who recorded the track?",
+        "answers": [
+          "Ella Langley",
+          "Ariana Grande",
+          "Olivia Dean",
+          "Choosin' Texas"
+        ],
+        "correctAnswer": "Ella Langley",
         "id": "music-1",
         "topicId": "music",
         "topic": "Music",
-        "itemTitle": "Choosin' Texas",
-        "prompt": "This track has been drawing attention in a recent musical context: a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers it. Which track fits that context?",
-        "answers": [
-          "Choosin' Texas",
-          "hate that i made you love me",
-          "Man I Need",
-          "stupid song"
-        ],
-        "correctAnswer": "Choosin' Texas"
+        "itemTitle": "Choosin' Texas"
       },
       {
+        "prompt": "A track by an artist, released May 29, 2026. Who recorded the track?",
+        "answers": [
+          "Ariana Grande",
+          "Ella Langley",
+          "Olivia Dean",
+          "hate that i made you love me"
+        ],
+        "correctAnswer": "Ariana Grande",
         "id": "music-2",
         "topicId": "music",
         "topic": "Music",
-        "itemTitle": "hate that i made you love me",
-        "prompt": "This track has been drawing attention in a recent musical context: a track by Ariana Grande, released May 29, 2026. Which track fits that context?",
-        "answers": [
-          "hate that i made you love me",
-          "Choosin' Texas",
-          "Man I Need",
-          "stupid song"
-        ],
-        "correctAnswer": "hate that i made you love me"
+        "itemTitle": "hate that i made you love me"
       },
       {
+        "prompt": "A track by an artist, released Aug 15, 2025. Who recorded the track?",
+        "answers": [
+          "Olivia Dean",
+          "Ella Langley",
+          "Ariana Grande",
+          "Man I Need"
+        ],
+        "correctAnswer": "Olivia Dean",
         "id": "music-3",
         "topicId": "music",
         "topic": "Music",
-        "itemTitle": "Man I Need",
-        "prompt": "This track has been drawing attention in a recent musical context: a track by Olivia Dean, released Aug 15, 2025. Which track fits that context?",
-        "answers": [
-          "Man I Need",
-          "Choosin' Texas",
-          "hate that i made you love me",
-          "stupid song"
-        ],
-        "correctAnswer": "Man I Need"
+        "itemTitle": "Man I Need"
       },
       {
+        "prompt": "This product, recently featured among viral beauty products alongside items from Dyson and Medicube. Which product is being described?",
+        "answers": [
+          "Lip Sleeping Mask",
+          "PDRN Pink Collagen Volume Multi Balm Stick for the face and body",
+          "NeeDoh Funky Pups",
+          "Laneige"
+        ],
+        "correctAnswer": "Lip Sleeping Mask",
         "id": "products-1",
         "topicId": "products",
         "topic": "Products",
-        "itemTitle": "Laneige",
-        "prompt": "A recent buying or social trend has made this product stand out: the Lip Sleeping Mask, recently featured among viral beauty products alongside items from Dyson and Medicube. Which product fits that buying trend?",
-        "answers": [
-          "Laneige",
-          "Medicube",
-          "NeeDohs",
-          "Dyson"
-        ],
-        "correctAnswer": "Laneige"
+        "itemTitle": "Laneige"
       },
       {
+        "prompt": "This product, recently featured among viral products. Which product is being described?",
+        "answers": [
+          "PDRN Pink Collagen Volume Multi Balm Stick for the face and body",
+          "Lip Sleeping Mask",
+          "NeeDoh Funky Pups",
+          "Medicube"
+        ],
+        "correctAnswer": "PDRN Pink Collagen Volume Multi Balm Stick for the face and body",
         "id": "products-2",
         "topicId": "products",
         "topic": "Products",
-        "itemTitle": "Medicube",
-        "prompt": "A recent buying or social trend has made this product stand out: the PDRN Pink Collagen Volume Multi Balm Stick for the face and body, recently featured among viral products. Which product fits that buying trend?",
-        "answers": [
-          "Medicube",
-          "Laneige",
-          "NeeDohs",
-          "Dyson"
-        ],
-        "correctAnswer": "Medicube"
+        "itemTitle": "Medicube"
       },
       {
+        "prompt": "This product, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them. Which product is being described?",
+        "answers": [
+          "NeeDoh Funky Pups",
+          "Lip Sleeping Mask",
+          "PDRN Pink Collagen Volume Multi Balm Stick for the face and body",
+          "NeeDohs"
+        ],
+        "correctAnswer": "NeeDoh Funky Pups",
         "id": "products-3",
         "topicId": "products",
         "topic": "Products",
-        "itemTitle": "NeeDohs",
-        "prompt": "A recent buying or social trend has made this product stand out: the NeeDoh Funky Pups, palm-sized squishy toys whose social-media popularity has led children, parents, and collectors to wait in long lines to buy them. Which product fits that buying trend?",
-        "answers": [
-          "NeeDohs",
-          "Laneige",
-          "Medicube",
-          "Dyson"
-        ],
-        "correctAnswer": "NeeDohs"
+        "itemTitle": "NeeDohs"
       },
       {
+        "prompt": "The FDA has classified July’s nationwide egg recall as that level, its highest severity level, because of salmonella risk. How did officials classify the development?",
+        "answers": [
+          "Class I",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says."
+        ],
+        "correctAnswer": "Class I",
         "id": "news-1",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-        "prompt": "This recent news story centers on a concrete development: The FDA has classified July’s nationwide egg recall as Class I, its highest severity level, because of salmonella risk. The recalled eggs have been linked to an outbreak that sickened nearly 100 people. Which story fits that development?",
-        "answers": [
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-          "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
-        ],
-        "correctAnswer": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
+        "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
       },
       {
+        "prompt": "Several impacts to Hawaii’s Big Island, prompting residents to stay off roads, protect their homes and hunker down. What immediate impact did the event have?",
+        "answers": [
+          "threats of flooding, mudslides, heavy rain and strong winds",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says."
+        ],
+        "correctAnswer": "threats of flooding, mudslides, heavy rain and strong winds",
         "id": "news-2",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-        "prompt": "This recent news story centers on a concrete development: threats of flooding, mudslides, heavy rain and strong winds to Hawaii’s Big Island, prompting residents to stay off roads, protect their homes and hunker down. Which story fits that development?",
-        "answers": [
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-          "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
-        ],
-        "correctAnswer": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
+        "itemTitle": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
       },
       {
+        "prompt": "About that distance from her home in Arizona do not appear connected to her disappearance at this time, according to the Pima County Sheriff’s. How far from home were the remains found?",
+        "answers": [
+          "15 miles",
+          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
+        ],
+        "correctAnswer": "15 miles",
         "id": "news-3",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-        "prompt": "This recent news story centers on a concrete development: about 15 miles from her home in Arizona do not appear connected to her disappearance at this time, according to the Pima County Sheriff’s Department. Which story fits that development?",
-        "answers": [
-          "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says.",
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
-          "Frozen 3 Trailer Reveals Anna’s Royal Wedding and A New Icy Magic."
-        ],
-        "correctAnswer": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says."
+        "itemTitle": "Human remains discovered miles from Nancy Guthrie’s home not connected to case so far, sheriff’s department says."
       }
     ]
   }

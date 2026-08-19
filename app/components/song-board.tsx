@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
-import type { CultureSection } from "../culture";
+import { releaseDateFor, type CultureSection } from "../culture";
 import { ExpandedRanking } from "./expanded-ranking";
 import { CloseIcon, ExternalLinkIcon, PlayIcon } from "./icons";
 
@@ -62,7 +62,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
                     <ExternalLinkIcon />
                   </div>
                   <p className="subtitle">{item.subtitle}</p>
-                  <p className="card-description">{item.description}</p>
+                  <p className="song-release">Released {releaseDateFor(item)}</p>
                   {item.metric ? (
                     <div className="metric">
                       <span>{item.metric.label}</span>

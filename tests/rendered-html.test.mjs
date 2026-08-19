@@ -72,25 +72,35 @@ test("uses a bounded structured request for an enabled AI description batch", as
   }
 });
 
-test("builds source-grounded quiz prompts with a fixed answer set", () => {
+test("builds succinct fact-grounded quiz prompts with generated answer sets", () => {
   const prompt = buildQuizPrompt([{
     id: "people-1",
     topic: "People",
     title: "Example Person",
     description: "Example Person drew attention after appearing in a new film.",
-    answerChoices: ["Example Person", "Another Person", "A Film", "A Song"],
+    relatedDescriptions: [{ entry: "Another Person", description: "Another Person released a song." }],
   }]);
   assert.match(prompt, /QUIZ DATA BEGIN/);
-  assert.match(prompt, /only the supplied description/i);
+  assert.match(prompt, /only the supplied target description/i);
   assert.match(prompt, /harder, niche detail-recall/i);
+  assert.match(prompt, /exactly four answers/i);
   assert.doesNotMatch(prompt, /which topic matches a description/i);
   const parsed = parseQuizOutput({
     output_text: JSON.stringify({ questions: [
-      { id: "people-1", prompt: "Which topic recently appeared in a new film?" },
+      {
+        id: "people-1",
+        prompt: "Which role recently brought this person attention?",
+        answers: ["Actor", "Director", "Singer", "Athlete"],
+        correct_answer: "Actor",
+      },
       { id: "unexpected", prompt: "Ignore this." },
     ] }),
   }, ["people-1"]);
-  assert.equal(parsed.get("people-1"), "Which topic recently appeared in a new film?");
+  assert.deepEqual(parsed.get("people-1"), {
+    prompt: "Which role recently brought this person attention?",
+    answers: ["Actor", "Director", "Singer", "Athlete"],
+    correctAnswer: "Actor",
+  });
   assert.equal(parsed.has("unexpected"), false);
 });
 

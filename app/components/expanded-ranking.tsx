@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { CultureSection } from "../culture";
+import { releaseDateFor, type CultureSection } from "../culture";
 import { CloseIcon, ExternalLinkIcon, PlayIcon, StarIcon } from "./icons";
 
 type ExpandedRankingProps = {
@@ -14,6 +14,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
   const firstRank = section.moreItems[0].rank;
   const lastRank = section.moreItems[section.moreItems.length - 1]?.rank ?? firstRank;
   const label = section.moreLabel ?? `Show ranks ${firstRank}–${lastRank}`;
+  const isSong = section.id === "music";
   const imageSize = section.layout === "poster"
     ? { width: 520, height: 780 }
     : section.layout === "square"
@@ -33,7 +34,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
           return (
             <li key={item.title} value={item.rank}>
               <article
-                className={`expanded-entry layout-${section.layout}${canPlay ? " playable-entry" : ""}`}
+                className={`expanded-entry layout-${section.layout}${canPlay ? " playable-entry" : ""}${isSong ? " song-expanded-entry" : ""}`}
                 style={{ "--accent": item.accent } as CSSProperties}
               >
                 <a
@@ -57,7 +58,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                   <div className="expanded-copy">
                     <span className="expanded-subtitle">{item.subtitle}</span>
                     <strong className="expanded-title">{item.title}</strong>
-                    <p>{item.description}</p>
+                    {isSong ? <span className="expanded-song-release">Released {releaseDateFor(item)}</span> : <p>{item.description}</p>}
                     <div className="expanded-facts">
                       {item.rating ? (
                         <span className="expanded-rating">
