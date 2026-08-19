@@ -32,6 +32,7 @@ test("builds and validates source-grounded AI descriptions", () => {
   assert.match(prompt, /SOURCE DATA BEGIN/);
   assert.match(prompt, /untrusted reference data/i);
   assert.match(prompt, /recent event or coverage/i);
+  assert.match(prompt, /Never mention a publisher|quote a headline/i);
   const parsed = parseDescriptionOutput({
     output_text: JSON.stringify({ descriptions: [
       { id: "people-1", description: "Example Person is an actor whose new film role has brought them renewed attention this summer." },
@@ -40,6 +41,18 @@ test("builds and validates source-grounded AI descriptions", () => {
   }, ["people-1"]);
   assert.equal(parsed.get("people-1"), "Example Person is an actor whose new film role has brought them renewed attention this summer.");
   assert.equal(parsed.has("unexpected"), false);
+  const incomplete = parseDescriptionOutput({
+    output_text: JSON.stringify({ descriptions: [
+      { id: "people-1", description: "Example Person drew attention after a new role and" },
+    ] }),
+  }, ["people-1"]);
+  assert.equal(incomplete.has("people-1"), false);
+  const attributed = parseDescriptionOutput({
+    output_text: JSON.stringify({ descriptions: [
+      { id: "people-1", description: "Example Person drew attention after a new role, according to The Daily News." },
+    ] }),
+  }, ["people-1"]);
+  assert.equal(attributed.has("people-1"), false);
 });
 
 test("uses a bounded structured request for an enabled AI description batch", async () => {
@@ -330,6 +343,11 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <p>The move affects stores nationwide and has prompted new guidance for consumers.</p></article>
   `);
   assert.match(intro, /recall after officials found a contamination risk/);
+  const boundedIntro = extractArticleIntro(`
+    <article><p>Officials announced a new event after months of preparation. The update drew fresh attention from readers.</p>
+    <p>This paragraph is deliberately long and should not be clipped in the middle of a sentence when the ingestion limit is reached. It remains complete.</p></article>
+  `);
+  assert.doesNotMatch(boundedIntro, /(?:…|\.\.\.)\s*$|\b(?:and|or|of|to|with)\.?$/i);
   assert.doesNotMatch(extractArticleIntro(`
     <article><p>See more of our coverage and sign up for our newsletter to receive updates.</p>
     <p>Officials opened an investigation after the incident was reported at several locations.</p></article>
@@ -411,6 +429,9 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok(allPeople.every((item) => /^Wikipedia views · [A-Z][a-z]+$/.test(item.metric.label)));
   assert.ok(allPeople.every((item) => !item.subtitle.includes("·")));
   assert.ok(allPeople.every((item) => !/Wikipedia (?:article )?(?:drew|views?)/i.test(item.description)));
+  const noisyCopyPattern = /\b(?:according to|reported by|reports? say|as reported|takes? a closer look|everything (?:we|you) know|what you need to know|not what you think|publisher|source says)\b|(?:…|\.\.\.)\s*$/i;
+  assert.ok(allPeople.every((item) => !noisyCopyPattern.test(item.description)));
+  assert.ok(allPeople.every((item) => !/(?:^|\s)[a-z]{1,2}\.$/.test(item.description)));
   const categoryCounts = new Map();
   for (const item of allPeople) categoryCounts.set(item.category, (categoryCounts.get(item.category) ?? 0) + 1);
   assert.ok([...categoryCounts.values()].every((count) => count <= 2));
@@ -468,6 +489,7 @@ test("keeps content and outbound links constrained", async () => {
   }));
   assert.ok(allProducts.every((item) => item.evidence.every((entry) => new URL(entry.url).hostname !== "news.google.com")));
   assert.ok(allProducts.every((item) => !/Google Shopping|ranking it #|rose \+\d|TikTok/i.test(item.description)));
+  assert.ok(allProducts.every((item) => !noisyCopyPattern.test(item.description)));
   const news = brief.sections.find((section) => section.id === "news");
   const volume = (value) => {
     const match = value.match(/([\d.]+)\s*([KMB])?\+/i);
@@ -480,6 +502,7 @@ test("keeps content and outbound links constrained", async () => {
   assert.ok([...news.items, ...news.moreItems].every((item) => !/past 7 days/i.test(item.subtitle)));
   assert.ok([...news.items, ...news.moreItems].every((item) => !/U\.S\. Google searches|search volume|placing it #/i.test(item.description)));
   assert.ok([...news.items, ...news.moreItems].every((item) => item.description.length >= 24 && item.description.length <= 360));
+  assert.ok([...news.items, ...news.moreItems].every((item) => !noisyCopyPattern.test(item.description)));
   assert.ok([...news.items, ...news.moreItems].every((item) => item.imageSourceKind !== "article"
     || (item.imageSourcePageUrl === item.url && !["news.google.com", "en.wikipedia.org", "commons.wikimedia.org"].includes(new URL(item.imageSource).hostname))));
   const updater = await readFile(new URL("../scripts/update-trends.mjs", import.meta.url), "utf8");

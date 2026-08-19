@@ -15,7 +15,6 @@ const quizOnly = process.argv.includes("--quiz-only");
 const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
-const aiDescriptionContexts = new WeakMap();
 const wikidataPersonCache = new Map();
 const quizSectionIds = ["memes", "people", "movies", "books", "news"];
 const quizQuestionCount = quizSectionIds.length * 3;
@@ -132,16 +131,10 @@ async function safely(name, work) {
 }
 
 function rememberAiDescriptionContext(item, sectionId, snippets) {
-  aiDescriptionContexts.set(item, {
-    sectionId,
-    snippets: snippets
-      .map((snippet) => ({
-        source: String(snippet.source ?? "").trim(),
-        text: plainText(snippet.text ?? "").replace(/\s+/g, " ").trim(),
-      }))
-      .filter((snippet) => snippet.source && snippet.text)
-      .slice(0, 6),
-  });
+  // Keep the call sites explicit about which validated context produced a card.
+  // The AI pass receives the already-curated card description, not raw headlines.
+  void sectionId;
+  void snippets;
   return item;
 }
 
@@ -981,9 +974,10 @@ async function updateBooks(brief, result) {
     mapConcurrent(books, 1, openLibraryBookContext),
   ]);
   const goodreads = await goodreadsBookContexts(books);
-  const articles = await mapConcurrent(contexts, 2, (context) => context
-    ? linkedNewsArticle({ ...context, alternates: [] }).catch(() => null)
-    : null);
+  // Goodreads, Open Library, and Wikipedia already provide the authoritative
+  // plot premise; avoid spending the daily refresh budget resolving unrelated
+  // news search results for every book.
+  const articles = books.map(() => null);
   const currentByUrl = new Map([...section.items, ...(section.moreItems ?? [])].map((item) => [item.url, item]));
   const currentByTitle = new Map([...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]));
   const allItems = books.map((book, index) => {
@@ -1191,7 +1185,9 @@ function conciseSentences(value, maxLength = 320) {
 
 const copiedMetricPattern = /\b(?:billboard hot 100|google shopping|google searches?|search volume|spotify(?:'|’)?s today(?:'|’)?s top hits|wikipedia (?:article )?(?:drew|views?))\b|\branking it #\d+|\bplacing it #\d+/i;
 const editorialHeadlinePattern = /^(?:forget|inside|meet|why)\b|\b(?:admit it|babygirl|best|cover by|favorite|homerist|hot take|joke on|must-see|opinion|pros? say|pr strategy|reacts?|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\beverything (?:else )?(?:you )?need to know\b|\bonly .{0,50} could\b|\b(?:leaving|left) millions on the table\b|\bgets? .{0,30} treatment\b/i;
-const eventHeadlinePattern = /\b(?:announc|appoint|arrest|appear|award|ban|block|break|buy|cancel|cast|cement|charg|clos|confirm|crash|damag|debut|direct|discount|dismis|file|first look|film|gross|join|launch|leav|let|match|movie|open|order|perform|pledge|premier|qualif|recall|reject|releas|renew|resign|return|reveal|rise|rally|role|say|sell|sign|sicken|surge|suspend|teas|tournament|tour|unveil|win|won|world cup)\w*\b/i;
+const eventHeadlinePattern = /\b(?:announc|appoint|arrest|appear|award|ban|block|break|buy|cancel|cast|cement|celebrat|charg|clos|confirm|coverage|crash|damag|debut|direct|discount|dismis|feature|file|first look|film|gross|join|launch|leav|lead|let|match|movie|open|order|perform|pledge|premier|qualif|recall|reject|releas|renew|respond|resign|return|reveal|rise|rally|role|say|sell|sign|sicken|spotlight|star|surge|suspend|teas|tournament|tour|unveil|win|won|world cup)\w*\b/i;
+const personEditorialPattern = /\b(?:actually|everything (?:we|you) know|family|lookalike|meet|net worth|parents?|siblings?|takes? a closer look|what to know|who is|why you should know|the reason (?:isn['’]?t|is not)|not what you think|explainer|explained|might (?:finally )?(?:have )?come to a close|at home|could|may)\b/i;
+const clippedSentencePattern = /(?:^|\s)[a-z]{1,2}\.$/;
 
 function factualHeadline(value, { rejectChartPlacement = false, requireEvent = false, maxLength = 240 } = {}) {
   const clean = plainText(value ?? "")
@@ -1203,6 +1199,7 @@ function factualHeadline(value, { rejectChartPlacement = false, requireEvent = f
     && !/(?:…|\.\.\.)\s*$/.test(sentence)
     && !sentence.includes("?")
     && !/\b(?:No|vs)\.$/i.test(sentence)
+    && !clippedSentencePattern.test(sentence)
     && !/^\d+\s+(?:and|as|but|in|on|to|with)\b/i.test(sentence)
     && !copiedMetricPattern.test(sentence)
     && !editorialHeadlinePattern.test(sentence)
@@ -1214,25 +1211,31 @@ function factualHeadline(value, { rejectChartPlacement = false, requireEvent = f
   return conciseSentences(factual.join(" "), maxLength);
 }
 
+function stripSourceAttribution(value) {
+  return plainText(value)
+    .replace(/\s+(?:according to|reported by|reports? from|authorities told|officials told|the company said|officials said|experts said)\b[\s\S]*$/i, "")
+    .replace(/\s+(?:credit|photo credit|image credit)\s*[:.][\s\S]*$/i, "")
+    .trim();
+}
+
 function personIdentity(title, description, categoryLabel) {
   const source = plainText(description ?? "");
-  const role = (() => {
-    if (categoryLabel === "Film") {
-      if (/\b(?:actor|actress)\b/i.test(source)) return source.match(/\b(?:actor|actress)\b/i)[0].toLowerCase();
-      if (/\b(?:director|filmmaker|screenwriter|film producer|cinematographer)\b/i.test(source)) return "film director";
-    }
-    if (categoryLabel === "Music" && /\b(?:singer|musician|rapper|songwriter|composer|record producer|disc jockey|dj)\b/i.test(source)) {
-      return source.match(/\b(?:singer|musician|rapper|songwriter|composer|record producer|disc jockey|dj)\b/i)[0].toLowerCase();
-    }
-    if (categoryLabel === "Sports" && /\b(?:footballer|football player|association football player|soccer player|basketball player|baseball player|tennis player|golfer|athlete|boxer|wrestler|fighter|sportsperson)\b/i.test(source)) {
-      return source.match(/\b(?:footballer|football player|association football player|soccer player|basketball player|baseball player|tennis player|golfer|athlete|boxer|wrestler|fighter|sportsperson)\b/i)[0]
-        .replace(/association football player|football player|soccer player/i, "footballer").toLowerCase();
-    }
-    if (categoryLabel === "Social media" && /\b(?:influencer|youtuber|streamer|content creator|internet personality)\b/i.test(source)) {
-      return source.match(/\b(?:influencer|youtuber|streamer|content creator|internet personality)\b/i)[0].toLowerCase();
-    }
-    return categoryLabel === "Film" ? "film director" : categoryLabel.toLowerCase();
-  })();
+  const rolePatterns = [
+    ["actor|actress", (match) => match.toLowerCase()],
+    ["director|filmmaker|screenwriter|film producer|cinematographer", () => "film director"],
+    ["footballer|football player|association football player|soccer player|basketball player|baseball player|tennis player|golfer|athlete|boxer|wrestler|fighter|sportsperson", (match) => match
+      .replace(/association football player|football player|soccer player/gi, "footballer").toLowerCase()],
+    ["singer|musician|rapper|songwriter|composer|record producer|disc jockey|dj", (match) => match.toLowerCase()],
+    ["influencer|youtuber|streamer|content creator|social media personality|internet personality", (match) => match.toLowerCase()],
+    ["businessperson|businessman|businesswoman|business magnate|entrepreneur|executive|chief executive|founder|industrialist|investor|billionaire", () => "business leader"],
+    ["journalist|presenter|broadcaster|comedian|television personality|media personality", (match) => match.toLowerCase()],
+    ["writer|author|novelist|poet|playwright", (match) => match.toLowerCase()],
+    ["engineer|scientist|researcher|inventor|physician|academic", (match) => match.toLowerCase()],
+  ];
+  const role = rolePatterns.map(([pattern, format]) => {
+    const match = source.match(new RegExp(`\\b(?:${pattern})\\b`, "i"));
+    return match ? format(match[0]) : null;
+  }).find(Boolean) ?? (categoryLabel === "Film" ? "film director" : categoryLabel === "Media" ? "media personality" : categoryLabel === "Business" ? "business leader" : categoryLabel === "Science & technology" ? "scientist" : categoryLabel.toLowerCase());
   const article = /^[aeiou]/i.test(role) ? "an" : "a";
   return ensureSentence(`${title} is primarily known as ${article} ${role}`);
 }
@@ -1245,23 +1248,23 @@ function recentDescription(identity, headline, options = {}) {
 
 function personRecentDescription(title, identity, article, context) {
   const candidates = [
-    article?.intro,
+    ...sentences(article?.intro),
     context?.headline,
     ...(context?.alternates ?? []).map((candidate) => candidate.headline),
   ];
   const titleTokens = new Set(normalize(title).split(" ").filter((token) => token.length >= 3));
   const recent = candidates.map((value) => {
     const raw = plainText(value);
-    const event = eventHeadlinePattern.test(raw);
-    const fallback = conciseSentences(value, 320);
-    const text = factualHeadline(value, { requireEvent: event, maxLength: 320 })
-      || (/(?:…|\.\.\.)\s*$/.test(fallback) ? "" : fallback);
+    const neutral = neutralPersonHeadline(title, value);
+    const text = neutral || cleanPersonEventContext(title, value);
+    const event = Boolean(neutral) || eventHeadlinePattern.test(raw);
     const normalized = normalize(text);
     const overlap = [...titleTokens].filter((token) => normalized.split(" ").includes(token)).length;
     const topical = /\b(?:film|movie|role|cast|box office|premier|trailer|release|album|single|tour|concert|award|world cup|tournament|match|championship|final)\b/i.test(raw);
-    const editorial = editorialHeadlinePattern.test(raw);
-    return { text, overlap, event, topical, editorial };
-  }).filter((candidate) => candidate.text && !copiedMetricPattern.test(candidate.text))
+    const editorial = !neutral && (editorialHeadlinePattern.test(raw) || personEditorialPattern.test(raw));
+    return { text, overlap, event, topical: topical || Boolean(neutral), editorial };
+  }).filter((candidate) => candidate.text && !copiedMetricPattern.test(candidate.text)
+    && !clippedSentencePattern.test(candidate.text))
     .filter((candidate) => !(normalize(candidate.text).startsWith(`${normalize(title)} is `)
       && candidate.text.length < 180))
     .sort((left, right) => Number(left.editorial) - Number(right.editorial)
@@ -1269,9 +1272,36 @@ function personRecentDescription(title, identity, article, context) {
       || Number(right.event) - Number(left.event)
       || right.overlap - left.overlap
       || right.text.length - left.text.length)
-    .find((candidate) => candidate.overlap > 0);
+    .find((candidate) => candidate.overlap > 0 && candidate.event && !candidate.editorial);
   if (!recent) return identity;
   return `${identity} ${recent.text}`;
+}
+
+function neutralPersonHeadline(title, value) {
+  const raw = plainText(value);
+  if (!raw) return "";
+  const work = raw.match(/['’]s\s+(.+?)\s+(?=(?:might|may|could|has|have|is|was|were|returns?|premier\w*|opens?|closes?)\b)/i)?.[1]
+    ?.replace(/\s+/g, " ").trim();
+  const looksLikeWorkTitle = Boolean(work)
+    && /^[A-Z0-9][A-Za-z0-9:'’&-]*(?:\s+[A-Z0-9][A-Za-z0-9:'’&-]*){1,8}$/.test(work);
+  const hasWorkCue = /\b(?:film|movie|series|album|tour|concert|world cup|tournament|match|championship)\b/i.test(raw);
+  if (!hasWorkCue && !looksLikeWorkTitle) return "";
+  if (!work) return "";
+  return `${title} is drawing attention for a recent role connected to ${work}.`;
+}
+
+function cleanPersonEventContext(title, value) {
+  let text = factualHeadline(stripSourceAttribution(value), { requireEvent: true, maxLength: 260 });
+  if (!text) return "";
+  text = text
+    .replace(/\s+(?:according to|reported by|reports? from|the company said|officials said|experts said)\b[\s\S]*$/i, "")
+    .replace(/\s+(?:takes? a closer look|everything (?:we|you) know|what you need to know)\b[\s\S]*$/i, "")
+    .trim();
+  if (/^(?:when|while|although|because)\s+/i.test(text)) {
+    const withoutLead = text.replace(/^(?:when|while|although|because)\s+/i, "");
+    if (normalize(withoutLead).startsWith(normalize(title))) text = withoutLead;
+  }
+  return /[.!?]["'’”)]?$/.test(text) ? text : "";
 }
 
 function publicationDateLabel(value) {
@@ -1384,6 +1414,16 @@ function usableArticleUrl(rawUrl) {
     const url = new URL(rawUrl);
     if (url.protocol !== "https:" || url.pathname === "/" || url.pathname.length < 8) return false;
     return !/(?:^|\.)bing\.com$|(?:^|\.)google\.com$|(?:^|\.)wikipedia\.org$|(?:^|\.)youtube\.com$|(?:^|\.)instagram\.com$|(?:^|\.)facebook\.com$|(?:^|\.)linkedin\.com$|(?:^|\.)twitter\.com$|(?:^|\.)x\.com$|(?:^|\.)tiktok\.com$/i.test(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
+function retainableNewsUrl(rawUrl) {
+  if (!usableArticleUrl(rawUrl)) return false;
+  try {
+    const path = new URL(rawUrl).pathname;
+    return !/(?:^|\/)(?:jobs?|careers?|human[-_ ]?resources?|hurricane[-_ ]?tracker|search|category|tag|author|about|contact|privacy|terms)(?:\/|$)/i.test(path);
   } catch {
     return false;
   }
@@ -1672,7 +1712,7 @@ async function updatePeople(brief, topviews) {
     googleNewsContext(`"${person.title}"`, 45, { requireEvent: true })
       .catch(() => null)
       .then((context) => context ?? googleNewsContext(`"${person.title}"`, 45, { requireEvent: false }).catch(() => null)));
-  const articles = await mapConcurrent(contexts, 2, (context) => linkedNewsArticle(context));
+  const articles = await mapConcurrent(contexts, 2, (context, index) => linkedNewsArticle(context, selected[index]?.title));
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
@@ -1684,11 +1724,12 @@ async function updatePeople(brief, topviews) {
     const context = contexts[index];
     const article = articles[index];
     const identity = personIdentity(title, person.entity?.descriptions?.en?.value, person.label);
+    const description = personRecentDescription(title, identity, article, context);
     const item = {
       rank: index + 1,
       title,
       subtitle: person.label,
-      description: personRecentDescription(title, identity, article, context),
+      description,
       image: current?.image ?? `/culture/person-${slugify(title)}.webp`,
       imageSource: page?.thumbnail?.source,
       alt: current?.alt ?? `Portrait of ${title}`,
@@ -1706,10 +1747,8 @@ async function updatePeople(brief, topviews) {
       category: person.category,
     };
     rememberAiDescriptionContext(item, "people", [
+      { source: "Curated recent context", text: description },
       { source: "Wikipedia biography", text: page?.extract },
-      { source: article?.context?.source ?? context?.source ?? "Recent coverage", text: article?.intro },
-      { source: article?.context?.source ?? context?.source ?? "Recent headline", text: article?.context?.headline },
-      ...(context?.alternates ?? []).map((candidate) => ({ source: candidate.source ?? "Related coverage", text: candidate.headline })),
     ]);
     return item;
   });
@@ -2156,7 +2195,7 @@ const genericProductWords = new Set([
   "again", "after", "air", "america", "away", "award", "back", "bag", "backpack", "before", "beverage", "beverages", "bicycle", "bottle", "bottles", "brand", "brands", "box", "brush", "buys", "cake", "camera", "candle", "candles", "case", "charger", "china", "concern", "concerns", "console", "cup", "down", "dot", "drink", "drinks", "dumpling", "dumplings", "eagle", "earthbound", "earbuds", "exclusive", "fidget", "food", "first", "fold", "foldable", "found", "fragrance", "frappuccino", "full", "get", "give", "good", "great", "headphones", "health", "here", "hit", "hot", "housekeeping", "how", "in", "india", "innovations", "into", "jacket", "jack", "june", "keyboard", "kids", "laptop", "last", "lifestyle", "lip", "look", "make", "make-up", "makes", "many", "market", "mascara", "mattress", "media", "meet", "memorial", "merch", "merchandise", "mister", "minutes", "monitor", "mouse", "mug", "my", "now", "olive", "online", "only", "on", "or", "out", "packaging", "people", "phone", "phones", "picks", "places", "platform", "plush", "price", "products", "psst", "raises", "retailer", "retail", "right", "rms", "router", "report", "serum", "share", "shoppers", "size", "skin", "skincare", "smartphone", "snack", "snacks", "sneaker", "specific", "stock", "still", "switch", "tablet", "target", "things", "throw", "tote", "totes", "toys", "tracker", "tried", "under", "up", "use", "using", "vacuum", "video", "watch", "water", "week", "which", "why", "world", "worth", "wants", "young",
 ]);
 const productIdentityPattern = /\b(?:air\s*fryer|backpack|bag|beverage|bicycle|bottle|brush|camera|candle|card|case|chair|charger|coffee|collectible|console|cube|doll|drink|dumpling|earbuds?|fold(?:able)?|frappuccino|fragrance|gadget|gloss|headphones?|jacket|keyboard|laptop|lip|mascara|mattress|monitor|mouse|mug|phone|plush|router|serum|skincare|smartphone|snack|sneaker|squish(?:y)?|switch|tablet|tote|tracker|toy|tumbler|vacuum|watch|wearable)\b/i;
-const genericProductPhrasePattern = /^(?:ahead|beauty product|cocktails?|emerging contemporary bag|fans?|i['’]?m|korean skincare|line|portable fan|plush|report|results?|shelves?|summer dress|squishy(?: toy)?(?: trend| craze)?|squishy dumpling(?:s|[’']? toys?)?|toy trend|toy craze|tri state parents|viral gadget|viral product|product trend|right now|tote bag nationwide|tote bag|body oil|hair mascara)$/i;
+const genericProductPhrasePattern = /^(?:ahead|beauty product|cocktails?|emerging contemporary bag|fan[- ]favou?rite drink|fans?|i['’]?m|its most drink|korean skincare|line|portable fan|plush|report|results?|shelves?|summer dress|squishy(?: toy)?(?: trend| craze)?|squishy dumpling(?:s|[’']? toys?)?|toy trend|toy craze|tri state parents|viral gadget|viral product|product trend|right now|tote bag nationwide|tote bag|body oil|hair mascara)$/i;
 const genericProductTailPattern = /\b(?:beverage|drink|lip|product|products?|serum|skincare|smartphone|phone|toy|toys?)\b$/i;
 const productEditorialPattern = /\b(?:best|defining|edit(?:or['’]?s)?|guide|roundup|results?|routine|top|trends?|what to buy|where to buy)\b/i;
 const productArticleBoilerplatePattern = /\b(?:affiliate commission|independently reviewed|when you purchase|purchase(?:d)? (?:an|a) .* through a link|links? on this page|shopping editors? (?:picked|selected)|we may earn|earn a commission|sponsored|advertisement|shop (?:our|the) (?:edit|selection)|click (?:here|the link|on links? we provide)|selected independently|editorial independence|shop today|we cover and recommend|learn more)\b/i;
@@ -2179,6 +2218,8 @@ function isGenericProductCandidate(value) {
     || /\b(?:away|brings?|cause|collaboration|could|cult|down|everyone|exclusive|forecast|good housekeeping|gta|india|japanese|largest|market|minutes?|my|over|own|packaging|secrets?|size|signature drink|specific fidget|throw|very specific|week|wants?|world['’]?s largest)\b/i.test(value)
     || (genericProductTailPattern.test(value) && /\b(?:custom|korean|popular|specific|viral)\b/i.test(value))
     || /\b(?:merch(?:andise)?|outfit|shelves?)\b/i.test(value)
+    || /^(?:fan[- ]favou?rite|its?|their|this|that|grocery|newest|latest|most|viral|popular|iconic)\b/i.test(value)
+    || /\b(?:company['’]?s|grocery company|newest tote|most drink)\b/i.test(value)
     || (productEditorialPattern.test(value) && /\b(?:20\d{2}|products?|skincare|beauty|gifts?|deals?|trends?)\b/i.test(value))
     || /^(?:\w+\s+){0,3}(?:20\d{2})\s+(?:skincare|beauty|products?|trends?)$/i.test(value)
     || (tokens.length <= 2 && /\b(?:award|coffee|fidget)\b/i.test(value))
@@ -3060,7 +3101,7 @@ function productRecentDescription(product, identity) {
         .filter((token) => token.length > 2 && !genericProductWords.has(token) && !amazonCategoryTerms.has(token));
       const introHasIdentity = !distinctive.length || distinctive.every((token) => productTokenSet(intro).has(token));
       const sourceText = intro && introHasIdentity ? intro : headline;
-      const text = conciseSentences(sourceText, 280);
+      const text = neutralProductContext(sourceText);
       return {
         text,
         identityMatches: distinctive.filter((token) => productTokenSet(`${headline} ${intro}`).has(token)).length,
@@ -3092,6 +3133,14 @@ function productRecentDescription(product, identity) {
   if (!recent && !fallbackPhrase) return identity;
   if (!recent) return conciseSentences(`${identity} Recent coverage places it among ${lowerFirst(fallbackPhrase)}`, 560);
   return conciseSentences(`${identity} ${recent}`, 560);
+}
+
+function neutralProductContext(value) {
+  const text = factualHeadline(stripSourceAttribution(value), { maxLength: 320 })
+    .replace(/\s+(?:however|although|but)\b[\s\S]*$/i, "")
+    .replace(/\s+(?:according to|the company said|officials said|experts said)\b[\s\S]*$/i, "")
+    .trim();
+  return conciseSentences(text, 280);
 }
 
 function usableProductEvidenceUrl(entry) {
@@ -3190,11 +3239,12 @@ function repairProductSnapshot(brief) {
   const allItems = [...(section.items ?? []), ...(section.moreItems ?? [])];
   const kept = [];
   for (const item of allItems) {
+    if (isGenericProductCandidate(item.title)) continue;
     const distinctive = productTokens(item.title)
       .filter((token) => token.length > 2 && !genericProductWords.has(token) && !amazonCategoryTerms.has(token));
-    const descriptionContext = sentences(item.description).slice(1).join(" ");
+    const descriptionContext = sentences(item.description).join(" ");
     const descriptionTokens = productTokenSet(descriptionContext);
-    const required = distinctive.length >= 3 ? 2 : 1;
+    const required = distinctive.length >= 4 ? 2 : 1;
     if (!descriptionContext || (distinctive.length && distinctive.filter((token) => descriptionTokens.has(token)).length < required)) continue;
     const evidenceUrls = new Set((item.evidence ?? []).map((entry) => entry.url).filter(Boolean));
     const duplicate = kept.find((previous) => {
@@ -3205,7 +3255,9 @@ function repairProductSnapshot(brief) {
     });
     if (!duplicate) kept.push(item);
   }
-  if (kept.length < 5) return;
+  if (kept.length < 5) {
+    throw new Error(`Product snapshot retained only ${kept.length} entries after generic/noisy candidates were removed`);
+  }
   kept.forEach((item, index) => { item.rank = index + 1; });
   section.items = kept.slice(0, 5);
   section.moreItems = kept.slice(5, 20);
@@ -3283,7 +3335,7 @@ async function googleTrendingNews() {
     ].filter(Boolean);
     const [topicSummary, article] = await Promise.all([
       wikipediaTopicContext(topicQueries).catch(() => null),
-      linkedNewsArticle(context),
+      linkedNewsArticle(context, row.title),
     ]);
     const commonsFallback = article?.imageSource || topicSummary?.imageSource
       ? null
@@ -3324,39 +3376,52 @@ async function googleTrendingNews() {
       topicPageUrl: topicSummary?.pageUrl,
     };
   });
-  const linkedTopics = topics.filter((topic) => usableArticleUrl(topic.link));
+  const linkedTopics = topics.filter((topic) => retainableNewsUrl(topic.link));
   if (linkedTopics.length < 4) throw new Error(`Only ${linkedTopics.length} news topics resolved to direct publisher articles`);
   if (linkedTopics.length < topics.length) console.warn(`News retained ${topics.length - linkedTopics.length} prior entries because their current article links could not be resolved.`);
   return linkedTopics;
 }
 
-async function linkedNewsArticle(context) {
+function articleMatchesEntity(candidate, metadata, entityName = "") {
+  const targetTokens = topicTokens(entityName || candidate.headline);
+  const articleTokens = topicTokens(`${candidate.headline ?? ""} ${metadata?.intro ?? ""}`);
+  const required = Math.min(2, Math.max(1, targetTokens.size));
+  return overlapCount(targetTokens, articleTokens) >= required
+    || (entityName && normalize(`${candidate.headline ?? ""} ${metadata?.intro ?? ""}`).includes(normalize(entityName)));
+}
+
+async function linkedNewsArticle(context, entityName = "") {
   if (!context) return null;
-  let primary = null;
   const unusableIntroPattern = /\b(?:we delve into|what it means for you|let['’]s explore|fascinating topic|in today['’]s fast-paced|discover how a .* lawsuit)\b/i;
   const usableImage = (value) => Boolean(value) && !/(?:gravatar|avatar|favicon|sprite|placeholder|default[-_ ]?image|\blogo\b)/i.test(value);
-  for (const candidate of [context, ...(context.alternates ?? [])]) {
+  const candidates = [];
+  // Resolve the primary, relevance-checked topic only. Searching every alternate
+  // headline was both expensive and capable of attaching a different story to
+  // the selected person or event.
+  for (const candidate of [context]) {
     const resolvedUrl = await resolveGoogleNewsArticle(candidate.link).catch(() => null);
-    const fallbackResults = await bingSearchArticles(candidate.headline, candidate.sourceUrl);
-    const searchResults = [...new Map([
-      ...(resolvedUrl ? [{ url: resolvedUrl }] : []),
-      ...fallbackResults,
-    ].map((result) => [result.url, result])).values()];
-    for (const result of searchResults.slice(0, 8)) {
-      const articleUrl = result.url;
-      const metadata = await linkedArticleMetadata(articleUrl, { allowMissingImage: true }).catch(() => null);
-      if (!metadata) {
-        if (!primary && usableArticleUrl(articleUrl)) primary = { context: candidate, url: articleUrl };
-        continue;
+    const inspect = async (searchResults) => {
+      for (const result of [...new Map(searchResults.map((entry) => [entry.url, entry])).values()].slice(0, 4)) {
+        const articleUrl = result.url;
+        const metadata = await linkedArticleMetadata(articleUrl, { allowMissingImage: true }).catch(() => null);
+        if (!metadata || !articleMatchesEntity(candidate, metadata, entityName)) continue;
+        const intro = metadata.intro && !unusableIntroPattern.test(metadata.intro) ? metadata.intro : "";
+        const article = { context: candidate, ...metadata, intro, imageSource: usableImage(metadata.imageSource) ? metadata.imageSource : undefined };
+        const articleTokens = topicTokens(`${candidate.headline ?? ""} ${intro}`);
+        const entityTokens = topicTokens(entityName || candidate.headline);
+        const overlap = overlapCount(entityTokens, articleTokens);
+        const event = Number(eventHeadlinePattern.test(candidate.headline ?? "") || eventHeadlinePattern.test(intro));
+        const sourceMatch = Number(sameArticleDomain(article.url, candidate.sourceUrl));
+        candidates.push({ article, score: overlap * 24 + event * 10 + sourceMatch * 8 + Number(Boolean(intro)) * 6 + Number(Boolean(article.imageSource)) * 2 });
       }
-      const intro = metadata.intro && !unusableIntroPattern.test(metadata.intro) ? metadata.intro : "";
-      const article = { context: candidate, ...metadata, intro, imageSource: usableImage(metadata.imageSource) ? metadata.imageSource : undefined };
-      if (!primary) primary = article;
-      if (article.imageSource) return article;
-      if (!primary.intro && intro) primary = article;
+    };
+    if (resolvedUrl) await inspect([{ url: resolvedUrl }]);
+    if (!candidates.length) {
+      const fallbackResults = await bingSearchArticles(candidate.headline, candidate.sourceUrl, entityName);
+      await inspect(fallbackResults);
     }
   }
-  return primary;
+  return candidates.sort((left, right) => right.score - left.score)[0]?.article ?? null;
 }
 
 const newsBoilerplatePattern = /\b(?:check out what['’]s clicking|subscribe|sign up for (?:our|the)|get the week['’]s news|newsletter|investigative stories and local news updates|award[- ]winning in-depth reports|featured on-going series|read more|follow us)\b/i;
@@ -3366,8 +3431,13 @@ function newsDescription(topic, title) {
   const event = factualHeadline(topic.headline, { maxLength: 190 });
   const articleSentences = sentences(topic.articleIntro)
     .filter((sentence) => !newsBoilerplatePattern.test(sentence) && !newsCaptionPattern.test(sentence))
-    .map((sentence) => sentence.replace(/^\s*\([^)]{1,30}\)\s*[—-]\s*/u, "").trim());
-  const articleIntro = conciseSentences(articleSentences.join(" "), 320);
+    .map((sentence) => stripSourceAttribution(sentence)
+      .replace(/^\s*\([^)]{1,30}\)\s*[—-]\s*/u, "").trim())
+    .filter(Boolean);
+  const articleIntroText = articleSentences.join(" ");
+  const articleIntro = articleMatchesEntity({ headline: topic.headline }, { intro: articleIntroText }, topic.title)
+    ? conciseSentences(articleIntroText, 320)
+    : "";
   const definition = conciseSentences(topic.topicSummary, 220);
   const repeatsHeadline = (text) => {
     const eventTokens = normalize(event).split(" ").filter((token) => token.length >= 4);
@@ -3399,7 +3469,7 @@ function updateNews(brief, topics) {
   const section = brief.sections.find((entry) => entry.id === "news");
   if (!section) return;
   const currentTopics = [...section.items, ...(section.moreItems ?? [])]
-    .filter((item) => usableArticleUrl(item.url))
+    .filter((item) => retainableNewsUrl(item.url))
     .map((item) => ({
       title: item.title,
       headline: item.title,
@@ -3477,7 +3547,20 @@ function updateNews(brief, topics) {
 }
 
 const aiDescriptionSectionIds = ["people", "movies", "books", "products", "news"];
-const unusableAiDescriptionPattern = /\b(?:as an ai|i cannot|i can’t|insufficient information|source snippets|ranking metric|page views|search volume|billboard hot 100|know your meme|goodreads monthly readers)\b/i;
+const unusableAiDescriptionPattern = /\b(?:as an ai|i cannot|i can’t|insufficient information|source snippets|ranking metric|page views|search volume|billboard hot 100|know your meme|goodreads monthly readers|according to|reported by|reports? say|as reported|authorities told|officials told|in an article (?:by|from)|via [A-Z]|takes? a closer look|everything (?:we|you) know|what you need to know|not what you think|click here|publisher|source says|credit)\b|(?:\b(?:daily|weekly|news|times|post|journal|wire|gazette|herald)\s+(?:[A-Z][A-Za-z-]+\b|says?\b))|(?:…|\.\.\.)\s*$/i;
+
+function usableAiDescription(sectionId, description) {
+  const text = plainText(description);
+  if (!text || unusableAiDescriptionPattern.test(text)) return false;
+  if (sectionId === "people") {
+    return /\b(?:after|following|recent(?:ly)?|currently|now|this|in 20\d{2}|appeared|appears|star(?:s|red)?|joined|direct(?:ed|ing)|premier(?:ed|es?)|released?|opening|won|winning|world cup|tournament|match|award|role|cast|respond(?:ed|ing)|coverage|attention|return(?:ed|ing)?|social media)\b/i.test(text);
+  }
+  if (sectionId === "movies" || sectionId === "books") {
+    return /\b(?:about|after|before|cent(?:er|re)s?|discovers?|encounters?|follows?|forced|journey|must|reunite|returns?|set|stranded|takes?|tries?|undergoes?|when|where|while|wakes?|story|film|movie|novel|book|character|family|mystery|conflict)\b/i.test(text);
+  }
+  if (sectionId === "news") return eventHeadlinePattern.test(text);
+  return true;
+}
 
 function usableProductAiDescription(description, item, siblings) {
   const text = plainText(description);
@@ -3505,14 +3588,14 @@ async function updateAiDescriptions(brief) {
     const section = brief.sections.find((entry) => entry.id === sectionId);
     const items = section ? [...section.items, ...(section.moreItems ?? [])] : [];
     const records = items.map((item) => {
-      const context = aiDescriptionContexts.get(item);
       return {
         id: `${sectionId}-${item.rank}`,
         title: item.title,
         role: item.subtitle,
-        sourceSnippets: context?.snippets?.length
-          ? context.snippets
-          : [{ source: "Existing validated context", text: item.description }],
+        sourceSnippets: [{
+          source: "Curated validated context",
+          text: item.description,
+        }],
       };
     });
     return { sectionId, items, records };
@@ -3523,7 +3606,7 @@ async function updateAiDescriptions(brief) {
       let applied = 0;
       for (const record of job.records) {
         const description = generated.get(record.id);
-        if (!description || unusableAiDescriptionPattern.test(description)) continue;
+        if (!usableAiDescription(job.sectionId, description)) continue;
         const item = job.items.find((candidate) => `${job.sectionId}-${candidate.rank}` === record.id);
         if (!item) continue;
         if (job.sectionId === "products" && !usableProductAiDescription(description, item, job.items)) continue;
@@ -3549,16 +3632,9 @@ function escapeRegExp(value) {
 }
 
 function redactQuizTitle(value, title) {
-  const genericWords = new Set(["this", "that", "with", "from", "your", "world", "meme", "film", "movie", "book", "song", "the", "and", "of", "in", "on", "for", "a", "an", "to"]);
-  const significantWords = title.split(/[^A-Za-z0-9]+/)
-    .filter((word) => word.length >= 4 && !genericWords.has(word.toLowerCase()));
+  // Redact the complete answer label only. Removing individual title words
+  // used to turn ordinary prose into fragments such as “non-it” and “the it”.
   const phrases = [title.trim()];
-  if (significantWords.length > 1) {
-    for (let index = 0; index < significantWords.length - 1; index += 1) {
-      phrases.push(`${significantWords[index]} ${significantWords[index + 1]}`);
-    }
-    phrases.push(significantWords[0]);
-  }
   const marker = "__QUIZ_TITLE__";
   const redacted = [...new Set(phrases.filter(Boolean))].sort((left, right) => right.length - left.length)
     .reduce((result, phrase) => {
@@ -3571,7 +3647,7 @@ function redactQuizTitle(value, title) {
     }, value)
     .replace(new RegExp(`${marker}(?:\\s+(?:or|and|/)\\s*${marker})+`, "g"), marker)
     .replaceAll(marker, "it")
-    .replace(/^\s*["'“”‘’]*\s*(?:it\s*["'“”‘’]*\s+)?(?:is|refers to|was|has been|brought|found|describes?)\s+/i, "")
+    .replace(/^\s*["'“”‘’]+\s*/g, "")
     .replace(/\bnamed\s+it\s+(?=arrives?\b)/gi, "")
     .replace(/\bvirtual singer\s+it\b/gi, "virtual singer")
     .replace(/\b((?:Dutch\s+)?YouTuber|streamer|singer|artist|creator)\s+it\b/gi, (_match, role) => {
@@ -3612,6 +3688,14 @@ function quizDescriptionClue(description, title, topicId) {
     .replace(/^\s*["'“”‘’]+|["'“”‘’]+\s*$/g, "")
     .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
+  const subject = {
+    memes: "This meme",
+    people: "This person",
+    movies: "This film",
+    books: "This book",
+    news: "This story",
+  }[topicId] ?? "This entry";
+  if (/^it\b/i.test(redacted)) redacted = `${subject} ${redacted.slice(2).trim()}`;
 
   // Redacting a headline can leave a dependent phrase such as “about 15 miles”.
   // Keep the original complete sentence in that case instead of surfacing a
@@ -3621,8 +3705,7 @@ function quizDescriptionClue(description, title, topicId) {
   if (dependentStart.test(redacted)) {
     redacted = context.trim();
   } else if (/^[a-z]/.test(redacted)) {
-    const prefix = topicId === "news" ? "This story covers " : "This is ";
-    redacted = `${prefix}${redacted}`;
+    redacted = `${subject} ${redacted}`;
   }
   return ensureSentence(redacted || context);
 }
@@ -3846,7 +3929,7 @@ function validateBrief(brief) {
   )
     || item.subtitle !== "Product"
     || /\bis a consumer product\./i.test(item.description)
-    || !/\b(?:backorder|buying|collect(?:ing|or)?|craze|demand|expansion|frenzy|global|launch|opening|popular|pre[- ]?order|recommend|release|restock|return|rollout|selling|sold out|trend(?:ing)?|unbox(?:ing)?|viral)\b/i.test(item.description));
+    || !/\b(?:attention|backorder|buying|collect(?:ing|or)?|craze|demand|expansion|frenzy|global|interest|launch|opening|popular|pre[- ]?order|recommend|release|restock|return|rollout|sales?|selling|sold out|trend(?:ing)?|unbox(?:ing)?|viral)\b/i.test(item.description));
   if (invalidProducts.length) {
     throw new Error(`Products must have at least two recent independent viral sources and recent context: ${invalidProducts.map((item) => `${item.title} (${item.description})`).join(" | ")}`);
   }

@@ -67,7 +67,7 @@ Descriptions do not repeat the ranking metric shown on each card and have no
 per-entry overrides. The updater first derives identity or premise context from
 current Wikidata, Wikipedia, IMDb/Cinemeta, Goodreads, Open Library, Spotify, or
 Amazon metadata and the selected publisher excerpts. When `OPENAI_API_KEY` is
-configured, six bounded Responses API batches rewrite the People, Movies,
+configured, five bounded Responses API batches rewrite the People, Movies,
 Books, Products, and News descriptions and create quiz prompts once during
 ingestion: films and books receive plot premises, while people, products, and
 news receive a concise reason for their recent relevance. The quiz stores 15
@@ -96,6 +96,14 @@ absent or the API is unavailable, ingestion remains fully functional with the
 deterministic copy and quiz prompts. `npm run content:quiz` regenerates the
 quiz pool from the descriptions already in the snapshot without fetching any
 external source.
+
+The AI copy pass receives one already-curated, entity-matched context per card;
+it never receives publisher labels, raw headline lists, or unrelated search
+alternates. Complete-sentence, attribution, clickbait, and section-specific
+quality checks reject noisy output and keep the deterministic fallback when a
+response is incomplete or unsupported. Article intros are retained only at
+sentence boundaries, so an upstream page cannot leave a clipped sentence in
+the snapshot.
 
 Every entry has evidence from at least two distinct source hosts (or one
 recent viral source plus independently recorded Amazon velocity), with no more

@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-19T16:33:43.867Z",
+  "generatedAt": "2026-08-19T17:37:27.735Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,002,681"
+            "value": "1,002,710"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,646"
+            "value": "114,649"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "100,188"
+            "value": "100,208"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,654"
+            "value": "76,656"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,618"
+            "value": "55,620"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,973"
+            "value": "46,974"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,420"
+            "value": "27,421"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,578"
+            "value": "18,579"
           },
           "evidence": [
             {
@@ -545,7 +545,7 @@
           "rank": 1,
           "title": "Erling Haaland",
           "subtitle": "Sports",
-          "description": "Erling Haaland is primarily known as a footballer. Erling Haaland is a champion in the sporting sphere – not only is he a coveted striker for Premier League club Manchester City, but he also helped lead Norway through to the 2026 World Cup quarter finals. HELLO takes a closer look at everything we know about Erling's parents and two siblings, Gabrielle and.",
+          "description": "Erling Haaland is primarily known as a footballer. Erling Haaland is expected to return to Manchester City training after starring at the World Cup.",
           "image": "/culture/person-erling-haaland.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Erling Haaland",
@@ -565,8 +565,8 @@
               "url": "https://en.wikipedia.org/wiki/Erling_Haaland"
             },
             {
-              "source": "Slate",
-              "url": "https://www.hellomagazine.com/us/912316/meet-erling-haalands-family-including-lookalike-famous-sister/"
+              "source": "Vogue",
+              "url": "https://people.com/erling-haaland-says-goodbye-to-us-after-emotional-world-cup-run-12016901"
             }
           ],
           "accent": "#ffc857",
@@ -576,7 +576,7 @@
           "rank": 2,
           "title": "Lamine Yamal",
           "subtitle": "Sports",
-          "description": "Lamine Yamal is primarily known as a footballer. Lamine Yamal's 3-year-old brother, Keyne, took to the field to celebrate Spain's FIFA World Cup victory. Keyne has become a social media star for his joyful celebrations during matches, capturing the hearts of Spain's supporters and fans ar.",
+          "description": "Lamine Yamal is primarily known as a footballer. His younger brother Keyne drew fresh attention with joyful celebrations on the field after Spain's World Cup victory.",
           "image": "/culture/person-lamine-yamal.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Lamine Yamal",
@@ -607,7 +607,7 @@
           "rank": 3,
           "title": "Christopher Nolan",
           "subtitle": "Film",
-          "description": "Christopher Nolan is primarily known as a film director. Actually, Christopher Nolan Is Making a Point About Trans People in The Odyssey.",
+          "description": "Christopher Nolan is primarily known as a film director. Attention around his next film has renewed interest in the director's closely controlled production process.",
           "image": "/culture/creator-christopher-nolan.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/ChristopherNolan-byPhilipRomano_%28cropped%29.jpg/960px-ChristopherNolan-byPhilipRomano_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Christopher Nolan",
@@ -627,8 +627,8 @@
               "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
             },
             {
-              "source": "Jacobin",
-              "url": "https://www.imdb.com/name/nm0634240/"
+              "source": "jacobin.com",
+              "url": "https://screenrant.com/all-christopher-nolan-movies-ranked/"
             }
           ],
           "accent": "#57d5a4",
@@ -638,7 +638,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya is primarily known as an actress. Zendaya and Tom Holland's Spider-Man: Brand New Day might finally have come to a close at home in London.",
+          "description": "Zendaya is primarily known as an actress. She is drawing renewed attention for her role connected to Spider-Man: Brand New Day.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -658,8 +658,8 @@
               "url": "https://en.wikipedia.org/wiki/Zendaya"
             },
             {
-              "source": "people.com",
-              "url": "https://www.britannica.com/biography/Zendaya"
+              "source": "people.com via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOZkxFUUZyclZUME1kVk1NX3BRQ2VQR2J2OE5NMGxRdzN0X3ZJVWV6NnlyTjAwR3pYZ0FFU08wVmY2SkJIZlVHM3FZejQxTktLRU43NVdzOUp2Z2FwMUpjNzVXdXBMbzJXeG5kWGdqLWVnd29idUdtRXU5VTJwRUFTcTlFM0VDZ3hZVFdGU0VuUFFXR0VYenBOMkhMc0s1SHVZNFZtVmVZaFpBVEI1OWVkYXpOM2VwME00bVE?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -669,7 +669,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is primarily known as a singer. Shakira makes surprise visit to earthquake-damaged Colombia and commits to building new schools.",
+          "description": "Shakira is primarily known as a singer. A surprise visit to earthquake-damaged Colombia has drawn attention to her commitment to rebuilding schools.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -702,7 +702,7 @@
           "rank": 6,
           "title": "Sonam Wangchuk",
           "subtitle": "Science & technology",
-          "description": "Sonam Wangchuk is primarily known as a science & technology. Sonam Wangchuk: the 59-year-old who rallied India's Gen Z against Modi and won.",
+          "description": "Sonam Wangchuk is primarily known for science and technology. His recent public campaign in India has drawn renewed attention to his work and activism.",
           "image": "/culture/person-sonam-wangchuk.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Sonam_Wangchuk%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Sonam Wangchuk",
@@ -733,7 +733,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Swift is primarily known as a singer. Taylor Swift Breaks Record for Most Adult Pop Airplay No. 1s With ‘I Knew It, I Knew You’.",
+          "description": "Taylor Swift is primarily known as a singer. Her latest release has renewed attention around another record-setting run on adult-pop radio.",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -754,7 +754,7 @@
             },
             {
               "source": "Billboard",
-              "url": "https://entertainmentnow.com/taylor-swift/"
+              "url": "https://people.com/taylor-swift-travis-kelce-all-the-details-fairy-tale-wedding-exclusive-12013138"
             }
           ],
           "accent": "#57d5a4",
@@ -764,7 +764,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeff Bezos is primarily known as a business. Investor Group Including Jeff Bezos Buys Liverpool FC Stake In Multibillion-Dollar Deal.",
+          "description": "Jeff Bezos is primarily known as a business leader. Recent attention around Amazon and his public profile has kept him in the news.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -785,7 +785,7 @@
             },
             {
               "source": "The New York Times",
-              "url": "https://www.forbes.com/profile/jeff-bezos/"
+              "url": "https://www.industrytap.com/jeff-bezos-companies-full-list-of-amazon-blue-origin-investments-explained/80442"
             }
           ],
           "accent": "#5ab0ff",
@@ -795,7 +795,7 @@
           "rank": 9,
           "title": "Andrew Tate",
           "subtitle": "Business",
-          "description": "Andrew Tate is primarily known as a business. Andrew and Tristan Tate—influential figures in the so-called manosphere that intersects with President Donald Trump’s base—were arrested in Miami on Saturday, more than a year after Romanian authorities lifted travel restrictions on them, reportedly at the Trump administration’s urging.",
+          "description": "Andrew Tate is primarily known as a social media personality. Recent arrest-related coverage has renewed attention around his public legal controversies.",
           "image": "/culture/person-andrew-tate.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Andrew Tate",
@@ -815,8 +815,8 @@
               "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
             },
             {
-              "source": "UN News",
-              "url": "https://www.forbes.com/sites/saradorn/2026/07/19/tate-brothers-arrested-in-florida-what-we-know-about-their-trump-ties/"
+              "source": "Forbes",
+              "url": "https://nypost.com/2026/07/19/us-news/andrew-tate-arrest-video-shows-moment-he-tried-to-give-phone-to-bodyguard-as-hes-cuffed-by-us-marshals/"
             }
           ],
           "accent": "#5ab0ff",
@@ -826,7 +826,7 @@
           "rank": 10,
           "title": "Amelia Dimoldenberg",
           "subtitle": "Media",
-          "description": "Amelia Dimoldenberg is primarily known as a media. Amelia Dimoldenberg’s F1 Series ‘Passenger Princess’ Returning for Season 2 This Month.",
+          "description": "Amelia Dimoldenberg is primarily known as a presenter. Her Formula 1 interview series is returning for a new season, bringing her back into current coverage.",
           "image": "/culture/person-amelia-dimoldenberg.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Amelia Dimoldenberg",
@@ -846,8 +846,8 @@
               "url": "https://en.wikipedia.org/wiki/Amelia_Dimoldenberg"
             },
             {
-              "source": "BuzzFeed via Google News",
-              "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQeDRwVHdGWnNkQlNHZ2Z0RkVKZHFVT1BPaE9LWXBHamQ1WG1kX3NYVndNRzFxOUJEckxhd0NTMDQ1X0dCOXlxXzlpdzNJOFk1MTNmMjlubUlUeG9mYXdva1kyVzNpYXJ4Wno1QmJzcGFrRFhKc2pyMWpIY2QtOUVoTWV3UW4zSXN6cVNtNm9uX0IxVFg2bFVZZXo0VQ?oc=5"
+              "source": "Formula 1",
+              "url": "https://people.com/meet-amelia-dimoldenberg-chicken-shop-date-8732025"
             }
           ],
           "accent": "#ff6b57",
@@ -1852,15 +1852,79 @@
           "label": "Google News · viral product coverage, 90 days",
           "url": "https://news.google.com/search?q=viral+products+when%3A90d&hl=en-US&gl=US&ceid=US%3Aen"
         },
-      {
-        "label": "Amazon · best-selling match",
-        "url": "https://www.amazon.com/dp/B0H6NDDD55"
-      }
+        {
+          "label": "Amazon · best-selling match",
+          "url": "https://www.amazon.com/s?k=Unicorn+Frappuccino&s=exact-aware-popularity-rank"
+        }
       ],
       "layout": "square",
       "items": [
         {
           "rank": 1,
+          "title": "Unicorn Frappuccino",
+          "subtitle": "Product",
+          "description": "Starbucks' Unicorn Frappuccino is a blended drink. The color-changing drink is returning for a limited-time weekend after renewed interest in its nostalgic 2017 launch.",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/14/NREC/91300639007-starbucks-unicorn-frappuccino.png?crop=1999,1125,x0,y437&width=1999&height=1125&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/",
+          "alt": "Starbucks' Unicorn Frappuccino product listing image",
+          "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank",
+          "source": "Amazon listing",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "3 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank"
+            },
+            {
+              "source": "Starbucks",
+              "url": "https://about.starbucks.com/press/2026/starbucks-unicorn-frappuccino-return-drives-record-weekend-with-more-than-2-million-beverages-sold/"
+            },
+            {
+              "source": "sekbernews.id",
+              "url": "https://www.usatoday.com/story/money/food/2026/06/02/starbucks-unicorn-frappuccino-returning-summer-2026/90371779007/"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Samsung Galaxy Z Fold 8",
+          "subtitle": "Product",
+          "description": "Samsung Galaxy Z Fold 8 is a foldable smartphone. Strong pre-order demand for Samsung's next foldable has made it a recent focus in the phone market.",
+          "image": "/culture/product-samsung-galaxy-z-fold-8.webp",
+          "imageSource": "https://img.biggo.com/1_YCH8aXtAEizaa_lptwUkF9RlcfmvjTcyQkunZCuqc/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYWdlL2FpX2dlbmVyYXRlZC8yMDI2LTA4Lzk1MjE3YWE0LTM4ODctNGVmZi04NDIxLTIxYjBiYzdlZDQ1ZF8xNzg2NDMzNTYxX2RlZmF1bHQuanBn.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://finance.biggo.com/news/95217aa4-3887-4eff-8421-21b0bc7ed45d",
+          "alt": "Samsung Galaxy Z Fold 8 product listing image",
+          "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank",
+          "source": "Amazon listing",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank"
+            },
+            {
+              "source": "Khaleej Times",
+              "url": "https://www.khaleejtimes.com/business/tech/galaxy-z-fold8-demand-helps-samsung-set-an-all-time-sales-record"
+            },
+            {
+              "source": "Samsung Magazine",
+              "url": "https://samsungmagazine.eu/en/2026/08/18/prodeje-noveho-galaxy-z-fold8-trhaji-rekordy-samsung-je-i-tak-v-tragicke-ztrate/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
           "title": "Trader Joe's Mini Tote Bag",
           "subtitle": "Product",
           "description": "The Trader Joe’s Mini Tote Bag is a blue-striped mini tote. It drew renewed attention after the popular canvas tote returned for a limited-time restock, sending shoppers queuing for it.",
@@ -1873,7 +1937,7 @@
           "source": "Amazon listing",
           "metric": {
             "label": "Independent viral sources",
-            "value": "3 sources"
+            "value": "2 sources"
           },
           "evidence": [
             {
@@ -1881,50 +1945,18 @@
               "url": "https://www.amazon.com/dp/B0H6NDDD55"
             },
             {
-              "source": "Bergen Record",
-              "url": "https://www.northjersey.com/story/shopping/2026/06/17/trader-joes-mini-tote-bags-create-big-crowds-in-north-jersey/90588064007/"
+              "source": "Lohud",
+              "url": "https://www.lohud.com/story/grocery/stores/2026/06/08/trader-joes-striped-mini-tote-bags-june-2026/90454373007/"
             },
             {
-              "source": "Newsweek",
-              "url": "https://www.newsweek.com/trader-joes-mini-tote-bag-new-design-has-shoppers-queuing-around-the-block-12095957"
+              "source": "eciks.org",
+              "url": "https://eciks.org/9488-90882-trader-joes-mini-tote-june-17-release"
             }
           ],
-          "accent": "#ffc857"
+          "accent": "#57d5a4"
         },
         {
-          "rank": 2,
-          "title": "Starbucks' Unicorn Frappuccino",
-          "subtitle": "Product",
-          "description": "Starbucks' Unicorn Frappuccino is a blended drink. A viral color-changing drink from 2017 is returning to Starbucks, but you'll need to act fast to get one. The Seattle-based coffeehouse giant is bringing back the Unicorn Frappuccino \"for one magical weekend to close out the summer,\" according to a statement from the company.",
-          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
-          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/14/NREC/91300639007-starbucks-unicorn-frappuccino.png?crop=1999,1125,x0,y437&width=1999&height=1125&format=pjpg&auto=webp",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/",
-          "alt": "Starbucks' Unicorn Frappuccino product listing image",
-          "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank",
-          "source": "Amazon product search",
-          "metric": {
-            "label": "Independent viral sources",
-            "value": "6 sources"
-          },
-          "evidence": [
-            {
-              "source": "Amazon product search",
-              "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank"
-            },
-            {
-              "source": "Cincinnati Enquirer",
-              "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/"
-            },
-            {
-              "source": "KTLA",
-              "url": "https://ktla.com/news/nationworld/starbucks-to-bring-back-unicorn-frappuccino-for-one-weekend-in-august/"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 3,
+          "rank": 4,
           "title": "Mystery Squishy Dumplings",
           "subtitle": "Product",
           "description": "Mystery Squishy Dumplings are two-pack, slow-rise bread squishy fidget toys for kids and adults. Their social-media-fueled popularity is expanding through a global lifestyle and character licensing program.",
@@ -1956,10 +1988,10 @@
           "accent": "#ff6b57"
         },
         {
-          "rank": 4,
+          "rank": 5,
           "title": "NeeDoh Toy",
           "subtitle": "Product",
-          "description": "NeeDoh Toy is a collectible toy. NeeDoh craze hits San Mateo County in force: Toy stores are struggling to keep up with demand for the tactile, squishy toys.",
+          "description": "NeeDoh Toy is a collectible toy. NeeDoh’s recent craze has stores struggling to keep up with demand for the tactile, squishy toys.",
           "image": "/culture/product-needoh-toy.webp",
           "imageSource": "https://m.media-amazon.com/images/I/7161JNgvkfL._AC_UL320_.jpg",
           "imageSourceKind": "commerce",
@@ -1973,9 +2005,9 @@
           },
           "evidence": [
             {
-          "source": "Amazon listing",
-          "url": "https://www.amazon.com/dp/B0B4HVVN8B"
-        },
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0B4HVVN8B"
+            },
             {
               "source": "San Mateo Daily Journal",
               "url": "https://www.smdailyjournal.com/news/local/needoh-craze-hits-san-mateo-county-in-force-toy-stores-are-struggling-to-keep-up/article_8fa97e45-d79f-4eec-be70-ce86555731a5.html"
@@ -1983,38 +2015,6 @@
             {
               "source": "GamesRadar+",
               "url": "https://www.gamesradar.com/toys-collectibles/where-to-buy-needoh-the-viral-toy-sensation/"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 5,
-          "title": "Samsung Galaxy Z Fold 8",
-          "subtitle": "Product",
-          "description": "Samsung Galaxy Z Fold 8 is a foldable smartphone. Samsung (005930) next-generation flagship foldable phones have gotten off to a strong start in Taiwan's market. Samsung Electronics Taiwan today (August 11) opened early-bird pre-order priority pickup.",
-          "image": "/culture/product-samsung-galaxy-z-fold-8.webp",
-          "imageSource": "https://img.biggo.com/1_YCH8aXtAEizaa_lptwUkF9RlcfmvjTcyQkunZCuqc/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYWdlL2FpX2dlbmVyYXRlZC8yMDI2LTA4Lzk1MjE3YWE0LTM4ODctNGVmZi04NDIxLTIxYjBiYzdlZDQ1ZF8xNzg2NDMzNTYxX2RlZmF1bHQuanBn.jpg",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://finance.biggo.com/news/95217aa4-3887-4eff-8421-21b0bc7ed45d",
-          "alt": "Samsung Galaxy Z Fold 8 product listing image",
-          "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank",
-          "source": "Amazon product search",
-          "metric": {
-            "label": "Independent viral sources",
-            "value": "5 sources"
-          },
-          "evidence": [
-            {
-              "source": "Amazon product search",
-              "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank"
-            },
-            {
-              "source": "finance.biggo.com",
-              "url": "https://finance.biggo.com/news/95217aa4-3887-4eff-8421-21b0bc7ed45d"
-            },
-            {
-              "source": "Gadget Hacks",
-              "url": "https://samsung.gadgethacks.com/news/samsung-galaxy-z-fold-8-wide-foldable-successor-explained/"
             }
           ],
           "accent": "#ffc857"
@@ -2043,7 +2043,7 @@
           "rank": 1,
           "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
           "subtitle": "News",
-          "description": "Monitor active hurricanes, tropical storms, and cyclones across all ocean basins. Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "description": "Hurricane Lala passed Hawaiʻi's Big Island without a direct hit, but the storm still drove intense attention as residents tracked flooding, wind, and travel impacts.",
           "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
           "imageSource": "https://www.the-world-now.com/theworldnowheader.png",
           "imageSourceKind": "article",
@@ -2071,7 +2071,7 @@
           "rank": 2,
           "title": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
           "subtitle": "News",
-          "description": "A massive egg recall due to salmonella risk issued in July has received the highest severity class by the U.S. Food and Drug Administration. Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "description": "The FDA classified a July egg recall linked to salmonella as a Class I risk, the agency's highest level, bringing renewed attention to the affected products and consumer guidance.",
           "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
           "imageSource": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2026-06/eggs-daily-healthy-as06252026-df99dd.jpg",
           "imageSourceKind": "article",
@@ -2099,7 +2099,7 @@
           "rank": 3,
           "title": "City to close non-essential offices and services Monday following Hurricane Lala.",
           "subtitle": "News",
-          "description": "Hurricane Lala: Body Of 93-Year-Old Woman Found In Nāʻālehu Field. City to close non-essential offices and services Monday following Hurricane Lala.",
+          "description": "Honolulu closed non-essential offices and services after Hurricane Lala, reflecting the storm's continuing effects on public operations and residents.",
           "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
           "imageSource": "https://www.honolulu.gov/mayor/wp-content/uploads/sites/12/2026/08/LALA-PRESSER-SLIDES-4-1.jpg",
           "imageSourceKind": "article",
@@ -2155,7 +2155,7 @@
           "rank": 5,
           "title": "Released Nancy Guthrie ransom notes generated 'slight increase' in tips: Sheriff's department.",
           "subtitle": "News · Aug 7, 2026",
-          "description": "The recent release of two credible ransom notes sent to Nancy Guthrie 's family in the days after her abduction generated a \"slight increase\" in tips, but none that have cracked the case, authorities told ABC News.",
+          "description": "The release of two credible ransom notes sent to Nancy Guthrie's family produced a slight increase in tips, but investigators said none has yet broken open the abduction case.",
           "image": "/culture/news-released-nancy-guthrie-ransom-notes-generated-slight-increase-in.webp",
           "imageSource": "https://cdn.abcotvs.com/dip/images/19641130_AP26212715366773.jpg?w=1600",
           "imageSourceKind": "article",
@@ -2185,7 +2185,7 @@
           "rank": 6,
           "title": "Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
           "subtitle": "News · Aug 19, 2026",
-          "description": "Florida Lt. Gov. Jay Collins said Monday that if Byron Donalds is the nominee of the Republican Party in the race for governor, that Donalds would lose the November election to a Democrat. FOX 13's Evan Axelbank reports. ST PETERSBURG, Fla - Florida Lt. Gov.",
+          "description": "Byron Donalds and David Jolly advanced from Florida's primary contests, setting up a governor's race that has drawn renewed national attention.",
           "image": "/culture/news-byron-donalds-david-jolly-to-face-off-in-florida-governor-s-race.webp",
           "imageSource": "https://images.foxtv.com/static.fox13news.com/www.fox13news.com/content/uploads/2026/04/1200/630/collins-and-donalds.jpg?ve=1&tl=1",
           "imageSourceKind": "article",
@@ -2217,13 +2217,13 @@
           "rank": 7,
           "title": "Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
           "subtitle": "News · Aug 13, 2026",
-          "description": "Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
+          "description": "Flock Safety announced updates to its automated license-plate cameras as scrutiny grows over their broad surveillance reach and the limits of their privacy protections.",
           "image": "/culture/news-flock-announces-privacy-updates-to-its-car-tracking-cameras.webp",
-          "imageSource": "https://roselawgroupreporter.com/wp-content/uploads/2026/08/washington-state-trooper-vehicle-with-lights-on-pu-2026-06-22-15-25-09-utc.jpg",
+          "imageSource": "https://static01.nyt.com/images/2026/08/07/multimedia/07nat-flock-safety-TOP-jlhp/07nat-flock-safety-TOP-jlhp-facebookJumbo.jpg",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://roselawgroupreporter.com/2026/08/flock-announces-privacy-updates-to-its-car-tracking-cameras-following-national-criticism/",
-          "alt": "Lead image from The New York Times's coverage of Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
-          "url": "https://roselawgroupreporter.com/2026/08/flock-announces-privacy-updates-to-its-car-tracking-cameras-following-national-criticism/",
+          "imageSourcePageUrl": "https://www.nytimes.com/2026/08/10/us/flock-cameras-can-track-every-car-in-america-police-love-them-citizens-dont.html",
+          "alt": "A Flock Safety license plate reader in Addison, Texas — one of 120,000 cameras the country has deployed around the country.",
+          "url": "https://www.nytimes.com/2026/08/10/us/flock-cameras-can-track-every-car-in-america-police-love-them-citizens-dont.html",
           "source": "The New York Times",
           "metric": {
             "label": "Google search volume",
@@ -2236,7 +2236,7 @@
             },
             {
               "source": "The New York Times via Google News",
-              "url": "https://roselawgroupreporter.com/2026/08/flock-announces-privacy-updates-to-its-car-tracking-cameras-following-national-criticism/"
+              "url": "https://www.nytimes.com/2026/08/10/us/flock-cameras-can-track-every-car-in-america-police-love-them-citizens-dont.html"
             }
           ],
           "accent": "#5ab0ff"
@@ -2244,8 +2244,8 @@
         {
           "rank": 8,
           "title": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
-          "subtitle": "News · Aug 15, 2026",
-          "description": "The filled Honda Center got a look at Frozen 3 — and let’s just say, there is quite a lot in store. First of all, are those wedding bells, we hear? Indeed, they are!",
+          "subtitle": "News",
+          "description": "A first look at Frozen 3 teased Anna's wedding and a new villain, renewing attention ahead of the animated film's release.",
           "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
           "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
           "imageSourceKind": "article",
@@ -2260,7 +2260,7 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=%27Frozen+3%27+First+Look+Teases+Anna%27s+Wedding%2C+New+Villain+%26+More."
             },
             {
               "source": "Deadline via Google News",
@@ -2268,126 +2268,73 @@
             }
           ],
           "accent": "#57d5a4"
-        },
-        {
-          "rank": 9,
-          "title": "Human remains discovered miles from Nancy Guthrie's home not connected to case so far, sheriff's department says.",
-          "subtitle": "News",
-          "description": "Human Resources 400 S. Ft. Harrison Ave. Human remains discovered miles from Nancy Guthrie's home not connected to case so far, sheriff's department says.",
-          "image": "/culture/news-human-remains-discovered-miles-from-nancy-guthrie-s-home-not-con.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg/1280px-Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "alt": "File:Palm Beach County Park Lantana Airport by Don Ramey Logan.jpg",
-          "url": "https://pinellas.gov/jobs-career-opportunities/",
-          "source": "Pinellas County (.gov)",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Human+remains+discovered+miles+from+Nancy+Guthrie%27s+home+not+connected+to+case+so+far%2C+sheriff%27s+department+says."
-            },
-            {
-              "source": "Pinellas County (.gov) via Google News",
-              "url": "https://pinellas.gov/jobs-career-opportunities/"
-            }
-          ],
-          "accent": "#ff6b57"
-        },
-        {
-          "rank": 10,
-          "title": "Remains found miles from Nancy Guthrie home with ‘no indication’ of connection to case so far, sheriff’s department says.",
-          "subtitle": "News",
-          "description": "Human Resources 400 S. Ft. Harrison Ave. Remains found miles from Nancy Guthrie home with ‘no indication’ of connection to case so far, sheriff’s department says.",
-          "image": "/culture/news-remains-found-miles-from-nancy-guthrie-home-with-no-indication-o.webp",
-          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg/1280px-Palm_Beach_County_Park_Lantana_Airport_by_Don_Ramey_Logan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "alt": "File:Palm Beach County Park Lantana Airport by Don Ramey Logan.jpg",
-          "url": "https://pinellas.gov/jobs-career-opportunities/",
-          "source": "Pinellas County (.gov)",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Remains+found+miles+from+Nancy+Guthrie+home+with+%E2%80%98no+indication%E2%80%99+of+connection+to+case+so+far%2C+sheriff%E2%80%99s+department+says."
-            },
-            {
-              "source": "Pinellas County (.gov) via Google News",
-              "url": "https://pinellas.gov/jobs-career-opportunities/"
-            }
-          ],
-          "accent": "#9b8cff"
         }
       ],
-      "moreLabel": "Show ranks 6–10"
+      "moreLabel": "Show ranks 6–8"
     }
   ],
   "sourceHealth": [
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:44.457Z"
+      "checkedAt": "2026-08-19T17:37:28.159Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:45.167Z"
+      "checkedAt": "2026-08-19T17:37:28.721Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:45.201Z"
+      "checkedAt": "2026-08-19T17:37:28.739Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:46.509Z"
+      "checkedAt": "2026-08-19T17:37:30.556Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:45.701Z"
+      "checkedAt": "2026-08-19T17:37:29.834Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-19T16:34:34.412Z"
+      "checkedAt": "2026-08-19T17:38:22.253Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:44.612Z"
+      "checkedAt": "2026-08-19T17:37:28.071Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:44.454Z"
+      "checkedAt": "2026-08-19T17:37:28.104Z"
     },
     {
       "name": "Goodreads monthly most read",
       "ok": true,
-      "checkedAt": "2026-08-19T16:33:46.117Z"
+      "checkedAt": "2026-08-19T17:37:29.253Z"
     },
     {
       "name": "Viral product discovery",
-      "ok": false,
-      "checkedAt": "2026-08-19T16:35:01.577Z",
-      "error": "Only 2 qualifying products had a matching Amazon or validated source page"
+      "ok": true,
+      "checkedAt": "2026-08-19T17:47:03.890Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-19T16:34:32.823Z"
+      "checkedAt": "2026-08-19T17:38:50.454Z"
     }
   ],
   "quiz": {
     "durationSeconds": 15,
     "questions": [
       {
-        "prompt": "Videos of it spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
+        "prompt": "Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
         "answers": [
           "Jimothy the raccoon",
           "Kwebbelkop Laughing / YourRAGE Laugh",
@@ -2415,7 +2362,7 @@
         "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh"
       },
       {
-        "prompt": "This is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer. Which meme matches this description?",
+        "prompt": "This meme is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. Which meme matches this description?",
         "answers": [
           "Hatsune Miku World Cup Custody Battle",
           "Jimothy the raccoon",
@@ -2429,7 +2376,7 @@
         "itemTitle": "Hatsune Miku World Cup Custody Battle"
       },
       {
-        "prompt": "This is a champion in the sporting sphere – not only is he a coveted striker for Premier League club Manchester City, but he also helped lead Norway through to the 2026 World Cup quarter finals. Which person matches this description?",
+        "prompt": "This person is expected to return to Manchester City training after starring at the World Cup. Which person matches this description?",
         "answers": [
           "Erling Haaland",
           "Lamine Yamal",
@@ -2443,7 +2390,7 @@
         "itemTitle": "Erling Haaland"
       },
       {
-        "prompt": "Keyne has become a social media star for his joyful celebrations during matches, capturing the hearts of Spain's supporters and fans ar. Which person matches this description?",
+        "prompt": "His younger brother Keyne drew fresh attention with joyful celebrations on the field after Spain's World Cup victory. Which person matches this description?",
         "answers": [
           "Lamine Yamal",
           "Erling Haaland",
@@ -2457,7 +2404,7 @@
         "itemTitle": "Lamine Yamal"
       },
       {
-        "prompt": "Actually, it Is Making a Point About Trans People in The Odyssey. Which person matches this description?",
+        "prompt": "Attention around his next film has renewed interest in the director's closely controlled production process. Which person matches this description?",
         "answers": [
           "Christopher Nolan",
           "Erling Haaland",
@@ -2471,7 +2418,7 @@
         "itemTitle": "Christopher Nolan"
       },
       {
-        "prompt": "This is an action/adventure/fantasy film. Which film matches this description?",
+        "prompt": "This film is an action/adventure/fantasy film. Which film matches this description?",
         "answers": [
           "The Odyssey",
           "Obsession",
@@ -2485,7 +2432,7 @@
         "itemTitle": "The Odyssey"
       },
       {
-        "prompt": "This is a horror/romance/thriller film. Which film matches this description?",
+        "prompt": "This film is a horror/romance/thriller film. Which film matches this description?",
         "answers": [
           "Obsession",
           "The Odyssey",
@@ -2499,7 +2446,7 @@
         "itemTitle": "Obsession"
       },
       {
-        "prompt": "This is an adventure/comedy/drama film. Which film matches this description?",
+        "prompt": "This film is an adventure/comedy/drama film. Which film matches this description?",
         "answers": [
           "Project Hail Mary",
           "The Odyssey",
@@ -2555,7 +2502,7 @@
         "itemTitle": "Theo of Golden"
       },
       {
-        "prompt": "This story covers it. Which story matches this description?",
+        "prompt": "Hurricane Lala passed Hawaiʻi's Big Island without a direct hit, but the storm still drove intense attention as residents tracked flooding, wind, and travel impacts. Which story matches this description?",
         "answers": [
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
           "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
@@ -2569,7 +2516,7 @@
         "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
       },
       {
-        "prompt": "A massive egg recall due to salmonella risk issued in July has received the highest severity class by the U.S. Which story matches this description?",
+        "prompt": "The FDA classified a July egg recall linked to salmonella as a Class I risk, the agency's highest level, bringing renewed attention to the affected products and consumer guidance. Which story matches this description?",
         "answers": [
           "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
@@ -2583,7 +2530,7 @@
         "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
       },
       {
-        "prompt": "This story covers it. Which story matches this description?",
+        "prompt": "Honolulu closed non-essential offices and services after Hurricane Lala, reflecting the storm's continuing effects on public operations and residents. Which story matches this description?",
         "answers": [
           "City to close non-essential offices and services Monday following Hurricane Lala.",
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",

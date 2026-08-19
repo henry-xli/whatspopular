@@ -138,16 +138,32 @@ function articleText(value) {
     .trim();
 }
 
+const sentenceSegmenter = new Intl.Segmenter("en", { granularity: "sentence" });
+
+function completeSentences(value, maxLength) {
+  let result = "";
+  for (const { segment } of sentenceSegmenter.segment(value)) {
+    const sentence = segment.trim();
+    if (!sentence) continue;
+    const candidate = `${result} ${sentence}`.trim();
+    if (candidate.length > maxLength) break;
+    result = candidate;
+  }
+  return result;
+}
+
 export function extractArticleIntro(html) {
   const scope = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1]
     ?? html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1]
     ?? html;
   const paragraphs = [...scope.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
     .map((match) => articleText(match[1]))
-    .filter((text) => text.length >= 45 && text.length <= 1_000)
+    .filter((text) => text.length >= 45 && text.length <= 720)
     .filter((text) => !/^(?:advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i.test(text))
     .filter((text) => !/\b(?:see more of our coverage|our coverage|in your search results|click here|download our app|follow us|sign up for our|subscribe to our)\b/i.test(text))
     .filter((text, index, values) => values.indexOf(text) === index)
+    .map((text) => completeSentences(text, 720))
+    .filter(Boolean)
     .slice(0, 3);
   if (!paragraphs.length) return "";
   let result = "";
@@ -156,7 +172,7 @@ export function extractArticleIntro(html) {
     if (candidate.length > 900 && result) break;
     result = candidate;
   }
-  return result.slice(0, 860).replace(/\s+\S*$/, "").trim();
+  return completeSentences(result, 900);
 }
 
 function relatedArticleHost(candidate, expected) {
