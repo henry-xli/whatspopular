@@ -275,11 +275,14 @@ img {
 }
 
 .hero {
+  --hero-side-padding: 24px;
+  --hero-spotlight-gap: 20px;
+  --hero-spotlight-width: 196px;
   position: relative;
   isolation: isolate;
   overflow: hidden;
   min-height: 0;
-  padding-block: 96px 88px;
+  padding: 96px var(--hero-side-padding) 88px;
   border-radius: 0 0 32px 32px;
   background: var(--paper-deep);
 }
@@ -336,8 +339,8 @@ img {
 .hero-spotlight {
   position: absolute;
   top: 50%;
-  right: 20px;
-  width: 196px;
+  right: var(--hero-side-padding);
+  width: var(--hero-spotlight-width);
   padding: 15px;
   transform: translateY(-50%);
   border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
@@ -1687,6 +1690,22 @@ a.culture-card:hover {
   }
 }
 
+@media (min-width: 851px) {
+  .hero {
+    --hero-side-padding: clamp(32px, 4vw, 72px);
+    --hero-spotlight-gap: clamp(28px, 3vw, 48px);
+    --hero-spotlight-width: clamp(240px, 24vw, 320px);
+  }
+
+  .hero-copy {
+    max-width: min(820px, calc(100% - var(--hero-spotlight-width) - var(--hero-spotlight-gap)));
+  }
+
+  .hero-slideshow {
+    right: calc(var(--hero-side-padding) + var(--hero-spotlight-width) + var(--hero-spotlight-gap));
+  }
+}
+
 @media (max-width: 850px) {
   .hero-copy {
     max-width: 560px;
@@ -1727,6 +1746,12 @@ a.culture-card:hover {
 
   .infrastructure-grid {
     gap: 55px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 850px) {
+  .hero {
+    padding-bottom: 330px;
   }
 }
 
