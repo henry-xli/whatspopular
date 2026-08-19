@@ -471,6 +471,18 @@ img {
   margin-top: 30px;
 }
 
+.hero-actions:has(.quiz-panel) {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+}
+
+.hero-actions:has(.quiz-panel) .quiz-panel {
+  width: min(100%, 780px);
+  flex: none;
+}
+
 .quiz-panel {
   flex: 1 0 100%;
   width: min(100%, 780px);
@@ -1703,6 +1715,14 @@ a.culture-card:hover {
 
   .hero-slideshow {
     right: calc(var(--hero-side-padding) + var(--hero-spotlight-width) + var(--hero-spotlight-gap));
+  }
+
+  .hero:has(.quiz-panel) .hero-copy {
+    max-width: min(100%, 1040px);
+  }
+
+  .hero:has(.quiz-panel) .hero-slideshow {
+    right: 0;
   }
 }
 
