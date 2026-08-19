@@ -456,7 +456,12 @@ test("keeps content and outbound links constrained", async () => {
   const products = brief.sections.find((section) => section.id === "products");
   const productSources = [...products.items, ...products.moreItems].map((item) => Number(item.metric.value.match(/^(\d+) sources?$/)[1]));
   assert.ok(productSources.every((count) => count >= 2));
-  assert.ok([...products.items, ...products.moreItems].every((item) => new URL(item.url).hostname === "www.amazon.com"));
+  assert.ok([...products.items, ...products.moreItems].every((item) => {
+    const url = new URL(item.url);
+    return url.hostname === "www.amazon.com"
+      || (url.protocol === "https:" && !/(?:^|\.)google\.com$|(?:^|\.)tiktok\.com$/i.test(url.hostname));
+  }));
+  assert.ok([...products.items, ...products.moreItems].every((item) => item.evidence.every((entry) => new URL(entry.url).hostname !== "news.google.com")));
   assert.ok([...products.items, ...products.moreItems].every((item) => !/Google Shopping|ranking it #|rose \+\d|TikTok/i.test(item.description)));
   const news = brief.sections.find((section) => section.id === "news");
   const volume = (value) => {
@@ -476,6 +481,11 @@ test("keeps content and outbound links constrained", async () => {
   assert.match(updater, /data-term/);
   assert.match(updater, /parseAnnualSlangReview/);
   assert.match(updater, /generateQuizBatch/);
+  assert.match(updater, /productExpansionSeeds/);
+  assert.match(updater, /PRODUCT_MOVERS_SNAPSHOT/);
+  assert.match(updater, /productTokenSubset/);
+  assert.match(updater, /commerceSource/);
+  assert.doesNotMatch(updater, /Unicorn Frappuccino|Galaxy Z Fold 8/i);
   assert.doesNotMatch(updater, /annualSlangCandidates|summaryQuery\s*=/);
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);
   assert.doesNotMatch(JSON.stringify(brief), /caution|b\*{2,}|a\*{2,}/i);

@@ -61,7 +61,8 @@ for (const section of brief.sections) {
       file,
       title: item.title,
       page: item.url,
-      refreshDaily: section.id === "news",
+      section: section.id,
+      refreshDaily: section.id === "news" || section.id === "products",
       expectedFallback: section.id === "news" && !item.imageSource,
       fit: section.id === "news" && /(?:logo|seal)/i.test(item.imageSource ?? "") ? "contain" : "cover",
       position: section.id === "news" ? "centre" : "attention",
@@ -76,14 +77,14 @@ for (const section of brief.sections) {
   }
 }
 
-async function fetchLimited(rawUrl, kind, directKind) {
+async function fetchLimited(rawUrl, kind, directKind, allowPublicHost = false) {
   const directHost = directKind === "article" ? new URL(rawUrl).hostname : null;
   return fetchBytes(rawUrl, {
     isAllowedHost: (hostname) => kind === "page"
-      ? pageHosts.has(hostname)
+      ? pageHosts.has(hostname) || (allowPublicHost && hostname !== "news.google.com")
       : imageHosts.has(hostname) || allowedImageSuffixes.some((suffix) => hostname.endsWith(suffix))
-        || hostname === directHost,
-    validateHost: directHost ? assertPublicHostname : undefined,
+        || hostname === directHost || (allowPublicHost && hostname !== "news.google.com"),
+    validateHost: directHost || allowPublicHost ? assertPublicHostname : undefined,
     kind,
     maxBytes: MAX_BYTES,
     timeoutMs: TIMEOUT_MS,
@@ -107,7 +108,8 @@ function extractOgImage(html, baseUrl) {
 
 async function resolveImage(asset) {
   if (asset.direct) return asset.direct;
-  const page = await fetchLimited(asset.page, "page");
+  const allowPublicHost = asset.section === "products";
+  const page = await fetchLimited(asset.page, "page", undefined, allowPublicHost);
   return extractOgImage(page.buffer.toString("utf8"), page.finalUrl);
 }
 
@@ -178,7 +180,7 @@ async function processAsset(asset) {
 
   try {
     const imageUrl = await resolveImage(asset);
-    const image = await fetchLimited(imageUrl, "image", asset.directKind);
+    const image = await fetchLimited(imageUrl, "image", asset.directKind, asset.section === "products");
     if (!/^image\/(?:avif|gif|jpeg|png|webp)\b/i.test(image.contentType)) {
       throw new Error(`Unexpected content type ${image.contentType}`);
     }

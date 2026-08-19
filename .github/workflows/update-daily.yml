@@ -46,7 +46,7 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
-          PRODUCT_TRENDS_SNAPSHOT: ${{ secrets.PRODUCT_TRENDS_SNAPSHOT }}
+          PRODUCT_MOVERS_SNAPSHOT: ${{ secrets.PRODUCT_MOVERS_SNAPSHOT || secrets.PRODUCT_TRENDS_SNAPSHOT }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_DESCRIPTION_MODEL: ${{ vars.OPENAI_DESCRIPTION_MODEL }}
       - if: steps.timing.outputs.run == 'true'

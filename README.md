@@ -46,10 +46,19 @@ last validated snapshot.
 - Music selects the first 10 Spotify Today’s Top Hits tracks that also appear on
   the Billboard Hot 100, then orders that same set by Billboard position.
 - Products start with Amazon Movers & Shakers across six retail categories and
-  recent Google News coverage about viral products. Retail movement alone is
-  not enough: a product needs explicit recent demand/social evidence and an
-  Amazon match. Ranking combines social signal, Amazon velocity when present,
-  freshness, independent confirmations, and scarcity/restock language.
+  recent Google News coverage about products with explicit demand signals. The
+  discovery pass also looks for launch demand, preorders, backorders, sold-out
+  or restock language, collecting, unboxing, and popular-demand coverage across
+  product categories. Retail movement alone never qualifies a product: a
+  candidate needs recent demand evidence plus either positive retail movement
+  or two independent confirming sources. Amazon is matched first; when a
+  product has no usable Amazon result, a resolved publisher source page is used
+  as a safe fallback. Names are normalized across model-number formatting and
+  aliases before scoring by demand, retail velocity, freshness, confirmations,
+  and scarcity. Broad discovery terms are expanded with exact searches for
+  named brands and mover candidates, so a generic headline can resolve to the
+  specific product family named in independent coverage; headline fragments,
+  category-only phrases, and duplicate aliases are removed before matching.
 - News uses U.S. Google Trending Now over seven days, excludes people and
   sports, and orders the remainder by Google’s displayed search volume.
 
@@ -89,17 +98,19 @@ external source.
 
 Every entry has evidence from at least two distinct source hosts, with no more
 than three linked evidence items or leaderboard source links.
-`scripts/cache-images.mjs` validates the snapshot, refreshes News art daily,
-downloads other art only when missing or invalid, and converts everything to
-bounded local WebP files. Publisher hosts and redirects are checked before any
-article image is fetched, and a last-known-good image survives upstream failure.
+`scripts/cache-images.mjs` validates the snapshot, refreshes News and Products
+art daily, downloads other art only when missing or invalid, and converts
+everything to bounded local WebP files. Product pages and selected publisher
+metadata are DNS-validated before an image is fetched, and a last-known-good
+image survives upstream failure.
 
 The YouTube Data API is used for Lessons in Meme Culture when
 `YOUTUBE_API_KEY` is configured; otherwise the updater reads YouTube’s public
 channel response. `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` enable the
 official Spotify attempt, with Spotify’s official playlist embed as the
 read-only fallback. `PRODUCT_MOVERS_SNAPSHOT` is an optional JSON recovery input
-for Amazon Movers & Shakers when its public page rate-limits automation.
+for Amazon Movers & Shakers when its public page rate-limits automation;
+`PRODUCT_TRENDS_SNAPSHOT` remains accepted as a backwards-compatible alias.
 
 ## Architecture and maintenance
 

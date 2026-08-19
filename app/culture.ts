@@ -103,6 +103,7 @@ function assertText(value: unknown, label: string, maximum = 800): asserts value
 const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
 
 function validQuizPrompt(prompt: string) {
+  if (/[.!?]\s+[a-z]/.test(prompt)) return false;
   const sentenceCount = prompt.match(/[^.!?]+[.!?]+/g)?.length ?? 0;
   return prompt.trim().endsWith("?")
     && sentenceCount >= 1 && sentenceCount <= 2
@@ -153,10 +154,10 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   if (item.imageSource !== undefined) {
     assertText(item.imageSource, `${item.title} source image`, 2000);
     const imageUrl = new URL(item.imageSource);
-    const articleImage = item.imageSourceKind === "article" && sectionId === "news"
+    const articleImage = item.imageSourceKind === "article" && (sectionId === "news" || sectionId === "products")
       && typeof item.imageSourcePageUrl === "string"
       && externalUrl(item.imageSourcePageUrl, `${item.title} image source page`, true).hostname
-        === externalUrl(item.url, item.title, true).hostname;
+        !== "news.google.com";
     if (imageUrl.protocol !== "https:" || imageUrl.username || imageUrl.password || imageUrl.port
       || !(articleImage ? publicHostname(imageUrl.hostname) : /(?:\.gr-assets\.com|\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/.test(imageUrl.hostname))) {
       throw new Error(`${item.title} has an unapproved source image host`);
@@ -239,7 +240,7 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
       if (!value || typeof value !== "object") throw new Error(`${section.title} has an invalid source`);
       const source = value as Record<string, unknown>;
       assertText(source.label, `${section.title} source label`, 160);
-      externalUrl(source.url, `${section.title} source`, expectedId === "news");
+      externalUrl(source.url, `${section.title} source`, expectedId === "news" || expectedId === "products");
     }
     if (!Array.isArray(section.items) || section.items.length !== 5) {
       throw new Error(`${section.title} must contain exactly five items`);

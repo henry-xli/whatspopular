@@ -16,6 +16,7 @@ const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 const aiDescriptionContexts = new WeakMap();
+const wikidataPersonCache = new Map();
 const quizSectionIds = ["memes", "people", "movies", "books", "news"];
 const quizQuestionCount = quizSectionIds.length * 3;
 const quizDurationSeconds = 15;
@@ -65,20 +66,21 @@ const amazonMoverCategories = [
 }));
 const productDiscoveryQueries = [
   "viral products",
-  "viral toys",
-  "viral beauty products",
-  "viral gadgets",
-  "viral fashion products",
-  "viral home products",
-  "viral collector products",
-  "viral unboxing products",
-  "viral product restock",
-  "viral squishy toys",
-  "viral collectibles",
-  "viral skincare products",
-  "viral bags and accessories",
-  "viral restock handbags",
-  "viral Amazon beauty",
+  "products going viral social media",
+  "new product launch high demand",
+  "product preorders record demand",
+  "product selling out backordered",
+  "popular demand limited edition product",
+  "viral toys collectibles squishies",
+  "viral beauty skincare makeup products",
+  "viral fashion bags accessories",
+  "viral home kitchen products",
+  "viral electronics smartphones gadgets",
+  "viral drinks beverages food products",
+  "viral unboxing collecting products",
+  "viral product restock waitlist",
+  "product launch sold out fans",
+  "consumer product record sales",
 ];
 const productDiscoveryUrl = "https://news.google.com/search?q=viral+products+when%3A90d&hl=en-US&gl=US&ceid=US%3Aen";
 
@@ -128,7 +130,7 @@ function rememberAiDescriptionContext(item, sectionId, snippets) {
 }
 
 function decodeHtml(value) {
-  return value
+  return String(value ?? "")
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')
     .replace(/&#39;|&apos;/gi, "'")
@@ -1142,7 +1144,7 @@ function ensureSentence(value) {
 const sentenceSegmenter = new Intl.Segmenter("en", { granularity: "sentence" });
 
 function sentences(value) {
-  const clean = plainText(value ?? "");
+  const clean = plainText(value ?? "").replace(/([.!?])\s+(?=[a-z])/g, " ");
   return clean ? [...sentenceSegmenter.segment(clean)].map(({ segment }) => segment.trim()).filter(Boolean) : [];
 }
 
@@ -2021,6 +2023,10 @@ function queryEntityMatch(query, entities, predicate) {
 }
 
 async function wikidataSearchIsPerson(value) {
+  const key = normalize(value);
+  if (!key) return false;
+  if (wikidataPersonCache.has(key)) return wikidataPersonCache.get(key);
+  const request = (async () => {
   const words = titleCase(value).split(/\s+/).filter(Boolean);
   const variants = [...new Set([words.slice(0, 2).join(" "), words.join(" ")].filter((entry) => entry.length >= 3))];
   for (const variant of variants) {
@@ -2055,6 +2061,14 @@ async function wikidataSearchIsPerson(value) {
     }
   }
   return false;
+  })();
+  wikidataPersonCache.set(key, request);
+  try {
+    return await request;
+  } catch (error) {
+    wikidataPersonCache.delete(key);
+    throw error;
+  }
 }
 
 function productTokens(value) {
@@ -2065,9 +2079,20 @@ function productTokens(value) {
 
 function productFamilyKey(value) {
   const generic = new Set(["a", "an", "and", "best", "buy", "buying", "deal", "deals", "find", "for", "from", "gift", "gifts", "item", "items", "new", "popular", "product", "products", "the", "toy", "toys", "trend", "trending", "viral"]);
-  const tokens = normalize(value).split(" ").filter((token) => token.length > 1 && !generic.has(token));
+  const tokens = normalize(value).split(" ").filter((token) => token.length > 0 && !generic.has(token));
   const singular = tokens.map((token) => token.length > 4 && token.endsWith("s") && !token.endsWith("ss") ? token.slice(0, -1) : token);
-  return singular.join(" ");
+  const collapsed = [];
+  for (let index = 0; index < singular.length; index += 1) {
+    const current = singular[index];
+    const next = singular[index + 1];
+    if (next && /^[a-z]+$/.test(current) && /^\d+[a-z]*$/.test(next)) {
+      collapsed.push(`${current}${next}`);
+      index += 1;
+    } else {
+      collapsed.push(current);
+    }
+  }
+  return collapsed.join(" ");
 }
 
 function productGroupKey(value) {
@@ -2081,34 +2106,65 @@ const genericProductWords = new Set([
   "more", "new", "one", "parents", "popular", "prime", "sale", "section", "shop", "starting", "story", "stories",
   "things", "today", "top", "trend", "trending", "viral", "warning", "what", "where", "why", "years",
   "about", "actually", "collectible", "collectibles", "doctors", "experts", "everything", "how", "hype", "inside", "internet", "job", "just", "know", "officials",
-  "again", "america", "bag", "brand", "brands", "box", "buys", "cake", "china", "concern", "concerns", "cup", "dot", "eagle", "earthbound", "found", "get", "give", "good", "great", "health", "hot", "jack", "june", "kids", "knicks", "lifestyle", "look", "make", "makes", "meet", "memorial", "now", "olive", "online", "only", "people", "picks", "places", "products", "psst", "raises", "retailer", "retail", "right", "rms", "shoppers", "skin", "skincare", "stock", "target", "things", "toys", "tried", "under", "use", "using", "video", "world", "worth", "young",
+  "again", "after", "air", "america", "away", "award", "back", "bag", "backpack", "before", "beverage", "beverages", "bicycle", "bottle", "bottles", "brand", "brands", "box", "brush", "buys", "cake", "camera", "candle", "candles", "case", "charger", "china", "concern", "concerns", "console", "cup", "down", "dot", "drink", "drinks", "dumpling", "dumplings", "eagle", "earthbound", "earbuds", "exclusive", "fidget", "food", "first", "fold", "foldable", "found", "fragrance", "frappuccino", "full", "get", "give", "good", "great", "headphones", "health", "here", "hit", "hot", "housekeeping", "how", "in", "india", "innovations", "into", "jacket", "jack", "june", "keyboard", "kids", "laptop", "last", "lifestyle", "lip", "look", "make", "make-up", "makes", "many", "market", "mascara", "mattress", "media", "meet", "memorial", "merch", "merchandise", "mister", "minutes", "monitor", "mouse", "mug", "my", "now", "olive", "online", "only", "on", "or", "out", "packaging", "people", "phone", "phones", "picks", "places", "platform", "plush", "price", "products", "psst", "raises", "retailer", "retail", "right", "rms", "router", "report", "serum", "share", "shoppers", "size", "skin", "skincare", "smartphone", "snack", "snacks", "sneaker", "specific", "stock", "still", "switch", "tablet", "target", "things", "throw", "tote", "totes", "toys", "tracker", "tried", "under", "up", "use", "using", "vacuum", "video", "watch", "water", "week", "which", "why", "world", "worth", "wants", "young",
 ]);
-const productIdentityPattern = /\b(?:bag|brush|candle|card|cube|dumpling|gadget|gloss|lip|mascara|mug|phone|plush|serum|skincare|squish(?:y)?|toy|tote|tracker|watch|wearable)\b/i;
-const genericProductPhrasePattern = /^(?:beauty product|portable fan|summer dress|squishy(?: toy)?(?: trend| craze)?|squishy dumpling(?:s|[’']? toys?)?|toy trend|toy craze|tri state parents|viral gadget|viral product|product trend|right now|tote bag nationwide|tote bag|body oil|hair mascara)$/i;
+const productIdentityPattern = /\b(?:air\s*fryer|backpack|bag|beverage|bicycle|bottle|brush|camera|candle|card|case|chair|charger|coffee|console|cube|drink|dumpling|earbuds?|fold(?:able)?|frappuccino|fragrance|gadget|gloss|headphones?|jacket|keyboard|laptop|lip|mascara|mattress|monitor|mouse|mug|phone|plush|router|serum|skincare|smartphone|snack|sneaker|squish(?:y)?|switch|tablet|tote|tracker|toy|tumbler|vacuum|watch|wearable)\b/i;
+const genericProductPhrasePattern = /^(?:ahead|beauty product|cocktails?|emerging contemporary bag|fans?|i['’]?m|korean skincare|line|portable fan|plush|report|results?|shelves?|summer dress|squishy(?: toy)?(?: trend| craze)?|squishy dumpling(?:s|[’']? toys?)?|toy trend|toy craze|tri state parents|viral gadget|viral product|product trend|right now|tote bag nationwide|tote bag|body oil|hair mascara)$/i;
+const genericProductTailPattern = /\b(?:beverage|drink|lip|product|products?|serum|skincare|smartphone|phone|toy|toys?)\b$/i;
 const productArticleBoilerplatePattern = /\b(?:affiliate commission|independently reviewed|when you purchase|purchase(?:d)? (?:an|a) .* through a link|links? on this page|shopping editors? (?:picked|selected)|we may earn|earn a commission|sponsored|advertisement|shop (?:our|the) (?:edit|selection)|click (?:here|the link|on links? we provide)|selected independently|editorial independence|shop today|we cover and recommend|learn more)\b/i;
 const productAdControversyPattern = /\b(?:beauty routine|brand .*respond|not actually|didn['’]?t use|did not use|tit for tat|ad(?:vertis)?|backlash|scandal)\b/i;
 const productCommercePattern = /\b(?:amazon|black friday|coupon|deal(?:s)?|discount|editor(?:s|ial)? pick|faves?|gift guide|k-beauty|last chance|off|prime day|routine|sale|shop(?:ping)?|tested|top pick|we tested)\b/i;
 const amazonFocusTerms = new Set(["airwrap", "supersonic", "vacuum", "hair", "dryer", "brush", "mask", "serum", "toner", "candle", "tote", "bag", "lip", "skin", "skincare", "beauty", "squish", "squishy", "dumpling", "toy", "plush", "cup", "collectible", "gadget", "phone", "watch", "shoe", "sneaker", "dress", "jacket"]);
+const amazonCategoryTerms = new Set(["airfryer", "bag", "bottle", "brush", "camera", "candle", "charger", "coffee", "console", "cube", "drink", "dumpling", "fold", "frappuccino", "fragrance", "gadget", "headphone", "laptop", "lip", "mascara", "mattress", "monitor", "mouse", "mug", "phone", "plush", "serum", "skincare", "smartphone", "snack", "sneaker", "squish", "switch", "tablet", "tote", "toy", "tumbler", "vacuum", "watch"]);
+const amazonAccessoryPattern = /\b(?:case|cover|filter|holder|mount|protector|replacement|stand|strap)\b/i;
+
+function amazonCategoryTokens(value) {
+  return [...productTokenSet(value)].filter((token) => [...amazonCategoryTerms].some((category) => token === category || token.startsWith(category)));
+}
 
 function isGenericProductCandidate(value) {
   const tokens = normalize(value).replace(/\s+s\b/g, "").split(" ").filter(Boolean);
   return !tokens.length
     || genericProductPhrasePattern.test(value)
+    || /\b(?:away|brings?|cause|collaboration|could|cult|down|everyone|exclusive|forecast|good housekeeping|gta|india|japanese|largest|market|minutes?|my|over|own|packaging|secrets?|size|signature drink|specific fidget|throw|very specific|week|wants?|world['’]?s largest)\b/i.test(value)
+    || (genericProductTailPattern.test(value) && /\b(?:custom|korean|popular|specific|viral)\b/i.test(value))
+    || /\b(?:merch(?:andise)?|outfit|shelves?)\b/i.test(value)
+    || (tokens.length <= 2 && /\b(?:award|coffee|fidget)\b/i.test(value))
+    || (tokens.length === 1 && genericProductWords.has(tokens[0]))
     || (tokens.length <= 2 && tokens.every((token) => genericProductWords.has(token) || ["product", "products", "squishy", "toy", "toys"].includes(token)));
+}
+
+function hasSpecificProductName(value) {
+  const tokens = productFamilyKey(value).split(" ").filter(Boolean);
+  return productIdentityPattern.test(value)
+    || tokens.some((token) => /^[a-z]{2,}\d+[a-z]*$/i.test(token));
+}
+
+const productContextPattern = /\b(?:air\s*fryer|apparel|bag|beauty|beverage|bicycle|bottle|brush|camera|candle|coffee|collectible|console|cosmetic|cube|drink|dumpling|electronics?|food|fold(?:able)?|frappuccino|fragrance|gadget|headphones?|kitchen|laptop|lip|makeup|merch(?:andise)?|phone|plush|product|serum|skincare|smartphone|snack|sneaker|squish(?:y)?|switch|tablet|toy|tumbler|vacuum|wearable)\b/i;
+
+function hasProductContext(candidate) {
+  return productContextPattern.test(candidate.name)
+    || candidate.observations.some((observation) => productContextPattern.test(observation.headline));
+}
+
+function isBrandLikeProductName(value) {
+  const tokens = productFamilyKey(value).split(" ").filter(Boolean);
+  return tokens.length >= 1 && tokens.length <= 2
+    && tokens.every((token) => /^[a-z][a-z0-9'’-]*$/i.test(token) && !genericProductWords.has(token));
 }
 
 function usableProductIntro(value) {
   const text = sanitizeSocialText(value);
   return text.length >= 45
     && !productArticleBoilerplatePattern.test(text)
-    && !productCommercePattern.test(text)
+    && (!productCommercePattern.test(text) || productDemandScore(text) >= 2)
     && !productAdControversyPattern.test(text) ? text : "";
 }
 
 function usableProductHeadline(value) {
   const text = sanitizeSocialText(value);
   return text.length >= 35
-    && !productCommercePattern.test(text)
+    && (!productCommercePattern.test(text) || productDemandScore(text) >= 2)
     && !productArticleBoilerplatePattern.test(text)
     && !productAdControversyPattern.test(text)
     && !/:\s*(?:what to know|where to buy|the details)\b/i.test(text)
@@ -2132,18 +2188,20 @@ function lowerFirst(value) {
 
 function productNameCandidate(value, source = "") {
   let candidate = plainText(value)
-    .replace(/\b(?:amazon|best|buy|deals?|find|from|new|popular|products?|the|this|tiktok|viral|trending|what|when|where)\b/gi, " ")
+    .replace(/\b(?:amazon|announc(?:e|ed|es|ing)?|back|back[- ]?orders?|best|bring(?:s|ing)?|buy|deals?|demand|find|from|just|launch(?:es|ed|ing)?|new|officially|popular|pre[- ]?orders?|products?|record|releas(?:e|ed|es|ing)?|return(?:s|ed|ing)?|revea(?:l|led|ls|ling)|sales|selling|sold|the|this|tiktok|units?|viral|trend(?:ing)?|what|when|where)\b/gi, " ")
     .replace(/\s+/g, " ")
     .replace(/^[\s:,'"“”‘’()-]+|[\s:,'"“”‘’()-]+$/g, "")
     .trim();
+  if (/^(?:\d{1,4}|\d{4}[a-z]?)$/i.test(candidate)
+    || /\b(?:january|february|march|april|may|june|july|august|september|october|november|december|performance|parents?|burn|risks?)\b/i.test(candidate)) return "";
   candidate = candidate.replace(/([A-Za-z])['’]s\b/gi, "$1's")
     .replace(/^(?:expand|explains?|inside|introducing|meet|shop|the|unbox(?:ing)?|where(?: to)? buy)\s+/i, "");
-  candidate = candidate.split(/\b(?:according|are|as|at|before|but|can|for|from|has|have|in|is|on|that|their|these|to|went|which|with|you)\b/i)[0]
+  candidate = candidate.split(/\b(?:a|about|according|after|an|and|any|are|as|at|before|but|can|changed|favorite|for|from|has|have|in|is|many|of|on|or|our|that|their|these|to|videos?|went|which|with|you)\b/i)[0]
     .replace(/[\s:,'"“”‘’()-]+$/, "")
     .trim();
   if (isGenericProductCandidate(candidate)) return "";
   const key = productFamilyKey(candidate);
-  if (!key || key.length < 3 || key.split(" ").length > 6
+  if (!key || key.length < 3 || key.split(" ").length > 7
     || /\b(?:amazon|beauty|clothing|deals?|gadgets?|home|kitchen|products?|shoes|social|summer|tiktok|toys?|viral)\b/i.test(key)
     || productFamilyKey(source) === key) return "";
   return candidate;
@@ -2152,19 +2210,66 @@ function productNameCandidate(value, source = "") {
 function productNamesFromHeadline(headline, source) {
   const names = [];
   const clean = plainText(headline).replace(/[–—]/g, " - ");
-  for (const match of clean.matchAll(/\b(?:[A-Z][A-Za-z0-9’'&-]{2,}|[A-Z]{2,})(?:\s+(?:[A-Z][A-Za-z0-9’'&-]{2,}|[A-Z]{2,})){0,4}\b/g)) {
+  const addNameVariants = (raw) => {
+    const words = plainText(raw).split(/\s+/).filter(Boolean);
+    for (let start = Math.max(0, words.length - 5); start < words.length; start += 1) {
+      const candidate = productNameCandidate(words.slice(start).join(" "), source);
+      if (candidate) names.push(candidate);
+    }
+  };
+  const titleToken = String.raw`(?:[A-Z][A-Za-z0-9’'&-]{1,}|[A-Z](?=\s+[A-Z0-9])|\d+[A-Za-z0-9-]*)`;
+  for (const match of clean.matchAll(new RegExp(`\\b${titleToken}(?:\\s+${titleToken}){0,5}\\b`, "g"))) {
     const candidate = productNameCandidate(match[0], source);
     if (candidate) names.push(candidate);
   }
+  for (const match of clean.matchAll(/\b(?:[A-Za-z0-9][A-Za-z0-9’'&-]*\s+){1,5}(?:air\s*fryer|backpack|bag|beverage|bicycle|bottle|brush|camera|candle|card|case|chair|charger|coffee|console|cube|drink|dumpling|earbuds?|foldable|frappuccino|fragrance|gadget|gloss|headphones?|jacket|keyboard|laptop|lip|mascara|mattress|monitor|mouse|mug|phone|plush|router|serum|skincare|smartphone|snack|sneaker|squish(?:y)?|switch|tablet|tote|tracker|toy|tumbler|vacuum|watch|wearable)\b/gi)) {
+    addNameVariants(match[0]);
+  }
   for (const match of clean.matchAll(/\b(?:collectible|frenzy|hunting|popular|restock(?:ed)?|sold out|unboxing|viral|trending)\s+(?:the\s+)?([^:?!-]{2,70})/gi)) {
-    const candidate = productNameCandidate(match[1], source);
-    if (candidate) names.push(candidate);
+    addNameVariants(match[1]);
   }
   return [...new Map(names.map((name) => [productFamilyKey(name), name])).values()];
 }
 
+function productNamesFromIntro(intro, source) {
+  const names = [];
+  const text = plainText(intro);
+  const addNameVariants = (raw) => {
+    const words = plainText(raw).split(/\s+/).filter(Boolean);
+    for (let start = Math.max(0, words.length - 4); start < words.length; start += 1) {
+      const candidate = productNameCandidate(words.slice(start).join(" "), source);
+      if (candidate && hasSpecificProductName(candidate)) names.push(candidate);
+    }
+  };
+  const token = String.raw`(?:[A-Z][A-Za-z0-9’'&-]{1,}|\d+[A-Za-z0-9-]*)`;
+  const category = String.raw`(?:air\s*fryer|backpack|bag|beverage|bicycle|bottle|brush|camera|candle|card|case|chair|charger|coffee|console|cube|drink|dumpling|earbuds?|foldable|frappuccino|fragrance|gadget|gloss|headphones?|jacket|keyboard|laptop|lip|mascara|mattress|monitor|mouse|mug|phone|plush|router|serum|skincare|smartphone|snack|sneaker|squish(?:y)?|switch|tablet|tote|tracker|toy|tumbler|vacuum|watch|wearable)`;
+  for (const match of text.matchAll(new RegExp(`\\b${token}(?:\\s+${token}){0,5}\\s+${category}\\b`, "gi"))) {
+    addNameVariants(match[0]);
+  }
+  for (const candidate of productNamesFromHeadline(text, source)) {
+    if (hasSpecificProductName(candidate)) names.push(candidate);
+  }
+  for (const match of text.matchAll(/[“"]([^“”"\n]{2,80})[”"]/g)) {
+    const candidate = productNameCandidate(match[1], source);
+    if (candidate && hasSpecificProductName(candidate)) names.push(candidate);
+  }
+  return [...new Map(names.map((name) => [productFamilyKey(name), name])).values()];
+}
+
+const productDemandPatterns = [
+  [/\b(?:buy|buying|collect|collector|collecting|hunting|obsessed|recommend|unbox|unboxing)\b/i, 1],
+  [/\b(?:viral|went viral|going viral|trending|social media|internet|frenzy|craze|popular demand)\b/i, 2],
+  [/\b(?:demand|high demand|surging|soaring|record(?:-breaking)?|hit|smash hit|fan favorite|customer favorite)\b/i, 2],
+  [/\b(?:preorder|pre-orders?|backorder(?:ed)?|wait[- ]?list|shipments? delayed|orders? delayed|sold out|selling out|sell out|restock(?:ed)?|shortage)\b/i, 2],
+  [/\b(?:\d[\d,.]*\s*(?:million|thousand|m)\s+(?:units?|sales|orders?|beverages?))\b/i, 3],
+];
+
+function productDemandScore(value) {
+  return productDemandPatterns.reduce((score, [pattern, weight]) => score + (pattern.test(value) ? weight : 0), 0);
+}
+
 function productDemandSignal(value) {
-  return /\b(?:buy|buying|collect|collector|demand|everyone|frenzy|hunting|obsessed|popular|recommend|restock|selling out|sold out|unbox|viral|went viral|going viral|trending|social media|internet)\b/i.test(value);
+  return productDemandScore(value) > 0;
 }
 
 function productControversySignal(value) {
@@ -2172,7 +2277,7 @@ function productControversySignal(value) {
 }
 
 function productScarcitySignal(value) {
-  return /\b(?:back in stock|hard to find|limited|restock|sold out|waitlist|wait-list)\b/i.test(value);
+  return /\b(?:back in stock|backordered?|hard to find|limited|restock|sold out|waitlist|wait-list|shipments? delayed|orders? delayed|shortage)\b/i.test(value);
 }
 
 function productFreshness(publishedAt) {
@@ -2249,8 +2354,9 @@ function parseAmazonMoverHtml(html, category) {
 }
 
 async function amazonMoversAndShakers() {
-  if (process.env.PRODUCT_MOVERS_SNAPSHOT) {
-    const rows = JSON.parse(process.env.PRODUCT_MOVERS_SNAPSHOT);
+  const snapshot = process.env.PRODUCT_MOVERS_SNAPSHOT ?? process.env.PRODUCT_TRENDS_SNAPSHOT;
+  if (snapshot) {
+    const rows = JSON.parse(snapshot);
     if (!Array.isArray(rows)) throw new Error("PRODUCT_MOVERS_SNAPSHOT is invalid");
     return rows.filter((row) => row && typeof row.query === "string").map((row) => ({
       ...row,
@@ -2274,35 +2380,140 @@ function googleNewsItemValue(item, tag) {
   return plainText(item.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"))?.[1] ?? "");
 }
 
-async function viralProductNewsItems() {
-  const feeds = await mapConcurrent(productDiscoveryQueries, 3, async (query) => {
-    const feedUrl = new URL("https://news.google.com/rss/search");
-    feedUrl.search = new URLSearchParams({ q: `${query} when:90d`, hl: "en-US", gl: "US", ceid: "US:en" });
-    const rss = await fetchText(feedUrl);
-    return [...rss.matchAll(/<item>([\s\S]*?)<\/item>/gi)].slice(0, 40).map((match) => {
-      const item = match[1];
-      const source = googleNewsItemValue(item, "source") || "Google News";
-      const rawHeadline = googleNewsItemValue(item, "title");
-      const headline = rawHeadline.endsWith(` - ${source}`)
-        ? rawHeadline.slice(0, -source.length - 3).trim()
-        : rawHeadline.replace(/\s+-\s+[^-]{2,80}$/, "").trim();
-      const link = googleNewsItemValue(item, "link");
-      const published = googleNewsItemValue(item, "pubDate");
-      const publishedAt = new Date(published);
-      return {
-        headline,
-        source,
-        link,
-        publishedAt: Number.isNaN(publishedAt.getTime()) ? null : publishedAt.toISOString(),
-        query,
-      };
-    }).filter((item) => item.headline && item.link && item.publishedAt);
-  });
-  return feeds.flat();
+function parseProductNewsFeed(rss, query) {
+  return [...rss.matchAll(/<item>([\s\S]*?)<\/item>/gi)].slice(0, 40).map((match) => {
+    const item = match[1];
+    const sourceTag = item.match(/<source\b([^>]*)>([\s\S]*?)<\/source>/i);
+    const source = plainText(sourceTag?.[2] ?? "") || "Google News";
+    const sourceUrl = sourceTag?.[1]?.match(/\burl=["']([^"']+)/i)?.[1] ?? "";
+    const rawHeadline = googleNewsItemValue(item, "title");
+    const headline = rawHeadline.endsWith(` - ${source}`)
+      ? rawHeadline.slice(0, -source.length - 3).trim()
+      : rawHeadline.replace(/\s+-\s+[^-]{2,80}$/, "").trim();
+    const link = googleNewsItemValue(item, "link");
+    const published = googleNewsItemValue(item, "pubDate");
+    const publishedAt = new Date(published);
+    return {
+      headline,
+      source,
+      ...(sourceUrl ? { sourceUrl } : {}),
+      link,
+      publishedAt: Number.isNaN(publishedAt.getTime()) ? null : publishedAt.toISOString(),
+      query,
+    };
+  }).filter((item) => item.headline && item.link && item.publishedAt);
+}
+
+function productExpansionSeeds(observations, movers = []) {
+  const groups = new Map();
+  for (const observation of observations) {
+    for (const name of productNamesFromHeadline(observation.headline, observation.source)) {
+      if (isGenericProductCandidate(name)) continue;
+      const key = productFamilyKey(name);
+      if (!key) continue;
+      const entry = groups.get(key) ?? { name, sources: new Set(), score: 0, context: 0 };
+      entry.sources.add(normalize(observation.source));
+      entry.context += Number(hasProductContext({ name, observations: [{ headline: observation.headline }] }));
+      entry.score += productDemandScore(observation.headline) + productFreshness(observation.publishedAt)
+        + (hasProductContext({ name, observations: [{ headline: observation.headline }] }) ? 2 : 0);
+      if (name.length > entry.name.length) entry.name = name;
+      groups.set(key, entry);
+    }
+  }
+  for (const mover of movers) {
+    const name = productNameCandidate(mover.query ?? mover.title ?? "");
+    if (!name || isGenericProductCandidate(name)) continue;
+    const key = productFamilyKey(name);
+    const entry = groups.get(key) ?? { name, sources: new Set(), score: 0, context: 0 };
+    entry.score += Math.max(1, Number(mover.gain ?? 0) / 25);
+    if (name.length > entry.name.length) entry.name = name;
+    groups.set(key, entry);
+  }
+  return [...groups.values()]
+    .filter((entry) => (hasSpecificProductName(entry.name) || isBrandLikeProductName(entry.name)) && (entry.context > 0 || hasSpecificProductName(entry.name)))
+    .sort((left, right) => right.context - left.context || right.score - left.score || right.sources.size - left.sources.size)
+    .slice(0, 20)
+    .map((entry) => entry.name);
+}
+
+async function productNewsFeed(query) {
+  const feedUrl = new URL("https://news.google.com/rss/search");
+  feedUrl.search = new URLSearchParams({ q: `${query} when:90d`, hl: "en-US", gl: "US", ceid: "US:en" });
+  return parseProductNewsFeed(await fetchText(feedUrl), query);
+}
+
+async function viralProductNewsItems(movers = []) {
+  const feeds = await mapConcurrent(productDiscoveryQueries, 3, productNewsFeed);
+  const initial = feeds.flat();
+  const seeds = productExpansionSeeds(initial, movers);
+  const expansionQueries = [...new Set(seeds.flatMap((seed) => [
+    `"${seed}" viral`,
+    `"${seed}" trending product`,
+  ]))];
+  const expandedFeeds = await mapConcurrent(expansionQueries, 3, productNewsFeed);
+  return [...initial, ...expandedFeeds.flat()];
+}
+
+function productTokenSet(value) {
+  return new Set(productFamilyKey(value).split(" ").filter((token) => token.length > 1));
+}
+
+function isBlockedSocialUrl(rawUrl) {
+  try {
+    const url = new URL(rawUrl);
+    const hostname = url.hostname.toLowerCase();
+    return /tiktok/i.test(url.href)
+      || hostname === "tiktok.com"
+      || hostname.endsWith(".tiktok.com")
+      || hostname.includes("tiktok");
+  } catch {
+    return false;
+  }
+}
+
+const productArticleResolutionCache = new Map();
+
+async function resolveProductArticle(rawUrl) {
+  if (!rawUrl) return rawUrl;
+  let parsed;
+  try { parsed = new URL(rawUrl); } catch { return rawUrl; }
+  if (parsed.hostname !== "news.google.com") return parsed.href;
+  if (!productArticleResolutionCache.has(parsed.href)) {
+    const request = resolveGoogleNewsArticle(parsed.href).catch((error) => {
+      productArticleResolutionCache.delete(parsed.href);
+      throw error;
+    });
+    productArticleResolutionCache.set(parsed.href, request);
+  }
+  return productArticleResolutionCache.get(parsed.href);
+}
+
+function productTokenOverlap(left, right) {
+  const leftTokens = productTokenSet(left);
+  const rightTokens = productTokenSet(right);
+  if (!leftTokens.size || !rightTokens.size) return 0;
+  const shared = [...leftTokens].filter((token) => rightTokens.has(token)).length;
+  return shared / Math.min(leftTokens.size, rightTokens.size);
+}
+
+function productTokenSubset(shorter, longer) {
+  const shortTokens = productTokenSet(shorter);
+  const longTokens = productTokenSet(longer);
+  return shortTokens.size > 0 && shortTokens.size < longTokens.size
+    && [...shortTokens].every((token) => longTokens.has(token));
+}
+
+function bestProductMover(group, movers) {
+  const exact = movers.find((mover) => productFamilyKey(mover.query ?? mover.title ?? "") === group.key);
+  if (exact) return exact;
+  return movers
+    .map((mover) => ({ mover, overlap: productTokenOverlap(group.name, mover.query ?? mover.title ?? "") }))
+    .filter((entry) => entry.overlap >= 0.6)
+    .sort((left, right) => right.overlap - left.overlap || Number(right.mover.gain ?? 0) - Number(left.mover.gain ?? 0))[0]?.mover;
 }
 
 async function viralProductCandidates(movers) {
-  const observations = await viralProductNewsItems();
+  const observations = await viralProductNewsItems(movers);
   const groups = new Map();
   for (const observation of observations) {
     if ((Date.now() - Date.parse(observation.publishedAt)) > 90 * 86_400_000) continue;
@@ -2328,12 +2539,11 @@ async function viralProductCandidates(movers) {
     .filter((group) => !productIdentityPattern.test(group.name)
       && group.name.trim().split(/\s+/).length >= 2
       && new Set(group.observations.map((item) => normalize(item.source))).size >= 2)
-    .slice(0, 80);
-  const personFlags = new Map(await mapConcurrent(personCheckGroups, 4, async (group) => [
+    .slice(0, 24);
+  const personFlags = new Map(await mapConcurrent(personCheckGroups, 1, async (group) => [
     group.key,
     await wikidataSearchIsPerson(group.name).catch(() => false),
   ]));
-  const moverMap = new Map(movers.map((mover) => [productGroupKey(mover.query ?? mover.title ?? ""), mover]));
   const candidates = namedGroups.filter((group) => !personFlags.get(group.key)).map((group) => {
     const sources = new Set(group.observations.map((item) => normalize(item.source)));
     const positive = group.observations.filter((item) => item.demand);
@@ -2342,16 +2552,16 @@ async function viralProductCandidates(movers) {
     const scarcity = group.observations.filter((item) => item.scarcity).length;
     const adControversy = group.observations.some((item) => productAdControversyPattern.test(item.headline));
     const controversyOnly = adControversy && organicPositive.length < 2 && scarcity === 0;
-    const mover = moverMap.get(group.key)
-      ?? movers.find((item) => productGroupKey(item.title ?? "").startsWith(group.key) || group.key.startsWith(productGroupKey(item.title ?? "")));
-    const social = Math.min(1, positive.length / 4);
+    const mover = bestProductMover(group, movers);
+    const social = Math.min(1, positive.reduce((total, item) => total + productDemandScore(item.headline), 0) / 8);
     const confirming = Math.min(1, sources.size / 4);
     const freshness = Math.max(...group.observations.map((item) => productFreshness(item.publishedAt)), 0);
-    const retail = mover ? Math.min(1, Math.max(0.25, Number(mover.gain ?? 0) / 100)) : 0;
+    const retailGain = Number(mover?.gain ?? 0);
+    const retail = mover && retailGain > 0 ? Math.min(1, Math.max(0.25, retailGain / 100)) : 0;
     const scarcityScore = Math.min(1, scarcity / 2);
     const score = 35 * social + 30 * retail + 20 * freshness + 10 * confirming + 5 * scarcityScore
       - controversy * 8 - (adControversy ? 15 : 0);
-    const best = [...group.observations].sort((left, right) => Number(right.demand) - Number(left.demand)
+    const best = [...group.observations].sort((left, right) => productDemandScore(right.headline) - productDemandScore(left.headline)
       || Date.parse(right.publishedAt) - Date.parse(left.publishedAt))[0];
     return {
       ...group,
@@ -2360,7 +2570,8 @@ async function viralProductCandidates(movers) {
       sourceCount: sources.size,
       observations: group.observations,
       best,
-      qualifies: organicPositive.length > 0 && !controversyOnly && (Boolean(mover) || sources.size >= 2),
+      qualifies: organicPositive.length > 0 && !controversyOnly
+        && ((mover && retailGain > 0) || sources.size >= 2),
     };
   }).filter((candidate) => {
     const repeated = new Set(candidate.observations.map((item) => normalize(item.source))).size >= 2;
@@ -2371,97 +2582,271 @@ async function viralProductCandidates(movers) {
     .slice(0, 24);
   if (candidates.length < 5) throw new Error(`Only ${candidates.length} products had qualifying recent viral evidence`);
   const enriched = await mapConcurrent(candidates, 3, async (candidate) => {
-    const evidence = await mapConcurrent(candidate.observations.slice(0, 5), 2, async (item) => {
-      const directUrl = await resolveGoogleNewsArticle(item.link).catch(() => item.link);
+    const prioritizedObservations = [...candidate.observations]
+      .sort((left, right) => productDemandScore(right.headline) - productDemandScore(left.headline)
+        || Number(productIdentityPattern.test(right.headline)) - Number(productIdentityPattern.test(left.headline))
+        || Date.parse(right.publishedAt) - Date.parse(left.publishedAt))
+      .slice(0, 8);
+    const evidence = (await mapConcurrent(prioritizedObservations, 2, async (item) => {
+      const directUrl = await resolveProductArticle(item.link).catch(() => item.link);
       const metadata = directUrl === item.link
         ? null
         : await linkedArticleMetadata(directUrl, { allowMissingImage: true }).catch(() => null);
-      return { ...item, directUrl, intro: metadata?.intro ?? "" };
-    });
+      return {
+        ...item,
+        directUrl,
+        intro: metadata?.intro ?? "",
+        ...(metadata?.imageSource ? { imageSource: metadata.imageSource, imageAlt: metadata.imageAlt, imageSourcePageUrl: metadata.url } : {}),
+      };
+    })).filter((item) => !isBlockedSocialUrl(item.directUrl));
     const publisherHosts = new Set(evidence.map((item) => {
       try { return new URL(item.directUrl).hostname; } catch { return normalize(item.source); }
     }));
     const bestEvidence = [...evidence].sort((left, right) => (
       Number(Boolean(usableProductIntro(right.intro))) - Number(Boolean(usableProductIntro(left.intro)))
-      || Number(right.demand) - Number(left.demand)
+      || productDemandScore(right.intro || right.headline) - productDemandScore(left.intro || left.headline)
       || Number(right.scarcity) - Number(left.scarcity)
       || Date.parse(right.publishedAt) - Date.parse(left.publishedAt)
     ))[0];
     const rssSourceCount = new Set(candidate.observations.map((item) => normalize(item.source))).size;
-    return { ...candidate, evidence, sourceCount: Math.max(publisherHosts.size, rssSourceCount), bestEvidence };
+    const contextNames = evidence.flatMap((item) => productNamesFromIntro(item.intro ?? "", item.source ?? ""));
+    const headlineNames = candidate.observations.flatMap((item) => productNamesFromHeadline(item.headline ?? "", item.source ?? ""));
+    const moverName = productNameCandidate(candidate.mover?.query ?? candidate.mover?.title ?? "");
+    const strongerName = [moverName, ...contextNames, ...headlineNames]
+      .filter((name) => hasSpecificProductName(name))
+      .sort((left, right) => Number(hasSpecificProductName(right) && productFamilyKey(right).split(" ").some((token) => /[a-z]\d|\d[a-z]/i.test(token)))
+        - Number(hasSpecificProductName(left) && productFamilyKey(left).split(" ").some((token) => /[a-z]\d|\d[a-z]/i.test(token)))
+        || Number(productIdentityPattern.test(right)) - Number(productIdentityPattern.test(left))
+        || right.length - left.length)[0];
+    const candidateKey = productFamilyKey(candidate.name);
+    const canUpgradeName = strongerName && (!hasSpecificProductName(candidate.name)
+      || (productTokenSubset(candidate.name, strongerName)
+        && !candidateKey.split(" ").some((token) => /[a-z]\d|\d[a-z]/i.test(token))));
+    return {
+      ...candidate,
+      ...(canUpgradeName ? { name: strongerName } : {}),
+      evidence,
+      sourceCount: Math.max(publisherHosts.size, rssSourceCount),
+      bestEvidence,
+    };
   });
-  const specificNames = enriched.filter((candidate) => productIdentityPattern.test(candidate.name));
-  const filtered = enriched
+  const deduped = [...new Map(enriched
+    .sort((left, right) => right.score - left.score || right.sourceCount - left.sourceCount)
+    .map((candidate) => [productFamilyKey(candidate.name), candidate])).values()];
+  const specificNames = deduped.filter((candidate) => hasSpecificProductName(candidate.name));
+  const namedAlternatives = deduped.filter((candidate) => hasSpecificProductName(candidate.name) || isBrandLikeProductName(candidate.name));
+  const filtered = deduped
     .filter((candidate) => candidate.sourceCount >= 2)
+    .filter((candidate) => (hasSpecificProductName(candidate.name) || isBrandLikeProductName(candidate.name))
+      && hasProductContext(candidate))
     .filter((candidate) => !specificNames.some((specific) => specific.key !== candidate.key
       && normalize(specific.name).startsWith(`${normalize(candidate.name)} `)
       && specific.score >= candidate.score * 0.8))
+    .filter((candidate) => !specificNames.some((specific) => specific.key !== candidate.key
+      && productTokenOverlap(candidate.name, specific.name) >= 0.5
+      && productFamilyKey(candidate.name).split(" ").length < productFamilyKey(specific.name).split(" ").length
+      && productFamilyKey(specific.name).split(" ").some((token) => /[a-z]\d|\d[a-z]/i.test(token))))
+    .filter((candidate) => !specificNames.some((specific) => specific.key !== candidate.key
+      && productTokenSubset(candidate.name, specific.name)
+      && candidate.observations.some((observation) => specific.observations.some((other) => other.link === observation.link))
+      && specific.score >= candidate.score * 0.75))
+    .filter((candidate) => !genericProductTailPattern.test(candidate.name)
+      || !namedAlternatives.some((alternative) => alternative.key !== candidate.key
+        && productFamilyKey(alternative.name).split(" ").length > productFamilyKey(candidate.name).split(" ").length
+        && candidate.observations.some((observation) => alternative.observations.some((other) => other.link === observation.link))
+        && alternative.score >= candidate.score * 0.75))
+    .filter((candidate) => !specificNames.some((specific) => specific.key !== candidate.key
+      && candidate.observations.some((observation) => specific.observations.some((other) => other.link === observation.link))
+      && productFamilyKey(candidate.name).split(" ").length === 1
+      && specific.score >= candidate.score * 0.75))
     .slice(0, 18);
   return (filtered.length >= 5
     ? filtered
-    : enriched.filter((candidate) => candidate.sourceCount >= 2).slice(0, 18));
+    : deduped.filter((candidate) => candidate.sourceCount >= 2
+      && (hasSpecificProductName(candidate.name) || isBrandLikeProductName(candidate.name))
+      && hasProductContext(candidate)
+      && (!genericProductTailPattern.test(candidate.name)
+        || !namedAlternatives.some((alternative) => alternative.key !== candidate.key
+          && productFamilyKey(alternative.name).split(" ").length > productFamilyKey(candidate.name).split(" ").length
+          && candidate.observations.some((observation) => alternative.observations.some((other) => other.link === observation.link))
+          && alternative.score >= candidate.score * 0.75))).slice(0, 18));
+}
+
+async function sourcePageProductMatch(row, excludedHost = "") {
+  const candidates = [row.bestEvidence, ...(row.evidence ?? []), row.best].filter(Boolean);
+  for (const candidate of candidates) {
+    const rawUrl = candidate.directUrl ?? candidate.link;
+    const rawUrls = [rawUrl, candidate.sourceUrl];
+    let requiresSearch = true;
+    try { requiresSearch = new URL(rawUrl).hostname === "news.google.com"; } catch { /* Bing can still recover a malformed feed URL. */ }
+    if (requiresSearch) {
+      const searchResults = await mapConcurrent([...new Set([candidate.headline, row.query].filter(Boolean))], 2, (query) =>
+        bingSearchArticles(query, ""));
+      rawUrls.push(...searchResults.flat().map((result) => result.url));
+    }
+    for (const rawCandidate of rawUrls) {
+      if (!rawCandidate) continue;
+      let rawUrl = rawCandidate;
+      try {
+        const parsed = new URL(rawUrl);
+        if (parsed.hostname === "news.google.com") rawUrl = await resolveProductArticle(rawUrl);
+      } catch { continue; }
+      let url;
+      try { url = new URL(rawUrl); } catch { continue; }
+      if (url.protocol !== "https:" || url.hostname === "news.google.com" || isBlockedSocialUrl(url.href)
+        || !usableArticleUrl(url.href) || (excludedHost && sameArticleDomain(url.href, excludedHost))) continue;
+      return {
+        ...row,
+        title: row.query,
+        url: url.href,
+        searchUrl: url.href,
+        commerceSource: "Recent source page",
+        image: candidate.imageSource,
+        imageSourceKind: candidate.imageSource ? "article" : undefined,
+        imageSourcePageUrl: candidate.imageSource ? (candidate.imageSourcePageUrl ?? url.href) : undefined,
+      };
+    }
+  }
+  return null;
+}
+
+async function productImageFromEvidence(row, excludedHost = "") {
+  const candidates = [
+    ...(row.evidence ?? []),
+    row.bestEvidence,
+    row.best,
+  ].filter(Boolean).slice(0, 8);
+  for (const candidate of candidates) {
+    let rawUrl = candidate.directUrl ?? candidate.link ?? candidate.url;
+    if (!rawUrl) continue;
+    try {
+      const parsed = new URL(rawUrl);
+      if (parsed.hostname === "news.google.com") rawUrl = await resolveProductArticle(rawUrl);
+    } catch {
+      continue;
+    }
+    let url;
+    try { url = new URL(rawUrl); } catch { continue; }
+    if (url.protocol !== "https:" || url.hostname === "news.google.com" || isBlockedSocialUrl(url.href)
+      || !usableArticleUrl(url.href) || (excludedHost && sameArticleDomain(url.href, excludedHost))) continue;
+    if (candidate.imageSource && candidate.imageSourcePageUrl) {
+      return {
+        image: candidate.imageSource,
+        imageSourcePageUrl: candidate.imageSourcePageUrl,
+      };
+    }
+    const metadata = await linkedArticleMetadata(url.href, { allowMissingImage: true }).catch(() => null);
+    if (metadata?.imageSource) {
+      return {
+        image: metadata.imageSource,
+        imageSourcePageUrl: metadata.url,
+      };
+    }
+  }
+  return null;
 }
 
 async function amazonProducts(rows) {
-  return withHeadlessPage({
-    allowedHosts: new Set(["www.amazon.com"]),
-    work: async (page) => {
-      const products = [];
-      for (const row of rows.slice(0, 20)) {
-        const contextText = [
-          row.best?.headline,
-          row.bestEvidence?.headline,
-          ...(row.observations ?? []).map((item) => item.headline),
-        ].filter(Boolean).join(" ");
-        const focusTerms = [...new Set(productTokens(contextText).filter((token) => amazonFocusTerms.has(token)))];
-        const amazonQuery = [row.query, ...focusTerms.slice(0, 2)].join(" ");
-        const searchUrl = new URL("https://www.amazon.com/s");
-        searchUrl.search = new URLSearchParams({ k: amazonQuery, s: "exact-aware-popularity-rank" });
-        await page.navigate(searchUrl, 1_600);
-        const cards = await page.evaluate(`Array.from(document.querySelectorAll("[data-asin]")).map((card) => { const asin = card.getAttribute("data-asin"); const links = Array.from(card.querySelectorAll('a[href*="/dp/"]')); const titleLink = links.find((link) => (link.innerText || "").trim().length > 8); return { asin, title: (titleLink?.innerText || "").replace(/\\s+/g, " ").trim(), text: (card.innerText || "").replace(/\\s+/g, " ").trim(), image: card.querySelector("img.s-image")?.src || "" }; }).filter((card) => /^[A-Z0-9]{10}$/.test(card.asin) && card.title)`);
-        const tokens = productTokens(row.query);
-        const required = Math.max(1, tokens.length - (tokens.length >= 3 ? 1 : 0));
-        const beautyContext = /\b(?:beauty|skincare|skin care|makeup|hair)\b/i.test(contextText);
-        const match = cards.filter((card) => {
-          const cardTokens = new Set(productTokens(card.text));
-          return tokens.filter((token) => cardTokens.has(token)).length >= required;
-        }).sort((left, right) => {
-          const score = (card) => {
-            const cardTokens = new Set(productTokens(card.text));
-            const focusMatches = focusTerms.filter((term) => cardTokens.has(term)).length;
-            const unsuitable = beautyContext && /\b(?:toy|kids?|children|role[- ]play)\b/i.test(card.text) ? 20 : 0;
-            return focusMatches * 10 - unsuitable;
-          };
-          return score(right) - score(left);
-        })[0];
-        if (!match) {
-          console.warn(`Amazon match unavailable: #${row.rank} ${row.query}`);
-          continue;
+  let amazonMatches = [];
+  try {
+    amazonMatches = await withHeadlessPage({
+      allowedHosts: new Set(["www.amazon.com"]),
+      work: async (page) => {
+        const products = [];
+        for (const row of rows.slice(0, 20)) {
+          const contextText = [
+            row.best?.headline,
+            row.bestEvidence?.headline,
+            ...(row.observations ?? []).map((item) => item.headline),
+          ].filter(Boolean).join(" ");
+          const focusTerms = [...new Set(productTokens(contextText).filter((token) => amazonFocusTerms.has(token)))];
+          const amazonQuery = [row.query, ...focusTerms.slice(0, 2)].join(" ");
+          const searchUrl = new URL("https://www.amazon.com/s");
+          searchUrl.search = new URLSearchParams({ k: amazonQuery, s: "exact-aware-popularity-rank" });
+          await page.navigate(searchUrl, 1_600);
+          const cards = await page.evaluate(`Array.from(document.querySelectorAll("[data-asin]")).map((card) => { const asin = card.getAttribute("data-asin"); const links = Array.from(card.querySelectorAll('a[href*="/dp/"]')); const titleLink = links.find((link) => (link.innerText || "").trim().length > 8); return { asin, title: (titleLink?.innerText || "").replace(/\\s+/g, " ").trim(), text: (card.innerText || "").replace(/\\s+/g, " ").trim(), image: card.querySelector("img.s-image")?.src || "" }; }).filter((card) => /^[A-Z0-9]{10}$/.test(card.asin) && card.title)`);
+          const tokens = productTokens(row.query);
+          const specificTokens = tokens.filter((token) => !genericProductWords.has(token));
+          const categoryTokens = amazonCategoryTokens(row.query);
+          const beautyContext = /\b(?:beauty|skincare|skin care|makeup|hair)\b/i.test(contextText);
+          const match = cards.filter((card) => {
+            const cardTitleTokens = productTokenSet(card.title);
+            const cardTokens = productTokenSet(`${card.title} ${card.text}`);
+            if (specificTokens.length && !specificTokens.every((token) => cardTitleTokens.has(token))) return false;
+            if (categoryTokens.length && !categoryTokens.some((token) => cardTitleTokens.has(token))) return false;
+            if (categoryTokens.some((token) => ["vacuum", "phone", "fold", "frappuccino"].some((category) => token.startsWith(category)))
+              && amazonAccessoryPattern.test(card.title)) return false;
+            const required = specificTokens.length ? specificTokens.length : Math.max(1, tokens.length - (tokens.length >= 3 ? 1 : 0));
+            return tokens.filter((token) => cardTokens.has(token)).length >= required;
+          }).sort((left, right) => {
+            const score = (card) => {
+              const cardTokens = productTokenSet(`${card.title} ${card.text}`);
+              const focusMatches = focusTerms.filter((term) => cardTokens.has(term)).length;
+              const unsuitable = beautyContext && /\b(?:toy|kids?|children|role[- ]play)\b/i.test(card.text) ? 20 : 0;
+              return focusMatches * 10 - unsuitable;
+            };
+            return score(right) - score(left);
+          })[0];
+          if (!match) continue;
+          products.push({
+            ...row,
+            ...match,
+            commerceSource: "Amazon listing",
+            url: `https://www.amazon.com/dp/${match.asin}`,
+            searchUrl: searchUrl.href,
+          });
+          if (products.length === 10) break;
         }
-        products.push({
-          ...row,
-          ...match,
-          url: `https://www.amazon.com/dp/${match.asin}`,
-          searchUrl: searchUrl.href,
-        });
-        if (products.length === 10) break;
-      }
-      if (products.length < 5) throw new Error(`Only ${products.length} viral products had a matching Amazon listing`);
-      return products;
-    },
+        return products;
+      },
+    });
+  } catch (error) {
+    console.warn(`Amazon product matching unavailable; using validated source pages where possible: ${error instanceof Error ? error.message : String(error)}`);
+  }
+
+  const matches = [...amazonMatches];
+  const matchedKeys = new Set(amazonMatches.map((row) => productFamilyKey(row.query)));
+  for (const row of rows) {
+    if (matches.length >= 10 || matchedKeys.has(productFamilyKey(row.query))) continue;
+    const fallback = await sourcePageProductMatch(row);
+    if (!fallback) continue;
+    matches.push(fallback);
+    matchedKeys.add(productFamilyKey(row.query));
+  }
+  if (matches.length < 5) throw new Error(`Only ${matches.length} qualifying products had a matching Amazon or validated source page`);
+  const enrichedMatches = await mapConcurrent(matches, 3, async (row) => {
+    let excludedHost = "";
+    try { excludedHost = new URL(row.url).hostname; } catch { /* validation will reject malformed commerce URLs. */ }
+    const sourcePage = await sourcePageProductMatch(row, excludedHost);
+    const sourceImage = await productImageFromEvidence(row, excludedHost);
+    return sourcePage ? {
+      ...row,
+      recentSourceUrl: sourcePage.url,
+      ...(sourcePage.image ? { recentSourceImage: sourcePage.image, recentSourceImagePageUrl: sourcePage.imageSourcePageUrl } : {}),
+      ...(sourceImage ? { recentSourceImage: sourceImage.image, recentSourceImagePageUrl: sourceImage.imageSourcePageUrl } : {}),
+    } : sourceImage ? {
+      ...row,
+      recentSourceImage: sourceImage.image,
+      recentSourceImagePageUrl: sourceImage.imageSourcePageUrl,
+    } : row;
   });
+  const directEvidence = enrichedMatches.filter((row) => (row.evidence ?? []).some((entry) => usableProductEvidenceUrl(entry))
+    || row.recentSourceUrl);
+  if (directEvidence.length < 5) throw new Error(`Only ${directEvidence.length} products had a direct publisher evidence link`);
+  return directEvidence;
 }
 
 async function productLeaderboard() {
   const movers = await amazonMoversAndShakers();
   const candidates = await viralProductCandidates(movers);
+  console.log(`Product candidates: ${candidates.map((candidate) => `${candidate.name} (${candidate.sourceCount} sources)`).join(" | ")}`);
   const products = await amazonProducts(candidates.map((candidate, index) => ({
     ...candidate,
     query: candidate.name,
     rank: index + 1,
     growth: candidate.mover ? `+${candidate.mover.gain ?? 0} ranks` : "Social discovery",
   })));
-  if (products.length < 5) throw new Error("Viral product discovery produced fewer than five Amazon matches");
+  if (products.length < 5) throw new Error("Viral product discovery produced fewer than five commerce matches");
   return products;
 }
 
@@ -2483,6 +2868,10 @@ function amazonProductIdentity(query, listingTitle) {
   return ensureSentence(`${title} refers here to the ${product}`);
 }
 
+function productDisplayTitle(value) {
+  return titleCase(value).replace(/\b([A-Za-z]{2,})(\d{1,3}[A-Za-z]*)\b/g, "$1 $2");
+}
+
 function productRecentDescription(product, identity) {
   const candidates = [product.bestEvidence, ...(product.evidence ?? []), product.best]
     .filter(Boolean)
@@ -2492,14 +2881,16 @@ function productRecentDescription(product, identity) {
       const text = conciseSentences(intro || headline, 280);
       return {
         text,
-        demand: productDemandSignal(text),
+        overlap: productTokenOverlap(product.query, `${candidate.headline ?? ""} ${candidate.intro ?? ""}`),
+        demand: productDemandScore(text),
         scarcity: productScarcitySignal(text),
         controversy: productControversySignal(text),
         freshness: productFreshness(candidate.publishedAt),
       };
     })
-    .filter((candidate) => candidate.text && !candidate.controversy)
-    .sort((left, right) => Number(right.demand) - Number(left.demand)
+    .filter((candidate) => candidate.text && candidate.overlap > 0 && !candidate.controversy)
+    .sort((left, right) => right.overlap - left.overlap
+      || right.demand - left.demand
       || Number(right.scarcity) - Number(left.scarcity)
       || right.freshness - left.freshness
       || right.text.length - left.text.length);
@@ -2515,6 +2906,18 @@ function productRecentDescription(product, identity) {
   return conciseSentences(`${identity} Recent coverage connects it with ${lowerFirst(recent)}`, 560);
 }
 
+function usableProductEvidenceUrl(entry) {
+  const rawUrl = entry?.directUrl ?? entry?.sourceUrl ?? entry?.link;
+  try {
+    const url = new URL(rawUrl);
+    const sourceHomepage = entry?.sourceUrl && rawUrl === entry.sourceUrl;
+    return url.protocol === "https:" && url.hostname !== "news.google.com" && !isBlockedSocialUrl(url.href)
+      && (sourceHomepage || usableArticleUrl(url.href)) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 async function updateProducts(brief, products) {
   const section = brief.sections.find((entry) => entry.id === "products");
   if (!section) return;
@@ -2522,14 +2925,20 @@ async function updateProducts(brief, products) {
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
   const allItems = products.map((product, index) => {
-    const title = titleCase(product.query);
+    const title = productDisplayTitle(product.query);
     const current = currentByTitle.get(normalize(title));
     const identity = amazonProductIdentity(product.query, product.title);
     const description = productRecentDescription(product, identity);
-    const socialEvidence = (product.evidence ?? []).slice(0, 3).map((item) => ({
-      source: `${item.source} via Google News`,
-      url: item.directUrl ?? item.link,
-    }));
+    const socialEvidence = [
+      ...(product.recentSourceUrl ? [{ source: "Recent product coverage", directUrl: product.recentSourceUrl }] : []),
+      ...(product.evidence ?? []).flatMap((entry) => [
+        entry,
+        ...(entry.sourceUrl ? [{ ...entry, directUrl: entry.sourceUrl, source: `${entry.source} publisher` }] : []),
+      ]),
+    ].map((item) => {
+      const url = usableProductEvidenceUrl(item);
+      return url ? { source: `${item.source} via Google News`, url } : null;
+    }).filter(Boolean).slice(0, 3);
     const moverEvidence = product.mover
       ? [{ source: `Amazon Movers & Shakers · ${product.mover.category}`, url: product.mover.sourceUrl }]
       : [];
@@ -2539,13 +2948,16 @@ async function updateProducts(brief, products) {
       subtitle: "Product",
       description: description.slice(0, 600),
       image: current?.image ?? `/culture/product-${slugify(title)}.webp`,
-      imageSource: product.image,
+      ...(product.image ? { imageSource: product.image } : {}),
+      ...(product.recentSourceImage ? { imageSource: product.recentSourceImage, imageSourceKind: "article", imageSourcePageUrl: product.recentSourceImagePageUrl ?? product.recentSourceUrl } : {}),
+      ...(product.imageSourceKind ? { imageSourceKind: product.imageSourceKind } : {}),
+      ...(product.imageSourcePageUrl ? { imageSourcePageUrl: product.imageSourcePageUrl } : {}),
       alt: current?.alt ?? `${title} product listing image`,
       url: product.url,
-      source: "Amazon",
+      source: product.commerceSource ?? "Amazon",
       metric: { label: "Independent viral sources", value: `${product.sourceCount} sources` },
       evidence: [
-        { source: "Amazon listing", url: product.url },
+        { source: product.commerceSource ?? "Amazon listing", url: product.url },
         ...moverEvidence,
         ...socialEvidence,
       ],
@@ -2567,11 +2979,11 @@ async function updateProducts(brief, products) {
   });
   section.eyebrow = "Social trend evidence · past 90 days";
   section.title = "Products";
-  section.description = "Products with recent, explicit viral-demand coverage and a matching Amazon listing. Candidates combine social evidence, Amazon Movers & Shakers velocity when available, freshness, independent confirmations, and scarcity signals; retail movement alone never qualifies a product.";
+  section.description = "Products with recent, explicit demand evidence and a validated purchase or source page. Amazon listings are preferred; candidates combine social evidence, retail velocity when available, freshness, independent confirmations, and scarcity signals; retail movement alone never qualifies a product.";
   section.sources = [
     { label: "Amazon Movers & Shakers", url: amazonMoverCategories[0].url },
     { label: "Google News · viral product coverage, 90 days", url: productDiscoveryUrl },
-    { label: "Amazon · best-selling match", url: products[0].searchUrl ?? products[0].url },
+    { label: products.some((product) => product.commerceSource === "Amazon listing") ? "Amazon · best-selling match" : "Validated product source pages", url: products[0].searchUrl ?? products[0].url },
   ];
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5);
@@ -2610,7 +3022,7 @@ async function googleTrendingNews() {
     .sort((left, right) => right.searches - left.searches || left.sourceOrder - right.sourceOrder)
     .slice(0, 10);
   if (filtered.length < 6) throw new Error(`Only ${filtered.length} non-person, non-sports news topics remained`);
-  return mapConcurrent(filtered, 4, async (row) => {
+  const topics = await mapConcurrent(filtered, 4, async (row) => {
     const rowTopicTokens = topicTokens(row.title);
     const anchorTokens = [...rowTopicTokens].filter((token) => token.length >= 4 && !/^\d+$/.test(token)).slice(0, 3);
     const primaryContext = await googleNewsContext(row.title, 14, { requireEvent: true }).catch(() => null)
@@ -2690,6 +3102,10 @@ async function googleTrendingNews() {
       topicPageUrl: topicSummary?.pageUrl,
     };
   });
+  const linkedTopics = topics.filter((topic) => usableArticleUrl(topic.link));
+  if (linkedTopics.length < 4) throw new Error(`Only ${linkedTopics.length} news topics resolved to direct publisher articles`);
+  if (linkedTopics.length < topics.length) console.warn(`News retained ${topics.length - linkedTopics.length} prior entries because their current article links could not be resolved.`);
+  return linkedTopics;
 }
 
 async function linkedNewsArticle(context) {
@@ -2760,10 +3176,37 @@ function newsCardTitle(topic) {
 function updateNews(brief, topics) {
   const section = brief.sections.find((entry) => entry.id === "news");
   if (!section) return;
+  const currentTopics = [...section.items, ...(section.moreItems ?? [])]
+    .filter((item) => usableArticleUrl(item.url))
+    .map((item) => ({
+      title: item.title,
+      headline: item.title,
+      volume: item.metric?.value ?? "0+",
+      searches: searchVolume(item.metric?.value),
+      link: item.url,
+      newsSource: item.source,
+      publishedAt: null,
+      imageSource: item.imageSource,
+      imageSourceKind: item.imageSourceKind,
+      imageSourcePageUrl: item.imageSourcePageUrl,
+      imageTitle: item.alt,
+      articleIntro: item.description,
+    }));
+  const topicKeys = new Set(topics.map((topic) => normalize(newsCardTitle(topic))));
+  const seenTitles = new Set();
+  const completeTopics = [...topics, ...currentTopics.filter((topic) => !topicKeys.has(normalize(newsCardTitle(topic))))]
+    .sort((left, right) => (right.searches ?? searchVolume(right.volume)) - (left.searches ?? searchVolume(left.volume)))
+    .filter((topic) => {
+      const key = normalize(newsCardTitle(topic));
+      if (!key || seenTitles.has(key)) return false;
+      seenTitles.add(key);
+      return true;
+    })
+    .slice(0, 10);
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
   );
-  const allItems = topics.map((topic, index) => {
+  const allItems = completeTopics.map((topic, index) => {
     const title = newsCardTitle(topic);
     const current = currentByTitle.get(normalize(title));
     const trendUrl = googleTrendsExploreUrl([topic.title], "now 7-d");
@@ -2965,6 +3408,7 @@ const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked
 
 function usableQuizPrompt(prompt) {
   if (!prompt || unusableQuizPromptPattern.test(prompt)) return false;
+  if (/[.!?]\s+[a-z]/.test(prompt)) return false;
   const sentenceCount = sentences(prompt).length;
   return prompt.trim().endsWith("?")
     && sentenceCount >= 1 && sentenceCount <= 2
@@ -3057,12 +3501,15 @@ function validateBrief(brief) {
     if (section.id === "news" && new URL(item.url).hostname === "news.google.com") {
       throw new Error(`${item.title} still points to a Google News redirect`);
     }
+    if (section.id === "products" && item.evidence.some((entry) => new URL(entry.url).hostname === "news.google.com")) {
+      throw new Error(`${item.title} still has a Google News redirect in its evidence`);
+    }
     if (item.imageSource) {
       const imageUrl = new URL(item.imageSource);
       const articleImage = item.imageSourceKind === "article"
-        && section.id === "news"
+        && (section.id === "news" || section.id === "products")
         && item.imageSourcePageUrl
-        && publicHttpsUrl(item.imageSourcePageUrl, "article image source page").hostname === new URL(item.url).hostname;
+        && publicHttpsUrl(item.imageSourcePageUrl, "article image source page").hostname !== "news.google.com";
       if (articleImage) publicHttpsUrl(imageUrl, "article image");
       else if (imageUrl.protocol !== "https:" || !imageUrl.hostname.match(/(?:\.gr-assets\.com|\.wikimedia\.org|\.media-amazon\.com|\.scdn\.co)$/)) {
         throw new Error(`${item.title} has an invalid source image`);
@@ -3333,7 +3780,12 @@ await updateQuiz(brief);
 for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
 delete brief.pulse;
 
-brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt }) => ({ name, ok, checkedAt }));
+brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt, error }) => ({
+  name,
+  ok,
+  checkedAt,
+  ...(error ? { error } : {}),
+}));
 brief.generatedAt = now.toISOString();
 brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
 brief.status = "Checked today";
