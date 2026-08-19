@@ -21,6 +21,10 @@ export type HeroSpotlight = {
   };
 };
 
+function wrapIndex(index: number, length: number) {
+  return (index + length) % length;
+}
+
 function shuffle<T>(values: readonly T[]) {
   const result = [...values];
   for (let index = result.length - 1; index > 0; index -= 1) {
@@ -33,9 +37,10 @@ function shuffle<T>(values: readonly T[]) {
   return result;
 }
 
-export function HeroVisuals({ slides, spotlight }: { slides: HeroSlide[]; spotlight: HeroSpotlight | null }) {
+export function HeroVisuals({ slides, spotlights }: { slides: HeroSlide[]; spotlights: HeroSpotlight[] }) {
   const [orderedSlides, setOrderedSlides] = useState(slides);
   const [current, setCurrent] = useState(0);
+  const [spotlightCurrent, setSpotlightCurrent] = useState(0);
 
   useEffect(() => {
     const randomize = window.setTimeout(() => {
@@ -53,6 +58,19 @@ export function HeroVisuals({ slides, spotlight }: { slides: HeroSlide[]; spotli
     return () => window.clearInterval(timer);
   }, [orderedSlides.length]);
 
+  useEffect(() => {
+    if (spotlights.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      setSpotlightCurrent((previous) => (previous + 1) % spotlights.length);
+    }, 3_000);
+    return () => window.clearInterval(timer);
+  }, [spotlights.length]);
+
+  function moveSpotlight(direction: -1 | 1) {
+    if (spotlights.length < 2) return;
+    setSpotlightCurrent((previous) => wrapIndex(previous + direction, spotlights.length));
+  }
+
   return (
     <div className="hero-visuals">
       <div className="hero-slideshow" aria-hidden="true">
@@ -64,22 +82,44 @@ export function HeroVisuals({ slides, spotlight }: { slides: HeroSlide[]; spotli
           ))}
         </div>
       </div>
-      {spotlight ? (
-        <aside className="hero-spotlight" aria-labelledby="hero-spotlight-title">
-          <p className="hero-spotlight-label">Standout · {spotlight.sectionTitle}</p>
-          <a href={spotlight.url} target="_blank" rel="noopener noreferrer">
-            <img src={spotlight.image} alt={spotlight.alt} width="96" height="96" loading="eager" decoding="async" />
-            <span className="hero-spotlight-copy">
-              <strong id="hero-spotlight-title">{spotlight.title}</strong>
-              <span>{spotlight.description}</span>
-              {spotlight.metric ? (
-                <span className="hero-spotlight-metric">
-                  <small>{spotlight.metric.label}</small>
-                  <b>{spotlight.metric.value}</b>
-                </span>
-              ) : null}
-            </span>
-          </a>
+      {spotlights.length ? (
+        <aside className="hero-spotlight" role="region" aria-label="Standout entries" aria-roledescription="carousel">
+          <div className="hero-spotlight-viewport">
+            <div
+              className="hero-spotlight-track"
+              style={{ transform: `translate3d(-${spotlightCurrent * 100}%, 0, 0)` }}
+            >
+              {spotlights.map((spotlight, index) => (
+                <article className="hero-spotlight-slide" key={spotlight.sectionTitle} aria-hidden={index !== spotlightCurrent}>
+                  <p className="hero-spotlight-label">Standout · {spotlight.sectionTitle}</p>
+                  <a href={spotlight.url} target="_blank" rel="noopener noreferrer" tabIndex={index === spotlightCurrent ? 0 : -1}>
+                    <img src={spotlight.image} alt={spotlight.alt} width="640" height="460" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
+                    <span className="hero-spotlight-copy">
+                      <strong>{spotlight.title}</strong>
+                      <span>{spotlight.description}</span>
+                      {spotlight.metric ? (
+                        <span className="hero-spotlight-metric">
+                          <small>{spotlight.metric.label}</small>
+                          <b>{spotlight.metric.value}</b>
+                        </span>
+                      ) : null}
+                    </span>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+          {spotlights.length > 1 ? (
+            <div className="hero-spotlight-controls">
+              <button className="hero-spotlight-arrow is-previous" type="button" onClick={() => moveSpotlight(-1)} aria-label="Previous standout">
+                <span aria-hidden="true" />
+              </button>
+              <span aria-live="polite">{spotlightCurrent + 1} / {spotlights.length}</span>
+              <button className="hero-spotlight-arrow is-next" type="button" onClick={() => moveSpotlight(1)} aria-label="Next standout">
+                <span aria-hidden="true" />
+              </button>
+            </div>
+          ) : null}
         </aside>
       ) : null}
     </div>
