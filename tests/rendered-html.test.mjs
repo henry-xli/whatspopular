@@ -120,6 +120,8 @@ test("renders the complete finite culture briefing", async () => {
   assert.equal((homeHtml.match(/class="hero-slide"/g) ?? []).length, 16);
   assert.match(homeHtml, /class="hero-spotlight"/);
   assert.match(homeHtml, /Standout ·/);
+  assert.match(homeHtml, /aria-label="Previous standout"/);
+  assert.match(homeHtml, /aria-label="Next standout"/);
   assert.match(homeHtml, /class="is-active" href="\/"[^>]*>Home<\/a>/);
   assert.match(homeHtml, /aria-current="page"/);
   assert.match(homeHtml, /One daily snapshot\. Eight boards\. One quiz\./);
@@ -135,6 +137,11 @@ test("renders the complete finite culture briefing", async () => {
   const html = await response.text();
   assert.match(html, /class="is-active" href="\/explore"[^>]*>Explore<\/a>/);
   assert.match(html, /Everything worth knowing at a glance/);
+  assert.match(html, /class="explore-index"/);
+  for (const id of ["memes", "slang", "people", "movies", "books", "music", "products", "news"]) {
+    assert.match(html, new RegExp(`href="#${id}"`));
+  }
+  assert.match(html, /class="scroll-top"/);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
   assert.match(html, />People</);

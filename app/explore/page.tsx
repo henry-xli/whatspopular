@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { ExploreIndex } from "../components/explore-index";
 import { Leaderboard } from "../components/leaderboard";
+import { ScrollToTop } from "../components/scroll-to-top";
 import { SongBoard } from "../components/song-board";
 import { cultureBrief } from "../culture";
 
@@ -16,12 +18,14 @@ export default function ExplorePage() {
         <p className="eyebrow">The {cultureBrief.edition} culture briefing</p>
         <h1 id="explore-title">Everything worth knowing at a glance.</h1>
         <p>{cultureBrief.summary}</p>
+        <ExploreIndex sections={cultureBrief.sections} />
       </section>
       <section className="boards wrap" id="boards" aria-label="Culture leaderboards">
         {cultureBrief.sections.map((section) => section.id === "music"
           ? <SongBoard key={section.id} section={section} />
           : <Leaderboard key={section.id} section={section} />)}
       </section>
+      <ScrollToTop />
     </main>
   );
 }
