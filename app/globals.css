@@ -1890,6 +1890,10 @@ a.culture-card:hover {
     height: var(--song-expanded-art-size);
   }
 
+  .song-expanded-entry .expanded-copy {
+    padding-right: 42px;
+  }
+
   .expanded-rank {
     width: 32px;
     height: 32px;
