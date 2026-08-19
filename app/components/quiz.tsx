@@ -47,6 +47,7 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
   const [deadline, setDeadline] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(durationSeconds);
   const [revealed, setRevealed] = useState(false);
+  const [timedOut, setTimedOut] = useState(false);
   const advanceTimer = useRef<number | null>(null);
 
   useEffect(() => () => {
@@ -59,15 +60,29 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
       const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
       setTimeLeft(remaining);
       if (remaining === 0) {
-        setStatus("complete");
         setDeadline(null);
-        setRevealed(false);
+        setTimedOut(true);
+        setRevealed(true);
+        advanceTimer.current = window.setTimeout(() => {
+          advanceTimer.current = null;
+          setTimedOut(false);
+          setRevealed(false);
+          setCurrent((previous) => {
+            if (previous >= round.length - 1) {
+              setStatus("complete");
+              return previous;
+            }
+            setTimeLeft(durationSeconds);
+            setDeadline(Date.now() + durationSeconds * 1000);
+            return previous + 1;
+          });
+        }, 2_000);
       }
     };
     update();
     const timer = window.setInterval(update, 1000);
     return () => window.clearInterval(timer);
-  }, [deadline, revealed, status]);
+  }, [deadline, durationSeconds, revealed, round.length, status]);
 
   function startQuiz() {
     if (!questions.length) return;
@@ -78,6 +93,7 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
     setCurrent(0);
     setTimeLeft(durationSeconds);
     setRevealed(false);
+    setTimedOut(false);
     setDeadline(Date.now() + durationSeconds * 1000);
     setStatus("active");
   }
@@ -89,9 +105,11 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
       next[current] = answer;
       return next;
     });
+    setTimedOut(false);
     setRevealed(true);
     advanceTimer.current = window.setTimeout(() => {
       advanceTimer.current = null;
+      setTimedOut(false);
       setRevealed(false);
       setCurrent((previous) => {
         if (previous >= round.length - 1) {
@@ -151,7 +169,9 @@ export function Quiz({ questions, durationSeconds }: { questions: CultureQuizQue
           </fieldset>
           <div className="quiz-controls">
             <span aria-live="polite">
-              {revealed
+              {timedOut
+                ? "Time's up — correct answer shown; next question in 2 seconds"
+                : revealed
                 ? selectedAnswer === question.correctAnswer
                   ? "Correct — next question in 2 seconds"
                   : "Not quite — next question in 2 seconds"

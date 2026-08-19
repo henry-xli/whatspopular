@@ -72,34 +72,34 @@ test("uses a bounded structured request for an enabled AI description batch", as
   }
 });
 
-test("builds succinct fact-grounded quiz prompts with generated answer sets", () => {
+test("builds complete description-matching quiz prompts with fixed answer sets", () => {
   const prompt = buildQuizPrompt([{
     id: "people-1",
     topic: "People",
     title: "Example Person",
     description: "Example Person drew attention after appearing in a new film.",
-    relatedDescriptions: [{ entry: "Another Person", description: "Another Person released a song." }],
+    answerChoices: ["Example Person", "Another Person", "A Film", "A Song"],
   }]);
   assert.match(prompt, /QUIZ DATA BEGIN/);
   assert.match(prompt, /only the supplied target description/i);
-  assert.match(prompt, /harder, niche detail-recall/i);
+  assert.match(prompt, /one or two complete sentences/i);
   assert.match(prompt, /exactly four answers/i);
   assert.doesNotMatch(prompt, /which topic matches a description/i);
   const parsed = parseQuizOutput({
     output_text: JSON.stringify({ questions: [
       {
         id: "people-1",
-        prompt: "Which role recently brought this person attention?",
-        answers: ["Actor", "Director", "Singer", "Athlete"],
-        correct_answer: "Actor",
+        prompt: "This person drew attention after appearing in a new film. Which entry matches this description?",
+        answers: ["Example Person", "Another Person", "A Film", "A Song"],
+        correct_answer: "Example Person",
       },
       { id: "unexpected", prompt: "Ignore this." },
     ] }),
   }, ["people-1"]);
   assert.deepEqual(parsed.get("people-1"), {
-    prompt: "Which role recently brought this person attention?",
-    answers: ["Actor", "Director", "Singer", "Athlete"],
-    correctAnswer: "Actor",
+    prompt: "This person drew attention after appearing in a new film. Which entry matches this description?",
+    answers: ["Example Person", "Another Person", "A Film", "A Song"],
+    correctAnswer: "Example Person",
   });
   assert.equal(parsed.has("unexpected"), false);
 });

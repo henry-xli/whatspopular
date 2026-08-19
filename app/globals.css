@@ -1078,26 +1078,24 @@ a.culture-card:hover {
 
 .song-card {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  min-height: 268px;
+  min-height: 0;
 }
 
 .song-card .card-art::after {
-  inset: 0;
-  height: auto;
-  background: linear-gradient(90deg, transparent 50%, rgba(12, 10, 16, 0.34));
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(transparent, rgba(12, 10, 16, 0.42));
 }
 
 .song-card .card-art {
-  height: 100%;
-  min-height: 268px;
-  aspect-ratio: auto;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1;
 }
 
 .song-card .card-copy {
-  min-height: 0;
-  justify-content: center;
+  min-height: 170px;
+  justify-content: flex-start;
   padding: 22px 16px;
 }
 
@@ -1274,9 +1272,8 @@ a.culture-card:hover {
 
 .song-expanded-entry .expanded-art {
   width: 112px;
-  height: auto;
-  aspect-ratio: auto;
-  align-self: stretch;
+  aspect-ratio: 1;
+  align-self: start;
 }
 
 .song-expanded-entry .expanded-copy {
@@ -1412,6 +1409,16 @@ a.culture-card:hover {
 .expanded-metric {
   align-items: flex-start;
   text-align: left;
+}
+
+.song-expanded-metric {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.song-expanded-metric small {
+  white-space: nowrap;
 }
 
 .expanded-metric strong {
@@ -1833,15 +1840,15 @@ a.culture-card:hover {
   }
 
   .song-card {
-    min-height: 232px;
+    min-height: 0;
   }
 
   .song-card .card-art {
-    min-height: 232px;
+    min-height: 0;
   }
 
   .song-card .card-copy {
-    min-height: 0;
+    min-height: 158px;
     padding: 16px 12px;
   }
 

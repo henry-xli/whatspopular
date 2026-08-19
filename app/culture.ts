@@ -100,37 +100,12 @@ function assertText(value: unknown, label: string, maximum = 800): asserts value
   }
 }
 
-const quizAnswerStopWords = new Set([
-  "about", "after", "again", "also", "been", "being", "came", "does", "from", "have", "into", "just",
-  "more", "most", "only", "over", "that", "their", "them", "then", "there", "these", "they", "this",
-  "through", "under", "were", "what", "when", "where", "which", "while", "with", "would", "your",
-]);
-
-function normalizedQuizText(value: string) {
-  return value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-}
-
-function quizAnswerGrounded(answer: string, description: string) {
-  const normalizedAnswer = normalizedQuizText(answer);
-  const normalizedDescription = normalizedQuizText(description);
-  if (!normalizedAnswer || !normalizedDescription) return false;
-  if (normalizedDescription.includes(normalizedAnswer)) return true;
-  const descriptionTokens = new Set(normalizedDescription.split(" ").filter((token) => token.length >= 3 && !quizAnswerStopWords.has(token)));
-  return normalizedAnswer.split(" ").some((token) => token.length >= 3 && !quizAnswerStopWords.has(token) && descriptionTokens.has(token));
-}
-
-const genericQuizPromptPattern = /^(?:which (?:topic|entry|item) (?:matches|is linked to|is described by|is associated with)|which (?:person|film|movie|book|track|song|product|news item|meme) is linked to this|which entry is linked to this)/i;
-
-function validQuizPrompt(prompt: string, title: string) {
-  const normalizedTitle = normalizedQuizText(title);
-  const normalizedPrompt = normalizedQuizText(prompt);
-  const titleWords = normalizedTitle.split(" ").filter(Boolean);
-  const wordCount = prompt.trim().split(/\s+/).length;
-  return !genericQuizPromptPattern.test(prompt.trim())
-    && !/\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i.test(prompt)
-    && (!normalizedTitle || normalizedTitle.length < 4 || titleWords.length < 2 || !normalizedPrompt.includes(normalizedTitle))
-    && prompt.trim().endsWith("?")
-    && wordCount >= 8 && wordCount <= 38;
+function validQuizPrompt(prompt: string) {
+  const sentenceCount = prompt.match(/[^.!?]+[.!?]+/g)?.length ?? 0;
+  return prompt.trim().endsWith("?")
+    && sentenceCount >= 1 && sentenceCount <= 2
+    && prompt.trim().length >= 40 && prompt.trim().length <= 480
+    && !/\.\.\.|…/.test(prompt);
 }
 
 function publicHostname(hostname: string) {
@@ -372,8 +347,8 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     const sourceItem = sourceItems.find((item) => item.title === question.itemTitle);
     if (!section || question.topic !== section.title
       || !sourceItem
-      || !validQuizPrompt(question.prompt, sourceItem.title)
-      || !quizAnswerGrounded(question.correctAnswer, sourceItem.description)) {
+      || !validQuizPrompt(question.prompt)
+      || question.correctAnswer !== question.itemTitle) {
       throw new Error("Quiz question is not grounded in a board's first three entries");
     }
   }

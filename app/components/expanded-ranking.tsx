@@ -68,7 +68,7 @@ export function ExpandedRanking({ section, activeTrack, onTrackChange }: Expande
                         </span>
                       ) : null}
                       {item.metric ? (
-                        <span className="expanded-metric">
+                        <span className={`expanded-metric${isSong ? " song-expanded-metric" : ""}`}>
                           <small>{item.metric.label}</small>
                           <strong>{item.metric.value}</strong>
                         </span>
