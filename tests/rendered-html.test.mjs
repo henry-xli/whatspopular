@@ -203,6 +203,9 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /Show ranks 6/);
   assert.equal(brief.quiz.durationSeconds, 15);
   assert.equal(brief.quiz.questions.length, 15);
+  const movieQuizQuestions = brief.quiz.questions.filter((question) => question.topicId === "movies");
+  assert.equal(movieQuizQuestions.length, 3);
+  assert.ok(movieQuizQuestions.every((question) => /\b(?:about|after|before|character|conflict|creator|discovers?|dimension|encounters?|family|follows?|forced|friendship|happens?|home|journey|king|memory|mission|mystery|plot|premise|reunite|returns?|set|sister|story|stranded|takes?|tries?|undergoes?|wakes?|when|where|while|world)\b/i.test(question.prompt)));
 });
 
 test("renders the About flowchart", async () => {
@@ -393,6 +396,9 @@ test("keeps content and outbound links constrained", async () => {
     assert.ok(question.answers.includes(question.correctAnswer));
     quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
   }
+  const movieQuizQuestions = brief.quiz.questions.filter((question) => question.topicId === "movies");
+  assert.ok(movieQuizQuestions.every((question) => !/^This film is (?:an?\s+)?[\w/-]+ film\./i.test(question.prompt)));
+  assert.ok(movieQuizQuestions.every((question) => /\b(?:about|after|before|character|conflict|creator|discovers?|dimension|encounters?|family|follows?|forced|friendship|happens?|home|journey|king|memory|mission|mystery|plot|premise|reunite|returns?|set|sister|story|stranded|takes?|tries?|undergoes?|wakes?|when|where|while|world)\b/i.test(question.prompt)));
   assert.ok([...quizCounts.values()].every((count) => count === 3));
   assert.ok(brief.sections.every((section) => section.items.length === 5));
   assert.ok(brief.sections.every((section) => section.moreItems.length <= 15));

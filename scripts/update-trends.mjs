@@ -3665,11 +3665,34 @@ function redactQuizTitle(value, title) {
 }
 
 const quizRecentSignalPattern = /\b(?:recent|recently|currently|now|today|this\s+(?:week|month|year)|in\s+20\d{2}|during|after|following|since|coverage|focus|attention|viral|trending|spread|became|emerged|prompted|respond(?:ed|ing)|popular|reaches?|reached|released|opening|premier\w*|outbreak|recall\w*|disappear\w*|classif\w*|hurricane|flood\w*|hunker\w*|restock\w*|sold\s+out|world\s+cup|social\s+media)\b/gi;
+// Movie quiz clues must contain a plot-premise cue, not only the genre sentence
+// that many source descriptions place first. The vocabulary is intentionally
+// generic so it works for newly ingested films without naming any title.
+const quizMoviePlotSignalPattern = /\b(?:about|after|before|character|conflict|creator|discovers?|dimension|encounters?|family|follows?|forced|friendship|happens?|home|journey|king|memory|mission|mystery|plot|premise|reunite|returns?|set|sister|story|stranded|takes?|tries?|undergoes?|wakes?|when|where|while|world)\b/i;
+const quizMovieGenreOnlyPattern = /\bis\s+(?:an?\s+)?(?:[\w-]+(?:\/[\w-]+)*\s+)?film\.?$/i;
+
+function moviePlotSentence(parts) {
+  return parts
+    .map((sentence, index) => ({
+      sentence,
+      index,
+      isGenreOnly: quizMovieGenreOnlyPattern.test(sentence),
+      hasPlotSignal: quizMoviePlotSignalPattern.test(sentence),
+    }))
+    .filter((entry) => !entry.isGenreOnly && entry.hasPlotSignal)
+    .sort((left, right) => right.hasPlotSignal - left.hasPlotSignal || left.index - right.index)
+    .at(0)?.sentence;
+}
 
 function quizContextFor(description, topicId) {
   const parts = sentences(description);
   if (!parts.length) return ensureSentence(description);
-  if (topicId === "movies" || topicId === "books") {
+  if (topicId === "movies") {
+    const plot = moviePlotSentence(parts);
+    const nonGenre = parts.find((sentence) => !quizMovieGenreOnlyPattern.test(sentence));
+    return ensureSentence(plot ?? nonGenre ?? parts[0]);
+  }
+  if (topicId === "books") {
     return ensureSentence(parts[0]);
   }
   const ranked = parts
@@ -3742,6 +3765,7 @@ function usableQuizPrompt(prompt) {
 function usableGeneratedQuizQuestion(candidate, record) {
   if (!candidate || typeof candidate !== "object") return false;
   const answers = Array.isArray(candidate.answers) ? candidate.answers : [];
+  if (record.topicId === "movies" && !quizMoviePlotSignalPattern.test(candidate.prompt ?? "")) return false;
   return usableQuizPrompt(candidate.prompt)
     && answers.length === 4
     && new Set(answers).size === 4
@@ -3966,6 +3990,7 @@ function validateBrief(brief) {
     const sourceItem = sourceItems.find((item) => item.title === question.itemTitle);
     if (!sourceItem
         || !usableQuizPrompt(question.prompt)
+        || (question.topicId === "movies" && !quizMoviePlotSignalPattern.test(question.prompt))
         || normalize(question.correctAnswer) !== normalize(question.itemTitle)
         || question.topic !== section?.title) {
       throw new Error(`Quiz question ${question.id} is not grounded in one of the board's first three entries`);

@@ -2418,7 +2418,7 @@
         "itemTitle": "Christopher Nolan"
       },
       {
-        "prompt": "This film is an action/adventure/fantasy film. Which film matches this description?",
+        "prompt": "In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway). Which film matches this description?",
         "answers": [
           "The Odyssey",
           "Obsession",
@@ -2432,7 +2432,7 @@
         "itemTitle": "The Odyssey"
       },
       {
-        "prompt": "This film is a horror/romance/thriller film. Which film matches this description?",
+        "prompt": "The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed. Which film matches this description?",
         "answers": [
           "Obsession",
           "The Odyssey",
@@ -2446,7 +2446,7 @@
         "itemTitle": "Obsession"
       },
       {
-        "prompt": "This film is an adventure/comedy/drama film. Which film matches this description?",
+        "prompt": "The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. Which film matches this description?",
         "answers": [
           "Project Hail Mary",
           "The Odyssey",
