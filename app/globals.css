@@ -875,15 +875,20 @@ img {
   gap: 12px;
 }
 
-.explore-index a {
+.explore-index-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--muted);
+  font: inherit;
   font-size: 0.78rem;
   font-weight: 800;
+  cursor: pointer;
   transition: color 0.18s ease;
 }
 
-.explore-index a:hover,
-.explore-index a:focus-visible {
+.explore-index-link:hover,
+.explore-index-link:focus-visible {
   color: var(--purple-dark);
 }
 
@@ -1015,8 +1020,6 @@ img {
   margin-top: 96px;
   border-top: 1px solid var(--line);
   scroll-margin-top: 100px;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
 }
 
 .boards > .board:first-child {

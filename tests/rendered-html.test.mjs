@@ -152,8 +152,9 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /Everything worth knowing at a glance/);
   assert.match(html, /class="explore-index"/);
   for (const id of ["memes", "slang", "people", "movies", "books", "music", "products", "news"]) {
-    assert.match(html, new RegExp(`href="#${id}"`));
+    assert.match(html, new RegExp(`class="explore-index-link"[^>]*aria-controls="${id}"`));
   }
+  assert.doesNotMatch(html, /href="#(?:memes|slang|people|movies|books|music|products|news)"/);
   assert.match(html, /class="scroll-top"/);
   assert.match(html, />Memes</);
   assert.match(html, />Slang</);
