@@ -38,6 +38,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E10000010000000000000001"
+            BuildableName = "WhatspopularMobile.app"
+            BlueprintName = "WhatspopularMobile"
+            ReferencedContainer = "container:WhatspopularMobile.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
