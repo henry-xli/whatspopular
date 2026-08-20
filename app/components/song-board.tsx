@@ -43,13 +43,27 @@ function spotifyUri(trackId: string) {
   return `spotify:track:${trackId}`;
 }
 
-function loadTrack(controller: SpotifyEmbedController, trackId: string) {
-  const uri = spotifyUri(trackId);
+function spotifyPlaylistIdFromUrl(url?: string) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    const match = parsed.pathname.match(/^\/playlist\/([A-Za-z0-9]+)\/?$/);
+    return match?.[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function loadEntity(controller: SpotifyEmbedController, uri: string) {
   if (controller.loadEntity) {
     controller.loadEntity(uri);
   } else {
     controller.loadUri?.(uri);
   }
+}
+
+function loadTrack(controller: SpotifyEmbedController, trackId: string) {
+  loadEntity(controller, spotifyUri(trackId));
 }
 
 function playController(controller: SpotifyEmbedController) {
@@ -131,6 +145,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
     tracks.flatMap((item) => item.spotifyId ? [[item.spotifyId, item] as const] : []),
   ), [tracks]);
   const [activeTrack, setActiveTrack] = useState<string | null>(null);
+  const [playlistMode, setPlaylistMode] = useState(false);
   const [embedError, setEmbedError] = useState(false);
   const [embedReady, setEmbedReady] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
@@ -139,11 +154,17 @@ export function SongBoard({ section }: { section: CultureSection }) {
   const queueModeRef = useRef(false);
   const queueIndexRef = useRef(-1);
   const pendingTrackRef = useRef<string | null>(null);
+  const pendingPlaylistRef = useRef(false);
   const advancingRef = useRef(false);
   const trackIdsRef = useRef(trackIds);
 
   const activeItem = activeTrack ? trackById.get(activeTrack) : undefined;
   const spotifyPlaylist = section.sources.find((source) => source.url.includes("open.spotify.com/playlist"));
+  const spotifyPlaylistId = spotifyPlaylistIdFromUrl(spotifyPlaylist?.url);
+  const spotifyPlaylistEmbedUrl = spotifyPlaylistId
+    ? `https://open.spotify.com/embed/playlist/${spotifyPlaylistId}?utm_source=generator&theme=0&autoplay=1`
+    : null;
+  const isPlayerOpen = Boolean(activeItem || playlistMode);
 
   const updateActiveTrack = (trackId: string | null) => {
     setActiveTrack(trackId);
@@ -203,7 +224,17 @@ export function SongBoard({ section }: { section: CultureSection }) {
           });
 
           const pendingTrack = pendingTrackRef.current;
-          if (pendingTrack) {
+          const pendingPlaylist = pendingPlaylistRef.current;
+          if (pendingPlaylist) {
+            pendingPlaylistRef.current = false;
+            queueModeRef.current = true;
+            queueIndexRef.current = 0;
+            const firstTrack = trackIdsRef.current[0];
+            if (firstTrack) {
+              loadTrack(controller, firstTrack);
+              playController(controller);
+            }
+          } else if (pendingTrack) {
             pendingTrackRef.current = null;
             loadTrack(controller, pendingTrack);
             playController(controller);
@@ -221,13 +252,33 @@ export function SongBoard({ section }: { section: CultureSection }) {
   }, [trackIds]);
 
   useEffect(() => {
-    if (!activeTrack) return;
+    if (!activeTrack && !playlistMode) return;
     const frame = window.requestAnimationFrame(() => {
       const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
       playerRef.current?.scrollIntoView({ behavior, block: "center" });
     });
     return () => window.cancelAnimationFrame(frame);
-  }, [activeTrack]);
+  }, [activeTrack, playlistMode]);
+
+  const startPlaylist = () => {
+    if (!trackIds.length) return;
+    if (!spotifyPlaylistEmbedUrl) {
+      startTrack(trackIds[0]);
+      return;
+    }
+    queueModeRef.current = true;
+    advancingRef.current = false;
+    queueIndexRef.current = 0;
+    pendingTrackRef.current = null;
+    pendingPlaylistRef.current = true;
+    setPlaylistMode(true);
+    updateActiveTrack(null);
+    const controller = controllerRef.current;
+    if (!controller) return;
+    pendingPlaylistRef.current = false;
+    loadTrack(controller, trackIds[0]);
+    playController(controller);
+  };
 
   const startTrack = (trackId: string) => {
     const index = trackIds.indexOf(trackId);
@@ -235,6 +286,8 @@ export function SongBoard({ section }: { section: CultureSection }) {
     queueIndexRef.current = index;
     queueModeRef.current = true;
     advancingRef.current = false;
+    pendingPlaylistRef.current = false;
+    setPlaylistMode(false);
     updateActiveTrack(trackId);
     const controller = controllerRef.current;
     if (!controller) {
@@ -248,6 +301,8 @@ export function SongBoard({ section }: { section: CultureSection }) {
   const stopTrack = () => {
     queueModeRef.current = false;
     pendingTrackRef.current = null;
+    pendingPlaylistRef.current = false;
+    setPlaylistMode(false);
     try {
       const result = controllerRef.current?.pause?.();
       if (result && typeof (result as Promise<void>).catch === "function") {
@@ -281,7 +336,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
           <button
             type="button"
             className="music-play-all"
-            onClick={() => trackIds[0] && startTrack(trackIds[0])}
+            onClick={startPlaylist}
             disabled={!trackIds.length}
           >
             <PlayIcon />
@@ -363,23 +418,36 @@ export function SongBoard({ section }: { section: CultureSection }) {
         </div>
       </div>
 
-      <div className={`song-player music-player${activeItem ? "" : " is-ready"}`} ref={playerRef} aria-live="polite">
+      <div className={`song-player music-player${isPlayerOpen ? "" : " is-ready"}`} ref={playerRef} aria-live="polite">
         <div className="song-player-heading">
-          <span>{activeItem ? "Now playing" : "Spotify player"}</span>
-          <strong>{activeItem ? `${activeItem.title} · ${activeItem.subtitle}` : "Choose a track or play the playlist"}</strong>
-          {activeItem ? (
+          <span>{isPlayerOpen ? "Now playing" : "Spotify player"}</span>
+          <strong>{activeItem ? `${activeItem.title} · ${activeItem.subtitle}` : "Music playlist"}</strong>
+          {isPlayerOpen ? (
             <button type="button" onClick={stopTrack} aria-label="Stop Spotify player">
               <CloseIcon />
             </button>
           ) : null}
         </div>
-        <div className="embed-wrap">
-          <div
-            ref={embedHostRef}
-            className={`music-spotify-embed${embedReady ? " is-ready" : ""}${embedError ? " has-error" : ""}`}
-            aria-label="Spotify embedded player"
-          />
-          {activeItem?.spotifyId && (!embedReady || embedError) ? (
+        <div className={`embed-wrap${playlistMode ? " is-playlist" : ""}`}>
+          <div className={`spotify-api-slot${playlistMode && !embedReady ? " is-hidden" : ""}`}>
+            <div
+              ref={embedHostRef}
+              className={`music-spotify-embed${embedReady ? " is-ready" : ""}${embedError ? " has-error" : ""}`}
+              aria-label="Spotify embedded player"
+            />
+          </div>
+          {playlistMode && !embedReady && spotifyPlaylistEmbedUrl ? (
+            <iframe
+              title="Spotify music playlist"
+              src={spotifyPlaylistEmbedUrl}
+              width="100%"
+              height="152"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          ) : null}
+          {!playlistMode && activeItem?.spotifyId && (!embedReady || embedError) ? (
             <iframe
               title={`Spotify player for ${activeItem.title}`}
               src={`https://open.spotify.com/embed/track/${activeItem.spotifyId}?utm_source=generator&theme=0`}

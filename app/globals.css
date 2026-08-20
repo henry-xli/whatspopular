@@ -1708,6 +1708,18 @@ button.music-track-select:focus-visible {
   background: transparent;
 }
 
+.spotify-api-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 152px;
+}
+
+.spotify-api-slot.is-hidden {
+  display: none;
+}
+
 .embed-wrap iframe {
   display: block;
   border: 0;
