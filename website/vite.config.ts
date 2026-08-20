@@ -23,7 +23,7 @@ function deploymentMetadata(): Plugin {
     },
     async closeBundle() {
       const outputDirectory = resolve(root, "dist", ".openai");
-      const hostingConfig = resolve(root, "hosting.json");
+      const hostingConfig = resolve(root, ".openai", "hosting.json");
       const drizzleSource = resolve(root, "drizzle");
       const clientDirectory = resolve(root, "dist", "client");
       const globalStyles = resolve(root, "app", "globals.css");
