@@ -99,7 +99,9 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="wrap header-inner">
         <a className="brand" href="/" aria-label="what’s popular? home">
-          <span aria-hidden="true" className="brand-mark">w?</span>
+          <span aria-hidden="true" className="brand-mark">
+            <img src="/icon.png" alt="" width="34" height="34" />
+          </span>
           <span>what’s popular?</span>
         </a>
         <nav aria-label="Main navigation">

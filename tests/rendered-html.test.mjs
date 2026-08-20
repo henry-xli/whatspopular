@@ -184,10 +184,11 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /og\.jpg/);
   assert.doesNotMatch(html, /og\.png|data-nimg|\/_next\/image\?/);
   const images = html.match(/<img\b[^>]*>/g) ?? [];
-  assert.equal(images.length, allItems.length);
-  assert.ok(images.every((image) => /\balt="[^"]+"/.test(image)));
-  assert.ok(images.every((image) => /\bwidth="\d+"/.test(image) && /\bheight="\d+"/.test(image)));
-  assert.ok(images.every((image) => /\bloading="lazy"/.test(image) && /\bdecoding="async"/.test(image)));
+  const contentImages = images.filter((image) => /\bloading="lazy"/.test(image));
+  assert.equal(contentImages.length, allItems.length);
+  assert.ok(contentImages.every((image) => /\balt="[^"]+"/.test(image)));
+  assert.ok(contentImages.every((image) => /\bwidth="\d+"/.test(image) && /\bheight="\d+"/.test(image)));
+  assert.ok(contentImages.every((image) => /\bdecoding="async"/.test(image)));
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
   assert.equal((html.match(/class="culture-card/g) ?? []).length, 40);
   assert.equal((html.match(/<details class="expanded-ranking"/g) ?? []).length,
