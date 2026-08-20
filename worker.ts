@@ -27,7 +27,10 @@ const securityHeaders = {
     "object-src 'none'",
     "frame-ancestors 'none'",
     "form-action 'none'",
-    "script-src 'self' 'unsafe-inline' https://cdnjs.buymeacoffee.com https://open.spotify.com https://embed-cdn.spotifycdn.com",
+    // Spotify's official iFrame controller currently evaluates its bundled
+    // runtime. Keep the source allowlist narrow while permitting that runtime
+    // so the playlist handoff can receive playback events.
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.buymeacoffee.com https://open.spotify.com https://embed-cdn.spotifycdn.com",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://cdn.buymeacoffee.com",
     "font-src 'self' data: https://cdn.buymeacoffee.com",
