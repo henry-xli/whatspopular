@@ -8,27 +8,26 @@ struct CultureImage: View {
 
     @State private var image: UIImage?
 
-    init(path: String, contentMode: ContentMode = .fill, remoteImageVersion: String? = nil) {
+    init(path: String, contentMode: ContentMode = .fit, remoteImageVersion: String? = nil) {
         self.path = path
         self.contentMode = contentMode
         self.remoteImageVersion = remoteImageVersion
     }
 
     var body: some View {
-        Group {
+        ZStack {
+            Color(.tertiarySystemGroupedBackground)
+
             if let image {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: contentMode)
             } else {
-                Rectangle()
-                    .fill(Color.black.opacity(0.08))
-                    .overlay {
-                        Image(systemName: "sparkles")
-                            .foregroundStyle(.secondary)
-                    }
+                Image(systemName: "sparkles")
+                    .foregroundStyle(.secondary)
             }
         }
+        .clipped()
         .task(id: "\(path)-\(remoteImageVersion ?? "bundled")") {
             await loadImage()
         }

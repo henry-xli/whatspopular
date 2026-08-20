@@ -65,62 +65,123 @@ struct ContentView: View {
     }
 }
 
+private enum BriefScrollTarget {
+    static let top = "brief-top"
+}
+
+private struct BriefScrollOffsetKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
 private struct BriefHome: View {
     let brief: CultureBrief
     @ObservedObject var preferences: LayoutPreferences
     @Binding var settingsPresented: Bool
     let remoteImageVersion: String?
 
+    @State private var scrollOffset: CGFloat = 0
+
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 22) {
-                MobileHeader(brief: brief) {
-                    settingsPresented = true
-                }
+        ScrollViewReader { proxy in
+            ZStack(alignment: .bottomTrailing) {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 14) {
+                        Color.clear
+                            .frame(height: 1)
+                            .background {
+                                GeometryReader { geometry in
+                                    Color.clear.preference(
+                                        key: BriefScrollOffsetKey.self,
+                                        value: geometry.frame(in: .named("briefScroll")).minY
+                                    )
+                                }
+                            }
+                            .id(BriefScrollTarget.top)
 
-                QuizCard(
-                    questions: brief.quiz.questions,
-                    durationSeconds: brief.quiz.durationSeconds
-                )
+                        MobileHeader(brief: brief) {
+                            settingsPresented = true
+                        }
 
-                StandoutRail(sections: brief.sections, remoteImageVersion: remoteImageVersion)
-
-                ExploreHeader(brief: brief) {
-                    settingsPresented = true
-                }
-
-                ForEach(preferences.order, id: \.self) { id in
-                    if let section = brief.sections.first(where: { $0.id == id }) {
-                        MobileLeaderboard(
-                            section: section,
-                            boardNumber: (preferences.order.firstIndex(of: id) ?? 0) + 1,
-                            preference: preferences.preference(for: id),
-                            remoteImageVersion: remoteImageVersion
+                        QuizCard(
+                            questions: brief.quiz.questions,
+                            durationSeconds: brief.quiz.durationSeconds
                         )
+
+                        StandoutRail(sections: brief.sections, remoteImageVersion: remoteImageVersion)
+
+                        ExploreHeader(brief: brief) {
+                            settingsPresented = true
+                        }
+
+                        LeaderboardJumpBar(sections: brief.sections, order: preferences.order) { id in
+                            withAnimation(.easeInOut(duration: 0.35)) {
+                                proxy.scrollTo(id, anchor: .top)
+                            }
+                        }
+
+                        ForEach(preferences.order, id: \.self) { id in
+                            if let section = brief.sections.first(where: { $0.id == id }) {
+                                MobileLeaderboard(
+                                    section: section,
+                                    boardNumber: (preferences.order.firstIndex(of: id) ?? 0) + 1,
+                                    preference: preferences.preference(for: id),
+                                    remoteImageVersion: remoteImageVersion
+                                )
+                                .id(id)
+                            }
+                        }
                     }
+                    .padding(.horizontal, 14)
+                    .padding(.top, 12)
+                    .padding(.bottom, 72)
+                }
+                .scrollIndicators(.hidden)
+
+                if scrollOffset < -180 {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.35)) {
+                            proxy.scrollTo(BriefScrollTarget.top, anchor: .top)
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up")
+                            .font(.headline.weight(.bold))
+                            .foregroundStyle(.white)
+                            .frame(width: 42, height: 42)
+                            .background(Color(hex: "#6F48E5"), in: Circle())
+                            .shadow(color: .black.opacity(0.18), radius: 8, y: 4)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Back to top")
+                    .padding(.trailing, 16)
+                    .padding(.bottom, 62)
+                    .transition(.scale.combined(with: .opacity))
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 18)
-            .padding(.bottom, 40)
-        }
-        .scrollIndicators(.hidden)
-        .background(Color(.systemGroupedBackground).ignoresSafeArea())
-        .safeAreaInset(edge: .bottom) {
-            Text("Tap any entry to open its source")
-                .font(.caption.weight(.medium))
-                .foregroundStyle(.secondary)
-                .padding(.vertical, 8)
-                .frame(maxWidth: .infinity)
-                .background(.thinMaterial)
-        }
-        .onAppear {
-            preferences.synchronize(with: brief.sections)
-        }
-        .sheet(isPresented: $settingsPresented) {
-            LayoutSettingsSheet(sections: brief.sections, preferences: preferences)
-                .presentationDetents([.large])
-                .presentationDragIndicator(.visible)
+            .background(Color(.systemGroupedBackground).ignoresSafeArea())
+            .onPreferenceChange(BriefScrollOffsetKey.self) { offset in
+                scrollOffset = offset
+            }
+            .safeAreaInset(edge: .bottom) {
+                Text("Tap any entry to open its source")
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .padding(.vertical, 6)
+                    .frame(maxWidth: .infinity)
+                    .background(.thinMaterial)
+            }
+            .onAppear {
+                preferences.synchronize(with: brief.sections)
+            }
+            .sheet(isPresented: $settingsPresented) {
+                LayoutSettingsSheet(sections: brief.sections, preferences: preferences)
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+            }
+            .coordinateSpace(name: "briefScroll")
         }
     }
 }
@@ -147,15 +208,17 @@ private struct MobileHeader: View {
                 }
 
                 Text("How trendy are you?")
-                    .font(.system(size: 31, weight: .black, design: .rounded))
+                    .font(.system(size: 25, weight: .black, design: .rounded))
                     .tracking(-1)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
 
                 HStack(spacing: 6) {
                     Circle()
                         .fill(Color.green)
                         .frame(width: 7, height: 7)
                     Text("\(brief.edition) · \(brief.status)")
-                        .font(.caption.weight(.semibold))
+                        .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
                 }
             }
@@ -163,10 +226,10 @@ private struct MobileHeader: View {
             Spacer(minLength: 0)
 
             Button(action: openSettings) {
-                Image(systemName: "slider.horizontal.3")
-                    .font(.headline.weight(.semibold))
-                    .frame(width: 42, height: 42)
-                    .background(.thinMaterial, in: Circle())
+                    Image(systemName: "slider.horizontal.3")
+                        .font(.headline.weight(.semibold))
+                        .frame(width: 38, height: 38)
+                        .background(.thinMaterial, in: Circle())
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Customize the briefing layout")
@@ -200,9 +263,43 @@ private struct ExploreHeader: View {
             }
 
             Text(brief.summary)
-                .font(.subheadline)
+                .font(.caption)
                 .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(2)
+        }
+    }
+}
+
+private struct LeaderboardJumpBar: View {
+    let sections: [CultureSection]
+    let order: [String]
+    let jumpTo: (String) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Jump to")
+                .font(.caption.weight(.black))
+                .foregroundStyle(.secondary)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(order, id: \.self) { id in
+                        if let section = sections.first(where: { $0.id == id }) {
+                            Button {
+                                jumpTo(id)
+                            } label: {
+                                Text(section.title)
+                                    .font(.caption.weight(.bold))
+                                    .foregroundStyle(Color(hex: "#5A38C5"))
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 7)
+                                    .background(Color(hex: "#6F48E5").opacity(0.10), in: Capsule())
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -242,8 +339,8 @@ private struct StandoutRail: View {
                         if let url = URL(string: standout.item.url) {
                             Link(destination: url) {
                                 VStack(alignment: .leading, spacing: 8) {
-                                    CultureImage(path: standout.item.image, remoteImageVersion: remoteImageVersion)
-                                        .frame(width: 174, height: 116)
+                                    CultureImage(path: standout.item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
+                                        .frame(width: 148, height: 86)
                                         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
 
                                     Text(standout.sectionTitle.uppercased())
@@ -254,11 +351,11 @@ private struct StandoutRail: View {
                                         .font(.subheadline.weight(.bold))
                                         .lineLimit(1)
                                     Text(standout.item.description)
-                                        .font(.caption)
+                                        .font(.caption2)
                                         .foregroundStyle(.secondary)
                                         .lineLimit(2)
                                 }
-                                .frame(width: 174, alignment: .leading)
+                                .frame(width: 148, alignment: .leading)
                             }
                             .buttonStyle(.plain)
                         }
@@ -278,13 +375,13 @@ private struct MobileLeaderboard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .center, spacing: 10) {
                     Text(String(format: "%02d", boardNumber))
                         .font(.caption.weight(.black).monospacedDigit())
                         .foregroundStyle(Color(hex: preference.accentHex))
                     Text(section.title)
-                        .font(.system(size: 23, weight: .black, design: .rounded))
+                        .font(.system(size: 20, weight: .black, design: .rounded))
                     Spacer()
                     Text("\(section.allItems.count) entries")
                         .font(.caption.weight(.medium))
@@ -297,9 +394,9 @@ private struct MobileLeaderboard: View {
 
                 if preference.descriptionStyle != .hidden {
                     Text(displayDescription(section.description, style: preference.descriptionStyle))
-                        .font(.subheadline)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(preference.descriptionStyle == .full ? 4 : 2)
                 }
 
                 HStack(spacing: 6) {
@@ -314,7 +411,7 @@ private struct MobileLeaderboard: View {
                 .foregroundStyle(Color(hex: preference.accentHex))
             }
 
-            LazyVStack(spacing: 8) {
+            LazyVStack(spacing: 6) {
                 ForEach(section.allItems) { item in
                     let expanded = preference.expansion == .all || item.rank <= 3
                     MobileEntryCard(
@@ -327,10 +424,10 @@ private struct MobileLeaderboard: View {
                 }
             }
         }
-        .padding(14)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .padding(10)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay {
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(Color(hex: preference.accentHex).opacity(0.28), lineWidth: 1)
         }
     }
@@ -369,20 +466,20 @@ private struct MobileEntryCard: View {
     }
 
     private var compactRow: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 8) {
             Text(String(format: "%02d", item.rank))
                 .font(.caption.weight(.black).monospacedDigit())
                 .foregroundStyle(Color(hex: preference.accentHex))
-                .frame(width: 26, alignment: .leading)
+                .frame(width: 22, alignment: .leading)
 
-            CultureImage(path: item.image, remoteImageVersion: remoteImageVersion)
-                .frame(width: 52, height: 52)
+            CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
+                .frame(width: 44, height: 44)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 5) {
                     Text(item.title)
-                        .font(.subheadline.weight(.bold))
+                        .font(.callout.weight(.bold))
                         .lineLimit(1)
                     if item.rating != nil {
                         Image(systemName: "star.fill")
@@ -409,16 +506,16 @@ private struct MobileEntryCard: View {
                 .font(.caption2.weight(.bold))
                 .foregroundStyle(.secondary)
         }
-        .padding(10)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+        .padding(8)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     private var fullCard: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .topLeading) {
-                CultureImage(path: item.image, remoteImageVersion: remoteImageVersion)
+                CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
                     .frame(maxWidth: .infinity)
-                    .frame(height: layout == .poster ? 190 : 160)
+                    .frame(height: imageHeight)
                     .clipped()
 
                 Text("#\(item.rank)")
@@ -489,9 +586,17 @@ private struct MobileEntryCard: View {
                     .padding(.top, 2)
                 }
             }
-            .padding(14)
+            .padding(12)
         }
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+    }
+
+    private var imageHeight: CGFloat {
+        switch layout {
+        case .poster: 150
+        case .square: 116
+        case .landscape: 104
+        }
     }
 
     private var descriptionText: String {
@@ -549,7 +654,7 @@ private struct QuizCard: View {
                 completeView
             }
         }
-        .padding(16)
+        .padding(13)
         .background(
             LinearGradient(
                 colors: [Color(hex: "#6F48E5"), Color(hex: "#4F2EB8")],
@@ -572,7 +677,7 @@ private struct QuizCard: View {
     }
 
     private var idleView: some View {
-        VStack(alignment: .leading, spacing: 9) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Label("TAKE THE QUIZ", systemImage: "sparkles")
                     .font(.caption.weight(.black))
@@ -583,22 +688,30 @@ private struct QuizCard: View {
                     .opacity(0.75)
             }
 
-            Text("How much do you know?")
-                .font(.title3.weight(.black))
-            Text("A quick pulse check on the people, stories, and things shaping the moment.")
-                .font(.subheadline)
-                .opacity(0.82)
+            HStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("How much do you know?")
+                        .font(.subheadline.weight(.black))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                    Text("A quick pulse check on what’s shaping the moment.")
+                        .font(.caption)
+                        .opacity(0.82)
+                        .lineLimit(1)
+                }
 
-            Button(action: start) {
-                Text("Start quiz")
-                    .font(.subheadline.weight(.bold))
-                    .foregroundStyle(Color(hex: "#4F2EB8"))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(.white, in: Capsule())
+                Spacer(minLength: 0)
+
+                Button(action: start) {
+                    Text("Start")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(Color(hex: "#4F2EB8"))
+                        .padding(.horizontal, 13)
+                        .padding(.vertical, 8)
+                        .background(.white, in: Capsule())
+                }
+                .fixedSize()
             }
-            .buttonStyle(.plain)
-            .padding(.top, 3)
         }
     }
 

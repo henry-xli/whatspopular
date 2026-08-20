@@ -48,11 +48,13 @@ struct BoardPreference: Codable, Equatable {
 
 final class LayoutPreferences: ObservableObject {
     static let defaultOrder = ["people", "movies", "books", "music", "products", "news", "memes", "slang"]
+    private static let currentStorageVersion = 2
 
     @Published private(set) var order: [String]
     @Published private(set) var styles: [String: BoardPreference]
 
     private let storageKey = "whatspopular-mobile-layout"
+    private let storageVersionKey = "whatspopular-mobile-layout-version"
 
     init() {
         order = Self.defaultOrder
@@ -103,6 +105,11 @@ final class LayoutPreferences: ObservableObject {
     }
 
     private func load() {
+        guard UserDefaults.standard.integer(forKey: storageVersionKey) == Self.currentStorageVersion else {
+            UserDefaults.standard.set(Self.currentStorageVersion, forKey: storageVersionKey)
+            return
+        }
+
         guard let data = UserDefaults.standard.data(forKey: storageKey),
               let saved = try? JSONDecoder().decode(SavedLayout.self, from: data) else { return }
         order = saved.order
@@ -132,7 +139,7 @@ final class LayoutPreferences: ObservableObject {
         ]
         return BoardPreference(
             accentHex: defaults[id] ?? "#6F48E5",
-            format: .fullCards,
+            format: .compactRows,
             descriptionStyle: .concise,
             expansion: .topThree
         )
