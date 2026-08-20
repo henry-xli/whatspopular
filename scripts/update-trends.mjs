@@ -4066,7 +4066,7 @@ async function updateQuiz(brief) {
 }
 
 function validateBrief(brief) {
-  const expected = ["memes", "slang", "people", "movies", "books", "music", "products", "news"];
+  const expected = ["people", "movies", "books", "music", "products", "news", "memes", "slang"];
   if (brief.sections.length !== expected.length
     || brief.sections.some((section, index) => section.id !== expected[index])) {
     throw new Error("Brief must contain the eight boards in the documented order");
@@ -4267,7 +4267,7 @@ const emptySection = (id, title, layout) => ({
 if (!brief.sections.some((section) => section.id === "books")) brief.sections.push(emptySection("books", "Books", "poster"));
 if (!brief.sections.some((section) => section.id === "products")) brief.sections.push(emptySection("products", "Products", "square"));
 if (!brief.sections.some((section) => section.id === "news")) brief.sections.push(emptySection("news", "News", "landscape"));
-const order = ["memes", "slang", "people", "movies", "books", "music", "products", "news"];
+const order = ["people", "movies", "books", "music", "products", "news", "memes", "slang"];
 brief.sections.sort((left, right) => order.indexOf(left.id) - order.indexOf(right.id));
 for (const section of brief.sections) {
   if (section.id === "people") {
@@ -4385,7 +4385,7 @@ brief.sourceHealth = sourceResults.map(({ name, ok, checkedAt, error }) => ({
 brief.generatedAt = now.toISOString();
 brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
 brief.status = "Checked today";
-brief.summary = "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.";
+brief.summary = "A five-minute, two-source briefing on the people, movies, books, music, products, news, memes, and slang shaping internet culture right now.";
 brief.window = "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts";
 sanitizeBriefSocialMentions(brief);
 capLinkedSources(brief);

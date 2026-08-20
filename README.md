@@ -4,6 +4,9 @@ A finite 48-hour briefing and quiz on internet culture. Visitors receive
 pre-rendered HTML and local images; there is no account, feed, runtime database
 query, or request-time scraper.
 
+Explore displays boards in this order: People, Movies, Books, Music, Products,
+News, Memes, and Slang.
+
 ## Develop
 
 Node.js 22.13 or newer is required.

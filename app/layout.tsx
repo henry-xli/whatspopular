@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s — what’s popular?",
   },
   description:
-    "Quiz yourself on the memes, slang, people, movies, books, music, products, and news shaping internet culture.",
+    "Quiz yourself on the people, movies, books, music, products, news, memes, and slang shaping internet culture.",
   applicationName: "what’s popular?",
   alternates: { canonical: "/" },
   openGraph: {

@@ -153,7 +153,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, /class="is-active" href="\/explore"[^>]*>Explore<\/a>/);
   assert.match(html, /Everything worth knowing at a glance/);
   assert.match(html, /class="explore-index"/);
-  for (const id of ["memes", "slang", "people", "movies", "books", "music", "products", "news"]) {
+  for (const id of ["people", "movies", "books", "music", "products", "news", "memes", "slang"]) {
     assert.match(html, new RegExp(`class="explore-index-link"[^>]*aria-controls="${id}"`));
   }
   assert.doesNotMatch(html, /href="#(?:memes|slang|people|movies|books|music|products|news)"/);
@@ -166,7 +166,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(html, />Music</);
   assert.match(html, />Products</);
   assert.match(html, />News</);
-  const boardPositions = ["memes", "slang", "people", "movies", "books", "music", "products", "news"]
+  const boardPositions = ["people", "movies", "books", "music", "products", "news", "memes", "slang"]
     .map((id) => html.indexOf(`id="${id}-title"`));
   assert.ok(boardPositions.every((position, index) => position >= 0
     && (index === 0 || position > boardPositions[index - 1])));
@@ -416,7 +416,7 @@ test("rate-limited work stays serialized after failures", async () => {
 test("keeps content and outbound links constrained", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
   assert.deepEqual(brief.sections.map((section) => section.id),
-    ["memes", "slang", "people", "movies", "books", "music", "products", "news"]);
+    ["people", "movies", "books", "music", "products", "news", "memes", "slang"]);
   assert.equal(brief.quiz.durationSeconds, 15);
   assert.equal(brief.quiz.questions.length, 15);
   const quizCounts = new Map();

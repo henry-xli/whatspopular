@@ -224,14 +224,14 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     throw new Error("Culture brief must contain exactly eight boards");
   }
   const expected = [
-    ["memes", "landscape"],
-    ["slang", "landscape"],
     ["people", "square"],
     ["movies", "poster"],
     ["books", "poster"],
     ["music", "square"],
     ["products", "square"],
     ["news", "landscape"],
+    ["memes", "landscape"],
+    ["slang", "landscape"],
   ];
   candidate.sections.forEach((value, sectionIndex) => {
     if (!value || typeof value !== "object") throw new Error(`Board ${sectionIndex + 1} is invalid`);

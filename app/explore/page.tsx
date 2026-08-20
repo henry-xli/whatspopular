@@ -6,7 +6,7 @@ import { cultureBrief } from "../culture";
 
 export const metadata: Metadata = {
   title: "Explore",
-  description: "Explore today’s memes, slang, people, movies, books, music, products, and news leaderboards.",
+  description: "Explore today’s people, movies, books, music, products, news, memes, and slang leaderboards.",
   alternates: { canonical: "/explore" },
 };
 

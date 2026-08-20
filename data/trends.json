@@ -3,527 +3,8 @@
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
   "generatedAt": "2026-08-20T06:39:05.184Z",
-  "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
+  "summary": "A five-minute, two-source briefing on the people, movies, books, music, products, news, memes, and slang shaping internet culture right now.",
   "sections": [
-    {
-      "id": "memes",
-      "eyebrow": "July 2026 · latest complete month",
-      "title": "Memes",
-      "description": "The July Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.",
-      "sources": [
-        {
-          "label": "Know Your Meme · July result",
-          "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-        },
-        {
-          "label": "Lessons in Meme Culture · past 2 months",
-          "url": "https://www.youtube.com/@LIMC/videos"
-        }
-      ],
-      "layout": "landscape",
-      "items": [
-        {
-          "rank": 1,
-          "title": "Jimothy the raccoon",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Jimothy is a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars.",
-          "image": "/culture/meme-jimothy-the-raccoon.webp",
-          "alt": "Visual example of the Jimothy the raccoon meme",
-          "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#1"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=Pa-L5dwDGJ4"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 2,
-          "title": "Kwebbelkop Laughing / YourRAGE Laugh",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Kwebbelkop Laughing or YourRAGE Laugh refers to a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like Dutch YouTuber Kwebbelkop. In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits.",
-          "image": "/culture/meme-kwebbelkop.webp",
-          "alt": "Kwebbelkop portrait used with the viral laughing sound",
-          "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#3"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=c65r2vtjqxc"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 3,
-          "title": "Hatsune Miku World Cup Custody Battle",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Hatsune Miku World Cup Custody Battle is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. The joke proposes that whichever national team defeats the previous holder earns temporary \"custody\" of the Vocaloid character, inspiring artists to redesign Miku in the country's colors, clothing and cultural motifs until that team is eliminated.",
-          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
-          "alt": "Visual example of the Hatsune Miku World Cup Custody Battle meme",
-          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#4"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
-          "title": "Mbappé Special",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Mbappé Special is a slang term and series of memes based on a viral video of French footballer and soccer star Kylian Mbappe saying, during an interview, that the \"Kylian Special\" is \"for example, nothing,\" when asked what he likes to cook. The clip of Mbappe saying the Mbappe Special is \"nothing\" inspired memes that use the term as slang to replace the word \"nothing\" over the following weeks as it spread online.",
-          "image": "/culture/meme-mbappe-special.webp",
-          "alt": "Visual example of the Mbappé Special meme",
-          "url": "https://knowyourmeme.com/memes/mbappe-special",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#5"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 5,
-          "title": "John Rod",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "John Rod is a nickname for an unnamed stand that appears in chapter 38 of the manga series JoJo's Bizarre Adventure Part 9: The JOJOLands. The stand was popularized online in mid-July 2026, inspiring edits, fan art, memes and other fan content.",
-          "image": "/culture/meme-john-rod.webp",
-          "alt": "John Rod from JoJo's Bizarre Adventure",
-          "url": "https://knowyourmeme.com/memes/john-rod",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#6"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=S2PsR7TCG7U"
-            }
-          ],
-          "accent": "#57d5a4"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
-          "title": "Stay In Character",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Stay In Character is a catchphrase and series of memes based on a scene from the 2026 Backrooms movie in which the protagonist, Clark (played by actor Chiwetel Ejiofor), yells, \"Stay in character!\" In June 2026, the film's scene became the subject of numerous memes on social media as the moment was used as an exploitable format with brainrot edits, recreations, Accuracy Reenactments and more.",
-          "image": "/culture/meme-stay-in-character.webp",
-          "alt": "Visual example of the Stay In Character meme",
-          "url": "https://knowyourmeme.com/memes/stay-in-character-backrooms",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#7"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=QMKWIuacG8c"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 7,
-          "title": "Funky Ehh",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "We'll Drive A Funky Ehh or He'll Drive A Funky Ehh refers to a viral video of a kid claiming, during a game of Fortnite, that a remix of the song \" Someone to Call My Lover \" by Janet Jackson is by Oliver Tree, singing the song, \"Maybe we'll meet at a bar, we'll drive a fancy ehh.\" A clip of the moment went viral on social media and Instagram Reels later that month, inspiring animations, remixes and memes based on the audio of the kid singing the song.",
-          "image": "/culture/meme-funky-ehh.webp",
-          "alt": "Visual example of the Funky Ehh meme",
-          "url": "https://knowyourmeme.com/memes/well-drive-a-funky-ehh",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#8"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=oyR_1uKIK6I"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 8,
-          "title": "Somebody Get These Beggars Out Of Here",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Somebody Get These Beggars Out Of Here is a quote from the character Antinous, played by actor Robert Pattinson, in Christopher Nolan's 2026 epic fantasy movie The Odyssey, which appeared online shortly after the film's release in mid-July 2026. The scene is typically used online as a simple catchphrase and reaction meme to mock someone for being poor or begging for something, with the GIF or reaction image of Pattinson from the movie also being used as an exploitable in which creators add different visual elements to him.",
-          "image": "/culture/meme-somebody-get-these-beggars-out-of-here.webp",
-          "alt": "Visual example of the Somebody Get These Beggars Out Of Here meme",
-          "url": "https://knowyourmeme.com/memes/robert-pattinson-somebody-get-these-beggars-out-of-here",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#9"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=8ugpFwj6ib8"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 9,
-          "title": "Homer Let the Barts Out",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Homer Let the Barts Out is a brainrot and AI song by Rabadoonga about Homer Simpson letting a massive group of Bart Simpsons out of the house, who go on to cause uncontrollable destruction. It inspired memes on sites including social media, X / Twitter and Instagram Reels, including lip dubs, animations, covers and AI-generated videos.",
-          "image": "/culture/meme-homer-let-the-barts-out.webp",
-          "alt": "Visual example of the Homer Let the Barts Out meme",
-          "url": "https://knowyourmeme.com/memes/homer-let-the-barts-out",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#10"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=kawenQiaRtI"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 10,
-          "title": "Best of Zach",
-          "subtitle": "July poll finalist · LIMC covered",
-          "description": "Best Of Zach refers to a series of memes about the Oney Plays video \"Best Of Zach\" and its thumbnail, which shows a cartoon drawing of Zach, also known as PsychicPebbles, over a pink background. In June 2026, a video that animates the video and sets it to an amateur rap song that repeats the words \"best of Zach\" was popularized online, inspiring further \"Best Of Zach\" memes.",
-          "image": "/culture/meme-best-of-zach.webp",
-          "alt": "Visual example of the Best of Zach meme",
-          "url": "https://knowyourmeme.com/memes/best-of-zach",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "July Meme of the Month",
-            "value": "#11"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme July result",
-              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
-            },
-            {
-              "source": "Lessons in Meme Culture",
-              "url": "https://www.youtube.com/watch?v=gUS5yEdRrvo"
-            }
-          ],
-          "accent": "#ff6b57"
-        }
-      ],
-      "moreLabel": "Show ranks 6–10"
-    },
-    {
-      "id": "slang",
-      "eyebrow": "2025 annual slang review · by page views",
-      "title": "Slang",
-      "description": "Terms from Know Your Meme's latest annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.",
-      "sources": [
-        {
-          "label": "Know Your Meme · 2025 annual slang review",
-          "url": "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025"
-        },
-        {
-          "label": "Urban Dictionary · 67 / Six-Seven",
-          "url": "https://www.urbandictionary.com/define.php?term=67"
-        }
-      ],
-      "layout": "landscape",
-      "items": [
-        {
-          "rank": 1,
-          "title": "67 / Six-Seven",
-          "subtitle": "2025 annual review term",
-          "description": "67 Meme refers to a series of memes about a lyric in the song \"Doot Doot\" by Skrilla featuring G Herbo, a hip-hop song released in December 2024, that was popularized on social media and Instagram Reels in January 2025.",
-          "image": "/culture/slang-67.webp",
-          "alt": "The number 67 as used in the six-seven meme",
-          "url": "https://knowyourmeme.com/memes/67-meme",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "1,003,097"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/67-meme"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=67"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 2,
-          "title": "Dead Rose Emoji",
-          "subtitle": "2025 annual review term",
-          "description": "The Dead Rose Emoji refers to the 🥀 emoji that depicts a wilted rose. It's used online to represent being damaged or heartbroken, earnestly shared by emo internet users.",
-          "image": "/culture/slang-dead-rose-emoji.webp",
-          "alt": "Visual example of Dead Rose Emoji",
-          "url": "https://knowyourmeme.com/memes/dead-rose-emoji",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "114,750"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/dead-rose-emoji"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=Dead%20Rose"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 3,
-          "title": "Aura Farming",
-          "subtitle": "2025 annual review term",
-          "description": "Aura Farming refers to an act of constantly trying to look \"cool\" or \"badass\" to build \"aura moments.\" The expression is derived from the \" aura \" internet slang term and gained viral usage on X / Twitter, Instagram and social media in mid-September 2024.",
-          "image": "/culture/slang-aura-farming.webp",
-          "alt": "Stylized scene representing aura farming",
-          "url": "https://knowyourmeme.com/memes/aura-farming",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "100,354"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/aura-farming"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=aura%20farming"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
-          "title": "SYBAU",
-          "subtitle": "2025 annual review term",
-          "description": "SYBAU is a slang term and acronym meaning \"shut your bitch ass up.\" The acronym has been used online since as early as 2003 when it was first defined on Urban Dictionary, spreading over the following years.",
-          "image": "/culture/slang-sybau.webp",
-          "alt": "Reaction image associated with the acronym SYBAU",
-          "url": "https://knowyourmeme.com/memes/sybau",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "76,691"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/sybau"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=SYBAU"
-            }
-          ],
-          "accent": "#5ab0ff"
-        },
-        {
-          "rank": 5,
-          "title": "Labubu Matcha Dubai Chocolate",
-          "subtitle": "2025 annual review term",
-          "description": "Labubu Matcha Dubai Chocolate refers to a slang overload trend involving the overuse and spamming of trendy, mid-2025 fads and crazes like Labubu Toys, matcha drinks and Dubai Chocolate Bars.",
-          "image": "/culture/slang-labubu-matcha-dubai-chocolate.webp",
-          "alt": "Visual example of Labubu Matcha Dubai Chocolate",
-          "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "55,654"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=Labubu"
-            }
-          ],
-          "accent": "#ff6b57"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
-          "title": "Clanker",
-          "subtitle": "2025 annual review term",
-          "description": "Clanker is a slang term and a robophobic slur for droids and robots, originating from the Star Wars franchise. After initially appearing in the video game Star Wars: Republic Commando and The Clone Wars in the mid-to-late 2000s, the slang began seeing use online and in memes during the 2010s.",
-          "image": "/culture/slang-clanker.webp",
-          "alt": "A battle droid associated with the slang term clanker",
-          "url": "https://knowyourmeme.com/memes/clanker",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "47,004"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/clanker"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=clanker"
-            }
-          ],
-          "accent": "#ffc857"
-        },
-        {
-          "rank": 7,
-          "title": "TS PMO ICL",
-          "subtitle": "2025 annual review term",
-          "description": "TS means “this shit”; PMO means “piss me off”; and ICL means “I can't lie”. TS PMO ICL, also spelled TSPMO ICL, refers to a Slang Overload trend of overusing slang abbreviations like TS, PMO and ICL, among others, to form nonsensical, brainrot posts that satirize the slang's use.",
-          "image": "/culture/slang-ts-pmo-icl.webp",
-          "alt": "Visual example of TS PMO ICL",
-          "url": "https://knowyourmeme.com/memes/ts-pmo-icl",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "43,575"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/ts-pmo-icl"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=TS%20PMO%20ICL"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 8,
-          "title": "Performative Male",
-          "subtitle": "2025 annual review term",
-          "description": "Performative Male is an internet slang term used to describe a man whose actions, hobbies and personality traits appear inauthentic and seem to revolve around \"performing\" for other people's worldviews, tastes and interests, specifically catering to the female gaze.",
-          "image": "/culture/slang-performative-male.webp",
-          "alt": "Visual example of Performative Male",
-          "url": "https://knowyourmeme.com/memes/performative-male",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "27,436"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/performative-male"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=Performative%20Male"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 9,
-          "title": "Chopped",
-          "subtitle": "2025 annual review term",
-          "description": "Chopped is a slang term with multiple definitions, but in memes, it predominantly means \"ugly\" when used to describe people. It's been used online since the early 2010s but gained a predominant presence online starting in the early 2020s.",
-          "image": "/culture/slang-chopped.webp",
-          "alt": "Reaction image associated with chopped slang",
-          "url": "https://knowyourmeme.com/memes/chopped-slang",
-          "source": "Know Your Meme",
-          "metric": {
-            "label": "Know Your Meme page views",
-            "value": "18,589"
-          },
-          "evidence": [
-            {
-              "source": "Know Your Meme entry",
-              "url": "https://knowyourmeme.com/memes/chopped-slang"
-            },
-            {
-              "source": "Urban Dictionary",
-              "url": "https://www.urbandictionary.com/define.php?term=chopped"
-            }
-          ],
-          "accent": "#5ab0ff"
-        }
-      ],
-      "moreLabel": "Show ranks 6–9 by page views"
-    },
     {
       "id": "people",
       "eyebrow": "July 2026 · Wikipedia topviews",
@@ -2341,6 +1822,525 @@
         }
       ],
       "moreLabel": "Show ranks 6–10"
+    },
+    {
+      "id": "memes",
+      "eyebrow": "July 2026 · latest complete month",
+      "title": "Memes",
+      "description": "The July Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.",
+      "sources": [
+        {
+          "label": "Know Your Meme · July result",
+          "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+        },
+        {
+          "label": "Lessons in Meme Culture · past 2 months",
+          "url": "https://www.youtube.com/@LIMC/videos"
+        }
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Jimothy the raccoon",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Jimothy is a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars.",
+          "image": "/culture/meme-jimothy-the-raccoon.webp",
+          "alt": "Visual example of the Jimothy the raccoon meme",
+          "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#1"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=Pa-L5dwDGJ4"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Kwebbelkop Laughing / YourRAGE Laugh",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Kwebbelkop Laughing or YourRAGE Laugh refers to a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like Dutch YouTuber Kwebbelkop. In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits.",
+          "image": "/culture/meme-kwebbelkop.webp",
+          "alt": "Kwebbelkop portrait used with the viral laughing sound",
+          "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#3"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=c65r2vtjqxc"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Hatsune Miku World Cup Custody Battle",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Hatsune Miku World Cup Custody Battle is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. The joke proposes that whichever national team defeats the previous holder earns temporary \"custody\" of the Vocaloid character, inspiring artists to redesign Miku in the country's colors, clothing and cultural motifs until that team is eliminated.",
+          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
+          "alt": "Visual example of the Hatsune Miku World Cup Custody Battle meme",
+          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#4"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Mbappé Special",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Mbappé Special is a slang term and series of memes based on a viral video of French footballer and soccer star Kylian Mbappe saying, during an interview, that the \"Kylian Special\" is \"for example, nothing,\" when asked what he likes to cook. The clip of Mbappe saying the Mbappe Special is \"nothing\" inspired memes that use the term as slang to replace the word \"nothing\" over the following weeks as it spread online.",
+          "image": "/culture/meme-mbappe-special.webp",
+          "alt": "Visual example of the Mbappé Special meme",
+          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#5"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "John Rod",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "John Rod is a nickname for an unnamed stand that appears in chapter 38 of the manga series JoJo's Bizarre Adventure Part 9: The JOJOLands. The stand was popularized online in mid-July 2026, inspiring edits, fan art, memes and other fan content.",
+          "image": "/culture/meme-john-rod.webp",
+          "alt": "John Rod from JoJo's Bizarre Adventure",
+          "url": "https://knowyourmeme.com/memes/john-rod",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#6"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=S2PsR7TCG7U"
+            }
+          ],
+          "accent": "#57d5a4"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Stay In Character",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Stay In Character is a catchphrase and series of memes based on a scene from the 2026 Backrooms movie in which the protagonist, Clark (played by actor Chiwetel Ejiofor), yells, \"Stay in character!\" In June 2026, the film's scene became the subject of numerous memes on social media as the moment was used as an exploitable format with brainrot edits, recreations, Accuracy Reenactments and more.",
+          "image": "/culture/meme-stay-in-character.webp",
+          "alt": "Visual example of the Stay In Character meme",
+          "url": "https://knowyourmeme.com/memes/stay-in-character-backrooms",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#7"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=QMKWIuacG8c"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "Funky Ehh",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "We'll Drive A Funky Ehh or He'll Drive A Funky Ehh refers to a viral video of a kid claiming, during a game of Fortnite, that a remix of the song \" Someone to Call My Lover \" by Janet Jackson is by Oliver Tree, singing the song, \"Maybe we'll meet at a bar, we'll drive a fancy ehh.\" A clip of the moment went viral on social media and Instagram Reels later that month, inspiring animations, remixes and memes based on the audio of the kid singing the song.",
+          "image": "/culture/meme-funky-ehh.webp",
+          "alt": "Visual example of the Funky Ehh meme",
+          "url": "https://knowyourmeme.com/memes/well-drive-a-funky-ehh",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#8"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=oyR_1uKIK6I"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Somebody Get These Beggars Out Of Here",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Somebody Get These Beggars Out Of Here is a quote from the character Antinous, played by actor Robert Pattinson, in Christopher Nolan's 2026 epic fantasy movie The Odyssey, which appeared online shortly after the film's release in mid-July 2026. The scene is typically used online as a simple catchphrase and reaction meme to mock someone for being poor or begging for something, with the GIF or reaction image of Pattinson from the movie also being used as an exploitable in which creators add different visual elements to him.",
+          "image": "/culture/meme-somebody-get-these-beggars-out-of-here.webp",
+          "alt": "Visual example of the Somebody Get These Beggars Out Of Here meme",
+          "url": "https://knowyourmeme.com/memes/robert-pattinson-somebody-get-these-beggars-out-of-here",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#9"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=8ugpFwj6ib8"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Homer Let the Barts Out",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Homer Let the Barts Out is a brainrot and AI song by Rabadoonga about Homer Simpson letting a massive group of Bart Simpsons out of the house, who go on to cause uncontrollable destruction. It inspired memes on sites including social media, X / Twitter and Instagram Reels, including lip dubs, animations, covers and AI-generated videos.",
+          "image": "/culture/meme-homer-let-the-barts-out.webp",
+          "alt": "Visual example of the Homer Let the Barts Out meme",
+          "url": "https://knowyourmeme.com/memes/homer-let-the-barts-out",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#10"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=kawenQiaRtI"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Best of Zach",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Best Of Zach refers to a series of memes about the Oney Plays video \"Best Of Zach\" and its thumbnail, which shows a cartoon drawing of Zach, also known as PsychicPebbles, over a pink background. In June 2026, a video that animates the video and sets it to an amateur rap song that repeats the words \"best of Zach\" was popularized online, inspiring further \"Best Of Zach\" memes.",
+          "image": "/culture/meme-best-of-zach.webp",
+          "alt": "Visual example of the Best of Zach meme",
+          "url": "https://knowyourmeme.com/memes/best-of-zach",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#11"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=gUS5yEdRrvo"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
+    },
+    {
+      "id": "slang",
+      "eyebrow": "2025 annual slang review · by page views",
+      "title": "Slang",
+      "description": "Terms from Know Your Meme's latest annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.",
+      "sources": [
+        {
+          "label": "Know Your Meme · 2025 annual slang review",
+          "url": "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025"
+        },
+        {
+          "label": "Urban Dictionary · 67 / Six-Seven",
+          "url": "https://www.urbandictionary.com/define.php?term=67"
+        }
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "67 / Six-Seven",
+          "subtitle": "2025 annual review term",
+          "description": "67 Meme refers to a series of memes about a lyric in the song \"Doot Doot\" by Skrilla featuring G Herbo, a hip-hop song released in December 2024, that was popularized on social media and Instagram Reels in January 2025.",
+          "image": "/culture/slang-67.webp",
+          "alt": "The number 67 as used in the six-seven meme",
+          "url": "https://knowyourmeme.com/memes/67-meme",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "1,003,097"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/67-meme"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=67"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Dead Rose Emoji",
+          "subtitle": "2025 annual review term",
+          "description": "The Dead Rose Emoji refers to the 🥀 emoji that depicts a wilted rose. It's used online to represent being damaged or heartbroken, earnestly shared by emo internet users.",
+          "image": "/culture/slang-dead-rose-emoji.webp",
+          "alt": "Visual example of Dead Rose Emoji",
+          "url": "https://knowyourmeme.com/memes/dead-rose-emoji",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "114,750"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/dead-rose-emoji"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Dead%20Rose"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Aura Farming",
+          "subtitle": "2025 annual review term",
+          "description": "Aura Farming refers to an act of constantly trying to look \"cool\" or \"badass\" to build \"aura moments.\" The expression is derived from the \" aura \" internet slang term and gained viral usage on X / Twitter, Instagram and social media in mid-September 2024.",
+          "image": "/culture/slang-aura-farming.webp",
+          "alt": "Stylized scene representing aura farming",
+          "url": "https://knowyourmeme.com/memes/aura-farming",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "100,354"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/aura-farming"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=aura%20farming"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "SYBAU",
+          "subtitle": "2025 annual review term",
+          "description": "SYBAU is a slang term and acronym meaning \"shut your bitch ass up.\" The acronym has been used online since as early as 2003 when it was first defined on Urban Dictionary, spreading over the following years.",
+          "image": "/culture/slang-sybau.webp",
+          "alt": "Reaction image associated with the acronym SYBAU",
+          "url": "https://knowyourmeme.com/memes/sybau",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "76,691"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/sybau"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=SYBAU"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "Labubu Matcha Dubai Chocolate",
+          "subtitle": "2025 annual review term",
+          "description": "Labubu Matcha Dubai Chocolate refers to a slang overload trend involving the overuse and spamming of trendy, mid-2025 fads and crazes like Labubu Toys, matcha drinks and Dubai Chocolate Bars.",
+          "image": "/culture/slang-labubu-matcha-dubai-chocolate.webp",
+          "alt": "Visual example of Labubu Matcha Dubai Chocolate",
+          "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "55,654"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Labubu"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Clanker",
+          "subtitle": "2025 annual review term",
+          "description": "Clanker is a slang term and a robophobic slur for droids and robots, originating from the Star Wars franchise. After initially appearing in the video game Star Wars: Republic Commando and The Clone Wars in the mid-to-late 2000s, the slang began seeing use online and in memes during the 2010s.",
+          "image": "/culture/slang-clanker.webp",
+          "alt": "A battle droid associated with the slang term clanker",
+          "url": "https://knowyourmeme.com/memes/clanker",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "47,004"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/clanker"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=clanker"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "TS PMO ICL",
+          "subtitle": "2025 annual review term",
+          "description": "TS means “this shit”; PMO means “piss me off”; and ICL means “I can't lie”. TS PMO ICL, also spelled TSPMO ICL, refers to a Slang Overload trend of overusing slang abbreviations like TS, PMO and ICL, among others, to form nonsensical, brainrot posts that satirize the slang's use.",
+          "image": "/culture/slang-ts-pmo-icl.webp",
+          "alt": "Visual example of TS PMO ICL",
+          "url": "https://knowyourmeme.com/memes/ts-pmo-icl",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "43,575"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/ts-pmo-icl"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=TS%20PMO%20ICL"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Performative Male",
+          "subtitle": "2025 annual review term",
+          "description": "Performative Male is an internet slang term used to describe a man whose actions, hobbies and personality traits appear inauthentic and seem to revolve around \"performing\" for other people's worldviews, tastes and interests, specifically catering to the female gaze.",
+          "image": "/culture/slang-performative-male.webp",
+          "alt": "Visual example of Performative Male",
+          "url": "https://knowyourmeme.com/memes/performative-male",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "27,436"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/performative-male"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Performative%20Male"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Chopped",
+          "subtitle": "2025 annual review term",
+          "description": "Chopped is a slang term with multiple definitions, but in memes, it predominantly means \"ugly\" when used to describe people. It's been used online since the early 2010s but gained a predominant presence online starting in the early 2020s.",
+          "image": "/culture/slang-chopped.webp",
+          "alt": "Reaction image associated with chopped slang",
+          "url": "https://knowyourmeme.com/memes/chopped-slang",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "18,589"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/chopped-slang"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=chopped"
+            }
+          ],
+          "accent": "#5ab0ff"
+        }
+      ],
+      "moreLabel": "Show ranks 6–9 by page views"
     }
   ],
   "sourceHealth": [
