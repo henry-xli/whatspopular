@@ -2222,7 +2222,8 @@ const productComparisonPattern = /\b(?:alongside|another|compared?\s+(?:to|with)
 const productReferencePattern = /\b(?:accessories|background|creation|facts|history|trivia|wiki|encyclop(?:edia|a)|kasing lung)\b/i;
 const amazonFocusTerms = new Set(["airwrap", "supersonic", "vacuum", "hair", "dryer", "brush", "mask", "serum", "toner", "candle", "tote", "bag", "lip", "skin", "skincare", "beauty", "squish", "squishy", "dumpling", "toy", "plush", "cup", "collectible", "gadget", "phone", "watch", "shoe", "sneaker", "dress", "jacket"]);
 const amazonCategoryTerms = new Set(["airfryer", "bag", "bottle", "brush", "camera", "candle", "charger", "coffee", "console", "cube", "drink", "dumpling", "fold", "frappuccino", "fragrance", "gadget", "headphone", "laptop", "lip", "mascara", "mattress", "monitor", "mouse", "mug", "phone", "plush", "serum", "skincare", "smartphone", "snack", "sneaker", "squish", "switch", "tablet", "tote", "toy", "tumbler", "vacuum", "watch"]);
-const amazonAccessoryPattern = /\b(?:case|cover|filter|holder|mount|protector|replacement|stand|strap)\b/i;
+const amazonAccessoryPattern = /\b(?:case|cover|filter|holder|insert|liner|mount|organizer|protector|replacement|screen\s+(?:film|guard|protector)|sleeve|stand|strap|tempered\s+glass|skin)\b/i;
+const amazonMerchandisePattern = /\b(?:decals?|hood(?:ie|ies)|keychains?|notebooks?|ornaments?|posters?|prints?|stickers?|sweatshirts?|shirts?|wall\s+art)\b/i;
 
 function amazonCategoryTokens(value) {
   return [...productTokenSet(value)].filter((token) => [...amazonCategoryTerms].some((category) => token === category || token.startsWith(category)));
@@ -2506,6 +2507,49 @@ function productTypePhrase(value) {
   if (/\b(?:bag|tote|backpack|jacket|sneaker|shoe|dress|apparel|clothing)\b/.test(text)) return "a fashion item";
   if (/\b(?:candle|mug|tumbler|mattress|chair|bottle|brush)\b/.test(text)) return "a household item";
   return "a consumer product";
+}
+
+function amazonListingType(value) {
+  const text = normalize(value);
+  if (amazonAccessoryPattern.test(text)) return "an accessory";
+  if (amazonMerchandisePattern.test(text)
+    || /\b(?:mug|tumbler|glass|powder|mix|syrup)\b/.test(text)
+    && !/\b(?:drink|beverage|coffee|latte)\b/.test(text)) return "merchandise";
+  return productTypePhrase(text);
+}
+
+function amazonListingMatchesProduct(query, listingTitle, listingText = "") {
+  const title = plainText(listingTitle);
+  if (!title) return false;
+  const queryTokens = productTokens(query);
+  const titleTokens = new Set(productTokens(title));
+  if (queryTokens.length && !queryTokens.every((token) => titleTokens.has(token))) return false;
+  const queryIsAccessory = amazonAccessoryPattern.test(query);
+  if (!queryIsAccessory && amazonAccessoryPattern.test(title)) return false;
+  const queryType = amazonListingType(query);
+  const listingType = amazonListingType(title);
+  if (queryType !== "a consumer product" && listingType !== "a consumer product" && queryType !== listingType) return false;
+  if (!queryIsAccessory && /\b(?:merchandise|mug|powder|syrup|tumbler)\b/i.test(title)
+    && /\b(?:drink|beverage|coffee|latte|frappuccino)\b/i.test(query)) return false;
+  if (!/\$\s?\d|\b(?:add to cart|buy now|in stock)\b/i.test(listingText)) return false;
+  return true;
+}
+
+function amazonDetailMatchesProduct(query, listingTitle, listingText = "") {
+  const title = plainText(listingTitle);
+  if (!title) return false;
+  const queryIsAccessory = amazonAccessoryPattern.test(query);
+  if (!queryIsAccessory && amazonAccessoryPattern.test(title)) return false;
+  const queryType = amazonListingType(query);
+  const listingType = amazonListingType(title);
+  if (queryType !== "a consumer product" && listingType !== "a consumer product" && queryType !== listingType) return false;
+  const identityTokens = productTokens(query)
+    .filter((token) => token.length > 2 && !genericProductWords.has(token) && !amazonCategoryTerms.has(token));
+  const titleTokens = new Set(productTokens(title));
+  const identityMatch = identityTokens.some((token) => titleTokens.has(token)
+    || [...titleTokens].some((titleToken) => titleToken.startsWith(token) || token.startsWith(titleToken)));
+  if (identityTokens.length && !identityMatch) return false;
+  return /\$\s?\d|\b(?:add to cart|buy now|in stock|currently unavailable)\b/i.test(listingText);
 }
 
 const productDemandPatterns = [
@@ -3011,10 +3055,14 @@ async function productImageFromEvidence(row, excludedHost = "") {
   return null;
 }
 
-function amazonSearchUrl(query) {
-  const url = new URL("https://www.amazon.com/s");
-  url.search = new URLSearchParams({ k: query, s: "exact-aware-popularity-rank" });
-  return url.href;
+function isAmazonListingUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === "www.amazon.com"
+      && /^\/(?:dp|gp\/product)\/[A-Z0-9]{10}\/?$/i.test(url.pathname);
+  } catch {
+    return false;
+  }
 }
 
 async function amazonProducts(rows) {
@@ -3031,7 +3079,10 @@ async function amazonProducts(rows) {
             ...(row.observations ?? []).map((item) => item.headline),
           ].filter(Boolean).join(" ");
           const focusTerms = [...new Set(productTokens(contextText).filter((token) => amazonFocusTerms.has(token)))];
-          const amazonQuery = [row.query, ...focusTerms.slice(0, 2)].join(" ");
+          // Search only the curated product identity. Article context can mention
+          // accessories (for example, a screen protector) and must not steer the
+          // purchase match away from the product itself.
+          const amazonQuery = row.query;
           const searchUrl = new URL("https://www.amazon.com/s");
           searchUrl.search = new URLSearchParams({ k: amazonQuery, s: "exact-aware-popularity-rank" });
           await page.navigate(searchUrl, 1_600);
@@ -3041,17 +3092,16 @@ async function amazonProducts(rows) {
           const categoryTokens = amazonCategoryTokens(row.query);
           const beautyContext = /\b(?:beauty|skincare|skin care|makeup|hair)\b/i.test(contextText);
           const match = cards.filter((card) => {
-            const cardTitleTokens = productTokenSet(card.title);
-            const cardTokens = productTokenSet(`${card.title} ${card.text}`);
+            const cardTitleTokens = new Set(productTokens(card.title));
+            const cardTokens = new Set(productTokens(`${card.title} ${card.text}`));
             if (specificTokens.length && !specificTokens.every((token) => cardTitleTokens.has(token))) return false;
             if (categoryTokens.length && !categoryTokens.some((token) => cardTitleTokens.has(token))) return false;
-            if (categoryTokens.some((token) => ["vacuum", "phone", "fold", "frappuccino"].some((category) => token.startsWith(category)))
-              && amazonAccessoryPattern.test(card.title)) return false;
+            if (!amazonListingMatchesProduct(row.query, card.title, card.text)) return false;
             const required = specificTokens.length ? specificTokens.length : Math.max(1, tokens.length - (tokens.length >= 3 ? 1 : 0));
             return tokens.filter((token) => cardTokens.has(token)).length >= required;
           }).sort((left, right) => {
             const score = (card) => {
-              const cardTokens = productTokenSet(`${card.title} ${card.text}`);
+              const cardTokens = new Set(productTokens(`${card.title} ${card.text}`));
               const focusMatches = focusTerms.filter((term) => cardTokens.has(term)).length;
               const unsuitable = beautyContext && /\b(?:toy|kids?|children|role[- ]play)\b/i.test(card.text) ? 20 : 0;
               return focusMatches * 10 - unsuitable;
@@ -3059,11 +3109,36 @@ async function amazonProducts(rows) {
             return score(right) - score(left);
           })[0];
           if (!match) continue;
+          const listingUrl = `https://www.amazon.com/dp/${match.asin}`;
+          if (!isAmazonListingUrl(listingUrl)) continue;
+          // Search cards can expose a keyword-matched ASIN whose detail page is
+          // a different item (for example a sticker pack named after a drink).
+          // Verify the canonical detail page before publishing the destination.
+          let detail = null;
+          try {
+            await page.navigate(listingUrl, 1_300);
+            detail = await page.evaluate(`(() => {
+              const title = (document.querySelector("#productTitle")?.innerText
+                || document.querySelector("h1")?.innerText
+                || document.title || "").replace(/\\s+/g, " ").trim();
+              const text = (document.body?.innerText || "").replace(/\\s+/g, " ").trim();
+              const image = document.querySelector("#landingImage")?.src
+                || document.querySelector("#imgTagWrapperId img")?.src
+                || document.querySelector("img[data-old-hires]")?.getAttribute("data-old-hires")
+                || "";
+              return { title, text, image };
+            })()`);
+          } catch {
+            continue;
+          }
+          if (!detail?.title || !amazonDetailMatchesProduct(row.query, detail.title, detail.text)) continue;
           products.push({
             ...row,
             ...match,
+            title: detail.title,
+            ...(detail.image ? { image: detail.image } : {}),
             commerceSource: "Amazon listing",
-            url: `https://www.amazon.com/dp/${match.asin}`,
+            url: listingUrl,
             searchUrl: searchUrl.href,
           });
           if (products.length === 10) break;
@@ -3081,29 +3156,15 @@ async function amazonProducts(rows) {
     if (matches.length >= 10 || matchedKeys.has(productFamilyKey(row.query))) continue;
     const fallback = await sourcePageProductMatch(row);
     if (fallback) {
-      const searchUrl = amazonSearchUrl(row.query);
       matches.push({
         ...fallback,
-        url: searchUrl,
-        searchUrl,
-        commerceSource: "Amazon product search",
+        commerceSource: "Recent source page",
       });
       matchedKeys.add(productFamilyKey(row.query));
       continue;
     }
-    const hasDirectEvidence = (row.evidence ?? []).some((entry) => usableProductEvidenceUrl(entry));
-    if (!hasDirectEvidence) continue;
-    const searchUrl = amazonSearchUrl(row.query);
-    const moverImage = row.mover?.image || row.image;
-    matches.push({
-      ...row,
-      title: row.query,
-      url: searchUrl,
-      searchUrl,
-      commerceSource: "Amazon product search",
-      ...(moverImage ? { image: moverImage, imageSourceKind: "commerce", imageSourcePageUrl: searchUrl } : {}),
-    });
-    matchedKeys.add(productFamilyKey(row.query));
+    // A search-results page is not evidence that the product is sold there.
+    // Keep the candidate out rather than publishing an irrelevant destination.
   }
   if (matches.length < 5) throw new Error(`Only ${matches.length} qualifying products had a matching Amazon or validated source page`);
   const enrichedMatches = await mapConcurrent(matches, 3, async (row) => {
@@ -3122,10 +3183,13 @@ async function amazonProducts(rows) {
       recentSourceImagePageUrl: sourceImage.imageSourcePageUrl,
     } : row;
   });
-  const directEvidence = enrichedMatches.filter((row) => (row.evidence ?? []).some((entry) => usableProductEvidenceUrl(entry))
-    || row.recentSourceUrl);
+  const directEvidence = enrichedMatches.filter((row) => (isAmazonListingUrl(row.url)
+    || row.commerceSource === "Recent source page")
+    && ((row.evidence ?? []).some((entry) => usableProductEvidenceUrl(entry)) || row.recentSourceUrl));
   if (directEvidence.length < 5) throw new Error(`Only ${directEvidence.length} products had a direct publisher evidence link`);
-  return directEvidence;
+  // Destination availability must not change the candidate ranking. Amazon
+  // matches and article fallbacks are merged back into discovery order.
+  return directEvidence.sort((left, right) => (left.rank ?? Number.MAX_SAFE_INTEGER) - (right.rank ?? Number.MAX_SAFE_INTEGER));
 }
 
 async function productLeaderboard() {
@@ -3212,7 +3276,7 @@ function neutralProductContext(value) {
 }
 
 function usableProductEvidenceUrl(entry) {
-  const rawUrl = entry?.directUrl ?? entry?.link;
+  const rawUrl = entry?.directUrl ?? entry?.link ?? entry?.url;
   try {
     const url = new URL(rawUrl);
     return url.protocol === "https:" && url.hostname !== "news.google.com" && !isBlockedSocialUrl(url.href)
@@ -3291,10 +3355,12 @@ async function updateProducts(brief, products) {
   section.eyebrow = "Social trend evidence · past 90 days";
   section.title = "Products";
   section.description = "Products with recent, explicit demand evidence and a validated purchase or source page. Amazon listings are preferred; candidates combine social evidence, retail velocity when available, freshness, independent confirmations, and scarcity signals; retail movement alone never qualifies a product.";
+  const verifiedCommerce = products.find((product) => product.commerceSource === "Amazon listing" && isAmazonListingUrl(product.url));
+  const verifiedDestination = verifiedCommerce ?? products.find((product) => product.commerceSource === "Recent source page" && product.url) ?? products[0];
   section.sources = [
     { label: "Amazon Movers & Shakers", url: amazonMoverCategories[0].url },
     { label: "Google News · viral product coverage, 90 days", url: productDiscoveryUrl },
-    { label: products.some((product) => product.commerceSource === "Amazon listing") ? "Amazon · best-selling match" : "Validated product source pages", url: products[0].searchUrl ?? products[0].url },
+    { label: verifiedCommerce ? "Amazon · verified product listing" : "Validated product source page", url: verifiedDestination.url },
   ];
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5);
@@ -3306,14 +3372,33 @@ function repairProductSnapshot(brief) {
   if (!section) return;
   const allItems = [...(section.items ?? []), ...(section.moreItems ?? [])];
   const kept = [];
+  const rejected = [];
   for (const item of allItems) {
-    if (isGenericProductCandidate(item.title)) continue;
-    const distinctive = productTokens(item.title)
-      .filter((token) => token.length > 2 && !genericProductWords.has(token) && !amazonCategoryTerms.has(token));
+    if (!isAmazonListingUrl(item.url)) {
+      const articleFallback = (item.evidence ?? []).find((entry) => {
+        const url = usableProductEvidenceUrl(entry);
+        return url && !/^https:\/\/www\.amazon\.com\//i.test(url);
+      });
+      if (!articleFallback) {
+        rejected.push(`${item.title}: no direct article fallback for ${item.url}`);
+        continue;
+      }
+      item.url = usableProductEvidenceUrl(articleFallback);
+      item.source = "Recent source page";
+    }
+    if (isGenericProductCandidate(item.title)) {
+      rejected.push(`${item.title}: generic candidate`);
+      continue;
+    }
     const descriptionContext = sentences(item.description).join(" ");
-    const descriptionTokens = productTokenSet(descriptionContext);
-    const required = distinctive.length >= 4 ? 2 : 1;
-    if (!descriptionContext || (distinctive.length && distinctive.filter((token) => descriptionTokens.has(token)).length < required)) continue;
+    // Identity wording can legitimately use a normalized variant or alias; the
+    // selected evidence and the final description validator provide the stronger
+    // source/context checks. Do not discard a valid candidate solely because its
+    // concise description omits one title token.
+    if (!descriptionContext) {
+      rejected.push(`${item.title}: empty description`);
+      continue;
+    }
     const evidenceUrls = new Set((item.evidence ?? []).map((entry) => entry.url).filter(Boolean));
     const duplicate = kept.find((previous) => {
       const previousUrls = new Set((previous.evidence ?? []).map((entry) => entry.url).filter(Boolean));
@@ -3322,9 +3407,10 @@ function repairProductSnapshot(brief) {
         && productTokenOverlap(item.title, previous.title) >= 0.5;
     });
     if (!duplicate) kept.push(item);
+    else rejected.push(`${item.title}: duplicate of ${duplicate.title}`);
   }
   if (kept.length < 5) {
-    throw new Error(`Product snapshot retained only ${kept.length} entries after generic/noisy candidates were removed`);
+    throw new Error(`Product snapshot retained only ${kept.length} entries after generic/noisy candidates were removed${rejected.length ? ` (${rejected.join(" | ")})` : ""}`);
   }
   kept.forEach((item, index) => { item.rank = index + 1; });
   section.items = kept.slice(0, 5);
@@ -3996,6 +4082,14 @@ function validateBrief(brief) {
     }
     if (section.id === "products" && item.evidence.some((entry) => new URL(entry.url).hostname === "news.google.com")) {
       throw new Error(`${item.title} still has a Google News redirect in its evidence`);
+    }
+    if (section.id === "products") {
+      const productUrl = new URL(item.url);
+      const directArticle = productUrl.hostname !== "www.amazon.com"
+        && item.evidence.some((entry) => entry.url === item.url);
+      if (!isAmazonListingUrl(item.url) && !directArticle) {
+        throw new Error(`${item.title} must link to a verified Amazon listing or related article`);
+      }
     }
     if (item.imageSource) {
       const imageUrl = new URL(item.imageSource);

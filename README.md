@@ -52,9 +52,10 @@ replace the last validated snapshot.
   movement or two independent confirming publisher sources. Evidence is
   resolved to direct publisher articles; comparison/roundup snippets that are
   really about another product, editorial headings, retailer names, and
-  duplicate product families are discarded. Amazon is matched first; Amazon
-  search results are used when a specific listing is unavailable, with a
-  validated publisher commerce page retained as supporting evidence. Names are normalized across
+  duplicate product families are discarded. Amazon is matched first, but only
+  a verified product-detail listing is used as the destination. If no relevant
+  listing can be verified, the card links directly to the validated publisher
+  article instead of an unfiltered Amazon search page. Names are normalized across
   model-number formatting and aliases before scoring by demand, retail
   velocity, freshness, confirmations, and scarcity. Product copy identifies
   the product type and summarizes the recent demand context; a product page’s

@@ -510,11 +510,14 @@ test("keeps content and outbound links constrained", async () => {
     || (item.metric.label === "Recent viral source + Amazon velocity"
       && item.metric.value === "1 source + Amazon velocity")));
   assert.ok(allProducts.every((item) => !/\bis a consumer product\./i.test(item.description)));
-  assert.ok(allProducts.every((item) => /\b(?:backorder|buying|collect(?:ing|or)?|craze|demand|expansion|frenzy|global|launch|opening|popular|pre[- ]?order|recommend|release|restock|return|rollout|selling|sold out|trend(?:ing)?|unbox(?:ing)?|viral)\b/i.test(item.description)));
+  assert.ok(allProducts.every((item) => /\b(?:backorder|buying|collect(?:ing|or)?|craze|demand|expansion|frenzy|global|interest|launch|opening|popular|pre[- ]?order|recommend|record|release|restock|return|rollout|selling|sold out|trend(?:ing)?|unbox(?:ing)?|viral)\b/i.test(item.description)));
   assert.ok(allProducts.every((item) => {
     const url = new URL(item.url);
-    return url.hostname === "www.amazon.com" && item.imageSource;
+    const amazonListing = url.hostname === "www.amazon.com" && /^\/(?:dp|gp\/product)\/[A-Z0-9]{10}\/?$/i.test(url.pathname);
+    const relatedArticle = url.hostname !== "www.amazon.com" && item.evidence.some((entry) => entry.url === item.url);
+    return (amazonListing || relatedArticle) && item.imageSource;
   }));
+  assert.ok(allProducts.every((item) => !/^\/s(?:\/|$)/i.test(new URL(item.url).pathname)));
   assert.ok(allProducts.every((item) => item.evidence.every((entry) => new URL(entry.url).hostname !== "news.google.com")));
   assert.ok(allProducts.every((item) => !/Google Shopping|ranking it #|rose \+\d|TikTok/i.test(item.description)));
   assert.ok(allProducts.every((item) => !noisyCopyPattern.test(item.description)));
@@ -544,6 +547,9 @@ test("keeps content and outbound links constrained", async () => {
   assert.match(updater, /PRODUCT_MOVERS_SNAPSHOT/);
   assert.match(updater, /productTokenSubset/);
   assert.match(updater, /commerceSource/);
+  assert.match(updater, /isAmazonListingUrl/);
+  assert.match(updater, /amazonListingMatchesProduct/);
+  assert.match(updater, /amazonDetailMatchesProduct/);
   assert.doesNotMatch(updater, /Unicorn Frappuccino|Galaxy Z Fold 8/i);
   assert.doesNotMatch(updater, /annualSlangCandidates|summaryQuery\s*=/);
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);

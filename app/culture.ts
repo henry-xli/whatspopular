@@ -167,7 +167,17 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   if (typeof item.accent !== "string" || !/^#[0-9a-f]{6}$/i.test(item.accent)) {
     throw new Error(`${item.title} has an invalid accent color`);
   }
-  externalUrl(item.url, item.title, sectionId === "news" || sectionId === "products");
+  const itemUrl = externalUrl(item.url, item.title, sectionId === "news" || sectionId === "products");
+  if (sectionId === "products") {
+    const amazonListing = itemUrl.hostname === "www.amazon.com"
+      && /^\/(?:dp|gp\/product)\/[A-Z0-9]{10}\/?$/i.test(itemUrl.pathname);
+    const directArticle = itemUrl.hostname !== "www.amazon.com"
+      && Array.isArray(item.evidence)
+      && item.evidence.some((entry) => entry && typeof entry === "object" && (entry as Record<string, unknown>).url === item.url);
+    if (!amazonListing && !directArticle) {
+      throw new Error(`${item.title} must link to a verified Amazon listing or related article`);
+    }
+  }
   if (!Array.isArray(item.evidence) || item.evidence.length < 2 || item.evidence.length > 3) {
     throw new Error(`${item.title} must have two to three sources of evidence`);
   }
