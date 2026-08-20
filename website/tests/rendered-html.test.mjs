@@ -120,6 +120,8 @@ test("builds complete description-matching quiz prompts with fixed answer sets",
 
 test("renders the complete finite culture briefing", async () => {
   const brief = JSON.parse(await readFile(new URL("../data/trends.json", import.meta.url), "utf8"));
+  const publishedBrief = JSON.parse(await readFile(new URL("../public/data/trends.json", import.meta.url), "utf8"));
+  assert.deepEqual(publishedBrief, brief);
   const allItems = brief.sections.flatMap((section) => [...section.items, ...section.moreItems]);
   const homeResponse = await render();
   const response = await render("/explore");
@@ -232,7 +234,7 @@ test("renders the About flowchart", async () => {
   assert.doesNotMatch(html, /The eight algorithms|Exactly how each list is made/);
   assert.match(html, /last good snapshot stays live/i);
   assert.match(html, /<main class="about-page" id="main-content" tabindex="-1">/);
-  const workflow = await readFile(new URL("../.github/workflows/update-daily.yml", import.meta.url), "utf8");
+  const workflow = await readFile(new URL("../../.github/workflows/update-daily.yml", import.meta.url), "utf8");
   assert.match(workflow, /cron: "0 19 \* \* \*"/);
   assert.match(workflow, /cron: "0 20 \* \* \*"/);
   assert.match(workflow, /pacific_hour/);

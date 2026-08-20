@@ -20,6 +20,9 @@ jobs:
     if: github.repository == 'henry-xli/whatspopular'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: website
     steps:
       - name: Check Pacific ingestion time
         id: timing
@@ -42,6 +45,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: website/package-lock.json
       - if: steps.timing.outputs.run == 'true'
         run: npm ci
       - if: steps.timing.outputs.run == 'true'
@@ -56,6 +60,8 @@ jobs:
       - if: steps.timing.outputs.run == 'true'
         run: npm run content:images
       - if: steps.timing.outputs.run == 'true'
+        run: npm run content:publish
+      - if: steps.timing.outputs.run == 'true'
         run: npm run lint
       - if: steps.timing.outputs.run == 'true'
         run: npm run typecheck
@@ -63,10 +69,11 @@ jobs:
         run: npm test
       - name: Commit a changed briefing
         if: steps.timing.outputs.run == 'true'
+        working-directory: .
         run: |
           git config user.name "whatspopular refresh bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/trends.json public/culture public/icon.png
+          git add website/data/trends.json website/public/data/trends.json website/public/culture website/public/icon.png
           git diff --cached --quiet && exit 0
           git commit -m "Refresh 48-hour culture briefing"
           git push origin main

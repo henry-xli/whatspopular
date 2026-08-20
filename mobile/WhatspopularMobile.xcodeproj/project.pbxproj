@@ -1,0 +1,251 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* WhatspopularMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000001 /* WhatspopularMobileApp.swift */; };
+		A10000010000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000002 /* ContentView.swift */; };
+		A10000010000000000000003 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000003 /* Models.swift */; };
+		A10000010000000000000004 /* BriefStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000004 /* BriefStore.swift */; };
+		A10000010000000000000005 /* LayoutPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000005 /* LayoutPreferences.swift */; };
+		A10000010000000000000006 /* AssetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000006 /* AssetImage.swift */; };
+		A10000010000000000000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000007 /* Assets.xcassets */; };
+		A10000010000000000000008 /* trends.json in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000009 /* trends.json */; };
+		A10000010000000000000009 /* culture in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000010 /* culture */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10000010000000000000000 /* WhatspopularMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatspopularMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10000010000000000000001 /* WhatspopularMobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatspopularMobileApp.swift; sourceTree = "<group>"; };
+		B10000010000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10000010000000000000003 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B10000010000000000000004 /* BriefStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefStore.swift; sourceTree = "<group>"; };
+		B10000010000000000000005 /* LayoutPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPreferences.swift; sourceTree = "<group>"; };
+		B10000010000000000000006 /* AssetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImage.swift; sourceTree = "<group>"; };
+		B10000010000000000000007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10000010000000000000009 /* trends.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BundleData/trends.json; sourceTree = "<group>"; };
+		B10000010000000000000010 /* culture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BundleData/culture; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C10000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D10000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				D10000010000000000000002 /* WhatspopularMobile */,
+				B10000010000000000000009 /* trends.json */,
+				B10000010000000000000010 /* culture */,
+				D10000010000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D10000010000000000000002 /* WhatspopularMobile */ = {
+			isa = PBXGroup;
+			children = (
+				B10000010000000000000001 /* WhatspopularMobileApp.swift */,
+				B10000010000000000000002 /* ContentView.swift */,
+				B10000010000000000000003 /* Models.swift */,
+				B10000010000000000000004 /* BriefStore.swift */,
+				B10000010000000000000005 /* LayoutPreferences.swift */,
+				B10000010000000000000006 /* AssetImage.swift */,
+				B10000010000000000000007 /* Assets.xcassets */,
+			);
+			path = WhatspopularMobile;
+			sourceTree = "<group>";
+		};
+		D10000010000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10000010000000000000000 /* WhatspopularMobile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E10000010000000000000001 /* WhatspopularMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E10000010000000000000004 /* Build configuration list for PBXNativeTarget "WhatspopularMobile" */;
+			buildPhases = (
+				C10000010000000000000002 /* Sources */,
+				C10000010000000000000003 /* Resources */,
+				C10000010000000000000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhatspopularMobile;
+			productName = WhatspopularMobile;
+			productReference = B10000010000000000000000 /* WhatspopularMobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E10000010000000000000002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					E10000010000000000000001 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = E10000010000000000000003 /* Build configuration list for PBXProject "WhatspopularMobile" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D10000010000000000000001;
+			productRefGroup = D10000010000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E10000010000000000000001 /* WhatspopularMobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C10000010000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000007 /* Assets.xcassets in Resources */,
+				A10000010000000000000008 /* trends.json in Resources */,
+				A10000010000000000000009 /* culture in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C10000010000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000001 /* WhatspopularMobileApp.swift in Sources */,
+				A10000010000000000000002 /* ContentView.swift in Sources */,
+				A10000010000000000000003 /* Models.swift in Sources */,
+				A10000010000000000000004 /* BriefStore.swift in Sources */,
+				A10000010000000000000005 /* LayoutPreferences.swift in Sources */,
+				A10000010000000000000006 /* AssetImage.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F10000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F10000010000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F10000010000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "what’s popular?";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.whatspopular.mobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F10000010000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "what’s popular?";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.whatspopular.mobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E10000010000000000000003 /* Build configuration list for PBXProject "WhatspopularMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10000010000000000000001 /* Debug */,
+				F10000010000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E10000010000000000000004 /* Build configuration list for PBXNativeTarget "WhatspopularMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10000010000000000000003 /* Debug */,
+				F10000010000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E10000010000000000000002 /* Project object */;
+}

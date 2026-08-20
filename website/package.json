@@ -13,9 +13,10 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "typecheck": "tsc --noEmit",
     "content:images": "node scripts/cache-images.mjs",
+    "content:publish": "node scripts/publish-snapshot.mjs",
     "content:update": "node scripts/update-trends.mjs",
     "content:quiz": "node scripts/update-trends.mjs --quiz-only",
-    "content:refresh": "npm run content:update && npm run content:images"
+    "content:refresh": "npm run content:update && npm run content:images && npm run content:publish"
   },
   "dependencies": {
     "next": "^16.3.1",

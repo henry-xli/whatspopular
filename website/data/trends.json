@@ -1,0 +1,2618 @@
+{
+  "edition": "August 2026",
+  "status": "Checked today",
+  "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
+  "generatedAt": "2026-08-20T06:39:05.184Z",
+  "summary": "A five-minute, two-source briefing on the people, movies, books, music, products, news, memes, and slang shaping internet culture right now.",
+  "sections": [
+    {
+      "id": "people",
+      "eyebrow": "July 2026 · Wikipedia topviews",
+      "title": "People",
+      "description": "Last month's most-viewed English Wikipedia pages that represent living people, excluding politicians and allowing at most two people from each broad primary category.",
+      "sources": [
+        {
+          "label": "Topviews · July 2026",
+          "url": "https://pageviews.wmcloud.org/topviews/?project=en.wikipedia.org&platform=all-access&date=last-month&excludes="
+        },
+        {
+          "label": "Wikimedia · monthly top-pages data",
+          "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+        }
+      ],
+      "layout": "square",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Erling Haaland",
+          "subtitle": "Sports",
+          "description": "Erling Haaland is primarily known as a footballer. I Want What They Have, World Cup Friendship Edition: Jude Bellingham and Erling Haaland.",
+          "image": "/culture/person-erling-haaland.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Erling Haaland",
+          "url": "https://en.wikipedia.org/wiki/Erling_Haaland",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "7.67M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Erling_Haaland"
+            },
+            {
+              "source": "Vogue",
+              "url": "https://www.vogue.com/article/i-want-what-they-have-world-cup-jude-bellingham-and-erling-haaland"
+            }
+          ],
+          "accent": "#ffc857",
+          "category": "sports"
+        },
+        {
+          "rank": 2,
+          "title": "Lamine Yamal",
+          "subtitle": "Sports",
+          "description": "Lamine Yamal is primarily known as a footballer. Lamine Yamal explains Lionel Messi advice after World Cup final, says it was as valuable as a medal.",
+          "image": "/culture/person-lamine-yamal.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Lamine Yamal",
+          "url": "https://en.wikipedia.org/wiki/Lamine_Yamal",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "6.55M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Lamine_Yamal"
+            },
+            {
+              "source": "ESPN",
+              "url": "https://www.espn.com/soccer/story/_/id/49423331/lionel-messi-encourages-lamine-yamal-go-own-way-spain-world-cup-triumph"
+            }
+          ],
+          "accent": "#9b8cff",
+          "category": "sports"
+        },
+        {
+          "rank": 3,
+          "title": "Christopher Nolan",
+          "subtitle": "Film",
+          "description": "Christopher Nolan is primarily known as a film director. Which reminds me, in an odd sense, of the way Nolan’s films are often discussed.",
+          "image": "/culture/creator-christopher-nolan.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/ChristopherNolan-byPhilipRomano_%28cropped%29.jpg/960px-ChristopherNolan-byPhilipRomano_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Christopher Nolan",
+          "url": "https://en.wikipedia.org/wiki/Christopher_Nolan",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "2.65M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
+            },
+            {
+              "source": "Truthdig",
+              "url": "https://www.truthdig.com/articles/can-we-finally-admit-christopher-nolan-leans-right-and-still-makes-good-movies/"
+            }
+          ],
+          "accent": "#57d5a4",
+          "category": "film"
+        },
+        {
+          "rank": 4,
+          "title": "Zendaya",
+          "subtitle": "Film",
+          "description": "Zendaya is primarily known as an actress. Holland confirmed his marriage to Zendaya in June after months of speculation Zendaya and Tom Holland are celebrating their love!",
+          "image": "/culture/creator-zendaya.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Zendaya",
+          "url": "https://en.wikipedia.org/wiki/Zendaya",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "2.19M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Zendaya"
+            },
+            {
+              "source": "People.com",
+              "url": "https://people.com/zendaya-tom-holland-have-secret-wedding-celebration-at-luxury-hotel-in-english-countryside-12034493"
+            }
+          ],
+          "accent": "#ffc857",
+          "category": "film"
+        },
+        {
+          "rank": 5,
+          "title": "Shakira",
+          "subtitle": "Music",
+          "description": "Shakira is primarily known as a singer. Shakira makes surprise visit to earthquake-damaged Colombia and commits to building new schools.",
+          "image": "/culture/person-shakira.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Shakira",
+          "url": "https://en.wikipedia.org/wiki/Shakira",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "2.18M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Shakira"
+            },
+            {
+              "source": "ABC News - Breaking News, Latest News and Videos",
+              "url": "https://abcnews.com/Business/wireStory/shakira-makes-surprise-visit-earthquake-damaged-colombia-commits-135726206"
+            }
+          ],
+          "accent": "#ff6b57",
+          "category": "music"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Sonam Wangchuk",
+          "subtitle": "Science & technology",
+          "description": "Sonam Wangchuk is primarily known as an engineer. Sonam Wangchuk: the 59-year-old who rallied India's Gen Z against Modi and won.",
+          "image": "/culture/person-sonam-wangchuk.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Sonam_Wangchuk%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+          "alt": "Portrait of Sonam Wangchuk",
+          "url": "https://en.wikipedia.org/wiki/Sonam_Wangchuk",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.95M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Sonam_Wangchuk"
+            },
+            {
+              "source": "Reuters",
+              "url": "https://www.reuters.com/world/india/sonam-wangchuk-indian-activist-rallying-gen-z-against-modi-2026-07-20/"
+            }
+          ],
+          "accent": "#ffc857",
+          "category": "science-technology"
+        },
+        {
+          "rank": 7,
+          "title": "Taylor Swift",
+          "subtitle": "Music",
+          "description": "Taylor Swift is primarily known as a singer. Taylor Swift ropes a record-breaking 16th No. 1 on Billboard ’s Adult Pop Airplay chart as ”I Knew It, I Knew You” jumps three spots to the top of the Aug. 22-dated ranking.",
+          "image": "/culture/person-taylor-swift.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Taylor Swift",
+          "url": "https://en.wikipedia.org/wiki/Taylor_Swift",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.45M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Taylor_Swift"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/music/chart-beat/taylor-swift-i-knew-it-i-knew-you-number-1-adult-pop-airplay-1236315955/"
+            }
+          ],
+          "accent": "#57d5a4",
+          "category": "music"
+        },
+        {
+          "rank": 8,
+          "title": "Jeff Bezos",
+          "subtitle": "Business",
+          "description": "Jeff Bezos is primarily known as a business leader. Jeff Bezos says being lazy, not working hard, is the root of anxiety: ‘The stress goes away the second I take that first step’.",
+          "image": "/culture/person-jeff-bezos.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "alt": "Portrait of Jeff Bezos",
+          "url": "https://en.wikipedia.org/wiki/Jeff_Bezos",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.27M"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Jeff_Bezos"
+            },
+            {
+              "source": "The New York Times",
+              "url": "https://www.biography.com/business-leaders/jeff-bezos"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "category": "business"
+        },
+        {
+          "rank": 9,
+          "title": "Andrew Tate",
+          "subtitle": "Business",
+          "description": "Andrew Tate is primarily known as an influencer. July 18 Andrew and Tristan Tate were arrested by U.S authorities in Miami after British authorities brought dozens of additional charges against them and announced they would seek extradition.",
+          "image": "/culture/person-andrew-tate.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+          "alt": "Portrait of Andrew Tate",
+          "url": "https://en.wikipedia.org/wiki/Andrew_Tate",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "887K"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Andrew_Tate"
+            },
+            {
+              "source": "Forbes",
+              "url": "https://www.forbes.com/sites/conormurray/2026/07/27/andrew-tates-miami-arrest-timeline-hearing-on-extradition-process-today/"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "category": "business"
+        },
+        {
+          "rank": 10,
+          "title": "Amelia Dimoldenberg",
+          "subtitle": "Media",
+          "description": "Amelia Dimoldenberg is primarily known as a journalist. Amelia Dimoldenberg’s F1 Series ‘Passenger Princess’ Returning for Season 2 This Month.",
+          "image": "/culture/person-amelia-dimoldenberg.webp",
+          "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+          "alt": "Portrait of Amelia Dimoldenberg",
+          "url": "https://en.wikipedia.org/wiki/Amelia_Dimoldenberg",
+          "source": "Wikipedia",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "653K"
+          },
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Amelia_Dimoldenberg"
+            },
+            {
+              "source": "Formula 1",
+              "url": "https://www.formula1.com/en/latest/article/exclusive-amelia-dimoldenberg-reveals-what-its-like-learning-from-f1-drivers-as-passenger-princess-season-2-launches.623S3D46GtgUgfpHtywtI5"
+            }
+          ],
+          "accent": "#ff6b57",
+          "category": "media"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10 by Wikipedia views"
+    },
+    {
+      "id": "movies",
+      "eyebrow": "July 2026 · Wikipedia topviews",
+      "title": "Movies",
+      "description": "Movie pages from last month's English Wikipedia topviews, kept in descending page-view order. IMDb ratings are shown as context but do not affect rank.",
+      "sources": [
+        {
+          "label": "Topviews · July 2026",
+          "url": "https://pageviews.wmcloud.org/topviews/?project=en.wikipedia.org&platform=all-access&date=last-month&excludes="
+        },
+        {
+          "label": "Wikimedia · monthly top-pages data",
+          "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+        }
+      ],
+      "layout": "poster",
+      "items": [
+        {
+          "rank": 1,
+          "title": "The Odyssey",
+          "subtitle": "2026 film",
+          "description": "The Odyssey is an action/adventure/fantasy film. In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway).",
+          "image": "/culture/media-odyssey.webp",
+          "alt": "The Odyssey 2026 theatrical poster",
+          "url": "https://www.imdb.com/title/tt33764258/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "13.3M"
+          },
+          "rating": "8.5",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt33764258/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 2,
+          "title": "Obsession",
+          "subtitle": "2025 film",
+          "description": "Obsession is a horror/romance/thriller film. The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed.",
+          "image": "/culture/movie-obsession.webp",
+          "alt": "Obsession poster or lead image",
+          "url": "https://www.imdb.com/title/tt37287335/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "4.4M"
+          },
+          "rating": "7.9",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Obsession_(2025_film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt37287335/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Project Hail Mary",
+          "subtitle": "2026 film",
+          "description": "Project Hail Mary is an adventure/comedy/drama film. The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. As his memory returns, he uncovers a mission to stop a mysterious substance killing Earth's sun, and realizes that an unexpected friendship may be the key.",
+          "image": "/culture/movie-project-hail-mary.webp",
+          "alt": "Project Hail Mary poster or lead image",
+          "url": "https://www.imdb.com/title/tt12042730/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.96M"
+          },
+          "rating": "8.2",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Project_Hail_Mary_(film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt12042730/"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Backrooms",
+          "subtitle": "2026 film",
+          "description": "Backrooms is a horror/sci-fi/thriller film. In the film, Clark (Chiwetel Ejiofor), a furniture store owner, and his therapist Mary (Renate Reinsve), discover a dimension of seemingly endless liminal spaces accessed through the store's basement.",
+          "image": "/culture/movie-backrooms.webp",
+          "alt": "Backrooms poster or lead image",
+          "url": "https://www.imdb.com/title/tt26657236/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.73M"
+          },
+          "rating": "7.0",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Backrooms_(film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt26657236/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "Alpha",
+          "subtitle": "Movie",
+          "description": "Alpha is a film. The film follows a highly trained assassin raised in isolation as a super-soldier by a rogue commander. When she discovers the dark truth about her family and her stolen childhood, she teams up with her long lost sister to take down her creator and his illicit military program.",
+          "image": "/culture/movie-alpha.webp",
+          "alt": "Alpha poster or lead image",
+          "url": "https://www.imdb.com/title/tt28363783/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.51M"
+          },
+          "rating": "3.0",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Alpha_(2026_film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt28363783/"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Supergirl",
+          "subtitle": "2026 film",
+          "description": "Supergirl is an action/adventure/drama film. Kara Zor-El, aka Supergirl, joins forces with an unlikely companion on an interstellar journey of vengeance and justice when an unexpected adversary strikes too close to home. In the film, Kara embarks on a journey across the galaxy to hunt down an adversary who has harmed her pet dog Krypto.",
+          "image": "/culture/movie-supergirl.webp",
+          "alt": "Supergirl poster or lead image",
+          "url": "https://www.imdb.com/title/tt8814476/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.36M"
+          },
+          "rating": "5.9",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Supergirl_(2026_film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt8814476/"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "Jana Nayagan",
+          "subtitle": "Movie",
+          "description": "Jana Nayagan is an action/thriller film. A partial remake of the 2023 Telugu film Bhagavanth Kesari, it follows a former Indian Police Service officer who raises the daughter of a deceased friend and encourages her to overcome childhood trauma and pursue a career in the Indian Army.",
+          "image": "/culture/movie-jana-nayagan.webp",
+          "alt": "Jana Nayagan poster or lead image",
+          "url": "https://www.imdb.com/title/tt33379543/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.34M"
+          },
+          "rating": "5.5",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Jana_Nayagan"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt33379543/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Evil Dead Burn",
+          "subtitle": "2026 film",
+          "description": "Evil Dead Burn is a fantasy/horror/mystery film. As one by one they transform into deadites, she comes to discover that the vows she took in life - survive even in death. After the loss of her husband, a woman seeks solace with her in-laws.",
+          "image": "/culture/media-evil-dead-burn.webp",
+          "alt": "Evil Dead Burn theatrical poster",
+          "url": "https://www.imdb.com/title/tt31170389/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.28M"
+          },
+          "rating": "6.4",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Evil_Dead_Burn"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt31170389/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 9,
+          "title": "Masters of the Universe",
+          "subtitle": "2026 film",
+          "description": "Masters of the Universe is an action/adventure/fantasy film. Prince Adam discovers that the strange memories shaping his life are real when the lost Sword of Power resurfaces, forcing him to return to Eternia and challenge the tyrant who shattered his family and kingdom.",
+          "image": "/culture/movie-masters-of-the-universe.webp",
+          "alt": "Masters of the Universe poster or lead image",
+          "url": "https://www.imdb.com/title/tt0427340/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.26M"
+          },
+          "rating": "6.5",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Masters_of_the_Universe_(2026_film)"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt0427340/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Toy Story 5",
+          "subtitle": "2026 film",
+          "description": "Toy Story 5 is an animation/adventure/comedy film. Set two years after the fourth film, it follows Jessie as she, Woody, Buzz Lightyear and the other toys deal with the presence of Lilypad, a tablet and the new favorite plaything of Bonnie. While Hanks referred to Toy Story 4 as the final film in the franchise in 2019, the possibility of a fifth film had not been ruled out.",
+          "image": "/culture/media-toy-story.webp",
+          "alt": "Toy Story 5 theatrical poster",
+          "url": "https://www.imdb.com/title/tt29355505/",
+          "source": "IMDb",
+          "metric": {
+            "label": "Wikipedia views · July",
+            "value": "1.14M"
+          },
+          "rating": "7.5",
+          "evidence": [
+            {
+              "source": "Wikimedia monthly topviews",
+              "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/2026/07/all-days"
+            },
+            {
+              "source": "Wikipedia article",
+              "url": "https://en.wikipedia.org/wiki/Toy_Story_5"
+            },
+            {
+              "source": "IMDb",
+              "url": "https://www.imdb.com/title/tt29355505/"
+            }
+          ],
+          "accent": "#ffc857"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10 by Wikipedia views"
+    },
+    {
+      "id": "books",
+      "eyebrow": "Goodreads · most read this month · U.S.",
+      "title": "Books",
+      "description": "The ten books most read by Goodreads members in the United States during the latest completed month, with context from Wikipedia or current coverage.",
+      "sources": [
+        {
+          "label": "Goodreads · most read books, U.S., month",
+          "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+        },
+        {
+          "label": "Google News · current book coverage",
+          "url": "https://news.google.com/search?q=Yesteryear+Caro+Claire+Burke&hl=en-US&gl=US&ceid=US%3Aen"
+        }
+      ],
+      "layout": "poster",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Yesteryear",
+          "subtitle": "Goodreads · Caro Claire Burke",
+          "description": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and her followers are sick with envy. Then, one morning, Natalie wakes up in a strange, horrible version of reality.",
+          "image": "/culture/book-yesteryear.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
+          "alt": "Cover of Yesteryear by Caro Claire Burke",
+          "url": "https://www.goodreads.com/book/show/238226942-yesteryear",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "127,483"
+          },
+          "rating": "3.89",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL45177696W"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/Yesteryear_(novel)"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "The Calamity Club",
+          "subtitle": "Goodreads · Kathryn Stockett",
+          "description": "In 1933 Oxford, Mississippi, Prohibition is on the wane, and the Great Depression is tightening its grip. And Charlie is a woman with a past, running low on luck but driven by fire, fury, and grit. Poor and rich folks alike have fallen on hard times, even as the old social order remains.",
+          "image": "/culture/book-the-calamity-club.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1763049143i/228820257.jpg",
+          "alt": "Cover of The Calamity Club by Kathryn Stockett",
+          "url": "https://www.goodreads.com/book/show/228820257-the-calamity-club",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "100,491"
+          },
+          "rating": "4.62",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL45732307W"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/The_Calamity_Club"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Theo of Golden",
+          "subtitle": "Goodreads · Allen Levi",
+          "description": "One spring morning, a stranger arrives in the small southern city of Golden. No one knows where he has come from…or why… His name is Theo. And he asks a lot more questions than he answers.",
+          "image": "/culture/book-theo-of-golden.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761744192i/242376245.jpg",
+          "alt": "Cover of Theo of Golden by Allen Levi",
+          "url": "https://www.goodreads.com/book/show/242376245-theo-of-golden",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "57,197"
+          },
+          "rating": "4.44",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/Theo_of_Golden"
+            },
+            {
+              "source": "Deadline",
+              "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5NZGRPay1BbjdlajVNcDZpOGMtLU5fU3RpYW8zLThNVnpHNXB1cW9RYW05S0psV3lYSk45XzVkSFlkTUNIalBndTNGUnRLVXBBN0h6RU1aSjdEQ0d6dE1YZEhCTEVzbmF1VzVUYk1SWDc0RklMaTJTd1ZvTQ?oc=5"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Mad Mabel",
+          "subtitle": "Goodreads · Sally Hepworth",
+          "description": "Elsie Mabel Fitzpatrick is eighty-one years old. Because when it comes to murder, no one ever suspects little girls or old ladies. She's lived on her idyllic street, Kenny Lane, for sixty years--longer than anyone else.",
+          "image": "/culture/book-mad-mabel.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775070793i/231127044.jpg",
+          "alt": "Cover of Mad Mabel by Sally Hepworth",
+          "url": "https://www.goodreads.com/book/show/231127044-mad-mabel",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "50,610"
+          },
+          "rating": "4.37",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL44477870W"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/search?q=Mad+Mabel+Sally+Hepworth&hl=en-US&gl=US&ceid=US%3Aen"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 5,
+          "title": "The Correspondent",
+          "subtitle": "Goodreads · Virginia Evans",
+          "description": "But when letters from someone in her past force her to examine one of the most painful periods of her life, she realizes that the letter she has been writing over the years needs to be read and that she cannot move forward until she finds it in her heart to offer forgiveness.",
+          "image": "/culture/book-the-correspondent.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1735235942i/223001257.jpg",
+          "alt": "Cover of The Correspondent by Virginia Evans",
+          "url": "https://www.goodreads.com/book/show/223001257-the-correspondent",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "48,269"
+          },
+          "rating": "4.44",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL42414694W"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/The_Correspondent_(novel)"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "The Divorce",
+          "subtitle": "Goodreads · Freida McFadden",
+          "description": "What is a happily ever after really worth? They fall in love, get married, buy a dream house, start a family… Then―he kicks her out, hires the city’s best divorce lawyers, drains their accounts, and takes up with a 20-something. Naomi was living the quintessential love story.",
+          "image": "/culture/book-the-divorce.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783i/244403162.jpg",
+          "alt": "Cover of The Divorce by Freida McFadden",
+          "url": "https://www.goodreads.com/book/show/244403162-the-divorce",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "47,856"
+          },
+          "rating": "3.88",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/search?q=The+Divorce+Freida+McFadden&hl=en-US&gl=US&ceid=US%3Aen"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/244403162-the-divorce"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 7,
+          "title": "Whistler",
+          "subtitle": "Goodreads · Ann Patchett",
+          "description": "When Daphne Fuller and her husband Jonathan visit the Metropolitan Museum of Art, they notice an older, white-haired gentleman following them. The man turns out to be Eddie Triplett, her former stepfather, who had been married to her mother for a little more than year when Daphne was nine. Whistler is a story about two adults looking back over the choices they made, and the choices that were made for them.",
+          "image": "/culture/book-whistler.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761863582i/242693052.jpg",
+          "alt": "Cover of Whistler by Ann Patchett",
+          "url": "https://www.goodreads.com/book/show/242693052-whistler",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "47,181"
+          },
+          "rating": "4.38",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNN0UzdzZnV096SUFZVW94QkRsdHJGWkVkZ0F4cmctZkEyTG9yR0NTelRVNGU0SjBwZmRmSGxrSEV0anV2WHdlMTNDM1VPN3NneVltajFUVnd5VWhJa1l0XzVTUTE3aUJzSUVtTWYtNm5URDZwdnNaazVVa2JaOVAwRC1UdnlZcDBkaWR0emFR0gGTAUFVX3lxTE83V1I4aDFYSHc0YVh0WUNCYjNGaEFwWjhkemdYczlkTzJIY2hZd1JYRC1ZNnBaWm1uS3pOWDdfdmpQcHoySnp5VkUzRzBrb3FTQkxNeGJEdWVSaUNFRGZWbmlCbjRvWVRWd3JPZTRoQnBNUVMyM2hiMThuaHM1M3FvbmM3VXBLbDRfRW5JUEMtVWpGZw?oc=5"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/242693052-whistler"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Dungeon Crawler Carl (Dungeon Crawler Carl, #1)",
+          "subtitle": "Goodreads · Matt Dinniman",
+          "description": "A sadistic game show unlike anything in the universe: a dungeon crawl where survival depends on killing your prey in the most entertaining way possible. But once you're in, you can't get out. In a flash, every human-erected construction on Earth—from Buckingham Palace to the tiniest of sheds—collapses in a heap, sinking into the ground.",
+          "image": "/culture/book-dungeon-crawler-carl-dungeon-crawler-carl-1.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1715780755i/211721806.jpg",
+          "alt": "Cover of Dungeon Crawler Carl (Dungeon Crawler Carl, #1) by Matt Dinniman",
+          "url": "https://www.goodreads.com/book/show/211721806-dungeon-crawler-carl",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "44,862"
+          },
+          "rating": "4.44",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL24593432W"
+            },
+            {
+              "source": "Wikipedia book context",
+              "url": "https://en.wikipedia.org/wiki/Dungeon_Crawler_Carl"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Our Perfect Storm",
+          "subtitle": "Goodreads · Carley Fortune",
+          "description": "Frankie and George have been best friends since they were eight years old. It’s the eve of Frankie’s wedding weekend, and she doesn’t know where they stand or even if George will show up as her best man. Both passionate, impulsive, and headstrong—they’ve always clashed. and come back together.",
+          "image": "/culture/book-our-perfect-storm.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756350403i/239703816.jpg",
+          "alt": "Cover of Our Perfect Storm by Carley Fortune",
+          "url": "https://www.goodreads.com/book/show/239703816-our-perfect-storm",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "40,455"
+          },
+          "rating": "4.01",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Open Library book context",
+              "url": "https://openlibrary.org/works/OL45398621W"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9lZE1JbEJKcXloMHFLb3kteUxLSkpUS2drR0swWWZ2bVNrWHpjNFRWWE5hbnhwOFlaLXliWkN2bXYwZjlTR2Q5cGJuSzFaQ0hCV0I5XzJXUDF1bTZTR2hNR0dCNC1hR0RRSkJLTUI2cUI?oc=5"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Dolly All the Time",
+          "subtitle": "Goodreads · Annabel Monaghan",
+          "description": "If they start by pretending, can they end with something real? Not when her mom left when she was twelve, and not at thirty-nine when she moves with her son back to Whitfield, Rhode Island, for the summer to keep her dad and brother from losing the family home. Dolly Brick has never met a problem she couldn’t solve.",
+          "image": "/culture/book-dolly-all-the-time.webp",
+          "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1757041312i/240687665.jpg",
+          "alt": "Cover of Dolly All the Time by Annabel Monaghan",
+          "url": "https://www.goodreads.com/book/show/240687665-dolly-all-the-time",
+          "source": "Goodreads",
+          "metric": {
+            "label": "Goodreads monthly readers",
+            "value": "38,436"
+          },
+          "rating": "4.33",
+          "ratingLabel": "Goodreads",
+          "evidence": [
+            {
+              "source": "Goodreads most read this month",
+              "url": "https://www.goodreads.com/book/most_read?category=all&country=US&duration=m"
+            },
+            {
+              "source": "Google News book coverage",
+              "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOQmtQb0NHeDlmNHZkdDU2M2tKT3FCLTFyaFFfalRCUmZMZURFalVqOEhwU1ZVcFd5Yk9TaVU3M2xjSDFjNnU5eGVWbEo2amF2ZFQ0a3JJdkZqUHVQRmppazZRaGVDWnAwc0NjYUxtY3NkQ0NNX2ZSVWFTb1Z1dWN6SVBNUkhYM053QlhublphRjBmc0dvRERsa1pSVmM?oc=5"
+            },
+            {
+              "source": "Goodreads book page",
+              "url": "https://www.goodreads.com/book/show/240687665-dolly-all-the-time"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
+    },
+    {
+      "id": "music",
+      "eyebrow": "Spotify Today’s Top Hits × Billboard",
+      "title": "Music",
+      "description": "The first 10 tracks in Spotify’s Today’s Top Hits that also appear on the Billboard Hot 100 are selected, then all 10 are ordered by Billboard position. Every track remains playable here.",
+      "sources": [
+        {
+          "label": "Spotify · Today’s Top Hits",
+          "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+        },
+        {
+          "label": "Billboard Hot 100 · 2026-08-22",
+          "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+        }
+      ],
+      "layout": "square",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Choosin' Texas",
+          "subtitle": "Ella Langley",
+          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘Choosin’ Texas’.",
+          "image": "/culture/song-choosin-texas-ella-langley.webp",
+          "alt": "Choosin' Texas artwork by Ella Langley",
+          "url": "https://open.spotify.com/track/65DbTqJKhbwqYbZ1Okr0rc",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#1"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Fox News via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPYk1HNFVQTzI0UDVBVGItLUx0Z1V1clNmUFo4bFVFSGVUeFNGZV9fdE9KbVlQdWVMTlVJYjBMLUI5ZWpoNFRZMGhIT1RPMEVWUGRMN2hxRXk3R0NZdmtTNVNSUzZidTU1UklfV3ozX3JkdnZFN1BhMVVfSUJIbnlrSnM0T0V6dF9YSkNCZmR1RjVFd3A2Q0s5NnA0MmQzMjY0ZHhHV1Q3V0hQeDBjTEtJSWZRbWh0ZmpWd2tYUTVVRHFNZ2pkVTJHdHBHZlFlNTJpeWpxSVZ5OTNIZ9IB3wFBVV95cUxQdEtmblh6UzMtdDJSbDYxbm91TC15WHhHR1VHOTNQVjN2b0pzWDhpWXlIeER0TTJqTTZBaDFZTmE5ZnJmQTFTT3FOSi05N0lIaVlGUDNfQXZMSWtrNnI0N0V5Y3hndXRia3otcmN5NmFNU2JQUmVoTnRBYjc4UEZLbmV0aXlJNWxSVFdMd0RzaUhmNFp0ZEVwMkpHblBHX25MVDVRejRZSm50SGtOcjdUWFUxYUFMRjJCZ014end4OTdiYkZ3ckw1a3R0ZG9NRFhVZF9aejdyU0JqNlEyZEJ3?oc=5"
+            }
+          ],
+          "accent": "#ffc857",
+          "spotifyId": "65DbTqJKhbwqYbZ1Okr0rc",
+          "spotifyRank": 7,
+          "releaseDate": "Oct 17, 2025"
+        },
+        {
+          "rank": 2,
+          "title": "hate that i made you love me",
+          "subtitle": "Ariana Grande",
+          "description": "“hate that i made you love me” is a track by Ariana Grande, released May 29, 2026.",
+          "image": "/culture/song-hate-that-i-made-you-love-me-ariana-grande.webp",
+          "alt": "hate that i made you love me artwork by Ariana Grande",
+          "url": "https://open.spotify.com/track/20jbSiX29FDX4oQxBXyUEi",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#5"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            }
+          ],
+          "accent": "#9b8cff",
+          "spotifyId": "20jbSiX29FDX4oQxBXyUEi",
+          "spotifyRank": 11,
+          "releaseDate": "May 29, 2026"
+        },
+        {
+          "rank": 3,
+          "title": "Man I Need",
+          "subtitle": "Olivia Dean",
+          "description": "“Man I Need” is a track by Olivia Dean, released Aug 15, 2025.",
+          "image": "/culture/song-man-i-need-olivia-dean.webp",
+          "alt": "Man I Need artwork by Olivia Dean",
+          "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#9"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            }
+          ],
+          "accent": "#57d5a4",
+          "spotifyId": "1qbmS6ep2hbBRaEZFpn7BX",
+          "spotifyRank": 8,
+          "releaseDate": "Aug 15, 2025"
+        },
+        {
+          "rank": 4,
+          "title": "stupid song",
+          "subtitle": "Olivia Rodrigo",
+          "description": "“stupid song” is a track by Olivia Rodrigo, released Jun 12, 2026.",
+          "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
+          "alt": "stupid song artwork by Olivia Rodrigo",
+          "url": "https://open.spotify.com/track/4LfCY65LvojKjWEnU7fNN4",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#15"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "spotifyId": "4LfCY65LvojKjWEnU7fNN4",
+          "spotifyRank": 2,
+          "releaseDate": "Jun 12, 2026"
+        },
+        {
+          "rank": 5,
+          "title": "petal",
+          "subtitle": "Ariana Grande",
+          "description": "“petal” is a track by Ariana Grande, released Jul 31, 2026. Ariana Grande Says She Loves ‘Petal’ Music Video ‘With My Entire Heart’ After It Sparks Controversy.",
+          "image": "/culture/song-petal-ariana-grande.webp",
+          "alt": "petal artwork by Ariana Grande",
+          "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#18"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Billboard via Google News",
+              "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNMk10Y0RJcDFlT2VPQnNyTWptbjBNamgxZm5FVTRSUExFY3dYcHR2QzJVbGhxVklQZEFxdG03eWNfMU14TmdBZzVrZHJVN1JQTkt1cGpaUDNoUDRsbW53QzBRRzkzcGJ1V3RwRk5qakIzNHpkTGppS21mTHhfbExNTmwwOW9yM1Y2eHN2QmU2R1RVQmp3alAxeVB5OG14bEdSUGFmSXphZ1ZIVk5WMnJn?oc=5"
+            }
+          ],
+          "accent": "#ff6b57",
+          "spotifyId": "70pVCVMGjmIWPbWXDwf11e",
+          "spotifyRank": 4,
+          "releaseDate": "Jul 31, 2026"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Earrings",
+          "subtitle": "Malcolm Todd",
+          "description": "“Earrings” is a track by Malcolm Todd, released Apr 5, 2024.",
+          "image": "/culture/song-earrings-malcolm-todd.webp",
+          "alt": "Earrings artwork by Malcolm Todd",
+          "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#21"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            }
+          ],
+          "accent": "#ffc857",
+          "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ",
+          "spotifyRank": 3,
+          "releaseDate": "Apr 5, 2024"
+        },
+        {
+          "rank": 7,
+          "title": "Loser",
+          "subtitle": "Tame Impala",
+          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. 'Loser' Lyrics: Tame Impala's 'Deadbeat' Track Finds Second Wind After Being Featured In 'Spider-Man: Brand New Day'.",
+          "image": "/culture/song-loser-tame-impala.webp",
+          "alt": "Loser artwork by Tame Impala",
+          "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#22"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Just Jared via Google News",
+              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTkpVeVVtV05jVTlpUnUzZmpGd3IwNGZuelN1Q1dFUFlWdjRuU0ktU0JFSGVYazdueWNja0tvY0gyTDUwaGQwMEl1V08xNWhjRmwwN0NHbWxLZmhzbkRLZVVPVlk5QWp3N0duUzdhT1VMaHA0V0VpNng4ZmQ2UkJxN3dZakVaeEY3dXUtcEppaE5VdUZYMXU5R0hTcW5NdWtHbFBMQkpjczZrS08xWFV1bEU0OHpEa3BUUC1MZGRjamtVYkYxLWhZQVZnNmpkMU1VYVNoUVY3c01jZlJ3dHc?oc=5"
+            }
+          ],
+          "accent": "#9b8cff",
+          "spotifyId": "7bxaFZ1O3cHkgLKMsdC3xR",
+          "spotifyRank": 9,
+          "releaseDate": "Oct 17, 2025"
+        },
+        {
+          "rank": 8,
+          "title": "Babydoll",
+          "subtitle": "Dominic Fike",
+          "description": "“Babydoll” is a track by Dominic Fike, released Oct 16, 2018.",
+          "image": "/culture/song-babydoll-dominic-fike.webp",
+          "alt": "Babydoll artwork by Dominic Fike",
+          "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#24"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            }
+          ],
+          "accent": "#57d5a4",
+          "spotifyId": "7yNf9YjeO5JXUE3JEBgnYc",
+          "spotifyRank": 6,
+          "releaseDate": "Oct 16, 2018"
+        },
+        {
+          "rank": 9,
+          "title": "Animal",
+          "subtitle": "KATSEYE",
+          "description": "“Animal” is a track by KATSEYE, released Jul 24, 2026. Demi Moore Gets Front-Row Seat to Katseye’s Breakdown in ‘Animal’ Video.",
+          "image": "/culture/song-animal-katseye.webp",
+          "alt": "Animal artwork by KATSEYE",
+          "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#30"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Rolling Stone via Google News",
+              "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPREtHY0s0MkNoM2tyNXF4WU04VXE3Sk1mTUVMQXlWdE5KRUpTNjRwSWRnSTUxMXJudHVLb2xsdjdFdWdtN0xocTlwX1JsUlhuNTF5ZzZSdUJRUGc5Y191RFVMQnFuRmFYM2pQUDJkSmhnVndTVGxad20yRVFBMWg4V1BUUXY3NkE0dzMxQzFDYjRGemdrYy1tMHNVbTRZRTA1aEtXVjFKU3pIdw?oc=5"
+            }
+          ],
+          "accent": "#5ab0ff",
+          "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX",
+          "spotifyRank": 1,
+          "releaseDate": "Jul 24, 2026"
+        },
+        {
+          "rank": 10,
+          "title": "Self Aware",
+          "subtitle": "Temper City",
+          "description": "“Self Aware” is a track by Temper City, released Feb 15, 2026.",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "alt": "Self Aware artwork by Temper City",
+          "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#37"
+          },
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            }
+          ],
+          "accent": "#ff6b57",
+          "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT",
+          "spotifyRank": 10,
+          "releaseDate": "Feb 15, 2026"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
+    },
+    {
+      "id": "products",
+      "eyebrow": "Social trend evidence · past 90 days",
+      "title": "Products",
+      "description": "Products with recent, explicit demand evidence and a validated purchase or source page. Amazon listings are preferred; candidates combine social evidence, retail velocity when available, freshness, independent confirmations, and scarcity signals; retail movement alone never qualifies a product.",
+      "sources": [
+        {
+          "label": "Amazon Movers & Shakers",
+          "url": "https://www.amazon.com/gp/movers-and-shakers"
+        },
+        {
+          "label": "Google News · viral product coverage, 90 days",
+          "url": "https://news.google.com/search?q=viral+products+when%3A90d&hl=en-US&gl=US&ceid=US%3Aen"
+        },
+        {
+          "label": "Validated product source page",
+          "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/"
+        }
+      ],
+      "layout": "square",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Unicorn Frappuccino",
+          "subtitle": "Product",
+          "description": "Unicorn Frappuccino is a blended drink. Starbucks Brings Back Viral Unicorn Frappuccino for Two Days.",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/14/NREC/91300639007-starbucks-unicorn-frappuccino.png?crop=1999,1125,x0,y437&width=1999&height=1125&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/",
+          "alt": "Starbucks' Unicorn Frappuccino product listing image",
+          "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/",
+          "source": "Recent source page",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "4 sources"
+          },
+          "evidence": [
+            {
+              "source": "Cincinnati Enquirer",
+              "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/"
+            },
+            {
+              "source": "USA Today",
+              "url": "https://www.usatoday.com/story/news/state/washington/seattle/2026/08/12/starbucks-reviving-the-unicorn-frappuccino-in-august/91272156007/"
+            },
+            {
+              "source": "AOL.com",
+              "url": "https://www.aol.com/articles/unicorn-frappuccino-back-ready-viral-173902000.html"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Mystery Squishy Dumplings",
+          "subtitle": "Product",
+          "description": "Mystery Squishy Dumplings is a collectible toy. From Viral Toy Craze to Lifestyle Brand: Earthbound Brands to Expand Mystery Squishy Dumplings by RMS.",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "imageSource": "https://bloximages.chicago2.vip.townnews.com/bdtonline.com/content/tncms/assets/v3/editorial/e/cd/ecd37c65-3693-5e15-aa04-4eb4d32baa97/6a7371081ad57.image.jpg?crop=1899%2C997%2C0%2C47&resize=1200%2C630&order=crop%2Cresize",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.bdtonline.com/region/from-viral-toy-craze-to-lifestyle-brand-earthbound-brands-to-expand-mystery-squishy-dumplings-by/article_a7a693fb-4e6e-52e8-bd0b-4c3e312c42ca.html",
+          "alt": "Mystery Squishy Dumplings product listing image",
+          "url": "https://www.bdtonline.com/region/from-viral-toy-craze-to-lifestyle-brand-earthbound-brands-to-expand-mystery-squishy-dumplings-by/article_a7a693fb-4e6e-52e8-bd0b-4c3e312c42ca.html",
+          "source": "Recent source page",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Bluefield Daily Telegraph",
+              "url": "https://www.bdtonline.com/region/from-viral-toy-craze-to-lifestyle-brand-earthbound-brands-to-expand-mystery-squishy-dumplings-by/article_a7a693fb-4e6e-52e8-bd0b-4c3e312c42ca.html"
+            },
+            {
+              "source": "Business Wire",
+              "url": "https://www.businesswire.com/news/home/20260804845782/en/From-Viral-Toy-Craze-to-Lifestyle-Brand-Earthbound-Brands-to-Expand-Mystery-Squishy-Dumplings-by-RMS"
+            }
+          ],
+          "accent": "#ff6b57"
+        },
+        {
+          "rank": 3,
+          "title": "Dasein Women's Tote Bag",
+          "subtitle": "Product",
+          "description": "Dasein Women's Tote Bag is a fashion item. Recent coverage places it among restocked the viral Wirkin bag—shop the $60 designer dupe.",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/328af9b593aaba96ded27ff3613fec1384d97eb7383622760eb27f61c3f22f7f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fusa_today_affiliate_609%2F288c8afaf34ff96801a87151c4cf9080.png",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html",
+          "alt": "Dasein Women's Tote Bag product listing image",
+          "url": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html",
+          "source": "Recent source page",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Yahoo",
+              "url": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html"
+            },
+            {
+              "source": "USA Today",
+              "url": "https://www.usatoday.com/story/shopping/trending/viral/2026/08/14/amazon-restocked-wirkin-bag-shoppers-love/91303543007/"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Restocked Wirkin Bag",
+          "subtitle": "Product",
+          "description": "Restocked Wirkin Bag is a fashion item. Amazon restocked the viral Wirkin bag—shop the $60 designer dupe.",
+          "image": "/culture/product-restocked-wirkin-bag.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/328af9b593aaba96ded27ff3613fec1384d97eb7383622760eb27f61c3f22f7f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fusa_today_affiliate_609%2F288c8afaf34ff96801a87151c4cf9080.png",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html",
+          "alt": "Restocked Wirkin Bag product listing image",
+          "url": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html",
+          "source": "Recent source page",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Yahoo",
+              "url": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html"
+            },
+            {
+              "source": "USA Today",
+              "url": "https://www.usatoday.com/story/shopping/trending/viral/2026/08/14/amazon-restocked-wirkin-bag-shoppers-love/91303543007/"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 5,
+          "title": "Striped Canvas Mini Tote",
+          "subtitle": "Product",
+          "description": "Striped Canvas Mini Tote is a fashion item. North Jersey shoppers lined up outside their local Trader Joe's on the morning of June 17, anxiously awaiting the release of the grocery company's newest trending tote bags. The Striped Canvas Mini Tote, available for $2.99 each, comes in four different striped pastel colors.",
+          "image": "/culture/product-striped-canvas-mini-tote.webp",
+          "imageSource": "https://www.northjersey.com/gcdn/authoring/authoring-images/2026/06/17/PNJM/90588796007-08-trader-joes-bags.jpg?crop=5999,3375,x0,y312&width=3200&height=1801&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.northjersey.com/story/shopping/2026/06/17/trader-joes-mini-tote-bags-create-big-crowds-in-north-jersey/90588064007/",
+          "alt": "Striped Canvas Mini Tote product listing image",
+          "url": "https://www.northjersey.com/story/shopping/2026/06/17/trader-joes-mini-tote-bags-create-big-crowds-in-north-jersey/90588064007/",
+          "source": "Recent source page",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Bergen Record",
+              "url": "https://www.northjersey.com/story/shopping/2026/06/17/trader-joes-mini-tote-bags-create-big-crowds-in-north-jersey/90588064007/"
+            },
+            {
+              "source": "AOL.com",
+              "url": "https://www.aol.com/articles/shoppers-line-north-jersey-trader-163358000.html"
+            }
+          ],
+          "accent": "#5ab0ff"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Galaxy Z Fold 8",
+          "subtitle": "Product",
+          "description": "Galaxy Z Fold 8 is a foldable smartphone. Galaxy Z Fold 8 and Fold 8 Ultra Generate Record Interest in the US.",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "imageSource": "https://samsungmagazine.eu/wp-content/uploads/2026/07/Galaxy-Z-Fold8-32.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://samsungmagazine.eu/en/2026/08/18/prodeje-noveho-galaxy-z-fold8-trhaji-rekordy-samsung-je-i-tak-v-tragicke-ztrate/",
+          "alt": "Galaxy Z Fold 8 product listing image",
+          "url": "https://www.khaleejtimes.com/business/tech/galaxy-z-fold8-demand-helps-samsung-set-an-all-time-sales-record",
+          "source": "Recent source page",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Khaleej Times",
+              "url": "https://www.khaleejtimes.com/business/tech/galaxy-z-fold8-demand-helps-samsung-set-an-all-time-sales-record"
+            },
+            {
+              "source": "Samsung Magazine",
+              "url": "https://samsungmagazine.eu/en/2026/08/18/prodeje-noveho-galaxy-z-fold8-trhaji-rekordy-samsung-je-i-tak-v-tragicke-ztrate/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        }
+      ],
+      "moreLabel": "Show ranks 6–6"
+    },
+    {
+      "id": "news",
+      "eyebrow": "U.S. Google Trends · past 7 days",
+      "title": "News",
+      "description": "The largest seven-day U.S. search-volume topics after removing people and sports, ranked by Google’s displayed search volume and linked to current coverage.",
+      "sources": [
+        {
+          "label": "Google Trending Now · 7 days, search volume",
+          "url": "https://trends.google.com/trending?geo=US&hours=168&sort=search-volume"
+        },
+        {
+          "label": "Google News · article context",
+          "url": "https://news.google.com/"
+        }
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "subtitle": "News · Aug 16, 2026",
+          "description": "Islam Makhachev records 17th UFC victory in a row in his welterweight title defeat of Ian Machado Garry.",
+          "image": "/culture/news-ufc-330-makhachev-secures-record-setting-win-against-machado-gar.webp",
+          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/AFP__20260816__2290665803__v1__HighRes__Ufc330MakhachevVMachadoGarry-1786861640_0d68f3-1786863820.jpg?resize=1200%2C630&quality=80",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.aljazeera.com/sports/2026/8/16/ufc-330-makhachev-secures-record-setting-win-against-machado-garry",
+          "alt": "Islam Makhachev wins record 17th straight fight at UFC 330",
+          "url": "https://www.aljazeera.com/sports/2026/8/16/ufc-330-makhachev-secures-record-setting-win-against-machado-garry",
+          "source": "Al Jazeera",
+          "metric": {
+            "label": "Google search volume",
+            "value": "2M+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=ufc+330"
+            },
+            {
+              "source": "Al Jazeera via Google News",
+              "url": "https://www.aljazeera.com/sports/2026/8/16/ufc-330-makhachev-secures-record-setting-win-against-machado-garry"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "subtitle": "News",
+          "description": "If you buy something through a link in this article, we may earn commission. Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "image": "/culture/news-machado-garry-how-to-watch-ufc-330-tonight-start-time-full-fight.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/d9fbc9e99184dcea4f7a47f043e4e6dd7b2e82efcb6a0602532ad40431476216/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fs.yimg.com%2Fos%2Fcreatr-uploaded-images%2F2025-11%2F5382c1c0-c2b6-11f0-b9ab-7a35ebb6400b",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://sports.yahoo.com/mma/article/makhachev-vs-machado-garry-how-to-watch-ufc-330-tonight-start-time-full-fight-card-and-more-143300270.html",
+          "alt": "Lead image from Yahoo Sports's coverage of Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "url": "https://sports.yahoo.com/mma/article/makhachev-vs-machado-garry-how-to-watch-ufc-330-tonight-start-time-full-fight-card-and-more-143300270.html",
+          "source": "Yahoo Sports",
+          "metric": {
+            "label": "Google search volume",
+            "value": "2M+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Machado+Garry%3A+How+to+watch+UFC+330+tonight%2C+start+time%2C+full+fight+card+and+more."
+            },
+            {
+              "source": "Yahoo Sports via Google News",
+              "url": "https://sports.yahoo.com/mma/article/makhachev-vs-machado-garry-how-to-watch-ufc-330-tonight-start-time-full-fight-card-and-more-143300270.html"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 3,
+          "title": "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "This story was updated with an alteration and a comment from Rebel Creamery. The popular Keto-based ice cream company Rebel Creamery filed for Chapter 11 bankruptcy last week, after losing a trademark lawsuit filed by another ice cream company.",
+          "image": "/culture/news-ice-cream-company-rebel-filed-for-chapter-11-bankruptcy.webp",
+          "imageSource": "https://www.lansingstatejournal.com/gcdn/authoring/authoring-images/2026/08/17/PLSJ/91334761007-screenshot-rebel-ice-cream.jpg?crop=776,435,x6,y0&width=776&height=435&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.lansingstatejournal.com/story/news/local/michigan/2026/08/17/rebel-creamery-keto-ice-cream-chapter-11-bankruptcy-van-leeuwen-trademark-lawsuit/91334447007/",
+          "alt": "Lead image from Lansing State Journal's coverage of Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "url": "https://www.lansingstatejournal.com/story/news/local/michigan/2026/08/17/rebel-creamery-keto-ice-cream-chapter-11-bankruptcy-van-leeuwen-trademark-lawsuit/91334447007/",
+          "source": "Lansing State Journal",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+ice+cream+lawsuit"
+            },
+            {
+              "source": "Lansing State Journal via Google News",
+              "url": "https://www.lansingstatejournal.com/story/news/local/michigan/2026/08/17/rebel-creamery-keto-ice-cream-chapter-11-bankruptcy-van-leeuwen-trademark-lawsuit/91334447007/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 4,
+          "title": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "subtitle": "News · Aug 14, 2026",
+          "description": "A massive egg recall due to salmonella risk issued in July has received the highest severity class by the U.S. Food and Drug Administration. Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
+          "imageSource": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2026-06/eggs-daily-healthy-as06252026-df99dd.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597",
+          "alt": "Lead image from TODAY.com's coverage of Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "url": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597",
+          "source": "TODAY.com",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
+            },
+            {
+              "source": "TODAY.com via Google News",
+              "url": "https://www.today.com/health/recall/salmonella-egg-recall-class-1-risk-fda-full-product-list-rcna592597"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 5,
+          "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "Hurricane Lala is a currently active tropical cyclone that was the third-wettest tropical cyclone to affect the U.S state of Hawaii on record. Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
+          "imageSource": "https://www.civilbeat.org/wp-content/uploads/2026/08/9511.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
+          "alt": "Lead image from civilbeat.org's coverage of Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
+          "source": "civilbeat.org",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
+            },
+            {
+              "source": "civilbeat.org via Google News",
+              "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/Hurricane_Lala"
+            }
+          ],
+          "accent": "#ffc857"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "City to close non-essential offices and services Monday following Hurricane Lala.",
+          "subtitle": "News",
+          "description": "Honolulu closed non-essential offices and services after Hurricane Lala. The shutdown reflects the storm’s continuing disruption to public operations and residents.",
+          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
+          "imageSource": "https://www.honolulu.gov/mayor/wp-content/uploads/sites/12/2026/08/LALA-PRESSER-SLIDES-4-1.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.honolulu.gov/mayor/city-to-close-non-essential-offices-and-services-monday-following-hurricane-lala/",
+          "alt": "Lead image from honolulu.gov's coverage of City to close non-essential offices and services Monday following Hurricane Lala.",
+          "url": "https://www.honolulu.gov/mayor/city-to-close-non-essential-offices-and-services-monday-following-hurricane-lala/",
+          "source": "honolulu.gov",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=City+to+close+non-essential+offices+and+services+Monday+following+Hurricane+Lala."
+            },
+            {
+              "source": "honolulu.gov via Google News",
+              "url": "https://www.honolulu.gov/mayor/city-to-close-non-essential-offices-and-services-monday-following-hurricane-lala/"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "subtitle": "News",
+          "description": "Hurricane Lala brought heavy rain, strong winds, flooding and mudslide threats to Hawaii’s Big Island. Residents stayed off roads, secured their homes and hunkered down as conditions worsened.",
+          "image": "/culture/news-hurricane-lala-leaves-big-island-residents-in-hawaii-hunkered-do.webp",
+          "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "alt": "Lead image from ABC7 Bay Area's coverage of Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
+          "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/",
+          "source": "ABC7 Bay Area",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Hurricane+Lala+leaves+Big+Island+residents+in+Hawaii+hunkered+down."
+            },
+            {
+              "source": "ABC7 Bay Area via Google News",
+              "url": "https://abc7news.com/post/hurricane-lala-leaves-big-island-residents-hawaii-hunkered-down/19685946/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Moderna Stock Explodes Over 100% After Cancer Vaccine Breakthrough.",
+          "subtitle": "News · Aug 19, 2026",
+          "description": "The above button links to Coinbase. Yahoo Finance is not a broker-dealer or investment adviser and does not offer securities or cryptocurrencies for sale or facilitate trading. Coinbase pays us for certain activity generated through this link. Prices displayed are informational. Moderna Stock Explodes Over 100% After Cancer Vaccine Breakthrough.",
+          "image": "/culture/news-moderna-stock-explodes-over-100-after-cancer-vaccine-breakthroug.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/CB70FAFE53970351934BD055F554164991B080E9D862AD9E5E245A49FA993553/subgraphmysterio/resizefill_w1200_h675;quality_80;format_webp/https:%2F%2Fmedia.zenfs.com%2Fen%2Fbeincrypto_us_662%2F35988ae8cbc31e6f09b1aa3265662fd1.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://finance.yahoo.com/markets/stocks/articles/moderna-stock-explodes-over-100-140939843.html",
+          "alt": "Lead image from Yahoo Finance's coverage of Moderna Stock Explodes Over 100% After Cancer Vaccine Breakthrough.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/moderna-stock-explodes-over-100-140939843.html",
+          "source": "Yahoo Finance",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=moderna+stock"
+            },
+            {
+              "source": "Yahoo Finance via Google News",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/moderna-stock-explodes-over-100-140939843.html"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "New GTA 6 Gameplay Features Leak Ahead of Netflix Stream.",
+          "subtitle": "News · Aug 11, 2026",
+          "description": "New GTA 6 gameplay features have reportedly leaked ahead of Rockstar’s Extended Look Netflix stream on August 27. New GTA 6 gameplay details have reportedly leaked ahead of the upcoming Netflix stream.",
+          "image": "/culture/news-new-gta-6-gameplay-features-leak-ahead-of-netflix-stream.webp",
+          "imageSource": "https://www.vice.com/wp-content/uploads/sites/2/2026/08/New-GTA-6-Gameplay-Features-Leak-Ahead-of-Netflix-Stream.jpg?w=1280",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.vice.com/en/article/gta-6-gameplay-features-leak-netflix-stream/",
+          "alt": "Lead image from VICE's coverage of New GTA 6 Gameplay Features Leak Ahead of Netflix Stream.",
+          "url": "https://www.vice.com/en/article/gta-6-gameplay-features-leak-netflix-stream/",
+          "source": "VICE",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=gta+6+leaks"
+            },
+            {
+              "source": "VICE via Google News",
+              "url": "https://www.vice.com/en/article/gta-6-gameplay-features-leak-netflix-stream/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "The filled Honda Center got a look at Frozen 3 — and let’s just say, there is quite a lot in store. First of all, are those wedding bells, we hear? Indeed, they are!",
+          "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
+          "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "alt": "Frozen 2",
+          "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/",
+          "source": "Deadline",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
+            },
+            {
+              "source": "Deadline via Google News",
+              "url": "https://deadline.com/2026/08/frozen-3-footage-d23-anna-wedding-new-villain-1237041024/"
+            }
+          ],
+          "accent": "#57d5a4"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
+    },
+    {
+      "id": "memes",
+      "eyebrow": "July 2026 · latest complete month",
+      "title": "Memes",
+      "description": "The July Meme of the Month results, kept in poll order and filtered to memes Lessons in Meme Culture covered in any upload from the past two months.",
+      "sources": [
+        {
+          "label": "Know Your Meme · July result",
+          "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+        },
+        {
+          "label": "Lessons in Meme Culture · past 2 months",
+          "url": "https://www.youtube.com/@LIMC/videos"
+        }
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Jimothy the raccoon",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Jimothy is a wild raccoon with short spine syndrome who lives in Seattle's Ballard neighborhood. Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars.",
+          "image": "/culture/meme-jimothy-the-raccoon.webp",
+          "alt": "Visual example of the Jimothy the raccoon meme",
+          "url": "https://knowyourmeme.com/memes/jimothy-the-raccoon",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#1"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=Pa-L5dwDGJ4"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Kwebbelkop Laughing / YourRAGE Laugh",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Kwebbelkop Laughing or YourRAGE Laugh refers to a viral sound effect of YouTuber and Twitch streamer YourRAGE loudly laughing in an exaggerated manner, which is often described as sounding like Dutch YouTuber Kwebbelkop. In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits.",
+          "image": "/culture/meme-kwebbelkop.webp",
+          "alt": "Kwebbelkop portrait used with the viral laughing sound",
+          "url": "https://knowyourmeme.com/memes/kwebbelkop-laughing-yourrage-laugh",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#3"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=c65r2vtjqxc"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Hatsune Miku World Cup Custody Battle",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Hatsune Miku World Cup Custody Battle is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. The joke proposes that whichever national team defeats the previous holder earns temporary \"custody\" of the Vocaloid character, inspiring artists to redesign Miku in the country's colors, clothing and cultural motifs until that team is eliminated.",
+          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
+          "alt": "Visual example of the Hatsune Miku World Cup Custody Battle meme",
+          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#4"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Mbappé Special",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Mbappé Special is a slang term and series of memes based on a viral video of French footballer and soccer star Kylian Mbappe saying, during an interview, that the \"Kylian Special\" is \"for example, nothing,\" when asked what he likes to cook. The clip of Mbappe saying the Mbappe Special is \"nothing\" inspired memes that use the term as slang to replace the word \"nothing\" over the following weeks as it spread online.",
+          "image": "/culture/meme-mbappe-special.webp",
+          "alt": "Visual example of the Mbappé Special meme",
+          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#5"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=NKA1qfaGYtQ"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "John Rod",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "John Rod is a nickname for an unnamed stand that appears in chapter 38 of the manga series JoJo's Bizarre Adventure Part 9: The JOJOLands. The stand was popularized online in mid-July 2026, inspiring edits, fan art, memes and other fan content.",
+          "image": "/culture/meme-john-rod.webp",
+          "alt": "John Rod from JoJo's Bizarre Adventure",
+          "url": "https://knowyourmeme.com/memes/john-rod",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#6"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=S2PsR7TCG7U"
+            }
+          ],
+          "accent": "#57d5a4"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Stay In Character",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Stay In Character is a catchphrase and series of memes based on a scene from the 2026 Backrooms movie in which the protagonist, Clark (played by actor Chiwetel Ejiofor), yells, \"Stay in character!\" In June 2026, the film's scene became the subject of numerous memes on social media as the moment was used as an exploitable format with brainrot edits, recreations, Accuracy Reenactments and more.",
+          "image": "/culture/meme-stay-in-character.webp",
+          "alt": "Visual example of the Stay In Character meme",
+          "url": "https://knowyourmeme.com/memes/stay-in-character-backrooms",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#7"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=QMKWIuacG8c"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "Funky Ehh",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "We'll Drive A Funky Ehh or He'll Drive A Funky Ehh refers to a viral video of a kid claiming, during a game of Fortnite, that a remix of the song \" Someone to Call My Lover \" by Janet Jackson is by Oliver Tree, singing the song, \"Maybe we'll meet at a bar, we'll drive a fancy ehh.\" A clip of the moment went viral on social media and Instagram Reels later that month, inspiring animations, remixes and memes based on the audio of the kid singing the song.",
+          "image": "/culture/meme-funky-ehh.webp",
+          "alt": "Visual example of the Funky Ehh meme",
+          "url": "https://knowyourmeme.com/memes/well-drive-a-funky-ehh",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#8"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=oyR_1uKIK6I"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Somebody Get These Beggars Out Of Here",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Somebody Get These Beggars Out Of Here is a quote from the character Antinous, played by actor Robert Pattinson, in Christopher Nolan's 2026 epic fantasy movie The Odyssey, which appeared online shortly after the film's release in mid-July 2026. The scene is typically used online as a simple catchphrase and reaction meme to mock someone for being poor or begging for something, with the GIF or reaction image of Pattinson from the movie also being used as an exploitable in which creators add different visual elements to him.",
+          "image": "/culture/meme-somebody-get-these-beggars-out-of-here.webp",
+          "alt": "Visual example of the Somebody Get These Beggars Out Of Here meme",
+          "url": "https://knowyourmeme.com/memes/robert-pattinson-somebody-get-these-beggars-out-of-here",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#9"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=8ugpFwj6ib8"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Homer Let the Barts Out",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Homer Let the Barts Out is a brainrot and AI song by Rabadoonga about Homer Simpson letting a massive group of Bart Simpsons out of the house, who go on to cause uncontrollable destruction. It inspired memes on sites including social media, X / Twitter and Instagram Reels, including lip dubs, animations, covers and AI-generated videos.",
+          "image": "/culture/meme-homer-let-the-barts-out.webp",
+          "alt": "Visual example of the Homer Let the Barts Out meme",
+          "url": "https://knowyourmeme.com/memes/homer-let-the-barts-out",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#10"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=kawenQiaRtI"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Best of Zach",
+          "subtitle": "July poll finalist · LIMC covered",
+          "description": "Best Of Zach refers to a series of memes about the Oney Plays video \"Best Of Zach\" and its thumbnail, which shows a cartoon drawing of Zach, also known as PsychicPebbles, over a pink background. In June 2026, a video that animates the video and sets it to an amateur rap song that repeats the words \"best of Zach\" was popularized online, inspiring further \"Best Of Zach\" memes.",
+          "image": "/culture/meme-best-of-zach.webp",
+          "alt": "Visual example of the Best of Zach meme",
+          "url": "https://knowyourmeme.com/memes/best-of-zach",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "July Meme of the Month",
+            "value": "#11"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme July result",
+              "url": "https://knowyourmeme.com/editorials/meme-review/see-the-winner-of-july-2026s-meme-of-the-month"
+            },
+            {
+              "source": "Lessons in Meme Culture",
+              "url": "https://www.youtube.com/watch?v=gUS5yEdRrvo"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreLabel": "Show ranks 6–10"
+    },
+    {
+      "id": "slang",
+      "eyebrow": "2025 annual slang review · by page views",
+      "title": "Slang",
+      "description": "Terms from Know Your Meme's latest annual slang review, ranked from most to least lifetime views on their Know Your Meme entries and checked against Urban Dictionary.",
+      "sources": [
+        {
+          "label": "Know Your Meme · 2025 annual slang review",
+          "url": "https://trending.knowyourmeme.com/editorials/meme-review/kym-review-the-top-slang-terms-of-2025"
+        },
+        {
+          "label": "Urban Dictionary · 67 / Six-Seven",
+          "url": "https://www.urbandictionary.com/define.php?term=67"
+        }
+      ],
+      "layout": "landscape",
+      "items": [
+        {
+          "rank": 1,
+          "title": "67 / Six-Seven",
+          "subtitle": "2025 annual review term",
+          "description": "67 Meme refers to a series of memes about a lyric in the song \"Doot Doot\" by Skrilla featuring G Herbo, a hip-hop song released in December 2024, that was popularized on social media and Instagram Reels in January 2025.",
+          "image": "/culture/slang-67.webp",
+          "alt": "The number 67 as used in the six-seven meme",
+          "url": "https://knowyourmeme.com/memes/67-meme",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "1,003,097"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/67-meme"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=67"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Dead Rose Emoji",
+          "subtitle": "2025 annual review term",
+          "description": "The Dead Rose Emoji refers to the 🥀 emoji that depicts a wilted rose. It's used online to represent being damaged or heartbroken, earnestly shared by emo internet users.",
+          "image": "/culture/slang-dead-rose-emoji.webp",
+          "alt": "Visual example of Dead Rose Emoji",
+          "url": "https://knowyourmeme.com/memes/dead-rose-emoji",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "114,750"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/dead-rose-emoji"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Dead%20Rose"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Aura Farming",
+          "subtitle": "2025 annual review term",
+          "description": "Aura Farming refers to an act of constantly trying to look \"cool\" or \"badass\" to build \"aura moments.\" The expression is derived from the \" aura \" internet slang term and gained viral usage on X / Twitter, Instagram and social media in mid-September 2024.",
+          "image": "/culture/slang-aura-farming.webp",
+          "alt": "Stylized scene representing aura farming",
+          "url": "https://knowyourmeme.com/memes/aura-farming",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "100,354"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/aura-farming"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=aura%20farming"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "SYBAU",
+          "subtitle": "2025 annual review term",
+          "description": "SYBAU is a slang term and acronym meaning \"shut your bitch ass up.\" The acronym has been used online since as early as 2003 when it was first defined on Urban Dictionary, spreading over the following years.",
+          "image": "/culture/slang-sybau.webp",
+          "alt": "Reaction image associated with the acronym SYBAU",
+          "url": "https://knowyourmeme.com/memes/sybau",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "76,691"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/sybau"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=SYBAU"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "Labubu Matcha Dubai Chocolate",
+          "subtitle": "2025 annual review term",
+          "description": "Labubu Matcha Dubai Chocolate refers to a slang overload trend involving the overuse and spamming of trendy, mid-2025 fads and crazes like Labubu Toys, matcha drinks and Dubai Chocolate Bars.",
+          "image": "/culture/slang-labubu-matcha-dubai-chocolate.webp",
+          "alt": "Visual example of Labubu Matcha Dubai Chocolate",
+          "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "55,654"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/labubu-matcha-dubai-chocolate"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Labubu"
+            }
+          ],
+          "accent": "#ff6b57"
+        }
+      ],
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Clanker",
+          "subtitle": "2025 annual review term",
+          "description": "Clanker is a slang term and a robophobic slur for droids and robots, originating from the Star Wars franchise. After initially appearing in the video game Star Wars: Republic Commando and The Clone Wars in the mid-to-late 2000s, the slang began seeing use online and in memes during the 2010s.",
+          "image": "/culture/slang-clanker.webp",
+          "alt": "A battle droid associated with the slang term clanker",
+          "url": "https://knowyourmeme.com/memes/clanker",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "47,004"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/clanker"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=clanker"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 7,
+          "title": "TS PMO ICL",
+          "subtitle": "2025 annual review term",
+          "description": "TS means “this shit”; PMO means “piss me off”; and ICL means “I can't lie”. TS PMO ICL, also spelled TSPMO ICL, refers to a Slang Overload trend of overusing slang abbreviations like TS, PMO and ICL, among others, to form nonsensical, brainrot posts that satirize the slang's use.",
+          "image": "/culture/slang-ts-pmo-icl.webp",
+          "alt": "Visual example of TS PMO ICL",
+          "url": "https://knowyourmeme.com/memes/ts-pmo-icl",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "43,575"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/ts-pmo-icl"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=TS%20PMO%20ICL"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 8,
+          "title": "Performative Male",
+          "subtitle": "2025 annual review term",
+          "description": "Performative Male is an internet slang term used to describe a man whose actions, hobbies and personality traits appear inauthentic and seem to revolve around \"performing\" for other people's worldviews, tastes and interests, specifically catering to the female gaze.",
+          "image": "/culture/slang-performative-male.webp",
+          "alt": "Visual example of Performative Male",
+          "url": "https://knowyourmeme.com/memes/performative-male",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "27,436"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/performative-male"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=Performative%20Male"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "Chopped",
+          "subtitle": "2025 annual review term",
+          "description": "Chopped is a slang term with multiple definitions, but in memes, it predominantly means \"ugly\" when used to describe people. It's been used online since the early 2010s but gained a predominant presence online starting in the early 2020s.",
+          "image": "/culture/slang-chopped.webp",
+          "alt": "Reaction image associated with chopped slang",
+          "url": "https://knowyourmeme.com/memes/chopped-slang",
+          "source": "Know Your Meme",
+          "metric": {
+            "label": "Know Your Meme page views",
+            "value": "18,589"
+          },
+          "evidence": [
+            {
+              "source": "Know Your Meme entry",
+              "url": "https://knowyourmeme.com/memes/chopped-slang"
+            },
+            {
+              "source": "Urban Dictionary",
+              "url": "https://www.urbandictionary.com/define.php?term=chopped"
+            }
+          ],
+          "accent": "#5ab0ff"
+        }
+      ],
+      "moreLabel": "Show ranks 6–9 by page views"
+    }
+  ],
+  "sourceHealth": [
+    {
+      "name": "Know Your Meme result",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:05.985Z"
+    },
+    {
+      "name": "Lessons in Meme Culture",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:06.862Z"
+    },
+    {
+      "name": "Know Your Meme annual slang review",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:06.506Z"
+    },
+    {
+      "name": "Know Your Meme slang pageviews",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:08.093Z"
+    },
+    {
+      "name": "Urban Dictionary",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:07.769Z"
+    },
+    {
+      "name": "Wikimedia monthly topviews",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:40:35.125Z"
+    },
+    {
+      "name": "Billboard Hot 100",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:05.762Z"
+    },
+    {
+      "name": "Spotify Today’s Top Hits",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:05.754Z"
+    },
+    {
+      "name": "Goodreads monthly most read",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:39:06.725Z"
+    },
+    {
+      "name": "Viral product discovery",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:41:02.032Z"
+    },
+    {
+      "name": "Google Trending Now / News",
+      "ok": true,
+      "checkedAt": "2026-08-20T06:43:25.803Z"
+    }
+  ],
+  "quiz": {
+    "durationSeconds": 15,
+    "questions": [
+      {
+        "prompt": "Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
+        "answers": [
+          "Jimothy the raccoon",
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Hatsune Miku World Cup Custody Battle",
+          "Mbappé Special"
+        ],
+        "correctAnswer": "Jimothy the raccoon",
+        "id": "memes-1",
+        "topicId": "memes",
+        "topic": "Memes",
+        "itemTitle": "Jimothy the raccoon"
+      },
+      {
+        "prompt": "In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits. Which meme matches this description?",
+        "answers": [
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Jimothy the raccoon",
+          "Hatsune Miku World Cup Custody Battle",
+          "Mbappé Special"
+        ],
+        "correctAnswer": "Kwebbelkop Laughing / YourRAGE Laugh",
+        "id": "memes-2",
+        "topicId": "memes",
+        "topic": "Memes",
+        "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh"
+      },
+      {
+        "prompt": "This meme is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. Which meme matches this description?",
+        "answers": [
+          "Hatsune Miku World Cup Custody Battle",
+          "Jimothy the raccoon",
+          "Kwebbelkop Laughing / YourRAGE Laugh",
+          "Mbappé Special"
+        ],
+        "correctAnswer": "Hatsune Miku World Cup Custody Battle",
+        "id": "memes-3",
+        "topicId": "memes",
+        "topic": "Memes",
+        "itemTitle": "Hatsune Miku World Cup Custody Battle"
+      },
+      {
+        "prompt": "I Want What They Have, World Cup Friendship Edition: Jude Bellingham and it. Which person matches this description?",
+        "answers": [
+          "Erling Haaland",
+          "Lamine Yamal",
+          "Christopher Nolan",
+          "Zendaya"
+        ],
+        "correctAnswer": "Erling Haaland",
+        "id": "people-1",
+        "topicId": "people",
+        "topic": "People",
+        "itemTitle": "Erling Haaland"
+      },
+      {
+        "prompt": "This person explains Lionel Messi advice after World Cup final, says it was as valuable as a medal. Which person matches this description?",
+        "answers": [
+          "Lamine Yamal",
+          "Erling Haaland",
+          "Christopher Nolan",
+          "Zendaya"
+        ],
+        "correctAnswer": "Lamine Yamal",
+        "id": "people-2",
+        "topicId": "people",
+        "topic": "People",
+        "itemTitle": "Lamine Yamal"
+      },
+      {
+        "prompt": "Which reminds me, in an odd sense, of the way Nolan’s films are often discussed. Which person matches this description?",
+        "answers": [
+          "Christopher Nolan",
+          "Erling Haaland",
+          "Lamine Yamal",
+          "Zendaya"
+        ],
+        "correctAnswer": "Christopher Nolan",
+        "id": "people-3",
+        "topicId": "people",
+        "topic": "People",
+        "itemTitle": "Christopher Nolan"
+      },
+      {
+        "prompt": "In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway). Which film matches this description?",
+        "answers": [
+          "The Odyssey",
+          "Obsession",
+          "Project Hail Mary",
+          "Backrooms"
+        ],
+        "correctAnswer": "The Odyssey",
+        "id": "movies-1",
+        "topicId": "movies",
+        "topic": "Movies",
+        "itemTitle": "The Odyssey"
+      },
+      {
+        "prompt": "The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed. Which film matches this description?",
+        "answers": [
+          "Obsession",
+          "The Odyssey",
+          "Project Hail Mary",
+          "Backrooms"
+        ],
+        "correctAnswer": "Obsession",
+        "id": "movies-2",
+        "topicId": "movies",
+        "topic": "Movies",
+        "itemTitle": "Obsession"
+      },
+      {
+        "prompt": "The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. Which film matches this description?",
+        "answers": [
+          "Project Hail Mary",
+          "The Odyssey",
+          "Obsession",
+          "Backrooms"
+        ],
+        "correctAnswer": "Project Hail Mary",
+        "id": "movies-3",
+        "topicId": "movies",
+        "topic": "Movies",
+        "itemTitle": "Project Hail Mary"
+      },
+      {
+        "prompt": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Which book matches this description?",
+        "answers": [
+          "Yesteryear",
+          "The Calamity Club",
+          "Theo of Golden",
+          "Mad Mabel"
+        ],
+        "correctAnswer": "Yesteryear",
+        "id": "books-1",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "Yesteryear"
+      },
+      {
+        "prompt": "In 1933 Oxford, Mississippi, Prohibition is on the wane, and the Great Depression is tightening its grip. Which book matches this description?",
+        "answers": [
+          "The Calamity Club",
+          "Yesteryear",
+          "Theo of Golden",
+          "Mad Mabel"
+        ],
+        "correctAnswer": "The Calamity Club",
+        "id": "books-2",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "The Calamity Club"
+      },
+      {
+        "prompt": "One spring morning, a stranger arrives in the small southern city of Golden. Which book matches this description?",
+        "answers": [
+          "Theo of Golden",
+          "Yesteryear",
+          "The Calamity Club",
+          "Mad Mabel"
+        ],
+        "correctAnswer": "Theo of Golden",
+        "id": "books-3",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "Theo of Golden"
+      },
+      {
+        "prompt": "Islam Makhachev records 17th UFC victory in a row in his welterweight title defeat of Ian Machado Garry. Which story matches this description?",
+        "answers": [
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
+        ],
+        "correctAnswer": "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+        "id": "news-1",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "UFC 330: Makhachev secures record-setting win against Machado Garry."
+      },
+      {
+        "prompt": "This story. Which story matches this description?",
+        "answers": [
+          "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
+        ],
+        "correctAnswer": "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+        "id": "news-2",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more."
+      },
+      {
+        "prompt": "The popular Keto-based ice cream company Rebel Creamery filed for Chapter 11 bankruptcy last week, after losing a trademark lawsuit filed by another ice cream company. Which story matches this description?",
+        "answers": [
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
+        ],
+        "correctAnswer": "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+        "id": "news-3",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Ice cream company Rebel filed for Chapter 11 bankruptcy."
+      }
+    ]
+  }
+}

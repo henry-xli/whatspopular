@@ -81,6 +81,8 @@ const worker = {
       headers.set("Cache-Control", "public, max-age=31536000, immutable");
     } else if (url.pathname === "/site.css") {
       headers.set("Cache-Control", "public, max-age=0, must-revalidate, s-maxage=86400, stale-while-revalidate=604800");
+    } else if (url.pathname === "/data/trends.json") {
+      headers.set("Cache-Control", "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400");
     } else if (url.pathname.startsWith("/culture/") || ["/icon.png", "/og.jpg"].includes(url.pathname)) {
       headers.set("Cache-Control", "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800");
     } else if ((headers.get("content-type") ?? "").includes("text/html")) {
