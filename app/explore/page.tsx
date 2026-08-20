@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { ExploreIndex } from "../components/explore-index";
+import { ExploreIndex, ScrollToTop } from "../components/explore-index";
 import { Leaderboard } from "../components/leaderboard";
-import { ScrollToTop } from "../components/scroll-to-top";
 import { SongBoard } from "../components/song-board";
 import { cultureBrief } from "../culture";
 

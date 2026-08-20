@@ -5,7 +5,7 @@ import { gunzipSync } from "node:zlib";
 import { generateDescriptionBatch, generateQuizBatch } from "./ai-descriptions.mjs";
 import { withHeadlessPage } from "./headless-browser.mjs";
 import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./news-article.mjs";
-import { fetchBytes, mapConcurrent } from "./runtime.mjs";
+import { createRateLimiter, fetchBytes, mapConcurrent } from "./runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const dataPath = path.join(root, "data", "trends.json");
@@ -16,6 +16,8 @@ const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 const wikidataPersonCache = new Map();
+const wikidataResponseCache = new Map();
+const scheduleWikidataRequest = createRateLimiter(500);
 const quizSectionIds = ["memes", "people", "movies", "books", "news"];
 const quizQuestionCount = quizSectionIds.length * 3;
 const quizDurationSeconds = 15;
@@ -115,6 +117,20 @@ async function fetchText(rawUrl, options = {}) {
     },
   });
   return buffer.toString("utf8");
+}
+
+async function fetchWikidataJson(rawUrl) {
+  const key = String(rawUrl);
+  const cached = wikidataResponseCache.get(key);
+  if (cached) return cached;
+  const request = scheduleWikidataRequest(async () => JSON.parse(await fetchText(rawUrl)));
+  wikidataResponseCache.set(key, request);
+  try {
+    return await request;
+  } catch (error) {
+    wikidataResponseCache.delete(key);
+    throw error;
+  }
 }
 
 async function safely(name, work) {
@@ -1068,7 +1084,7 @@ async function wikidataEntitiesForTitles(titles) {
       format: "json",
       origin: "*",
     });
-    const payload = JSON.parse(await fetchText(url));
+    const payload = await fetchWikidataJson(url);
     for (const entity of Object.values(payload.entities ?? {})) {
       const title = entity.sitelinks?.enwiki?.title;
       if (title) entities.set(normalize(title), entity);
@@ -2127,7 +2143,7 @@ async function wikidataSearchIsPerson(value) {
       format: "json",
       origin: "*",
     });
-    const results = JSON.parse(await fetchText(url)).search ?? [];
+    const results = (await fetchWikidataJson(url)).search ?? [];
     const key = normalize(variant);
     const matches = results.filter((result) => {
       const label = normalize(result.label ?? "");
@@ -2143,7 +2159,7 @@ async function wikidataSearchIsPerson(value) {
         format: "json",
         origin: "*",
       });
-      const entity = JSON.parse(await fetchText(entityUrl)).entities?.[match.id];
+      const entity = (await fetchWikidataJson(entityUrl)).entities?.[match.id];
       if (claimIds(entity, "P31").includes("Q5")) return true;
     }
   }
@@ -2731,7 +2747,7 @@ async function viralProductCandidates(movers) {
     const organicPositive = group.observations.filter((item) => item.demand && !item.controversy);
     const scarcity = group.observations.filter((item) => item.scarcity).length;
     const adControversy = group.observations.some((item) => productAdControversyPattern.test(item.headline));
-    const controversyOnly = adControversy && organicPositive.length < 2 && scarcity === 0;
+    const controversyOnly = (adControversy || controversy > 0) && organicPositive.length < 2 && scarcity === 0;
     const mover = bestProductMover(group, movers);
     const social = Math.min(1, positive.reduce((total, item) => total + productDemandScore(item.headline), 0) / 8);
     const confirming = Math.min(1, sources.size / 4);

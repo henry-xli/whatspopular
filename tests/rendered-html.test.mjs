@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { buildDescriptionPrompt, buildQuizPrompt, generateDescriptionBatch, parseDescriptionOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
 import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/news-article.mjs";
-import { fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
+import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -386,6 +386,21 @@ test("bounded concurrency preserves result order", async () => {
   });
   assert.deepEqual(result, [6, 2, 8, 4]);
   assert.equal(peak, 2);
+});
+
+test("rate-limited work stays serialized after failures", async () => {
+  const schedule = createRateLimiter(1);
+  const events = [];
+  const first = schedule(async () => {
+    events.push("first-start");
+    throw new Error("expected failure");
+  }).catch(() => events.push("first-failed"));
+  const second = schedule(async () => {
+    events.push("second-start");
+    return "ok";
+  });
+  await Promise.all([first, second]);
+  assert.deepEqual(events, ["first-start", "first-failed", "second-start"]);
 });
 
 test("keeps content and outbound links constrained", async () => {

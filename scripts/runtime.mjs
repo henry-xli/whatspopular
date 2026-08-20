@@ -228,3 +228,20 @@ export async function mapConcurrent(values, limit, work) {
   await Promise.all(Array.from({ length: Math.min(limit, values.length) }, worker));
   return output;
 }
+
+export function createRateLimiter(intervalMs) {
+  if (!Number.isInteger(intervalMs) || intervalMs < 0) throw new Error("Rate-limit interval must be a non-negative integer");
+  let nextAvailable = 0;
+  let queue = Promise.resolve();
+  return async function schedule(work) {
+    if (typeof work !== "function") throw new Error("Rate-limited work must be a function");
+    const run = queue.then(async () => {
+      const delay = Math.max(0, nextAvailable - Date.now());
+      if (delay) await new Promise((resolve) => setTimeout(resolve, delay));
+      nextAvailable = Date.now() + intervalMs;
+      return work();
+    });
+    queue = run.catch(() => {});
+    return run;
+  };
+}

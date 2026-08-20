@@ -129,10 +129,14 @@ for Amazon Movers & Shakers when its public page rate-limits automation;
 - `app/` contains pages, components, styles, and runtime data validation; the
   shared culture model lives in `app/culture.ts`. `/` is the quiz-first home
   page, `/explore` contains the leaderboards, and `/about` contains the flow
-  explanation.
+  explanation. The shared header includes the theme toggle, and the explore
+  index includes its back-to-top control so those page-local behaviors do not
+  require one-file components.
 - `data/trends.json` is the single preprocessed content snapshot.
 - `scripts/` contains the 48-hour ingestion, source adapters, AI copy pass, and
-  image pipeline. The helpers are kept flat so the pipeline is easy to find.
+  image pipeline. The helpers are kept as separate files because they are
+  independent network/security boundaries; combining them would make source
+  changes harder to review and increase the blast radius of a failure.
 - `worker.ts` applies edge caching and production security headers.
 - `tests/` checks rendered content, headers, links, media, and data invariants.
 - `.github/workflows/update-daily.yml` refreshes, verifies, and commits every 48 hours.
