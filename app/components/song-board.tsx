@@ -180,7 +180,9 @@ export function SongBoard({ section }: { section: CultureSection }) {
             const position = Number(data.position ?? 0);
             const threshold = duration > 100 ? 1500 : 1.5;
             const atEnd = duration > 0 && position >= duration - threshold;
-            if (!queueModeRef.current || data.isPaused || !atEnd || advancingRef.current) return;
+            // Some embeds report a naturally finished track as paused, so the
+            // position boundary is the reliable signal for advancing the queue.
+            if (!queueModeRef.current || !atEnd || advancingRef.current) return;
 
             const currentIndex = currentId ? trackIdsRef.current.indexOf(currentId) : queueIndexRef.current;
             const nextTrack = trackIdsRef.current[currentIndex + 1];
