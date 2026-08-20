@@ -314,7 +314,7 @@ img {
 
 .hero-slideshow {
   position: absolute;
-  inset: 0 236px 0 0;
+  inset: 0;
   overflow: hidden;
 }
 
@@ -354,6 +354,7 @@ img {
   right: var(--hero-side-padding);
   bottom: var(--hero-side-padding);
   width: var(--hero-spotlight-width);
+  z-index: 1;
   display: flex;
   flex-direction: column;
   padding: 22px;
@@ -1937,16 +1938,8 @@ a.culture-card:hover {
     max-width: min(820px, calc(100% - var(--hero-spotlight-width) - var(--hero-spotlight-gap)));
   }
 
-  .hero-slideshow {
-    right: calc(var(--hero-side-padding) + var(--hero-spotlight-width) + var(--hero-spotlight-gap));
-  }
-
   .hero:has(.quiz-panel) .hero-copy {
     max-width: min(100%, 1040px);
-  }
-
-  .hero:has(.quiz-panel) .hero-slideshow {
-    right: 0;
   }
 }
 
