@@ -89,7 +89,7 @@ private struct BriefHome: View {
         ScrollViewReader { proxy in
             ZStack(alignment: .bottomTrailing) {
                 ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 14) {
+                    LazyVStack(alignment: .leading, spacing: 10) {
                         Color.clear
                             .frame(height: 1)
                             .background {
@@ -135,9 +135,9 @@ private struct BriefHome: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 14)
-                    .padding(.top, 12)
-                    .padding(.bottom, 72)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 8)
+                    .padding(.bottom, 64)
                 }
                 .scrollIndicators(.hidden)
 
@@ -191,9 +191,9 @@ private struct MobileHeader: View {
     let openSettings: () -> Void
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 8) {
+        HStack(alignment: .top, spacing: 10) {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 6) {
                     ZStack {
                         Circle()
                             .fill(Color(hex: "#6F48E5"))
@@ -201,14 +201,14 @@ private struct MobileHeader: View {
                             .font(.caption.weight(.bold))
                             .foregroundStyle(.white)
                     }
-                    .frame(width: 28, height: 28)
+                    .frame(width: 25, height: 25)
 
                     Text("what’s popular?")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
                 }
 
                 Text("How trendy are you?")
-                    .font(.system(size: 25, weight: .black, design: .rounded))
+                    .font(.system(size: 23, weight: .black, design: .rounded))
                     .tracking(-1)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
@@ -228,7 +228,7 @@ private struct MobileHeader: View {
             Button(action: openSettings) {
                     Image(systemName: "slider.horizontal.3")
                         .font(.headline.weight(.semibold))
-                        .frame(width: 38, height: 38)
+                        .frame(width: 34, height: 34)
                         .background(.thinMaterial, in: Circle())
             }
             .buttonStyle(.plain)
@@ -242,13 +242,13 @@ private struct ExploreHeader: View {
     let openSettings: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Explore")
-                        .font(.system(size: 27, weight: .black, design: .rounded))
+                        .font(.system(size: 23, weight: .black, design: .rounded))
                     Text("Your briefing, in your order")
-                        .font(.subheadline.weight(.medium))
+                        .font(.caption.weight(.medium))
                         .foregroundStyle(.secondary)
                 }
 
@@ -256,16 +256,16 @@ private struct ExploreHeader: View {
 
                 Button(action: openSettings) {
                     Label("Customize", systemImage: "slider.horizontal.3")
-                        .font(.caption.weight(.bold))
+                        .font(.caption2.weight(.bold))
                 }
                 .buttonStyle(.bordered)
                 .tint(Color(hex: "#6F48E5"))
             }
 
             Text(brief.summary)
-                .font(.caption)
+                .font(.caption2)
                 .foregroundStyle(.secondary)
-                .lineLimit(2)
+                .lineLimit(1)
         }
     }
 }
@@ -276,23 +276,23 @@ private struct LeaderboardJumpBar: View {
     let jumpTo: (String) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 4) {
             Text("Jump to")
-                .font(.caption.weight(.black))
+                .font(.caption2.weight(.black))
                 .foregroundStyle(.secondary)
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
+                HStack(spacing: 5) {
                     ForEach(order, id: \.self) { id in
                         if let section = sections.first(where: { $0.id == id }) {
                             Button {
                                 jumpTo(id)
                             } label: {
                                 Text(section.title)
-                                    .font(.caption.weight(.bold))
+                                    .font(.caption2.weight(.bold))
                                     .foregroundStyle(Color(hex: "#5A38C5"))
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 7)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 5)
                                     .background(Color(hex: "#6F48E5").opacity(0.10), in: Capsule())
                             }
                             .buttonStyle(.plain)
@@ -322,40 +322,36 @@ private struct StandoutRail: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Label("Standout", systemImage: "star.fill")
-                    .font(.headline.weight(.bold))
+                    .font(.subheadline.weight(.bold))
                     .foregroundStyle(Color(hex: "#6F48E5"))
                 Spacer()
                 Text("Top entry in each board")
-                    .font(.caption.weight(.medium))
+                    .font(.caption2.weight(.medium))
                     .foregroundStyle(.secondary)
             }
 
             ScrollView(.horizontal) {
-                HStack(spacing: 12) {
+                HStack(spacing: 8) {
                     ForEach(standouts) { standout in
                         if let url = URL(string: standout.item.url) {
                             Link(destination: url) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     CultureImage(path: standout.item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
-                                        .frame(width: 148, height: 86)
-                                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                        .frame(width: 116, height: 68)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
                                     Text(standout.sectionTitle.uppercased())
-                                        .font(.system(size: 9, weight: .black, design: .rounded))
+                                        .font(.system(size: 8, weight: .black, design: .rounded))
                                         .foregroundStyle(Color(hex: standout.item.accent))
                                         .tracking(0.6)
                                     Text(standout.item.title)
-                                        .font(.subheadline.weight(.bold))
+                                        .font(.caption.weight(.bold))
                                         .lineLimit(1)
-                                    Text(standout.item.description)
-                                        .font(.caption2)
-                                        .foregroundStyle(.secondary)
-                                        .lineLimit(2)
                                 }
-                                .frame(width: 148, alignment: .leading)
+                                .frame(width: 116, alignment: .leading)
                             }
                             .buttonStyle(.plain)
                         }
@@ -374,32 +370,32 @@ private struct MobileLeaderboard: View {
     let remoteImageVersion: String?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .center, spacing: 8) {
                     Text(String(format: "%02d", boardNumber))
                         .font(.caption.weight(.black).monospacedDigit())
                         .foregroundStyle(Color(hex: preference.accentHex))
                     Text(section.title)
-                        .font(.system(size: 20, weight: .black, design: .rounded))
+                        .font(.system(size: 18, weight: .black, design: .rounded))
                     Spacer()
                     Text("\(section.allItems.count) entries")
-                        .font(.caption.weight(.medium))
+                        .font(.caption2.weight(.medium))
                         .foregroundStyle(.secondary)
                 }
 
                 Text(section.eyebrow)
-                    .font(.caption.weight(.semibold))
+                    .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
 
                 if preference.descriptionStyle != .hidden {
                     Text(displayDescription(section.description, style: preference.descriptionStyle))
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundStyle(.secondary)
-                        .lineLimit(preference.descriptionStyle == .full ? 4 : 2)
+                        .lineLimit(preference.descriptionStyle == .full ? 3 : 1)
                 }
 
-                HStack(spacing: 6) {
+                HStack(spacing: 4) {
                     Image(systemName: "arrow.up.right")
                         .font(.caption2.weight(.bold))
                     Text(section.sources.first?.label ?? "Sources")
@@ -411,7 +407,7 @@ private struct MobileLeaderboard: View {
                 .foregroundStyle(Color(hex: preference.accentHex))
             }
 
-            LazyVStack(spacing: 6) {
+            LazyVStack(spacing: 4) {
                 ForEach(section.allItems) { item in
                     let expanded = preference.expansion == .all || item.rank <= 3
                     MobileEntryCard(
@@ -424,10 +420,10 @@ private struct MobileLeaderboard: View {
                 }
             }
         }
-        .padding(10)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .padding(8)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .overlay {
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .stroke(Color(hex: preference.accentHex).opacity(0.28), lineWidth: 1)
         }
     }
@@ -466,20 +462,20 @@ private struct MobileEntryCard: View {
     }
 
     private var compactRow: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 6) {
             Text(String(format: "%02d", item.rank))
                 .font(.caption.weight(.black).monospacedDigit())
                 .foregroundStyle(Color(hex: preference.accentHex))
-                .frame(width: 22, alignment: .leading)
+                .frame(width: 20, alignment: .leading)
 
             CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
-                .frame(width: 44, height: 44)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 5) {
                     Text(item.title)
-                        .font(.callout.weight(.bold))
+                        .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
                     if item.rating != nil {
                         Image(systemName: "star.fill")
@@ -488,7 +484,7 @@ private struct MobileEntryCard: View {
                     }
                 }
                 Text(item.subtitle)
-                    .font(.caption)
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
             }
@@ -506,8 +502,8 @@ private struct MobileEntryCard: View {
                 .font(.caption2.weight(.bold))
                 .foregroundStyle(.secondary)
         }
-        .padding(8)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .padding(6)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
     private var fullCard: some View {
@@ -644,7 +640,7 @@ private struct QuizCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 10) {
             switch status {
             case .idle:
                 idleView
@@ -654,14 +650,14 @@ private struct QuizCard: View {
                 completeView
             }
         }
-        .padding(13)
+        .padding(11)
         .background(
             LinearGradient(
                 colors: [Color(hex: "#6F48E5"), Color(hex: "#4F2EB8")],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             ),
-            in: RoundedRectangle(cornerRadius: 24, style: .continuous)
+            in: RoundedRectangle(cornerRadius: 18, style: .continuous)
         )
         .foregroundStyle(.white)
         .onReceive(timer) { now in
@@ -677,25 +673,25 @@ private struct QuizCard: View {
     }
 
     private var idleView: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Label("TAKE THE QUIZ", systemImage: "sparkles")
-                    .font(.caption.weight(.black))
+                    .font(.caption2.weight(.black))
                     .tracking(0.8)
                 Spacer()
                 Text("5 questions")
-                    .font(.caption.weight(.semibold))
+                    .font(.caption2.weight(.semibold))
                     .opacity(0.75)
             }
 
             HStack(alignment: .center, spacing: 10) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("How much do you know?")
-                        .font(.subheadline.weight(.black))
+                        .font(.callout.weight(.black))
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                     Text("A quick pulse check on what’s shaping the moment.")
-                        .font(.caption)
+                        .font(.caption2)
                         .opacity(0.82)
                         .lineLimit(1)
                 }
@@ -704,10 +700,10 @@ private struct QuizCard: View {
 
                 Button(action: start) {
                     Text("Start")
-                        .font(.caption.weight(.bold))
+                        .font(.caption2.weight(.bold))
                         .foregroundStyle(Color(hex: "#4F2EB8"))
-                        .padding(.horizontal, 13)
-                        .padding(.vertical, 8)
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 7)
                         .background(.white, in: Capsule())
                 }
                 .fixedSize()
