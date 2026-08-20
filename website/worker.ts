@@ -1,6 +1,9 @@
 import handler from "vinext/server/app-router-entry";
+import rawBrief from "./data/trends.json";
 
 declare const __BUILD_ID__: string;
+
+const mobileSnapshot = JSON.stringify(rawBrief);
 
 interface AssetFetcher {
   fetch(request: Request): Promise<Response>;
@@ -52,13 +55,50 @@ const securityHeaders = {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    const isMobileSnapshot = url.pathname === "/api/brief";
+    const edgeCache = (globalThis as unknown as { caches?: { default?: EdgeCache } }).caches?.default;
+
+    if (isMobileSnapshot) {
+      if (request.method !== "GET" && request.method !== "HEAD") {
+        return new Response(null, {
+          status: 405,
+          headers: { Allow: "GET, HEAD", "Cache-Control": "no-store" },
+        });
+      }
+
+      let snapshotCacheKey: Request | undefined;
+      if (request.method === "GET" && edgeCache) {
+        const cacheUrl = new URL("/api/brief", url.origin);
+        cacheUrl.searchParams.set("__wpv", __BUILD_ID__);
+        snapshotCacheKey = new Request(cacheUrl, { headers: { accept: "application/json" } });
+        try {
+          const cached = await edgeCache.match(snapshotCacheKey);
+          if (cached) return cached;
+        } catch {}
+      }
+
+      const etag = `"${__BUILD_ID__}"`;
+      const headers = new Headers({
+        "Cache-Control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+        "Content-Type": "application/json; charset=utf-8",
+        ETag: etag,
+      });
+      if (process.env.NODE_ENV === "production") {
+        for (const [name, value] of Object.entries(securityHeaders)) headers.set(name, value);
+      }
+      const response = new Response(request.method === "HEAD" ? null : mobileSnapshot, { headers });
+      if (snapshotCacheKey && edgeCache) {
+        ctx.waitUntil(edgeCache.put(snapshotCacheKey, response.clone()).catch(() => {}));
+      }
+      return response;
+    }
+
     const isHtmlNavigation = request.method === "GET"
       && (url.pathname === "/" || url.pathname === "/about" || url.pathname === "/explore")
       && !request.headers.has("rsc")
       && !request.headers.has("next-router-state-tree")
       && ((request.headers.get("accept") ?? "").includes("text/html")
         || request.headers.get("sec-fetch-mode") === "navigate");
-    const edgeCache = (globalThis as unknown as { caches?: { default?: EdgeCache } }).caches?.default;
     let cacheKey: Request | undefined;
     if (isHtmlNavigation && edgeCache) {
       const cacheUrl = new URL(url.pathname, url.origin);

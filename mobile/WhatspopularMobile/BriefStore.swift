@@ -3,7 +3,7 @@ import Foundation
 enum MobileContentEndpoint {
     // This is the stable public Sites URL for the deployed briefing.
     static let baseURL = URL(string: "https://whatspopular.pigeonflare.chatgpt.site")!
-    static let snapshotURL = baseURL.appendingPathComponent("data/trends.json")
+    static let snapshotURL = baseURL.appendingPathComponent("api/brief")
 
     static func imageURL(for path: String, revision: String?) -> URL? {
         guard path.range(of: #"^/culture/[a-z0-9-]+\.webp$"#, options: .regularExpression) != nil else {

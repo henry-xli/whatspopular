@@ -1,7 +1,7 @@
 # what’s popular?
 
 A finite 48-hour briefing and quiz on internet culture. Visitors receive
-pre-rendered HTML, local images, and a cached snapshot at `/data/trends.json`;
+pre-rendered HTML, local images, and a cached mobile snapshot at `/api/brief`;
 there is no account, feed, runtime database query, or request-time scraper.
 
 Explore displays boards in this order: People, Movies, Books, Music, Products,

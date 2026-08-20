@@ -125,6 +125,10 @@ test("renders the complete finite culture briefing", async () => {
   const allItems = brief.sections.flatMap((section) => [...section.items, ...section.moreItems]);
   const homeResponse = await render();
   const response = await render("/explore");
+  const mobileSnapshotResponse = await render("/api/brief", { headers: { accept: "application/json" } });
+  assert.equal(mobileSnapshotResponse.status, 200);
+  assert.deepEqual(await mobileSnapshotResponse.json(), brief);
+  assert.match(mobileSnapshotResponse.headers.get("cache-control") ?? "", /s-maxage=3600/);
   assert.equal(homeResponse.status, 200);
   const homeHtml = await homeResponse.text();
   assert.match(homeHtml, /How trendy are you\?/);
