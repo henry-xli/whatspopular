@@ -379,7 +379,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
             className={`music-spotify-embed${embedReady ? " is-ready" : ""}${embedError ? " has-error" : ""}`}
             aria-label="Spotify embedded player"
           />
-          {embedError && activeItem?.spotifyId ? (
+          {activeItem?.spotifyId && (!embedReady || embedError) ? (
             <iframe
               title={`Spotify player for ${activeItem.title}`}
               src={`https://open.spotify.com/embed/track/${activeItem.spotifyId}?utm_source=generator&theme=0`}
