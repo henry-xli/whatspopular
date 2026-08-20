@@ -167,6 +167,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
         (controller) => {
           if (disposed) return;
           controllerRef.current = controller;
+          setEmbedError(false);
           setEmbedReady(true);
           controller.addListener("playback_update", (event) => {
             const data = event.data;
@@ -375,7 +376,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
         <div className="embed-wrap">
           <div
             ref={embedHostRef}
-            className={`music-spotify-embed${embedReady ? " is-ready" : ""}`}
+            className={`music-spotify-embed${embedReady ? " is-ready" : ""}${embedError ? " has-error" : ""}`}
             aria-label="Spotify embedded player"
           />
           {embedError && activeItem?.spotifyId ? (

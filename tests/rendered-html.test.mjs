@@ -144,6 +144,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-src[^;]*https:\/\/buymeacoffee\.com/);
   assert.match(response.headers.get("content-security-policy") ?? "", /script-src[^;]*https:\/\/open\.spotify\.com/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /script-src[^;]*https:\/\/embed-cdn\.spotifycdn\.com/);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
   assert.equal(response.headers.get("x-permitted-cross-domain-policies"), "none");
   assert.match(response.headers.get("cache-control") ?? "", /s-maxage=86400/);

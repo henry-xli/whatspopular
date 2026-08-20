@@ -1591,24 +1591,40 @@ button.music-track-select:focus-visible {
 }
 
 .music-player {
-  width: min(100%, 760px);
-  margin-top: 26px;
+  position: relative;
+  width: min(100%, 960px);
+  min-height: 152px;
+  margin: 24px auto 0;
+  scroll-margin-top: 110px;
 }
 
 .music-player.is-ready {
-  margin-top: 20px;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  visibility: hidden;
 }
 
 .music-spotify-embed {
+  height: 152px;
   min-height: 152px;
 }
 
 .music-spotify-embed iframe {
   display: block;
   width: 100%;
+  height: 152px;
   min-height: 152px;
   border: 0;
   border-radius: 12px;
+}
+
+.music-spotify-embed.has-error {
+  display: none;
+  height: 0;
+  min-height: 0;
 }
 
 .song-card {
@@ -1676,8 +1692,8 @@ button.music-track-select:focus-visible {
 }
 
 .embed-wrap {
-  padding: 0 12px 12px;
-  background: var(--card);
+  padding: 0;
+  background: transparent;
 }
 
 .embed-wrap iframe {
@@ -1687,50 +1703,59 @@ button.music-track-select:focus-visible {
 }
 
 .song-player {
-  width: min(100%, 720px);
-  padding: 12px;
-  margin: 28px auto 0;
-  scroll-margin-top: 110px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  width: min(100%, 960px);
+  padding: 0;
 }
 
 .song-player-heading {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 16px;
-  align-items: center;
-  padding: 5px 5px 12px;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .song-player-heading > span {
-  color: var(--purple-dark);
-  font-size: 0.6rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .song-player-heading strong {
-  grid-column: 1;
-  font-family: Georgia, "Times New Roman", serif;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .song-player-heading button {
   display: grid;
-  grid-column: 2;
-  grid-row: 1 / span 2;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
   width: 34px;
   height: 34px;
   padding: 0;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
-  background: var(--paper);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
   color: var(--ink);
   cursor: pointer;
+  opacity: 0.86;
+  pointer-events: auto;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.song-player-heading button:hover,
+.song-player-heading button:focus-visible {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .expanded-ranking {
