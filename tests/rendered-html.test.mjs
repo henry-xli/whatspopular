@@ -143,6 +143,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-src[^;]*https:\/\/buymeacoffee\.com/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /script-src[^;]*https:\/\/open\.spotify\.com/);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
   assert.equal(response.headers.get("x-permitted-cross-domain-policies"), "none");
   assert.match(response.headers.get("cache-control") ?? "", /s-maxage=86400/);
@@ -190,15 +191,22 @@ test("renders the complete finite culture briefing", async () => {
   assert.ok(contentImages.every((image) => /\bwidth="\d+"/.test(image) && /\bheight="\d+"/.test(image)));
   assert.ok(contentImages.every((image) => /\bdecoding="async"/.test(image)));
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
-  assert.equal((html.match(/class="culture-card/g) ?? []).length, 40);
+  const nonMusicSections = brief.sections.filter((section) => section.id !== "music");
+  assert.equal((html.match(/class="culture-card/g) ?? []).length,
+    nonMusicSections.reduce((count, section) => count + section.items.length, 0));
   assert.equal((html.match(/<details class="expanded-ranking"/g) ?? []).length,
-    brief.sections.filter((section) => section.moreItems.length).length);
+    nonMusicSections.filter((section) => section.moreItems.length).length);
   assert.equal((html.match(/class="expanded-entry /g) ?? []).length,
-    brief.sections.reduce((count, section) => count + section.moreItems.length, 0));
+    nonMusicSections.reduce((count, section) => count + section.moreItems.length, 0));
   assert.doesNotMatch(html, /class="expanded-source"|↗|▶/);
   assert.match(html, /class="ui-icon ui-icon-external/);
   assert.match(html, /<svg class="ui-icon ui-icon-external/);
   assert.match(html, /class="ui-icon ui-icon-play/);
+  assert.match(html, /class="music-playlist"/);
+  assert.match(html, /class="music-tracklist"/);
+  assert.equal((html.match(/class="music-track-row/g) ?? []).length,
+    brief.sections.find((section) => section.id === "music").items.length
+      + brief.sections.find((section) => section.id === "music").moreItems.length);
   assert.equal((html.match(/aria-label="Play /g) ?? []).length,
     brief.sections.find((section) => section.id === "music").items.length
       + brief.sections.find((section) => section.id === "music").moreItems.length);
