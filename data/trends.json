@@ -2,7 +2,7 @@
   "edition": "August 2026",
   "status": "Checked today",
   "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-19T17:37:27.735Z",
+  "generatedAt": "2026-08-20T04:07:55.190Z",
   "summary": "A five-minute, two-source briefing on the memes, slang, people, movies, books, music, products, and news shaping internet culture right now.",
   "sections": [
     {
@@ -305,7 +305,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "1,002,710"
+            "value": "1,003,046"
           },
           "evidence": [
             {
@@ -330,7 +330,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "114,649"
+            "value": "114,738"
           },
           "evidence": [
             {
@@ -355,7 +355,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "100,208"
+            "value": "100,340"
           },
           "evidence": [
             {
@@ -380,7 +380,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "76,656"
+            "value": "76,689"
           },
           "evidence": [
             {
@@ -405,7 +405,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "55,620"
+            "value": "55,647"
           },
           "evidence": [
             {
@@ -432,7 +432,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "46,974"
+            "value": "47,001"
           },
           "evidence": [
             {
@@ -457,7 +457,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "43,571"
+            "value": "43,575"
           },
           "evidence": [
             {
@@ -482,7 +482,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "27,421"
+            "value": "27,433"
           },
           "evidence": [
             {
@@ -507,7 +507,7 @@
           "source": "Know Your Meme",
           "metric": {
             "label": "Know Your Meme page views",
-            "value": "18,579"
+            "value": "18,588"
           },
           "evidence": [
             {
@@ -545,7 +545,7 @@
           "rank": 1,
           "title": "Erling Haaland",
           "subtitle": "Sports",
-          "description": "Erling Haaland is primarily known as a footballer. Erling Haaland is expected to return to Manchester City training after starring at the World Cup.",
+          "description": "Erling Haaland is primarily known as a footballer. He was recently featured in coverage about a World Cup friendship involving him and Jude Bellingham.",
           "image": "/culture/person-erling-haaland.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/960px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Erling Haaland",
@@ -566,7 +566,7 @@
             },
             {
               "source": "Vogue",
-              "url": "https://people.com/erling-haaland-says-goodbye-to-us-after-emotional-world-cup-run-12016901"
+              "url": "https://www.vogue.com/article/i-want-what-they-have-world-cup-jude-bellingham-and-erling-haaland"
             }
           ],
           "accent": "#ffc857",
@@ -576,7 +576,7 @@
           "rank": 2,
           "title": "Lamine Yamal",
           "subtitle": "Sports",
-          "description": "Lamine Yamal is primarily known as a footballer. His younger brother Keyne drew fresh attention with joyful celebrations on the field after Spain's World Cup victory.",
+          "description": "Lamine Yamal is primarily known as a footballer. He recently discussed advice Lionel Messi gave him after the World Cup final, describing it as valuable as a medal.",
           "image": "/culture/person-lamine-yamal.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Lamine Yamal",
@@ -597,7 +597,7 @@
             },
             {
               "source": "ESPN",
-              "url": "https://www.fcbarcelona.com/en/football/first-team/players/129404/---------------lamine-yamal"
+              "url": "https://www.espn.com/soccer/story/_/id/49423331/lionel-messi-encourages-lamine-yamal-go-own-way-spain-world-cup-triumph"
             }
           ],
           "accent": "#9b8cff",
@@ -607,7 +607,7 @@
           "rank": 3,
           "title": "Christopher Nolan",
           "subtitle": "Film",
-          "description": "Christopher Nolan is primarily known as a film director. Attention around his next film has renewed interest in the director's closely controlled production process.",
+          "description": "Christopher Nolan is primarily known as a film director. The supplied context refers generally to how his films are discussed but does not establish a specific recent event.",
           "image": "/culture/creator-christopher-nolan.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/ChristopherNolan-byPhilipRomano_%28cropped%29.jpg/960px-ChristopherNolan-byPhilipRomano_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Christopher Nolan",
@@ -627,8 +627,8 @@
               "url": "https://en.wikipedia.org/wiki/Christopher_Nolan"
             },
             {
-              "source": "jacobin.com",
-              "url": "https://screenrant.com/all-christopher-nolan-movies-ranked/"
+              "source": "Truthdig",
+              "url": "https://www.truthdig.com/articles/can-we-finally-admit-christopher-nolan-leans-right-and-still-makes-good-movies/"
             }
           ],
           "accent": "#57d5a4",
@@ -638,7 +638,7 @@
           "rank": 4,
           "title": "Zendaya",
           "subtitle": "Film",
-          "description": "Zendaya is primarily known as an actress. She is drawing renewed attention for her role connected to Spider-Man: Brand New Day.",
+          "description": "Zendaya is primarily known as an actress. She recently drew coverage after reports of a secret wedding celebration with Tom Holland at a luxury hotel in the English countryside.",
           "image": "/culture/creator-zendaya.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Zendaya-byPhilipRomano.jpg/960px-Zendaya-byPhilipRomano.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Zendaya",
@@ -658,7 +658,7 @@
               "url": "https://en.wikipedia.org/wiki/Zendaya"
             },
             {
-              "source": "people.com via Google News",
+              "source": "People.com via Google News",
               "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOZkxFUUZyclZUME1kVk1NX3BRQ2VQR2J2OE5NMGxRdzN0X3ZJVWV6NnlyTjAwR3pYZ0FFU08wVmY2SkJIZlVHM3FZejQxTktLRU43NVdzOUp2Z2FwMUpjNzVXdXBMbzJXeG5kWGdqLWVnd29idUdtRXU5VTJwRUFTcTlFM0VDZ3hZVFdGU0VuUFFXR0VYenBOMkhMc0s1SHVZNFZtVmVZaFpBVEI1OWVkYXpOM2VwME00bVE?oc=5"
             }
           ],
@@ -669,7 +669,7 @@
           "rank": 5,
           "title": "Shakira",
           "subtitle": "Music",
-          "description": "Shakira is primarily known as a singer. A surprise visit to earthquake-damaged Colombia has drawn attention to her commitment to rebuilding schools.",
+          "description": "Shakira is primarily known as a singer. She recently visited earthquake-damaged areas of Colombia and committed to building new schools.",
           "image": "/culture/person-shakira.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/960px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Shakira",
@@ -689,8 +689,8 @@
               "url": "https://en.wikipedia.org/wiki/Shakira"
             },
             {
-              "source": "ABC News - Breaking News, Latest News and Videos via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSzhRV3BxMk4yWDNuSzVBUWZpRzNrN2xYN3UzeHlMLW5TR3h2aGtTU0gxUGg2Zk55UVVsXzRkaFJxM0NzdHVtTFVOZnE0b1hINFR5TklJdFdGU2k3TWVuMmV3Y0hCSDNEeVlNbl9ZbHF0eHNDWUw0NUkwVTFNWHJpNkhiaTNUYVdyckYyRjJ4RFlxMlpiWDVCdXJnMmpjeFRGN0hYT0JzVU9Xc1d1VXo1UzVnMNIBuAFBVV95cUxNTEhYZUNKXzZHTm55aFFQV2pYRWY5Zk1OeE1TZWtzSnBRblFZcU53bWJRZWNpdlF6bW1rNmRWbmo2dlZQR0owc0g5QURqYUpBaHBVTGdCcjk1MnZXSlJYM1NzRmxoZEV1S2VhME1XRzJuakdaUlRXWk9CZlJicl9lUFE5VEtWUERrR2s3c3ZxNV9WcWFqRG5HU2N3ZTB1TGx3Rklwbm5CWmoxNkt3UFE4S3ZyYWNPNWww?oc=5"
+              "source": "ABC News - Breaking News, Latest News and Videos",
+              "url": "https://abcnews.com/Business/wireStory/shakira-makes-surprise-visit-earthquake-damaged-colombia-commits-135726206"
             }
           ],
           "accent": "#ff6b57",
@@ -702,7 +702,7 @@
           "rank": 6,
           "title": "Sonam Wangchuk",
           "subtitle": "Science & technology",
-          "description": "Sonam Wangchuk is primarily known for science and technology. His recent public campaign in India has drawn renewed attention to his work and activism.",
+          "description": "Sonam Wangchuk is primarily known as an engineer. Recent coverage described him as rallying India's Gen Z against Modi and winning.",
           "image": "/culture/person-sonam-wangchuk.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Sonam_Wangchuk%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Sonam Wangchuk",
@@ -733,7 +733,7 @@
           "rank": 7,
           "title": "Taylor Swift",
           "subtitle": "Music",
-          "description": "Taylor Swift is primarily known as a singer. Her latest release has renewed attention around another record-setting run on adult-pop radio.",
+          "description": "Taylor Swift is primarily known as a singer. Recent coverage highlighted her record-breaking 16th Adult Pop Airplay achievement for “I Knew It, I Knew You.”",
           "image": "/culture/person-taylor-swift.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/960px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Taylor Swift",
@@ -754,7 +754,7 @@
             },
             {
               "source": "Billboard",
-              "url": "https://people.com/taylor-swift-travis-kelce-all-the-details-fairy-tale-wedding-exclusive-12013138"
+              "url": "https://www.billboard.com/music/chart-beat/taylor-swift-i-knew-it-i-knew-you-number-1-adult-pop-airplay-1236315955/"
             }
           ],
           "accent": "#57d5a4",
@@ -764,7 +764,7 @@
           "rank": 8,
           "title": "Jeff Bezos",
           "subtitle": "Business",
-          "description": "Jeff Bezos is primarily known as a business leader. Recent attention around Amazon and his public profile has kept him in the news.",
+          "description": "Jeff Bezos is primarily known as a business leader. He recently said that laziness and failing to take action are roots of anxiety, adding that stress eases once he begins.",
           "image": "/culture/person-jeff-bezos.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/960px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "alt": "Portrait of Jeff Bezos",
@@ -785,7 +785,7 @@
             },
             {
               "source": "The New York Times",
-              "url": "https://www.industrytap.com/jeff-bezos-companies-full-list-of-amazon-blue-origin-investments-explained/80442"
+              "url": "https://www.biography.com/business-leaders/jeff-bezos"
             }
           ],
           "accent": "#5ab0ff",
@@ -795,7 +795,7 @@
           "rank": 9,
           "title": "Andrew Tate",
           "subtitle": "Business",
-          "description": "Andrew Tate is primarily known as a social media personality. Recent arrest-related coverage has renewed attention around his public legal controversies.",
+          "description": "Andrew Tate is primarily known as an influencer. U.S. authorities arrested him and Tristan Tate in Miami after British authorities announced additional charges and plans to seek extradition.",
           "image": "/culture/person-andrew-tate.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Andrew_Tate_-_James_Tamim_Upload_%28Cropped_Wide_Portrait%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Andrew Tate",
@@ -816,7 +816,7 @@
             },
             {
               "source": "Forbes",
-              "url": "https://nypost.com/2026/07/19/us-news/andrew-tate-arrest-video-shows-moment-he-tried-to-give-phone-to-bodyguard-as-hes-cuffed-by-us-marshals/"
+              "url": "https://www.forbes.com/sites/conormurray/2026/07/27/andrew-tates-miami-arrest-timeline-hearing-on-extradition-process-today/"
             }
           ],
           "accent": "#5ab0ff",
@@ -826,7 +826,7 @@
           "rank": 10,
           "title": "Amelia Dimoldenberg",
           "subtitle": "Media",
-          "description": "Amelia Dimoldenberg is primarily known as a presenter. Her Formula 1 interview series is returning for a new season, bringing her back into current coverage.",
+          "description": "Amelia Dimoldenberg is primarily known as a journalist. She recently revealed which celebrity she would not want to interview again and explained why.",
           "image": "/culture/person-amelia-dimoldenberg.webp",
           "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/Amelia_Dimoldenberg_%28cropped_3%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "alt": "Portrait of Amelia Dimoldenberg",
@@ -847,7 +847,7 @@
             },
             {
               "source": "Formula 1",
-              "url": "https://people.com/meet-amelia-dimoldenberg-chicken-shop-date-8732025"
+              "url": "https://www.formula1.com/en/latest/article/exclusive-amelia-dimoldenberg-reveals-what-its-like-learning-from-f1-drivers-as-passenger-princess-season-2-launches.623S3D46GtgUgfpHtywtI5"
             }
           ],
           "accent": "#ff6b57",
@@ -877,7 +877,7 @@
           "rank": 1,
           "title": "The Odyssey",
           "subtitle": "2026 film",
-          "description": "The Odyssey is an action/adventure/fantasy film. In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway).",
+          "description": "An action-adventure fantasy follows Odysseus, the Greek king of Ithaca, on a long and perilous journey home after the Trojan War. Along the way, he encounters mythical beings while trying to reunite with his wife, Penelope.",
           "image": "/culture/media-odyssey.webp",
           "alt": "The Odyssey 2026 theatrical poster",
           "url": "https://www.imdb.com/title/tt33764258/",
@@ -907,7 +907,7 @@
           "rank": 2,
           "title": "Obsession",
           "subtitle": "2025 film",
-          "description": "Obsession is a horror/romance/thriller film. The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed.",
+          "description": "This horror-romance thriller follows Bear, a music store employee who buys a supernatural toy and wishes for his friend Nikki to fall in love with him. The wish comes true by making Nikki dangerously obsessed with him.",
           "image": "/culture/movie-obsession.webp",
           "alt": "Obsession poster or lead image",
           "url": "https://www.imdb.com/title/tt37287335/",
@@ -937,7 +937,7 @@
           "rank": 3,
           "title": "Project Hail Mary",
           "subtitle": "2026 film",
-          "description": "Project Hail Mary is an adventure/comedy/drama film. The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. As his memory returns, he uncovers a mission to stop a mysterious substance killing Earth's sun, and realizes that an unexpected friendship may be the key.",
+          "description": "An adventure comedy-drama follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. As he recovers his memories, he discovers a mission to stop a mysterious substance from killing Earth's sun, with an unexpected friendship possibly holding the key.",
           "image": "/culture/movie-project-hail-mary.webp",
           "alt": "Project Hail Mary poster or lead image",
           "url": "https://www.imdb.com/title/tt12042730/",
@@ -967,7 +967,7 @@
           "rank": 4,
           "title": "Backrooms",
           "subtitle": "2026 film",
-          "description": "Backrooms is a horror/sci-fi/thriller film. In the film, Clark (Chiwetel Ejiofor), a furniture store owner, and his therapist Mary (Renate Reinsve), discover a dimension of seemingly endless liminal spaces accessed through the store's basement.",
+          "description": "This horror sci-fi thriller follows furniture store owner Clark and his therapist, Mary, after they discover a dimension of seemingly endless liminal spaces accessible through the store's basement. They must confront the implications of finding this strange hidden world.",
           "image": "/culture/movie-backrooms.webp",
           "alt": "Backrooms poster or lead image",
           "url": "https://www.imdb.com/title/tt26657236/",
@@ -997,7 +997,7 @@
           "rank": 5,
           "title": "Alpha",
           "subtitle": "Movie",
-          "description": "Alpha is a film. The film follows a highly trained assassin raised in isolation as a super-soldier by a rogue commander. When she discovers the dark truth about her family and her stolen childhood, she teams up with her long lost sister to take down her creator and his illicit military program.",
+          "description": "The film follows a highly trained assassin raised in isolation as a super-soldier by a rogue commander. After learning the truth about her family and stolen childhood, she joins her long-lost sister to bring down her creator and his illicit military program.",
           "image": "/culture/movie-alpha.webp",
           "alt": "Alpha poster or lead image",
           "url": "https://www.imdb.com/title/tt28363783/",
@@ -1029,7 +1029,7 @@
           "rank": 6,
           "title": "Supergirl",
           "subtitle": "2026 film",
-          "description": "Supergirl is an action/adventure/drama film. Kara Zor-El, aka Supergirl, joins forces with an unlikely companion on an interstellar journey of vengeance and justice when an unexpected adversary strikes too close to home. In the film, Kara embarks on a journey across the galaxy to hunt down an adversary who has harmed her pet dog Krypto.",
+          "description": "An action-adventure drama follows Kara Zor-El, or Supergirl, as she travels across the galaxy with an unlikely companion to pursue an adversary who harmed her pet dog, Krypto. Her mission becomes a journey of vengeance and justice when the threat strikes close to home.",
           "image": "/culture/movie-supergirl.webp",
           "alt": "Supergirl poster or lead image",
           "url": "https://www.imdb.com/title/tt8814476/",
@@ -1059,7 +1059,7 @@
           "rank": 7,
           "title": "Jana Nayagan",
           "subtitle": "Movie",
-          "description": "Jana Nayagan is an action/thriller film. A partial remake of the 2023 Telugu film Bhagavanth Kesari, it follows a former Indian Police Service officer who raises the daughter of a deceased friend and encourages her to overcome childhood trauma and pursue a career in the Indian Army.",
+          "description": "This action thriller follows a former Indian Police Service officer who raises the daughter of a deceased friend. He helps her overcome childhood trauma and pursue a career in the Indian Army.",
           "image": "/culture/movie-jana-nayagan.webp",
           "alt": "Jana Nayagan poster or lead image",
           "url": "https://www.imdb.com/title/tt33379543/",
@@ -1089,7 +1089,7 @@
           "rank": 8,
           "title": "Evil Dead Burn",
           "subtitle": "2026 film",
-          "description": "Evil Dead Burn is a fantasy/horror/mystery film. As one by one they transform into deadites, she comes to discover that the vows she took in life - survive even in death. After the loss of her husband, a woman seeks solace with her in-laws.",
+          "description": "A fantasy horror mystery follows a woman who seeks solace with her in-laws after losing her husband. As the family members transform into deadites one by one, she discovers that vows made in life may demand survival even after death.",
           "image": "/culture/media-evil-dead-burn.webp",
           "alt": "Evil Dead Burn theatrical poster",
           "url": "https://www.imdb.com/title/tt31170389/",
@@ -1119,7 +1119,7 @@
           "rank": 9,
           "title": "Masters of the Universe",
           "subtitle": "2026 film",
-          "description": "Masters of the Universe is an action/adventure/fantasy film. Prince Adam discovers that the strange memories shaping his life are real when the lost Sword of Power resurfaces, forcing him to return to Eternia and challenge the tyrant who shattered his family and kingdom.",
+          "description": "An action-adventure fantasy follows Prince Adam after the lost Sword of Power resurfaces and reveals that the strange memories shaping his life are real. He returns to Eternia to challenge the tyrant who destroyed his family and kingdom.",
           "image": "/culture/movie-masters-of-the-universe.webp",
           "alt": "Masters of the Universe poster or lead image",
           "url": "https://www.imdb.com/title/tt0427340/",
@@ -1149,7 +1149,7 @@
           "rank": 10,
           "title": "Toy Story 5",
           "subtitle": "2026 film",
-          "description": "Toy Story 5 is an animation/adventure/comedy film. Set two years after the fourth film, it follows Jessie as she, Woody, Buzz Lightyear and the other toys deal with the presence of Lilypad, a tablet and the new favorite plaything of Bonnie. While Hanks referred to Toy Story 4 as the final film in the franchise in 2019, the possibility of a fifth film had not been ruled out.",
+          "description": "This animated adventure comedy follows Jessie, Woody, Buzz Lightyear and the other toys as they adjust to Lilypad, a tablet that has become Bonnie's favorite plaything. Set two years after the previous story, the film centers on the toys' struggle with this new presence in playtime.",
           "image": "/culture/media-toy-story.webp",
           "alt": "Toy Story 5 theatrical poster",
           "url": "https://www.imdb.com/title/tt29355505/",
@@ -1199,7 +1199,7 @@
           "rank": 1,
           "title": "Yesteryear",
           "subtitle": "Goodreads · Caro Claire Burke",
-          "description": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and her followers are sick with envy. Then, one morning, Natalie wakes up in a strange, horrible version of reality.",
+          "description": "Natalie Heller Mills, a traditional-lifestyle social media influencer, wakes up in the 19th century. She must learn to survive without modern society.",
           "image": "/culture/book-yesteryear.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1753932705i/238226942.jpg",
           "alt": "Cover of Yesteryear by Caro Claire Burke",
@@ -1209,7 +1209,7 @@
             "label": "Goodreads monthly readers",
             "value": "127,483"
           },
-          "rating": "3.90",
+          "rating": "3.89",
           "ratingLabel": "Goodreads",
           "evidence": [
             {
@@ -1263,7 +1263,7 @@
           "rank": 3,
           "title": "Theo of Golden",
           "subtitle": "Goodreads · Allen Levi",
-          "description": "One spring morning, a stranger arrives in the small southern city of Golden. No one knows where he has come from…or why… His name is Theo. And he asks a lot more questions than he answers.",
+          "description": "One spring morning, a mysterious stranger named Theo arrives in the small Southern city of Golden. No one knows where he came from or why he is there, while his many questions leave the community searching for answers.",
           "image": "/culture/book-theo-of-golden.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761744192i/242376245.jpg",
           "alt": "Cover of Theo of Golden by Allen Levi",
@@ -1285,8 +1285,8 @@
               "url": "https://en.wikipedia.org/wiki/Theo_of_Golden"
             },
             {
-              "source": "Goodreads book page",
-              "url": "https://www.goodreads.com/book/show/242376245-theo-of-golden"
+              "source": "Deadline",
+              "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5NZGRPay1BbjdlajVNcDZpOGMtLU5fU3RpYW8zLThNVnpHNXB1cW9RYW05S0psV3lYSk45XzVkSFlkTUNIalBndTNGUnRLVXBBN0h6RU1aSjdEQ0d6dE1YZEhCTEVzbmF1VzVUYk1SWDc0RklMaTJTd1ZvTQ?oc=5"
             }
           ],
           "accent": "#57d5a4"
@@ -1295,7 +1295,7 @@
           "rank": 4,
           "title": "Mad Mabel",
           "subtitle": "Goodreads · Sally Hepworth",
-          "description": "Elsie Mabel Fitzpatrick is eighty-one years old. Because when it comes to murder, no one ever suspects little girls or old ladies. She's lived on her idyllic street, Kenny Lane, for sixty years--longer than anyone else.",
+          "description": "Eighty-one-year-old Elsie Mabel Fitzpatrick has lived on Kenny Lane for sixty years. With murder at the center of the story, her age and unassuming appearance may make her an unlikely suspect.",
           "image": "/culture/book-mad-mabel.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775070793i/231127044.jpg",
           "alt": "Cover of Mad Mabel by Sally Hepworth",
@@ -1327,7 +1327,7 @@
           "rank": 5,
           "title": "The Correspondent",
           "subtitle": "Goodreads · Virginia Evans",
-          "description": "But when letters from someone in her past force her to examine one of the most painful periods of her life, she realizes that the letter she has been writing over the years needs to be read and that she cannot move forward until she finds it in her heart to offer forgiveness.",
+          "description": "Letters from a woman’s past force her to confront one of the most painful periods of her life. She must find a letter she has written over the years and offer forgiveness before she can move forward.",
           "image": "/culture/book-the-correspondent.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1735235942i/223001257.jpg",
           "alt": "Cover of The Correspondent by Virginia Evans",
@@ -1361,7 +1361,7 @@
           "rank": 6,
           "title": "The Divorce",
           "subtitle": "Goodreads · Freida McFadden",
-          "description": "What is a happily ever after really worth? They fall in love, get married, buy a dream house, start a family… Then―he kicks her out, hires the city’s best divorce lawyers, drains their accounts, and takes up with a 20-something. Naomi was living the quintessential love story.",
+          "description": "Naomi believes she is living a quintessential love story until her husband expels her from their dream life, hires top divorce lawyers, drains their accounts, and begins seeing a younger woman. She must face the collapse of her marriage and security.",
           "image": "/culture/book-the-divorce.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769708783i/244403162.jpg",
           "alt": "Cover of The Divorce by Freida McFadden",
@@ -1425,7 +1425,7 @@
           "rank": 8,
           "title": "Dungeon Crawler Carl (Dungeon Crawler Carl, #1)",
           "subtitle": "Goodreads · Matt Dinniman",
-          "description": "A sadistic game show unlike anything in the universe: a dungeon crawl where survival depends on killing your prey in the most entertaining way possible. But once you're in, you can't get out. In a flash, every human-erected construction on Earth—from Buckingham Palace to the tiniest of sheds—collapses in a heap, sinking into the ground.",
+          "description": "After every human-built structure on Earth collapses underground, survivors are forced into a sadistic intergalactic game show. Carl must crawl through a deadly dungeon, killing for survival while entertaining an audience he cannot escape.",
           "image": "/culture/book-dungeon-crawler-carl-dungeon-crawler-carl-1.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1715780755i/211721806.jpg",
           "alt": "Cover of Dungeon Crawler Carl (Dungeon Crawler Carl, #1) by Matt Dinniman",
@@ -1457,7 +1457,7 @@
           "rank": 9,
           "title": "Our Perfect Storm",
           "subtitle": "Goodreads · Carley Fortune",
-          "description": "Frankie and George have been best friends since they were eight years old. It’s the eve of Frankie’s wedding weekend, and she doesn’t know where they stand or even if George will show up as her best man. Both passionate, impulsive, and headstrong—they’ve always clashed. and come back together.",
+          "description": "On the eve of Frankie’s wedding weekend, she does not know where she stands with George, her childhood best friend, or whether he will appear as her best man. Their passionate, impulsive friendship has always swung between conflict and reunion.",
           "image": "/culture/book-our-perfect-storm.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756350403i/239703816.jpg",
           "alt": "Cover of Our Perfect Storm by Carley Fortune",
@@ -1489,7 +1489,7 @@
           "rank": 10,
           "title": "Dolly All the Time",
           "subtitle": "Goodreads · Annabel Monaghan",
-          "description": "If they start by pretending, can they end with something real? Not when her mom left when she was twelve, and not at thirty-nine when she moves with her son back to Whitfield, Rhode Island, for the summer to keep her dad and brother from losing the family home. Dolly Brick has never met a problem she couldn’t solve.",
+          "description": "At thirty-nine, Dolly Brick returns to Whitfield, Rhode Island, with her son for the summer after her mother left years earlier. She tries to keep her father and brother from losing the family home while confronting a situation that may begin as pretense but could become real.",
           "image": "/culture/book-dolly-all-the-time.webp",
           "imageSource": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1757041312i/240687665.jpg",
           "alt": "Cover of Dolly All the Time by Annabel Monaghan",
@@ -1541,7 +1541,7 @@
           "rank": 1,
           "title": "Choosin' Texas",
           "subtitle": "Ella Langley",
-          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘Choosin’ Texas’.",
+          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025.",
           "image": "/culture/song-choosin-texas-ella-langley.webp",
           "alt": "Choosin' Texas artwork by Ella Langley",
           "url": "https://open.spotify.com/track/65DbTqJKhbwqYbZ1Okr0rc",
@@ -1558,10 +1558,6 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
-            },
-            {
-              "source": "Fox News via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPYk1HNFVQTzI0UDVBVGItLUx0Z1V1clNmUFo4bFVFSGVUeFNGZV9fdE9KbVlQdWVMTlVJYjBMLUI5ZWpoNFRZMGhIT1RPMEVWUGRMN2hxRXk3R0NZdmtTNVNSUzZidTU1UklfV3ozX3JkdnZFN1BhMVVfSUJIbnlrSnM0T0V6dF9YSkNCZmR1RjVFd3A2Q0s5NnA0MmQzMjY0ZHhHV1Q3V0hQeDBjTEtJSWZRbWh0ZmpWd2tYUTVVRHFNZ2pkVTJHdHBHZlFlNTJpeWpxSVZ5OTNIZ9IB3wFBVV95cUxQdEtmblh6UzMtdDJSbDYxbm91TC15WHhHR1VHOTNQVjN2b0pzWDhpWXlIeER0TTJqTTZBaDFZTmE5ZnJmQTFTT3FOSi05N0lIaVlGUDNfQXZMSWtrNnI0N0V5Y3hndXRia3otcmN5NmFNU2JQUmVoTnRBYjc4UEZLbmV0aXlJNWxSVFdMd0RzaUhmNFp0ZEVwMkpHblBHX25MVDVRejRZSm50SGtOcjdUWFUxYUFMRjJCZ014end4OTdiYkZ3ckw1a3R0ZG9NRFhVZF9aejdyU0JqNlEyZEJ3?oc=5"
             }
           ],
           "accent": "#ffc857",
@@ -1863,13 +1859,13 @@
           "rank": 1,
           "title": "Unicorn Frappuccino",
           "subtitle": "Product",
-          "description": "Starbucks' Unicorn Frappuccino is a blended drink. The color-changing drink is returning for a limited-time weekend after renewed interest in its nostalgic 2017 launch.",
+          "description": "The Unicorn Frappuccino is a blended Starbucks drink. Its return became a major buying trend, with more than two million beverages sold over one weekend.",
           "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
-          "imageSource": "https://www.cincinnati.com/gcdn/authoring/authoring-images/2026/08/14/NREC/91300639007-starbucks-unicorn-frappuccino.png?crop=1999,1125,x0,y437&width=1999&height=1125&format=pjpg&auto=webp",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/",
+          "imageSource": "https://m.media-amazon.com/images/I/81dsizrSRKL._AC_UL320_.jpg",
+          "imageSourceKind": "commerce",
+          "imageSourcePageUrl": "https://www.amazon.com/dp/B0GSKYFKZN",
           "alt": "Starbucks' Unicorn Frappuccino product listing image",
-          "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank",
+          "url": "https://www.amazon.com/dp/B0GSKYFKZN",
           "source": "Amazon listing",
           "metric": {
             "label": "Independent viral sources",
@@ -1878,88 +1874,24 @@
           "evidence": [
             {
               "source": "Amazon listing",
-              "url": "https://www.amazon.com/s?k=Starbucks+Unicorn+Frappuccino&s=exact-aware-popularity-rank"
+              "url": "https://www.amazon.com/dp/B0GSKYFKZN"
             },
             {
               "source": "Starbucks",
               "url": "https://about.starbucks.com/press/2026/starbucks-unicorn-frappuccino-return-drives-record-weekend-with-more-than-2-million-beverages-sold/"
             },
             {
-              "source": "sekbernews.id",
-              "url": "https://www.usatoday.com/story/money/food/2026/06/02/starbucks-unicorn-frappuccino-returning-summer-2026/90371779007/"
+              "source": "cincinnati.com",
+              "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino-viral-drink-ohio-us/91300627007/"
             }
           ],
           "accent": "#ffc857"
         },
         {
           "rank": 2,
-          "title": "Samsung Galaxy Z Fold 8",
-          "subtitle": "Product",
-          "description": "Samsung Galaxy Z Fold 8 is a foldable smartphone. Strong pre-order demand for Samsung's next foldable has made it a recent focus in the phone market.",
-          "image": "/culture/product-samsung-galaxy-z-fold-8.webp",
-          "imageSource": "https://img.biggo.com/1_YCH8aXtAEizaa_lptwUkF9RlcfmvjTcyQkunZCuqc/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYWdlL2FpX2dlbmVyYXRlZC8yMDI2LTA4Lzk1MjE3YWE0LTM4ODctNGVmZi04NDIxLTIxYjBiYzdlZDQ1ZF8xNzg2NDMzNTYxX2RlZmF1bHQuanBn.jpg",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://finance.biggo.com/news/95217aa4-3887-4eff-8421-21b0bc7ed45d",
-          "alt": "Samsung Galaxy Z Fold 8 product listing image",
-          "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank",
-          "source": "Amazon listing",
-          "metric": {
-            "label": "Independent viral sources",
-            "value": "2 sources"
-          },
-          "evidence": [
-            {
-              "source": "Amazon listing",
-              "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+8&s=exact-aware-popularity-rank"
-            },
-            {
-              "source": "Khaleej Times",
-              "url": "https://www.khaleejtimes.com/business/tech/galaxy-z-fold8-demand-helps-samsung-set-an-all-time-sales-record"
-            },
-            {
-              "source": "Samsung Magazine",
-              "url": "https://samsungmagazine.eu/en/2026/08/18/prodeje-noveho-galaxy-z-fold8-trhaji-rekordy-samsung-je-i-tak-v-tragicke-ztrate/"
-            }
-          ],
-          "accent": "#9b8cff"
-        },
-        {
-          "rank": 3,
-          "title": "Trader Joe's Mini Tote Bag",
-          "subtitle": "Product",
-          "description": "The Trader Joe’s Mini Tote Bag is a blue-striped mini tote. It drew renewed attention after the popular canvas tote returned for a limited-time restock, sending shoppers queuing for it.",
-          "image": "/culture/product-trader-joe-s-mini-tote-bag.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/71yPwAIlSUL._AC_UL320_.jpg",
-          "imageSourceKind": "commerce",
-          "imageSourcePageUrl": "https://www.amazon.com/dp/B0H6NDDD55",
-          "alt": "Trader Joe's Mini Tote Bag product listing image",
-          "url": "https://www.amazon.com/dp/B0H6NDDD55",
-          "source": "Amazon listing",
-          "metric": {
-            "label": "Independent viral sources",
-            "value": "2 sources"
-          },
-          "evidence": [
-            {
-              "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0H6NDDD55"
-            },
-            {
-              "source": "Lohud",
-              "url": "https://www.lohud.com/story/grocery/stores/2026/06/08/trader-joes-striped-mini-tote-bags-june-2026/90454373007/"
-            },
-            {
-              "source": "eciks.org",
-              "url": "https://eciks.org/9488-90882-trader-joes-mini-tote-june-17-release"
-            }
-          ],
-          "accent": "#57d5a4"
-        },
-        {
-          "rank": 4,
           "title": "Mystery Squishy Dumplings",
           "subtitle": "Product",
-          "description": "Mystery Squishy Dumplings are two-pack, slow-rise bread squishy fidget toys for kids and adults. Their social-media-fueled popularity is expanding through a global lifestyle and character licensing program.",
+          "description": "Mystery Squishy Dumplings are collectible toys meant for handling and collecting. Their viral toy craze has now expanded into a broader lifestyle brand.",
           "image": "/culture/product-mystery-squishy-dumplings.webp",
           "imageSource": "https://m.media-amazon.com/images/I/71cI1fqZqQL._AC_UL320_.jpg",
           "imageSourceKind": "commerce",
@@ -1977,50 +1909,148 @@
               "url": "https://www.amazon.com/dp/B0GXDRHWG3"
             },
             {
-              "source": "Business Wire",
-              "url": "https://www.businesswire.com/news/home/20260804845782/en/From-Viral-Toy-Craze-to-Lifestyle-Brand-Earthbound-Brands-to-Expand-Mystery-Squishy-Dumplings-by-RMS"
+              "source": "Bluefield Daily Telegraph",
+              "url": "https://www.bdtonline.com/region/from-viral-toy-craze-to-lifestyle-brand-earthbound-brands-to-expand-mystery-squishy-dumplings-by/article_a7a693fb-4e6e-52e8-bd0b-4c3e312c42ca.html"
             },
             {
-              "source": "Yahoo Finance Singapore",
-              "url": "https://sg.finance.yahoo.com/news/viral-toy-craze-lifestyle-brand-171500666.html"
+              "source": "Business Wire",
+              "url": "https://www.businesswire.com/news/home/20260804845782/en/From-Viral-Toy-Craze-to-Lifestyle-Brand-Earthbound-Brands-to-Expand-Mystery-Squishy-Dumplings-by-RMS"
             }
           ],
           "accent": "#ff6b57"
         },
         {
-          "rank": 5,
-          "title": "NeeDoh Toy",
+          "rank": 3,
+          "title": "Dasein Women's Tote Bag",
           "subtitle": "Product",
-          "description": "NeeDoh Toy is a collectible toy. NeeDoh’s recent craze has stores struggling to keep up with demand for the tactile, squishy toys.",
-          "image": "/culture/product-needoh-toy.webp",
-          "imageSource": "https://m.media-amazon.com/images/I/7161JNgvkfL._AC_UL320_.jpg",
+          "description": "Dasein Women's Tote Bag is a fashion item. Recent coverage places it among restocked the viral Wirkin bag—shop the $60 designer dupe.",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/71j2F8RIcpS._AC_UL320_.jpg",
           "imageSourceKind": "commerce",
-          "imageSourcePageUrl": "https://www.amazon.com/dp/B0B4HVVN8B",
-          "alt": "NeeDoh Toy product listing image",
-          "url": "https://www.amazon.com/dp/B0B4HVVN8B",
+          "imageSourcePageUrl": "https://www.amazon.com/dp/B0F9P1L84F",
+          "alt": "Dasein Women's Tote Bag product listing image",
+          "url": "https://www.amazon.com/dp/B0F9P1L84F",
           "source": "Amazon listing",
           "metric": {
             "label": "Independent viral sources",
-            "value": "4 sources"
+            "value": "2 sources"
           },
           "evidence": [
             {
               "source": "Amazon listing",
-              "url": "https://www.amazon.com/dp/B0B4HVVN8B"
+              "url": "https://www.amazon.com/dp/B0F9P1L84F"
+            },
+            {
+              "source": "shopping.yahoo.com",
+              "url": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html"
+            },
+            {
+              "source": "USA Today",
+              "url": "https://www.usatoday.com/story/shopping/trending/viral/2026/08/14/amazon-restocked-wirkin-bag-shoppers-love/91303543007/"
+            }
+          ],
+          "accent": "#57d5a4"
+        },
+        {
+          "rank": 4,
+          "title": "Galaxy Z Fold 8",
+          "subtitle": "Product",
+          "description": "The Galaxy Z Fold 8 is a foldable smartphone used for everyday mobile computing and communication. Its launch generated record interest in the United States.",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "imageSource": "https://m.media-amazon.com/images/I/51PFW8uARvL._AC_UY218_.jpg",
+          "imageSourceKind": "commerce",
+          "imageSourcePageUrl": "https://www.amazon.com/dp/B0H1265SZQ",
+          "alt": "Galaxy Z Fold 8 product listing image",
+          "url": "https://www.amazon.com/dp/B0H1265SZQ",
+          "source": "Amazon listing",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon listing",
+              "url": "https://www.amazon.com/dp/B0H1265SZQ"
+            },
+            {
+              "source": "Khaleej Times",
+              "url": "https://www.khaleejtimes.com/business/tech/galaxy-z-fold8-demand-helps-samsung-set-an-all-time-sales-record"
+            },
+            {
+              "source": "Samsung Magazine",
+              "url": "https://samsungmagazine.eu/en/2026/08/18/prodeje-noveho-galaxy-z-fold8-trhaji-rekordy-samsung-je-i-tak-v-tragicke-ztrate/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 5,
+          "title": "NeeDoh Toy",
+          "subtitle": "Product",
+          "description": "NeeDoh Toy is a collectible toy. NeeDoh craze hits San Mateo County in force: Toy stores are struggling to keep up with demand for the tactile, squishy toys.",
+          "image": "/culture/product-needoh-toy.webp",
+          "imageSource": "https://www.hola.com/us/horizon/landscape/df14c5b81ba5-gettyimages-2282808080.jpg?im=Resize=(1200)",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.hola.com/us/lifestyle/20260819918995/needoh-viral-squishy-craze-problem/",
+          "alt": "NeeDoh Toy product listing image",
+          "url": "https://www.amazon.com/s?k=NeeDoh+toy&s=exact-aware-popularity-rank",
+          "source": "Amazon product search",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon product search",
+              "url": "https://www.amazon.com/s?k=NeeDoh+toy&s=exact-aware-popularity-rank"
             },
             {
               "source": "San Mateo Daily Journal",
               "url": "https://www.smdailyjournal.com/news/local/needoh-craze-hits-san-mateo-county-in-force-toy-stores-are-struggling-to-keep-up/article_8fa97e45-d79f-4eec-be70-ce86555731a5.html"
             },
             {
-              "source": "GamesRadar+",
-              "url": "https://www.gamesradar.com/toys-collectibles/where-to-buy-needoh-the-viral-toy-sensation/"
+              "source": "HOLA",
+              "url": "https://www.hola.com/us/lifestyle/20260819918995/needoh-viral-squishy-craze-problem/"
             }
           ],
           "accent": "#ffc857"
         }
       ],
-      "moreItems": []
+      "moreItems": [
+        {
+          "rank": 6,
+          "title": "Restocked Wirkin Bag",
+          "subtitle": "Product",
+          "description": "The Restocked Wirkin Bag is a fashion bag used to carry personal belongings. Its Amazon restock renewed interest in the viral $60 designer-dupe trend.",
+          "image": "/culture/product-restocked-wirkin-bag.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/328af9b593aaba96ded27ff3613fec1384d97eb7383622760eb27f61c3f22f7f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fusa_today_affiliate_609%2F288c8afaf34ff96801a87151c4cf9080.png",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html",
+          "alt": "Restocked Wirkin Bag product listing image",
+          "url": "https://www.amazon.com/s?k=restocked+Wirkin+bag&s=exact-aware-popularity-rank",
+          "source": "Amazon product search",
+          "metric": {
+            "label": "Independent viral sources",
+            "value": "2 sources"
+          },
+          "evidence": [
+            {
+              "source": "Amazon product search",
+              "url": "https://www.amazon.com/s?k=restocked+Wirkin+bag&s=exact-aware-popularity-rank"
+            },
+            {
+              "source": "shopping.yahoo.com",
+              "url": "https://shopping.yahoo.com/style/accessories/articles/amazon-restocked-viral-wirkin-bag-172959740.html"
+            },
+            {
+              "source": "USA Today",
+              "url": "https://www.usatoday.com/story/shopping/trending/viral/2026/08/14/amazon-restocked-wirkin-bag-shoppers-love/91303543007/"
+            }
+          ],
+          "accent": "#ffc857"
+        }
+      ],
+      "moreLabel": "Show ranks 6–6"
     },
     {
       "id": "news",
@@ -2041,16 +2071,44 @@
       "items": [
         {
           "rank": 1,
-          "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "subtitle": "News",
-          "description": "Hurricane Lala passed Hawaiʻi's Big Island without a direct hit, but the storm still drove intense attention as residents tracked flooding, wind, and travel impacts.",
-          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
-          "imageSource": "https://www.the-world-now.com/theworldnowheader.png",
+          "title": "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "subtitle": "News · Aug 16, 2026",
+          "description": "Islam Makhachev defeated Ian Machado Garry for the welterweight title, extending his UFC winning streak to 17 victories. The result is notable for setting a new UFC win streak record.",
+          "image": "/culture/news-ufc-330-makhachev-secures-record-setting-win-against-machado-gar.webp",
+          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/AFP__20260816__2290665803__v1__HighRes__Ufc330MakhachevVMachadoGarry-1786861640_0d68f3-1786863820.jpg?resize=1200%2C630&quality=80",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.the-world-now.com/hurricane-tracker",
-          "alt": "The World Now - Real-Time Global Events",
-          "url": "https://www.the-world-now.com/hurricane-tracker",
+          "imageSourcePageUrl": "https://www.aljazeera.com/sports/2026/8/16/ufc-330-makhachev-secures-record-setting-win-against-machado-garry",
+          "alt": "Islam Makhachev wins record 17th straight fight at UFC 330",
+          "url": "https://www.aljazeera.com/sports/2026/8/16/ufc-330-makhachev-secures-record-setting-win-against-machado-garry",
           "source": "Al Jazeera",
+          "metric": {
+            "label": "Google search volume",
+            "value": "2M+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=ufc+330"
+            },
+            {
+              "source": "Al Jazeera via Google News",
+              "url": "https://www.aljazeera.com/sports/2026/8/16/ufc-330-makhachev-secures-record-setting-win-against-machado-garry"
+            }
+          ],
+          "accent": "#ffc857"
+        },
+        {
+          "rank": 2,
+          "title": "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "subtitle": "News · Aug 17, 2026",
+          "description": "Keto-focused ice cream company Rebel Creamery filed for Chapter 11 bankruptcy after losing a trademark lawsuit brought by another ice cream company. The filing marks a major financial setback for the brand.",
+          "image": "/culture/news-ice-cream-company-rebel-filed-for-chapter-11-bankruptcy.webp",
+          "imageSource": "https://www.lansingstatejournal.com/gcdn/authoring/authoring-images/2026/08/17/PLSJ/91334761007-screenshot-rebel-ice-cream.jpg?crop=776,435,x6,y0&width=776&height=435&format=pjpg&auto=webp",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.lansingstatejournal.com/story/news/local/michigan/2026/08/17/rebel-creamery-keto-ice-cream-chapter-11-bankruptcy-van-leeuwen-trademark-lawsuit/91334447007/",
+          "alt": "Lead image from Lansing State Journal's coverage of Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "url": "https://www.lansingstatejournal.com/story/news/local/michigan/2026/08/17/rebel-creamery-keto-ice-cream-chapter-11-bankruptcy-van-leeuwen-trademark-lawsuit/91334447007/",
+          "source": "Lansing State Journal",
           "metric": {
             "label": "Google search volume",
             "value": "500K+"
@@ -2058,20 +2116,52 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Hurricane+Lala+Passes+Big+Island%3A+Hawai%CA%BBi+Spared+From+Direct+Hit."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=rebel+creamery+ice+cream+lawsuit"
             },
             {
-              "source": "Al Jazeera via Google News",
-              "url": "https://www.the-world-now.com/hurricane-tracker"
+              "source": "Lansing State Journal via Google News",
+              "url": "https://www.lansingstatejournal.com/story/news/local/michigan/2026/08/17/rebel-creamery-keto-ice-cream-chapter-11-bankruptcy-van-leeuwen-trademark-lawsuit/91334447007/"
+            }
+          ],
+          "accent": "#9b8cff"
+        },
+        {
+          "rank": 3,
+          "title": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "Hurricane Lala passed the Big Island without making a direct hit, while becoming the third-wettest tropical cyclone on record to affect Hawaii. The storm still had significant effects across the state.",
+          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
+          "imageSource": "https://www.civilbeat.org/wp-content/uploads/2026/08/9511.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
+          "alt": "Lead image from Honolulu Civil Beat's coverage of Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/",
+          "source": "Honolulu Civil Beat",
+          "metric": {
+            "label": "Google search volume",
+            "value": "500K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=hurricane+lala"
+            },
+            {
+              "source": "Honolulu Civil Beat via Google News",
+              "url": "https://www.civilbeat.org/2026/08/hurricane-lala-brings-rain-and-strong-winds-thousands-on-hawaii-island-lose-power/"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/Hurricane_Lala"
             }
           ],
           "accent": "#ffc857"
         },
         {
-          "rank": 2,
+          "rank": 4,
           "title": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "subtitle": "News",
-          "description": "The FDA classified a July egg recall linked to salmonella as a Class I risk, the agency's highest level, bringing renewed attention to the affected products and consumer guidance.",
+          "subtitle": "News · Aug 14, 2026",
+          "description": "The FDA assigned its highest severity classification to a July egg recall linked to salmonella risk. The designation underscores the seriousness of the recall and the need to identify affected products.",
           "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
           "imageSource": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/rockcms/2026-06/eggs-daily-healthy-as06252026-df99dd.jpg",
           "imageSourceKind": "article",
@@ -2086,7 +2176,7 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=Egg+Recall+Over+Salmonella+Deemed+Class+I+by+the+FDA%3A+See+the+Full+List+of+Affected+Products."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=egg+recall"
             },
             {
               "source": "TODAY.com via Google News",
@@ -2096,10 +2186,10 @@
           "accent": "#ffc857"
         },
         {
-          "rank": 3,
+          "rank": 5,
           "title": "City to close non-essential offices and services Monday following Hurricane Lala.",
           "subtitle": "News",
-          "description": "Honolulu closed non-essential offices and services after Hurricane Lala, reflecting the storm's continuing effects on public operations and residents.",
+          "description": "Honolulu closed non-essential offices and services after Hurricane Lala. The shutdown reflects the storm’s continuing disruption to public operations and residents.",
           "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
           "imageSource": "https://www.honolulu.gov/mayor/wp-content/uploads/sites/12/2026/08/LALA-PRESSER-SLIDES-4-1.jpg",
           "imageSourceKind": "article",
@@ -2122,12 +2212,14 @@
             }
           ],
           "accent": "#ffc857"
-        },
+        }
+      ],
+      "moreItems": [
         {
-          "rank": 4,
+          "rank": 6,
           "title": "Hurricane Lala leaves Big Island residents in Hawaii hunkered down.",
           "subtitle": "News",
-          "description": "Hurricane Lala brought threats of flooding, mudslides, heavy rain and strong winds to Hawaii’s Big Island, prompting residents to stay off roads, protect their homes and hunker down.",
+          "description": "Hurricane Lala brought heavy rain, strong winds, flooding and mudslide threats to Hawaii’s Big Island. Residents stayed off roads, secured their homes and hunkered down as conditions worsened.",
           "image": "/culture/news-hurricane-lala-leaves-big-island-residents-in-hawaii-hunkered-do.webp",
           "imageSource": "https://cdn.abcotvs.com/dip/images/19688786_081526-kgo-hurricane-lala-darryl-honda-split-img.jpg?w=1600",
           "imageSourceKind": "article",
@@ -2152,79 +2244,17 @@
           "accent": "#9b8cff"
         },
         {
-          "rank": 5,
-          "title": "Released Nancy Guthrie ransom notes generated 'slight increase' in tips: Sheriff's department.",
-          "subtitle": "News · Aug 7, 2026",
-          "description": "The release of two credible ransom notes sent to Nancy Guthrie's family produced a slight increase in tips, but investigators said none has yet broken open the abduction case.",
-          "image": "/culture/news-released-nancy-guthrie-ransom-notes-generated-slight-increase-in.webp",
-          "imageSource": "https://cdn.abcotvs.com/dip/images/19641130_AP26212715366773.jpg?w=1600",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/",
-          "alt": "Lead image from ABC7 New York's coverage of Released Nancy Guthrie ransom notes generated 'slight increase' in tips: Sheriff's department.",
-          "url": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/",
-          "source": "ABC7 New York",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=pima+county+sheriff%27s+department"
-            },
-            {
-              "source": "ABC7 New York via Google News",
-              "url": "https://abc7ny.com/story/released-nancy-guthrie-ransom-notes-generated-slight-increase-tips-sheriffs-department/19641076/"
-            }
-          ],
-          "accent": "#ffc857"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
-          "title": "Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
-          "subtitle": "News · Aug 19, 2026",
-          "description": "Byron Donalds and David Jolly advanced from Florida's primary contests, setting up a governor's race that has drawn renewed national attention.",
-          "image": "/culture/news-byron-donalds-david-jolly-to-face-off-in-florida-governor-s-race.webp",
-          "imageSource": "https://images.foxtv.com/static.fox13news.com/www.fox13news.com/content/uploads/2026/04/1200/630/collins-and-donalds.jpg?ve=1&tl=1",
-          "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.fox13news.com/news/florida-governors-race-jay-collins-claims-byron-donalds-would-lose-democrat-david-jolly",
-          "alt": "Lead image from CBS News's coverage of Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
-          "url": "https://www.fox13news.com/news/florida-governors-race-jay-collins-claims-byron-donalds-would-lose-democrat-david-jolly",
-          "source": "CBS News",
-          "metric": {
-            "label": "Google search volume",
-            "value": "200K+"
-          },
-          "evidence": [
-            {
-              "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=florida+governor+race"
-            },
-            {
-              "source": "CBS News via Google News",
-              "url": "https://www.fox13news.com/news/florida-governors-race-jay-collins-claims-byron-donalds-would-lose-democrat-david-jolly"
-            },
-            {
-              "source": "Wikipedia topic context",
-              "url": "https://en.wikipedia.org/wiki/David_Jolly"
-            }
-          ],
-          "accent": "#ff6b57"
-        },
-        {
           "rank": 7,
-          "title": "Flock Announces Privacy Updates to Its Car-Tracking Cameras.",
-          "subtitle": "News · Aug 13, 2026",
-          "description": "Flock Safety announced updates to its automated license-plate cameras as scrutiny grows over their broad surveillance reach and the limits of their privacy protections.",
-          "image": "/culture/news-flock-announces-privacy-updates-to-its-car-tracking-cameras.webp",
-          "imageSource": "https://static01.nyt.com/images/2026/08/07/multimedia/07nat-flock-safety-TOP-jlhp/07nat-flock-safety-TOP-jlhp-facebookJumbo.jpg",
+          "title": "Moderna Stock Explodes Over 100% After Cancer Vaccine Breakthrough.",
+          "subtitle": "News · Aug 19, 2026",
+          "description": "The above button links to Coinbase. Yahoo Finance is not a broker-dealer or investment adviser and does not offer securities or cryptocurrencies for sale or facilitate trading. Coinbase pays us for certain activity generated through this link. Prices displayed are informational. Moderna Stock Explodes Over 100% After Cancer Vaccine Breakthrough.",
+          "image": "/culture/news-moderna-stock-explodes-over-100-after-cancer-vaccine-breakthroug.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/CB70FAFE53970351934BD055F554164991B080E9D862AD9E5E245A49FA993553/subgraphmysterio/resizefill_w1200_h675;quality_80;format_webp/https:%2F%2Fmedia.zenfs.com%2Fen%2Fbeincrypto_us_662%2F35988ae8cbc31e6f09b1aa3265662fd1.jpg",
           "imageSourceKind": "article",
-          "imageSourcePageUrl": "https://www.nytimes.com/2026/08/10/us/flock-cameras-can-track-every-car-in-america-police-love-them-citizens-dont.html",
-          "alt": "A Flock Safety license plate reader in Addison, Texas — one of 120,000 cameras the country has deployed around the country.",
-          "url": "https://www.nytimes.com/2026/08/10/us/flock-cameras-can-track-every-car-in-america-police-love-them-citizens-dont.html",
-          "source": "The New York Times",
+          "imageSourcePageUrl": "https://finance.yahoo.com/markets/stocks/articles/moderna-stock-explodes-over-100-140939843.html",
+          "alt": "Lead image from Yahoo Finance's coverage of Moderna Stock Explodes Over 100% After Cancer Vaccine Breakthrough.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/moderna-stock-explodes-over-100-140939843.html",
+          "source": "Yahoo Finance",
           "metric": {
             "label": "Google search volume",
             "value": "200K+"
@@ -2232,20 +2262,20 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=flock+cameras"
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=moderna+stock"
             },
             {
-              "source": "The New York Times via Google News",
-              "url": "https://www.nytimes.com/2026/08/10/us/flock-cameras-can-track-every-car-in-america-police-love-them-citizens-dont.html"
+              "source": "Yahoo Finance via Google News",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/moderna-stock-explodes-over-100-140939843.html"
             }
           ],
-          "accent": "#5ab0ff"
+          "accent": "#9b8cff"
         },
         {
           "rank": 8,
           "title": "'Frozen 3' First Look Teases Anna's Wedding, New Villain & More.",
-          "subtitle": "News",
-          "description": "A first look at Frozen 3 teased Anna's wedding and a new villain, renewing attention ahead of the animated film's release.",
+          "subtitle": "News · Aug 15, 2026",
+          "description": "A preview of Frozen 3 revealed that the story may include Anna’s wedding, along with a new villain and other developments. The footage offered audiences an early look at the upcoming sequel.",
           "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
           "imageSource": "https://deadline.com/wp-content/uploads/2019/12/frozen-dos-e1575648103863.jpg?w=1024",
           "imageSourceKind": "article",
@@ -2260,7 +2290,7 @@
           "evidence": [
             {
               "source": "Google Trending Now",
-              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=%27Frozen+3%27+First+Look+Teases+Anna%27s+Wedding%2C+New+Villain+%26+More."
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=frozen+3"
             },
             {
               "source": "Deadline via Google News",
@@ -2268,73 +2298,133 @@
             }
           ],
           "accent": "#57d5a4"
+        },
+        {
+          "rank": 9,
+          "title": "New GTA 6 Gameplay Features Leak Ahead of Netflix Stream.",
+          "subtitle": "News · Aug 11, 2026",
+          "description": "Reported gameplay details for GTA 6 surfaced ahead of Rockstar’s extended-look Netflix stream scheduled for August 27. The leaks have drawn attention to what the upcoming presentation may reveal.",
+          "image": "/culture/news-new-gta-6-gameplay-features-leak-ahead-of-netflix-stream.webp",
+          "imageSource": "https://www.vice.com/wp-content/uploads/sites/2/2026/08/New-GTA-6-Gameplay-Features-Leak-Ahead-of-Netflix-Stream.jpg?w=1280",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.vice.com/en/article/gta-6-gameplay-features-leak-netflix-stream/",
+          "alt": "Lead image from VICE's coverage of New GTA 6 Gameplay Features Leak Ahead of Netflix Stream.",
+          "url": "https://www.vice.com/en/article/gta-6-gameplay-features-leak-netflix-stream/",
+          "source": "VICE",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=gta+6+leaks"
+            },
+            {
+              "source": "VICE via Google News",
+              "url": "https://www.vice.com/en/article/gta-6-gameplay-features-leak-netflix-stream/"
+            }
+          ],
+          "accent": "#5ab0ff"
+        },
+        {
+          "rank": 10,
+          "title": "Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
+          "subtitle": "News · Aug 19, 2026",
+          "description": "Byron Donalds won the Republican primary for Florida governor, while David Jolly also secured his party’s nomination. The results set up a general-election contest between the two candidates.",
+          "image": "/culture/news-byron-donalds-david-jolly-to-face-off-in-florida-governor-s-race.webp",
+          "imageSource": "https://assets1.cbsnewsstatic.com/hub/i/r/2026/08/18/98316a9e-b246-4e3f-b7ee-d17598c8bc93/thumbnail/1200x630/ce1ae8c86b09e302f36d9e891525c680/donalds-jolly-primary.jpg",
+          "imageSourceKind": "article",
+          "imageSourcePageUrl": "https://www.cbsnews.com/news/florida-governors-race-primary-results-byron-donalds-david-jolly/",
+          "alt": "Lead image from CBS News's coverage of Byron Donalds, David Jolly to face off in Florida governor's race after primary wins.",
+          "url": "https://www.cbsnews.com/news/florida-governors-race-primary-results-byron-donalds-david-jolly/",
+          "source": "CBS News",
+          "metric": {
+            "label": "Google search volume",
+            "value": "200K+"
+          },
+          "evidence": [
+            {
+              "source": "Google Trending Now",
+              "url": "https://trends.google.com/trends/explore?date=now+7-d&geo=US&q=florida+governor+race"
+            },
+            {
+              "source": "CBS News via Google News",
+              "url": "https://www.cbsnews.com/news/florida-governors-race-primary-results-byron-donalds-david-jolly/"
+            },
+            {
+              "source": "Wikipedia topic context",
+              "url": "https://en.wikipedia.org/wiki/David_Jolly"
+            }
+          ],
+          "accent": "#ff6b57"
         }
       ],
-      "moreLabel": "Show ranks 6–8"
+      "moreLabel": "Show ranks 6–10"
     }
   ],
   "sourceHealth": [
     {
       "name": "Know Your Meme result",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:28.159Z"
+      "checkedAt": "2026-08-20T04:07:55.393Z"
     },
     {
       "name": "Lessons in Meme Culture",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:28.721Z"
+      "checkedAt": "2026-08-20T04:07:56.244Z"
     },
     {
       "name": "Know Your Meme annual slang review",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:28.739Z"
+      "checkedAt": "2026-08-20T04:07:56.200Z"
     },
     {
       "name": "Know Your Meme slang pageviews",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:30.556Z"
+      "checkedAt": "2026-08-20T04:07:57.182Z"
     },
     {
       "name": "Urban Dictionary",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:29.834Z"
+      "checkedAt": "2026-08-20T04:07:56.984Z"
     },
     {
       "name": "Wikimedia monthly topviews",
       "ok": true,
-      "checkedAt": "2026-08-19T17:38:22.253Z"
+      "checkedAt": "2026-08-20T04:09:20.403Z"
     },
     {
       "name": "Billboard Hot 100",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:28.071Z"
+      "checkedAt": "2026-08-20T04:07:55.544Z"
     },
     {
       "name": "Spotify Today’s Top Hits",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:28.104Z"
+      "checkedAt": "2026-08-20T04:07:55.591Z"
     },
     {
       "name": "Goodreads monthly most read",
       "ok": true,
-      "checkedAt": "2026-08-19T17:37:29.253Z"
+      "checkedAt": "2026-08-20T04:07:56.798Z"
     },
     {
       "name": "Viral product discovery",
       "ok": true,
-      "checkedAt": "2026-08-19T17:47:03.890Z"
+      "checkedAt": "2026-08-20T04:09:35.835Z"
     },
     {
       "name": "Google Trending Now / News",
       "ok": true,
-      "checkedAt": "2026-08-19T17:38:50.454Z"
+      "checkedAt": "2026-08-20T04:12:06.202Z"
     }
   ],
   "quiz": {
     "durationSeconds": 15,
     "questions": [
       {
-        "prompt": "Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
+        "prompt": "Videos of this raccoon have recently spread across social media, inspiring fan art, memes, and viral coverage. Which entry matches this description?",
         "answers": [
           "Jimothy the raccoon",
           "Kwebbelkop Laughing / YourRAGE Laugh",
@@ -2348,7 +2438,7 @@
         "itemTitle": "Jimothy the raccoon"
       },
       {
-        "prompt": "In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits. Which meme matches this description?",
+        "prompt": "In 2026, a laugh became a trending sound used in memes featuring different edits of two creators. Which entry matches this description?",
         "answers": [
           "Kwebbelkop Laughing / YourRAGE Laugh",
           "Jimothy the raccoon",
@@ -2362,7 +2452,7 @@
         "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh"
       },
       {
-        "prompt": "This meme is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. Which meme matches this description?",
+        "prompt": "During the 2026 FIFA World Cup, users jokingly treated matches as battles for the custody of Hatsune Miku. Which entry matches this description?",
         "answers": [
           "Hatsune Miku World Cup Custody Battle",
           "Jimothy the raccoon",
@@ -2376,7 +2466,7 @@
         "itemTitle": "Hatsune Miku World Cup Custody Battle"
       },
       {
-        "prompt": "This person is expected to return to Manchester City training after starring at the World Cup. Which person matches this description?",
+        "prompt": "This person was recently featured in coverage about a World Cup friendship involving Jude Bellingham. Which entry matches this description?",
         "answers": [
           "Erling Haaland",
           "Lamine Yamal",
@@ -2390,7 +2480,7 @@
         "itemTitle": "Erling Haaland"
       },
       {
-        "prompt": "His younger brother Keyne drew fresh attention with joyful celebrations on the field after Spain's World Cup victory. Which person matches this description?",
+        "prompt": "This person recently discussed Lionel Messi’s advice after the World Cup final, calling it as valuable as a medal. Which entry matches this description?",
         "answers": [
           "Lamine Yamal",
           "Erling Haaland",
@@ -2404,7 +2494,7 @@
         "itemTitle": "Lamine Yamal"
       },
       {
-        "prompt": "Attention around his next film has renewed interest in the director's closely controlled production process. Which person matches this description?",
+        "prompt": "The supplied description refers generally to how this person’s films are discussed, without identifying a specific recent event. Which entry matches this description?",
         "answers": [
           "Christopher Nolan",
           "Erling Haaland",
@@ -2418,7 +2508,7 @@
         "itemTitle": "Christopher Nolan"
       },
       {
-        "prompt": "In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway). Which film matches this description?",
+        "prompt": "An action-adventure fantasy follows Odysseus, king of Ithaca, on a perilous journey home after the Trojan War. Which entry matches this description?",
         "answers": [
           "The Odyssey",
           "Obsession",
@@ -2432,7 +2522,7 @@
         "itemTitle": "The Odyssey"
       },
       {
-        "prompt": "The film follows Bear (Michael Johnston), a music store employee who buys a supernatural toy that grants his wish for his friend Nikki (Inde Navarrette) to fall in love with him, which makes her become obsessed. Which film matches this description?",
+        "prompt": "This horror-romance thriller follows Bear, a music store employee who buys a supernatural toy and wishes for his friend Nikki to fall in love with him. Which film matches this description?",
         "answers": [
           "Obsession",
           "The Odyssey",
@@ -2446,7 +2536,7 @@
         "itemTitle": "Obsession"
       },
       {
-        "prompt": "The story follows Ryland Grace, a middle school teacher who awakens aboard an interstellar spacecraft with no memory of how he got there. Which film matches this description?",
+        "prompt": "A middle school teacher awakens aboard an interstellar spacecraft with no memory of how he arrived there. Which entry matches this description?",
         "answers": [
           "Project Hail Mary",
           "The Odyssey",
@@ -2460,7 +2550,7 @@
         "itemTitle": "Project Hail Mary"
       },
       {
-        "prompt": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Which book matches this description?",
+        "prompt": "A traditional-lifestyle social media influencer wakes up in the 19th century. Which entry matches this description?",
         "answers": [
           "Yesteryear",
           "The Calamity Club",
@@ -2474,7 +2564,7 @@
         "itemTitle": "Yesteryear"
       },
       {
-        "prompt": "In 1933 Oxford, Mississippi, Prohibition is on the wane, and the Great Depression is tightening its grip. Which book matches this description?",
+        "prompt": "Set in 1933 Oxford, Mississippi, this story unfolds as Prohibition wanes and the Great Depression tightens its grip. Which entry matches this description?",
         "answers": [
           "The Calamity Club",
           "Yesteryear",
@@ -2488,7 +2578,7 @@
         "itemTitle": "The Calamity Club"
       },
       {
-        "prompt": "One spring morning, a stranger arrives in the small southern city of Golden. Which book matches this description?",
+        "prompt": "One spring morning, a mysterious stranger named Theo arrives in the small Southern city of Golden. Which entry matches this description?",
         "answers": [
           "Theo of Golden",
           "Yesteryear",
@@ -2502,46 +2592,46 @@
         "itemTitle": "Theo of Golden"
       },
       {
-        "prompt": "Hurricane Lala passed Hawaiʻi's Big Island without a direct hit, but the storm still drove intense attention as residents tracked flooding, wind, and travel impacts. Which story matches this description?",
+        "prompt": "A UFC result is notable because it sets a new win-streak record. Which entry matches this description?",
         "answers": [
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "City to close non-essential offices and services Monday following Hurricane Lala.",
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
         ],
-        "correctAnswer": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+        "correctAnswer": "UFC 330: Makhachev secures record-setting win against Machado Garry.",
         "id": "news-1",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
+        "itemTitle": "UFC 330: Makhachev secures record-setting win against Machado Garry."
       },
       {
-        "prompt": "The FDA classified a July egg recall linked to salmonella as a Class I risk, the agency's highest level, bringing renewed attention to the affected products and consumer guidance. Which story matches this description?",
+        "prompt": "A keto-focused ice cream company filed for Chapter 11 bankruptcy after losing a trademark lawsuit brought by another ice cream company. Which entry matches this description?",
         "answers": [
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "City to close non-essential offices and services Monday following Hurricane Lala.",
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
         ],
-        "correctAnswer": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
+        "correctAnswer": "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
         "id": "news-2",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
+        "itemTitle": "Ice cream company Rebel filed for Chapter 11 bankruptcy."
       },
       {
-        "prompt": "Honolulu closed non-essential offices and services after Hurricane Lala, reflecting the storm's continuing effects on public operations and residents. Which story matches this description?",
+        "prompt": "A hurricane passed the Big Island without a direct hit while becoming the third-wettest tropical cyclone on record to affect Hawaii. Which entry matches this description?",
         "answers": [
-          "City to close non-essential offices and services Monday following Hurricane Lala.",
           "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products.",
-          "Hurricane Lala leaves Big Island residents in Hawaii hunkered down."
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
+          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
         ],
-        "correctAnswer": "City to close non-essential offices and services Monday following Hurricane Lala.",
+        "correctAnswer": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
         "id": "news-3",
         "topicId": "news",
         "topic": "News",
-        "itemTitle": "City to close non-essential offices and services Monday following Hurricane Lala."
+        "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
       }
     ]
   }
