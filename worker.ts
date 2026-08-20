@@ -76,10 +76,12 @@ const worker = {
       headers.set("Cache-Control", "no-store");
     } else if (url.pathname.startsWith("/_next/static/")) {
       headers.set("Cache-Control", "public, max-age=31536000, immutable");
+    } else if (url.pathname === "/site.css") {
+      headers.set("Cache-Control", "public, max-age=0, must-revalidate, s-maxage=86400, stale-while-revalidate=604800");
     } else if (url.pathname.startsWith("/culture/") || ["/icon.png", "/og.jpg"].includes(url.pathname)) {
       headers.set("Cache-Control", "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800");
     } else if ((headers.get("content-type") ?? "").includes("text/html")) {
-      headers.set("Cache-Control", "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800");
+      headers.set("Cache-Control", "public, no-cache, s-maxage=86400, stale-while-revalidate=604800");
     }
 
     if (process.env.NODE_ENV === "production") {

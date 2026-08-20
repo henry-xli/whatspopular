@@ -1,4 +1,4 @@
-import { access, cp, mkdir, rm } from "node:fs/promises";
+import { access, cp, mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import vinext from "vinext";
 import { defineConfig, type Plugin } from "vite";
@@ -25,13 +25,36 @@ function deploymentMetadata(): Plugin {
       const outputDirectory = resolve(root, "dist", ".openai");
       const hostingConfig = resolve(root, "hosting.json");
       const drizzleSource = resolve(root, "drizzle");
+      const clientDirectory = resolve(root, "dist", "client");
+      const globalStyles = resolve(root, "app", "globals.css");
 
       await rm(outputDirectory, { recursive: true, force: true });
       await mkdir(outputDirectory, { recursive: true });
+      if (await exists(globalStyles) && await exists(clientDirectory)) {
+        await cp(globalStyles, resolve(clientDirectory, "site.css"));
+      }
       if (await exists(hostingConfig)) await cp(hostingConfig, resolve(outputDirectory, "hosting.json"));
       if (await exists(drizzleSource)) {
         await cp(drizzleSource, resolve(outputDirectory, "drizzle"), { recursive: true });
       }
+    },
+  };
+}
+
+function stableStylesheetDev(): Plugin {
+  return {
+    name: "stable-stylesheet-dev",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use("/site.css", async (_request, response, next) => {
+        try {
+          response.setHeader("Content-Type", "text/css; charset=utf-8");
+          response.setHeader("Cache-Control", "no-store");
+          response.end(await readFile(resolve(process.cwd(), "app", "globals.css"), "utf8"));
+        } catch (error) {
+          next(error as Error);
+        }
+      });
     },
   };
 }
@@ -63,6 +86,7 @@ export default defineConfig(async () => {
       : undefined,
     plugins: [
       vinext(),
+      stableStylesheetDev(),
       deploymentMetadata(),
       cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },

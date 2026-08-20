@@ -55,7 +55,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Stable fallback for browsers restoring HTML after a deployment. */}
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
+        <link rel="stylesheet" href="/site.css" data-wp-stable-style="true" />
         <script dangerouslySetInnerHTML={{ __html: "try{const t=localStorage.getItem('whatspopular-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch{}" }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(()=>{const r=()=>{if([...document.styleSheets].some(s=>{try{return s.cssRules.length>0}catch{return false}})||document.documentElement.dataset.wpStyleRecovery)return;document.documentElement.dataset.wpStyleRecovery="pending";const l=document.createElement("link");l.rel="stylesheet";l.href="/site.css?recovery="+Date.now().toString(36);l.dataset.wpStyleRecovery="true";l.onload=()=>document.documentElement.dataset.wpStyleRecovery="ready";l.onerror=()=>document.documentElement.dataset.wpStyleRecovery="failed";document.head.appendChild(l)};const s=()=>setTimeout(r,0);document.readyState==="loading"?document.addEventListener("DOMContentLoaded",s,{once:true}):s();addEventListener("pageshow",s,{passive:true});setTimeout(r,500)})()`,
+          }}
+        />
       </head>
       <body>
         <a className="skip-link" href="#main-content">Skip to the briefing</a>
