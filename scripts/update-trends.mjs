@@ -2433,6 +2433,62 @@ function productEvidenceSpecificTo(productName, evidence) {
   });
 }
 
+function productIdentityTokens(value) {
+  return productTokens(value)
+    .filter((token) => token.length > 2 && !genericProductWords.has(token) && !amazonCategoryTerms.has(token));
+}
+
+function productEvidenceContextText(productName, evidence) {
+  const intro = usableProductIntro(evidence?.intro);
+  const headline = usableProductHeadline(evidence?.headline);
+  const identityTokens = productIdentityTokens(productName);
+  const requiredMatches = Math.min(2, identityTokens.length);
+  const introSentences = sentences(intro);
+  const introMatches = identityTokens.filter((token) => productTokenSet(intro).has(token)).length;
+  if (intro && (requiredMatches === 0 || introMatches >= requiredMatches)) {
+    const matchingSentences = introSentences
+      .map((sentence, index) => ({
+        sentence,
+        index,
+        identityMatches: identityTokens.filter((token) => productTokenSet(sentence).has(token)).length,
+        demand: productDemandScore(sentence),
+      }))
+      .filter((entry) => entry.identityMatches > 0);
+    if (matchingSentences.length && matchingSentences.length < introSentences.length) {
+      const selected = matchingSentences
+        .sort((left, right) => right.identityMatches - left.identityMatches
+          || right.demand - left.demand
+          || left.index - right.index)
+        .slice(0, 2);
+      if (!selected.some((entry) => entry.demand > 0 || productScarcitySignal(entry.sentence))) {
+        const selectedIndexes = new Set(selected.map((entry) => entry.index));
+        const context = introSentences
+          .map((sentence, index) => ({
+            sentence,
+            index,
+            demand: productDemandScore(sentence),
+            scarcity: productScarcitySignal(sentence),
+            distance: Math.min(...selected.map((entry) => Math.abs(entry.index - index))),
+          }))
+          .filter((entry) => !selectedIndexes.has(entry.index)
+            && entry.distance <= 1
+            && (entry.demand > 0 || entry.scarcity))
+          .sort((left, right) => right.demand - left.demand
+            || Number(right.scarcity) - Number(left.scarcity)
+            || left.distance - right.distance
+            || left.index - right.index)[0];
+        if (context) selected.splice(Math.min(selected.length, 1), 0, context);
+      }
+      return conciseSentences(selected
+        .sort((left, right) => left.index - right.index)
+        .map((entry) => entry.sentence)
+        .join(" "), 280);
+    }
+    return intro;
+  }
+  return headline;
+}
+
 function productTypePhrase(value) {
   const text = normalize(value);
   if (/\b(?:frappuccino|beverage|coffee|drink|latte|refresh(?:er|ment))\b/.test(text)) return "a blended drink";
@@ -2861,7 +2917,8 @@ async function viralProductCandidates(movers) {
     .filter((candidate) => candidate.evidence.length >= 1 && (candidate.mover || candidate.sourceCount >= 2))
     .filter((candidate) => (hasSpecificProductName(candidate.name) || isBrandLikeProductName(candidate.name))
       && hasProductContext(candidate)
-      && hasProductNameEvidence(candidate))
+      && hasProductNameEvidence(candidate)
+      && candidate.evidence.some((evidence) => productEvidenceContextText(candidate.name, evidence)))
     .sort((left, right) => right.score - left.score || right.sourceCount - left.sourceCount
       || right.name.length - left.name.length);
   const uniqueFiltered = [];
@@ -3112,16 +3169,13 @@ function productRecentDescription(product, identity) {
   const candidates = [product.bestEvidence, ...(product.evidence ?? []), product.best]
     .filter(Boolean)
     .map((candidate) => {
-      const intro = usableProductIntro(candidate.intro);
-      const headline = usableProductHeadline(candidate.headline);
-      const distinctive = productTokens(product.query)
-        .filter((token) => token.length > 2 && !genericProductWords.has(token) && !amazonCategoryTerms.has(token));
-      const introHasIdentity = !distinctive.length || distinctive.every((token) => productTokenSet(intro).has(token));
-      const sourceText = intro && introHasIdentity ? intro : headline;
+      const sourceText = productEvidenceContextText(product.query, candidate);
+      const distinctive = productIdentityTokens(product.query);
       const text = neutralProductContext(sourceText);
       return {
+        source: candidate,
         text,
-        identityMatches: distinctive.filter((token) => productTokenSet(`${headline} ${intro}`).has(token)).length,
+        identityMatches: distinctive.filter((token) => productTokenSet(sourceText).has(token)).length,
         overlap: productTokenOverlap(product.query, `${candidate.headline ?? ""} ${candidate.intro ?? ""}`),
         demand: productDemandScore(text),
         scarcity: productScarcitySignal(text),
@@ -3130,11 +3184,8 @@ function productRecentDescription(product, identity) {
         reference: productReferencePattern.test(`${candidate.headline ?? ""} ${candidate.intro ?? ""}`),
       };
     })
-    .filter((candidate, index) => {
-      const source = [product.bestEvidence, ...(product.evidence ?? []), product.best].filter(Boolean)[index];
-      return candidate.text && candidate.overlap > 0 && !candidate.controversy && !candidate.reference
-        && productEvidenceSpecificTo(product.query, source);
-    })
+    .filter((candidate) => candidate.text && candidate.overlap > 0 && !candidate.controversy && !candidate.reference
+      && productEvidenceSpecificTo(product.query, candidate.source))
     .sort((left, right) => right.identityMatches - left.identityMatches
       || right.overlap - left.overlap
       || right.demand - left.demand
@@ -3227,12 +3278,12 @@ async function updateProducts(brief, products) {
     const productContext = [
       { source: "Amazon listing", text: product.title },
       ...(product.bestEvidence && productEvidenceSpecificTo(product.query, product.bestEvidence)
-        ? [{ source: product.bestEvidence.source ?? "Best recent product coverage", text: product.bestEvidence.intro || product.bestEvidence.headline }]
+        ? [{ source: product.bestEvidence.source ?? "Best recent product coverage", text: productEvidenceContextText(product.query, product.bestEvidence) }]
         : []),
       ...(product.evidence ?? []).filter((evidence) => productEvidenceSpecificTo(product.query, evidence)).map((evidence) => ({
         source: evidence.source ?? "Recent product coverage",
-        text: evidence.intro || evidence.headline,
-      })),
+        text: productEvidenceContextText(product.query, evidence),
+      })).filter((evidence) => evidence.text),
     ];
     rememberAiDescriptionContext(item, "products", productContext);
     return item;
