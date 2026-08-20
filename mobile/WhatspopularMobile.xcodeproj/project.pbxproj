@@ -16,6 +16,8 @@
 		A10000010000000000000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000007 /* Assets.xcassets */; };
 		A10000010000000000000008 /* trends.json in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000009 /* trends.json */; };
 		A10000010000000000000009 /* culture in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000010 /* culture */; };
+		A10000010000000000000010 /* AlertPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000011 /* AlertPreferences.swift */; };
+		A10000010000000000000011 /* BackgroundRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000012 /* BackgroundRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		B10000010000000000000007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B10000010000000000000009 /* trends.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BundleData/trends.json; sourceTree = "<group>"; };
 		B10000010000000000000010 /* culture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BundleData/culture; sourceTree = "<group>"; };
+		B10000010000000000000011 /* AlertPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPreferences.swift; sourceTree = "<group>"; };
+		B10000010000000000000012 /* BackgroundRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				B10000010000000000000004 /* BriefStore.swift */,
 				B10000010000000000000005 /* LayoutPreferences.swift */,
 				B10000010000000000000006 /* AssetImage.swift */,
+				B10000010000000000000011 /* AlertPreferences.swift */,
+				B10000010000000000000012 /* BackgroundRefresh.swift */,
 				B10000010000000000000007 /* Assets.xcassets */,
 			);
 			path = WhatspopularMobile;
@@ -150,6 +156,8 @@
 				A10000010000000000000004 /* BriefStore.swift in Sources */,
 				A10000010000000000000005 /* LayoutPreferences.swift in Sources */,
 				A10000010000000000000006 /* AssetImage.swift in Sources */,
+				A10000010000000000000010 /* AlertPreferences.swift in Sources */,
+				A10000010000000000000011 /* BackgroundRefresh.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,11 +191,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "what’s popular?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_FILE = WhatspopularMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -209,11 +216,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "what’s popular?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_FILE = WhatspopularMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

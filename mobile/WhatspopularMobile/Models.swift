@@ -35,6 +35,16 @@ struct CultureItem: Codable, Identifiable {
     let releaseDate: String?
 
     var id: String { "\(rank)-\(title)" }
+
+    // Rank is intentionally excluded so an entry remains trackable when it
+    // moves up or down within a leaderboard.
+    var alertID: String {
+        let normalized = title
+            .lowercased()
+            .split { !$0.isLetter && !$0.isNumber }
+            .joined(separator: "-")
+        return normalized.isEmpty ? url : normalized
+    }
 }
 
 struct CultureSource: Codable, Identifiable {

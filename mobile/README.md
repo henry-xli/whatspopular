@@ -8,11 +8,17 @@ single, scrollable briefing screen designed for one-handed reading:
 - all eight website leaderboards follow below on the same page;
 - entries open their existing source URLs, including Spotify tracks;
 - the Customize sheet persists board order, board colors, card density,
-  description length, expanded-entry behavior, and light/dark/system mode.
+  description length, expanded-entry behavior, alert selections, and
+  light/dark/system mode.
 
 The app is snapshot-driven. `BundleData/trends.json` and `BundleData/culture/`
 are bundled into the app, so the first launch works without a content API or
-remote image requests.
+remote image requests. When connected, the app checks the published `/api/brief`
+snapshot at most every 12 hours and keeps a local copy for offline launches.
+Users can enable local alerts for selected leaderboard updates and for tracked
+entries that are newly added or removed. iOS background refresh is best effort;
+the system controls when it runs, so alerts are not a guaranteed real-time push
+channel.
 
 ## Run in Xcode
 

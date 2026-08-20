@@ -20,6 +20,7 @@ private enum MobileThemeMode: String, CaseIterable, Identifiable {
 struct ContentView: View {
     @StateObject private var store = BriefStore()
     @StateObject private var preferences = LayoutPreferences()
+    @StateObject private var alerts = AlertPreferences()
     @AppStorage("whatspopular-mobile-theme") private var themeRawValue = MobileThemeMode.system.rawValue
     @State private var settingsPresented = false
     @Environment(\.scenePhase) private var scenePhase
@@ -39,6 +40,7 @@ struct ContentView: View {
                     BriefHome(
                         brief: brief,
                         preferences: preferences,
+                        alerts: alerts,
                         settingsPresented: $settingsPresented,
                         remoteImageVersion: store.isUsingRemoteSnapshot ? brief.generatedAt : nil
                     )
@@ -56,11 +58,27 @@ struct ContentView: View {
         }
         .preferredColorScheme(preferredColorScheme)
         .task {
+            if let brief = store.brief {
+                alerts.seed(brief: brief)
+            }
             await store.refreshIfNeeded()
+            if alerts.notificationsEnabled {
+                BackgroundRefreshScheduler.schedule()
+            }
+        }
+        .onChange(of: store.remoteRefreshCount) { _, _ in
+            guard let brief = store.brief else { return }
+            alerts.process(brief: brief)
         }
         .onChange(of: scenePhase) { _, phase in
-            guard phase == .active else { return }
-            Task { await store.refreshIfNeeded() }
+            switch phase {
+            case .active:
+                Task { await store.refreshIfNeeded() }
+            case .background where alerts.notificationsEnabled:
+                BackgroundRefreshScheduler.schedule()
+            default:
+                break
+            }
         }
     }
 }
@@ -80,6 +98,7 @@ private struct BriefScrollOffsetKey: PreferenceKey {
 private struct BriefHome: View {
     let brief: CultureBrief
     @ObservedObject var preferences: LayoutPreferences
+    @ObservedObject var alerts: AlertPreferences
     @Binding var settingsPresented: Bool
     let remoteImageVersion: String?
 
@@ -87,7 +106,7 @@ private struct BriefHome: View {
 
     var body: some View {
         ScrollViewReader { proxy in
-            ZStack(alignment: .bottomTrailing) {
+            ZStack(alignment: .topTrailing) {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
                         Color.clear
@@ -157,27 +176,20 @@ private struct BriefHome: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to top")
                     .padding(.trailing, 16)
-                    .padding(.bottom, 62)
+                    .padding(.top, 8)
                     .transition(.scale.combined(with: .opacity))
                 }
             }
+            .animation(.easeInOut(duration: 0.2), value: scrollOffset < -180)
             .background(Color(.systemGroupedBackground).ignoresSafeArea())
             .onPreferenceChange(BriefScrollOffsetKey.self) { offset in
                 scrollOffset = offset
-            }
-            .safeAreaInset(edge: .bottom) {
-                Text("Tap any entry to open its source")
-                    .font(.caption2.weight(.medium))
-                    .foregroundStyle(.secondary)
-                    .padding(.vertical, 6)
-                    .frame(maxWidth: .infinity)
-                    .background(.thinMaterial)
             }
             .onAppear {
                 preferences.synchronize(with: brief.sections)
             }
             .sheet(isPresented: $settingsPresented) {
-                LayoutSettingsSheet(sections: brief.sections, preferences: preferences)
+                LayoutSettingsSheet(sections: brief.sections, preferences: preferences, alerts: alerts)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
             }
@@ -862,6 +874,7 @@ private struct QuizCard: View {
 private struct LayoutSettingsSheet: View {
     let sections: [CultureSection]
     @ObservedObject var preferences: LayoutPreferences
+    @ObservedObject var alerts: AlertPreferences
     @AppStorage("whatspopular-mobile-theme") private var themeRawValue = MobileThemeMode.system.rawValue
     @Environment(\.dismiss) private var dismiss
 
@@ -874,6 +887,121 @@ private struct LayoutSettingsSheet: View {
                             Text(mode.label).tag(mode.rawValue)
                         }
                     }
+                }
+
+                Section("Alerts") {
+                    Toggle(
+                        "Notify me about changes",
+                        isOn: Binding(
+                            get: { alerts.notificationsEnabled },
+                            set: { enabled in
+                                Task {
+                                    await alerts.setNotificationsEnabled(enabled)
+                                }
+                            }
+                        )
+                    )
+
+                    Text(alerts.notificationStatusMessage)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Section {
+                    ForEach(sections) { section in
+                        Toggle(
+                            "\(section.title) updated",
+                            isOn: Binding(
+                                get: { alerts.isBoardUpdateEnabled(section.id) },
+                                set: { enabled in
+                                    alerts.setBoardUpdateEnabled(enabled, for: section.id)
+                                }
+                            )
+                        )
+                    }
+                } header: {
+                    Text("Leaderboard alerts")
+                } footer: {
+                    Text("Choose a board to receive an alert whenever a new briefing updates it.")
+                }
+
+                Section {
+                    Text("Choose entries to be notified when they disappear from a board or return in a later update.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    ForEach(sections) { section in
+                        DisclosureGroup {
+                            ForEach(section.allItems) { item in
+                                Toggle(
+                                    isOn: Binding(
+                                        get: {
+                                            alerts.isEntryAlertEnabled(sectionID: section.id, entryID: item.alertID)
+                                        },
+                                        set: { enabled in
+                                            alerts.setEntryAlertEnabled(
+                                                enabled,
+                                                sectionID: section.id,
+                                                entryID: item.alertID,
+                                                title: item.title
+                                            )
+                                        }
+                                    )
+                                ) {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(item.title)
+                                            .font(.subheadline.weight(.medium))
+                                        Text("#\(item.rank) · \(item.subtitle)")
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                            }
+
+                            let currentIDs = Set(section.allItems.map(\.alertID))
+                            let missingIDs = alerts.trackedEntryIDs(for: section.id).subtracting(currentIDs).sorted()
+                            ForEach(missingIDs, id: \.self) { entryID in
+                                Toggle(
+                                    isOn: Binding(
+                                        get: {
+                                            alerts.isEntryAlertEnabled(sectionID: section.id, entryID: entryID)
+                                        },
+                                        set: { enabled in
+                                            alerts.setEntryAlertEnabled(
+                                                enabled,
+                                                sectionID: section.id,
+                                                entryID: entryID,
+                                                title: alerts.trackedEntryLabel(sectionID: section.id, entryID: entryID)
+                                            )
+                                        }
+                                    )
+                                ) {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(alerts.trackedEntryLabel(sectionID: section.id, entryID: entryID))
+                                            .font(.subheadline.weight(.medium))
+                                        Text("Not in the current briefing")
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Text(section.title)
+                                Spacer()
+                                let count = alerts.selectedEntryCount(for: section.id)
+                                if count > 0 {
+                                    Text("\(count) tracked")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Entry alerts")
+                } footer: {
+                    Text("Entry alerts stay tracked even after an entry disappears, so you can be notified if it returns.")
                 }
 
                 Section {
@@ -917,12 +1045,18 @@ private struct LayoutSettingsSheet: View {
                     Button("Reset mobile layout", role: .destructive) {
                         preferences.reset()
                     }
+                    Button("Clear all alerts", role: .destructive) {
+                        alerts.clearAllAlerts()
+                    }
                 } footer: {
                     Text("Your choices are saved on this device and do not change the shared website.")
                 }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Customize")
+            .task {
+                await alerts.refreshAuthorizationStatus()
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     EditButton()

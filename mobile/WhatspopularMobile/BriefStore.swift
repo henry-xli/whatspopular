@@ -26,6 +26,7 @@ final class BriefStore: ObservableObject {
     @Published private(set) var errorMessage: String?
     @Published private(set) var isUsingRemoteSnapshot = false
     @Published private(set) var isRefreshing = false
+    @Published private(set) var remoteRefreshCount = 0
 
     private let refreshInterval: TimeInterval = 12 * 60 * 60
     private let retryInterval: TimeInterval = 15 * 60
@@ -72,6 +73,7 @@ final class BriefStore: ObservableObject {
             brief = nextBrief
             isUsingRemoteSnapshot = true
             errorMessage = nil
+            remoteRefreshCount += 1
             UserDefaults.standard.set(now, forKey: lastSuccessKey)
         } catch {
             if brief == nil {
