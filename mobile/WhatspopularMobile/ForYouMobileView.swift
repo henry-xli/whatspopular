@@ -1,4 +1,6 @@
 import SwiftUI
+import UIKit
+import WebKit
 
 struct ForYouMobileView: View {
     @ObservedObject var account: AccountStore
@@ -158,7 +160,7 @@ struct ForYouMobileView: View {
                         .padding(.bottom, 24)
                 }
             }
-            .frame(height: 535)
+            .frame(height: topics.contains(where: { $0.playback != nil }) ? 650 : 535)
             .tabViewStyle(.page(indexDisplayMode: .automatic))
             .animation(.easeInOut(duration: 0.35), value: activeIndex)
             Button {
@@ -247,6 +249,18 @@ private struct MobileDigestCard: View {
                             .font(.caption.weight(.semibold))
                             .fixedSize(horizontal: false, vertical: true)
                     }
+                    if let playback = topic.playback {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Label("Play on this card", systemImage: "play.circle.fill")
+                                .font(.caption2.weight(.black))
+                                .tracking(0.6)
+                            NicheMusicEmbedView(playback: playback)
+                                .frame(height: 152)
+                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        }
+                        .padding(9)
+                        .background(.black.opacity(0.24), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    }
                     if let url = URL(string: topic.url), url.scheme?.lowercased() == "https" {
                         Link(destination: url) {
                             HStack {
@@ -266,5 +280,35 @@ private struct MobileDigestCard: View {
             .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             .shadow(color: .black.opacity(0.18), radius: 15, y: 8)
         }
+    }
+}
+
+private struct NicheMusicEmbedView: UIViewRepresentable {
+    let playback: NichePlayback
+
+    func makeUIView(context: Context) -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = [.audio, .video]
+
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.showsVerticalScrollIndicator = false
+        loadIfNeeded(webView)
+        return webView
+    }
+
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        loadIfNeeded(webView)
+    }
+
+    private func loadIfNeeded(_ webView: WKWebView) {
+        let identifier = "niche-music-player-\(playback.provider)-\(playback.embedUrl)"
+        guard webView.accessibilityIdentifier != identifier,
+              let url = URL(string: playback.embedUrl) else { return }
+        webView.accessibilityIdentifier = identifier
+        webView.load(URLRequest(url: url, cachePolicy: .useProtocolCachePolicy))
     }
 }

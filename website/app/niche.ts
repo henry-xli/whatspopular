@@ -1,5 +1,12 @@
 import rawNicheBrief from "../data/niche-trends.json";
 
+export type NichePlayback = {
+  provider: "Apple Music" | "SoundCloud" | "Spotify" | "YouTube";
+  externalUrl: string;
+  embedUrl: string;
+  label: string;
+};
+
 export type NicheTopic = {
   id: string;
   title: string;
@@ -12,6 +19,7 @@ export type NicheTopic = {
   imageSource?: string;
   imageSourcePageUrl?: string;
   imageAlt?: string;
+  playback?: NichePlayback;
   publishedAt?: string;
   accent: string;
   trendLabel: string;

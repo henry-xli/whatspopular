@@ -1,5 +1,12 @@
 import Foundation
 
+struct NichePlayback: Codable, Equatable {
+    let provider: String
+    let externalUrl: String
+    let embedUrl: String
+    let label: String
+}
+
 struct NicheTopic: Codable, Identifiable, Equatable {
     let id: String
     let title: String
@@ -11,6 +18,7 @@ struct NicheTopic: Codable, Identifiable, Equatable {
     let image: String
     let accent: String
     let trendLabel: String
+    let playback: NichePlayback?
 }
 
 struct NicheCategory: Codable, Identifiable, Equatable {
@@ -65,6 +73,7 @@ final class NicheStore: ObservableObject {
                                 !host.hasSuffix(".local"),
                                 !host.hasSuffix(".internal"),
                                 !host.hasSuffix(".lan") else { return false }
+                          if let playback = topic.playback, !Self.isSafePlayback(playback) { return false }
                           return true
                       }
                   }) else {
@@ -74,6 +83,36 @@ final class NicheStore: ObservableObject {
             errorMessage = nil
         } catch {
             if brief == nil { errorMessage = "Your niche digest could not be loaded." }
+        }
+    }
+
+    private static func isSafePlayback(_ playback: NichePlayback) -> Bool {
+        guard let external = URL(string: playback.externalUrl),
+              let embed = URL(string: playback.embedUrl),
+              external.scheme?.lowercased() == "https",
+              embed.scheme?.lowercased() == "https",
+              external.user == nil,
+              external.password == nil,
+              external.port == nil,
+              embed.user == nil,
+              embed.password == nil,
+              embed.port == nil,
+              let externalHost = external.host?.lowercased(),
+              let embedHost = embed.host?.lowercased() else { return false }
+
+        switch playback.provider {
+        case "Spotify":
+            return externalHost == "open.spotify.com" && embedHost == "open.spotify.com"
+        case "YouTube":
+            return ["youtube.com", "www.youtube.com", "youtu.be"].contains(externalHost)
+                && ["www.youtube.com", "www.youtube-nocookie.com"].contains(embedHost)
+        case "SoundCloud":
+            return ["soundcloud.com", "www.soundcloud.com"].contains(externalHost)
+                && embedHost == "w.soundcloud.com"
+        case "Apple Music":
+            return externalHost == "music.apple.com" && embedHost == "embed.music.apple.com"
+        default:
+            return false
         }
     }
 }

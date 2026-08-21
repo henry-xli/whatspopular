@@ -498,6 +498,7 @@ function categoryRuleUsable(category, candidate, focused) {
 
 function sourceCandidateUsable(category, candidate, now) {
   if (!candidate || !isRecentPublication(candidate.publishedAt, now)) return false;
+  if (category.parent === "Music" && !candidate.playback?.embedUrl) return false;
   const focused = focusedArticleContext(candidate.headline, candidate.articleIntro, 620);
   if (!focused || genericNicheCopyPattern.test(focused)) return false;
   if (category.parent === "Music" && candidate.directCategoryFeed && category.id !== "edm"
@@ -531,9 +532,10 @@ function candidateRelevanceScore(candidate, now) {
   const causalSignal = Number(/\b(?:after|amid|because|following|when|return|re-?release|meme|viral|reaction|fans?|funny|sold out|restock|won|match|tournament|announc|report|study|research)\b/i.test(focused));
   const overlap = meaningfulWordOverlap(candidate.headline, focused).length;
   const imageSignal = Number(Boolean(candidate.imageSource));
+  const playbackSignal = Number(Boolean(candidate.playback?.embedUrl));
   const coverageSignal = Math.min(4, Number(candidate.coverageCount ?? 1));
   const attentionSignal = Number(attentionSignalPattern.test(`${candidate.headline} ${focused}`));
-  return freshness * 12 + coverageSignal * 18 + headlineSignal * 28 + articleSignal * 12 + causalSignal * 10 + attentionSignal * 14 + overlap * 5 + imageSignal * 6;
+  return freshness * 12 + coverageSignal * 18 + headlineSignal * 28 + articleSignal * 12 + causalSignal * 10 + attentionSignal * 14 + overlap * 5 + imageSignal * 6 + playbackSignal * 8;
 }
 
 async function categoryCandidates(category, now = new Date()) {
@@ -612,6 +614,7 @@ async function categoryCandidates(category, now = new Date()) {
               ...candidate,
               link: metadata.url,
               articleIntro,
+              playback: metadata.playback,
               imageSource: metadata.imageSource,
               imageAlt: metadata.imageAlt,
             };
@@ -652,6 +655,7 @@ async function categoryCandidates(category, now = new Date()) {
             headline: topic.title,
             articleIntro,
             publishedAt,
+            playback: metadata.playback,
             imageSource: metadata.imageSource,
             source: topic.source,
             directCategoryFeed: isTrustedMusicCategoryFeed(category, { source: topic.source }),
@@ -666,6 +670,7 @@ async function categoryCandidates(category, now = new Date()) {
           publishedAt,
           order: topic.id,
           articleIntro,
+          playback: metadata.playback,
           imageSource: metadata.imageSource,
           imageAlt: metadata.imageAlt,
           relevanceScore: candidateRelevanceScore(priorCandidate, now),
@@ -778,6 +783,7 @@ function sourceGroundedTopic(record, category, index, fallback) {
     sourceLabel: "Read the report",
     evidenceMode: "source-grounded",
     image: nicheImagePath(record.id),
+    ...(candidate.playback ? { playback: candidate.playback } : {}),
     ...(candidate.imageSource ? {
       imageSource: candidate.imageSource,
       imageSourcePageUrl: candidate.link,
@@ -809,11 +815,13 @@ function persistedTopicUsable(topic, category) {
   const candidate = {
     headline: topic?.title ?? "",
     source: topic?.source ?? "",
+    playback: topic?.playback,
     directCategoryFeed: isTrustedMusicCategoryFeed(category, { source: topic?.source ?? "" }),
   };
   const focused = `${topic?.description ?? ""} ${topic?.whyNow ?? ""}`;
   return topic?.evidenceMode === "source-grounded"
     && /^https:\/\//i.test(topic.url ?? "")
+    && (category.parent !== "Music" || Boolean(topic?.playback?.embedUrl))
     && !numberedNicheHeadlinePattern.test(topic.title ?? "")
     && !genericNicheHeadlinePattern.test(topic.title ?? "")
     && !hardMetaNicheHeadlinePattern.test(topic.title ?? "")

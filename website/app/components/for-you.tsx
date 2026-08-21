@@ -26,6 +26,29 @@ type DigestTopic = NicheTopic & {
 
 type DigestLayout = "poster" | "split" | "quote" | "ticker" | "collage";
 
+function MusicPlaybackEmbed({ topic }: { topic: DigestTopic }) {
+  if (topic.categoryParent !== "Music" || !topic.playback) return null;
+  return (
+    <div className="digest-playback">
+      <div className="digest-playback-head">
+        <span>Playable on this card</span>
+        <a href={topic.playback.externalUrl} target="_blank" rel="noopener noreferrer">
+          {topic.playback.label} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <iframe
+        title={`${topic.title} ${topic.playback.provider} player`}
+        src={topic.playback.embedUrl}
+        width="100%"
+        height="152"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
+    </div>
+  );
+}
+
 function hashSeed(value: string) {
   let hash = 2166136261;
   for (let index = 0; index < value.length; index += 1) {
@@ -364,6 +387,7 @@ export function ForYouExperience({
                       <span>Why now</span>
                       <p>{topic.whyNow}</p>
                     </div>
+                    <MusicPlaybackEmbed topic={topic} />
                     <a className="digest-source" href={topic.url} target="_blank" rel="noopener noreferrer">
                       <span>{topic.sourceLabel}</span>
                       <strong>{topic.source}</strong>

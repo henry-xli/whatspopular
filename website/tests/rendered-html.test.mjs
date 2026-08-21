@@ -4,7 +4,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { buildDescriptionPrompt, buildNichePrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, isNicheTopicUsable, parseDescriptionOutput, parseNicheOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
-import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractArticleTitle, publicHttpsUrl } from "../scripts/news-article.mjs";
+import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractArticleTitle, extractPlayableMedia, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
@@ -363,6 +363,9 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.ok(nicheTopics.every((topic) => !topic.imageSource || (new URL(topic.imageSource).protocol === "https:" && topic.imageSourcePageUrl === topic.url)));
   assert.doesNotMatch(JSON.stringify(nicheBrief), /&(?:ldquo|rdquo|lsquo|rsquo|hellip|nbsp|ndash|mdash);|&#(?:x[0-9a-f]+|\d+);/i);
   const musicTopics = nicheBrief.categories.filter((category) => category.parent === "Music").flatMap((category) => category.topics);
+  assert.ok(musicTopics.every((topic) => topic.playback
+    && /^https:\/\/(?:open\.spotify\.com|www\.youtube-nocookie\.com|w\.soundcloud\.com|embed\.music\.apple\.com)\//i.test(topic.playback.embedUrl)
+    && /^https:\/\/(?:open\.spotify\.com|www\.youtube\.com|soundcloud\.com|music\.apple\.com)\//i.test(topic.playback.externalUrl)));
   assert.ok(musicTopics.every((topic) => /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist|viral (?:song|sound|audio)|listeners?|Spotify|Billboard)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
   assert.ok(musicTopics.every((topic) => !/\b(?:festival|lineup|headliner|concert|tour|tickets?)\b/i.test(topic.title)
     || /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
@@ -386,6 +389,8 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.match(forYouSource, /const layouts: DigestLayout\[\] = \["poster", "split", "quote", "ticker", "collage"\]/);
   assert.match(forYouSource, /digestLayoutFor\(index, compileNumber\)/);
   assert.match(forYouSource, /data-layout=\{layout\}/);
+  assert.match(forYouSource, /MusicPlaybackEmbed/);
+  assert.match(forYouSource, /allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"/);
   for (const layout of ["poster", "split", "quote", "ticker", "collage"]) {
     assert.match(forYouStyles, new RegExp(`\\.digest-card-${layout}`));
   }
@@ -548,6 +553,23 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <article><p>See more of our coverage and sign up for our newsletter to receive updates.</p>
     <p>Officials opened an investigation after the incident was reported at several locations.</p></article>
   `), /See more of our coverage/i);
+  assert.deepEqual(extractPlayableMedia(`
+    <iframe data-src="https://open.spotify.com/embed/album/2os46ReV779WlryAHPL6ko?si=ignored"></iframe>
+  `, "https://publisher.example/story"), {
+    provider: "Spotify",
+    externalUrl: "https://open.spotify.com/album/2os46ReV779WlryAHPL6ko",
+    embedUrl: "https://open.spotify.com/embed/album/2os46ReV779WlryAHPL6ko?utm_source=whatspopular&theme=0",
+    label: "Listen on Spotify",
+  });
+  assert.deepEqual(extractPlayableMedia(`
+    <meta property="og:video" content="https://www.youtube.com/watch?v=veBbOF5OtO8">
+  `, "https://publisher.example/story"), {
+    provider: "YouTube",
+    externalUrl: "https://www.youtube.com/watch?v=veBbOF5OtO8",
+    embedUrl: "https://www.youtube-nocookie.com/embed/veBbOF5OtO8?rel=0",
+    label: "Watch on YouTube",
+  });
+  assert.equal(extractPlayableMedia("<a href=\"https://open.spotify.com/u\">bad</a>", "https://publisher.example/story"), null);
   assert.throws(() => publicHttpsUrl("http://example.com/image.jpg"), /non-public/);
   assert.throws(() => publicHttpsUrl("https://127.0.0.1/image.jpg"), /non-public/);
 });

@@ -79,6 +79,157 @@ function imageUrl(rawUrl, baseUrl) {
   }
 }
 
+const playableMediaLabels = {
+  "Apple Music": "Listen on Apple Music",
+  SoundCloud: "Listen on SoundCloud",
+  Spotify: "Listen on Spotify",
+  YouTube: "Watch on YouTube",
+};
+
+function normalizedMediaUrl(rawUrl, baseUrl) {
+  if (!rawUrl || rawUrl.length > 4096) return null;
+  try {
+    return publicHttpsUrl(
+      new URL(decodeHtml(rawUrl).trim().replaceAll("\\/", "/"), baseUrl),
+      "playback",
+    );
+  } catch {
+    return null;
+  }
+}
+
+function spotifyMedia(url) {
+  if (url.hostname !== "open.spotify.com") return null;
+  const match = url.pathname.match(/^\/(?:embed\/)?(track|album|playlist)\/([A-Za-z0-9]{10,64})\/?$/i);
+  if (!match) return null;
+  const kind = match[1].toLowerCase();
+  const id = match[2];
+  return {
+    provider: "Spotify",
+    externalUrl: `https://open.spotify.com/${kind}/${id}`,
+    embedUrl: `https://open.spotify.com/embed/${kind}/${id}?utm_source=whatspopular&theme=0`,
+    label: playableMediaLabels.Spotify,
+  };
+}
+
+function youtubeMedia(url) {
+  const hostname = url.hostname;
+  if (!new Set(["m.youtube.com", "www.youtube-nocookie.com", "www.youtube.com", "youtube.com", "youtu.be"]).has(hostname)) {
+    return null;
+  }
+  let videoId = null;
+  if (hostname === "youtu.be") {
+    videoId = url.pathname.split("/").filter(Boolean)[0] ?? null;
+  } else if (url.pathname === "/watch") {
+    videoId = url.searchParams.get("v");
+  } else {
+    videoId = url.pathname.match(/^\/(?:embed|shorts|live)\/([A-Za-z0-9_-]{11})(?:\/|$)/i)?.[1] ?? null;
+  }
+  if (!videoId || !/^[A-Za-z0-9_-]{11}$/.test(videoId)) return null;
+  return {
+    provider: "YouTube",
+    externalUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`,
+    label: playableMediaLabels.YouTube,
+  };
+}
+
+function soundCloudMedia(url) {
+  if (!["soundcloud.com", "www.soundcloud.com"].includes(url.hostname)) return null;
+  const path = url.pathname.replace(/\/+$/, "");
+  if (!/^\/[^/]+\/[^/]+(?:\/[^/]+)?$/i.test(path)) return null;
+  const externalUrl = `https://soundcloud.com${path}`;
+  return {
+    provider: "SoundCloud",
+    externalUrl,
+    embedUrl: `https://w.soundcloud.com/player/?url=${encodeURIComponent(externalUrl)}&color=%238b5cf6&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`,
+    label: playableMediaLabels.SoundCloud,
+  };
+}
+
+function appleMusicMedia(url) {
+  if (!["embed.music.apple.com", "music.apple.com"].includes(url.hostname)) return null;
+  if (!/^\/[a-z]{2}(?:-[a-z]{2})?\/(?:album|song|playlist|music-video)\//i.test(url.pathname)) return null;
+  const externalUrl = `https://music.apple.com${url.pathname}${url.search}`;
+  return {
+    provider: "Apple Music",
+    externalUrl,
+    embedUrl: `https://embed.music.apple.com${url.pathname}${url.search}`,
+    label: playableMediaLabels["Apple Music"],
+  };
+}
+
+export function normalizePlayableMedia(rawUrl, baseUrl) {
+  const url = normalizedMediaUrl(rawUrl, baseUrl ?? rawUrl);
+  if (!url) return null;
+  return spotifyMedia(url) ?? youtubeMedia(url) ?? soundCloudMedia(url) ?? appleMusicMedia(url);
+}
+
+function structuredPlayableValues(value, output, depth = 0) {
+  if (depth > 8 || value === null || value === undefined || output.length >= 40) return;
+  if (typeof value === "string") {
+    output.push({ rawUrl: value, score: 20 });
+    return;
+  }
+  if (Array.isArray(value)) {
+    for (const entry of value) structuredPlayableValues(entry, output, depth + 1);
+    return;
+  }
+  if (typeof value !== "object") return;
+  for (const [key, entry] of Object.entries(value)) {
+    if (/^(?:contentUrl|embedUrl|sameAs|url)$/i.test(key)) {
+      structuredPlayableValues(entry, output, depth + 1);
+    } else if (depth < 4 && /^(?:@graph|associatedMedia|mainEntity|subjectOf|video)$/i.test(key)) {
+      structuredPlayableValues(entry, output, depth + 1);
+    }
+  }
+}
+
+export function extractPlayableMedia(html, baseUrl) {
+  const candidates = [];
+  const add = (rawUrl, score) => {
+    const playback = normalizePlayableMedia(rawUrl, baseUrl);
+    if (playback) candidates.push({ playback, score });
+  };
+
+  for (const tag of html.match(/<meta\s+[^>]*>/gi) ?? []) {
+    const attributes = htmlAttributes(tag);
+    const key = (attributes.property ?? attributes.name ?? "").toLowerCase();
+    if (/^(?:og:video(?::(?:secure_url|url))?|music:song|twitter:player(?::stream)?)$/.test(key)) {
+      add(attributes.content, 36);
+    }
+  }
+  for (const tag of html.match(/<(?:embed|iframe)\s+[^>]*>/gi) ?? []) {
+    const attributes = htmlAttributes(tag);
+    add(attributes.src ?? attributes["data-src"] ?? attributes["data-embed-url"] ?? attributes["data-url"], 52);
+  }
+  for (const tag of html.match(/<a\s+[^>]*>/gi) ?? []) {
+    add(htmlAttributes(tag).href, 12);
+  }
+  for (const match of html.matchAll(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      let structuredData;
+      try {
+        structuredData = JSON.parse(match[1].trim());
+      } catch {
+        structuredData = JSON.parse(decodeHtml(match[1]).trim());
+      }
+      const values = [];
+      structuredPlayableValues(structuredData, values);
+      for (const value of values) add(value.rawUrl, value.score);
+    } catch {
+      // Malformed structured data is common; explicit media tags remain usable.
+    }
+  }
+
+  const bestByEmbedUrl = new Map();
+  for (const candidate of candidates) {
+    const current = bestByEmbedUrl.get(candidate.playback.embedUrl);
+    if (!current || current.score < candidate.score) bestByEmbedUrl.set(candidate.playback.embedUrl, candidate);
+  }
+  return [...bestByEmbedUrl.values()].sort((left, right) => right.score - left.score)[0]?.playback ?? null;
+}
+
 function jsonLdImages(value, output, depth = 0, insideImage = false) {
   if (depth > 8 || output.length >= 12 || value === null || value === undefined) return;
   if (typeof value === "string") {
@@ -336,12 +487,13 @@ export async function linkedArticleMetadata(articleUrl, { allowMissingImage = fa
   const html = page.buffer.toString("utf8");
   const intro = extractArticleIntro(html);
   const title = extractArticleTitle(html);
+  const playback = extractPlayableMedia(html, page.finalUrl);
   try {
     const metadata = extractArticleImage(html, page.finalUrl);
     await assertPublicHostname(new URL(metadata.imageSource).hostname);
-    return { url: page.finalUrl, title, intro, ...metadata };
+    return { url: page.finalUrl, title, intro, ...(playback ? { playback } : {}), ...metadata };
   } catch (error) {
     if (!allowMissingImage) throw error;
-    return { url: page.finalUrl, title, intro };
+    return { url: page.finalUrl, title, intro, ...(playback ? { playback } : {}) };
   }
 }
