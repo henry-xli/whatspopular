@@ -12,12 +12,12 @@ const flow = [
   {
     number: "03",
     title: "Build the snapshot",
-    text: "Normalize the selected topics, order each board, and collect the supporting images and links.",
+    text: "Normalize the selected topics, order each board, and package rising niche stories with their supporting images and links.",
   },
   {
     number: "04",
     title: "Write and quiz",
-    text: "Optional AI copy editing uses the selected source excerpts, then creates the fixed quiz pool from the finished descriptions.",
+    text: "Optional AI copy editing turns validated excerpts into card copy, niche-topic context, and the fixed quiz pool.",
   },
   {
     number: "05",
@@ -68,8 +68,9 @@ export function AboutFlow({ full = false, id }: AboutFlowProps) {
               data, the updater publishes nothing and visitors keep the previous
               pre-rendered page. If product discovery alone is unavailable, the
               last validated Products board is retained while the other boards
-              may refresh. There is no runtime database query, personalized feed,
-              or request-time scraper.
+              may refresh. Signed-in preferences are the only per-user lookup;
+              digest cards are already in the snapshot and are assembled in the
+              browser without a request-time scraper or AI call.
             </p>
           </div>
         </section>

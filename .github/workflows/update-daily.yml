@@ -73,7 +73,7 @@ jobs:
         run: |
           git config user.name "whatspopular refresh bot"
           git config user.email "actions@users.noreply.github.com"
-          git add website/data/trends.json website/public/data/trends.json website/public/culture website/public/icon.png
+          git add website/data/trends.json website/data/niche-trends.json website/public/data/trends.json website/public/data/niche-trends.json website/public/culture website/public/icon.png
           git diff --cached --quiet && exit 0
           git commit -m "Refresh 48-hour culture briefing"
           git push origin main

@@ -19,9 +19,9 @@ export function SiteFooter() {
         </div>
         <div>
           <strong>Principles</strong>
-          <span>No accounts</span>
-          <span>No personalization</span>
-          <span>One update every 48 hours</span>
+          <span>Pre-built weekly signals</span>
+          <span>Local feed assembly</span>
+          <span>One snapshot for everyone</span>
         </div>
       </div>
       <div className="wrap footer-bottom">

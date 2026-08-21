@@ -162,17 +162,28 @@ export function extractArticleIntro(html) {
     .filter((text) => !/^(?:advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i.test(text))
     .filter((text) => !/\b(?:see more of our coverage|our coverage|in your search results|click here|download our app|follow us|sign up for our|subscribe to our)\b/i.test(text))
     .filter((text, index, values) => values.indexOf(text) === index)
-    .map((text) => completeSentences(text, 720))
-    .filter(Boolean)
-    .slice(0, 3);
+    .map((text, index) => ({
+      text: completeSentences(text, 720),
+      index,
+      contextScore: (text.match(/\b(?:because|after|amid|announced|brought back|bring(?:s|ing)? back|debut(?:ed)?|first introduced|introduced|original(?:ly)?|return(?:ed|ing)?|re-?released?|revived|viral|meme|nostalgia|fans?|funny|walk(?:ed|ing)?|appearance|sold out|restock(?:ed)?|from\s+20\d{2}|in\s+20\d{2})\b/gi) ?? []).length,
+    }))
+    .filter((entry) => entry.text);
   if (!paragraphs.length) return "";
+  const selected = paragraphs
+    .slice(0, 2)
+    .concat(paragraphs
+      .slice(2)
+      .sort((left, right) => right.contextScore - left.contextScore || left.index - right.index)
+      .slice(0, 4))
+    .sort((left, right) => left.index - right.index)
+    .filter((entry, index, values) => values.findIndex((candidate) => candidate.text === entry.text) === index);
   let result = "";
-  for (const paragraph of paragraphs) {
-    const candidate = `${result} ${paragraph}`.trim();
-    if (candidate.length > 900 && result) break;
+  for (const paragraph of selected) {
+    const candidate = `${result} ${paragraph.text}`.trim();
+    if (candidate.length > 1_400 && result) break;
     result = candidate;
   }
-  return completeSentences(result, 900);
+  return completeSentences(result, 1_400);
 }
 
 function relatedArticleHost(candidate, expected) {

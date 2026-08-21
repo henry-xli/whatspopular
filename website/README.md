@@ -1,8 +1,9 @@
 # what’s popular?
 
-A finite 48-hour briefing and quiz on internet culture. Visitors receive
-pre-rendered HTML, local images, and a cached mobile snapshot at `/api/brief`;
-there is no account, feed, runtime database query, or request-time scraper.
+A finite 48-hour briefing, quiz, and niche-interest digest on internet culture.
+Visitors receive pre-rendered HTML, local images, and a cached mobile snapshot
+at `/api/brief`; the For You page assembles pre-generated cards locally after
+the user chooses interest tags.
 
 Explore displays boards in this order: People, Movies, Books, Music, Products,
 News, Memes, and Slang.
@@ -132,15 +133,18 @@ for Amazon Movers & Shakers when its public page rate-limits automation;
 
 - `app/` contains pages, components, styles, and runtime data validation; the
   shared culture model lives in `app/culture.ts`. `/` is the quiz-first home
-  page, `/explore` contains the leaderboards, and `/about` contains the flow
-  explanation. The shared header includes the theme toggle, and the explore
-  index includes its back-to-top control so those page-local behaviors do not
-  require one-file components.
-- `data/trends.json` is the single preprocessed content snapshot.
-- `scripts/` contains the 48-hour ingestion, source adapters, AI copy pass, and
-  image pipeline. The helpers are kept as separate files because they are
-  independent network/security boundaries; combining them would make source
-  changes harder to review and increase the blast radius of a failure.
+  page, `/explore` contains the leaderboards, `/for-you` contains the niche tag
+  builder and local digest compiler, and `/about` contains the flow explanation.
+  Signed-in tag preferences are stored in D1 under the hosted user identity.
+- `data/trends.json` and `data/niche-trends.json` are the preprocessed culture
+  and niche snapshots.
+- `scripts/niche-catalog.mjs` defines the expanded interest taxonomy: 42 lanes
+  across music, sports, news, lifestyle, and culture. `content:niche-catalog`
+  materializes its deterministic fallback cards into the weekly snapshot.
+- `scripts/` contains the 48-hour ingestion, niche source adapters, AI copy
+  pass, and image pipeline. The helpers are kept as separate files because
+  they are independent network/security boundaries; combining them would make
+  source changes harder to review and increase the blast radius of a failure.
 - `worker.ts` applies edge caching and production security headers.
 - `tests/` checks rendered content, headers, links, media, and data invariants.
 - `.github/workflows/update-daily.yml` refreshes, verifies, and commits every 48 hours.

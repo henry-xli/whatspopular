@@ -1,0 +1,1926 @@
+{
+  "generatedAt": "2026-08-20T06:39:05.184Z",
+  "edition": "Week of August 17",
+  "window": "Past 7 days",
+  "summary": "Choose the corners of the internet you actually care about. Each tag is pre-built from this week’s rising conversations, so compiling a digest never triggers a scrape.",
+  "categories": [
+    {
+      "id": "edm",
+      "label": "EDM",
+      "parent": "Music",
+      "description": "Electronic releases, festival moments, and club sounds that are moving from niche rooms into the wider conversation.",
+      "accent": "#8b5cf6",
+      "topics": [
+        {
+          "id": "edm-festival-season",
+          "title": "The festival setlist economy",
+          "description": "Festival season is turning unreleased IDs into their own kind of headline: a single live clip can make a drop feel essential before it even has a title.",
+          "whyNow": "New sets and crowd videos are pushing dance tracks from specialist communities into the week’s wider music conversation.",
+          "url": "https://www.billboard.com/charts/dance-electronic-songs/",
+          "source": "Billboard Dance/Electronic Songs",
+          "sourceLabel": "Chart context",
+          "image": "/culture/song-animal-katseye.webp",
+          "accent": "#8b5cf6",
+          "trendLabel": "Moving from the floor"
+        },
+        {
+          "id": "edm-peak-time",
+          "title": "Peak-time techno gets a second wind",
+          "description": "Long-build, high-impact club tracks are showing up in more discovery playlists, with producers favoring tension and texture over a quick pop hook.",
+          "whyNow": "The sound is gaining momentum through DJ sets and algorithmic playlists rather than a single mainstream release.",
+          "url": "https://open.spotify.com/genre/edm-page",
+          "source": "Spotify EDM",
+          "sourceLabel": "Listen on Spotify",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "accent": "#6d4aff",
+          "trendLabel": "Slow burn"
+        },
+        {
+          "id": "edm-remixes",
+          "title": "The remix is having a main-character week",
+          "description": "Familiar vocal moments are getting rebuilt into faster, brighter edits that work equally well in a club clip, a workout queue, or a late-night drive.",
+          "whyNow": "Short-form edits are acting like a discovery layer for dance music, rewarding versions that change the mood without losing the hook.",
+          "url": "https://open.spotify.com/playlist/37i9dQZF1DX8tZsk68tuDw",
+          "source": "Spotify Dance Rising",
+          "sourceLabel": "Listen on Spotify",
+          "image": "/culture/song-babydoll-dominic-fike.webp",
+          "accent": "#b995ff",
+          "trendLabel": "Up on replay"
+        }
+      ]
+    },
+    {
+      "id": "kpop",
+      "label": "K-pop",
+      "parent": "Music",
+      "description": "Comebacks, choreography, fandom moments, and the songs gaining international lift before they reach general charts.",
+      "accent": "#ff6b9d",
+      "topics": [
+        {
+          "id": "kpop-global-discovery",
+          "title": "K-pop’s global discovery loop",
+          "description": "New releases are being discovered through choreography, live stages, and fan edits as much as through the official track itself.",
+          "whyNow": "Performance clips are giving songs a second launch this week, with the visual moment often arriving before the chart peak.",
+          "url": "https://www.billboard.com/charts/world-digital-song-sales/",
+          "source": "Billboard Global Music",
+          "sourceLabel": "Chart context",
+          "image": "/culture/song-animal-katseye.webp",
+          "accent": "#ff6b9d",
+          "trendLabel": "Fandom-powered"
+        },
+        {
+          "id": "kpop-stagecraft",
+          "title": "The stage is the headline",
+          "description": "Precision formations, styling, and a single instantly recognizable move are making live performances as shareable as the songs they promote.",
+          "whyNow": "This week’s conversation is clustering around moments people can recreate, not only releases people can stream.",
+          "url": "https://www.youtube.com/results?search_query=kpop+live+performance",
+          "source": "YouTube",
+          "sourceLabel": "Watch performances",
+          "image": "/culture/person-shakira.webp",
+          "accent": "#ff91b5",
+          "trendLabel": "Visual-first"
+        },
+        {
+          "id": "kpop-fandom-artifacts",
+          "title": "Collectibles are part of the release",
+          "description": "Photocards, limited drops, and fan-made edits are extending a comeback into a whole ecosystem of objects and rituals.",
+          "whyNow": "The release cycle is showing up in shopping and collecting conversations as well as music charts.",
+          "url": "https://www.billboard.com/c/music/music-news/k-pop/",
+          "source": "Billboard K-pop coverage",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "accent": "#ffb1c9",
+          "trendLabel": "Beyond the song"
+        }
+      ]
+    },
+    {
+      "id": "football",
+      "label": "Football",
+      "parent": "Sports",
+      "description": "The players, matches, tactics, and off-pitch moments shaping the football conversation right now.",
+      "accent": "#20b486",
+      "topics": [
+        {
+          "id": "football-haaland-bellingham",
+          "title": "The next-generation rivalry is the story",
+          "description": "Erling Haaland and Jude Bellingham are becoming a shorthand for the next era of football: different roles, huge expectations, and a World Cup-sized stage.",
+          "whyNow": "Recent tournament coverage has pulled the sport’s younger superstars into the center of the global conversation.",
+          "url": "https://www.vogue.com/article/i-want-what-they-have-world-cup-jude-bellingham-and-erling-haaland",
+          "source": "Vogue",
+          "sourceLabel": "Read the feature",
+          "image": "/culture/person-erling-haaland.webp",
+          "accent": "#20b486",
+          "trendLabel": "World Cup lift"
+        },
+        {
+          "id": "football-lamine-yamal",
+          "title": "Lamine Yamal’s own-way era",
+          "description": "Lamine Yamal’s latest chapter is being framed around creative independence: advice from legends, a huge final, and the pressure to become the next reference point.",
+          "whyNow": "His post-tournament comments and performance have made him one of the week’s most discussed footballers.",
+          "url": "https://www.espn.com/soccer/story/_/id/49423331/lionel-messi-encourages-lamine-yamal-go-own-way-spain-world-cup-triumph",
+          "source": "ESPN",
+          "sourceLabel": "Read the reporting",
+          "image": "/culture/person-lamine-yamal.webp",
+          "accent": "#1ca879",
+          "trendLabel": "Rising fast"
+        },
+        {
+          "id": "football-meme-custody",
+          "title": "Football fandom has entered custody battle mode",
+          "description": "A playful Hatsune Miku meme is turning match results into temporary custody claims, with fans redrawing the virtual singer in each winning country’s colors.",
+          "whyNow": "The joke is spreading alongside the tournament, giving football fans a shared visual language beyond the scoreline.",
+          "url": "https://knowyourmeme.com/memes/hatsune-miku-world-cup-custody-battle",
+          "source": "Know Your Meme",
+          "sourceLabel": "See the meme",
+          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
+          "accent": "#52d1a0",
+          "trendLabel": "Fan-made folklore"
+        }
+      ]
+    },
+    {
+      "id": "combat-sports",
+      "label": "Combat sports",
+      "parent": "Sports",
+      "description": "Fight cards, champions, rivalries, and the storylines that matter between the bell and the post-fight interview.",
+      "accent": "#f05e4f",
+      "topics": [
+        {
+          "id": "combat-ufc-330",
+          "title": "UFC 330 is the card everyone is timing",
+          "description": "A record-setting win has made the next UFC card feel less like a single night and more like a marker in the division’s changing hierarchy.",
+          "whyNow": "The latest result reshaped the conversation around who gets the next meaningful matchup.",
+          "url": "https://www.mmafighting.com/ufc/",
+          "source": "MMA Fighting",
+          "sourceLabel": "Follow the card",
+          "image": "/culture/news-ufc-330-makhachev-secures-record-setting-win-against-machado-gar.webp",
+          "accent": "#f05e4f",
+          "trendLabel": "Division shifting"
+        },
+        {
+          "id": "combat-title-runs",
+          "title": "The title run is the new personality test",
+          "description": "Fans are debating not only who wins, but how a champion handles pressure, adaptation, and the rematch that follows a dominant performance.",
+          "whyNow": "This week’s fight discussion is being driven by what the result means for a whole division, not just one highlight.",
+          "url": "https://www.espn.com/mma/",
+          "source": "ESPN MMA",
+          "sourceLabel": "Read the latest",
+          "image": "/culture/person-erling-haaland.webp",
+          "accent": "#ff806b",
+          "trendLabel": "High stakes"
+        },
+        {
+          "id": "combat-fight-week",
+          "title": "Fight week has become a media genre",
+          "description": "Open workouts, face-offs, breakdowns, and weigh-ins are building a narrative arc long before the main event starts.",
+          "whyNow": "Pre-fight content is pulling casual viewers into the sport through personality and anticipation.",
+          "url": "https://www.ufc.com/events",
+          "source": "UFC",
+          "sourceLabel": "See upcoming events",
+          "image": "/culture/news-machado-garry-how-to-watch-ufc-330-tonight-start-time-full-fight.webp",
+          "accent": "#ff9d8e",
+          "trendLabel": "Before the bell"
+        }
+      ]
+    },
+    {
+      "id": "beauty",
+      "label": "Beauty",
+      "parent": "Lifestyle",
+      "description": "Makeup, skincare, hair, and the product signals moving from creator shelves into everyday routines.",
+      "accent": "#e981a9",
+      "topics": [
+        {
+          "id": "beauty-routine-reset",
+          "title": "The routine reset is replacing the haul",
+          "description": "Beauty content is leaning toward small, repeatable routines: fewer products, clearer steps, and one visible change people can test immediately.",
+          "whyNow": "Practical routine videos are outperforming pure product accumulation in this week’s discovery cycle.",
+          "url": "https://www.vogue.com/beauty",
+          "source": "Vogue Beauty",
+          "sourceLabel": "Browse the beauty desk",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "accent": "#e981a9",
+          "trendLabel": "Practical glow"
+        },
+        {
+          "id": "beauty-lip-color",
+          "title": "Lip color is getting more specific",
+          "description": "The current beauty conversation is less about one universal shade and more about finishes, undertones, and the tiny adjustment that makes a familiar look feel new.",
+          "whyNow": "Short demonstrations are creating fast feedback loops around shades that look different in motion than on a product page.",
+          "url": "https://www.allure.com/beauty",
+          "source": "Allure",
+          "sourceLabel": "Read the beauty coverage",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "accent": "#f29bbb",
+          "trendLabel": "Micro-trend"
+        },
+        {
+          "id": "beauty-skin-barrier",
+          "title": "Skin-barrier language is sticking",
+          "description": "Gentler formulas and slower routines are still shaping how people talk about skincare, with comfort becoming as important as a dramatic before-and-after.",
+          "whyNow": "The category is moving through education and repeat use rather than a single overnight product spike.",
+          "url": "https://www.nytimes.com/wirecutter/reviews/best-skin-care-routine/",
+          "source": "Wirecutter",
+          "sourceLabel": "Read the guide",
+          "image": "/culture/product-striped-canvas-mini-tote.webp",
+          "accent": "#ffc1d2",
+          "trendLabel": "Slow and steady"
+        }
+      ]
+    },
+    {
+      "id": "food-drink",
+      "label": "Food & drink",
+      "parent": "Lifestyle",
+      "description": "New flavors, nostalgic drops, limited drinks, and the food moments people are trying to explain to one another.",
+      "accent": "#f59e42",
+      "topics": [
+        {
+          "id": "food-unicorn-frappuccino",
+          "title": "The return of the maximalist drink",
+          "description": "Bright, limited-time drinks are back in the conversation because they function as both a flavor experiment and an instantly recognizable social object.",
+          "whyNow": "The latest Starbucks-style drop is creating a familiar mix of curiosity, nostalgia, and camera-ready color.",
+          "url": "https://www.cincinnati.com/story/entertainment/dining/2026/08/14/starbucks-unicorn-frappuccino/",
+          "source": "The Cincinnati Enquirer",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "accent": "#f59e42",
+          "trendLabel": "Camera-ready"
+        },
+        {
+          "id": "food-squishy-dumplings",
+          "title": "Snackable novelty is back",
+          "description": "Mystery snacks and squishy-looking treats are bridging food, toys, and collecting, turning the unboxing moment into part of the appeal.",
+          "whyNow": "The product is spreading through curiosity-driven clips that make the reveal as important as the taste.",
+          "url": "https://www.amazon.com/s?k=mystery+squishy+dumplings",
+          "source": "Amazon",
+          "sourceLabel": "See the products",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "accent": "#ffbd66",
+          "trendLabel": "Unboxable"
+        },
+        {
+          "id": "food-nostalgia-drops",
+          "title": "Nostalgia is the new limited edition",
+          "description": "Food brands are revisiting colorful flavors and old-school formats that make a simple purchase feel like a small cultural event.",
+          "whyNow": "The strongest food launches this week are selling a memory and a photo opportunity at the same time.",
+          "url": "https://www.eater.com/",
+          "source": "Eater",
+          "sourceLabel": "Browse food culture",
+          "image": "/culture/product-restocked-wirkin-bag.webp",
+          "accent": "#ffd28b",
+          "trendLabel": "Back for seconds"
+        }
+      ]
+    },
+    {
+      "id": "gaming",
+      "label": "Gaming",
+      "parent": "Culture",
+      "description": "Game launches, reveals, communities, and the small details players are collectively zooming in on.",
+      "accent": "#3fa7ff",
+      "topics": [
+        {
+          "id": "gaming-gta6",
+          "title": "GTA 6 details are feeding the microscope",
+          "description": "Every new gameplay detail is being treated as evidence of how dense and reactive the next Grand Theft Auto world could be.",
+          "whyNow": "Fresh footage and feature chatter have revived the cycle of frame-by-frame speculation.",
+          "url": "https://www.rockstargames.com/VI",
+          "source": "Rockstar Games",
+          "sourceLabel": "Visit the official site",
+          "image": "/culture/news-new-gta-6-gameplay-features-leak-ahead-of-netflix-stream.webp",
+          "accent": "#3fa7ff",
+          "trendLabel": "Under the microscope"
+        },
+        {
+          "id": "gaming-cozy-worlds",
+          "title": "Cozy games keep expanding their worlds",
+          "description": "The appeal of a low-pressure game is widening into decorating, collecting, and social play that can be followed as casually as a favorite show.",
+          "whyNow": "Players are rewarding games that create a place to return to, not only a challenge to finish.",
+          "url": "https://www.polygon.com/gaming",
+          "source": "Polygon",
+          "sourceLabel": "Read gaming coverage",
+          "image": "/culture/movie-backrooms.webp",
+          "accent": "#65b7ff",
+          "trendLabel": "A world to revisit"
+        },
+        {
+          "id": "gaming-community-lore",
+          "title": "Community lore is a feature now",
+          "description": "Players are making the surrounding theories, clips, and inside jokes feel like a second game layered on top of the official one.",
+          "whyNow": "The most active gaming conversations this week are being driven by interpretation and remixing as much as release news.",
+          "url": "https://www.ign.com/games",
+          "source": "IGN",
+          "sourceLabel": "Explore game coverage",
+          "image": "/culture/meme-john-rod.webp",
+          "accent": "#8acbff",
+          "trendLabel": "Player-built"
+        }
+      ]
+    },
+    {
+      "id": "anime-manga",
+      "label": "Anime & manga",
+      "parent": "Culture",
+      "description": "Series moments, character arcs, fan art, and releases that are traveling far beyond the core fandom.",
+      "accent": "#ff5d65",
+      "topics": [
+        {
+          "id": "anime-fan-art",
+          "title": "Fan art is becoming the recap",
+          "description": "A single illustration can now summarize a character turn, a ship, or a whole episode faster than a conventional recap.",
+          "whyNow": "This week’s anime conversation is moving through images and edits that make emotional context immediately legible.",
+          "url": "https://www.crunchyroll.com/news/latest",
+          "source": "Crunchyroll News",
+          "sourceLabel": "Read the latest",
+          "image": "/culture/meme-hatsune-miku-world-cup-custody-battle.webp",
+          "accent": "#ff5d65",
+          "trendLabel": "Drawn into it"
+        },
+        {
+          "id": "anime-character-arcs",
+          "title": "Character arcs are driving the discourse",
+          "description": "The strongest anime debates this week are about choices and consequences rather than power scaling alone.",
+          "whyNow": "Viewers are sharing scenes that reveal a character’s inner logic, giving the conversation a longer tail after the episode ends.",
+          "url": "https://www.animenewsnetwork.com/",
+          "source": "Anime News Network",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/movie-jana-nayagan.webp",
+          "accent": "#ff7d83",
+          "trendLabel": "Story-first"
+        },
+        {
+          "id": "anime-collectibles",
+          "title": "The collectible is part of the canon",
+          "description": "Figures, cards, and limited collaborations are giving fans a way to keep a favorite scene present after the episode or chapter is over.",
+          "whyNow": "New drops and restocks are connecting anime fandom to the wider collector economy.",
+          "url": "https://www.goodsmile.com/en/",
+          "source": "Good Smile Company",
+          "sourceLabel": "Browse collectibles",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "accent": "#ff9da1",
+          "trendLabel": "Collect the moment"
+        }
+      ]
+    },
+    {
+      "id": "film-tv",
+      "label": "Film & TV",
+      "parent": "Culture",
+      "description": "Trailers, casting, premieres, and the movies and shows becoming part of the week’s shared vocabulary.",
+      "accent": "#e8b64e",
+      "topics": [
+        {
+          "id": "film-project-hail-mary",
+          "title": "Project Hail Mary is the week’s big bet",
+          "description": "The adaptation is drawing attention for the size of its premise: one stranded astronaut, an impossible problem, and a solution that depends on unexpected connection.",
+          "whyNow": "The film’s current rollout is turning a book-world favorite into a mainstream event movie conversation.",
+          "url": "https://www.imdb.com/title/tt12042730/",
+          "source": "IMDb",
+          "sourceLabel": "See the film record",
+          "image": "/culture/movie-project-hail-mary.webp",
+          "accent": "#e8b64e",
+          "trendLabel": "Big-screen bet"
+        },
+        {
+          "id": "film-supergirl",
+          "title": "Supergirl is sharpening the superhero palette",
+          "description": "The new film is being discussed as a chance to make a familiar comic-book world feel stranger, more personal, and less polished at the edges.",
+          "whyNow": "First-look conversation is widening beyond the costume into tone, character, and the shape of the new DC era.",
+          "url": "https://www.imdb.com/title/tt11798650/",
+          "source": "IMDb",
+          "sourceLabel": "See the film record",
+          "image": "/culture/movie-supergirl.webp",
+          "accent": "#f4cb6e",
+          "trendLabel": "New tone"
+        },
+        {
+          "id": "film-frozen3",
+          "title": "Frozen 3 is turning the sequel into a mystery",
+          "description": "The first look is raising questions about Anna’s next chapter and the new threat waiting beyond the story’s familiar kingdom.",
+          "whyNow": "A single preview has been enough to restart fan theory-making around a major animated return.",
+          "url": "https://www.disney.com/movies/frozen-3",
+          "source": "Disney",
+          "sourceLabel": "Visit the official site",
+          "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
+          "accent": "#ffe09b",
+          "trendLabel": "Theory fuel"
+        }
+      ]
+    },
+    {
+      "id": "books-reading",
+      "label": "Books & reading",
+      "parent": "Culture",
+      "description": "The novels, stories, and reading communities generating recommendation energy beyond the bestseller table.",
+      "accent": "#a77b55",
+      "topics": [
+        {
+          "id": "books-calamity-club",
+          "title": "The Calamity Club is a conversation starter",
+          "description": "A group of people colliding with the same impossible problem is giving readers a plot that is easy to recommend without flattening its emotional stakes.",
+          "whyNow": "Reader discussion is pushing the book beyond a monthly list and into active recommendation chains.",
+          "url": "https://www.goodreads.com/book/show/",
+          "source": "Goodreads",
+          "sourceLabel": "See reader context",
+          "image": "/culture/book-the-calamity-club.webp",
+          "accent": "#a77b55",
+          "trendLabel": "Passed hand to hand"
+        },
+        {
+          "id": "books-dungeon-crawler",
+          "title": "Dungeon Crawler Carl refuses to stay niche",
+          "description": "A game-like survival premise, escalating danger, and a comic voice are helping the series move from recommendation circles into broader reading culture.",
+          "whyNow": "The series is getting fresh attention from readers looking for a propulsive next-world obsession.",
+          "url": "https://www.goodreads.com/book/show/56791322-dungeon-crawler-carl",
+          "source": "Goodreads",
+          "sourceLabel": "See reader context",
+          "image": "/culture/book-dungeon-crawler-carl-dungeon-crawler-carl-1.webp",
+          "accent": "#c29263",
+          "trendLabel": "Cult favorite"
+        },
+        {
+          "id": "books-our-perfect-storm",
+          "title": "Our Perfect Storm is pulling readers into the weather",
+          "description": "A high-pressure situation and the people trapped inside it are making this week’s reading conversation feel urgent, intimate, and very easy to keep talking about.",
+          "whyNow": "The title is gaining momentum through readers looking for a story with immediate stakes and a strong emotional hook.",
+          "url": "https://www.goodreads.com/book/show/",
+          "source": "Goodreads",
+          "sourceLabel": "See reader context",
+          "image": "/culture/book-our-perfect-storm.webp",
+          "accent": "#d3a47a",
+          "trendLabel": "High-stakes read"
+        }
+      ]
+    },
+    {
+      "id": "streetwear",
+      "label": "Streetwear",
+      "parent": "Lifestyle",
+      "description": "Bags, sneakers, styling codes, and the fashion pieces that move through resale, restock, and creator culture.",
+      "accent": "#f37d43",
+      "topics": [
+        {
+          "id": "streetwear-wirkin",
+          "title": "The Wirkin restock is still doing numbers",
+          "description": "The viral designer-adjacent bag is sitting at the intersection of access, aspiration, and the thrill of finding the thing everyone thought was gone.",
+          "whyNow": "A fresh restock has restarted the conversation around the product’s unusual mix of scarcity and recognizability.",
+          "url": "https://www.amazon.com/s?k=wirkin+bag",
+          "source": "Amazon",
+          "sourceLabel": "See the restock",
+          "image": "/culture/product-restocked-wirkin-bag.webp",
+          "accent": "#f37d43",
+          "trendLabel": "Restock watch"
+        },
+        {
+          "id": "streetwear-tote",
+          "title": "The oversized tote is the whole outfit",
+          "description": "Simple canvas shapes are being styled as a visual anchor rather than an afterthought, making utility look like a deliberate part of the silhouette.",
+          "whyNow": "Street-style posts are rewarding pieces that read clearly in one frame and work across several aesthetics.",
+          "url": "https://www.vogue.com/fashion",
+          "source": "Vogue Fashion",
+          "sourceLabel": "Browse fashion coverage",
+          "image": "/culture/product-striped-canvas-mini-tote.webp",
+          "accent": "#ff9864",
+          "trendLabel": "Utility, styled"
+        },
+        {
+          "id": "streetwear-dupe-culture",
+          "title": "Dupe culture keeps changing the question",
+          "description": "The conversation has moved from whether an item looks similar to whether the lower-cost version delivers the same feeling, use, or social signal.",
+          "whyNow": "Restocks and comparison clips are bringing the value-versus-status debate back into everyday fashion shopping.",
+          "url": "https://www.businessoffashion.com/",
+          "source": "The Business of Fashion",
+          "sourceLabel": "Read fashion business coverage",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "accent": "#ffb180",
+          "trendLabel": "Value, redefined"
+        }
+      ]
+    },
+    {
+      "id": "internet-culture",
+      "label": "Internet culture",
+      "parent": "Culture",
+      "description": "Memes, slang, and the tiny social signals that become a shared language before anyone agrees on what they mean.",
+      "accent": "#e95bd6",
+      "topics": [
+        {
+          "id": "internet-67",
+          "title": "67 is still doing a lot of work",
+          "description": "The number is functioning less like a definition and more like a flexible in-group signal: context, timing, and delivery do most of the meaning-making.",
+          "whyNow": "It is recurring across posts and comments because it can be dropped into almost any situation without a fixed explanation.",
+          "url": "https://knowyourmeme.com/memes/67",
+          "source": "Know Your Meme",
+          "sourceLabel": "See the entry",
+          "image": "/culture/slang-67.webp",
+          "accent": "#e95bd6",
+          "trendLabel": "Context is the joke"
+        },
+        {
+          "id": "internet-aura-farming",
+          "title": "Aura farming is now a full-time job",
+          "description": "The phrase describes moments engineered to look effortlessly cool, especially when the performance of not trying becomes the entire point.",
+          "whyNow": "Creators and commenters are using it to name the invisible choreography behind a viral moment.",
+          "url": "https://knowyourmeme.com/memes/aura-farming",
+          "source": "Know Your Meme",
+          "sourceLabel": "See the entry",
+          "image": "/culture/slang-aura-farming.webp",
+          "accent": "#f178df",
+          "trendLabel": "Effortlessly effortful"
+        },
+        {
+          "id": "internet-mbappe-meme",
+          "title": "The Mbappé meme has entered sports folklore",
+          "description": "A football image is being remixed into a general-purpose reaction format, proving once again that the internet likes a recognizable face with a very specific expression.",
+          "whyNow": "Tournament attention is giving the meme fresh circulation far outside football-specific feeds.",
+          "url": "https://knowyourmeme.com/memes/mbappe-special",
+          "source": "Know Your Meme",
+          "sourceLabel": "See the entry",
+          "image": "/culture/meme-mbappe-special.webp",
+          "accent": "#ff8de8",
+          "trendLabel": "Escaped the niche"
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "label": "Tech",
+      "parent": "Culture",
+      "description": "Devices, interfaces, and the product shifts that change what people expect from everyday technology.",
+      "accent": "#5a9cff",
+      "topics": [
+        {
+          "id": "tech-foldables",
+          "title": "Foldables are becoming a design language",
+          "description": "The Galaxy Z Fold 8 is part of a wider push to make a phone feel like a pocket-sized workspace without giving up the visual drama of a new form.",
+          "whyNow": "Fresh hardware coverage is shifting the question from novelty to what people actually do with the extra screen.",
+          "url": "https://www.samsung.com/us/smartphones/galaxy-z-fold/",
+          "source": "Samsung",
+          "sourceLabel": "See the product family",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "accent": "#5a9cff",
+          "trendLabel": "Form factor watch"
+        },
+        {
+          "id": "tech-ai-workflows",
+          "title": "AI is moving into the boring parts",
+          "description": "The most durable AI conversations are becoming less about spectacle and more about drafts, cleanup, search, and the tiny repetitive tasks people do every day.",
+          "whyNow": "Practical workflows are creating repeat use, which is a quieter but more meaningful kind of adoption signal.",
+          "url": "https://www.theverge.com/ai-artificial-intelligence",
+          "source": "The Verge",
+          "sourceLabel": "Read AI coverage",
+          "image": "/culture/media-odyssey.webp",
+          "accent": "#75b0ff",
+          "trendLabel": "Useful by Tuesday"
+        },
+        {
+          "id": "tech-camera-roll",
+          "title": "The camera roll is becoming the interface",
+          "description": "Visual search, screenshots, and image-first notes are turning the phone’s photo library into a place to ask questions, not just store memories.",
+          "whyNow": "People are discovering new device behavior through quick demonstrations that start with something already in their camera roll.",
+          "url": "https://www.wired.com/",
+          "source": "WIRED",
+          "sourceLabel": "Read technology coverage",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "accent": "#97c7ff",
+          "trendLabel": "Image-first"
+        }
+      ]
+    },
+    {
+      "id": "creators",
+      "label": "Creators",
+      "parent": "Culture",
+      "description": "The personalities, formats, and creator-led moments that are shaping what people watch, quote, and search next.",
+      "accent": "#ff765f",
+      "topics": [
+        {
+          "id": "creators-amelia-dimoldenberg",
+          "title": "Awkward interviews are still a superpower",
+          "description": "Amelia Dimoldenberg’s intentionally off-kilter interview style keeps turning a familiar press format into a character-driven piece of entertainment.",
+          "whyNow": "A new wave of guest clips is reminding people that the format works because the pauses are part of the payoff.",
+          "url": "https://www.youtube.com/@ameliadimoldenberg",
+          "source": "YouTube",
+          "sourceLabel": "Watch the channel",
+          "image": "/culture/person-amelia-dimoldenberg.webp",
+          "accent": "#ff765f",
+          "trendLabel": "Pause for effect"
+        },
+        {
+          "id": "creators-visual-language",
+          "title": "The visual language is the product",
+          "description": "Creators are building recognizable worlds through color, pacing, props, and recurring formats before they ever ask an audience to buy anything.",
+          "whyNow": "The most memorable creator moments this week are instantly identifiable without a username attached.",
+          "url": "https://www.youtube.com/",
+          "source": "YouTube Culture & Trends",
+          "sourceLabel": "Browse creator culture",
+          "image": "/culture/meme-best-of-zach.webp",
+          "accent": "#ff967f",
+          "trendLabel": "Recognizable at a glance"
+        },
+        {
+          "id": "creators-fan-edit",
+          "title": "The fan edit is an editorial desk",
+          "description": "A good edit does more than clip a moment: it decides what matters, sets a rhythm, and teaches everyone else how to read the source material.",
+          "whyNow": "Edits are increasingly where a show, athlete, or song gets its first widely shared interpretation.",
+          "url": "https://www.youtube.com/feed/trending",
+          "source": "YouTube Trending",
+          "sourceLabel": "See what is moving",
+          "image": "/culture/creator-zendaya.webp",
+          "accent": "#ffb09e",
+          "trendLabel": "The first draft"
+        }
+      ]
+    },
+    {
+      "id": "pop",
+      "label": "Pop",
+      "parent": "Music",
+      "query": "pop music new release viral song chart",
+      "accent": "#ff4f86",
+      "description": "Hooks, releases, fandom moments, and pop-cultural signals that are moving faster than the general song leaderboard.",
+      "topics": [
+        {
+          "title": "The hook is back in the driver's seat",
+          "description": "Pop's most durable moments still begin with a line or melody people can carry into a group chat, a short clip, or a whole room.",
+          "whyNow": "Fresh releases and replayed hooks are creating a second wave of discovery this week.",
+          "url": "https://www.billboard.com/charts/pop-songs/",
+          "source": "Billboard Pop",
+          "sourceLabel": "Browse the chart",
+          "image": "/culture/song-petal-ariana-grande.webp",
+          "trendLabel": "Hook first",
+          "id": "pop-1",
+          "accent": "#ff4f86"
+        },
+        {
+          "title": "Deluxe tracks are a second campaign",
+          "description": "A bonus track is no longer just an extra: it can reset the visual language, reopen a rollout, and give fans a new favorite to organize around.",
+          "whyNow": "Recent deluxe drops are extending release conversations well past their first weekend.",
+          "url": "https://www.billboard.com/charts/hot-100/",
+          "source": "Billboard Hot 100",
+          "sourceLabel": "See the signal",
+          "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
+          "trendLabel": "Second wind",
+          "id": "pop-2",
+          "accent": "#ff4f86"
+        },
+        {
+          "title": "Pop fandom is writing the rollout",
+          "description": "Fan edits, dance formats, and lyric fragments are shaping which part of a polished pop release becomes the public-facing moment.",
+          "whyNow": "This week's most shared pop moments are being selected in the feed before they settle on a chart.",
+          "url": "https://newsroom.tiktok.com/en-us/music",
+          "source": "TikTok Music",
+          "sourceLabel": "Read the trend desk",
+          "image": "/culture/song-hate-that-i-made-you-love-me-ariana-grande.webp",
+          "trendLabel": "Fandom cut",
+          "id": "pop-3",
+          "accent": "#ff4f86"
+        }
+      ]
+    },
+    {
+      "id": "hip-hop-rap",
+      "label": "Hip-hop & rap",
+      "parent": "Music",
+      "query": "hip hop rap new music freestyle album release",
+      "accent": "#f15b40",
+      "description": "Verses, producers, mixtapes, and rap conversations gaining lift before they settle into the mainstream cycle.",
+      "topics": [
+        {
+          "title": "The verse is back in the group chat",
+          "description": "A sharp verse can now travel as a self-contained event, carrying cadence, punchlines, and a producer's whole atmosphere in under a minute.",
+          "whyNow": "New clips and guest verses are pulling attention toward writing and delivery again this week.",
+          "url": "https://www.billboard.com/charts/hot-rap-songs/",
+          "source": "Billboard Hot Rap Songs",
+          "sourceLabel": "Browse the chart",
+          "image": "/culture/song-choosin-texas-ella-langley.webp",
+          "trendLabel": "Bars in motion",
+          "id": "hip-hop-rap-1",
+          "accent": "#f15b40"
+        },
+        {
+          "title": "Mixtape energy meets rollout discipline",
+          "description": "Artists are pairing loose, immediate tracks with highly designed worlds, making the project feel spontaneous and collectible at the same time.",
+          "whyNow": "The week's rap conversation is clustering around projects that feel both raw and carefully sequenced.",
+          "url": "https://www.complex.com/music",
+          "source": "Complex Music",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/song-earrings-malcolm-todd.webp",
+          "trendLabel": "Loose but precise",
+          "id": "hip-hop-rap-2",
+          "accent": "#f15b40"
+        },
+        {
+          "title": "The producer tag is a personality",
+          "description": "A familiar tag or drum pocket can function like a signature, letting listeners recognize a collaboration before the artist even enters the frame.",
+          "whyNow": "Producer-led clips are turning behind-the-scenes details into front-of-feed conversation.",
+          "url": "https://genius.com/",
+          "source": "Genius",
+          "sourceLabel": "Follow the annotations",
+          "image": "/culture/person-andrew-tate.webp",
+          "trendLabel": "Signature sound",
+          "id": "hip-hop-rap-3",
+          "accent": "#f15b40"
+        }
+      ]
+    },
+    {
+      "id": "r-and-b-soul",
+      "label": "R&B & soul",
+      "parent": "Music",
+      "query": "R&B soul music new release vocal performance",
+      "accent": "#b76bff",
+      "description": "Vocal performances, slow-burn releases, and soul references that are finding a fresh audience beyond the broad music charts.",
+      "topics": [
+        {
+          "title": "Late-night R&B is finding daylight",
+          "description": "Intimate production and close-up vocals are traveling outside their usual listening hours, becoming the soundtrack for edits, routines, and quiet flexes.",
+          "whyNow": "A cluster of low-key releases is gaining replay through mood-first discovery this week.",
+          "url": "https://www.billboard.com/charts/r-and-b-hip-hop-songs/",
+          "source": "Billboard R&B/Hip-Hop",
+          "sourceLabel": "Browse the chart",
+          "image": "/culture/song-earrings-malcolm-todd.webp",
+          "trendLabel": "After-hours lift",
+          "id": "r-and-b-soul-1",
+          "accent": "#b76bff"
+        },
+        {
+          "title": "The vocal run becomes a shareable event",
+          "description": "Listeners are isolating the exact moment a singer bends, stacks, or stretches a phrase and turning technique into the hook itself.",
+          "whyNow": "Performance snippets are sending people back to full songs for the vocal detail they caught in passing.",
+          "url": "https://www.npr.org/music/",
+          "source": "NPR Music",
+          "sourceLabel": "Explore the performances",
+          "image": "/culture/song-babydoll-dominic-fike.webp",
+          "trendLabel": "Voice as headline",
+          "id": "r-and-b-soul-2",
+          "accent": "#b76bff"
+        },
+        {
+          "title": "Soul samples are back in rotation",
+          "description": "Classic textures are being reintroduced with enough space to feel familiar without becoming a museum piece, keeping the old reference alive in a new room.",
+          "whyNow": "Sample-spotting threads are giving this week's songs a second layer of conversation.",
+          "url": "https://open.spotify.com/genre/rnb-page",
+          "source": "Spotify R&B",
+          "sourceLabel": "Listen to the lane",
+          "image": "/culture/song-man-i-need-olivia-dean.webp",
+          "trendLabel": "Old soul, new room",
+          "id": "r-and-b-soul-3",
+          "accent": "#b76bff"
+        }
+      ]
+    },
+    {
+      "id": "indie-alternative",
+      "label": "Indie & alternative",
+      "parent": "Music",
+      "query": "indie alternative rock new music festival discovery",
+      "accent": "#6c9e7b",
+      "description": "Guitar lines, left-field pop, and scene-level discoveries that are building momentum before a wider breakout.",
+      "topics": [
+        {
+          "title": "Guitar bands are reclaiming the small room",
+          "description": "The new alternative fantasy is less about maximal production and more about a song that feels better when a crowd is close enough to sing every turn.",
+          "whyNow": "Live clips and intimate sessions are pushing guitar-forward acts into new discovery loops.",
+          "url": "https://www.nme.com/music",
+          "source": "NME",
+          "sourceLabel": "Read the scene report",
+          "image": "/culture/song-loser-tame-impala.webp",
+          "trendLabel": "Small room energy",
+          "id": "indie-alternative-1",
+          "accent": "#6c9e7b"
+        },
+        {
+          "title": "The quiet chorus gets loud online",
+          "description": "Subtle vocal turns and understated choruses are becoming the part listeners quote, remix, and build a visual mood around.",
+          "whyNow": "Low-key tracks are gaining lift through repeat listens rather than one oversized viral moment.",
+          "url": "https://www.stereogum.com/",
+          "source": "Stereogum",
+          "sourceLabel": "Follow the discoveries",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "trendLabel": "Soft breakout",
+          "id": "indie-alternative-2",
+          "accent": "#6c9e7b"
+        },
+        {
+          "title": "Festival discovery starts before the set",
+          "description": "Playlists, rehearsal snippets, and fan-shot previews now let listeners arrive at a festival with a personal shortlist of artists they have only just found.",
+          "whyNow": "This week's festival conversation is sending attention toward the names just outside the obvious headliners.",
+          "url": "https://www.brooklynvegan.com/",
+          "source": "BrooklynVegan",
+          "sourceLabel": "Browse the live radar",
+          "image": "/culture/song-hate-that-i-made-you-love-me-ariana-grande.webp",
+          "trendLabel": "Before the stage",
+          "id": "indie-alternative-3",
+          "accent": "#6c9e7b"
+        }
+      ]
+    },
+    {
+      "id": "latin-music",
+      "label": "Latin music",
+      "parent": "Music",
+      "query": "Latin music reggaeton regional Mexican new release",
+      "accent": "#f28d45",
+      "description": "Reggaetón, música Mexicana, bachata, and cross-border sounds with momentum outside a single-language chart.",
+      "topics": [
+        {
+          "title": "Regional sounds keep crossing the border",
+          "description": "Accordion lines, corridos, and regional instruments are moving through global playlists without sanding down the local identity that made them distinct.",
+          "whyNow": "The latest releases are making regional texture part of the international pop conversation.",
+          "url": "https://www.billboard.com/charts/latin-songs/",
+          "source": "Billboard Latin",
+          "sourceLabel": "Browse the chart",
+          "image": "/culture/person-shakira.webp",
+          "trendLabel": "Borderless sound",
+          "id": "latin-music-1",
+          "accent": "#f28d45"
+        },
+        {
+          "title": "The dance-floor bridge is doing the work",
+          "description": "A strong rhythmic switch can connect club music, pop, and regional styles in a way that gives listeners an immediate entry point.",
+          "whyNow": "Dance clips are turning genre-blending moments into the most portable part of this week's releases.",
+          "url": "https://www.billboard.com/charts/latin-airplay/",
+          "source": "Billboard Latin Airplay",
+          "sourceLabel": "See the movement",
+          "image": "/culture/song-animal-katseye.webp",
+          "trendLabel": "Rhythm crossover",
+          "id": "latin-music-2",
+          "accent": "#f28d45"
+        },
+        {
+          "title": "Spanglish is a hook strategy",
+          "description": "Bilingual phrases are being used as texture, punchline, and invitation, letting a chorus feel specific while still opening the door to a wider singalong.",
+          "whyNow": "Mixed-language hooks are showing up repeatedly in the clips traveling furthest this week.",
+          "url": "https://www.rollingstone.com/music/music-latin/",
+          "source": "Rolling Stone Música",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/song-man-i-need-olivia-dean.webp",
+          "trendLabel": "Two-language hook",
+          "id": "latin-music-3",
+          "accent": "#f28d45"
+        }
+      ]
+    },
+    {
+      "id": "country",
+      "label": "Country",
+      "parent": "Music",
+      "query": "country music new release Nashville singer songwriter",
+      "accent": "#c88948",
+      "description": "Story songs, Nashville craft, crossover production, and the country artists building momentum outside the general song chart.",
+      "topics": [
+        {
+          "title": "Country is stretching its map",
+          "description": "Country's current edge is a wide one: traditional storytelling, rock muscle, pop polish, and regional details can all belong in the same week.",
+          "whyNow": "New releases are making genre boundaries part of the conversation instead of a footnote.",
+          "url": "https://www.billboard.com/charts/country-songs/",
+          "source": "Billboard Country",
+          "sourceLabel": "Browse the chart",
+          "image": "/culture/song-choosin-texas-ella-langley.webp",
+          "trendLabel": "Wide-open lane",
+          "id": "country-1",
+          "accent": "#c88948"
+        },
+        {
+          "title": "The story song is social content",
+          "description": "A single lyric can now introduce a character, a hometown, and an emotional plot before someone has heard the full arrangement.",
+          "whyNow": "Lyric-led clips are sending listeners from a short scene directly into full country releases.",
+          "url": "https://www.rollingstone.com/music/music-country/",
+          "source": "Rolling Stone Country",
+          "sourceLabel": "Read the latest",
+          "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
+          "trendLabel": "Verse to feed",
+          "id": "country-2",
+          "accent": "#c88948"
+        },
+        {
+          "title": "Honky-tonk details, stadium scale",
+          "description": "The most shareable country moments are pairing tactile details—boots, bars, back roads—with choruses built to fill a much bigger room.",
+          "whyNow": "Live videos are making the scale of this week's country breakouts impossible to miss.",
+          "url": "https://www.cmt.com/music",
+          "source": "CMT Music",
+          "sourceLabel": "Watch the performances",
+          "image": "/culture/person-taylor-swift.webp",
+          "trendLabel": "Big room roots",
+          "id": "country-3",
+          "accent": "#c88948"
+        }
+      ]
+    },
+    {
+      "id": "afrobeats",
+      "label": "Afrobeats",
+      "parent": "Music",
+      "query": "Afrobeats Afropop music new release dance trend",
+      "accent": "#f3b341",
+      "description": "Afropop releases, dance-led discovery, and global collaborations that are building momentum from the rhythm outward.",
+      "topics": [
+        {
+          "title": "The groove travels without translation",
+          "description": "A drum pattern, vocal pocket, and movement can make a song legible across borders before listeners know every word.",
+          "whyNow": "This week's discovery clips are rewarding songs whose rhythm does the introduction first.",
+          "url": "https://www.billboard.com/charts/world-digital-song-sales/",
+          "source": "Billboard Global",
+          "sourceLabel": "See the chart",
+          "image": "/culture/song-animal-katseye.webp",
+          "trendLabel": "Rhythm first",
+          "id": "afrobeats-1",
+          "accent": "#f3b341"
+        },
+        {
+          "title": "Afropop hooks are global chorus material",
+          "description": "Collaborations are treating the chorus as shared space, keeping a song's local character while giving multiple audiences a line to carry.",
+          "whyNow": "Cross-border features are appearing across the week's most replayed music clips.",
+          "url": "https://www.okayafrica.com/music/",
+          "source": "OkayAfrica Music",
+          "sourceLabel": "Read the scene report",
+          "image": "/culture/person-shakira.webp",
+          "trendLabel": "Worldwide chorus",
+          "id": "afrobeats-2",
+          "accent": "#f3b341"
+        },
+        {
+          "title": "Dance challenges are scouting A&R",
+          "description": "Movement is acting as an early signal for which songs have enough personality to survive outside the original release context.",
+          "whyNow": "Dance formats are giving newer artists a discovery path that bypasses the broad chart cycle.",
+          "url": "https://www.youtube.com/results?search_query=afrobeats+new+music",
+          "source": "YouTube",
+          "sourceLabel": "Watch the movement",
+          "image": "/culture/song-babydoll-dominic-fike.webp",
+          "trendLabel": "Move before chart",
+          "id": "afrobeats-3",
+          "accent": "#f3b341"
+        }
+      ]
+    },
+    {
+      "id": "basketball",
+      "label": "Basketball",
+      "parent": "Sports",
+      "query": "basketball NBA WNBA players playoffs trade news",
+      "accent": "#ed7a36",
+      "description": "The players, schemes, roster moves, and basketball culture stories worth knowing beyond the final score.",
+      "topics": [
+        {
+          "title": "The next guard conversation",
+          "description": "Young guards are being evaluated through a wider lens now: shot creation, decision-making, defensive range, and whether their style survives a playoff possession.",
+          "whyNow": "Off-season movement and international play are resetting the league's next-wave debates.",
+          "url": "https://www.espn.com/nba/",
+          "source": "ESPN NBA",
+          "sourceLabel": "Follow the league",
+          "image": "/culture/person-lamine-yamal.webp",
+          "trendLabel": "Next up",
+          "id": "basketball-1",
+          "accent": "#ed7a36"
+        },
+        {
+          "title": "Positionless basketball gets specific",
+          "description": "The phrase only matters when a player can solve several problems in the same lineup, turning versatility into an actual tactical advantage.",
+          "whyNow": "Recent analysis is focusing on the exact roles that make flexible lineups work.",
+          "url": "https://www.nytimes.com/athletic/nba/",
+          "source": "The Athletic NBA",
+          "sourceLabel": "Read the analysis",
+          "image": "/culture/person-erling-haaland.webp",
+          "trendLabel": "Role matters",
+          "id": "basketball-2",
+          "accent": "#ed7a36"
+        },
+        {
+          "title": "The highlight has a scouting report",
+          "description": "A spectacular finish now travels with a second conversation about footwork, spacing, and the small decision that made the clip possible.",
+          "whyNow": "Breakout clips are pulling casual viewers into deeper basketball vocabulary this week.",
+          "url": "https://www.wnba.com/",
+          "source": "WNBA",
+          "sourceLabel": "See the game",
+          "image": "/culture/meme-mbappe-special.webp",
+          "trendLabel": "More than a clip",
+          "id": "basketball-3",
+          "accent": "#ed7a36"
+        }
+      ]
+    },
+    {
+      "id": "baseball",
+      "label": "Baseball",
+      "parent": "Sports",
+      "query": "MLB baseball games trade prospects home run news",
+      "accent": "#4d83d1",
+      "description": "Pitching matchups, prospects, trades, and the small statistical details making baseball feel immediate this week.",
+      "topics": [
+        {
+          "title": "The pitch clock changed the highlight",
+          "description": "Baseball's new rhythm is making the space between pitches part of the spectacle, with urgency showing up before the ball is put in play.",
+          "whyNow": "Recent games and broadcasts are drawing attention to pace as a piece of player identity.",
+          "url": "https://www.mlb.com/news",
+          "source": "MLB News",
+          "sourceLabel": "Follow the league",
+          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
+          "trendLabel": "Faster tension",
+          "id": "baseball-1",
+          "accent": "#4d83d1"
+        },
+        {
+          "title": "Prospects are becoming content",
+          "description": "Minor-league call-ups and scouting reports now arrive with clips, personality, and a ready-made story about what a player might change next.",
+          "whyNow": "The week's roster conversations are making future stars feel like current events.",
+          "url": "https://www.baseballamerica.com/",
+          "source": "Baseball America",
+          "sourceLabel": "Track the prospects",
+          "image": "/culture/person-jeff-bezos.webp",
+          "trendLabel": "Future in frame",
+          "id": "baseball-2",
+          "accent": "#4d83d1"
+        },
+        {
+          "title": "The long ball is a full production",
+          "description": "A home run is now the payoff to a chain of decisions: pitch selection, count management, launch angle, and the crowd's anticipation.",
+          "whyNow": "Highlight packages are sending viewers back to the at-bat rather than stopping at the result.",
+          "url": "https://www.espn.com/mlb/",
+          "source": "ESPN MLB",
+          "sourceLabel": "See the matchups",
+          "image": "/culture/person-lamine-yamal.webp",
+          "trendLabel": "At-bat drama",
+          "id": "baseball-3",
+          "accent": "#4d83d1"
+        }
+      ]
+    },
+    {
+      "id": "american-football",
+      "label": "American football",
+      "parent": "Sports",
+      "query": "NFL football quarterback training camp draft trade news",
+      "accent": "#31896e",
+      "description": "Quarterbacks, roster battles, scheme shifts, and football stories that matter before the national broadcast catches up.",
+      "topics": [
+        {
+          "title": "Training camp is already a narrative engine",
+          "description": "A rep count, a new route combination, or one sharp practice clip can become the first chapter of an entire season's storyline.",
+          "whyNow": "Camp reports and preseason footage are turning possibility into daily football conversation.",
+          "url": "https://www.espn.com/nfl/",
+          "source": "ESPN NFL",
+          "sourceLabel": "Follow camp",
+          "image": "/culture/news-ice-cream-company-rebel-filed-for-chapter-11-bankruptcy.webp",
+          "trendLabel": "Before kickoff",
+          "id": "american-football-1",
+          "accent": "#31896e"
+        },
+        {
+          "title": "The quarterback carousel keeps spinning",
+          "description": "Every new starter changes the story around protection, play-calling, expectations, and which part of a roster has to grow up fastest.",
+          "whyNow": "Depth-chart movement is creating more meaningful football questions than a simple win-loss prediction.",
+          "url": "https://www.nfl.com/news",
+          "source": "NFL News",
+          "sourceLabel": "Read the latest",
+          "image": "/culture/person-taylor-swift.webp",
+          "trendLabel": "New signal caller",
+          "id": "american-football-2",
+          "accent": "#31896e"
+        },
+        {
+          "title": "Fantasy football starts in the rumor cycle",
+          "description": "Usage hints, red-zone roles, and coach comments give fantasy players a way to read a season before the box score can confirm anything.",
+          "whyNow": "Early rankings are being rebuilt around training-camp clues and emerging role changes.",
+          "url": "https://www.fantasypros.com/nfl/",
+          "source": "FantasyPros NFL",
+          "sourceLabel": "Track the roles",
+          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
+          "trendLabel": "Role watch",
+          "id": "american-football-3",
+          "accent": "#31896e"
+        }
+      ]
+    },
+    {
+      "id": "tennis",
+      "label": "Tennis",
+      "parent": "Sports",
+      "query": "tennis ATP WTA tournament players match news",
+      "accent": "#9aaa32",
+      "description": "Tournament swings, player rivalries, surfaces, and the tactical turns shaping tennis beyond the headline final.",
+      "topics": [
+        {
+          "title": "Hard-court season resets the hierarchy",
+          "description": "A new surface changes the questions: who can take time away, who can defend deep, and whose second serve holds under pressure.",
+          "whyNow": "The calendar's next turn is putting recent results in a different tactical light.",
+          "url": "https://www.atptour.com/en/news",
+          "source": "ATP Tour",
+          "sourceLabel": "Follow the tour",
+          "image": "/culture/person-lamine-yamal.webp",
+          "trendLabel": "New surface",
+          "id": "tennis-1",
+          "accent": "#9aaa32"
+        },
+        {
+          "title": "Teen contenders are forcing the question",
+          "description": "A young player's run is compelling when it reveals more than potential—especially a pattern they can repeat against experienced opponents.",
+          "whyNow": "Breakthrough matches are making the next generation feel immediate rather than theoretical.",
+          "url": "https://www.wtatennis.com/news",
+          "source": "WTA",
+          "sourceLabel": "Read the tour notes",
+          "image": "/culture/person-erling-haaland.webp",
+          "trendLabel": "Future now",
+          "id": "tennis-2",
+          "accent": "#9aaa32"
+        },
+        {
+          "title": "The rally is the highlight",
+          "description": "Long exchanges are being edited like action sequences, with defense, recovery, and the final change of direction carrying the drama.",
+          "whyNow": "Point-of-the-match clips are bringing tactical tennis to viewers who may not watch an entire draw.",
+          "url": "https://www.youtube.com/results?search_query=tennis+best+rallies",
+          "source": "YouTube Tennis",
+          "sourceLabel": "Watch the points",
+          "image": "/culture/person-shakira.webp",
+          "trendLabel": "Point by point",
+          "id": "tennis-3",
+          "accent": "#9aaa32"
+        }
+      ]
+    },
+    {
+      "id": "motorsport",
+      "label": "Motorsport",
+      "parent": "Sports",
+      "query": "Formula 1 racing motorsport driver team race news",
+      "accent": "#e74b50",
+      "description": "Drivers, garages, strategy, and the data-rich drama that makes a motorsport weekend feel like a serialized show.",
+      "topics": [
+        {
+          "title": "Qualifying is the weekend's cliffhanger",
+          "description": "A single lap can reveal setup choices, tire confidence, and the pressure a driver will carry into the race before the lights even go out.",
+          "whyNow": "Recent qualifying battles are making Saturday performance part of the main storyline.",
+          "url": "https://www.formula1.com/en/latest",
+          "source": "Formula 1",
+          "sourceLabel": "Follow the paddock",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "trendLabel": "One-lap drama",
+          "id": "motorsport-1",
+          "accent": "#e74b50"
+        },
+        {
+          "title": "The garage becomes the storyline",
+          "description": "Strategy calls, upgrades, and team radio turn engineering decisions into character beats that fans can follow race by race.",
+          "whyNow": "Behind-the-scenes coverage is making the team battle as legible as the driver standings.",
+          "url": "https://www.motorsport.com/f1/",
+          "source": "Motorsport.com",
+          "sourceLabel": "Read the analysis",
+          "image": "/culture/media-odyssey.webp",
+          "trendLabel": "Inside the garage",
+          "id": "motorsport-2",
+          "accent": "#e74b50"
+        },
+        {
+          "title": "Data is part of the fandom",
+          "description": "Telemetry, tire windows, and lap deltas let viewers build an argument about what happened instead of settling for the final order.",
+          "whyNow": "Explainer clips are turning technical details into the most satisfying part of the week's race recap.",
+          "url": "https://www.racefans.net/",
+          "source": "RaceFans",
+          "sourceLabel": "Decode the race",
+          "image": "/culture/person-jeff-bezos.webp",
+          "trendLabel": "Numbers at speed",
+          "id": "motorsport-3",
+          "accent": "#e74b50"
+        }
+      ]
+    },
+    {
+      "id": "golf",
+      "label": "Golf",
+      "parent": "Sports",
+      "query": "golf PGA tour major tournament players news",
+      "accent": "#5d9f63",
+      "description": "Courses, swings, equipment, and tournament storylines that make golf more interesting than a leaderboard alone.",
+      "topics": [
+        {
+          "title": "The leaderboard is a moving target",
+          "description": "Golf's most suspenseful turns come from how a course changes across the day, making patience, weather, and late pressure part of the competition.",
+          "whyNow": "The latest tournament finishes are rewarding viewers who follow the round's shape, not just its winner.",
+          "url": "https://www.pgatour.com/news",
+          "source": "PGA Tour",
+          "sourceLabel": "Follow the tour",
+          "image": "/culture/person-erling-haaland.webp",
+          "trendLabel": "Course in motion",
+          "id": "golf-1",
+          "accent": "#5d9f63"
+        },
+        {
+          "title": "Equipment talk is spectator sport",
+          "description": "A club change or ball choice becomes compelling when it clarifies the player's strategy instead of functioning as a simple product plug.",
+          "whyNow": "Gear stories are being tied to visible changes in shot shape and confidence this week.",
+          "url": "https://www.golfdigest.com/gear",
+          "source": "Golf Digest",
+          "sourceLabel": "Read the gear desk",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "trendLabel": "Gear with a reason",
+          "id": "golf-2",
+          "accent": "#5d9f63"
+        },
+        {
+          "title": "The next generation plays loud",
+          "description": "Younger golfers are bringing faster pacing, visible emotion, and a more social presentation to a sport built on quiet concentration.",
+          "whyNow": "New players are drawing attention for the way they change the atmosphere around a competitive round.",
+          "url": "https://www.golfchannel.com/news",
+          "source": "Golf Channel",
+          "sourceLabel": "Watch the rise",
+          "image": "/culture/person-sonam-wangchuk.webp",
+          "trendLabel": "New tempo",
+          "id": "golf-3",
+          "accent": "#5d9f63"
+        }
+      ]
+    },
+    {
+      "id": "sports-news",
+      "label": "Sports news",
+      "parent": "Sports",
+      "query": "sports news leagues athletes trades results headlines",
+      "accent": "#2f8db0",
+      "description": "The cross-sport storylines, business moves, and athlete moments that deserve a wider lens than one league provides.",
+      "topics": [
+        {
+          "title": "The calendar is the story",
+          "description": "A crowded sports week can connect tournaments, transfers, injuries, and cultural moments that would otherwise stay in separate league silos.",
+          "whyNow": "This week's biggest sports conversations are crossing the boundaries between seasons and competitions.",
+          "url": "https://www.espn.com/",
+          "source": "ESPN",
+          "sourceLabel": "See the whole board",
+          "image": "/culture/meme-mbappe-special.webp",
+          "trendLabel": "Beyond one league",
+          "id": "sports-news-1",
+          "accent": "#2f8db0"
+        },
+        {
+          "title": "The transaction wire is never quiet",
+          "description": "Trades, signings, and contract decisions reshape what fans expect from a season before a single new game has been played.",
+          "whyNow": "A cluster of roster moves is changing multiple title pictures at once.",
+          "url": "https://sports.yahoo.com/",
+          "source": "Yahoo Sports",
+          "sourceLabel": "Follow the moves",
+          "image": "/culture/news-ufc-330-makhachev-secures-record-setting-win-against-machado-gar.webp",
+          "trendLabel": "Roster ripple",
+          "id": "sports-news-2",
+          "accent": "#2f8db0"
+        },
+        {
+          "title": "Fans want the why after the score",
+          "description": "The result is the entry point; the more useful story explains the tactical choice, injury, matchup, or organizational decision behind it.",
+          "whyNow": "Explainers are carrying more of the postgame conversation than raw highlights alone.",
+          "url": "https://www.cbssports.com/",
+          "source": "CBS Sports",
+          "sourceLabel": "Read the explainers",
+          "image": "/culture/person-lamine-yamal.webp",
+          "trendLabel": "Context after impact",
+          "id": "sports-news-3",
+          "accent": "#2f8db0"
+        }
+      ]
+    },
+    {
+      "id": "us-news",
+      "label": "U.S. news",
+      "parent": "News",
+      "query": "United States news policy courts public life latest",
+      "accent": "#5c78b9",
+      "description": "U.S. developments, public decisions, and local-to-national stories with consequences beyond the general news leaderboard.",
+      "topics": [
+        {
+          "title": "The policy headline meets the kitchen table",
+          "description": "The most useful domestic stories connect a government decision to the ordinary systems people actually use: work, school, housing, health, or travel.",
+          "whyNow": "This week's national coverage is being measured by its practical consequence, not just its political drama.",
+          "url": "https://apnews.com/hub/us-news",
+          "source": "Associated Press U.S.",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
+          "trendLabel": "Life after headline",
+          "id": "us-news-1",
+          "accent": "#5c78b9"
+        },
+        {
+          "title": "Courts are setting the next headline",
+          "description": "Legal decisions often arrive as quiet documents before becoming public turning points, changing what agencies, companies, and communities can do next.",
+          "whyNow": "A run of rulings is moving several national conversations from argument into implementation.",
+          "url": "https://www.reuters.com/world/us/",
+          "source": "Reuters U.S.",
+          "sourceLabel": "Follow the decisions",
+          "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
+          "trendLabel": "Decision point",
+          "id": "us-news-2",
+          "accent": "#5c78b9"
+        },
+        {
+          "title": "Weather keeps rewriting the local agenda",
+          "description": "Storms and heat turn infrastructure, public safety, and preparation into immediate civic stories long before the season has finished.",
+          "whyNow": "Recent weather coverage is pulling local impacts into national attention.",
+          "url": "https://www.weather.gov/news",
+          "source": "National Weather Service",
+          "sourceLabel": "Track the conditions",
+          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
+          "trendLabel": "Local, then national",
+          "id": "us-news-3",
+          "accent": "#5c78b9"
+        }
+      ]
+    },
+    {
+      "id": "world-news",
+      "label": "World news",
+      "parent": "News",
+      "query": "world international news diplomacy conflict economy latest",
+      "accent": "#4b9b9b",
+      "description": "International developments, diplomacy, and regional stories that are changing how the wider world is being read this week.",
+      "topics": [
+        {
+          "title": "The map keeps moving",
+          "description": "International stories become easier to understand when the timeline, the neighboring interests, and the people living with the decision are visible together.",
+          "whyNow": "A burst of diplomatic and regional coverage is making the consequences of movement impossible to isolate.",
+          "url": "https://www.reuters.com/world/",
+          "source": "Reuters World",
+          "sourceLabel": "Read the world desk",
+          "image": "/culture/person-sonam-wangchuk.webp",
+          "trendLabel": "A wider frame",
+          "id": "world-news-1",
+          "accent": "#4b9b9b"
+        },
+        {
+          "title": "Diplomacy becomes a live sport",
+          "description": "Meetings, statements, and carefully chosen absences can signal the next move before any formal agreement is announced.",
+          "whyNow": "This week's coverage is following the language around negotiations as closely as the outcomes.",
+          "url": "https://apnews.com/world-news",
+          "source": "Associated Press World",
+          "sourceLabel": "Follow the negotiations",
+          "image": "/culture/news-hurricane-lala-leaves-big-island-residents-in-hawaii-hunkered-do.webp",
+          "trendLabel": "Between the lines",
+          "id": "world-news-2",
+          "accent": "#4b9b9b"
+        },
+        {
+          "title": "A regional story goes global",
+          "description": "A local event can suddenly matter everywhere when it touches supply chains, migration, climate, security, or a shared cultural conversation.",
+          "whyNow": "Several stories this week are being understood through their second-order effects outside the original region.",
+          "url": "https://www.bbc.com/news/world",
+          "source": "BBC World",
+          "sourceLabel": "See the wider context",
+          "image": "/culture/person-jeff-bezos.webp",
+          "trendLabel": "Ripple effect",
+          "id": "world-news-3",
+          "accent": "#4b9b9b"
+        }
+      ]
+    },
+    {
+      "id": "business-markets",
+      "label": "Business & markets",
+      "parent": "News",
+      "query": "business markets economy companies stocks latest news",
+      "accent": "#3d907b",
+      "description": "Companies, markets, labor, and consumer signals that explain what is changing beneath the day's broad business headlines.",
+      "topics": [
+        {
+          "title": "Markets are pricing the next question",
+          "description": "A market move is most useful as a prompt: what changed in expectations about rates, demand, risk, or a company's ability to execute?",
+          "whyNow": "This week's volatility is being read as a story about future confidence rather than a verdict on one day.",
+          "url": "https://www.reuters.com/markets/",
+          "source": "Reuters Markets",
+          "sourceLabel": "Follow the markets",
+          "image": "/culture/news-ice-cream-company-rebel-filed-for-chapter-11-bankruptcy.webp",
+          "trendLabel": "Expectation watch",
+          "id": "business-markets-1",
+          "accent": "#3d907b"
+        },
+        {
+          "title": "The consumer signal matters",
+          "description": "Spending patterns, product queues, and the small trade-offs people make can reveal a shift in confidence before a quarterly report explains it.",
+          "whyNow": "Recent retail and household stories are making everyday behavior part of the market read.",
+          "url": "https://www.wsj.com/news/business",
+          "source": "The Wall Street Journal",
+          "sourceLabel": "Read the business desk",
+          "image": "/culture/product-restocked-wirkin-bag.webp",
+          "trendLabel": "In the checkout",
+          "id": "business-markets-2",
+          "accent": "#3d907b"
+        },
+        {
+          "title": "AI spending meets the balance sheet",
+          "description": "The business question is moving from whether companies will use AI to where the investment is producing measurable work, revenue, or leverage.",
+          "whyNow": "Earnings and product updates are putting practical return on AI spend in the foreground.",
+          "url": "https://www.ft.com/technology",
+          "source": "Financial Times",
+          "sourceLabel": "Follow the technology economy",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "trendLabel": "Show the return",
+          "id": "business-markets-3",
+          "accent": "#3d907b"
+        }
+      ]
+    },
+    {
+      "id": "science-space",
+      "label": "Science & space",
+      "parent": "News",
+      "query": "science space NASA discovery research latest news",
+      "accent": "#7169c7",
+      "description": "Space missions, research breakthroughs, and scientific ideas that are becoming part of the public conversation now.",
+      "topics": [
+        {
+          "title": "The sky is the next timeline",
+          "description": "Space stories make distant systems feel immediate when a new image, mission, or measurement turns an abstract question into something people can see.",
+          "whyNow": "Fresh observations and mission updates are giving this week's science conversation a visual center.",
+          "url": "https://www.nasa.gov/news/",
+          "source": "NASA",
+          "sourceLabel": "Follow the mission desk",
+          "image": "/culture/media-odyssey.webp",
+          "trendLabel": "Look up",
+          "id": "science-space-1",
+          "accent": "#7169c7"
+        },
+        {
+          "title": "Tiny instruments, big discoveries",
+          "description": "Many breakthroughs begin with better sensors, cleaner samples, or a more patient way of measuring something researchers have been chasing for years.",
+          "whyNow": "New research coverage is highlighting the tools behind the result as much as the result itself.",
+          "url": "https://www.sciencenews.org/",
+          "source": "Science News",
+          "sourceLabel": "Read the research",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "trendLabel": "Better measurement",
+          "id": "science-space-2",
+          "accent": "#7169c7"
+        },
+        {
+          "title": "Science gets a public beta",
+          "description": "When a complex finding is explained with an image, model, or experiment people can understand, the research becomes a shared object rather than a distant paper.",
+          "whyNow": "This week's most shared science stories are the ones that make the method visible.",
+          "url": "https://www.nature.com/news",
+          "source": "Nature News",
+          "sourceLabel": "Explore the evidence",
+          "image": "/culture/news-moderna-stock-explodes-over-100-after-cancer-vaccine-breakthroug.webp",
+          "trendLabel": "Method matters",
+          "id": "science-space-3",
+          "accent": "#7169c7"
+        }
+      ]
+    },
+    {
+      "id": "climate-environment",
+      "label": "Climate & environment",
+      "parent": "News",
+      "query": "climate environment extreme weather energy conservation latest news",
+      "accent": "#4d9e79",
+      "description": "Weather, ecosystems, energy, and adaptation stories that make the climate conversation concrete and local.",
+      "topics": [
+        {
+          "title": "Extreme weather is the backdrop",
+          "description": "The climate story is increasingly told through the systems people rely on: roads, power, crops, insurance, and the timing of everyday life.",
+          "whyNow": "Recent conditions are turning long-term climate questions into immediate planning stories.",
+          "url": "https://climate.nasa.gov/news/",
+          "source": "NASA Climate",
+          "sourceLabel": "Read the context",
+          "image": "/culture/news-hurricane-lala-leaves-big-island-residents-in-hawaii-hunkered-do.webp",
+          "trendLabel": "Now, not abstract",
+          "id": "climate-environment-1",
+          "accent": "#4d9e79"
+        },
+        {
+          "title": "The grid is becoming a culture story",
+          "description": "Power demand, storage, and local infrastructure are shaping where people live, what gets built, and how technology fits into the day.",
+          "whyNow": "Energy stories are showing up across business, policy, and consumer coverage this week.",
+          "url": "https://www.noaa.gov/climate",
+          "source": "NOAA Climate",
+          "sourceLabel": "Follow the data",
+          "image": "/culture/news-city-to-close-non-essential-offices-and-services-monday-followin.webp",
+          "trendLabel": "Power in focus",
+          "id": "climate-environment-2",
+          "accent": "#4d9e79"
+        },
+        {
+          "title": "Adaptation is moving local",
+          "description": "The most legible environmental changes are often neighborhood-scale: shade, water, food systems, building materials, and the design of public space.",
+          "whyNow": "Local experiments are giving the week's climate conversation practical examples instead of only distant targets.",
+          "url": "https://www.theguardian.com/environment/climate-crisis",
+          "source": "The Guardian Environment",
+          "sourceLabel": "See the experiments",
+          "image": "/culture/media-odyssey.webp",
+          "trendLabel": "Built for change",
+          "id": "climate-environment-3",
+          "accent": "#4d9e79"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "label": "Health",
+      "parent": "News",
+      "query": "health medicine public health research wellness latest news",
+      "accent": "#d96878",
+      "description": "Medical research, public health, prevention, and everyday health stories with clear relevance beyond generic wellness content.",
+      "topics": [
+        {
+          "title": "Prevention is having a data moment",
+          "description": "Health coverage is increasingly about finding risk earlier, making care easier to reach, and giving people signals they can act on before a crisis.",
+          "whyNow": "New research and public guidance are pushing prevention back into the center of the conversation.",
+          "url": "https://www.cdc.gov/media/",
+          "source": "CDC Newsroom",
+          "sourceLabel": "Read the guidance",
+          "image": "/culture/news-egg-recall-over-salmonella-deemed-class-i-by-the-fda-see-the-ful.webp",
+          "trendLabel": "Earlier action",
+          "id": "health-1",
+          "accent": "#d96878"
+        },
+        {
+          "title": "The wellness claim meets evidence",
+          "description": "The useful question behind a viral health idea is what was actually studied, for whom, and what would count as a meaningful result.",
+          "whyNow": "This week's health discourse is separating attractive routines from claims that have real support.",
+          "url": "https://www.nih.gov/news-events/news-releases",
+          "source": "National Institutes of Health",
+          "sourceLabel": "Check the evidence",
+          "image": "/culture/news-moderna-stock-explodes-over-100-after-cancer-vaccine-breakthroug.webp",
+          "trendLabel": "Proof over promise",
+          "id": "health-2",
+          "accent": "#d96878"
+        },
+        {
+          "title": "Public health becomes personal",
+          "description": "A population-level update matters most when it explains the small decisions people can make about prevention, exposure, treatment, or access.",
+          "whyNow": "Recent coverage is translating broad health signals into more practical individual context.",
+          "url": "https://www.who.int/news",
+          "source": "World Health Organization",
+          "sourceLabel": "Read the health desk",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "trendLabel": "Make it usable",
+          "id": "health-3",
+          "accent": "#d96878"
+        }
+      ]
+    },
+    {
+      "id": "tech-news",
+      "label": "Technology news",
+      "parent": "News",
+      "query": "technology AI gadgets companies regulation latest news",
+      "accent": "#4d91d8",
+      "description": "The consequential technology stories—products, platforms, regulation, and research—separated from general gadget discovery.",
+      "topics": [
+        {
+          "title": "The AI product cycle gets practical",
+          "description": "The interesting question is shifting from what a model can demonstrate to where a real workflow becomes faster, clearer, or newly possible.",
+          "whyNow": "New product launches and user experiments are making practical adoption the week's main technology signal.",
+          "url": "https://www.theverge.com/ai-artificial-intelligence",
+          "source": "The Verge AI",
+          "sourceLabel": "Read the coverage",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "trendLabel": "Useful by Tuesday",
+          "id": "tech-news-1",
+          "accent": "#4d91d8"
+        },
+        {
+          "title": "Antitrust becomes product news",
+          "description": "Regulation can change the interfaces, defaults, pricing, and choices people experience every day—not just the companies named in a case.",
+          "whyNow": "Recent legal and policy moves are making platform structure part of mainstream product conversation.",
+          "url": "https://www.reuters.com/technology/",
+          "source": "Reuters Technology",
+          "sourceLabel": "Follow the policy",
+          "image": "/culture/media-odyssey.webp",
+          "trendLabel": "Rules shape tools",
+          "id": "tech-news-2",
+          "accent": "#4d91d8"
+        },
+        {
+          "title": "The hardware reset",
+          "description": "The next device story is less about adding one more feature and more about making form, battery, camera, and software feel like one coherent behavior.",
+          "whyNow": "New device coverage is rewarding products that change how a task feels, not only what a spec sheet says.",
+          "url": "https://www.wired.com/",
+          "source": "WIRED",
+          "sourceLabel": "Read technology coverage",
+          "image": "/culture/product-galaxy-z-fold-8.webp",
+          "trendLabel": "Form meets function",
+          "id": "tech-news-3",
+          "accent": "#4d91d8"
+        }
+      ]
+    },
+    {
+      "id": "entertainment-news",
+      "label": "Entertainment news",
+      "parent": "News",
+      "query": "entertainment news celebrity film television music industry latest",
+      "accent": "#c968b8",
+      "description": "Casting, releases, industry moves, and entertainment moments that sit between culture chatter and hard news.",
+      "topics": [
+        {
+          "title": "The franchise machine is remixing itself",
+          "description": "Studios are looking for freshness inside familiar worlds, using new formats, tones, and points of view to make a known title feel newly discussable.",
+          "whyNow": "Announcements and first looks are making franchise strategy part of this week's entertainment story.",
+          "url": "https://variety.com/v/film/",
+          "source": "Variety Film",
+          "sourceLabel": "Read the industry desk",
+          "image": "/culture/movie-supergirl.webp",
+          "trendLabel": "Familiar, remixed",
+          "id": "entertainment-news-1",
+          "accent": "#c968b8"
+        },
+        {
+          "title": "Casting news is a social event",
+          "description": "A casting decision can instantly change the imagined tone of a project, creating a collaborative fan trailer before production is even visible.",
+          "whyNow": "Newly announced roles are generating more conversation about possibility than plot.",
+          "url": "https://www.hollywoodreporter.com/c/movies/",
+          "source": "The Hollywood Reporter",
+          "sourceLabel": "Follow the casting",
+          "image": "/culture/creator-zendaya.webp",
+          "trendLabel": "Before the trailer",
+          "id": "entertainment-news-2",
+          "accent": "#c968b8"
+        },
+        {
+          "title": "The release window is part of the story",
+          "description": "When and where a film, series, or special arrives now shapes how people discover it, talk about it, and decide whether it becomes a shared moment.",
+          "whyNow": "This week's release chatter is as focused on timing and access as it is on the title itself.",
+          "url": "https://www.indiewire.com/c/film/",
+          "source": "IndieWire",
+          "sourceLabel": "See what's arriving",
+          "image": "/culture/news-frozen-3-first-look-teases-anna-s-wedding-new-villain-more.webp",
+          "trendLabel": "Timing is content",
+          "id": "entertainment-news-3",
+          "accent": "#c968b8"
+        }
+      ]
+    },
+    {
+      "id": "home-design",
+      "label": "Home & design",
+      "parent": "Lifestyle",
+      "query": "home design interiors furniture architecture trend",
+      "accent": "#b68766",
+      "description": "Interiors, objects, architecture, and small design choices making everyday spaces feel newly legible or desirable.",
+      "topics": [
+        {
+          "title": "Small spaces are getting smarter",
+          "description": "The best compact-home ideas do more than save room: they make storage, movement, and daily rituals feel intentional instead of compromised.",
+          "whyNow": "Space-saving layouts and flexible objects are dominating this week's design saves and shares.",
+          "url": "https://www.architecturaldigest.com/",
+          "source": "Architectural Digest",
+          "sourceLabel": "Browse the homes",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "trendLabel": "Room to move",
+          "id": "home-design-1",
+          "accent": "#b68766"
+        },
+        {
+          "title": "The color forecast is warmer",
+          "description": "Paint, upholstery, and small objects are being used to make a room feel collected and lived-in without committing to a full renovation.",
+          "whyNow": "Warm palettes are appearing across the week's most copied room details.",
+          "url": "https://www.domino.com/design/",
+          "source": "Domino",
+          "sourceLabel": "See the design ideas",
+          "image": "/culture/product-striped-canvas-mini-tote.webp",
+          "trendLabel": "Warmth, edited",
+          "id": "home-design-2",
+          "accent": "#b68766"
+        },
+        {
+          "title": "The object is the mood",
+          "description": "A single lamp, chair, textile, or table can set the emotional temperature of a space more effectively than a room full of matching pieces.",
+          "whyNow": "Object-first room tours are turning individual design choices into the new discovery format.",
+          "url": "https://www.dezeen.com/",
+          "source": "Dezeen",
+          "sourceLabel": "Explore the objects",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "trendLabel": "One good object",
+          "id": "home-design-3",
+          "accent": "#b68766"
+        }
+      ]
+    },
+    {
+      "id": "travel",
+      "label": "Travel",
+      "parent": "Lifestyle",
+      "query": "travel destinations trip planning hotel food itinerary trend",
+      "accent": "#4ea5a2",
+      "description": "Destinations, itineraries, hotels, and travel behaviors that are making people rethink where and how to go next.",
+      "topics": [
+        {
+          "title": "The destination is the itinerary",
+          "description": "Travelers are choosing places for the rhythm of a day—markets, swims, trains, walks, and late dinners—rather than a checklist of sights.",
+          "whyNow": "Itinerary-first guides are driving this week's travel inspiration more than landmark lists.",
+          "url": "https://www.cntraveler.com/",
+          "source": "Condé Nast Traveler",
+          "sourceLabel": "Find the route",
+          "image": "/culture/news-hurricane-lala-passes-big-island-hawai-i-spared-from-direct-hit.webp",
+          "trendLabel": "Day-shaped travel",
+          "id": "travel-1",
+          "accent": "#4ea5a2"
+        },
+        {
+          "title": "Shoulder season gets a glow-up",
+          "description": "The in-between months are becoming the point: lighter crowds, better light, and a version of a famous place that feels more inhabitable.",
+          "whyNow": "Recent destination coverage is selling timing and atmosphere as much as the destination itself.",
+          "url": "https://www.cntraveler.com/gallery/best-shoulder-season-destinations",
+          "source": "Condé Nast Traveler",
+          "sourceLabel": "See the timing guide",
+          "image": "/culture/person-sonam-wangchuk.webp",
+          "trendLabel": "Go between",
+          "id": "travel-2",
+          "accent": "#4ea5a2"
+        },
+        {
+          "title": "Travel planning becomes content",
+          "description": "Maps, packing systems, and tiny logistics are becoming satisfying objects to share, turning preparation into part of the trip's anticipation.",
+          "whyNow": "Planning videos and saveable guides are moving faster than traditional destination roundups.",
+          "url": "https://www.lonelyplanet.com/articles",
+          "source": "Lonely Planet",
+          "sourceLabel": "Browse the guides",
+          "image": "/culture/product-dasein-women-s-tote-bag.webp",
+          "trendLabel": "Before takeoff",
+          "id": "travel-3",
+          "accent": "#4ea5a2"
+        }
+      ]
+    },
+    {
+      "id": "wellness-fitness",
+      "label": "Wellness & fitness",
+      "parent": "Lifestyle",
+      "query": "fitness wellness exercise recovery sleep trend",
+      "accent": "#68a477",
+      "description": "Movement, recovery, sleep, and sustainable routines that are gaining traction beyond the broad wellness conversation.",
+      "topics": [
+        {
+          "title": "Zone two refuses to disappear",
+          "description": "The appeal is less about a perfect protocol than a manageable way to build endurance into a routine without making every workout a test.",
+          "whyNow": "Low-intensity training is still circulating because it translates cleanly into repeatable weekly habits.",
+          "url": "https://www.runnersworld.com/uk/training/",
+          "source": "Runner's World",
+          "sourceLabel": "Read the training desk",
+          "image": "/culture/song-self-aware-temper-city.webp",
+          "trendLabel": "Repeatable effort",
+          "id": "wellness-fitness-1",
+          "accent": "#68a477"
+        },
+        {
+          "title": "Recovery is the new flex",
+          "description": "Rest, mobility, hydration, and sleep are being presented as active parts of performance rather than evidence that someone skipped the hard work.",
+          "whyNow": "Athlete and creator routines are putting recovery tools back in the center of the fitness feed.",
+          "url": "https://www.gq.com/about/fitness",
+          "source": "GQ Fitness",
+          "sourceLabel": "See the routines",
+          "image": "/culture/person-shakira.webp",
+          "trendLabel": "Train, then restore",
+          "id": "wellness-fitness-2",
+          "accent": "#68a477"
+        },
+        {
+          "title": "Short workouts, long streaks",
+          "description": "A smaller session can still feel complete when it is designed around consistency, a clear finish line, and a routine people can actually repeat.",
+          "whyNow": "Compact workout formats are gaining lift as people look for sustainable momentum rather than dramatic resets.",
+          "url": "https://www.self.com/fitness",
+          "source": "SELF Fitness",
+          "sourceLabel": "Find a routine",
+          "image": "/culture/product-starbucks-unicorn-frappuccino.webp",
+          "trendLabel": "Small, consistent",
+          "id": "wellness-fitness-3",
+          "accent": "#68a477"
+        }
+      ]
+    },
+    {
+      "id": "parenting",
+      "label": "Parenting",
+      "parent": "Lifestyle",
+      "query": "parenting family school kids advice trend",
+      "accent": "#e09a59",
+      "description": "Family systems, school rhythms, kid culture, and practical parenting conversations that are gaining attention right now.",
+      "topics": [
+        {
+          "title": "The group chat is the village",
+          "description": "Parents are using small digital networks to trade logistics, reassurance, recommendations, and the kind of context that rarely fits a formal guide.",
+          "whyNow": "Back-to-school planning is making informal coordination feel newly visible this week.",
+          "url": "https://www.parents.com/",
+          "source": "Parents",
+          "sourceLabel": "Read the family desk",
+          "image": "/culture/book-theo-of-golden.webp",
+          "trendLabel": "Shared logistics",
+          "id": "parenting-1",
+          "accent": "#e09a59"
+        },
+        {
+          "title": "Back-to-school is a systems problem",
+          "description": "The start of a school year is a choreography of sleep, supplies, transportation, meals, and emotions—not just a shopping list.",
+          "whyNow": "Seasonal preparation is pulling practical family routines into the center of the conversation.",
+          "url": "https://www.nytimes.com/section/parenting",
+          "source": "The New York Times Parenting",
+          "sourceLabel": "See the guides",
+          "image": "/culture/meme-homer-let-the-barts-out.webp",
+          "trendLabel": "Reset the rhythm",
+          "id": "parenting-2",
+          "accent": "#e09a59"
+        },
+        {
+          "title": "Screen time is a design question",
+          "description": "The most useful family-tech conversations ask what a device is replacing, enabling, or interrupting instead of treating minutes as the whole story.",
+          "whyNow": "New family routines are focusing on the shape of digital life, not only its total duration.",
+          "url": "https://www.commonsensemedia.org/",
+          "source": "Common Sense Media",
+          "sourceLabel": "Find the context",
+          "image": "/culture/product-mystery-squishy-dumplings.webp",
+          "trendLabel": "Shape the habit",
+          "id": "parenting-3",
+          "accent": "#e09a59"
+        }
+      ]
+    },
+    {
+      "id": "podcasts",
+      "label": "Podcasts",
+      "parent": "Culture",
+      "query": "podcast new episodes interview audio show trend",
+      "accent": "#8e6ed0",
+      "description": "Shows, formats, hosts, and episode moments that are making audio feel like a live part of culture again.",
+      "topics": [
+        {
+          "title": "The video podcast is a set",
+          "description": "The most successful shows are designing a visual world—chairs, lighting, reactions, recurring bits—that makes the conversation recognizable before the clip begins.",
+          "whyNow": "This week's podcast clips are traveling because the format has a visual grammar, not just a famous guest.",
+          "url": "https://podcasts.apple.com/us/genre/podcasts/id26",
+          "source": "Apple Podcasts",
+          "sourceLabel": "Browse the charts",
+          "image": "/culture/creator-zendaya.webp",
+          "trendLabel": "More than audio",
+          "id": "podcasts-1",
+          "accent": "#8e6ed0"
+        },
+        {
+          "title": "Niche shows beat broad reach",
+          "description": "A focused show can build unusual trust by giving a specific community its own references, language, and long-running set of questions.",
+          "whyNow": "Specialist podcasts are gaining attention through recommendations that feel personal rather than mass-market.",
+          "url": "https://www.podchaser.com/",
+          "source": "Podchaser",
+          "sourceLabel": "Find a new show",
+          "image": "/culture/person-amelia-dimoldenberg.webp",
+          "trendLabel": "Specific wins",
+          "id": "podcasts-2",
+          "accent": "#8e6ed0"
+        },
+        {
+          "title": "The episode clip is its own format",
+          "description": "A good excerpt does not merely advertise the full episode; it has a beginning, a turn, and a reason to keep listening after the clip ends.",
+          "whyNow": "Short clips are driving discovery for shows whose full episodes live in a different attention mode.",
+          "url": "https://www.youtube.com/podcasts",
+          "source": "YouTube Podcasts",
+          "sourceLabel": "Watch the clips",
+          "image": "/culture/media-odyssey.webp",
+          "trendLabel": "Clip with a point",
+          "id": "podcasts-3",
+          "accent": "#8e6ed0"
+        }
+      ]
+    },
+    {
+      "id": "comedy",
+      "label": "Comedy",
+      "parent": "Culture",
+      "query": "comedy stand up sketch comedian viral bit",
+      "accent": "#e2a33f",
+      "description": "Bits, performers, formats, and comic phrases that are escaping their original stage or screen and becoming shared language.",
+      "topics": [
+        {
+          "title": "The bit escapes the stage",
+          "description": "A strong comedy premise can now live as a stand-up clip, a caption, a reaction, and a repeated phrase without losing its original shape.",
+          "whyNow": "Short-form performances are turning this week's jokes into portable social objects.",
+          "url": "https://www.youtube.com/results?search_query=stand+up+comedy+new",
+          "source": "YouTube Comedy",
+          "sourceLabel": "Watch the bits",
+          "image": "/culture/person-amelia-dimoldenberg.webp",
+          "trendLabel": "Out of context",
+          "id": "comedy-1",
+          "accent": "#e2a33f"
+        },
+        {
+          "title": "Deadpan is having a loud week",
+          "description": "Understatement works best when the audience can see the absurdity gathering just beneath a calm delivery, making the smallest reaction feel huge.",
+          "whyNow": "Reaction-led clips are carrying more of the comedy conversation than polished punchline compilations.",
+          "url": "https://www.vulture.com/section/comedy",
+          "source": "Vulture Comedy",
+          "sourceLabel": "Read the comedy desk",
+          "image": "/culture/meme-best-of-zach.webp",
+          "trendLabel": "Quietly enormous",
+          "id": "comedy-2",
+          "accent": "#e2a33f"
+        },
+        {
+          "title": "Crowd work keeps traveling",
+          "description": "Audience interaction gives a comic an unpredictable scene and gives viewers the feeling that the joke is happening only once, right in front of them.",
+          "whyNow": "Crowd-work clips are creating discovery loops for performers beyond their scheduled specials.",
+          "url": "https://www.netflixisajoke.com/",
+          "source": "Netflix Is A Joke",
+          "sourceLabel": "Find a special",
+          "image": "/culture/meme-funky-ehh.webp",
+          "trendLabel": "One-night energy",
+          "id": "comedy-3",
+          "accent": "#e2a33f"
+        }
+      ]
+    }
+  ]
+}

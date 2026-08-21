@@ -3,7 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { buildDescriptionPrompt, buildQuizPrompt, generateDescriptionBatch, parseDescriptionOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
+import { buildDescriptionPrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, parseDescriptionOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
 import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
@@ -27,19 +27,24 @@ test("builds and validates source-grounded AI descriptions", () => {
     id: "people-1",
     title: "Example Person",
     role: "Actor",
-    sourceSnippets: [{ source: "Publisher", text: "The person appeared in a new film this summer." }],
+    sourceSnippets: [{ kind: "current_event", source: "Publisher", text: "The person appeared in a new film this summer." }],
   }]);
   assert.match(prompt, /SOURCE DATA BEGIN/);
   assert.match(prompt, /untrusted reference data/i);
   assert.match(prompt, /recent event or coverage/i);
+  assert.match(prompt, /first sentence must answer/i);
+  assert.match(prompt, /concrete causal signal/i);
+  assert.match(prompt, /meme or unusual fan reaction/i);
+  assert.match(prompt, /return or re-release/i);
+  assert.match(prompt, /return an empty description/i);
   assert.match(prompt, /Never mention a publisher|quote a headline/i);
   const parsed = parseDescriptionOutput({
     output_text: JSON.stringify({ descriptions: [
-      { id: "people-1", description: "Example Person is an actor whose new film role has brought them renewed attention this summer." },
+      { id: "people-1", description: "Example Person drew attention this summer after appearing in a new film; they are an actor." },
       { id: "unexpected", description: "This must be ignored." },
     ] }),
   }, ["people-1"]);
-  assert.equal(parsed.get("people-1"), "Example Person is an actor whose new film role has brought them renewed attention this summer.");
+  assert.equal(parsed.get("people-1"), "Example Person drew attention this summer after appearing in a new film; they are an actor.");
   assert.equal(parsed.has("unexpected"), false);
   const incomplete = parseDescriptionOutput({
     output_text: JSON.stringify({ descriptions: [
@@ -53,6 +58,37 @@ test("builds and validates source-grounded AI descriptions", () => {
     ] }),
   }, ["people-1"]);
   assert.equal(attributed.has("people-1"), false);
+
+  const currentEvidence = {
+    title: "Example Person",
+    sourceSnippets: [{
+      kind: "current_event",
+      source: "Current coverage",
+      text: "Example Person appeared in a new film this summer.",
+    }],
+  };
+  assert.equal(isDescriptionUsable("people", parsed.get("people-1"), currentEvidence), true);
+  assert.equal(isDescriptionUsable("people", "Example Person drew attention after appearing in a new film this summer.", currentEvidence), true);
+  assert.equal(isDescriptionUsable("people", "Example Person is primarily known as an actor. A new film is coming.", currentEvidence), false);
+  assert.equal(isDescriptionUsable("people", "Example Person is an actor. Which reminds me, films are often discussed.", currentEvidence), false);
+  assert.equal(isDescriptionUsable("people", "Example Person joins a new project after a major announcement this summer.", {
+    title: "Example Person",
+    sourceSnippets: [{
+      kind: "current_headline",
+      source: "Current coverage",
+      text: "Example Person joins a new project after a major announcement this summer.",
+    }],
+  }), false);
+
+  const productEvidence = {
+    title: "Unicorn Frappuccino",
+    sourceSnippets: [
+      { kind: "current_demand", source: "Current coverage", text: "Starbucks brought back the Unicorn Frappuccino for a limited return, and demand surged." },
+      { kind: "background_context", source: "Product history", text: "The drink was first introduced as a limited release in 2017 and became a viral Starbucks moment." },
+    ],
+  };
+  assert.equal(isDescriptionUsable("products", "The Unicorn Frappuccino is back for a limited return, reviving the viral Starbucks drink that was first introduced in 2017.", productEvidence), true);
+  assert.equal(isDescriptionUsable("products", "The Unicorn Frappuccino is a blended drink with a sweet flavor.", productEvidence), false);
 });
 
 test("uses a bounded structured request for an enabled AI description batch", async () => {
@@ -245,6 +281,31 @@ test("renders the About flowchart", async () => {
   assert.match(workflow, /epoch_day/);
 });
 
+test("renders the niche For You builder and keeps anonymous profiles gated", async () => {
+  const nicheBrief = JSON.parse(await readFile(new URL("../data/niche-trends.json", import.meta.url), "utf8"));
+  const publishedNicheBrief = JSON.parse(await readFile(new URL("../public/data/niche-trends.json", import.meta.url), "utf8"));
+  assert.deepEqual(publishedNicheBrief, nicheBrief);
+  assert.ok(nicheBrief.categories.length >= 40);
+  assert.ok(nicheBrief.categories.every((category) => category.topics.length >= 3));
+  const nicheIds = new Set(nicheBrief.categories.map((category) => category.id));
+  for (const id of ["pop", "hip-hop-rap", "r-and-b-soul", "indie-alternative", "latin-music", "country", "afrobeats", "basketball", "sports-news", "us-news", "world-news", "business-markets", "science-space", "climate-environment", "health", "tech-news"]) {
+    assert.ok(nicheIds.has(id), `expected expanded niche category: ${id}`);
+  }
+
+  const response = await render("/for-you");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Your internet/);
+  assert.match(html, /Choose your corners/);
+  assert.match(html, /Compile my feed/);
+  assert.match(html, /class="interest-tag/);
+  assert.match(html, /class="is-active" href="\/for-you"[^>]*>For You<\/a>/);
+  assert.match(html, /signin-with-chatgpt/);
+
+  const profile = await render("/api/for-you/profile", { headers: { accept: "application/json" } });
+  assert.equal(profile.status, 401);
+});
+
 test("never edge-caches errors or unsafe request methods", async () => {
   const missing = await render("/definitely-not-a-page");
   assert.equal(missing.status, 404);
@@ -373,6 +434,13 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <p>This paragraph is deliberately long and should not be clipped in the middle of a sentence when the ingestion limit is reached. It remains complete.</p></article>
   `);
   assert.doesNotMatch(boundedIntro, /(?:…|\.\.\.)\s*$|\b(?:and|or|of|to|with)\.?$/i);
+  const contextRichIntro = extractArticleIntro(`
+    <article><p>The item returned this week and quickly drew attention from shoppers.</p>
+    <p>Retailers described the demand as unusually strong during the limited window.</p>
+    <p>The product was first introduced in 2017 and became a memorable limited release.</p>
+    <p>More background that is less relevant to the current explanation.</p></article>
+  `);
+  assert.match(contextRichIntro, /first introduced in 2017/);
   assert.doesNotMatch(extractArticleIntro(`
     <article><p>See more of our coverage and sign up for our newsletter to receive updates.</p>
     <p>Officials opened an investigation after the incident was reported at several locations.</p></article>

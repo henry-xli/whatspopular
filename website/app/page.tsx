@@ -39,6 +39,9 @@ export default function Home() {
             <a className="button button-quiet" href="/explore">
               Explore <span aria-hidden="true">→</span>
             </a>
+            <a className="button button-accent" href="/for-you">
+              Build your feed <span aria-hidden="true">✦</span>
+            </a>
           </div>
           <p className="hero-deck">{cultureBrief.summary}</p>
           <div className="freshness" aria-label="Brief freshness">

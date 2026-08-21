@@ -2,9 +2,10 @@ import { readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { gunzipSync } from "node:zlib";
-import { generateDescriptionBatch, generateQuizBatch } from "./ai-descriptions.mjs";
+import { generateDescriptionBatch, generateQuizBatch, isDescriptionUsable } from "./ai-descriptions.mjs";
 import { withHeadlessPage } from "./headless-browser.mjs";
 import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./news-article.mjs";
+import { generateNicheSnapshot } from "./niche-ingestion.mjs";
 import { createRateLimiter, fetchBytes, mapConcurrent } from "./runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -18,6 +19,7 @@ const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
 const wikidataPersonCache = new Map();
 const wikidataResponseCache = new Map();
 const scheduleWikidataRequest = createRateLimiter(500);
+const aiDescriptionContexts = new WeakMap();
 const quizSectionIds = ["memes", "people", "movies", "books", "news"];
 const quizQuestionCount = quizSectionIds.length * 3;
 const quizDurationSeconds = 15;
@@ -148,10 +150,16 @@ async function safely(name, work) {
 }
 
 function rememberAiDescriptionContext(item, sectionId, snippets) {
-  // Keep the call sites explicit about which validated context produced a card.
-  // The AI pass receives the already-curated card description, not raw headlines.
-  void sectionId;
-  void snippets;
+  if (!item || typeof item !== "object") return item;
+  const normalized = (Array.isArray(snippets) ? snippets : [])
+    .map((snippet) => ({
+      kind: plainText(snippet?.kind ?? "reference").slice(0, 40) || "reference",
+      source: plainText(snippet?.source ?? "Validated context").slice(0, 120) || "Validated context",
+      text: plainText(snippet?.text ?? "").slice(0, 900),
+      ...(snippet?.publishedAt ? { publishedAt: plainText(snippet.publishedAt).slice(0, 60) } : {}),
+    }))
+    .filter((snippet) => snippet.text);
+  aiDescriptionContexts.set(item, { sectionId, snippets: normalized });
   return item;
 }
 
@@ -1030,11 +1038,11 @@ async function updateBooks(brief, result) {
       accent: current?.accent ?? accents[index % accents.length],
     };
     rememberAiDescriptionContext(item, "books", [
-      { source: "Goodreads book page", text: goodreadsContext?.description },
-      { source: "Open Library book record", text: openLibraryContext?.description },
-      { source: "Wikipedia book context", text: wiki?.extract },
-      { source: article?.context?.source ?? context?.source ?? "Current book coverage", text: article?.intro },
-      { source: article?.context?.source ?? context?.source ?? "Current book headline", text: article?.context?.headline },
+      { kind: "premise", source: "Goodreads book page", text: goodreadsContext?.description },
+      { kind: "premise", source: "Open Library book record", text: openLibraryContext?.description },
+      { kind: "premise", source: "Wikipedia book context", text: wiki?.extract },
+      { kind: "current_coverage", source: article?.context?.source ?? context?.source ?? "Current book coverage", text: article?.intro, publishedAt: article?.context?.publishedAt ?? context?.publishedAt },
+      { kind: "current_headline", source: article?.context?.source ?? context?.source ?? "Current book headline", text: article?.context?.headline, publishedAt: article?.context?.publishedAt ?? context?.publishedAt },
     ]);
     return item;
   });
@@ -1202,11 +1210,12 @@ function conciseSentences(value, maxLength = 320) {
 
 const copiedMetricPattern = /\b(?:billboard hot 100|google shopping|google searches?|search volume|spotify(?:'|’)?s today(?:'|’)?s top hits|wikipedia (?:article )?(?:drew|views?))\b|\branking it #\d+|\bplacing it #\d+/i;
 const editorialHeadlinePattern = /^(?:forget|inside|meet|why)\b|\b(?:admit it|babygirl|best|cover by|favorite|homerist|hot take|joke on|must-see|opinion|pros? say|pr strategy|reacts?|review|should you|story behind|thank zeus|trojan horse|what to know|worst|worth buying)\b|\beverything (?:else )?(?:you )?need to know\b|\bonly .{0,50} could\b|\b(?:leaving|left) millions on the table\b|\bgets? .{0,30} treatment\b/i;
-const eventHeadlinePattern = /\b(?:announc|appoint|arrest|appear|award|ban|block|break|buy|cancel|cast|cement|celebrat|charg|clos|confirm|coverage|crash|damag|debut|direct|discount|dismis|feature|file|first look|film|gross|join|launch|leav|lead|let|match|movie|open|order|perform|pledge|premier|qualif|recall|reject|releas|renew|respond|resign|return|reveal|rise|rally|role|say|sell|sign|sicken|spotlight|star|surge|suspend|teas|tournament|tour|unveil|win|won|world cup)\w*\b/i;
+const personRelevancePattern = /\b(?:meme|memes|viral|internet|online|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|mock(?:ed)?|trend(?:ing)?|gesture|look(?:s|ed)?|facial|expression|mannerism|style|celebration)\b/i;
+const eventHeadlinePattern = /\b(?:announc|appoint|arrest|appear|award|ban|block|break|buy|cancel|cast|cement|celebrat|charg|clos|confirm|coverage|crash|damag|debut|direct|discount|dismis|feature|file|first look|film|gross|join|launch|leav|lead|let|match|meme|movie|online|open|order|perform|pledge|premier|qualif|recall|reaction|reject|releas|renew|respond|resign|return|reveal|rise|rally|role|say|sell|sign|sicken|spotlight|star|surge|suspend|teas|tournament|tour|trending|unveil|viral|win|won|world cup)\w*\b/i;
 const personEditorialPattern = /\b(?:actually|everything (?:we|you) know|family|lookalike|meet|net worth|parents?|siblings?|takes? a closer look|what to know|who is|why you should know|the reason (?:isn['’]?t|is not)|not what you think|explainer|explained|might (?:finally )?(?:have )?come to a close|at home|could|may)\b/i;
 const clippedSentencePattern = /(?:^|\s)[a-z]{1,2}\.$/;
 
-function factualHeadline(value, { rejectChartPlacement = false, requireEvent = false, maxLength = 240 } = {}) {
+function factualHeadline(value, { rejectChartPlacement = false, requireEvent = false, maxLength = 240, allowCultural = false } = {}) {
   const clean = plainText(value ?? "")
     .replace(/^(?:exclusive|opinion|review)\s*[|:]\s*/i, "")
     .replace(/\s+-\s+The Athletic$/i, "")
@@ -1214,13 +1223,13 @@ function factualHeadline(value, { rejectChartPlacement = false, requireEvent = f
   const factual = sentences(clean).filter((sentence) => sentence.length >= 24
       && sentence.length <= maxLength
     && !/(?:…|\.\.\.)\s*$/.test(sentence)
-    && !sentence.includes("?")
+    && (!sentence.includes("?") || (allowCultural && personRelevancePattern.test(sentence)))
     && !/\b(?:No|vs)\.$/i.test(sentence)
     && !clippedSentencePattern.test(sentence)
     && !/^\d+\s+(?:and|as|but|in|on|to|with)\b/i.test(sentence)
     && !copiedMetricPattern.test(sentence)
-    && !editorialHeadlinePattern.test(sentence)
-    && (!requireEvent || eventHeadlinePattern.test(sentence))
+    && (!editorialHeadlinePattern.test(sentence) || (allowCultural && personRelevancePattern.test(sentence)))
+    && (!requireEvent || eventHeadlinePattern.test(sentence) || (allowCultural && personRelevancePattern.test(sentence)))
     && !(rejectChartPlacement && /\b(?:billboard|charts?|no\.?\s*\d+|number one|#\d+)\b/i.test(sentence)))
     .map((sentence) => sentence
       .replace(/\s+draws outrage and fears of misuse$/i, " has prompted scrutiny over potential misuse")
@@ -1266,6 +1275,7 @@ function recentDescription(identity, headline, options = {}) {
 function personRecentDescription(title, identity, article, context) {
   const candidates = [
     ...sentences(article?.intro),
+    article?.context?.headline,
     context?.headline,
     ...(context?.alternates ?? []).map((candidate) => candidate.headline),
   ];
@@ -1274,24 +1284,32 @@ function personRecentDescription(title, identity, article, context) {
     const raw = plainText(value);
     const neutral = neutralPersonHeadline(title, value);
     const text = neutral || cleanPersonEventContext(title, value);
-    const event = Boolean(neutral) || eventHeadlinePattern.test(raw);
+    const event = Boolean(neutral) || eventHeadlinePattern.test(raw) || personRelevancePattern.test(raw);
     const normalized = normalize(text);
     const overlap = [...titleTokens].filter((token) => normalized.split(" ").includes(token)).length;
-    const topical = /\b(?:film|movie|role|cast|box office|premier|trailer|release|album|single|tour|concert|award|world cup|tournament|match|championship|final)\b/i.test(raw);
-    const editorial = !neutral && (editorialHeadlinePattern.test(raw) || personEditorialPattern.test(raw));
-    return { text, overlap, event, topical: topical || Boolean(neutral), editorial };
+    const topical = /\b(?:film|movie|role|cast|box office|premier|trailer|release|album|single|tour|concert|award|world cup|tournament|match|championship|final)\b/i.test(raw)
+      || personRelevancePattern.test(raw);
+    const causal = /\b(?:after|amid|because|following|return(?:ed|ing)?|re-?released?|viral|meme|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|sold out|trending|won|announced|arrested|joined|performed|released?)\b/i.test(raw);
+    const cultural = personRelevancePattern.test(raw);
+    const editorial = !neutral && !personRelevancePattern.test(raw)
+      && (editorialHeadlinePattern.test(raw) || personEditorialPattern.test(raw));
+    return { text, overlap, event, topical: topical || Boolean(neutral), causal, cultural, editorial };
   }).filter((candidate) => candidate.text && !copiedMetricPattern.test(candidate.text)
     && !clippedSentencePattern.test(candidate.text))
     .filter((candidate) => !(normalize(candidate.text).startsWith(`${normalize(title)} is `)
       && candidate.text.length < 180))
     .sort((left, right) => Number(left.editorial) - Number(right.editorial)
+      || Number(right.cultural) - Number(left.cultural)
+      || Number(right.causal) - Number(left.causal)
       || Number(right.topical) - Number(left.topical)
       || Number(right.event) - Number(left.event)
       || right.overlap - left.overlap
       || right.text.length - left.text.length)
     .find((candidate) => candidate.overlap > 0 && candidate.event && !candidate.editorial);
-  if (!recent) return identity;
-  return `${identity} ${recent.text}`;
+  if (!recent) return "";
+  // Put the current signal first. The identity sentence is useful context,
+  // but it must never be allowed to become the explanation for the trend.
+  return `${recent.text} ${identity}`;
 }
 
 function neutralPersonHeadline(title, value) {
@@ -1308,8 +1326,9 @@ function neutralPersonHeadline(title, value) {
 }
 
 function cleanPersonEventContext(title, value) {
-  let text = factualHeadline(stripSourceAttribution(value), { requireEvent: true, maxLength: 260 });
+  let text = factualHeadline(stripSourceAttribution(value), { requireEvent: true, maxLength: 260, allowCultural: true });
   if (!text) return "";
+  if (text.includes("?")) return "";
   text = text
     .replace(/\s+(?:according to|reported by|reports? from|the company said|officials said|experts said)\b[\s\S]*$/i, "")
     .replace(/\s+(?:takes? a closer look|everything (?:we|you) know|what you need to know)\b[\s\S]*$/i, "")
@@ -1335,21 +1354,26 @@ function publicationDateLabel(value) {
 
 const googleNewsCache = new Map();
 
-async function googleNewsContext(query, days = 45, { requireEvent = false } = {}) {
-  const key = `${normalize(query)}:${days}:${requireEvent}`;
+async function googleNewsContext(query, days = 45, { requireEvent = false, queryVariants = [] } = {}) {
+  const variants = [...new Set(queryVariants.map((value) => plainText(value)).filter(Boolean))];
+  const key = `${normalize(query)}:${days}:${requireEvent}:${variants.map(normalize).join("|")}`;
   if (googleNewsCache.has(key)) return googleNewsCache.get(key);
   const request = (async () => {
-    const newsUrl = new URL("https://news.google.com/rss/search");
-    newsUrl.search = new URLSearchParams({
-      q: `${query} when:${days}d`,
-      hl: "en-US",
-      gl: "US",
-      ceid: "US:en",
-    });
-    const rss = await fetchText(newsUrl);
+    const queries = [...new Set([query, ...variants])];
     const queryTokens = new Set(normalize(query).split(" ").filter((token) => (token.length >= 3 || /\d/.test(token))
       && !new Set(["and", "for", "from", "news", "film", "movie", "product", "song", "shopping", "the", "with"]).has(token)));
-    const items = [...rss.matchAll(/<item>([\s\S]*?)<\/item>/gi)].slice(0, 8).map((match, index) => {
+    const variantTokens = new Set(normalize(variants.join(" ")).split(" ").filter((token) => token.length >= 3));
+    const feeds = await mapConcurrent(queries, 3, async (searchQuery) => {
+      const newsUrl = new URL("https://news.google.com/rss/search");
+      newsUrl.search = new URLSearchParams({
+        q: `${searchQuery} when:${days}d`,
+        hl: "en-US",
+        gl: "US",
+        ceid: "US:en",
+      });
+      return { feedUrl: newsUrl.href, rss: await fetchText(newsUrl).catch(() => "") };
+    });
+    const items = feeds.flatMap(({ feedUrl, rss }, queryIndex) => [...rss.matchAll(/<item>([\s\S]*?)<\/item>/gi)].slice(0, 8).map((match, index) => {
       const item = match[1];
       const sourceTag = item.match(/<source\b([^>]*)>([\s\S]*?)<\/source>/i);
       const source = plainText(sourceTag?.[2] ?? "");
@@ -1365,34 +1389,44 @@ async function googleNewsContext(query, days = 45, { requireEvent = false } = {}
       const published = plainText(item.match(/<pubDate\b[^>]*>([\s\S]*?)<\/pubDate>/i)?.[1] ?? "");
       const headlineTokens = new Set(normalize(headline).split(" "));
       const overlap = [...queryTokens].filter((token) => headlineTokens.has(token)).length;
-      let score = overlap * 12 - index;
+      const facetOverlap = [...variantTokens].filter((token) => headlineTokens.has(token)).length;
+      let score = overlap * 12 + facetOverlap * 4 - index - queryIndex;
+      if (queryIndex > 0 && facetOverlap) score += 8;
       if (headline.length >= 55 && headline.length <= 180) score += 6;
       if (/\b(?:announces?|bankruptcy|blocks?|crashes?|damaged|debut|first look|launches?|lawsuit|lets?|opens?|recall|rejects?|release date|reveals?|rises?|sickens|surges?|trailer|unveils?|without power)\b/i.test(headline)) score += 9;
+      if (personRelevancePattern.test(headline)) score += 5;
       if (/^(?:how to|watch|photos?|video)\b/i.test(headline)) score -= 8;
       if (/\b(?:Associated Press|AP News|BBC|Billboard|Bloomberg|Deadline|ESPN|Forbes|Fortune|FOX Sports|The Guardian|Los Angeles Times|NBC News|NPR|New York Times|Reuters|SCOTUSblog|The Athletic|The Hollywood Reporter|The Washington Post|Variety)\b/i.test(source)) score += 12;
       if (/\b(?:Just Jared|Medium|Mshale|Weverse)\b/i.test(source)
         || /^(?:exclusive|opinion)\b|\b(?:cover by|lyrics:)\b/i.test(headline)) score -= 10;
-      if (editorialHeadlinePattern.test(headline) || /\?/.test(headline)) score -= 30;
+      if ((editorialHeadlinePattern.test(headline) || /\?/.test(headline)) && !personRelevancePattern.test(headline)) score -= 30;
       if (/\b\w{1,3}$/.test(headline) && !/[.!?'’”)]$/.test(headline)) score -= 6;
       const date = new Date(published);
       return {
         headline,
-        link: link.startsWith("https://news.google.com/") ? link : newsUrl.href,
+        link: link.startsWith("https://news.google.com/") ? link : feedUrl,
         publishedAt: Number.isNaN(date.getTime()) ? null : date.toISOString(),
         source: source || "Google News",
         sourceUrl: /^https:\/\//i.test(sourceUrl) ? sourceUrl : null,
-        feedUrl: newsUrl.href,
+        feedUrl,
         sourceOrder: index,
+        queryIndex,
         overlap,
+        facetOverlap,
         score,
       };
-    }).filter((item) => item.headline);
-    const candidates = items.filter((item) => item.overlap >= Math.min(2, Math.max(1, queryTokens.size)));
-    const ranked = items.sort((left, right) => right.score - left.score);
-    const selected = candidates.find((item) => factualHeadline(item.headline, { requireEvent }));
+    }).filter((item) => item.headline));
+    const requiredOverlap = Math.min(2, Math.max(1, queryTokens.size));
+    const candidates = items.filter((item) => item.overlap >= requiredOverlap
+      || (variants.length > 0 && item.queryIndex > 0 && item.overlap >= 1 && item.facetOverlap >= 1));
+    const ranked = [...new Map(items.map((item) => [normalize(item.headline), item])).values()]
+      .sort((left, right) => right.score - left.score);
+    const selected = candidates
+      .sort((left, right) => right.score - left.score)
+      .find((item) => factualHeadline(item.headline, { requireEvent, allowCultural: variants.length > 0 }));
     return selected ? {
       ...selected,
-      alternates: ranked.filter((item) => item !== selected).slice(0, 5),
+      alternates: ranked.filter((item) => item !== selected).slice(0, 8),
     } : null;
   })();
   googleNewsCache.set(key, request);
@@ -1714,21 +1748,52 @@ async function updatePeople(brief, topviews) {
     })
     .filter((row) => eligiblePerson(row.entity));
   if (eligible.length < 10) throw new Error(`Wikimedia topviews produced only ${eligible.length} eligible living non-politicians`);
+  // A page-view spike identifies attention, but it does not explain why the
+  // person is relevant now. Only use candidates with a separately validated,
+  // recent event/coverage signal before spending the rest of the enrichment
+  // work on the final ten.
+  const candidatesWithContext = await mapConcurrent(eligible.slice(0, 80), 4, async (person) => ({
+    person,
+    context: await googleNewsContext(`"${person.title}"`, 45, {
+      requireEvent: true,
+      queryVariants: [
+        `"${person.title}" meme viral funny`,
+        `"${person.title}" reaction fans appearance`,
+        `"${person.title}" clip joke walk`,
+      ],
+    }).catch(() => null),
+  }));
   const selected = [];
+  const contexts = [];
   const categoryCounts = new Map();
-  for (const person of eligible) {
+  const validCandidates = candidatesWithContext.filter(({ context }) => context);
+  console.log(`People context validation: ${validCandidates.length}/${candidatesWithContext.length} candidates have recent causal coverage`);
+  const addCandidate = ({ person, context }) => {
+    if (!context || selected.some((entry) => normalize(entry.title) === normalize(person.title))) return false;
+    selected.push(person);
+    contexts.push(context);
+    categoryCounts.set(person.category, (categoryCounts.get(person.category) ?? 0) + 1);
+    return true;
+  };
+  // Prefer a broad mix of person categories, but never let the diversity
+  // preference discard otherwise validated current coverage when the monthly
+  // topviews are concentrated in one category.
+  for (const candidate of validCandidates) {
+    const { person, context } = candidate;
+    if (!context) continue;
     const count = categoryCounts.get(person.category) ?? 0;
     if (count >= 2) continue;
-    selected.push(person);
-    categoryCounts.set(person.category, count + 1);
+    addCandidate(candidate);
     if (selected.length === 10) break;
   }
-  if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people");
+  if (selected.length < 10) {
+    for (const candidate of validCandidates) {
+      addCandidate(candidate);
+      if (selected.length === 10) break;
+    }
+  }
+  if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people with recent relevance evidence");
   const details = await wikipediaPageDetails(selected.map((person) => person.title));
-  const contexts = await mapConcurrent(selected, 4, (person) =>
-    googleNewsContext(`"${person.title}"`, 45, { requireEvent: true })
-      .catch(() => null)
-      .then((context) => context ?? googleNewsContext(`"${person.title}"`, 45, { requireEvent: false }).catch(() => null)));
   const articles = await mapConcurrent(contexts, 2, (context, index) => linkedNewsArticle(context, selected[index]?.title));
   const currentByTitle = new Map(
     [...section.items, ...(section.moreItems ?? [])].map((item) => [normalize(item.title), item]),
@@ -1764,14 +1829,35 @@ async function updatePeople(brief, topviews) {
       category: person.category,
     };
     rememberAiDescriptionContext(item, "people", [
-      { source: "Curated recent context", text: description },
-      { source: "Wikipedia biography", text: page?.extract },
+      {
+        kind: "current_event",
+        source: article?.context?.source ?? context?.source ?? "Current coverage",
+        text: factualHeadline(article?.intro, { requireEvent: true, maxLength: 320 }),
+        publishedAt: article?.context?.publishedAt ?? context?.publishedAt,
+      },
+      {
+        kind: "current_headline",
+        source: article?.context?.source ?? context?.source ?? "Current coverage",
+        text: factualHeadline(context?.headline, { requireEvent: true, maxLength: 220, allowCultural: true }),
+        publishedAt: context?.publishedAt,
+      },
+      {
+        kind: "current_coverage",
+        source: "Related current coverage",
+        text: (context?.alternates ?? [])
+          .map((candidate) => factualHeadline(candidate.headline, { requireEvent: true, maxLength: 220, allowCultural: true }))
+          .filter(Boolean)
+          .slice(0, 6)
+          .join(" "),
+        publishedAt: context?.publishedAt,
+      },
+      { kind: "background", source: "Wikipedia biography", text: page?.extract },
     ]);
     return item;
   });
   section.eyebrow = `${topviews.period.month} ${topviews.period.year} · Wikipedia topviews`;
   section.title = "People";
-  section.description = "Last month's most-viewed English Wikipedia pages that represent living people, excluding politicians and allowing at most two people from each broad primary category.";
+  section.description = "Last month's most-viewed English Wikipedia pages that represent living people, excluding politicians and preferring a broad mix of primary categories when current coverage supports it.";
   section.sources = [
     { label: `Topviews · ${topviews.period.month} ${topviews.period.year}`, url: topviewsToolUrl() },
     { label: "Wikimedia · monthly top-pages data", url: topviews.apiUrl },
@@ -1918,9 +2004,9 @@ async function updateMovies(brief, topviews) {
       accent: current?.accent ?? accents[index % accents.length],
     };
     rememberAiDescriptionContext(item, "movies", [
-      { source: "Cinemeta film synopsis", text: cinemeta?.description },
-      { source: "Wikipedia film article", text: page?.extract },
-      { source: "Recent film coverage", text: recentContexts[index] },
+      { kind: "premise", source: "Cinemeta film synopsis", text: cinemeta?.description },
+      { kind: "premise", source: "Wikipedia film article", text: page?.extract },
+      { kind: "current_coverage", source: "Recent film coverage", text: recentContexts[index] },
     ]);
     return item;
   });
@@ -2581,6 +2667,60 @@ function productFreshness(publishedAt) {
   return Number.isFinite(age) ? Math.max(0, Math.min(1, 1 - age / 90)) : 0;
 }
 
+const productHistoryPattern = /\b(?:first introduced|introduced|debut(?:ed)?|original(?:ly)?|return(?:ed|ing)?|re-?released?|reintroduced|revived|brought back|bring(?:s|ing)? back|returned to|comeback|nostalgia|classic|relaunch(?:ed)?|from\s+20\d{2}|in\s+20\d{2}|earlier version|original launch)\b/i;
+
+function productBackgroundEvidenceSpecificTo(productName, evidence) {
+  const text = `${plainText(evidence?.headline ?? "")} ${plainText(evidence?.intro ?? "")}`.trim();
+  if (!text || productTokenOverlap(productName, text) <= 0) return false;
+  const identityTokens = productIdentityTokens(productName);
+  const matches = identityTokens.filter((token) => productTokenSet(text).has(token)).length;
+  return matches >= Math.min(2, Math.max(1, identityTokens.length));
+}
+
+const productBackgroundCache = new Map();
+
+async function productBackgroundContext(productName) {
+  const key = productFamilyKey(productName);
+  if (!key) return [];
+  if (productBackgroundCache.has(key)) return productBackgroundCache.get(key);
+  const request = (async () => {
+    const quoted = `"${plainText(productName).replace(/["']/g, "")}"`;
+    const queries = [`${quoted} history introduced original return re-release`];
+    const searchResults = (await mapConcurrent(queries, 2, (query) =>
+      bingSearchArticles(query, "", productName).catch(() => []))).flat();
+    const candidates = [...new Map(searchResults.map((result) => [result.url, result])).values()]
+      .filter((result) => usableArticleUrl(result.url))
+      .slice(0, 4);
+    const contexts = await mapConcurrent(candidates, 3, async (candidate) => {
+      const metadata = await linkedArticleMetadata(candidate.url, { allowMissingImage: true }).catch(() => null);
+      const evidence = {
+        headline: candidate.title,
+        intro: metadata?.intro ?? "",
+      };
+      if (!metadata || !productBackgroundEvidenceSpecificTo(productName, evidence)) return null;
+      const text = conciseSentences(stripSourceAttribution(`${candidate.title}. ${metadata.intro}`), 420);
+      if (!text || !productHistoryPattern.test(text)) return null;
+      let source = "Background context";
+      try { source = new URL(metadata.url).hostname.replace(/^www\./i, ""); } catch { /* source label remains generic */ }
+      return {
+        source,
+        url: metadata.url,
+        text,
+        publishedAt: candidate.publishedAt ?? null,
+      };
+    });
+    return contexts.filter(Boolean)
+      .sort((left, right) => Number(productHistoryPattern.test(right.text)) - Number(productHistoryPattern.test(left.text))
+        || right.text.length - left.text.length)
+      .slice(0, 3);
+  })().catch((error) => {
+    console.warn(`Product background context unavailable for ${productName}: ${error instanceof Error ? error.message : String(error)}`);
+    return [];
+  });
+  productBackgroundCache.set(key, request);
+  return request;
+}
+
 function sanitizeSocialText(value) {
   return plainText(value ?? "")
     .replace(/\bTikTok\b/gi, "social media")
@@ -2878,7 +3018,7 @@ async function viralProductCandidates(movers) {
     .sort((left, right) => right.score - left.score || right.sourceCount - left.sourceCount)
     .slice(0, 24);
   if (candidates.length < 5) throw new Error(`Only ${candidates.length} products had qualifying recent viral evidence`);
-  const enriched = await mapConcurrent(candidates, 3, async (candidate) => {
+  const enriched = await mapConcurrent(candidates, 3, async (candidate, candidateIndex) => {
     const prioritizedObservations = [...candidate.observations]
       .sort((left, right) => productDemandScore(right.headline) - productDemandScore(left.headline)
         || Number(productIdentityPattern.test(right.headline)) - Number(productIdentityPattern.test(left.headline))
@@ -2925,6 +3065,9 @@ async function viralProductCandidates(movers) {
         && !candidateKey.split(" ").some((token) => /[a-z]\d|\d[a-z]/i.test(token))));
     const resolvedName = canUpgradeName ? strongerName : candidate.name;
     const relevantEvidence = evidence.filter((item) => productEvidenceSpecificTo(resolvedName, item));
+    const backgroundEvidence = candidateIndex < 8
+      ? await productBackgroundContext(resolvedName)
+      : [];
     const relevantHosts = new Set(relevantEvidence.map((item) => {
       try { return new URL(item.directUrl).hostname.replace(/^www\./i, ""); } catch { return normalize(item.source); }
     }));
@@ -2934,6 +3077,7 @@ async function viralProductCandidates(movers) {
       evidence: relevantEvidence,
       sourceCount: relevantHosts.size,
       bestEvidence: relevantEvidence.includes(bestEvidence) ? bestEvidence : relevantEvidence[0],
+      backgroundEvidence,
     };
   });
   const dedupedMap = new Map();
@@ -3262,9 +3406,14 @@ function productRecentDescription(product, identity) {
       && !productReferencePattern.test(`${candidate.headline ?? ""} ${candidate.intro ?? ""}`))
     .map((candidate) => productViralPhrase(candidate.headline))
     .find(Boolean);
-  if (!recent && !fallbackPhrase) return identity;
-  if (!recent) return conciseSentences(`${identity} Recent coverage places it among ${lowerFirst(fallbackPhrase)}`, 560);
-  return conciseSentences(`${identity} ${recent}`, 560);
+  const background = (product.backgroundEvidence ?? [])
+    .filter((context) => context.text && productHistoryPattern.test(context.text))
+    .sort((left, right) => right.text.length - left.text.length)[0]?.text;
+  const distinctBackground = background && recent && productTokenOverlap(recent, background) < 0.78 ? background : "";
+  if (!recent && !fallbackPhrase && !background) return identity;
+  if (!recent && background) return conciseSentences(`${identity} ${background}`, 560);
+  if (!recent) return conciseSentences(`${identity} Recent coverage places it among ${lowerFirst(fallbackPhrase)}.`, 560);
+  return conciseSentences(`${identity} ${recent}${distinctBackground ? ` ${distinctBackground}` : ""}`, 560);
 }
 
 function neutralProductContext(value) {
@@ -3340,13 +3489,20 @@ async function updateProducts(brief, products) {
       accent: current?.accent ?? accents[index % accents.length],
     };
     const productContext = [
-      { source: "Amazon listing", text: product.title },
+      { kind: "identity", source: "Amazon listing", text: product.title },
       ...(product.bestEvidence && productEvidenceSpecificTo(product.query, product.bestEvidence)
-        ? [{ source: product.bestEvidence.source ?? "Best recent product coverage", text: productEvidenceContextText(product.query, product.bestEvidence) }]
+        ? [{ kind: "current_demand", source: product.bestEvidence.source ?? "Best recent product coverage", text: productEvidenceContextText(product.query, product.bestEvidence) }]
         : []),
       ...(product.evidence ?? []).filter((evidence) => productEvidenceSpecificTo(product.query, evidence)).map((evidence) => ({
+        kind: "current_demand",
         source: evidence.source ?? "Recent product coverage",
         text: productEvidenceContextText(product.query, evidence),
+      })).filter((evidence) => evidence.text),
+      ...(product.backgroundEvidence ?? []).map((evidence) => ({
+        kind: "background_context",
+        source: evidence.source ?? "Background product context",
+        text: evidence.text,
+        publishedAt: evidence.publishedAt ?? undefined,
       })).filter((evidence) => evidence.text),
     ];
     rememberAiDescriptionContext(item, "products", productContext);
@@ -3627,10 +3783,10 @@ async function linkedNewsArticle(context, entityName = "") {
   const unusableIntroPattern = /\b(?:we delve into|what it means for you|let['’]s explore|fascinating topic|in today['’]s fast-paced|discover how a .* lawsuit)\b/i;
   const usableImage = (value) => Boolean(value) && !/(?:gravatar|avatar|favicon|sprite|placeholder|default[-_ ]?image|\blogo\b)/i.test(value);
   const candidates = [];
-  // Resolve the primary, relevance-checked topic only. Searching every alternate
-  // headline was both expensive and capable of attaching a different story to
-  // the selected person or event.
-  for (const candidate of [context]) {
+  // Inspect the primary result plus a small set of relevance-checked alternates.
+  // The first headline is often the ranking or announcement, while an alternate
+  // carries the cultural mechanism that explains why attention spread.
+  for (const candidate of [context, ...(context.alternates ?? []).slice(0, 6)]) {
     const resolvedUrl = await resolveGoogleNewsArticle(candidate.link).catch(() => null);
     const inspect = async (searchResults) => {
       for (const result of [...new Map(searchResults.map((entry) => [entry.url, entry])).values()].slice(0, 4)) {
@@ -3759,10 +3915,10 @@ function updateNews(brief, topics) {
       accent: current?.accent ?? accents[index % accents.length],
     };
     rememberAiDescriptionContext(item, "news", [
-      { source: topic.newsSource ?? "Publisher article", text: topic.articleIntro },
-      { source: "Publisher headline", text: topic.headline },
-      { source: "Wikipedia topic context", text: topic.topicSummary },
-      { source: "Related current coverage", text: topic.relatedHeadline },
+      { kind: "current_event", source: topic.newsSource ?? "Publisher article", text: topic.articleIntro, publishedAt: topic.publishedAt },
+      { kind: "current_headline", source: "Publisher headline", text: topic.headline, publishedAt: topic.publishedAt },
+      { kind: "background", source: "Wikipedia topic context", text: topic.topicSummary },
+      { kind: "current_coverage", source: "Related current coverage", text: topic.relatedHeadline },
     ]);
     return item;
   });
@@ -3785,7 +3941,7 @@ function usableAiDescription(sectionId, description) {
   const text = plainText(description);
   if (!text || unusableAiDescriptionPattern.test(text)) return false;
   if (sectionId === "people") {
-    return /\b(?:after|following|recent(?:ly)?|currently|now|this|in 20\d{2}|appeared|appears|star(?:s|red)?|joined|direct(?:ed|ing)|premier(?:ed|es?)|released?|opening|won|winning|world cup|tournament|match|award|role|cast|respond(?:ed|ing)|coverage|attention|return(?:ed|ing)?|social media)\b/i.test(text);
+    return true;
   }
   if (sectionId === "movies" || sectionId === "books") {
     return /\b(?:about|after|before|cent(?:er|re)s?|discovers?|encounters?|follows?|forced|journey|must|reunite|returns?|set|stranded|takes?|tries?|undergoes?|when|where|while|wakes?|story|film|movie|novel|book|character|family|mystery|conflict)\b/i.test(text);
@@ -3820,14 +3976,16 @@ async function updateAiDescriptions(brief) {
     const section = brief.sections.find((entry) => entry.id === sectionId);
     const items = section ? [...section.items, ...(section.moreItems ?? [])] : [];
     const records = items.map((item) => {
+      const context = aiDescriptionContexts.get(item);
+      const sourceSnippets = context?.sectionId === sectionId && context.snippets.length
+        ? context.snippets
+        : [{ kind: "card_context", source: "Validated card context", text: item.description }];
       return {
         id: `${sectionId}-${item.rank}`,
         title: item.title,
         role: item.subtitle,
-        sourceSnippets: [{
-          source: "Curated validated context",
-          text: item.description,
-        }],
+        purpose: sectionId === "people" ? "current_relevance" : "section_description",
+        sourceSnippets,
       };
     });
     return { sectionId, items, records };
@@ -3838,7 +3996,8 @@ async function updateAiDescriptions(brief) {
       let applied = 0;
       for (const record of job.records) {
         const description = generated.get(record.id);
-        if (!usableAiDescription(job.sectionId, description)) continue;
+        if (!isDescriptionUsable(job.sectionId, description, record)
+          || !usableAiDescription(job.sectionId, description)) continue;
         const item = job.items.find((candidate) => `${job.sectionId}-${candidate.rank}` === record.id);
         if (!item) continue;
         if (job.sectionId === "products" && !usableProductAiDescription(description, item, job.items)) continue;
@@ -4076,6 +4235,15 @@ function validateBrief(brief) {
     if (!item.description?.trim() || !item.alt?.trim() || !item.image?.startsWith("/culture/")
       || !/^#[0-9a-f]{6}$/i.test(item.accent) || !item.url || new URL(item.url).protocol !== "https:") {
       throw new Error(`${item.title} lacks complete card information`);
+    }
+    if (section.id === "people") {
+      const context = aiDescriptionContexts.get(item);
+      if (context && !isDescriptionUsable("people", item.description, {
+        title: item.title,
+        sourceSnippets: context.snippets,
+      }, { allowHeadlineReuse: true })) {
+        throw new Error(`${item.title} lacks a first-sentence, recent-relevance explanation`);
+      }
     }
     if (section.id === "news" && new URL(item.url).hostname === "news.google.com") {
       throw new Error(`${item.title} still points to a Google News redirect`);
@@ -4390,6 +4558,7 @@ brief.window = "Memes: latest complete poll · People and Movies: last month · 
 sanitizeBriefSocialMentions(brief);
 capLinkedSources(brief);
 validateBrief(brief);
+await generateNicheSnapshot(brief, { now, dryRun });
 
 const output = `${JSON.stringify(brief, null, 2)}\n`;
 if (dryRun) {

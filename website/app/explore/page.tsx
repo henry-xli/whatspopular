@@ -17,6 +17,13 @@ export default function ExplorePage() {
         <p className="eyebrow">The {cultureBrief.edition} culture briefing</p>
         <h1 id="explore-title">Everything worth knowing at a glance.</h1>
         <p>{cultureBrief.summary}</p>
+        <div className="explore-for-you-callout">
+          <div>
+            <span className="eyebrow">Want a narrower signal?</span>
+            <strong>Build a For You page around the things you actually follow.</strong>
+          </div>
+          <a className="button button-accent button-small" href="/for-you">Choose your corners <span aria-hidden="true">✦</span></a>
+        </div>
         <ExploreIndex sections={cultureBrief.sections} />
       </section>
       <section className="boards wrap" id="boards" aria-label="Culture leaderboards">

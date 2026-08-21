@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s — what’s popular?",
   },
   description:
-    "Quiz yourself on the people, movies, books, music, products, news, memes, and slang shaping internet culture.",
+    "Explore the culture briefing, then build a personal weekly digest from the niche interests you actually follow.",
   applicationName: "what’s popular?",
   alternates: { canonical: "/" },
   openGraph: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "what’s popular?",
     title: "How trendy are you? — what’s popular?",
     description:
-      "A finite 48-hour briefing and quiz on what the internet is talking about.",
+      "A finite culture briefing plus a pre-built weekly digest for the corners of the internet you actually care about.",
     url: "/",
     images: [
       {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "How trendy are you? — what’s popular?",
-    description: "A finite 48-hour briefing and quiz on what the internet is talking about.",
+    description: "A finite culture briefing plus a pre-built weekly digest for the corners of the internet you actually care about.",
     images: ["/og.jpg"],
   },
   icons: {
