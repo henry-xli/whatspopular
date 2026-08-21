@@ -243,11 +243,6 @@ export function ForYouExperience({
             <h1 id="for-you-title">Your internet,<br /><em>more specific.</em></h1>
             <p className="for-you-lede">{summary}</p>
           </div>
-          <div className="for-you-manifesto" aria-label="For You product promise">
-            <span className="manifesto-mark" aria-hidden="true">✳</span>
-            <p>Not a popularity contest.<br /><strong>A weekly signal mix.</strong></p>
-            <span className="manifesto-count">{categories.length} corners · 3 stories each</span>
-          </div>
         </div>
 
         <div className="mobile-auth-intro">

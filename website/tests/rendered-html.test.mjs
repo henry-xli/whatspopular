@@ -363,6 +363,7 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.match(html, /Your internet/);
   assert.match(html, /Choose your corners/);
   assert.match(html, /Compile my feed/);
+  assert.doesNotMatch(html, /Not a popularity contest|A weekly signal mix/);
   assert.match(html, /class="interest-tag/);
   assert.match(html, /class="is-active" href="\/for-you"[^>]*>For You<\/a>/);
   assert.match(html, /signin-with-chatgpt/);
