@@ -9,6 +9,10 @@ export type NicheTopic = {
   source: string;
   sourceLabel: string;
   image: string;
+  imageSource?: string;
+  imageSourcePageUrl?: string;
+  imageAlt?: string;
+  publishedAt?: string;
   accent: string;
   trendLabel: string;
 };

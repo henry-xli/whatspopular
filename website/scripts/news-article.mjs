@@ -154,12 +154,14 @@ function articleText(value) {
 }
 
 const sentenceSegmenter = new Intl.Segmenter("en", { granularity: "sentence" });
+const incompleteSentencePattern = /\b(?:St|Mr|Mrs|Ms|Dr|Prof|No|vs|etc)\.$/i;
 
 function completeSentences(value, maxLength) {
   let result = "";
   for (const { segment } of sentenceSegmenter.segment(value)) {
     const sentence = segment.trim();
     if (!sentence) continue;
+    if (incompleteSentencePattern.test(sentence)) continue;
     if (/^(?:although|because|but|which|while|with|as)\b/i.test(sentence.replace(/^[\s"“”'’]+/, "")) && sentence.length < 72) break;
     const candidate = `${result} ${sentence}`.trim();
     if (candidate.length > maxLength) break;

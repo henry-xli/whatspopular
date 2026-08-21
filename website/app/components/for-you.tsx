@@ -46,9 +46,10 @@ function seededShuffle<T>(values: readonly T[], seedValue: string) {
   return result;
 }
 
-function digestLayoutFor(topic: DigestTopic, index: number, compileNumber: number): DigestLayout {
+function digestLayoutFor(index: number, compileNumber: number): DigestLayout {
   const layouts: DigestLayout[] = ["poster", "split", "quote", "ticker", "collage"];
-  return layouts[hashSeed(`${topic.id}:${compileNumber}:${index}`) % layouts.length];
+  const offset = hashSeed(`for-you-layout:${compileNumber}`) % layouts.length;
+  return layouts[(offset + index) % layouts.length];
 }
 
 function readLocalTags(categories: readonly NicheCategory[]) {
@@ -335,40 +336,44 @@ export function ForYouExperience({
             </div>
           </div>
           <div className="digest-feed wrap" id="digest-feed" aria-label="Your For You digest">
-            {digestTopics.map((topic, index) => (
-              <article
-                className={`digest-card digest-card-${digestLayoutFor(topic, index, compileNumber)}`}
-                key={`${topic.id}-${compileNumber}`}
-                style={{ "--card-accent": topic.accent, "--card-index": index } as CSSProperties}
-              >
-                <div className="digest-card-art">
-                  <div className="digest-art-blob" aria-hidden="true" />
-                  <img src={topic.image} alt="" width="720" height="520" loading={index < 2 ? "eager" : "lazy"} decoding="async" />
-                  <span className="digest-card-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="digest-card-parent">{topic.categoryParent}</span>
-                  <span className="digest-card-stamp" aria-hidden="true">{index % 3 === 0 ? "RISING" : index % 3 === 1 ? "ON THE RADAR" : "WORTH A MINUTE"}</span>
-                </div>
-                <div className="digest-card-body">
-                  <div className="digest-card-meta">
-                    <span>{topic.categoryLabel}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="digest-trend-label">{topic.trendLabel}</span>
+            {digestTopics.map((topic, index) => {
+              const layout = digestLayoutFor(index, compileNumber);
+              return (
+                <article
+                  className={`digest-card digest-card-${layout}`}
+                  data-layout={layout}
+                  key={`${topic.id}-${compileNumber}`}
+                  style={{ "--card-accent": topic.accent, "--card-index": index } as CSSProperties}
+                >
+                  <div className="digest-card-art">
+                    <div className="digest-art-blob" aria-hidden="true" />
+                    <img src={topic.image} alt={topic.imageAlt || topic.title} width="720" height="520" loading={index < 2 ? "eager" : "lazy"} decoding="async" />
+                    <span className="digest-card-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="digest-card-parent">{topic.categoryParent}</span>
+                    <span className="digest-card-stamp" aria-hidden="true">{index % 3 === 0 ? "RISING" : index % 3 === 1 ? "ON THE RADAR" : "WORTH A MINUTE"}</span>
                   </div>
-                  <h3>{topic.title}</h3>
-                  <p className="digest-description">{topic.description}</p>
-                  <div className="digest-why">
-                    <span>Why now</span>
-                    <p>{topic.whyNow}</p>
+                  <div className="digest-card-body">
+                    <div className="digest-card-meta">
+                      <span>{topic.categoryLabel}</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="digest-trend-label">{topic.trendLabel}</span>
+                    </div>
+                    <h3>{topic.title}</h3>
+                    <p className="digest-description">{topic.description}</p>
+                    <div className="digest-why">
+                      <span>Why now</span>
+                      <p>{topic.whyNow}</p>
+                    </div>
+                    <a className="digest-source" href={topic.url} target="_blank" rel="noopener noreferrer">
+                      <span>{topic.sourceLabel}</span>
+                      <strong>{topic.source}</strong>
+                      <span aria-hidden="true">↗</span>
+                    </a>
                   </div>
-                  <a className="digest-source" href={topic.url} target="_blank" rel="noopener noreferrer">
-                    <span>{topic.sourceLabel}</span>
-                    <strong>{topic.source}</strong>
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
-                <div className="digest-card-edge" aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span><i /></div>
-              </article>
-            ))}
+                  <div className="digest-card-edge" aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span><i /></div>
+                </article>
+              );
+            })}
           </div>
           <div className="digest-end wrap">
             <span className="sparkle" aria-hidden="true">✦</span>

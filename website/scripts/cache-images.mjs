@@ -36,9 +36,14 @@ const allowedImageSuffixes = [
 const assets = [];
 
 const brief = JSON.parse(await readFile(path.join(root, "data", "trends.json"), "utf8"));
+const nicheBrief = JSON.parse(await readFile(path.join(root, "data", "niche-trends.json"), "utf8"));
 if (!Array.isArray(brief.sections) || brief.sections.length !== 8
   || brief.sections.some((section) => !Array.isArray(section.items) || section.items.length !== 5)) {
   throw new Error("Refusing to modify cached images for an invalid briefing");
+}
+if (!Array.isArray(nicheBrief.categories)
+  || nicheBrief.categories.some((category) => !Array.isArray(category.topics) || category.topics.length < 3)) {
+  throw new Error("Refusing to modify cached images for an invalid niche briefing");
 }
 const referencedFiles = new Set(brief.sections.flatMap((section) =>
   [...section.items, ...(section.moreItems ?? [])].map((item) => {
@@ -72,6 +77,31 @@ for (const section of brief.sections) {
           ? { direct: `https://images.metahub.space/poster/medium/${imdbId}/img` }
           : {}),
       shape: section.layout,
+    });
+    knownFiles.add(file);
+  }
+}
+for (const category of nicheBrief.categories) {
+  for (const topic of category.topics) {
+    if (!/^\/culture\/niche-[a-z0-9-]+\.webp$/.test(topic.image)) {
+      throw new Error(`Refusing invalid niche cached image path: ${topic.image}`);
+    }
+    const file = path.basename(topic.image);
+    if (knownFiles.has(file)) continue;
+    assets.push({
+      file,
+      title: topic.title,
+      page: topic.url,
+      section: "niche",
+      refreshDaily: true,
+      // A source image is always attempted when present. If the publisher
+      // blocks it, the generated title card is still topic-specific rather
+      // than borrowing another article's image.
+      expectedFallback: !topic.imageSource,
+      fit: "cover",
+      position: "attention",
+      ...(topic.imageSource ? { direct: topic.imageSource, directKind: "article" } : {}),
+      shape: "wide",
     });
     knownFiles.add(file);
   }
@@ -298,11 +328,6 @@ async function processAsset(asset) {
   const destination = path.join(outputRoot, asset.file);
   const cached = await validImage(destination, asset.shape);
   if (!force && cached && !asset.refreshDaily) return { asset, state: "cached" };
-
-  if (asset.expectedFallback) {
-    await writeWebp(fallbackCard(asset.title, asset.shape), destination, asset.shape);
-    return { asset, state: "fallback (no relevant reusable image was found)" };
-  }
 
   try {
     const imageUrl = await resolveImage(asset);

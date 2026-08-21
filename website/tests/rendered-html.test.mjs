@@ -144,6 +144,9 @@ test("niche cards require concrete current context and plain language", () => {
   const prompt = buildNichePrompt([record]);
   assert.match(prompt, /publisher article excerpt/i);
   assert.match(prompt, /actual event, person, release, match, result/i);
+  assert.match(prompt, /strict recency and current-event filter/i);
+  assert.match(prompt, /evergreen explainer, listicle/i);
+  assert.match(prompt, /specific person, product, match, release, return, meme/i);
   assert.match(prompt, /main-character week/i);
   assert.match(prompt, /read like news/i);
   const useful = { title: "Players are fighting for the final places", description: "Late scores in the final playoff event are changing which players can qualify for the Tour Championship.", whyNow: "The final playoff event is changing the Tour Championship field this week.", trendLabel: "Playoff pressure" };
@@ -352,8 +355,12 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.ok(nicheBrief.categories.length >= 25);
   assert.ok(nicheBrief.categories.every((category) => category.topics.length >= 3));
   assert.ok(nicheBrief.categories.every((category) => category.topics.every((topic) => topic.evidenceMode === "source-grounded")));
+  const nicheTopics = nicheBrief.categories.flatMap((category) => category.topics);
+  assert.ok(nicheTopics.every((topic) => /^\/culture\/niche-[a-z0-9-]+\.webp$/.test(topic.image)));
+  assert.ok(nicheTopics.every((topic) => !/(?:main[- ]character|next generation|moving target|worth watching|having (?:a|its) \w+ week|deserves the hype|sets? (?:his|her|their|its) sights|challenges? (?:the )?(?:norms|boundaries)|sparks? (?:a )?debate|current development|latest updates|news and notes|connect(?:ed|ing)? with fans|^\s*(?:the\s+)?(?!(?:19|20)\d{2}\b)\d+(?:st|nd|rd|th)?\s+(?!annual\b))/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
+  assert.ok(nicheTopics.every((topic) => !topic.imageSource || (new URL(topic.imageSource).protocol === "https:" && topic.imageSourcePageUrl === topic.url)));
   const nicheIds = new Set(nicheBrief.categories.map((category) => category.id));
-  for (const id of ["edm", "football", "food-drink", "golf", "pop", "hip-hop-rap", "r-and-b-soul", "indie-alternative", "sports-news", "world-news", "science-space", "tech-news"]) {
+  for (const id of ["edm", "football", "food-drink", "golf", "pop", "hip-hop-rap", "r-and-b-soul", "indie-alternative", "sports-news", "science-space", "tech-news"]) {
     assert.ok(nicheIds.has(id), `expected expanded niche category: ${id}`);
   }
 
@@ -367,6 +374,14 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.match(html, /class="interest-tag/);
   assert.match(html, /class="is-active" href="\/for-you"[^>]*>For You<\/a>/);
   assert.match(html, /signin-with-chatgpt/);
+  const forYouSource = await readFile(new URL("../app/components/for-you.tsx", import.meta.url), "utf8");
+  const forYouStyles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(forYouSource, /const layouts: DigestLayout\[\] = \["poster", "split", "quote", "ticker", "collage"\]/);
+  assert.match(forYouSource, /digestLayoutFor\(index, compileNumber\)/);
+  assert.match(forYouSource, /data-layout=\{layout\}/);
+  for (const layout of ["poster", "split", "quote", "ticker", "collage"]) {
+    assert.match(forYouStyles, new RegExp(`\\.digest-card-${layout}`));
+  }
 
   const profile = await render("/api/for-you/profile", { headers: { accept: "application/json" } });
   assert.equal(profile.status, 401);
@@ -723,8 +738,10 @@ test("keeps content and outbound links constrained", async () => {
   assert.doesNotMatch(JSON.stringify(brief), /caution|b\*{2,}|a\*{2,}/i);
   assert.doesNotMatch(JSON.stringify(brief), /"(?:signal|score)":/);
   const referencedImages = new Set(items.map((item) => item.image.split("/").at(-1)));
+  const nicheBrief = JSON.parse(await readFile(new URL("../data/niche-trends.json", import.meta.url), "utf8"));
+  const referencedNicheImages = new Set(nicheBrief.categories.flatMap((category) => category.topics.map((topic) => topic.image.split("/").at(-1))));
   const cachedImages = new Set((await readdir(new URL("../public/culture/", import.meta.url))).filter((file) => file.endsWith(".webp")));
-  assert.deepEqual(cachedImages, referencedImages);
+  assert.deepEqual(cachedImages, new Set([...referencedImages, ...referencedNicheImages]));
 
   const expectedDimensions = {
     landscape: { width: 720, height: 520 },
@@ -738,6 +755,12 @@ test("keeps content and outbound links constrained", async () => {
       assert.equal(metadata.width, expectedDimensions[section.layout].width);
       assert.equal(metadata.height, expectedDimensions[section.layout].height);
     }
+  }
+  for (const topic of nicheBrief.categories.flatMap((category) => category.topics)) {
+    const metadata = await sharp(fileURLToPath(new URL(`../public${topic.image}`, import.meta.url))).metadata();
+    assert.equal(metadata.format, "webp");
+    assert.equal(metadata.width, 720);
+    assert.equal(metadata.height, 520);
   }
 
   const socialPreview = await sharp(fileURLToPath(new URL("../public/og.jpg", import.meta.url))).metadata();
