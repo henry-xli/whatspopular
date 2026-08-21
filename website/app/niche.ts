@@ -7,6 +7,13 @@ export type NichePlayback = {
   label: string;
 };
 
+export type NichePopularityEvidence = {
+  mode: "independent-coverage" | "measurable-signal" | "concrete-trend-signal";
+  coverageCount: number;
+  coverageSources: string[];
+  signal: string;
+};
+
 export type NicheTopic = {
   id: string;
   title: string;
@@ -20,6 +27,9 @@ export type NicheTopic = {
   imageSourcePageUrl?: string;
   imageAlt?: string;
   playback?: NichePlayback;
+  coverageCount: number;
+  coverageSources: string[];
+  popularityEvidence: NichePopularityEvidence;
   publishedAt?: string;
   accent: string;
   trendLabel: string;
@@ -42,7 +52,7 @@ export type NicheBrief = {
   categories: NicheCategory[];
 };
 
-export const nicheBrief = rawNicheBrief as NicheBrief;
+export const nicheBrief = rawNicheBrief as unknown as NicheBrief;
 
 export const nicheCategories = nicheBrief.categories;
 

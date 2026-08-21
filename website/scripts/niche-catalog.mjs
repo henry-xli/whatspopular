@@ -1,4 +1,4 @@
-function category({ id, label, parent, query, accent, description, topics }) {
+function category({ id, label, parent, query, accent, description }) {
   return {
     id,
     label,
@@ -6,17 +6,12 @@ function category({ id, label, parent, query, accent, description, topics }) {
     query,
     accent,
     description,
-    topics: topics.map((topic, index) => ({
-      ...topic,
-      id: `${id}-${index + 1}`,
-      accent: topic.accent ?? accent,
-    })),
   };
 }
 
-// These are deterministic fallback cards for the additional lanes. The daily
-// ingestion replaces their copy with the week's RSS-backed AI edit whenever
-// the source feeds and OPENAI_API_KEY are available.
+// This file contains category metadata and query vocabulary only. The topic
+// arrays below are legacy authoring notes; ingestion never exposes them as
+// cards and only publishes records grounded in the current source snapshot.
 export const additionalNicheCategories = [
   category({
     id: "pop",

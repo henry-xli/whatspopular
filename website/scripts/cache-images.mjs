@@ -42,7 +42,7 @@ if (!Array.isArray(brief.sections) || brief.sections.length !== 8
   throw new Error("Refusing to modify cached images for an invalid briefing");
 }
 if (!Array.isArray(nicheBrief.categories)
-  || nicheBrief.categories.some((category) => !Array.isArray(category.topics) || category.topics.length < 3)) {
+  || nicheBrief.categories.some((category) => !Array.isArray(category.topics) || category.topics.length < 1)) {
   throw new Error("Refusing to modify cached images for an invalid niche briefing");
 }
 const referencedFiles = new Set(brief.sections.flatMap((section) =>

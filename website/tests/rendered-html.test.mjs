@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { buildDescriptionPrompt, buildNichePrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, isNicheTopicUsable, parseDescriptionOutput, parseNicheOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
 import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractArticleTitle, extractPlayableMedia, publicHttpsUrl } from "../scripts/news-article.mjs";
+import { categoryDefinitions, sourceCandidateUsable } from "../scripts/niche-ingestion.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
@@ -142,6 +143,12 @@ test("niche cards require concrete current context and plain language", () => {
         publishedAt: "Fri, 21 Aug 2026 00:00:00 GMT",
       },
     ],
+    popularityEvidence: {
+      mode: "independent-coverage",
+      coverageCount: 3,
+      coverageSources: ["ESPN", "Reuters", "AP"],
+      signal: "",
+    },
   };
   const prompt = buildNichePrompt([record]);
   assert.match(prompt, /publisher article excerpt/i);
@@ -149,6 +156,8 @@ test("niche cards require concrete current context and plain language", () => {
   assert.match(prompt, /strict recency and current-event filter/i);
   assert.match(prompt, /evergreen explainer, listicle/i);
   assert.match(prompt, /specific person, product, match, release, return, meme/i);
+  assert.match(prompt, /validated popularity_evidence/i);
+  assert.match(prompt, /first-person taste test/i);
   assert.match(prompt, /main-character week/i);
   assert.match(prompt, /read like news/i);
   const useful = { title: "Players are fighting for the final places", description: "Late scores in the final playoff event are changing which players can qualify for the Tour Championship.", whyNow: "The final playoff event is changing the Tour Championship field this week.", trendLabel: "Playoff pressure" };
@@ -158,6 +167,33 @@ test("niche cards require concrete current context and plain language", () => {
     { id: "golf-1", title: "The leaderboard is having a main-character week", description: "Golf is having a main-character week as fans follow the standings.", why_now: "The sport is having a main-character week.", trend_label: "Big week" },
   ] }) }, ["golf-1"]);
   assert.equal(parsed.has("golf-1"), false);
+});
+
+test("ingestion rejects self-described hype without independent popularity evidence", () => {
+  const food = categoryDefinitions.find((category) => category.id === "food-drink");
+  const now = new Date("2026-08-21T12:00:00.000Z");
+  const review = {
+    headline: "I Tried The Viral Diet Coke Slushie To See If It Lives Up To The Internet Hype",
+    articleIntro: "Diet Coke slushies are currently having their moment in the viral internet sun, but are they actually any good? I wanted to try a Diet Coke slushie for myself, so I headed down to a place in Soho.",
+    publishedAt: "Fri, 21 Aug 2026 00:00:00 GMT",
+    source: "Tasting Table",
+    coverageCount: 1,
+    coverageSources: ["Tasting Table"],
+  };
+  assert.equal(sourceCandidateUsable(food, review, now), false);
+  assert.equal(sourceCandidateUsable(food, {
+    ...review,
+    headline: "Limited drink return sells out and triggers a restock",
+    articleIntro: "The limited drink returned this week, sold out at several locations, and triggered a restock after demand exceeded the first shipment.",
+    coverageCount: 2,
+    coverageSources: ["Publisher One", "Publisher Two"],
+    popularityEvidence: {
+      mode: "independent-coverage",
+      coverageCount: 2,
+      coverageSources: ["Publisher One", "Publisher Two"],
+      signal: "The limited drink returned this week, sold out at several locations, and triggered a restock.",
+    },
+  }, now), true);
 });
 
 test("uses a bounded structured request for an enabled AI description batch", async () => {
@@ -354,12 +390,22 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   const nicheBrief = JSON.parse(await readFile(new URL("../data/niche-trends.json", import.meta.url), "utf8"));
   const publishedNicheBrief = JSON.parse(await readFile(new URL("../public/data/niche-trends.json", import.meta.url), "utf8"));
   assert.deepEqual(publishedNicheBrief, nicheBrief);
-  assert.ok(nicheBrief.categories.length >= 25);
-  assert.ok(nicheBrief.categories.every((category) => category.topics.length >= 3));
+  assert.ok(nicheBrief.categories.length >= 18);
+  assert.ok(nicheBrief.categories.every((category) => category.topics.length >= 1));
   assert.ok(nicheBrief.categories.every((category) => category.topics.every((topic) => topic.evidenceMode === "source-grounded")));
   const nicheTopics = nicheBrief.categories.flatMap((category) => category.topics);
+  assert.ok(nicheTopics.every((topic) => topic.popularityEvidence
+    && ["independent-coverage", "measurable-signal", "concrete-trend-signal"].includes(topic.popularityEvidence.mode)
+    && (topic.popularityEvidence.mode === "independent-coverage"
+      ? topic.popularityEvidence.coverageCount >= 2 && topic.popularityEvidence.coverageSources.length >= 2
+        && (topic.popularityEvidence.coverageSources.length >= 3
+          || /\b(?:sold[- ]out|sell(?:s|ing)? out|restock|record|box office|ticket sales|chart(?:ed|ing)?|airplay|no\.?\s*1|top\s+\d+|rank|search interest|trending on|demand|return|re-?release|reintroduc|brought back|comeback|reunion|meme|viral (?:clip|video|sound|song|post)|debut|preview|deluxe edition|mixtape|breakout|win|won|beat|match|tournament)\b/i.test(topic.popularityEvidence.signal))
+      : /\b(?:sold[- ]out|sell(?:s|ing)? out|restock|record|chart|airplay|no\.?\s*1|top\s+\d+|rank|search interest|trending on|demand|return|re-?release|reintroduc|brought back|comeback|reunion|meme|viral (?:clip|video|sound|song|post)|debut|preview|deluxe edition|mixtape|breakout|win|won|beat|match|tournament|\d[\d,.]*\s*(?:million|billion|thousand|views?|streams?|sales?|tickets?|orders?))\b/i.test(topic.popularityEvidence.signal))));
+  assert.ok(nicheTopics.every((topic) => topic.whyNow.trim().toLocaleLowerCase() !== topic.title.trim().toLocaleLowerCase()));
+  assert.ok(nicheTopics.every((topic) => !/^Reports from\b/i.test(topic.whyNow)));
   assert.ok(nicheTopics.every((topic) => /^\/culture\/niche-[a-z0-9-]+\.webp$/.test(topic.image)));
   assert.ok(nicheTopics.every((topic) => !/(?:main[- ]character|next generation|moving target|worth watching|having (?:a|its) \w+ week|deserves the hype|sets? (?:his|her|their|its) sights|challenges? (?:the )?(?:norms|boundaries)|sparks? (?:a )?debate|current development|latest updates|news and notes|connect(?:ed|ing)? with fans|^\s*(?:the\s+)?(?!(?:19|20)\d{2}\b)\d+(?:st|nd|rd|th)?\s+(?!annual\b))/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
+  assert.ok(nicheTopics.every((topic) => !/(?:award[- ]winning daily .* publication|daily print newspaper|24\/7 website|front (?:center|centre)|photo(?:graph)? by|ap photo|illustration taken|stands? ahead of|reports? from)/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
   assert.ok(nicheTopics.every((topic) => !topic.imageSource || (new URL(topic.imageSource).protocol === "https:" && topic.imageSourcePageUrl === topic.url)));
   assert.doesNotMatch(JSON.stringify(nicheBrief), /&(?:ldquo|rdquo|lsquo|rsquo|hellip|nbsp|ndash|mdash);|&#(?:x[0-9a-f]+|\d+);/i);
   const musicTopics = nicheBrief.categories.filter((category) => category.parent === "Music").flatMap((category) => category.topics);
@@ -371,7 +417,10 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
     || /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
   const nicheIds = new Set(nicheBrief.categories.map((category) => category.id));
   for (const id of ["edm", "football", "food-drink", "golf", "pop", "r-and-b-soul", "sports-news", "science-space", "tech-news"]) {
-    assert.ok(nicheIds.has(id), `expected expanded niche category: ${id}`);
+    assert.ok(categoryDefinitions.some((category) => category.id === id), `expected configured niche category: ${id}`);
+  }
+  for (const id of ["edm", "food-drink", "sports-news", "science-space", "tech-news"]) {
+    assert.ok(nicheIds.has(id), `expected currently populated niche category: ${id}`);
   }
 
   const response = await render("/for-you");
@@ -537,6 +586,19 @@ test("extracts safe lead images from linked publisher metadata", () => {
   `);
   assert.match(intro, /recall after officials found a contamination risk/);
   assert.match(extractArticleIntro('<meta property="og:description" content="The product returned this week after a limited re-release and demand rose quickly.">'), /returned this week after a limited re-release/);
+  const captionSafeIntro = extractArticleIntro(`
+    <meta name="description" content="The federation president accused FIFA of fear tactics after it removed a senior executive.">
+    <article>
+      <p class="image-caption">FIFA officials stand ahead of a World Cup match in Texas, Tuesday.</p>
+      <p>The federation president said the firing was unacceptable and urged leaders to resist damaging orders.</p>
+    </article>
+  `, "Federation president accuses FIFA after executive firing");
+  assert.match(captionSafeIntro, /accused FIFA of fear tactics/);
+  assert.doesNotMatch(captionSafeIntro, /stand ahead of a World Cup match/i);
+  assert.doesNotMatch(extractArticleIntro(`
+    <meta name="description" content="The Journal Record is an award-winning daily general business and legal publication with a 24/7 website.">
+    <article><p class="image-caption">Illustration taken February 19, 2024.</p></article>
+  `, "AI spending drives record tech debt"), /award-winning daily|Illustration taken/i);
   const boundedIntro = extractArticleIntro(`
     <article><p>Officials announced a new event after months of preparation. The update drew fresh attention from readers.</p>
     <p>This paragraph is deliberately long and should not be clipped in the middle of a sentence when the ingestion limit is reached. It remains complete.</p></article>

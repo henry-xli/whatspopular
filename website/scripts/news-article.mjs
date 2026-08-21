@@ -329,6 +329,25 @@ function articleText(value) {
     .trim();
 }
 
+function headlineWords(value) {
+  return new Set(articleText(value)
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9]+/g, " ")
+    .split(/\s+/)
+    .filter((word) => word.length >= 4 && !/^(?:about|after|again|also|being|from|have|into|more|most|over|that|their|there|these|they|this|through|under|what|when|where|which|while|with|would|news|report|reports|latest|today|week|weekly|says|said|story|stories|update|updates|release|released|new|time|year|years)$/i.test(word)));
+}
+
+function headlineOverlap(value, headline) {
+  if (!headline) return 1;
+  const words = headlineWords(headline);
+  return [...headlineWords(value)].filter((word) => words.has(word)).length;
+}
+
+const nonArticleContainerPattern = /<(?:figure|figcaption|aside|nav|header|footer|form|dialog|template)\b[\s\S]*?<\/(?:figure|figcaption|aside|nav|header|footer|form|dialog|template)\s*>/gi;
+const nonArticleParagraphAttributePattern = /(?:caption|photo|credit|gallery|sidebar|related|promo|advert|weather|breadcrumb|byline|share|social|comment)/i;
+const nonArticleParagraphTextPattern = /^(?:mostly cloudy|partly cloudy|weather forecast|advertisement|sign up for|subscribe to|read more|follow us|copyright|all rights reserved)\b/i;
+const publisherBoilerplatePattern = /\b(?:award[- ]winning daily .* publication|daily print newspaper|24\/7 website|voice of the .* community|free e-alerts|breaking news notifications|our coverage|in your search results)\b/i;
+
 const sentenceSegmenter = new Intl.Segmenter("en", { granularity: "sentence" });
 const incompleteSentencePattern = /\b(?:St|Mr|Mrs|Ms|Dr|Prof|No|vs|etc|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.$/i;
 
@@ -337,6 +356,7 @@ function completeSentences(value, maxLength) {
   for (const { segment } of sentenceSegmenter.segment(value)) {
     const sentence = segment.trim();
     if (!sentence) continue;
+    if (!/[.!?]["'’”)]?$/u.test(sentence)) break;
     if (incompleteSentencePattern.test(sentence)) continue;
     if (/^(?:although|because|but|which|while|with|as)\b/i.test(sentence.replace(/^[\s"“”'’]+/, "")) && sentence.length < 72) break;
     const candidate = `${result} ${sentence}`.trim();
@@ -346,38 +366,48 @@ function completeSentences(value, maxLength) {
   return result;
 }
 
-export function extractArticleIntro(html) {
+export function extractArticleIntro(html, headline = "") {
   const scope = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1]
     ?? html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1]
     ?? html;
   const boilerplatePattern = /^(?:reporting by|editing by|edited by|our standards|this article has been reviewed|advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i;
-  const contextPattern = /\b(?:after|amid|announc|brought back|bring(?:s|ing)? back|because|comeback|confirm|debut(?:ed)?|first introduced|introduced|launch|limited(?:[- ]time)?|meme|nostalgia|original(?:ly)?|reaction|return(?:ed|ing)?|re-?released?|revived|viral|fans?|funny|walk(?:ed|ing)?|appearance|sold out|restock(?:ed)?|from\s+20\d{2}|in\s+20\d{2}|win|won|beat|loss|match|tournament|championship|playoffs?|final|injur|trade|transfer|sign(?:ed|ing)?|ruling|vote|strike|storm|fire|earthquake|study|research|mission|update|festival|concert|tour|game|season|episode|chapter|book|film|series)\b/gi;
+  const contextPattern = /\b(?:after|amid|announc|accus|brought back|bring(?:s|ing)? back|because|comeback|confirm|debut(?:ed)?|demand|first introduced|introduced|launch|limited(?:[- ]time)?|meme|nostalgia|original(?:ly)?|reaction|return(?:ed|ing)?|re-?released?|removal|removed|revived|viral|fans?|funny|walk(?:ed|ing)?|appearance|sold out|restock(?:ed)?|from\s+20\d{2}|in\s+20\d{2}|win|won|beat|loss|match|tournament|championship|playoffs?|final|injur|trade|transfer|sign(?:ed|ing)?|ruling|vote|strike|storm|fire|earthquake|study|research|mission|update|festival|concert|tour|game|season|episode|chapter|book|film|series|official|executive|proposal|investor|yield|debt)\b/gi;
   const metadata = [...html.matchAll(/<meta\s+[^>]*>/gi)]
     .map((match) => htmlAttributes(match[0]))
-    .filter((attributes) => /^(?:description|og:description|twitter:description)$/i.test(attributes.property ?? attributes.name ?? ""))
+    .filter((attributes) => /^(?:description|og:description|twitter:description)$/i.test(attributes.property ?? attributes.name ?? "")
+      || /^description$/i.test(attributes.itemprop ?? ""))
     .map((attributes) => articleText(attributes.content ?? ""))
-    .filter((text) => text.length >= 45 && text.length <= 720 && !boilerplatePattern.test(text))
+    .filter((text) => text.length >= 45 && text.length <= 720
+      && !boilerplatePattern.test(text)
+      && !publisherBoilerplatePattern.test(text)
+      && (!headline || headlineOverlap(text, headline) >= 1))
     .map((text, index) => ({
       text: completeSentences(text, 720),
       index: -100 + index,
-      contextScore: (text.match(contextPattern) ?? []).length + 3,
+      isMetadata: true,
+      contextScore: (text.match(contextPattern) ?? []).length + 8 + headlineOverlap(text, headline) * 2,
     }));
-  const paragraphs = [...scope.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
-    .map((match) => articleText(match[1]))
+  const paragraphScope = scope.replace(nonArticleContainerPattern, " ");
+  const paragraphs = [...paragraphScope.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi)]
+    .map((match) => ({ attributes: match[1], text: articleText(match[2]) }))
+    .filter(({ attributes, text }) => !nonArticleParagraphAttributePattern.test(attributes ?? "")
+      && !nonArticleParagraphTextPattern.test(text))
+    .map(({ text }) => text)
     .filter((text) => text.length >= 45 && text.length <= 720)
-    .filter((text) => !boilerplatePattern.test(text))
+    .filter((text) => !boilerplatePattern.test(text) && !publisherBoilerplatePattern.test(text))
     .filter((text) => !/\b(?:see more of our coverage|our coverage|in your search results|click here|download our app|follow us|sign up for our|subscribe to our)\b/i.test(text))
     .filter((text, index, values) => values.indexOf(text) === index)
     .map((text, index) => ({
       text: completeSentences(text, 720),
       index,
-      contextScore: (text.match(contextPattern) ?? []).length + (text.length >= 90 && text.length <= 520 ? 1 : 0),
+      isMetadata: false,
+      contextScore: (text.match(contextPattern) ?? []).length + (text.length >= 90 && text.length <= 520 ? 1 : 0) + headlineOverlap(text, headline) * 2,
     }))
     .filter((entry) => entry.text);
   if (!paragraphs.length && !metadata.length) return "";
   const selected = metadata.concat(paragraphs)
     .slice()
-    .sort((left, right) => right.contextScore - left.contextScore || left.index - right.index)
+    .sort((left, right) => right.contextScore - left.contextScore || Number(right.isMetadata) - Number(left.isMetadata) || left.index - right.index)
     .slice(0, 5)
     .sort((left, right) => left.index - right.index)
     .filter((entry, index, values) => values.findIndex((candidate) => candidate.text === entry.text) === index);
@@ -485,8 +515,8 @@ export async function linkedArticleMetadata(articleUrl, { allowMissingImage = fa
     throw new Error(`Unexpected publisher content type ${page.contentType}`);
   }
   const html = page.buffer.toString("utf8");
-  const intro = extractArticleIntro(html);
   const title = extractArticleTitle(html);
+  const intro = extractArticleIntro(html, title);
   const playback = extractPlayableMedia(html, page.finalUrl);
   try {
     const metadata = extractArticleImage(html, page.finalUrl);

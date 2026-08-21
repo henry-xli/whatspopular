@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T17:32:00.685Z",
+  "generatedAt": "2026-08-21T20:56:13.550Z",
   "edition": "Week of August 21",
   "window": "Past 7 days",
   "summary": "Choose the corners of the internet you actually care about. Each tag is pre-built from this week’s rising conversations, so compiling a digest never triggers a scrape.",
@@ -15,7 +15,7 @@
           "id": "edm-1",
           "title": "KSHMR Releases Debut Album Mirage As His Alias TEJA",
           "description": "KSHMR is one of electronic music's most recognised influential producers and now reveals Mirage, his debut album under the alias TEJA. The album represents both exploring a new creative direction and a significant personal statement from an artist who fully steps into a sound he has been quietly developing for years.",
-          "whyNow": "KSHMR Releases Debut Album Mirage As His Alias TEJA.",
+          "whyNow": "KSHMR is one of electronic music's most recognised influential producers and now reveals Mirage, his debut album under the alias TEJA.",
           "url": "https://www.edmtunes.com/2026/08/kshmr-releases-debut-album-mirage-as-his-alias-teja/?utm_source=rss&utm_medium=rss&utm_campaign=kshmr-releases-debut-album-mirage-as-his-alias-teja",
           "source": "EDM Tunes",
           "sourceLabel": "Read the report",
@@ -32,119 +32,21 @@
           "imageAlt": "",
           "publishedAt": "Fri, 21 Aug 2026 15:01:12 +0000",
           "coverageCount": 2,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "edm-2",
-          "title": "Blanke Drops Debut Album ‘Edge of the World’",
-          "description": "Blanke's debut album Edge of the World is out now, featuring Jason Ross, Virtual Riot, 1788-L and more across a cinematic bass music journey. The album lands during one of Blanke’s busiest stretches yet.",
-          "whyNow": "Blanke Drops Debut Album ‘Edge of the World’.",
-          "url": "https://www.edmtunes.com/2026/08/blanke-drops-debut-album-edge-of-the-world/?utm_source=rss&utm_medium=rss&utm_campaign=blanke-drops-debut-album-edge-of-the-world",
-          "source": "EDM Tunes",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-edm-2.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/album/40LNAakQwoFFgvhHfMwMHV",
-            "embedUrl": "https://open.spotify.com/embed/album/40LNAakQwoFFgvhHfMwMHV?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
+          "coverageSources": [
+            "DJ Mag",
+            "EDM Tunes"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 2,
+            "coverageSources": [
+              "DJ Mag",
+              "EDM Tunes"
+            ],
+            "signal": "KSHMR is one of electronic music's most recognised influential producers and now reveals Mirage, his debut album under the alias TEJA."
           },
-          "imageSource": "https://www.edmtunes.com/wp-content/uploads/2026/08/image-60.png",
-          "imageSourcePageUrl": "https://www.edmtunes.com/2026/08/blanke-drops-debut-album-edge-of-the-world/?utm_source=rss&utm_medium=rss&utm_campaign=blanke-drops-debut-album-edge-of-the-world",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 14:45:44 +0000",
-          "coverageCount": 1,
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "edm-3",
-          "title": "mölly trusted the timing and her debut album ’22’ is the payoff",
-          "description": "Some artists spend a decade circling their debut album. mölly got there in two years, and she wasn’t even in a hurry. What started as an album about unity, love and connection turned into a year of arguing with herself about whether she’d earned any of it. Her words: “I spent so much of the album feeling like I needed to become more in order to deserve my place as an artist.",
-          "whyNow": "mölly trusted the timing and her debut album ’22’ is the payoff.",
-          "url": "https://dancingastronaut.com/2026/08/molly-trusted-the-timing-and-her-debut-album-22-is-the-payoff/",
-          "source": "Dancing Astronaut",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-edm-3.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/album/25v8BAk8pokWmaNJUDOPCD",
-            "embedUrl": "https://open.spotify.com/embed/album/25v8BAk8pokWmaNJUDOPCD?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
-          },
-          "imageSource": "https://dancingastronaut.com/wp-content/uploads/2026/08/molly-22-Press-Selects-2.jpg",
-          "imageSourcePageUrl": "https://dancingastronaut.com/2026/08/molly-trusted-the-timing-and-her-debut-album-22-is-the-payoff/",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 16:44:19 +0000",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "football",
-      "label": "Football",
-      "parent": "Sports",
-      "description": "Football conversations, releases, and signals that are accelerating beyond the general leaderboard.",
-      "accent": "#20b486",
-      "topics": [
-        {
-          "id": "football-1",
-          "title": "U-20 Women's World Cup to move forward despite UEFA boycott threat, says USA coach",
-          "description": "United States U-20 women's national team manager Vicky Jepson said she believes the upcoming U-20 Women's World Cup will be held as scheduled. 19, Jepson named a 21-player roster for the upcoming tournament in Poland.",
-          "whyNow": "U-20 Women's World Cup to move forward despite UEFA boycott threat, says USA coach.",
-          "url": "https://www.usatoday.com/story/sports/soccer/2026/08/19/u20-womens-world-cup-uefa-boycott-threat-usa-coach-jepson/91375452007/",
-          "source": "USA Today",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-football-1.webp",
-          "imageSource": "https://www.usatoday.com/gcdn/authoring/authoring-images/2026/08/19/USAT/91376056007-getty-images-1476191481.jpg?crop=4992,2808,x0,y260&width=3200&height=1801&format=pjpg&auto=webp",
-          "imageSourcePageUrl": "https://www.usatoday.com/story/sports/soccer/2026/08/19/u20-womens-world-cup-uefa-boycott-threat-usa-coach-jepson/91375452007/",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 20:35:00 GMT",
-          "coverageCount": 2,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "football-2",
-          "title": "Rodri set to arrive as Barcelona finalize transfer of Spain captain from Man City",
-          "description": "Spain’s World Cup-winning captain Rodri is set to arrive in Barcelona to seal his transfer from Manchester City to the Catalan club.",
-          "whyNow": "Rodri set to arrive as Barcelona finalize transfer of Spain captain from Man City.",
-          "url": "https://www.dailygazette.com/ap/sports/rodri-set-to-arrive-as-barcelona-finalize-transfer-of-spain-captain-from-man-city/article_27b489a4-3271-5316-a15c-7d4139e4b8b5.html",
-          "source": "Bozeman Daily Chronicle",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-football-2.webp",
-          "imageSource": "https://bloximages.chicago2.vip.townnews.com/dailygazette.com/content/tncms/assets/v3/editorial/0/85/0858eb5f-7c10-563e-b7a8-d2e931e2427f/6a7ef9c087f2c.image.jpg?crop=1763%2C926%2C0%2C124&resize=1200%2C630&order=crop%2Cresize",
-          "imageSourcePageUrl": "https://www.dailygazette.com/ap/sports/rodri-set-to-arrive-as-barcelona-finalize-transfer-of-spain-captain-from-man-city/article_27b489a4-3271-5316-a15c-7d4139e4b8b5.html",
-          "imageAlt": "Argentina Spain WCup Soccer",
-          "publishedAt": "Mon, 17 Aug 2026 13:45:02 GMT",
-          "coverageCount": 2,
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "football-3",
-          "title": "A top official leaves FIFA, deepening the fallout from Infantino’s World Cup sell-off plan",
-          "description": "ZURICH (AP) — FIFA's chief operating officer, Kevin Lamour, has reportedly left his role at soccer's governing body just weeks after saying its president, Gianni Infantino, had deceived staff with his World Cup sell-off plan.",
-          "whyNow": "A top official leaves FIFA, deepening the fallout from Infantino’s World Cup sell-off plan.",
-          "url": "https://www.wral.com/news/ap/0c432-a-top-official-leaves-fifa-deepening-the-fallout-from-infantino-s-world-cup-sell-off-plan/",
-          "source": "WRAL",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-football-3.webp",
-          "imageSource": "https://images.wral.com/dffad512-8e04-55fa-9560-e003440abfdc?w=1200&h=630&height=630",
-          "imageSourcePageUrl": "https://www.wral.com/news/ap/0c432-a-top-official-leaves-fifa-deepening-the-fallout-from-infantino-s-world-cup-sell-off-plan/",
-          "imageAlt": "FILE - UEFA's deputy general secretary Kevin Lamour, centre, looks on as he stands next to UEFA President Aleksander Ceferin, right, prior to the start of a Group F match between Turkey and Georgia at the Euro 2024 soccer tournament in Dort",
-          "publishedAt": "Tue, 18 Aug 2026 03:42:58 GMT",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -152,68 +54,41 @@
       "id": "combat-sports",
       "label": "Combat sports",
       "parent": "UFC MMA boxing fight card",
-      "description": "Fight cards, champions, rivalries, and the storylines that matter between the bell and the post-fight interview.",
+      "description": "Combat sports conversations, releases, and signals that are accelerating beyond the general leaderboard.",
       "accent": "#f05e4f",
       "topics": [
         {
           "id": "combat-sports-1",
-          "title": "D'Angelo Hutchinson is the latest Louisville veteran to return amid 5-for-5 court fight",
-          "description": "D'Angelo Hutchinson, the Cardinals' second-leading tackler last season, announced Tuesday that he plans to return for a fifth season, the latest member of the high school Class of 2022 to",
-          "whyNow": "D'Angelo Hutchinson is the latest Louisville veteran to return amid 5-for-5 court fight.",
-          "url": "https://www.wdrb.com/sports/dangelo-hutchinson-is-the-latest-louisville-veteran-to-return-amid-5-for-5-court-fight/article_542bca7c-3df0-4764-82f9-949d425a7879.html",
-          "source": "WDRB",
+          "title": "Raze Action launches as a new direct-to-consumer combat sports streaming service",
+          "description": "Raze Action, a new direct-to-consumer streaming company built for combat sports, has launched as a dedicated home for live boxing, MMA and pro wrestling. Powered by Kiswe it will debut with a live pay-per-view event: Universal Promotions' Noche de Campeones: Juanma vs Fenómeno, streamed worldwide from Puerto Rico on Saturday 29 August 2026.",
+          "whyNow": "Raze Action, a new direct-to-consumer streaming company built for combat sports, has launched as a dedicated home for live boxing, MMA and pro wrestling.",
+          "url": "https://www.svgeurope.org/blog/headlines/raze-action-launches-as-a-new-direct-to-consumer-combat-sports-streaming-service/",
+          "source": "SVG Europe",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-combat-sports-1.webp",
-          "imageSource": "https://bloximages.newyork1.vip.townnews.com/wdrb.com/content/tncms/assets/v3/editorial/1/c2/1c260aa9-6a41-4630-97bb-578d7f930e6e/6a8520e89de2e.image.jpg?crop=1672%2C878%2C0%2C31&resize=1200%2C630&order=crop%2Cresize",
-          "imageSourcePageUrl": "https://www.wdrb.com/sports/dangelo-hutchinson-is-the-latest-louisville-veteran-to-return-amid-5-for-5-court-fight/article_542bca7c-3df0-4764-82f9-949d425a7879.html",
-          "imageAlt": "D'Angelo Hutchinson and Jabari Mack",
-          "publishedAt": "Wed, 19 Aug 2026 03:10:00 GMT",
-          "coverageCount": 1,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "combat-sports-2",
-          "title": "Dana White on Potential UFC Return for Khabib Nurmagomedov",
-          "description": "UFC president Dana White commented on a potential return to the UFC for Hall of Famer Khabib Nurmagomedov.The former UFC lightweight champion retired in 2021 following an amazing career that saw him go 29-0 in MMA and 13-0 in the UFC.",
-          "whyNow": "Dana White on Potential UFC Return for Khabib Nurmagomedov.",
-          "url": "https://sports.yahoo.com/articles/dana-white-potential-ufc-return-085253901.html",
-          "source": "Yahoo Sports",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-combat-sports-2.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=rVkePUj_KBk",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/rVkePUj_KBk?rel=0",
-            "label": "Watch on YouTube"
+          "imageSource": "https://www.svgeurope.org/wp-content/blogs.dir/17/files/2026/08/Founder_Photo_Adam_Bigwood_Headshot.jpg",
+          "imageSourcePageUrl": "https://www.svgeurope.org/blog/headlines/raze-action-launches-as-a-new-direct-to-consumer-combat-sports-streaming-service/",
+          "imageAlt": "",
+          "publishedAt": "Tue, 18 Aug 2026 15:27:06 GMT",
+          "coverageCount": 6,
+          "coverageSources": [
+            "Real Change",
+            "SVG Europe",
+            "Yahoo Finance"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 6,
+            "coverageSources": [
+              "Real Change",
+              "SVG Europe",
+              "Yahoo Finance"
+            ],
+            "signal": "Raze Action, a new direct-to-consumer streaming company built for combat sports, has launched as a dedicated home for live boxing, MMA and pro wrestling."
           },
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/627b42ebe08883ad2ee9d6e750596c31ed454a7c11c5fdd0d822fe5545a1fd81/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fheavy_214%2Fc98b2905ed034b93740bf230588d2904.jpg",
-          "imageSourcePageUrl": "https://sports.yahoo.com/articles/dana-white-potential-ufc-return-085253901.html",
-          "imageAlt": "",
-          "publishedAt": "Sun, 16 Aug 2026 08:52:53 GMT",
-          "coverageCount": 1,
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "combat-sports-3",
-          "title": "BKFC founder on the fight for the future of combat sports",
-          "description": "Bare Knuckle Fighting Championship is taking its biggest swing yet. BKFC founder and president David Feldman joins Asking for a Trend as the fast-growing combat sport heads to Fenway Park in Boston next Friday night.",
-          "whyNow": "Bare Knuckle Fighting Championship is taking its biggest swing yet.",
-          "url": "https://finance.yahoo.com/video/bkfc-founder-fight-future-combat-210200075.html",
-          "source": "Yahoo Finance",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-combat-sports-3.webp",
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/6478924C8B8E1F455EF494D2D70ED6BBACD790A94B859880D3E91DA8D86DBD7A/subgraphmysterio/resizefill_w1200_h800;quality_80;format_webp/https:%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2F2026-08%2Fa2db9a9f-d2c1-4980-9840-1e03ea28d483",
-          "imageSourcePageUrl": "https://finance.yahoo.com/video/bkfc-founder-fight-future-combat-210200075.html",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 21:02:00 GMT",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -221,60 +96,76 @@
       "id": "beauty",
       "label": "Beauty",
       "parent": "beauty makeup skincare trend product",
-      "description": "Makeup, skincare, hair, and the product signals moving from creator shelves into everyday routines.",
+      "description": "Beauty conversations, releases, and signals that are accelerating beyond the general leaderboard.",
       "accent": "#e981a9",
       "topics": [
         {
           "id": "beauty-1",
-          "title": "‘Skin care in a can’: How TikTok turned sardines into a viral beauty trend",
-          "description": "Sardines are going viral on social media as a skin-care trend. A Georgia expert explains their potential benefits for skin health and what claims may be overblown. When CamRon Drake Torain went to pick up sardines at his neighborhood grocery store in metro Atlanta earlier this month, he was in for a shock.",
-          "whyNow": "‘Skin care in a can’: How TikTok turned sardines into a viral beauty trend.",
-          "url": "https://www.ajc.com/wellness/2026/08/sardines-are-going-viral-on-tiktok-for-skin-health-heres-what-experts-say/",
-          "source": "AJC.com",
+          "title": "Space NK opens waitlist for 2026 beauty advent calendar packed with ‘bestsellers’",
+          "description": "The 2026 Space NK Beauty Advent Calendar goes on sale on 10 September and builds on the success of the British beauty retailer’s 2025 edition, which sold out in 2.5 weeks.",
+          "whyNow": "The 2026 Space NK Beauty Advent Calendar goes on sale on 10 September and builds on the success of the British beauty retailer’s 2025 edition, which sold out in 2.5 weeks.",
+          "url": "https://cosmeticsbusiness.com/space-nk-opens-waitlist-for-2026-beauty-advent-calendar",
+          "source": "Cosmetics Business",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-beauty-1.webp",
-          "imageSource": "https://images.ajc.com/resizer/v2/LRJZJCJS7IHA7LROHPFIUNU4LE.jpg?auth=96bf3364d431941cd9eecf29c1224d60085a1138c7d1c6e255fbc0512d10c372&width=1200&height=630&smart=true",
-          "imageSourcePageUrl": "https://www.ajc.com/wellness/2026/08/sardines-are-going-viral-on-tiktok-for-skin-health-heres-what-experts-say/",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 01:53:42 GMT",
-          "accent": "#e981a9",
-          "trendLabel": "Reported this week"
+          "imageSource": "https://cosmeticsbusiness.com/article-image-alias/space-nk-opens-waitlist-for-2026.jpg",
+          "imageSourcePageUrl": "https://cosmeticsbusiness.com/space-nk-opens-waitlist-for-2026-beauty-advent-calendar",
+          "imageAlt": "Space NK opens waitlist for 2026 beauty advent calendar packed with ‘bestsellers’",
+          "publishedAt": "Mon, 17 Aug 2026 10:56:19 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "WWD",
+            "Vogue",
+            "Forbes",
+            "shape.com",
+            "Cosmetics Business"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "WWD",
+              "Vogue",
+              "Forbes",
+              "shape.com",
+              "Cosmetics Business"
+            ],
+            "signal": "The 2026 Space NK Beauty Advent Calendar goes on sale on 10 September and builds on the success of the British beauty retailer’s 2025 edition, which sold out in 2.5 weeks."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         },
         {
           "id": "beauty-2",
           "title": "e.l.f. Cosmetics Answers Community Demand with the Return of Pickle-Inspired Glow Reviver Melting Lip Balms",
           "description": "Beauty (NYSE: ELF), is bringing back the highly demanded pickle-inspired Glow Reviver Melting Lip Balm in three limited-edition shades, starting tomorrow. The launch follows the viral success of the original pickle flavored Glow Reviver Melting Lip Balm earlier this year, which sold out in 8 minutes and left the community wanting more.",
-          "whyNow": "e.l.f. Cosmetics Answers Community Demand with the Return of Pickle-Inspired Glow Reviver Melting Lip Balms.",
+          "whyNow": "The launch follows the viral success of the original pickle flavored Glow Reviver Melting Lip Balm earlier this year, which sold out in 8 minutes and left the community wanting more.",
           "url": "https://www.rutlandherald.com/news/business/e-l-f-cosmetics-answers-community-demand-with-the-return-of-pickle-inspired-glow-reviver/article_b752752c-7bf5-5242-87c0-97d77378bef7.html",
-          "source": "Business Wire",
+          "source": "e.l.f. Beauty",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-beauty-2.webp",
           "imageSource": "https://bloximages.chicago2.vip.townnews.com/rutlandherald.com/content/tncms/assets/v3/editorial/b/fb/bfb13231-20af-5e0d-b4d6-802927490bd5/6a852c1622c86.image.jpg?crop=1920%2C1008%2C0%2C35&resize=1200%2C630&order=crop%2Cresize",
           "imageSourcePageUrl": "https://www.rutlandherald.com/news/business/e-l-f-cosmetics-answers-community-demand-with-the-return-of-pickle-inspired-glow-reviver/article_b752752c-7bf5-5242-87c0-97d77378bef7.html",
           "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 04:02:30 GMT",
-          "accent": "#f29bbb",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "beauty-3",
-          "title": "The Best Beauty Products of 2026 So Far, According to Vogue’s Beauty Team",
-          "description": "From signature perfumes to hair styling tricks—Vogue editors share the valuable beauty lessons their maternal figures taught them. “Growing up, my mom had one beauty rule: always wear lotion—lathering on an assortment of Vaseline, Nivea, and Aveeno lotions immediately after showering.",
-          "whyNow": "“Growing up, my mom had one beauty rule: always wear lotion—lathering on an assortment of Vaseline, Nivea, and Aveeno lotions immediately after showering.",
-          "url": "https://www.vogue.com/article/mothers-day-vogue-editors-beauty-lessons",
-          "source": "Vogue",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-beauty-3.webp",
-          "imageSource": "https://assets.vogue.com/photos/68027e04998190ce36e6764c/16:9/w_1280,c_limit/Holding%20Collage.jpg",
-          "imageSourcePageUrl": "https://www.vogue.com/article/mothers-day-vogue-editors-beauty-lessons",
-          "imageAlt": "",
-          "publishedAt": "Mon, 17 Aug 2026 20:33:59 GMT",
+          "publishedAt": "Wed, 19 Aug 2026 11:20:31 GMT",
           "coverageCount": 2,
-          "accent": "#ffc1d2",
-          "trendLabel": "Reported this week"
+          "coverageSources": [
+            "e.l.f. Beauty",
+            "Business Wire"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 2,
+            "coverageSources": [
+              "e.l.f. Beauty",
+              "Business Wire"
+            ],
+            "signal": "The launch follows the viral success of the original pickle flavored Glow Reviver Melting Lip Balm earlier this year, which sold out in 8 minutes and left the community wanting more."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -287,57 +178,90 @@
       "topics": [
         {
           "id": "food-drink-1",
-          "title": "A viral Italian spritz just made its Boston debut. Meet Sarti.",
-          "description": "Here’s where to find a Sarti spritz in Boston. The reign of the Aperol spritz may be over because there’s a new drink in town: the Sarti spritz. After seeing several videos about Sarti online, Bridget Rooney, owner and general manager of the South Boston restaurant Roza Lyons, ordered two cases, which sold out in a few days.",
-          "whyNow": "A viral Italian spritz just made its Boston debut. Meet Sarti.",
-          "url": "https://www.boston.com/food/restaurants/2026/08/18/where-to-find-sarti-spritz-boston/",
-          "source": "Boston.com",
+          "title": "Starbucks’ Unicorn Frappuccino returns for limited release",
+          "description": "Nearly a decade after its first appearance, Starbucks’ viral Unicorn Frappuccino has made a comeback. For fans who reminisce about the original Unicorn Frappuccino, the return of the viral drink offers another opportunity to try one of Starbucks’ most recognizable drinks.",
+          "whyNow": "Nearly a decade after its first appearance, Starbucks’ viral Unicorn Frappuccino has made a comeback.",
+          "url": "https://foothilldragonpress.org/292066/a-latest/starbucks-unicorn-frappuccino-returns-for-limited-release/",
+          "source": "The Foothill Dragon Press",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-food-drink-1.webp",
-          "imageSource": "https://bdc2020.o0bc.com/wp-content/uploads/2026/08/Sarti-Rosa-6a845d987f177-768x432.jpg",
-          "imageSourcePageUrl": "https://www.boston.com/food/restaurants/2026/08/18/where-to-find-sarti-spritz-boston/",
+          "imageSource": "https://foothilldragonpress.org/wp-content/uploads/2026/08/1KAN1N8FOE4Ewdzdi7DCVF84yuqecejT4WNBuMkC.jpg",
+          "imageSourcePageUrl": "https://foothilldragonpress.org/292066/a-latest/starbucks-unicorn-frappuccino-returns-for-limited-release/",
           "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 15:34:19 GMT",
-          "coverageCount": 3,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
+          "publishedAt": "Wed, 19 Aug 2026 09:04:49 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "The Foothill Dragon Press",
+            "The Skyline View",
+            "wandtv.com",
+            "ABC Columbia",
+            "KSBY News",
+            "Yahoo Finance"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "The Foothill Dragon Press",
+              "The Skyline View",
+              "wandtv.com",
+              "ABC Columbia",
+              "KSBY News",
+              "Yahoo Finance"
+            ],
+            "signal": "Nearly a decade after its first appearance, Starbucks’ viral Unicorn Frappuccino has made a comeback."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
+        }
+      ]
+    },
+    {
+      "id": "gaming",
+      "label": "Gaming",
+      "parent": "Culture",
+      "description": "Gaming conversations, releases, and signals that are accelerating beyond the general leaderboard.",
+      "accent": "#3fa7ff",
+      "topics": [
         {
-          "id": "food-drink-2",
-          "title": "I Tried The Viral Diet Coke Slushie To See If It Lives Up To The Internet Hype",
-          "description": "Diet Coke slushies are currently having their moment in the viral internet sun, but are they actually any good? We're bombarded with new viral food trends every day — but how many of them are actually something special? I wanted to try a Diet Coke slushie for myself, so I headed down to a place in the Soho area of New York City called Tender Crush.",
-          "whyNow": "I Tried The Viral Diet Coke Slushie To See If It Lives Up To The Internet Hype.",
-          "url": "https://www.yahoo.com/lifestyle/articles/tried-viral-diet-coke-slushie-162000440.html",
-          "source": "Tasting Table",
+          "id": "gaming-1",
+          "title": "As Its Launch Trailer Hits Like a Gundark, I Have a Good Feeling About Star Wars: Zero Company",
+          "description": "The first game from new studio Bit Reactor, Star Wars: Zero Company aims to combine the nail-biting turn-based tactical gameplay of XCOM with the rich, cinematic roleplaying of games like Knights of the Old Republic and Mass Effect. Bit Reactor, helmed by XCOM and Midnight Suns veteran Greg Foertsch and staffed by 20 other ex-Firaxis devs, on Monday released a thrilling launch trailer for Zero Company.",
+          "whyNow": "Bit Reactor, helmed by XCOM and Midnight Suns veteran Greg Foertsch and staffed by 20 other ex-Firaxis devs, on Monday released a thrilling launch trailer for Zero Company.",
+          "url": "https://www.cnet.com/tech/gaming/star-wars-zero-company-preview-less-xcom-more-rpg/",
+          "source": "CNET",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-food-drink-2.webp",
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/a1c9af45bebc791663913f8dcad2032659e2814804286105069cba5460de40ac/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Ftasting_table_543%2F86be0aab1896216f876cf67213f8fa09.jpg",
-          "imageSourcePageUrl": "https://www.yahoo.com/lifestyle/articles/tried-viral-diet-coke-slushie-162000440.html",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 16:20:00 GMT",
-          "coverageCount": 1,
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "food-drink-3",
-          "title": "Reese’s Teams Up with Cult-Favorite Coffee Shop for a Fall Drink That Tastes Like Reese’s Pumpkins (Exclusive)",
-          "description": "Reese’s is teaming up with The Nitro Bar for a limited edition latte inspired by Reese’s Pumpkins. Reese’s collab with The Nitro Bar comes just over a week after Hershey unveiled its full Hersheyween 2026 lineup of sweet and salty treats.",
-          "whyNow": "Reese’s is teaming up with The Nitro Bar for a limited edition latte inspired by Reese’s Pumpkins.",
-          "url": "https://people.com/reeses-teams-up-with-cult-favorite-coffee-shop-for-limited-edition-reeses-pumpkin-drink-exclusive-12064712",
-          "source": "People.com",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-food-drink-3.webp",
-          "imageSource": "https://people.com/thmb/8mzTMJJFFYz72ycHAUCIj6olWIg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/Reeses-New-Collab-082026-1-111600e941c6438b86c787de6d5d1789.jpg",
-          "imageSourcePageUrl": "https://people.com/reeses-teams-up-with-cult-favorite-coffee-shop-for-limited-edition-reeses-pumpkin-drink-exclusive-12064712",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 12:00:00 GMT",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
+          "image": "/culture/niche-gaming-1.webp",
+          "playback": {
+            "provider": "YouTube",
+            "externalUrl": "https://www.youtube.com/watch?v=AxAgeglgSeA",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/AxAgeglgSeA?rel=0",
+            "label": "Watch on YouTube"
+          },
+          "imageSource": "https://www.cnet.com/wp-content/uploads/sites/2/Star-Wars-Zero-Company-PR-team-cinematic.jpeg",
+          "imageSourcePageUrl": "https://www.cnet.com/tech/gaming/star-wars-zero-company-preview-less-xcom-more-rpg/",
+          "imageAlt": "a Jedi, a Mandalorian, a clone trooper and an Umbaran running towards the camera",
+          "publishedAt": "Mon, 17 Aug 2026 17:22:00 GMT",
+          "coverageCount": 4,
+          "coverageSources": [
+            "StarWars.com",
+            "CNET",
+            "Space"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 4,
+            "coverageSources": [
+              "StarWars.com",
+              "CNET",
+              "Space"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -350,56 +274,42 @@
       "topics": [
         {
           "id": "anime-manga-1",
-          "title": "Crunchyroll Puts Fans First When It Comes to Building Out Its Global Anime Empire",
-          "description": "Crunchyroll is growing its global anime business through streaming, theatrical releases, events, merchandise and fan-first experiences.",
-          "whyNow": "Crunchyroll Puts Fans First When It Comes to Building Out Its Global Anime Empire.",
-          "url": "https://variety.com/2026/film/focus/crunchyroll-anime-global-1236837643/",
-          "source": "Variety",
+          "title": "Anime NYC 2026 Opens Today: 150,000 Fans, yama, and Final Kagurabachi US Stop",
+          "description": "Anime NYC 2026 opens today at the Javits Center in Manhattan, expecting 150,000 fans through Sunday.",
+          "whyNow": "Anime NYC 2026 opens today at the Javits Center in Manhattan, expecting 150,000 fans through Sunday.",
+          "url": "https://www.techtimes.com/articles/325124/20260820/anime-nyc-2026-opens-today-150000-fans-yama-final-kagurabachi-us-stop.htm",
+          "source": "Tech Times",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-anime-manga-1.webp",
-          "imageSource": "https://variety.com/wp-content/uploads/2025/08/Demon-Slayer-HTW-Featured.jpg?w=1000&h=563&crop=1",
-          "imageSourcePageUrl": "https://variety.com/2026/film/focus/crunchyroll-anime-global-1236837643/",
-          "imageAlt": "How to watch 'Demon Slayer' online",
-          "publishedAt": "Wed, 19 Aug 2026 16:45:00 GMT",
-          "coverageCount": 1,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "anime-manga-2",
-          "title": "Azusa Banjo's Hit Manga I Think I Turned My Childhood Friend Into a Girl Gets TV Anime Adaptation",
-          "description": "YTE Ltd. announced today that the highly popular Japanese manga series I Think I Turned My Childhood Friend Into a Girl, created by Azusa Banjo, will receive a TV anime adaptation.",
-          "whyNow": "YTE Ltd. announced today that the highly popular Japanese manga series I Think I Turned My Childhood Friend Into a Girl, created by Azusa Banjo, will receive a TV anime adaptation.",
-          "url": "https://finance.yahoo.com/media-advertising/articles/azusa-banjos-hit-manga-think-123800399.html",
-          "source": "Yahoo Finance",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-anime-manga-2.webp",
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/F89F067E8304A094F4714BC741909C4144B88E272AC941F8836AD0A89CFA4545/subgraphmysterio/resizefill_w1200_h1200;quality_80;format_webp/https:%2F%2Fmedia.zenfs.com%2Fen%2Fprnewswire.com%2F80485c76158e4818a0f0ef4ea0e36bf4.png",
-          "imageSourcePageUrl": "https://finance.yahoo.com/media-advertising/articles/azusa-banjos-hit-manga-think-123800399.html",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 12:38:00 GMT",
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "anime-manga-3",
-          "title": "Naver Webtoon Launches 'Superfan' Badges to Deepen Fandom Economy",
-          "description": "Naver Webtoon has launched a Fan Score feature awarding \"Superfan\" badges to reward reader engagement and deepen its fandom economy strategy. The Fan Score is a feature that calculates fan devotion for each work up to a maximum of 99.9 points, based on a reader's reading rate, payment history, comment activity, and timing of viewing the latest episodes.",
-          "whyNow": "The Fan Score is a feature that calculates fan devotion for each work up to a maximum of 99.9 points, based on a reader's reading rate, payment history, comment activity, and timing of viewing the latest episodes.",
-          "url": "https://en.sedaily.com/technology/2026/08/19/naver-webtoon-launches-superfan-badges-to-deepen-fandom",
-          "source": "Seoul Economic Daily",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-anime-manga-3.webp",
-          "imageSource": "https://wimg.sedaily.com/news/cms/2026/08/19/news-p.v1.20260819.bbb8e54d74554deeb66e3cd03751255e_P1.png",
-          "imageSourcePageUrl": "https://en.sedaily.com/technology/2026/08/19/naver-webtoon-launches-superfan-badges-to-deepen-fandom",
-          "imageAlt": "Naver Webtoon Launches 'Superfan' Badges to Deepen Fandom Economy",
-          "publishedAt": "Wed, 19 Aug 2026 00:52:50 GMT",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
+          "imageSource": "https://d.techtimes.com/en/full/473334/anime-nycs-cosplay-masquerade-event.png",
+          "imageSourcePageUrl": "https://www.techtimes.com/articles/325124/20260820/anime-nyc-2026-opens-today-150000-fans-yama-final-kagurabachi-us-stop.htm",
+          "imageAlt": "Anime NYC's Cosplay Masquerade event",
+          "publishedAt": "Thu, 20 Aug 2026 17:33:02 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "ICv2",
+            "The Outerhaven",
+            "Variety",
+            "Tech Times",
+            "JustWatch",
+            "Popverse"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "ICv2",
+              "The Outerhaven",
+              "Variety",
+              "Tech Times",
+              "JustWatch",
+              "Popverse"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -407,422 +317,76 @@
       "id": "film-tv",
       "label": "Film & TV",
       "parent": "Culture",
-      "description": "Trailers, casting, premieres, and the movies and shows becoming part of the week’s shared vocabulary.",
+      "description": "Film & TV conversations, releases, and signals that are accelerating beyond the general leaderboard.",
       "accent": "#e8b64e",
       "topics": [
         {
           "id": "film-tv-1",
-          "title": "Meghan Markle Could Resume Acting Career After Return To UK – Report",
-          "description": "Meghan Markle, the Duchess of Sussex, could be set for a new acting role after moving back to the UK, according to a report. Meghan Markle ‘s move to the UK might not be the only return she’s planning to make.",
-          "whyNow": "Meghan Markle Could Resume Acting Career After Return To UK – Report.",
-          "url": "https://deadline.com/2026/08/meghan-markle-acting-role-uk-1237047334/",
-          "source": "Deadline",
+          "title": "Australians Want to Watch More Local Film and TV, New Report Finds",
+          "description": "New research from Screen Australia has revealed a widening gap between the appetite for local film and television and how much Australians are actually watching. Screen Australia’s new ‘Screen Currency 2026’ report found 84% of Australians believe access to local screen content is important, while 75% are interested in watching more. The research also found local content has an impact beyond viewing figures.",
+          "whyNow": "Screen Australia’s new ‘Screen Currency 2026’ report found 84% of Australians believe access to local screen content is important, while 75% are interested in watching more.",
+          "url": "https://au.rollingstone.com/movies/movie-news/australians-want-to-watch-more-local-film-and-tv-new-report-finds-99984/",
+          "source": "Rolling Stone Australia",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-film-tv-1.webp",
-          "imageSource": "https://deadline.com/wp-content/uploads/2025/04/Screenshot-2025-04-20-at-10.00.57.png?w=1024",
-          "imageSourcePageUrl": "https://deadline.com/2026/08/meghan-markle-acting-role-uk-1237047334/",
-          "imageAlt": "Meghan Markle",
-          "publishedAt": "Fri, 21 Aug 2026 12:17:00 GMT",
-          "coverageCount": 1,
+          "imageSource": "https://images.thebrag.com/cdn-cgi/image/fit=crop,width=1200,height=628/https://images-r2-1.thebrag.com/rs/uploads/2021/12/RS-AU_LOGO-RED.png",
+          "imageSourcePageUrl": "https://au.rollingstone.com/movies/movie-news/australians-want-to-watch-more-local-film-and-tv-new-report-finds-99984/",
+          "imageAlt": "",
+          "publishedAt": "Wed, 19 Aug 2026 01:15:47 GMT",
+          "coverageCount": 4,
+          "coverageSources": [
+            "TheWrap",
+            "Rolling Stone Australia",
+            "Always Be Watching",
+            "Mediaweek"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 4,
+            "coverageSources": [
+              "TheWrap",
+              "Rolling Stone Australia",
+              "Always Be Watching",
+              "Mediaweek"
+            ],
+            "signal": ""
+          },
           "accent": "#e8b64e",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "film-tv-2",
-          "title": "'Sons of Anarchy' Stars Reunite for 'Legends' Series at FX",
-          "description": "FX ‘s Sons of Anarchy is making a TV comeback, but not in the way you’d expect, as FX and Hulu unveil Legends, an all-new limited series reuniting cast members like Charlie Hunnam, Katey Sagal, and Ron Perlman, among others. Described as a meta-thriller, Legends follows the Sons of Anarchy cast as they reunite at a fan convention after more than a decade.",
-          "whyNow": "'Sons of Anarchy' Stars Reunite for 'Legends' Series at FX.",
-          "url": "https://www.tvinsider.com/1282437/legends-sons-of-anarchy-premiere-date-trailer-cast-plot/",
-          "source": "TV Insider",
+          "title": "California Pols Race To Fix Film Tax Credits Mess, Pass Postproduction Incentive",
+          "description": "California lawmakers are racing the clock to fix a snafu in the state's film tax credits program and pass a bill offering postproduction incentive. EXCLUSIVE: With a very hard out of less than two weeks, state legislators in Sacramento are either going to be Scrooge or Santa with California ’s film and TV tax incentives for the near-moribund L.A. industry.",
+          "whyNow": "California lawmakers are racing the clock to fix a snafu in the state's film tax credits program and pass a bill offering postproduction incentive.",
+          "url": "https://deadline.com/2026/08/california-film-tax-credits-latest-1237045968/",
+          "source": "Deadline",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-film-tv-2.webp",
-          "imageSource": "https://www.tvinsider.com/wp-content/uploads/2023/08/sons-of-anarchy-jax-teller-charlie-hunnam-1420x798.jpg",
-          "imageSourcePageUrl": "https://www.tvinsider.com/1282437/legends-sons-of-anarchy-premiere-date-trailer-cast-plot/",
-          "imageAlt": "Charlie Hunnam as Jax Taylor in 'Sons of Anarchy'",
-          "publishedAt": "Wed, 19 Aug 2026 20:35:06 GMT",
-          "coverageCount": 1,
-          "accent": "#f4cb6e",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "film-tv-3",
-          "title": "Watch: The trailer for 'Slow Horses' season 6 has galloped in",
-          "description": "Get ready for the crew of Apple TV's \"Slow Horses\" to be in some serious trouble in season six, which premieres in September.",
-          "whyNow": "Watch: The trailer for 'Slow Horses' season 6 has galloped in.",
-          "url": "https://www.timeout.com/usa/news/watch-the-trailer-for-slow-horses-season-6-has-galloped-in-082026",
-          "source": "Time Out Worldwide",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-film-tv-3.webp",
-          "imageSource": "https://media.timeout.com/images/106437874/image.jpg",
-          "imageSourcePageUrl": "https://www.timeout.com/usa/news/watch-the-trailer-for-slow-horses-season-6-has-galloped-in-082026",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 01:38:03 GMT",
-          "coverageCount": 1,
-          "accent": "#ffe09b",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "books-reading",
-      "label": "Books & reading",
-      "parent": "Culture",
-      "description": "Books & reading conversations, releases, and signals that are accelerating beyond the general leaderboard.",
-      "accent": "#a77b55",
-      "topics": [
-        {
-          "id": "books-reading-1",
-          "title": "The Return of ‘Little House on the Prairie’",
-          "description": "Photo: The Ingalls family heads west to the Kansas prairie in the first season of Netflix’s adaptation of the “Little House on the Prairie” book series. (Credit: Netflix via IMDb) Of all the stories about the American frontier, you would be hard-pressed to come up with any more beloved than Laura Ingalls Wilder’s “Little House on the Prairie.”",
-          "whyNow": "The Return of ‘Little House on the Prairie’.",
-          "url": "https://pagosadailypost.com/2026/08/20/the-return-of-little-house-on-the-prairie/",
-          "source": "Pagosa Daily Post",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-books-reading-1.webp",
-          "publishedAt": "Thu, 20 Aug 2026 11:08:10 GMT",
-          "coverageCount": 1,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "books-reading-2",
-          "title": "Sarah J. Maas Reveals 2 New ACOTAR Titles in Major Double Book Announcement",
-          "description": "Maas—bestselling author of A Court of Thorns and Roses—revealed the titles and covers of the sixth and seventh books in the romantasy series set to release in 2026 and 2027. And then the next book in that series, I have the ideas and general, vague thoughts.”",
-          "whyNow": "Sarah J. Maas Reveals 2 New ACOTAR Titles in Major Double Book Announcement.",
-          "url": "https://www.eonline.com/news/1435116/sarah-j-maas-reveals-titles-covers-for-2-new-acotar-books",
-          "source": "E! News",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-books-reading-2.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=M5iKSzjzTCw",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/M5iKSzjzTCw?rel=0",
-            "label": "Watch on YouTube"
+          "imageSource": "https://deadline.com/wp-content/uploads/2026/08/Sacramento-.jpg?w=1024",
+          "imageSourcePageUrl": "https://deadline.com/2026/08/california-film-tax-credits-latest-1237045968/",
+          "imageAlt": "California Pols Race To Fix Film Tax Credits Mess, Pass Postproduction Incentive",
+          "publishedAt": "Thu, 20 Aug 2026 21:43:00 GMT",
+          "coverageCount": 3,
+          "coverageSources": [
+            "Los Angeles Times",
+            "Deadline",
+            "facebook.com"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 3,
+            "coverageSources": [
+              "Los Angeles Times",
+              "Deadline",
+              "facebook.com"
+            ],
+            "signal": ""
           },
-          "imageSource": "https://akns-images.eonline.com/eol_images/Entire_Site/20260817/286e45a6-7292-462b-a135-429562ac98e6_1786994981.jpg?fit=around%7C1200:1200&output-quality=90&crop=1200:1200;center,top",
-          "imageSourcePageUrl": "https://www.eonline.com/news/1435116/sarah-j-maas-reveals-titles-covers-for-2-new-acotar-books",
-          "imageAlt": "",
-          "publishedAt": "Mon, 17 Aug 2026 19:39:00 GMT",
-          "coverageCount": 2,
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "books-reading-3",
-          "title": "Melody Friedenthal explores new worlds in science fiction book club",
-          "description": "Melody Friedenthal, reference librarian at Worcester Public Library, started and coordinates the library's science fiction book club. In these books, authors weave tales inspired by science, including exploration of space, nature and the human body and mind.",
-          "whyNow": "Melody Friedenthal explores new worlds in science fiction book club.",
-          "url": "https://www.worcestermag.com/story/lifestyle/columns/2026/08/19/last-call-melody-friedenthal-coordinator-science-ficiton-book-club/91332062007/",
-          "source": "Worcester Magazine",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-books-reading-3.webp",
-          "imageSource": "https://www.worcestermag.com/gcdn/authoring/authoring-images/2026/08/17/NWOR/91332330007-wmg-friedenthal-082126.png?crop=626,352,x0,y225&width=626&height=352&format=pjpg&auto=webp",
-          "imageSourcePageUrl": "https://www.worcestermag.com/story/lifestyle/columns/2026/08/19/last-call-melody-friedenthal-coordinator-science-ficiton-book-club/91332062007/",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 09:03:00 GMT",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "internet-culture",
-      "label": "Internet culture",
-      "parent": "Culture",
-      "description": "Internet culture conversations, releases, and signals that are accelerating beyond the general leaderboard.",
-      "accent": "#e95bd6",
-      "topics": [
-        {
-          "id": "internet-culture-1",
-          "title": "Internet pranksters hijacked MTV in 1999 with a chain letter, a New Kids on the Block music video and a dream",
-          "description": "This iconic but little-discussed moment in pop culture history is revisited in the documentary short \"TR(ol)L: Total Request Live, New Kids On The Block And The Chain Letter That Changed The Internet....",
-          "whyNow": "Internet pranksters hijacked MTV in 1999 with a chain letter, a New Kids on the Block music video and a dream.",
-          "url": "https://www.yahoo.com/entertainment/movies/article/internet-pranksters-hijacked-mtv-in-1999-with-a-chain-letter-a-new-kids-on-the-block-music-video-and-a-dream-152123979.html",
-          "source": "Yahoo",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-internet-culture-1.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=By86PcLufOU",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/By86PcLufOU?rel=0",
-            "label": "Watch on YouTube"
-          },
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/a5ec4bcd7fcf61ab65d4694e49910a75116c9ed295bc6be9c18f5ee886969b2a/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2Fuser-uploaded%2Fthumbnail-mtv-chain-letter_4664.png",
-          "imageSourcePageUrl": "https://www.yahoo.com/entertainment/movies/article/internet-pranksters-hijacked-mtv-in-1999-with-a-chain-letter-a-new-kids-on-the-block-music-video-and-a-dream-152123979.html",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 15:21:23 GMT",
-          "coverageCount": 1,
-          "accent": "#f05e4f",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "internet-culture-2",
-          "title": "Boy who helped 'Baby Shark' go viral makes comeback with new K-pop tune",
-          "description": "A decade after dancing in the \"Baby Shark\" video that would become YouTube's biggest hit, a 17-year-old is returning to music with a K-pop solo. Park Geonroung, who appeared in The Pinkfong Company's \"Baby Shark\" video when he was only 7, is making his debut as a solo K-pop performer with an electro pop song \"WAVE.\"",
-          "whyNow": "Boy who helped 'Baby Shark' go viral makes comeback with new K-pop tune.",
-          "url": "https://www.goodmorningamerica.com/culture/story/boy-helped-baby-shark-viral-makes-comeback-new-135769152",
-          "source": "ABC News - Breaking News, Latest News and Videos",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-internet-culture-2.webp",
-          "imageSource": "https://i.abcnewsfe.com/a/c7f165ad-38c2-4e8e-9b7e-d3cf7e89e77a/baby-shark-01-ht-jt-260819_1787156768660_hpMain_16x9.jpg?w=992",
-          "imageSourcePageUrl": "https://www.goodmorningamerica.com/culture/story/boy-helped-baby-shark-viral-makes-comeback-new-135769152",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 03:50:23 GMT",
-          "coverageCount": 1,
-          "accent": "#ff806b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "internet-culture-3",
-          "title": "Niu Lai: Movie that went viral for terrible animation becomes China box office hit",
-          "description": "Niu Lai's confusing plot and laughable animation quality has won ironic fans on the internet. Niu Lai, a low-budget animation film about a cow in a dream sequence has seen a huge jump in ticket sales after going viral for its confusing plot and terrible graphics.",
-          "whyNow": "Niu Lai: Movie that went viral for terrible animation becomes China box office hit.",
-          "url": "https://www.bbc.com/news/articles/c4g4r0mrmlpo",
-          "source": "BBC",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-internet-culture-3.webp",
-          "imageSource": "https://ichef.bbci.co.uk/news/1024/branded_news/e236/live/6f76c6e0-9a12-11f1-a05c-fdd5e0ed226e.jpg",
-          "imageSourcePageUrl": "https://www.bbc.com/news/articles/c4g4r0mrmlpo",
-          "imageAlt": "A screengrab from the movie shows a yellow cow standing against poorly illustrated trees and talking to a brown bull that is holding what appears to be a black block",
-          "publishedAt": "Mon, 17 Aug 2026 08:35:07 GMT",
-          "coverageCount": 1,
-          "accent": "#ff9d8e",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "tech",
-      "label": "Tech",
-      "parent": "Culture",
-      "description": "Devices, interfaces, and the product shifts that change what people expect from everyday technology.",
-      "accent": "#5a9cff",
-      "topics": [
-        {
-          "id": "tech-1",
-          "title": "These 4 things must happen for Texas Tech to return to College Football Playoff",
-          "description": "After a wild offseason for the program, the Red Raiders have to jell quickly in 2026. It remains to be seen whether, coming off the injury, Hammond can return to his dual-threat ways of last season.",
-          "whyNow": "These 4 things must happen for Texas Tech to return to College Football Playoff.",
-          "url": "https://www.dallasnews.com/sports/texas-tech-red-raiders/article/texas-tech-preview-will-hammond-joey-mcguire-22385683.php",
-          "source": "Dallas News",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-tech-1.webp",
-          "imageSource": "https://s.hdnux.com/photos/01/66/61/77/31137742/3/rawImage.jpg",
-          "imageSourcePageUrl": "https://www.dallasnews.com/sports/texas-tech-red-raiders/article/texas-tech-preview-will-hammond-joey-mcguire-22385683.php",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 11:06:47 GMT",
-          "coverageCount": 1,
-          "accent": "#5a9cff",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "tech-2",
-          "title": "Samsung Galaxy Note 20 Ultra with its new Gorilla Glass is tough as nails",
-          "description": "Samsung's Galaxy Note 20 Ultra, which sports the new Gorilla Glass Victus, appears to be tougher than an iPhone 11 Pro Max. This was confirmed by YouTuber JerryRigEverything, who recently performed his classic series of durability tests on the Note 20 Ultra, which performed admirably.",
-          "whyNow": "This was confirmed by YouTuber JerryRigEverything, who recently performed his classic series of durability tests on the Note 20 Ultra, which performed admirably.",
-          "url": "https://mashable.com/article/samsung-galay-note-20-ultra-drop-test",
-          "source": "Mashable",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-tech-2.webp",
-          "imageSource": "https://helios-i.mashable.com/imagery/articles/00zT4ONRBPeQbwpGtDcS6H7/hero-image.fill.size_1200x675.v1623390504.png",
-          "imageSourcePageUrl": "https://mashable.com/article/samsung-galay-note-20-ultra-drop-test",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 02:09:23 GMT",
-          "coverageCount": 1,
-          "accent": "#75b0ff",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "tech-3",
-          "title": "This Tech Was Initially Dunked On - Now Almost Everyone Uses It",
-          "description": "Up until the original iPhone in 2007, most mobile phones featured screens that were barely large enough to accommodate more than a few lines of text. Samsung released the Galaxy Note in 2011 — a 5.3-inch smartphone that got dunked on for being too large.",
-          "whyNow": "Up until the original iPhone in 2007, most mobile phones featured screens that were barely large enough to accommodate more than a few lines of text.",
-          "url": "https://www.slashgear.com/2237643/tech-that-everyone-uses-but-was-originally-rejected/",
-          "source": "SlashGear",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-tech-3.webp",
-          "imageSource": "https://www.slashgear.com/img/gallery/this-tech-was-initially-dunked-on-now-almost-everyone-uses-it/l-intro-1786792398.jpg",
-          "imageSourcePageUrl": "https://www.slashgear.com/2237643/tech-that-everyone-uses-but-was-originally-rejected/",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 11:15:00 GMT",
-          "coverageCount": 1,
-          "accent": "#97c7ff",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "pop",
-      "label": "Pop",
-      "parent": "Music",
-      "description": "Hooks, releases, fandom moments, and pop-cultural signals that are moving faster than the general song leaderboard.",
-      "accent": "#ff4f86",
-      "topics": [
-        {
-          "id": "pop-1",
-          "title": "ENHYPEN Drops Latest Installment in ‘THE SIN’ Series With ‘BLISS’: Stream It Now",
-          "description": "ENHYPEN drops the latest installment in their \"THE SIN\" series with \"BLISS,\" their eighth mini-album. THE SIN: BLISS is ENHYPEN’s first release since HEESEUNG announced that he would go his own way and pursue a solo career.",
-          "whyNow": "ENHYPEN Drops Latest Installment in ‘THE SIN’ Series With ‘BLISS’: Stream It Now.",
-          "url": "https://www.billboard.com/music/pop/enhypen-the-sin-bliss-stream-it-now-1236321606/",
-          "source": "Billboard Pop",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-pop-1.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/album/2os46ReV779WlryAHPL6ko",
-            "embedUrl": "https://open.spotify.com/embed/album/2os46ReV779WlryAHPL6ko?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
-          },
-          "imageSource": "https://www.billboard.com/wp-content/uploads/2026/07/ENHYPEN-in-Mexico-cr-BELIFT-LAB-billboard-1800.jpg?w=1024",
-          "imageSourcePageUrl": "https://www.billboard.com/music/pop/enhypen-the-sin-bliss-stream-it-now-1236321606/",
-          "imageAlt": "ENHYPEN in Mexico City.",
-          "publishedAt": "Fri, 21 Aug 2026 04:10:39 +0000",
-          "coverageCount": 1,
-          "accent": "#ff4f86",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "pop-2",
-          "title": "Gracie Abrams Says ‘Hit the Wall’ Became the ‘North Star’ for Her ‘Daughter From Hell’ Album & Yet ‘I Don’t Remember Writing It’",
-          "description": "Gracie Abrams reveals how \"Hit the Wall\" came together and became the \"north star\" for her Billboard 200 No. 1 album, Daughter From Hell. During a recent appearance on Jake Shane ‘s Therapuss podcast, Abrams vulnerably talked about the circumstances surrounding the creation of “Hit the Wall,” revealing that the song became the “north star” of her third studio album.",
-          "whyNow": "Gracie Abrams Says ‘Hit the Wall’ Became the ‘North Star’ for Her ‘Daughter From Hell’ Album & Yet ‘I Don’t Remember Writing It’.",
-          "url": "https://www.billboard.com/music/pop/gracie-abrams-hit-the-wall-jake-shake-therapuss-podcast-1236321559/",
-          "source": "Billboard Pop",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-pop-2.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=jFCTQ68gxoY",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/jFCTQ68gxoY?rel=0",
-            "label": "Watch on YouTube"
-          },
-          "imageSource": "https://www.billboard.com/wp-content/uploads/2026/08/gracie-abrams-cr-jake-shane-therapuss-billboard-1800.jpg?w=1024",
-          "imageSourcePageUrl": "https://www.billboard.com/music/pop/gracie-abrams-hit-the-wall-jake-shake-therapuss-podcast-1236321559/",
-          "imageAlt": "Gracie Abrams on Jake Shane's \"Therapuss\" podcast",
-          "publishedAt": "Fri, 21 Aug 2026 01:45:55 +0000",
-          "coverageCount": 1,
-          "accent": "#ff4f86",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "pop-3",
-          "title": "The ‘Baby Shark’ Boy Is All Grown Up & Launching His Music Career With a Monsta X Collab",
-          "description": "Baby Shark Boy launches his music career with \"WAVE,\" a new electropop single featuring Monsta X's JOOHONEY, 10 years after \"Baby Shark Dance. Baby Shark Boy also made a surprise return to the franchise’s 10th-anniversary short-form content in 2025, with his appearance racking up more than 22 million views.",
-          "whyNow": "Baby Shark Boy also made a surprise return to the franchise’s 10th-anniversary short-form content in 2025, with his appearance racking up more than 22 million views.",
-          "url": "https://www.billboard.com/music/pop/baby-shark-boy-baby-shark-dance-wave-song-joohoney-monsta-x-1236321397/",
-          "source": "Billboard Pop",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-pop-3.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=63rOINf75yY",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/63rOINf75yY?rel=0",
-            "label": "Watch on YouTube"
-          },
-          "imageSource": "https://www.billboard.com/wp-content/uploads/2026/08/baby-sharkboy-cr-pinkfong-billboard-1800_d5a161.jpg?w=1024",
-          "imageSourcePageUrl": "https://www.billboard.com/music/pop/baby-shark-boy-baby-shark-dance-wave-song-joohoney-monsta-x-1236321397/",
-          "imageAlt": "Screenshot from \"Baby Shark Dance\" music video",
-          "publishedAt": "Thu, 20 Aug 2026 22:01:25 +0000",
-          "coverageCount": 1,
-          "accent": "#ff4f86",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "r-and-b-soul",
-      "label": "R&B & soul",
-      "parent": "Music",
-      "description": "Vocal performances, slow-burn releases, and soul references that are finding a fresh audience beyond the broad music charts.",
-      "accent": "#b76bff",
-      "topics": [
-        {
-          "id": "r-and-b-soul-1",
-          "title": "Chicago’s Manasseh has a new album. It’s a tribute to his younger self",
-          "description": "A new album from the Chicago independent artist and vocal coach is out Tuesday, but fans can get a preview at tonight’s release show. It was the first secular album the Chicago artist was allowed to own, a gift from his mother, Idella. Twenty-six years after her death, Manasseh still feels his mother’s presence on his upcoming sophomore album “R&B[eyond]” — out Tuesday, the day he turns 39.",
-          "whyNow": "Chicago’s Manasseh has a new album. It’s a tribute to his younger self.",
-          "url": "https://chicago.suntimes.com/music/2026/08/21/manasseh-chicago-artist-new-album-r-and-beyond",
-          "source": "Chicago Sun-Times",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-r-and-b-soul-1.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=FYQRbL5m1uQ",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/FYQRbL5m1uQ?rel=0",
-            "label": "Watch on YouTube"
-          },
-          "imageSource": "https://cst.brightspotcdn.com/dims4/default/9b0cee7/2147483647/strip/true/crop/6000x3425+0+0/resize/1461x834!/quality/90/?url=https%3A%2F%2Fchorus-production-cst-web.s3.us-east-1.amazonaws.com%2Fbrightspot%2Fe5%2Fe3%2Fb079246743858baece83011784cf%2Fmanassehnewalbum-260823-8.jpg",
-          "imageSourcePageUrl": "https://chicago.suntimes.com/music/2026/08/21/manasseh-chicago-artist-new-album-r-and-beyond",
-          "imageAlt": "MANASSEHNEWALBUM_260823-8.jpg",
-          "publishedAt": "Fri, 21 Aug 2026 10:30:00 GMT",
-          "coverageCount": 1,
-          "accent": "#b76bff",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "r-and-b-soul-2",
-          "title": "Boney James Taps Ledisi for ‘I Belong to You,’ Announces 20th Album ‘A Simple Man’",
-          "description": "Grammy-nominated musician Boney James has shared his Ledisi-assisted single \"I Belong To You\" from his upcoming album \"A Simple Man.\"",
-          "whyNow": "Boney James Taps Ledisi for ‘I Belong to You,’ Announces 20th Album ‘A Simple Man’.",
-          "url": "https://ratedrnb.com/2026/08/boney-james-ledisi-i-belong-to-you-announces-a-simple-man/",
-          "source": "Rated R&B",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-r-and-b-soul-2.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/track/3azayAcrGBdQy6TTl8fMWK",
-            "embedUrl": "https://open.spotify.com/embed/track/3azayAcrGBdQy6TTl8fMWK?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
-          },
-          "imageSource": "https://ratedrnb.com/cdn/2026/08/featured-boney-james-ledisi.jpg",
-          "imageSourcePageUrl": "https://ratedrnb.com/2026/08/boney-james-ledisi-i-belong-to-you-announces-a-simple-man/",
-          "imageAlt": "",
-          "publishedAt": "Mon, 17 Aug 2026 14:08:37 +0000",
-          "coverageCount": 1,
-          "accent": "#b76bff",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "r-and-b-soul-3",
-          "title": "Chart Brief: Tems’ ‘What You Need’ Leads Adult R&B Airplay for Third Week, Steve Lacy Nabs Top 20 on Hot 100",
-          "description": "Tems' \"What You Need\" holds the No. 1 spot at R&B radio, while Steve Lacy hits the top 20 on the Hot 100 with \"Oh Yeah?\"",
-          "whyNow": "Chart Brief: Tems’ ‘What You Need’ Leads Adult R&B Airplay for Third Week, Steve Lacy Nabs Top 20 on Hot 100.",
-          "url": "https://ratedrnb.com/2026/08/tems-what-you-need-steve-lacy-oh-yeah-chart-brief/",
-          "source": "Rated R&B",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-r-and-b-soul-3.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=QQaFn8f6ihA",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/QQaFn8f6ihA?rel=0",
-            "label": "Watch on YouTube"
-          },
-          "imageSource": "https://ratedrnb.com/cdn/2026/08/tems-steve-lacy-scaled.jpg",
-          "imageSourcePageUrl": "https://ratedrnb.com/2026/08/tems-what-you-need-steve-lacy-oh-yeah-chart-brief/",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 23:28:34 +0000",
-          "coverageCount": 1,
-          "accent": "#b76bff",
-          "trendLabel": "Reported this week"
+          "accent": "#e8b64e",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -835,10 +399,10 @@
       "topics": [
         {
           "id": "indie-alternative-1",
-          "title": "Swedish artist de clair announces debut album veta begas",
-          "description": "Swedish indie-folk songwriter de clair has announced her debut album, veta begas, due on 9 October via The Satchi Six & Arketyp. The nine-track collection follows the double A-side “naming you” and “swim in illyria,” which arrived earlier this year. “satisfied” employs a fuller band sound, exploring the pull between restlessness and wanting to feel settled.",
-          "whyNow": "Swedish artist de clair announces debut album veta begas.",
-          "url": "https://www.thelineofbestfit.com/news/swedish-artist-de-clair-announces-debut-album-veta-begas",
+          "title": "Beabadoobee shares new song “Memories” ahead of forthcoming album Pylon",
+          "description": "beabadoobee has shared “Memories,” the latest preview of her fourth album Pylon, due on 18 September. The new track was debuted live during recent US shows including Lollapalooza and Hinterland festivals, plus a headline show at Red Rocks Amphitheatre.",
+          "whyNow": "The new track was debuted live during recent US shows including Lollapalooza and Hinterland festivals, plus a headline show at Red Rocks Amphitheatre.",
+          "url": "https://www.thelineofbestfit.com/news/beabadoobee-shares-new-song-memories-ahead-of-forthcoming-album-pylon",
           "source": "The Line of Best Fit",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
@@ -849,20 +413,37 @@
             "embedUrl": "https://open.spotify.com/embed/playlist/5359l8Co8qztllR0Mxk4Zv?utm_source=whatspopular&theme=0",
             "label": "Listen on Spotify"
           },
-          "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/de-clair-26.jpg?fit=cover&format=webp&width=1200&s=_dvU_1upp1JabW3CUu8Fun3L5r6ZyiZZ5HhbLXM6wDA",
-          "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/swedish-artist-de-clair-announces-debut-album-veta-begas",
-          "imageAlt": "Swedish artist de clair announces debut album veta begas",
+          "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/beabadoobee-26-memories.jpg?fit=cover&format=webp&width=1200&s=YbqpKkSUzle8x6tdYQNX_kBhjrRzDCBB6LRBwIUvHNc",
+          "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/beabadoobee-shares-new-song-memories-ahead-of-forthcoming-album-pylon",
+          "imageAlt": "Beabadoobee shares new song “Memories” ahead of forthcoming album Pylon",
           "publishedAt": "Fri, 21 Aug 2026 11:00:00 +0000",
-          "coverageCount": 1,
+          "coverageCount": 5,
+          "coverageSources": [
+            "The Line of Best Fit",
+            "whynow",
+            "Popzine",
+            "Live4ever Media"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 5,
+            "coverageSources": [
+              "The Line of Best Fit",
+              "whynow",
+              "Popzine",
+              "Live4ever Media"
+            ],
+            "signal": "beabadoobee has shared “Memories,” the latest preview of her fourth album Pylon, due on 18 September."
+          },
           "accent": "#6c9e7b",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "indie-alternative-2",
-          "title": "Clyde Crooks readies new EP Hark with “Coldest Day of the Year” single",
-          "description": "LA goth-pop songwriter Clyde Crooks has announced a new EP, Hark, due on 18 September. Across the EP, Crooks writes about grief, addiction, and his move towards sobriety. He added: “Sobriety forced me to confront a simple realisation: my feelings won’t kill me.",
-          "whyNow": "Clyde Crooks readies new EP Hark with “Coldest Day of the Year” single.",
-          "url": "https://www.thelineofbestfit.com/news/clyde-crooks-readies-new-ep-hark-with-coldest-day-of-the-year-single",
+          "title": "Swedish artist de clair announces debut album veta begas",
+          "description": "Swedish indie-folk songwriter de clair has announced her debut album, veta begas, due on 9 October via The Satchi Six & Arketyp. I wrote 'satisfied' out of pure frustration with how restless my mind was at the time.” Across veta begas, that restlessness is expanded. de clair described the record as being about “allowing yourself to be free.",
+          "whyNow": "Swedish indie-folk songwriter de clair has announced her debut album, veta begas, due on 9 October via The Satchi Six & Arketyp.",
+          "url": "https://www.thelineofbestfit.com/news/swedish-artist-de-clair-announces-debut-album-veta-begas",
           "source": "The Line of Best Fit",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
@@ -873,19 +454,32 @@
             "embedUrl": "https://open.spotify.com/embed/playlist/5359l8Co8qztllR0Mxk4Zv?utm_source=whatspopular&theme=0",
             "label": "Listen on Spotify"
           },
-          "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/Clyde-Crooks-Digitals-2023-092_2026-08-21-102528_payj.jpg?fit=cover&format=webp&width=1200&s=wXpWx19TT4RKxQhEnRcsgdhYQqQFrdAm3nryRnzCnUs",
-          "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/clyde-crooks-readies-new-ep-hark-with-coldest-day-of-the-year-single",
-          "imageAlt": "Clyde Crooks readies new EP Hark with “Coldest Day of the Year” single",
+          "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/de-clair-26.jpg?fit=cover&format=webp&width=1200&s=_dvU_1upp1JabW3CUu8Fun3L5r6ZyiZZ5HhbLXM6wDA",
+          "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/swedish-artist-de-clair-announces-debut-album-veta-begas",
+          "imageAlt": "Swedish artist de clair announces debut album veta begas",
           "publishedAt": "Fri, 21 Aug 2026 11:00:00 +0000",
-          "coverageCount": 1,
+          "coverageCount": 3,
+          "coverageSources": [
+            "The Line of Best Fit",
+            "Popzine"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 3,
+            "coverageSources": [
+              "The Line of Best Fit",
+              "Popzine"
+            ],
+            "signal": "Swedish indie-folk songwriter de clair has announced her debut album, veta begas, due on 9 October via The Satchi Six & Arketyp."
+          },
           "accent": "#6c9e7b",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "indie-alternative-3",
           "title": "Ms* Gloom announces remix of her J Is For Joon mixtape with Araabmuzik version of “Joker”",
           "description": "Ms* Gloom has announced J Is For Joon (RMX), a remix collection based on February's debut mixtape J Is For Joon. A new version of “Joker” by Araabmuzik is out now. The LA artist released J Is For Joon earlier this year after stepping away from her previous alias, Joon Gloom.",
-          "whyNow": "Ms* Gloom has announced J Is For Joon (RMX), a remix collection based on February's debut mixtape J Is For Joon.",
+          "whyNow": "Ms* Gloom has announced J Is For Joon (RMX), a remix collection based on February's debut mixtape J Is For Joon. The LA artist released J Is For Joon earlier this year after stepping away from her previous alias, Joon Gloom.",
           "url": "https://www.thelineofbestfit.com/news/ms-gloom-announces-remix-of-her-j-is-for-joon-mixtape-with-araabmuzik-version-of-joker",
           "source": "The Line of Best Fit",
           "sourceLabel": "Read the report",
@@ -901,9 +495,20 @@
           "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/ms-gloom-announces-remix-of-her-j-is-for-joon-mixtape-with-araabmuzik-version-of-joker",
           "imageAlt": "Ms* Gloom announces remix of her J Is For Joon mixtape with Araabmuzik version of “Joker”",
           "publishedAt": "Fri, 21 Aug 2026 11:00:00 +0000",
-          "coverageCount": 1,
-          "accent": "#6c9e7b",
-          "trendLabel": "Reported this week"
+          "coverageCount": 2,
+          "coverageSources": [
+            "The Line of Best Fit"
+          ],
+          "popularityEvidence": {
+            "mode": "concrete-trend-signal",
+            "coverageCount": 2,
+            "coverageSources": [
+              "The Line of Best Fit"
+            ],
+            "signal": "Ms* Gloom has announced J Is For Joon (RMX), a remix collection based on February's debut mixtape J Is For Joon."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -916,201 +521,313 @@
       "topics": [
         {
           "id": "basketball-1",
-          "title": "Former NBA Player Makes Bold Caitlin Clark Claim Amid Controversy",
-          "description": "The 34-year-old big man last played in the NBA during the […] The post Former NBA Player Makes Bold Caitlin Clark Claim Amid Controversy appeared first on HEAVY.",
-          "whyNow": "Former NBA Player Makes Bold Caitlin Clark Claim Amid Controversy.",
-          "url": "https://sports.yahoo.com/articles/former-nba-player-makes-bold-154634543.html",
-          "source": "Yahoo Sports",
+          "title": "James Harden agrees to three-year, $97m Cleveland Cavaliers deal: Report",
+          "description": "Harden previously declined $42.3m player ⁠option on his contract in bid to secure a multi-year basketball deal. Former NBA MVP ‌and 11-time All-Star guard James ⁠Harden ⁠has agreed to a new three-year, $97m contract to return to the Cleveland ⁠Cavaliers, his agents told ESPN on Thursday.",
+          "whyNow": "Former NBA MVP ‌and 11-time All-Star guard James ⁠Harden ⁠has agreed to a new three-year, $97m contract to return to the Cleveland ⁠Cavaliers, his agents told ESPN on Thursday.",
+          "url": "https://www.aljazeera.com/sports/2026/8/20/james-harden-agrees-to-three-year-97m-cleveland-cavaliers-deal-report",
+          "source": "Al Jazeera",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-basketball-1.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=JoVYfTtiLvo",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/JoVYfTtiLvo?rel=0",
-            "label": "Watch on YouTube"
+          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/reuters_6a874871-1787250801_af154c-1787252588.jpg?resize=1200%2C630&quality=80",
+          "imageSourcePageUrl": "https://www.aljazeera.com/sports/2026/8/20/james-harden-agrees-to-three-year-97m-cleveland-cavaliers-deal-report",
+          "imageAlt": "James Harden agrees to three-year, $97m Cleveland Cavaliers deal: Report",
+          "publishedAt": "Thu, 20 Aug 2026 19:15:57 GMT",
+          "coverageCount": 9,
+          "coverageSources": [
+            "Al Jazeera",
+            "ESPN",
+            "WKYC",
+            "Cleveland.com",
+            "The New York Times",
+            "Yahoo Sports"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 9,
+            "coverageSources": [
+              "Al Jazeera",
+              "ESPN",
+              "WKYC",
+              "Cleveland.com",
+              "The New York Times",
+              "Yahoo Sports"
+            ],
+            "signal": "Former NBA MVP ‌and 11-time All-Star guard James ⁠Harden ⁠has agreed to a new three-year, $97m contract to return to the Cleveland ⁠Cavaliers, his agents told ESPN on Thursday."
           },
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/96b4d57a4c2f194cc268573e06e53b15ea982ff507895f8db36ecffbb39061f9/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fheavy_214%2F430265a8aa6ded4bb3b28839507d53ab.png",
-          "imageSourcePageUrl": "https://sports.yahoo.com/articles/former-nba-player-makes-bold-154634543.html",
-          "imageAlt": "",
-          "publishedAt": "Sun, 16 Aug 2026 15:46:34 GMT",
-          "coverageCount": 1,
           "accent": "#ed7a36",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "basketball-2",
-          "title": "NBA trade tracker: Updates for every deal of the 2026 offseason",
-          "description": "We have the updates, including players and draft picks, for every NBA trade made this summer.",
-          "whyNow": "NBA trade tracker: Updates for every deal of the 2026 offseason.",
-          "url": "https://www.espn.com/nba/story/_/id/48957844/nba-trade-tracker-details-every-deal-2026-offseason-draft-free-agency",
-          "source": "ESPN",
+          "title": "Kelsey Mitchell ties WNBA scoring record in Fever win over Tempo",
+          "description": "The three-time All-Star made history when she registered 20 or more points in a WNBA game for the 20th straight time. Kelsey Mitchell tied a Women’s National Basketball Association (WNBA) record when she finished with 29 points before sitting out the fourth, while Caitlin Clark added 24 points for the Indiana Fever to beat the Toronto Tempo 101-95 for their fifth straight victory.",
+          "whyNow": "Kelsey Mitchell tied a Women’s National Basketball Association (WNBA) record when she finished with 29 points before sitting out the fourth, while Caitlin Clark added 24 points for the Indiana Fever to beat the Toronto Tempo 101-95 for their fifth straight victory.",
+          "url": "https://www.aljazeera.com/sports/2026/8/19/kelsey-mitchell-ties-wnba-scoring-record-in-fever-win-over-tempo",
+          "source": "Al Jazeera",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-basketball-2.webp",
-          "imageSource": "https://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2026%2F0820%2Fr1704204_1296x729_16%2D9.jpg",
-          "imageSourcePageUrl": "https://www.espn.com/nba/story/_/id/48957844/nba-trade-tracker-details-every-deal-2026-offseason-draft-free-agency",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 01:14:00 GMT",
-          "coverageCount": 1,
-          "accent": "#ed7a36",
-          "trendLabel": "Reported this week"
+          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/2026-08-19T012759Z_2042750924_MT1USATODAY29614975_RTRMADP_3_WNBA-INDIANA-FEVER-AT-TORONTO-TEMPO-1787126354_9c7fbe-1787128140.jpg?resize=1200%2C630&quality=80",
+          "imageSourcePageUrl": "https://www.aljazeera.com/sports/2026/8/19/kelsey-mitchell-ties-wnba-scoring-record-in-fever-win-over-tempo",
+          "imageAlt": "Kelsey Mitchell ties WNBA scoring record in Fever win over Tempo",
+          "publishedAt": "Wed, 19 Aug 2026 09:07:27 GMT",
+          "coverageCount": 2,
+          "coverageSources": [
+            "Yahoo Sports",
+            "Al Jazeera"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 2,
+            "coverageSources": [
+              "Yahoo Sports",
+              "Al Jazeera"
+            ],
+            "signal": "Kelsey Mitchell tied a Women’s National Basketball Association (WNBA) record when she finished with 29 points before sitting out the fourth, while Caitlin Clark added 24 points for the Indiana Fever to beat the Toronto Tempo 101-95 for their fifth straight victory."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         },
         {
           "id": "basketball-3",
-          "title": "NBA Owner Takes Major Decision on His Stakes in WNBA Team Amid Volatile Transgender Controversy: Report",
-          "description": "Phoenix Mercury guard Kelsey Plum joined a rebuilding roster fighting for a playoff spot this August, yet the franchise’s biggest story this week involves Suns and Mercury owner Mat Ishbia’s mortgage empire, not basketball. United Wholesale Mortgage confirmed the move in a statement obtained by Bloomberg.",
-          "whyNow": "NBA Owner Takes Major Decision on His Stakes in WNBA Team Amid Volatile Transgender Controversy: Report.",
-          "url": "https://sports.yahoo.com/articles/nba-owner-takes-major-decision-151338265.html",
-          "source": "Yahoo Sports",
+          "title": "FAMU basketball gets Jaquan Sanders back under NCAA 5-for-5 rule",
+          "description": "FAMU men’s basketball will get top scorer Jaquan Sanders back after the NCAA passed the 5-for-5 rule, granting him an extra year of eligibility. HBCU basketball insider Olivia Antilla first reported the Sanders news. Basketball winner is running it back in Orange and Green for the 2026-2027 season.",
+          "whyNow": "FAMU men’s basketball will get top scorer Jaquan Sanders back after the NCAA passed the 5-for-5 rule, granting him an extra year of eligibility. Sanders was the second-leading scorer last year behind the now-graduated forward Tyler Shirley.",
+          "url": "https://www.tallahassee.com/story/sports/college/famu/2026/08/20/famu-rattlers-basketball-jaquan-sanders-returning-ncaa-5-for-5-rule/91379761007/",
+          "source": "Tallahassee Democrat",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-basketball-3.webp",
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/e09dc9e1b75e4207ce303ac9e01c09df415b1caaa7b511b3bf0cfe9c50cf9e00/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fessentiallysports_articles_591%2F40ddc1990047185a76d9ddce051bd69a.jpg",
-          "imageSourcePageUrl": "https://sports.yahoo.com/articles/nba-owner-takes-major-decision-151338265.html",
+          "imageSource": "https://www.tallahassee.com/gcdn/authoring/authoring-images/2026/01/26/PTAL/88360977007-original-01-e-4004-d-6-c-074-b-809703-d-9-c-86-d-061054.jpeg?crop=1178,663,x0,y0&width=1178&height=663&format=pjpg&auto=webp",
+          "imageSourcePageUrl": "https://www.tallahassee.com/story/sports/college/famu/2026/08/20/famu-rattlers-basketball-jaquan-sanders-returning-ncaa-5-for-5-rule/91379761007/",
           "imageAlt": "",
-          "publishedAt": "Sat, 15 Aug 2026 15:13:38 GMT",
-          "coverageCount": 1,
-          "accent": "#ed7a36",
-          "trendLabel": "Reported this week"
+          "publishedAt": "Thu, 20 Aug 2026 13:28:00 GMT",
+          "coverageCount": 3,
+          "coverageSources": [
+            "Tallahassee Democrat",
+            "AOL.com"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 3,
+            "coverageSources": [
+              "Tallahassee Democrat",
+              "AOL.com"
+            ],
+            "signal": "Sanders’ return means he has FAMU’s top scoring average among returning players."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
     {
-      "id": "american-football",
-      "label": "American football",
+      "id": "baseball",
+      "label": "Baseball",
       "parent": "Sports",
-      "description": "Quarterbacks, roster battles, scheme shifts, and football stories that matter before the national broadcast catches up.",
-      "accent": "#31896e",
+      "description": "Pitching matchups, prospects, trades, and the small statistical details making baseball feel immediate this week.",
+      "accent": "#4d83d1",
       "topics": [
         {
-          "id": "american-football-1",
-          "title": "2026 NFL season: Top 10 contenders for Comeback Player of the Year",
-          "description": "The Associated Press NFL Comeback Player of the Year was first awarded in 1963 -- to a kicker. Last season, Christian McCaffrey earned the accolade, returning from an injury-shortened 2024 to turn in a stellar campaign for the 49ers.",
-          "whyNow": "2026 NFL season: Top 10 contenders for Comeback Player of the Year.",
-          "url": "https://www.nfl.com/news/2026-nfl-season-top-10-contenders-for-comeback-player-of-the-year",
-          "source": "NFL.com",
+          "id": "baseball-1",
+          "title": "Brewers Prospect's First Career Home Run Caught By Very Special Fan",
+          "description": "Sometimes when a baseball player hits their first career home run, they need to barter a deal with the fan who ends up with the souvenir to get the ball back. It's extremely unlikely that Milwaukee Brewers prospect Sawyer Strosnider had to go through that ordeal after hitting the first home run of his professional career on Wednesday for the Wisconsin Timber Rattlers.",
+          "whyNow": "It's extremely unlikely that Milwaukee Brewers prospect Sawyer Strosnider had to go through that ordeal after hitting the first home run of his professional career on Wednesday for the Wisconsin Timber Rattlers.",
+          "url": "https://www.si.com/mlb/brewers/onsi/brewers-prospect-s-first-career-home-run-caught-by-very-special-fan-victor3",
+          "source": "Sports Illustrated",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-american-football-1.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=FencwxKgvm0",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/FencwxKgvm0?rel=0",
-            "label": "Watch on YouTube"
+          "image": "/culture/niche-baseball-1.webp",
+          "imageSource": "https://images2.minutemediacdn.com/image/upload/c_crop,x_0,y_0,w_3600,h_2025/c_fill,w_1440,ar_1440:810,f_auto,q_auto,g_auto/images/ReutersImages/mmsport/milwaukee_brewers_on_si/01m0fqvw788b905nymep.jpg",
+          "imageSourcePageUrl": "https://www.si.com/mlb/brewers/onsi/brewers-prospect-s-first-career-home-run-caught-by-very-special-fan-victor3",
+          "imageAlt": "",
+          "publishedAt": "Thu, 20 Aug 2026 15:02:13 GMT",
+          "coverageCount": 7,
+          "coverageSources": [
+            "Yahoo Sports",
+            "Sports Illustrated",
+            "Milwaukee Journal Sentinel",
+            "USA Today",
+            "Reviewing the Brew",
+            "The New York Times"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 7,
+            "coverageSources": [
+              "Yahoo Sports",
+              "Sports Illustrated",
+              "Milwaukee Journal Sentinel",
+              "USA Today",
+              "Reviewing the Brew",
+              "The New York Times"
+            ],
+            "signal": ""
           },
-          "imageSource": "https://static.www.nfl.com/image/upload/t_editorial_landscape_12_desktop/league/iw3dmtt2tmsqsgsdlkng",
-          "imageSourcePageUrl": "https://www.nfl.com/news/2026-nfl-season-top-10-contenders-for-comeback-player-of-the-year",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 19:30:00 GMT",
-          "coverageCount": 1,
-          "accent": "#31896e",
-          "trendLabel": "Reported this week"
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         },
         {
-          "id": "american-football-2",
-          "title": "Judge rules some NFL players can enter the transfer portal, return to college football in 2026",
-          "description": "The temporary restraining order granted by a judge in Louisiana comes after a judge in Colorado said that players from the high school class of 2022 were entitled to a fifth season of eligibility.",
-          "whyNow": "Judge rules some NFL players can enter the transfer portal, return to college football in 2026.",
-          "url": "https://sports.yahoo.com/college-football/article/judge-rules-some-nfl-players-can-enter-the-transfer-portal-return-to-college-football-in-2026-210502118.html",
-          "source": "Yahoo Sports",
+          "id": "baseball-3",
+          "title": "Dave Roberts decries Dodgers' inability to play 'clean baseball' after latest costly loss to Brewers",
+          "description": "Los Angeles Dodgers manager Dave Roberts called out his struggling club after a 6-2 loss to the Milwaukee Brewers on Sunday cost them a significant tiebreaker in the race for home-field advantage. Los Angeles Dodgers’ Kyle Tucker (23) walks to the outfield after grounding out during the seventh inning of a baseball game against the Milwaukee Brewers, Sunday, Aug. 16, 2026, in Los Angeles.",
+          "whyNow": "Los Angeles Dodgers manager Dave Roberts called out his struggling club after a 6-2 loss to the Milwaukee Brewers on Sunday cost them a significant tiebreaker in the race for home-field advantage.",
+          "url": "https://apnews.com/article/dodgers-dave-roberts-f8cfb1c688bb632158d6c7d5a5f73429",
+          "source": "AP News",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-american-football-2.webp",
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/b77875c7ed3a7022f72817d1264b908718bcc21c219b3bb4d591e98711c0bb7f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2F2026-08%2F5726eda0-68be-4fd6-9361-2c4109ef7da3",
-          "imageSourcePageUrl": "https://sports.yahoo.com/college-football/article/judge-rules-some-nfl-players-can-enter-the-transfer-portal-return-to-college-football-in-2026-210502118.html",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 21:05:02 GMT",
-          "coverageCount": 1,
-          "accent": "#31896e",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "american-football-3",
-          "title": "Who is Jack Pyburn and what would happen if the Buccaneers LB returns to college?",
-          "description": "Pyburn would have to repay his NFL signing bonus if he returned to college football, while the Buccaneers would retain his rights. After a strong performance in the preseason opener for the Tampa Bay Buccaneers, it appeared undrafted rookie linebacker Jack Pyburn was setting himself up for an NFL future.",
-          "whyNow": "Pyburn would have to repay his NFL signing bonus if he returned to college football, while the Buccaneers would retain his rights.",
-          "url": "https://www.nytimes.com/athletic/7528235/2026/08/21/jack-pyburn-buccaneers-return-college-nfl-contract/",
-          "source": "The New York Times",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-american-football-3.webp",
-          "imageSource": "https://static01.nyt.com/athletic/uploads/wp/2026/08/20193645/AP26228711453172-scaled-e1787269025680.jpg?width=1200&height=630&fit=cover",
-          "imageSourcePageUrl": "https://www.nytimes.com/athletic/7528235/2026/08/21/jack-pyburn-buccaneers-return-college-nfl-contract/",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 13:35:59 GMT",
-          "coverageCount": 1,
-          "accent": "#31896e",
-          "trendLabel": "Reported this week"
+          "image": "/culture/niche-baseball-3.webp",
+          "imageSource": "https://dims.apnews.com/dims4/default/3f69f5f/2147483647/strip/true/crop/5655x3768+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F3e%2F8c%2Fd65c731a507f263147c6a74f0e06%2Fe6ee5646e4fa411cb2ce37366ca01967",
+          "imageSourcePageUrl": "https://apnews.com/article/dodgers-dave-roberts-f8cfb1c688bb632158d6c7d5a5f73429",
+          "imageAlt": "Los Angeles Dodgers' Kyle Tucker (23) walks to the outfield after grounding out during the seventh inning of a baseball game against the Milwaukee Brewers, Sunday, Aug. 16, 2026, in Los Angeles. (Eric Thayer/Los Angeles Times via AP)",
+          "publishedAt": "Mon, 17 Aug 2026 01:22:00 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "AP News",
+            "Yahoo Sports",
+            "Bozeman Daily Chronicle",
+            "Ottumwa Courier",
+            "Source ONE News",
+            "Eagle-Tribune"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "AP News",
+              "Yahoo Sports",
+              "Bozeman Daily Chronicle",
+              "Ottumwa Courier",
+              "Source ONE News",
+              "Eagle-Tribune"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
     {
-      "id": "golf",
-      "label": "Golf",
+      "id": "tennis",
+      "label": "Tennis",
       "parent": "Sports",
-      "description": "Courses, swings, equipment, and tournament storylines that make golf more interesting than a leaderboard alone.",
-      "accent": "#5d9f63",
+      "description": "Tournament swings, player rivalries, surfaces, and the tactical turns shaping tennis beyond the headline final.",
+      "accent": "#9aaa32",
       "topics": [
         {
-          "id": "golf-1",
-          "title": "McIlroy warns LIV Golf players of 'tough road back' to PGA Tour",
-          "description": "McIlroy, speaking to reporters ahead of this week’s BMW Championship, needed a brief moment to reflect before answering a question on whether the possibility of players returning from LIV Golf brings value to the PGA Tour.",
-          "whyNow": "McIlroy warns LIV Golf players of 'tough road back' to PGA Tour.",
-          "url": "https://www.straitstimes.com/sport/golf/mcilroy-warns-liv-golf-players-of-tough-road-back-to-pga-tour",
-          "source": "Reuters",
+          "id": "tennis-1",
+          "title": "Carlos Alcaraz confirms US Open return after four-month injury layoff",
+          "description": "Spanish tennis star had missed the French Open, ‌Wimbledon and the hard-court events in Toronto and Cincinnati. Carlos ‌Alcaraz will return to competitive tennis at ⁠the US ⁠Open, ending a more than four-month absence caused by a wrist injury, in ⁠a bid to defend his title in New York.",
+          "whyNow": "Carlos ‌Alcaraz will return to competitive tennis at ⁠the US ⁠Open, ending a more than four-month absence caused by a wrist injury, in ⁠a bid to defend his title in New York.",
+          "url": "https://www.aljazeera.com/sports/2026/8/20/carlos-alcaraz-confirms-us-open-return-after-four-month-injury-layoff",
+          "source": "Al Jazeera",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-golf-1.webp",
-          "imageSource": "https://cassette.sphdigital.com.sg/image/straitstimes/adac85f29dd740c1c3a63bbf064112acbd022de92504cafa09569df0d51364f9",
-          "imageSourcePageUrl": "https://www.straitstimes.com/sport/golf/mcilroy-warns-liv-golf-players-of-tough-road-back-to-pga-tour",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 21:14:11 GMT",
-          "coverageCount": 1,
-          "accent": "#5d9f63",
-          "trendLabel": "Reported this week"
+          "image": "/culture/niche-tennis-1.webp",
+          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/getty_6a8740d304-1787248851.jpg?resize=1920%2C1440",
+          "imageSourcePageUrl": "https://www.aljazeera.com/sports/2026/8/20/carlos-alcaraz-confirms-us-open-return-after-four-month-injury-layoff",
+          "imageAlt": "Carlos Alcaraz confirms US Open return after four-month injury layoff",
+          "publishedAt": "Thu, 20 Aug 2026 21:47:04 GMT",
+          "coverageCount": 5,
+          "coverageSources": [
+            "Yahoo Sports",
+            "Bounces | Ben Rothenberg",
+            "The New York Times",
+            "Al Jazeera"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 5,
+            "coverageSources": [
+              "Yahoo Sports",
+              "Bounces | Ben Rothenberg",
+              "The New York Times",
+              "Al Jazeera"
+            ],
+            "signal": "Carlos ‌Alcaraz will return to competitive tennis at ⁠the US ⁠Open, ending a more than four-month absence caused by a wrist injury, in ⁠a bid to defend his title in New York."
+          },
+          "accent": "#9aaa32",
+          "trendLabel": "Recent signal"
         },
         {
-          "id": "golf-2",
-          "title": "Source: Some LIV players still awaiting payment for most recent tournament",
-          "description": "LIV Golf on Monday said that this week’s tournament in Indianapolis will be its last of the season, confirming the previously reported cancellation of its season finale in Michigan slated for next week.",
-          "whyNow": "Source: Some LIV players still awaiting payment for most recent tournament.",
-          "url": "https://www.sportsbusinessjournal.com/Articles/2026/08/18/source-some-liv-players-still-awaiting-payment-for-most-recent-tournament/",
-          "source": "Sports Business Journal",
+          "id": "tennis-2",
+          "title": "Tennis, ATP – Cincinnati Open 2026: Tirante downs Mensik",
+          "description": "Days after stunning Novak Djokovic, the world No 50 came from a set down to beat No 14 seed Jakub Mensik 5-7, 6-4, 6-4 and reach the first Masters 1000 quarter-final of his career, at 25. Thiago Agustin Tirante is living a dream in Cincinnati, and it shows no sign of ending.",
+          "whyNow": "Days after stunning Novak Djokovic, the world No 50 came from a set down to beat No 14 seed Jakub Mensik 5-7, 6-4, 6-4 and reach the first Masters 1000 quarter-final of his career, at 25.",
+          "url": "https://www.tennismajors.com/atp/the-week-of-his-life-tirante-topples-mensik-to-reach-a-first-masters-quarter-final-858873.html",
+          "source": "tennismajors.com",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-golf-2.webp",
+          "image": "/culture/niche-tennis-2.webp",
           "playback": {
             "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=oUkm7nn6kaA",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/oUkm7nn6kaA?rel=0",
+            "externalUrl": "https://www.youtube.com/watch?v=whZNHHr2du8",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/whZNHHr2du8?rel=0",
             "label": "Watch on YouTube"
           },
-          "imageSource": "https://leadersgroup-sbj-prod.web.arc-cdn.net/resizer/v2/U4SH3BBLIBBNLJOVUWE3UDLBKE.jpg?smart=true&auth=0b9bb529426d40634522a9bb0081ef5523343146db81354807c3355e360102d7&width=1200&height=630",
-          "imageSourcePageUrl": "https://www.sportsbusinessjournal.com/Articles/2026/08/18/source-some-liv-players-still-awaiting-payment-for-most-recent-tournament/",
-          "imageAlt": "LIV Golf South Africa",
-          "publishedAt": "Tue, 18 Aug 2026 12:04:46 GMT",
-          "coverageCount": 1,
-          "accent": "#5d9f63",
-          "trendLabel": "Reported this week"
+          "imageSource": "https://www.tennismajors.com/app/uploads/2026/08/Tirante_2026.jpg",
+          "imageSourcePageUrl": "https://www.tennismajors.com/atp/the-week-of-his-life-tirante-topples-mensik-to-reach-a-first-masters-quarter-final-858873.html",
+          "imageAlt": "Thiago Tirante, Cincinnati 2026 | © Pam Smith/Wick Photography for Cincinnati Open",
+          "publishedAt": "Wed, 19 Aug 2026 20:24:18 GMT",
+          "coverageCount": 5,
+          "coverageSources": [
+            "ESPN",
+            "tennismajors.com",
+            "Yahoo Sports",
+            "Cincinnati Enquirer",
+            "olympics.com"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 5,
+            "coverageSources": [
+              "ESPN",
+              "tennismajors.com",
+              "Yahoo Sports",
+              "Cincinnati Enquirer",
+              "olympics.com"
+            ],
+            "signal": ""
+          },
+          "accent": "#9aaa32",
+          "trendLabel": "Recent signal"
         },
         {
-          "id": "golf-3",
-          "title": "PGA TOUR this week: BMW Championship facts and figures",
-          "description": "Recent BMW Championship winners showcase the tournament's competitive nature. Here are the past five champions: Only four players in history have won the BMW Championship en route to claiming the FedExCup: Tiger Woods (2007, 2009), Billy Horschel (2014), Patrick Cantlay (2021), and Viktor Hovland (2023).",
-          "whyNow": "PGA TOUR this week: BMW Championship facts and figures.",
-          "url": "https://www.pgatour.com/article/news/latest/2026/08/18/bmw-championship-facts-and-figures-bellerive-country-club-st-louis-missouri-2026",
-          "source": "PGA Tour",
+          "id": "tennis-3",
+          "title": "Svitolina withdraws from Cincinnati; Wang Xiyu moves into last 16",
+          "description": "9 Elina Svitolina, right ankle injury, pulled out of the Cincinnati Open ahead of her third-round match against Wang Xiyu. Earlier in 2026, she posted strong results such as a fourth round finish at Roland Garros, reaching the WTA 125 final in Brescia, Italy, and won multiple World Tennis/ITF titles.",
+          "whyNow": "9 Elina Svitolina, right ankle injury, pulled out of the Cincinnati Open ahead of her third-round match against Wang Xiyu.",
+          "url": "https://www.wtatennis.com/news/4561997/svitolina-withdraws-from-cincinnati-open-wang-xiyu-moves-last-16",
+          "source": "WTA Tennis",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-golf-3.webp",
-          "imageSource": "https://res.cloudinary.com/pgatour-prod/w_1200,h_628,c_fill,f_auto,q_auto/pgatour/news/editorial/2026/08/18/BMW-facts-and-figures.jpg",
-          "imageSourcePageUrl": "https://www.pgatour.com/article/news/latest/2026/08/18/bmw-championship-facts-and-figures-bellerive-country-club-st-louis-missouri-2026",
-          "imageAlt": "PGA TOUR this week: BMW Championship facts and figures",
-          "publishedAt": "Tue, 18 Aug 2026 22:19:51 GMT",
-          "coverageCount": 1,
-          "accent": "#5d9f63",
-          "trendLabel": "Reported this week"
+          "image": "/culture/niche-tennis-3.webp",
+          "imageSource": "https://photoresources.wtatennis.com/wta/photo/2026/08/18/1d9ef135-a7a4-42d0-9df7-c2935970a1cc/Elina_Svitolina_-_National_Bank_Open_2026_-_Day_7-DSC_2010A.jpg",
+          "imageSourcePageUrl": "https://www.wtatennis.com/news/4561997/svitolina-withdraws-from-cincinnati-open-wang-xiyu-moves-last-16",
+          "imageAlt": "",
+          "publishedAt": "Tue, 18 Aug 2026 17:42:02 GMT",
+          "coverageCount": 5,
+          "coverageSources": [
+            "WTA Tennis",
+            "Reuters",
+            "heavy.com",
+            "Fanatik"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 5,
+            "coverageSources": [
+              "WTA Tennis",
+              "Reuters",
+              "heavy.com",
+              "Fanatik"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1123,57 +840,108 @@
       "topics": [
         {
           "id": "sports-news-1",
-          "title": "Trade Shows Will Return to The I-X Center, Thanks to Haslam Sports Group",
-          "description": "Burke says that the Haslam Sports Group reached out to her in 2025, after trade shows were told they were shutting down at the I-X Center, with interest in hosting future trade shows at its new Huntington Bank Field domed stadium being constructed in Brook Park. \"When I met with them, I said, 'Then you should rent the I-X Center and keep the shows there strong and solvent for the future.",
-          "whyNow": "Trade Shows Will Return to The I-X Center, Thanks to Haslam Sports Group.",
-          "url": "https://clevelandmagazine.com/articles/trade-shows-will-return-to-the-i-x-center-thanks-to-haslam-sports-group/",
-          "source": "Cleveland Magazine",
+          "title": "Leeds 2026-27 preview: Five losses in 25 Premier League games and transfers give them hope",
+          "description": "The aim for Leeds is to again avoid relegation, but the good vibes around Elland Road suggest they could do more than that... Leeds United head into their second Premier League season under Daniel Farke riding a wave of momentum and optimism few of their rivals can match. Optimism is a dangerous feeling in West Yorkshire.",
+          "whyNow": "Leeds United head into their second Premier League season under Daniel Farke riding a wave of momentum and optimism few of their rivals can match. The aim for Leeds is to again avoid relegation, but the good vibes around Elland Road suggest they could do more than that...",
+          "url": "https://www.nytimes.com/athletic/7508025/2026/08/20/leeds-premier-league-preview-analysis/",
+          "source": "The New York Times",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-sports-news-1.webp",
-          "imageSource": "https://greatlakespublishing.azureedge.net/sm5bti3a/dscf3225.jpg?rxy=0.5081142703862661,0.5450643776824035&width=1200&height=630&v=1dd2fe1eec025e0",
-          "imageSourcePageUrl": "https://clevelandmagazine.com/articles/trade-shows-will-return-to-the-i-x-center-thanks-to-haslam-sports-group/",
+          "imageSource": "https://static01.nyt.com/athletic/uploads/wp/2026/08/19125439/GettyImages-2289587114-scaled.jpg?width=1200&height=630&fit=cover",
+          "imageSourcePageUrl": "https://www.nytimes.com/athletic/7508025/2026/08/20/leeds-premier-league-preview-analysis/",
           "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 15:32:45 GMT",
-          "coverageCount": 1,
+          "publishedAt": "Thu, 20 Aug 2026 04:16:43 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "The New York Times",
+            "ESPN",
+            "The Guardian",
+            "Defector",
+            "Irish Echo Newspaper",
+            "Yahoo Sports"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "The New York Times",
+              "ESPN",
+              "The Guardian",
+              "Defector",
+              "Irish Echo Newspaper",
+              "Yahoo Sports"
+            ],
+            "signal": "Leeds 2026-27 preview: Five losses in 25 Premier League games and transfers give them hope"
+          },
           "accent": "#2f8db0",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "sports-news-2",
-          "title": "Sports Final: Scott Spiezio talks Cardinals and ‘The Hardest Comeback’",
-          "description": "Two-time World Series champion Scott Spiezio joins FOX 2 Sports Director Martin Kilcoyne on Sports Final to reflect on Cardinals memories. He also opens up about her personal struggles with drugs and alcohol, as detailed in his new memoir \"The Hardest Comeback.\"",
-          "whyNow": "Sports Final: Scott Spiezio talks Cardinals and ‘The Hardest Comeback’.",
-          "url": "https://sports.yahoo.com/articles/sports-final-scott-spiezio-talks-221857561.html",
-          "source": "FOX 2",
+          "title": "Cooper Flagg Debut Patch card owner cried in fetal position, says money is secondary",
+          "description": "Jason Williams, who hit the card on Monday, has not yet decided what he wants to do with it amid multi-million-dollar offers. The much-anticipated discovery of the Cooper Flagg NBA Rookie Debut Patch Autograph card, expected to sell for millions if it reaches public auction, drew a full range of emotions from everyone involved when it was pulled on Monday.",
+          "whyNow": "The much-anticipated discovery of the Cooper Flagg NBA Rookie Debut Patch Autograph card, expected to sell for millions if it reaches public auction, drew a full range of emotions from everyone involved when it was pulled on Monday.",
+          "url": "https://www.nytimes.com/athletic/7514974/2026/08/15/cooper-flagg-debut-patch-card-mavericks-nba/",
+          "source": "The New York Times",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-sports-news-2.webp",
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/cd19a024172ac0a9d83d1117ef967a594d73e4ec8eb43ef17eea22be07c71de0/lightyear_networkapi/resizefill_w900_h506%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fktvi_articles_498%2Fc8eb9b48696311ddca3463383a599a0c.jpg",
-          "imageSourcePageUrl": "https://sports.yahoo.com/articles/sports-final-scott-spiezio-talks-221857561.html",
+          "imageSource": "https://static01.nyt.com/athletic/uploads/wp/2026/08/15085158/IMG_8354.JPEG-scaled.jpeg?width=1200&height=630&fit=cover",
+          "imageSourcePageUrl": "https://www.nytimes.com/athletic/7514974/2026/08/15/cooper-flagg-debut-patch-card-mavericks-nba/",
           "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 22:18:57 GMT",
-          "coverageCount": 1,
+          "publishedAt": "Sat, 15 Aug 2026 13:26:08 GMT",
+          "coverageCount": 5,
+          "coverageSources": [
+            "The New York Times",
+            "ESPN",
+            "New York Post",
+            "roundtable.io"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 5,
+            "coverageSources": [
+              "The New York Times",
+              "ESPN",
+              "New York Post",
+              "roundtable.io"
+            ],
+            "signal": "The much-anticipated discovery of the Cooper Flagg NBA Rookie Debut Patch Autograph card, expected to sell for millions if it reaches public auction, drew a full range of emotions from everyone involved when it was pulled on Monday."
+          },
           "accent": "#2f8db0",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "sports-news-3",
-          "title": "Notes: Champaign Central football eyes postseason return",
-          "description": "Champaign Central, Centennial and Westville all begin the IHSA football season this week.",
-          "whyNow": "Notes: Champaign Central football eyes postseason return.",
-          "url": "https://www.news-gazette.com/sports/notes-champaign-central-football-eyes-postseason-return/article_f5ed16f8-f7c9-4060-af0c-7f4139af08c7.html",
-          "source": "The News-Gazette",
+          "title": "US Open 2026: Carlos Alcaraz to return in New York after four months out with wrist injury",
+          "description": "Defending champion Carlos Alcaraz is set to make his return at the US Open after missing four months with a wrist injury. After missing the majority of the clay-court swing and the entire grass season with his wrist injury, Alcaraz made a cautious return to training in July.",
+          "whyNow": "Defending champion Carlos Alcaraz is set to make his return at the US Open after missing four months with a wrist injury.",
+          "url": "https://www.bbc.com/sport/tennis/articles/cwyq490lje0o",
+          "source": "BBC",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-sports-news-3.webp",
-          "imageSource": "https://bloximages.newyork1.vip.townnews.com/news-gazette.com/content/tncms/assets/v3/editorial/f/5e/f5ed16f8-f7c9-4060-af0c-7f4139af08c7/6a875db7714c4.preview.jpg?crop=1703%2C894%2C0%2C161&resize=1200%2C630&order=crop%2Cresize",
-          "imageSourcePageUrl": "https://www.news-gazette.com/sports/notes-champaign-central-football-eyes-postseason-return/article_f5ed16f8-f7c9-4060-af0c-7f4139af08c7.html",
-          "imageAlt": "08072026-central-fb-media-days-8.JPG",
-          "publishedAt": "Fri, 21 Aug 2026 10:00:00 GMT",
-          "coverageCount": 1,
+          "imageSource": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/b26b/live/30098130-9cbc-11f1-aed2-8d6da8d75094.jpg",
+          "imageSourcePageUrl": "https://www.bbc.com/sport/tennis/articles/cwyq490lje0o",
+          "imageAlt": "Carlos Alcaraz with the US Open trophy in 2025",
+          "publishedAt": "Thu, 20 Aug 2026 17:39:09 GMT",
+          "coverageCount": 2,
+          "coverageSources": [
+            "BBC",
+            "Yahoo Sports"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 2,
+            "coverageSources": [
+              "BBC",
+              "Yahoo Sports"
+            ],
+            "signal": "Defending champion Carlos Alcaraz is set to make his return at the US Open after missing four months with a wrist injury."
+          },
           "accent": "#2f8db0",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1186,120 +954,40 @@
       "topics": [
         {
           "id": "us-news-1",
-          "title": "Here's a list of the individuals, including James Comey, targeted by the Trump administration",
-          "description": "The DOJ's second attempt to indict ex-FBI Director James Comey is the latest salvo in what critics call a campaign of retribution on the part of the Trump administration.",
-          "whyNow": "Here's a list of the individuals, including James Comey, targeted by the Trump administration.",
-          "url": "https://abcnews.com/US/list-individuals-including-lisa-cook-targeted-trump-administration/story?id=124968309",
-          "source": "ABC News - Breaking News, Latest News and Videos",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-us-news-1.webp",
-          "imageSource": "https://i.abcnewsfe.com/a/2cba649e-ced1-412a-9943-1c8a836dcac1/comey-gty-er-260706_1783356312412_hpMain_16x9.jpg?w=1600",
-          "imageSourcePageUrl": "https://abcnews.com/US/list-individuals-including-lisa-cook-targeted-trump-administration/story?id=124968309",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 16:24:01 GMT",
-          "coverageCount": 2,
-          "accent": "#5c78b9",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "us-news-2",
           "title": "US judge says government can revoke deportation protections for Ethiopians",
-          "description": "Ruling permits Trump administration to nix Ethiopians’ protected status despite concern over conditions in the country. Since returning to office for a second term in 2025, Trump has sought to end TPS protections for a range of nationalities. Tuesday’s ruling removes the final judicial block that had prevented the government from ending TPS for individual countries.",
+          "description": "Ruling permits Trump administration to nix Ethiopians’ protected status despite concern over conditions in the country. A United States federal judge has ruled that the administration of President Donald Trump can revoke legal protections that shielded more than 5,000 Ethiopians from deportation.",
           "whyNow": "Ruling permits Trump administration to nix Ethiopians’ protected status despite concern over conditions in the country.",
           "url": "https://www.aljazeera.com/news/2026/8/18/us-judge-says-government-can-revoke-deportation-protections-for-ethiopians",
           "source": "Al Jazeera",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-us-news-2.webp",
+          "image": "/culture/niche-us-news-1.webp",
           "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/ap_6a84928e22cbf-1787073166.jpg?resize=1920%2C1440",
           "imageSourcePageUrl": "https://www.aljazeera.com/news/2026/8/18/us-judge-says-government-can-revoke-deportation-protections-for-ethiopians",
           "imageAlt": "US judge says government can revoke deportation protections for Ethiopians",
           "publishedAt": "Tue, 18 Aug 2026 19:24:38 GMT",
-          "coverageCount": 1,
-          "accent": "#5c78b9",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "us-news-3",
-          "title": "Iran says no decision yet on a return to talks with the US",
-          "description": "FM Abbas Araghchi says Iran is working with Oman on routes, but Hormuz shipping depends on US meeting conditions. Iran is still undecided about resuming talks with the United States to end the war, amid disagreements about ceasefire violations and the future of the Strait of Hormuz.",
-          "whyNow": "Iran says no decision yet on a return to talks with the US.",
-          "url": "https://www.aljazeera.com/news/2026/8/15/iran-says-no-decision-yet-on-a-return-to-talks-with-the-us",
-          "source": "Al Jazeera",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-us-news-3.webp",
-          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2026/08/reuters_6a7fdca6-1786764454.jpg?resize=1920%2C1440",
-          "imageSourcePageUrl": "https://www.aljazeera.com/news/2026/8/15/iran-says-no-decision-yet-on-a-return-to-talks-with-the-us",
-          "imageAlt": "Iran says no decision yet on a return to talks with the US",
-          "publishedAt": "Sat, 15 Aug 2026 04:32:02 GMT",
-          "coverageCount": 1,
-          "accent": "#5c78b9",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "business-markets",
-      "label": "Business & markets",
-      "parent": "News",
-      "description": "Companies, markets, labor, and consumer signals that explain what is changing beneath the day's broad business headlines.",
-      "accent": "#3d907b",
-      "topics": [
-        {
-          "id": "business-markets-1",
-          "title": "Trump’s ‘economic D-Day’ claims first victim: Not Iran, but US markets",
-          "description": "The US and Israel’s war on Iran has upended global financial and energy markets. Frederic Schneider, a nonresident senior fellow at the Middle East Council on Global Affairs, noted that the 30-year US Treasury yield pushed above 5.25 percent, close to a two-decade high after Trump’s announcement.",
-          "whyNow": "Frederic Schneider, a nonresident senior fellow at the Middle East Council on Global Affairs, noted that the 30-year US Treasury yield pushed above 5.25 percent, close to a two-decade high after Trump’s announcement.",
-          "url": "https://www.aljazeera.com/news/2026/8/21/trumps-economic-d-day-claims-first-victim-not-iran-but-us-markets",
-          "source": "Al Jazeera",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-business-markets-1.webp",
-          "imageSource": "https://www.aljazeera.com/wp-content/uploads/2025/04/AFP__20250407__39EB4MW__v1__HighRes__NewYorkStockExchangeCloser-1744119806.jpg?resize=1920%2C1440",
-          "imageSourcePageUrl": "https://www.aljazeera.com/news/2026/8/21/trumps-economic-d-day-claims-first-victim-not-iran-but-us-markets",
-          "imageAlt": "Trump’s ‘economic D-Day’ claims first victim: Not Iran, but US markets",
-          "publishedAt": "Fri, 21 Aug 2026 13:51:42 GMT",
-          "coverageCount": 1,
-          "accent": "#3d907b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "business-markets-2",
-          "title": "‘Rearranging deckchairs on the Titanic’: Bonds erase the impact of Treasury’s intervention",
-          "description": "Bond yields jumped Thursday, erasing the declines stemming from the Treasury Department’s unusual intervention in the debt market a day earlier. Stock indexes fell and U.S. crude oil briefly neared $90 per barrel. The timing of the announcement was also “highly unusual” because it came just two weeks after Treasury had released its funding plan.",
-          "whyNow": "‘Rearranging deckchairs on the Titanic’: Bonds erase the impact of Treasury’s intervention.",
-          "url": "https://www.nbcnews.com/business/markets/bond-yields-stocks-oil-prices-rcna593517",
-          "source": "NBC News",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-business-markets-2.webp",
-          "imageSource": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-06/260603-Scott-Bessent-ac-1156-52c549.jpg",
-          "imageSourcePageUrl": "https://www.nbcnews.com/business/markets/bond-yields-stocks-oil-prices-rcna593517",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 18:59:39 GMT",
-          "coverageCount": 1,
-          "accent": "#3d907b",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "business-markets-3",
-          "title": "An alarmed bond market gets the Trump administration to act again",
-          "description": "Normally quiet, the bond market can occasionally send warning signals loud enough to hit stock markets worldwide and even grab the attention of U.S. presidents and other world leaders After the bond market’s alarm bells rose in volume through the summer, the Trump administration announced on Wednesday a move that could help calm it down.",
-          "whyNow": "Normally quiet, the bond market can occasionally send warning signals loud enough to hit stock markets worldwide and even grab the attention of U.S. presidents and other world leaders After the bond market’s alarm bells rose in volume through the summer, the Trump administration announced on Wednesday a move that could help calm it down.",
-          "url": "https://abcnews.com/US/wireStory/alarmed-bond-market-gets-trump-administration-act-135783005",
-          "source": "ABC News - Breaking News, Latest News and Videos",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-business-markets-3.webp",
-          "imageSource": "https://i.abcnewsfe.com/a/2ea3fd6e-9e6d-4ecb-9267-54d2a7b62c5b/wirestory_bd0cead63ff1b7f2e99d4c8cce0a28d3_16x9.jpg?w=1600",
-          "imageSourcePageUrl": "https://abcnews.com/US/wireStory/alarmed-bond-market-gets-trump-administration-act-135783005",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 19:23:22 GMT",
-          "coverageCount": 1,
-          "accent": "#3d907b",
-          "trendLabel": "Reported this week"
+          "coverageCount": 6,
+          "coverageSources": [
+            "Al Jazeera",
+            "Reuters",
+            "ABC News - Breaking News, Latest News and Videos",
+            "Fox News",
+            "WKOW"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 6,
+            "coverageSources": [
+              "Al Jazeera",
+              "Reuters",
+              "ABC News - Breaking News, Latest News and Videos",
+              "Fox News",
+              "WKOW"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1313,8 +1001,8 @@
         {
           "id": "science-space-1",
           "title": "NASA calls off rescue mission for its falling Swift space telescope",
-          "description": "The space agency’s Neil Gehrels Swift Observatory, which studied cataclysmic cosmic explosions, is expected to burn up in Earth’s atmosphere later this year The satellite, launched with instruments to study gamma-ray bursts across the universe in 2004, will likely plunge into Earth’s atmosphere and burn up later this year.",
-          "whyNow": "NASA calls off rescue mission for its falling Swift space telescope.",
+          "description": "After more than two decades contributing to humanity’s knowledge of the cosmos, NASA’s Neil Gehrels Swift Observatory will soon suffer a fiery end following a rescue attempt that failed before it truly began. On July 28 NASA said that hardware malfunctions had sent LINK spinning out of control and that communications with the spacecraft were sporadic.",
+          "whyNow": "After more than two decades contributing to humanity’s knowledge of the cosmos, NASA’s Neil Gehrels Swift Observatory will soon suffer a fiery end following a rescue attempt that failed before it truly began.",
           "url": "https://www.scientificamerican.com/article/nasa-calls-off-rescue-mission-for-its-falling-swift-space-telescope/",
           "source": "Scientific American",
           "sourceLabel": "Read the report",
@@ -1324,14 +1012,35 @@
           "imageSourcePageUrl": "https://www.scientificamerican.com/article/nasa-calls-off-rescue-mission-for-its-falling-swift-space-telescope/",
           "imageAlt": "A view of a spacecraft deploying solar arrays, with Earth in the background.",
           "publishedAt": "Wed, 19 Aug 2026 22:00:00 GMT",
-          "coverageCount": 1,
+          "coverageCount": 9,
+          "coverageSources": [
+            "Scientific American",
+            "NASA Jet Propulsion Laboratory (JPL) (.gov)",
+            "CBS News",
+            "Engadget",
+            "Ars Technica",
+            "NBC News"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 9,
+            "coverageSources": [
+              "Scientific American",
+              "NASA Jet Propulsion Laboratory (JPL) (.gov)",
+              "CBS News",
+              "Engadget",
+              "Ars Technica",
+              "NBC News"
+            ],
+            "signal": ""
+          },
           "accent": "#7169c7",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         },
         {
           "id": "science-space-2",
           "title": "China's bid for lunar water launches Sunday as the new space race heats up",
-          "description": "China is gearing up for moon mission to secure lunar water, a vital resource in establishing a permanent settlement on the moon. China has high hopes for the Chang'E-7 mission.",
+          "description": "China is gearing up for moon mission to secure lunar water, a vital resource in establishing a permanent settlement on the moon. Isaacman hasn't been shy about reminding the public and policymakers that the United States is competing with China to return to the moon and stay for good. China has high hopes for the Chang'E-7 mission.",
           "whyNow": "China is gearing up for moon mission to secure lunar water, a vital resource in establishing a permanent settlement on the moon.",
           "url": "https://abcnews.com/International/chinas-bid-lunar-water-launches-sunday-new-space/story?id=135833760",
           "source": "ABC News - Breaking News, Latest News and Videos",
@@ -1341,28 +1050,70 @@
           "imageSource": "https://i.abcnewsfe.com/a/d6353b98-1f0b-4236-b324-19494ee99e17/china-moon-mission-1-gty-jedf-260821_1787321461556_hpMain_16x9.jpg?w=1600",
           "imageSourcePageUrl": "https://abcnews.com/International/chinas-bid-lunar-water-launches-sunday-new-space/story?id=135833760",
           "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 17:48:26 GMT",
-          "coverageCount": 1,
-          "accent": "#7169c7",
-          "trendLabel": "Reported this week"
+          "publishedAt": "Thu, 20 Aug 2026 20:38:53 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "ABC News - Breaking News, Latest News and Videos",
+            "Reuters",
+            "The Conversation",
+            "Ars Technica",
+            "Space",
+            "India Today"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "ABC News - Breaking News, Latest News and Videos",
+              "Reuters",
+              "The Conversation",
+              "Ars Technica",
+              "Space",
+              "India Today"
+            ],
+            "signal": "Isaacman hasn't been shy about reminding the public and policymakers that the United States is competing with China to return to the moon and stay for good."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         },
         {
           "id": "science-space-3",
-          "title": "Scientists may have finally proved that “empty” space isn’t really empty",
-          "description": "A magnetar’s colossal magnetic field may have revealed a quantum effect predicted by Werner Heisenberg nearly 90 years ago, in which seemingly empty space alters the behavior of light. Magnetars provide a rare opportunity to search for this effect because their magnetic fields are powerful enough to make the predicted quantum behavior potentially observable.",
-          "whyNow": "Magnetars provide a rare opportunity to search for this effect because their magnetic fields are powerful enough to make the predicted quantum behavior potentially observable.",
-          "url": "https://www.sciencedaily.com/releases/2026/08/260815065007.htm",
-          "source": "Science Daily",
+          "title": "NASA’s LRO Images Falcon 9 Crater on Moon, Learns New Details - NASA Science (.gov)",
+          "description": "Between Aug. 11 and 12, NASA’s Lunar Reconnaissance Orbiter (LRO) captured a series of images of a new crater on the Moon. The crater formed on Aug. 5, when a SpaceX Falcon 9 upper stage impacted the surface following its January 2025 launch of the Firefly Blue Ghost 1 mission. After capturing images of the crater, the Danuri mission sent coordinates to NASA’s LRO team to help refine their follow-up imaging sequence.",
+          "whyNow": "The crater formed on Aug. 5, when a SpaceX Falcon 9 upper stage impacted the surface following its January 2025 launch of the Firefly Blue Ghost 1 mission.",
+          "url": "https://science.nasa.gov/solar-system/moon/nasas-lro-images-falcon-9-crater-on-moon-learns-new-details/",
+          "source": "NASA Science (.gov)",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-science-space-3.webp",
-          "imageSource": "https://www.sciencedaily.com/images/1920/magnetar-1e-15470-5408.webp",
-          "imageSourcePageUrl": "https://www.sciencedaily.com/releases/2026/08/260815065007.htm",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 06:08:43 GMT",
-          "coverageCount": 3,
-          "accent": "#7169c7",
-          "trendLabel": "Reported this week"
+          "imageSource": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/iotd/2026/earthset-from-the-lunar-far-side/earthset_55192132107_00dc598014_o.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+          "imageSourcePageUrl": "https://science.nasa.gov/solar-system/moon/nasas-lro-images-falcon-9-crater-on-moon-learns-new-details/",
+          "imageAlt": "falcon 9",
+          "publishedAt": "Tue, 18 Aug 2026 18:49:50 GMT",
+          "coverageCount": 8,
+          "coverageSources": [
+            "NASA Science (.gov)",
+            "Discover Magazine",
+            "CNN",
+            "Popular Science",
+            "Mashable",
+            "People.com"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 8,
+            "coverageSources": [
+              "NASA Science (.gov)",
+              "Discover Magazine",
+              "CNN",
+              "Popular Science",
+              "Mashable",
+              "People.com"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1375,57 +1126,36 @@
       "topics": [
         {
           "id": "climate-environment-1",
-          "title": "As Students Return, America’s Classrooms Are Dangerously Hot",
-          "description": "America’s classrooms are heating up, but we have the tools to fix them, write Bill Frist and Jonathan Klein. Eight elementary schools in Doylestown, PA also closed for a day because old buildings couldn’t protect students from the heat. And in recent years, schools in Memphis dismissed students early as temperatures climbed to 110 degrees.",
-          "whyNow": "",
-          "url": "https://time.com/article/2026/08/19/as-students-return-to-school-america-s-classrooms-are-dangerously-hot/",
-          "source": "Time Magazine",
+          "title": "Europe’s seas reach record heat as climate change threatens marine life",
+          "description": "Human-caused climate change was the main driver of record-breaking sea temperatures around Europe this summer, scientists said on Wednesday, warning of severe risks to marine ecosystems and coastal communities. The Mediterranean averaged a record 27 degrees Celsius in July, while waters near Mallorca reached 33 C in early August.",
+          "whyNow": "Human-caused climate change was the main driver of record-breaking sea temperatures around Europe this summer, scientists said on Wednesday, warning of severe risks to marine ecosystems and coastal communities.",
+          "url": "https://www.france24.com/en/environment/20260818-europe-seas-record-heat-climate-change-marine-life",
+          "source": "France 24",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-climate-environment-1.webp",
-          "imageSource": "https://static.time.com/v3/assets/bltea6093859af6183b/blt582df6c5baeb7316/6a85dd87747a86b691c2eeaf/school-air-conditioning.jpg?branch=production&width=2400&quality=75&auto=webp&crop=16:9",
-          "imageSourcePageUrl": "https://time.com/article/2026/08/19/as-students-return-to-school-america-s-classrooms-are-dangerously-hot/",
-          "imageAlt": "school-air-conditioning.jpg",
-          "publishedAt": "Wed, 19 Aug 2026 16:48:27 GMT",
-          "coverageCount": 1,
-          "accent": "#4d9e79",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "climate-environment-2",
-          "title": "Swansea secures state funds for coastal protection",
-          "description": "Swansea secured over $140,000 in state grants to study marsh migration and improve coastal resilience at Town Beach. Funding through the Coastal Zone Management Coastal Resilience program will support planning efforts at Swansea Town Beach. Planned evaluations include raising the elevation of the beach dune to help protect residents and infrastructure from storm surge, wave action and strong winds.",
-          "whyNow": "Swansea secured over $140,000 in state grants to study marsh migration and improve coastal resilience at Town Beach.",
-          "url": "https://www.heraldnews.com/story/news/local/2026/08/20/swansea-awarded-funding-for-flood-and-coastal-planning/91373911007/",
-          "source": "Fall River Herald News",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-climate-environment-2.webp",
-          "imageSource": "https://www.heraldnews.com/gcdn/authoring/2018/05/05/NHER/ghows-WL-6b6284c5-9cd7-4113-e053-0100007f03a6-9bbf7994.jpeg?crop=5183,2929,x0,y263&width=3200&height=1809&format=pjpg&auto=webp",
-          "imageSourcePageUrl": "https://www.heraldnews.com/story/news/local/2026/08/20/swansea-awarded-funding-for-flood-and-coastal-planning/91373911007/",
+          "imageSource": "https://s.france24.com/media/display/e47a41a8-5bdd-11ef-a4be-005056bf30b7/w:1280/p:16x9/AP22308648615151.jpg",
+          "imageSourcePageUrl": "https://www.france24.com/en/environment/20260818-europe-seas-record-heat-climate-change-marine-life",
           "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 08:01:00 GMT",
-          "coverageCount": 1,
+          "publishedAt": "Tue, 18 Aug 2026 23:34:00 GMT",
+          "coverageCount": 3,
+          "coverageSources": [
+            "France 24",
+            "Reuters",
+            "grist.org"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 3,
+            "coverageSources": [
+              "France 24",
+              "Reuters",
+              "grist.org"
+            ],
+            "signal": "Human-caused climate change was the main driver of record-breaking sea temperatures around Europe this summer, scientists said on Wednesday, warning of severe risks to marine ecosystems and coastal communities."
+          },
           "accent": "#4d9e79",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "climate-environment-3",
-          "title": "As Europe bakes, momentum grows for climate-resilient farming",
-          "description": "Simon leads a team tracking how the financial system and companies more broadly are responding to the challenges posed by climate change, nature loss and other environmental, social and governance (ESG) issues including diversity and inclusion.",
-          "whyNow": "Simon leads a team tracking how the financial system and companies more broadly are responding to the challenges posed by climate change, nature loss and other environmental, social and governance (ESG) issues including diversity and inclusion.",
-          "url": "https://www.reuters.com/business/environment/europe-bakes-momentum-grows-climate-resilient-farming-2026-08-19/",
-          "source": "Reuters",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-climate-environment-3.webp",
-          "imageSource": "https://www.reuters.com/resizer/v2/LXT7R6OVS5K4XBP3M6LGHRRJTA.jpg?auth=8a026b21e9bc6087bb8c92cb62aedf452b153c9694f17bc26a4c52378f1b367e&height=1005&width=1920&quality=80&smart=true",
-          "imageSourcePageUrl": "https://www.reuters.com/business/environment/europe-bakes-momentum-grows-climate-resilient-farming-2026-08-19/",
-          "imageAlt": "Cattle farmer Sam Squier poses for a photograph with his herd of Aberdeen Angus cows on a green pasture at Humphreys Farm, in Great Waltham, Chelmsford, Britain, August 11, 2026. R",
-          "publishedAt": "Wed, 19 Aug 2026 06:05:53 GMT",
-          "coverageCount": 1,
-          "accent": "#4d9e79",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1438,57 +1168,42 @@
       "topics": [
         {
           "id": "tech-news-1",
-          "title": "Anthropic CEO Dario Amodei to AI companies: Fulfil your Cancer promise, rather than blaming me",
-          "description": "Tech News News: Anthropic CEO Dario Amodei has pushed back against criticism that warnings about AI risks are fuelling public negativity. In a post shared on social media platform X (formerly known as Twitter) Amodei said that the real issue is a ‘crisis of trust’ rooted in decades of suspicion toward companies, governments, and the tech industry.",
-          "whyNow": "In a post shared on social media platform X (formerly known as Twitter) Amodei said that the real issue is a ‘crisis of trust’ rooted in decades of suspicion toward companies, governments, and the tech industry.",
-          "url": "https://timesofindia.indiatimes.com/technology/tech-news/anthropic-ceo-dario-amodei-to-ai-companies-fulfil-your-cancer-promise-rather-than-blaming-me/articleshow/133286084.cms",
-          "source": "The Times of India",
+          "title": "Australia passes law to levy tech giants that fail to pay for local news",
+          "description": "Australia passed legislation on Thursday that will force tech giants to pay millions of dollars in levies if they fail ​to strike commercial deals with local media outlets for news ‌on their platforms.",
+          "whyNow": "Australia passed legislation on Thursday that will force tech giants to pay millions of dollars in levies if they fail ​to strike commercial deals with local media outlets for news ‌on their platforms.",
+          "url": "https://www.reuters.com/legal/litigation/australia-passes-law-levy-tech-giants-that-fail-pay-local-news-2026-08-20/",
+          "source": "Reuters",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-tech-news-1.webp",
-          "imageSource": "https://static.toiimg.com/thumb/msid-133290629,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-          "imageSourcePageUrl": "https://timesofindia.indiatimes.com/technology/tech-news/anthropic-ceo-dario-amodei-to-ai-companies-fulfil-your-cancer-promise-rather-than-blaming-me/articleshow/133286084.cms",
-          "imageAlt": "",
-          "publishedAt": "Mon, 17 Aug 2026 07:53:00 GMT",
-          "coverageCount": 2,
+          "imageSource": "https://www.reuters.com/resizer/v2/M3XEU56CMZPGHFWN7NZFVFSPWU.jpg?auth=e2eb73b87a2621eefd3a78a7a0ddba6f0b7c813c502ea7521d81343cb16c6f58&height=1005&width=1920&quality=80&smart=true",
+          "imageSourcePageUrl": "https://www.reuters.com/legal/litigation/australia-passes-law-levy-tech-giants-that-fail-pay-local-news-2026-08-20/",
+          "imageAlt": "Google and Facebook logos, words \"media, news, media\" and Australian flag are displayed in this illustration taken, February 18, 2021. REUTERS/Dado Ruvic/Illustration/File Photo",
+          "publishedAt": "Thu, 20 Aug 2026 15:21:06 GMT",
+          "coverageCount": 9,
+          "coverageSources": [
+            "Reuters",
+            "Editor and Publisher",
+            "TV News Check",
+            "AOL.com",
+            "The Hindu",
+            "The Economic Times"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 9,
+            "coverageSources": [
+              "Reuters",
+              "Editor and Publisher",
+              "TV News Check",
+              "AOL.com",
+              "The Hindu",
+              "The Economic Times"
+            ],
+            "signal": ""
+          },
           "accent": "#4d91d8",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "tech-news-2",
-          "title": "Nvidia H200 AI processors enter China: These two companies secure new batches",
-          "description": "Tech News News: Chinese regulatory authorities have reportedly begun permitting limited quantities of Nvidia’s H200 artificial intelligence (AI) processors into mainl. Citing a source familiar with the developments, The Financial Times reported that both ByteDance and Tencent have taken delivery of roughly 10,000 H200 units over recent weeks while several others may receive clearance in the near future.",
-          "whyNow": "Tech News News: Chinese regulatory authorities have reportedly begun permitting limited quantities of Nvidia’s H200 artificial intelligence (AI) processors into mainl.",
-          "url": "https://timesofindia.indiatimes.com/technology/tech-news/nvidia-h200-ai-processors-enter-china-these-two-companies-secure-new-batches/articleshow/133356136.cms",
-          "source": "The Times of India",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-tech-news-2.webp",
-          "imageSource": "https://static.toiimg.com/thumb/msid-133356305,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-          "imageSourcePageUrl": "https://timesofindia.indiatimes.com/technology/tech-news/nvidia-h200-ai-processors-enter-china-these-two-companies-secure-new-batches/articleshow/133356136.cms",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 17:54:00 GMT",
-          "coverageCount": 1,
-          "accent": "#4d91d8",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "tech-news-3",
-          "title": "Get Mannerisms, Gadget Master, the Daily and the Weekly, in newsletter form",
-          "description": "Don’t forget to also sign up for Industry Updates, bringing you the latest technology and product news direct from industry companies. Sign up for the Electronics Weekly newsletters: Mannerisms, Gadget Master and the Daily and Weekly roundups.",
-          "whyNow": "Sign up for the Electronics Weekly newsletters: Mannerisms, Gadget Master and the Daily and Weekly roundups.",
-          "url": "https://www.electronicsweekly.com/blogs/electro-ramblings/site-update/get-mannerisms-gadget-master-daily-weekly-newsletter-form-2026-08/",
-          "source": "Electronics Weekly",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-tech-news-3.webp",
-          "imageSource": "https://static.electronicsweekly.com/wp-content/uploads/2023/01/24104603/Mannerisms-newsletter.jpg",
-          "imageSourcePageUrl": "https://www.electronicsweekly.com/blogs/electro-ramblings/site-update/get-mannerisms-gadget-master-daily-weekly-newsletter-form-2026-08/",
-          "imageAlt": "",
-          "publishedAt": "Tue, 18 Aug 2026 07:00:00 GMT",
-          "coverageCount": 1,
-          "accent": "#4d91d8",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1501,50 +1216,14 @@
       "topics": [
         {
           "id": "entertainment-news-1",
-          "title": "Prince Harry, Meghan Markle's UK return signals ‘spectacular defeat’ as royal experts warn of William showdown",
-          "description": "Prince Harry and Meghan Markle's return to Britain could ignite a clash with Prince William and Kate Middleton, with experts warning it could be \"catastrophic\" for the royal family. Prince Harry and Meghan Markle’s reported return to Britain could mark a stunning reversal of Megxit six years after they walked away from royal life.",
-          "whyNow": "Prince Harry, Meghan Markle's UK return signals ‘spectacular defeat’ as royal experts warn of William showdown.",
-          "url": "https://www.foxnews.com/entertainment/prince-harry-meghan-markle-uk-return-signals-spectacular-defeat-royal-experts-warn-william-showdown",
-          "source": "Fox News",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-entertainment-news-1.webp",
-          "imageSource": "https://static.foxnews.com/foxnews.com/content/uploads/2026/08/meghan-duchess-sussex-prince-harry-canada-house.jpg",
-          "imageSourcePageUrl": "https://www.foxnews.com/entertainment/prince-harry-meghan-markle-uk-return-signals-spectacular-defeat-royal-experts-warn-william-showdown",
-          "imageAlt": "Harry and Meghan's reported UK move signals Megxit defeat, experts say",
-          "publishedAt": "Fri, 21 Aug 2026 10:00:17 GMT",
-          "coverageCount": 2,
-          "accent": "#c968b8",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "entertainment-news-2",
-          "title": "2026-27 Awards Season Calendar",
-          "description": "Check out a list of what's ahead for awards shows this season — the Oscars, Golden Globes, Grammys and more, including the various guild awards. UPDATED with latest: With the Academy of Motion Picture Arts and Sciences setting its dates for the 2027 and 2028 Oscars (the latter the ceremony’s 100th anniversary), the rest of the awards docket for those two years is falling into place.",
-          "whyNow": "2026-27 Awards Season Calendar.",
-          "url": "https://deadline.com/feature/awards-season-calendar-oscars-emmys-golden-globes-list-1234814076/?u",
-          "source": "Deadline",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-entertainment-news-2.webp",
-          "imageSource": "https://deadline.com/wp-content/uploads/2021/08/Emmy-Grammy-Oscar-Tony.jpg?w=1000",
-          "imageSourcePageUrl": "https://deadline.com/feature/awards-season-calendar-oscars-emmys-golden-globes-list-1234814076/?u",
-          "imageAlt": "2026-27 Awards Season calendar",
-          "publishedAt": "Wed, 19 Aug 2026 08:01:00 GMT",
-          "coverageCount": 1,
-          "accent": "#c968b8",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "entertainment-news-3",
           "title": "Michelle Pfeiffer clarifies rumors she’s retiring: ‘The most ridiculous thing’",
-          "description": "After previously asserting that she was done with the big screen, Pfeiffer clarified that she is not retiring anytime soon. During Thursday's appearance on The Tonight Show, she explained her remarks to host Jimmy Fallon, who inquired about her future career plans.",
-          "whyNow": "After previously asserting that she was done with the big screen, Pfeiffer clarified that she is not retiring anytime soon.",
+          "description": "Michelle Pfeiffer clarified that she is not retiring from film. Michelle Pfeiffer will not be making a French exit from the entertainment industry.",
+          "whyNow": "Michelle Pfeiffer clarified that she is not retiring from film. After previously asserting that she was done with the big screen, Pfeiffer clarified that she is not retiring anytime soon.",
           "url": "https://www.yahoo.com/entertainment/celebrity/articles/michelle-pfeiffer-clarifies-rumors-she-145630453.html",
           "source": "Yahoo",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-entertainment-news-3.webp",
+          "image": "/culture/niche-entertainment-news-1.webp",
           "playback": {
             "provider": "YouTube",
             "externalUrl": "https://www.youtube.com/watch?v=oIKpB3eSr-M",
@@ -1555,145 +1234,105 @@
           "imageSourcePageUrl": "https://www.yahoo.com/entertainment/celebrity/articles/michelle-pfeiffer-clarifies-rumors-she-145630453.html",
           "imageAlt": "",
           "publishedAt": "Fri, 21 Aug 2026 14:56:30 GMT",
-          "coverageCount": 1,
+          "coverageCount": 7,
+          "coverageSources": [
+            "Yahoo",
+            "Entertainment Weekly",
+            "People.com",
+            "AOL.com",
+            "The Independent",
+            "Us Weekly"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 7,
+            "coverageSources": [
+              "Yahoo",
+              "Entertainment Weekly",
+              "People.com",
+              "AOL.com",
+              "The Independent",
+              "Us Weekly"
+            ],
+            "signal": ""
+          },
           "accent": "#c968b8",
-          "trendLabel": "Reported this week"
+          "trendLabel": "Recent signal"
         }
       ]
     },
     {
-      "id": "parenting",
-      "label": "Parenting",
+      "id": "home-design",
+      "label": "Home & design",
       "parent": "Lifestyle",
-      "description": "Family systems, school rhythms, kid culture, and practical parenting conversations that are gaining attention right now.",
-      "accent": "#e09a59",
+      "description": "Interiors, objects, architecture, and small design choices making everyday spaces feel newly legible or desirable.",
+      "accent": "#b68766",
       "topics": [
         {
-          "id": "parenting-1",
-          "title": "'That’s my voice': Friend of late Mississippi teen Nolan Wells speaks out on what he saw that day",
-          "description": "Nolan Wells, an 18-year-old Mississippi football player, died last weekend following an all-day party on Horn Island, off the coast of Ocean Springs, his hometown. Shepherd said Wells said he wanted to stay behind because he met a girl and would return on another friend's boat. Authorities say they have been interviewing everyone they can who was with Wells, or may have spoken to him that day.",
-          "whyNow": "Shepherd said Wells said he wanted to stay behind because he met a girl and would return on another friend's boat.",
-          "url": "https://abcnews.com/US/hurt-nolan-friend-late-mississippi-teen-nolan-wells/story?id=134703876",
-          "source": "ABC News - Breaking News, Latest News and Videos",
+          "id": "home-design-1",
+          "title": "Novato's iconic rotating 'Spaceship House' hits the market for first time",
+          "description": "A one-of-a-kind Novato home that generations of Bay Area commuters have spotted from Highway 101 is now looking for a new owner. Novato's futuristic hilltop house, known locally as the \"Round House\" for its spaceship-like appearance, has been listed for sale for the first time since it was built in 1963.",
+          "whyNow": "Novato's futuristic hilltop house, known locally as the \"Round House\" for its spaceship-like appearance, has been listed for sale for the first time since it was built in 1963.",
+          "url": "https://abc7news.com/post/novatos-iconic-rotating-spaceship-house-hits-market-first-time/19694726/",
+          "source": "ABC7 Bay Area",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-parenting-1.webp",
-          "imageSource": "https://i.abcnewsfe.com/a/0650e036-8ffb-4cf9-82fc-7634167abb06/nolan-xavier-wells-ht-jef-260707_1783428332296_hpMain_2_16x9.jpg?w=1600",
-          "imageSourcePageUrl": "https://abcnews.com/US/hurt-nolan-friend-late-mississippi-teen-nolan-wells/story?id=134703876",
+          "image": "/culture/niche-home-design-1.webp",
+          "imageSource": "https://cdn.abcotvs.com/dip/images/19695620_081726-kgo-rotating-house-img.jpg?w=1600",
+          "imageSourcePageUrl": "https://abc7news.com/post/novatos-iconic-rotating-spaceship-house-hits-market-first-time/19694726/",
           "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 20:21:24 GMT",
-          "coverageCount": 1,
-          "accent": "#e09a59",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "parenting-2",
-          "title": "Multistate controversy highlights gray areas around surrogacy, bioethics expert says",
-          "description": "A multistate surrogacy controversy — involving Alaska, California and Texas — could have far-reaching implications. One medical ethics expert said the case highlights the flaws and weaknesses around surrogacy agreements that pose dozens of unanswered questions.",
-          "whyNow": "Multistate controversy highlights gray areas around surrogacy, bioethics expert says.",
-          "url": "https://www.keranews.org/health-wellness/2026-08-17/surrogacy-bioethics-expert-future-ethical-legal-implications-texas-alaska-california",
-          "source": "KERA News",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-parenting-2.webp",
-          "imageSource": "https://npr.brightspotcdn.com/dims4/default/233441f/2147483647/strip/true/crop/5047x2650+0+358/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fa9%2F06%2F1efeec084e2eacb28be823093344%2F0328-home-birth-midwife-kera-10.JPG",
-          "imageSourcePageUrl": "https://www.keranews.org/health-wellness/2026-08-17/surrogacy-bioethics-expert-future-ethical-legal-implications-texas-alaska-california",
-          "imageAlt": "Midwife Becky Hines checks baby Ramsom’s feet after birth to mother Jessica Gamboa Tuesday, March 28, 2023, at their home in Forney.",
-          "publishedAt": "Mon, 17 Aug 2026 10:03:00 GMT",
-          "accent": "#e09a59",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "parenting-3",
-          "title": "Parents protest sudden announcement of UCLA childcare center closures",
-          "description": "About 60 parents rallied outside Murphy Hall on Monday to protest the closure of two UCLA childcare centers. The Krieger and University Centers, which are under UCLA’s Early Care and Education Program, will close June 30, 2027 because its operations are no longer sustainable, Executive Vice Chancellor and Provost Darnell Hunt announced in a Thursday email to parents.",
-          "whyNow": "Parents protest sudden announcement of UCLA childcare center closures.",
-          "url": "https://dailybruin.com/2026/08/17/parents-protest-sudden-announcement-of-ucla-childcare-center-closures",
-          "source": "Daily Bruin",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-parenting-3.webp",
-          "imageSource": "https://wp.dailybruin.com/images/2026/08/news.protest.breaking.8.17.26.KD_.v2-768x492.jpg",
-          "imageSourcePageUrl": "https://dailybruin.com/2026/08/17/parents-protest-sudden-announcement-of-ucla-childcare-center-closures",
-          "imageAlt": "",
-          "publishedAt": "Mon, 17 Aug 2026 21:56:00 GMT",
-          "accent": "#e09a59",
-          "trendLabel": "Reported this week"
-        }
-      ]
-    },
-    {
-      "id": "podcasts",
-      "label": "Podcasts",
-      "parent": "Culture",
-      "description": "Shows, formats, hosts, and episode moments that are making audio feel like a live part of culture again.",
-      "accent": "#8e6ed0",
-      "topics": [
-        {
-          "id": "podcasts-1",
-          "title": "Jake Reiner discusses death of parents Rob and Michelle Reiner in return to podcast",
-          "description": "Jake Reiner remembered his parents, Rob and Michelle Reiner in his podcast return on Wednesday.",
-          "whyNow": "Jake Reiner discusses death of parents Rob and Michelle Reiner in return to podcast.",
-          "url": "https://abcnews.com/GMA/News/jake-reiner-discusses-death-parents-rob-michelle-reiner/story?id=132747869",
-          "source": "ABC News - Breaking News, Latest News and Videos",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-podcasts-1.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=F4pqg_vz1Gc",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/F4pqg_vz1Gc?rel=0",
-            "label": "Watch on YouTube"
+          "publishedAt": "Tue, 18 Aug 2026 04:55:24 GMT",
+          "coverageCount": 6,
+          "coverageSources": [
+            "ABC7 Bay Area",
+            "Yahoo",
+            "People.com",
+            "AOL.com"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 6,
+            "coverageSources": [
+              "ABC7 Bay Area",
+              "Yahoo",
+              "People.com",
+              "AOL.com"
+            ],
+            "signal": ""
           },
-          "imageSource": "https://i.abcnewsfe.com/a/0246d891-1e76-4994-b75c-01db7f82d622/jake-reiner-gty-jef-260507_1778170764346_hpMain_16x9.jpg?w=1600",
-          "imageSourcePageUrl": "https://abcnews.com/GMA/News/jake-reiner-discusses-death-parents-rob-michelle-reiner/story?id=132747869",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 07:17:41 GMT",
-          "coverageCount": 1,
-          "accent": "#8e6ed0",
-          "trendLabel": "Reported this week"
+          "accent": "#b68766",
+          "trendLabel": "Recent signal"
         },
         {
-          "id": "podcasts-2",
-          "title": "'The Office' stars reveal a Mac sound was accidentally used on Michael Scott's computer",
-          "description": "They also shared a hilarious tech fail involving Michael's computer that they learned about from the episode's DVD commentary. Greg [Daniels, show runner] shared that they worked really hard in editing to get that sound to match Steve hitting the keyboard. And Danny [Chun, writer] shared that after the episode aired, the comment boards were full of people saying that that was a Mac sound.",
-          "whyNow": "They also shared a hilarious tech fail involving Michael's computer that they learned about from the episode's DVD commentary.",
-          "url": "https://mashable.com/article/the-office-mac-pc-volume-sound-murder-episode",
-          "source": "Mashable",
+          "id": "home-design-3",
+          "title": "This Colorful Old-School Design Trend Is Back—With a Modern Twist",
+          "description": "The once outdated painted furniture trend is making a comeback, according to designers. Here's how to get the look with more of a modern twist.",
+          "whyNow": "The once outdated painted furniture trend is making a comeback, according to designers.",
+          "url": "https://ca.news.yahoo.com/colorful-old-school-design-trend-163830912.html",
+          "source": "Yahoo News Canada",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
-          "image": "/culture/niche-podcasts-2.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=hG9C0VwruXE",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/hG9C0VwruXE?rel=0",
-            "label": "Watch on YouTube"
+          "image": "/culture/niche-home-design-3.webp",
+          "imageSource": "https://s.yimg.com/lo/mysterio/api/5f947065bf6bb84b31db384242d6c5a771398313c78fea0464f2ce2adc21e58f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fgood_housekeeping_561%2Fd388a6a0e13c6e91845da82f55152be6.jpg",
+          "imageSourcePageUrl": "https://ca.news.yahoo.com/colorful-old-school-design-trend-163830912.html",
+          "imageAlt": "",
+          "publishedAt": "Tue, 18 Aug 2026 16:38:30 GMT",
+          "coverageCount": 2,
+          "coverageSources": [
+            "Vogue Adria",
+            "Yahoo News Canada"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 2,
+            "coverageSources": [
+              "Vogue Adria",
+              "Yahoo News Canada"
+            ],
+            "signal": "The once outdated painted furniture trend is making a comeback, according to designers."
           },
-          "imageSource": "https://helios-i.mashable.com/imagery/articles/03BEfEROo0FHHe9LvL7garo/hero-image.fill.size_1200x675.v1648565937.png",
-          "imageSourcePageUrl": "https://mashable.com/article/the-office-mac-pc-volume-sound-murder-episode",
-          "imageAlt": "",
-          "publishedAt": "Fri, 21 Aug 2026 05:00:00 GMT",
-          "coverageCount": 1,
-          "accent": "#8e6ed0",
-          "trendLabel": "Reported this week"
-        },
-        {
-          "id": "podcasts-3",
-          "title": "The magic of totality, vaccine misinformation and good news for coffee lovers",
-          "description": "From eclipse awe to vaccine debate, earthquake recovery and coffee’s benefits With all of that in mind, the next time a total eclipse will meaningfully cross the U.S.—no offense, Alaska—is 2044, and that one will only hit Montana and the Dakotas. Luckily for the rest of the lower 48 we’ll get a cross-country totality path in 2045.",
-          "whyNow": "From eclipse awe to vaccine debate, earthquake recovery and coffee’s benefits With all of that in mind, the next time a total eclipse will meaningfully cross the U.S.—no offense, Alaska—is 2044, and that one will only hit Montana and the Dakotas.",
-          "url": "https://www.scientificamerican.com/podcast/episode/total-solar-eclipse-vaccine-controversy-and-coffee-health-benefits/",
-          "source": "Scientific American",
-          "sourceLabel": "Read the report",
-          "evidenceMode": "source-grounded",
-          "image": "/culture/niche-podcasts-3.webp",
-          "imageSource": "https://static.scientificamerican.com/dam/asset/c4bc7515-3bfd-471c-92e9-a21f17e2d9fe/2608_SQ_MON_AUG_17.png?m=1786725952.111&w=1200",
-          "imageSourcePageUrl": "https://www.scientificamerican.com/podcast/episode/total-solar-eclipse-vaccine-controversy-and-coffee-health-benefits/",
-          "imageAlt": "An image of the sun during the total solar eclipse on August 12, 2026 in Caspe, Spain.",
-          "publishedAt": "Mon, 17 Aug 2026 10:00:00 GMT",
-          "coverageCount": 1,
-          "accent": "#8e6ed0",
-          "trendLabel": "Reported this week"
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     },
@@ -1706,51 +1345,79 @@
       "topics": [
         {
           "id": "comedy-1",
-          "title": "The Funny Way That Stand-Up Comics Are Posting on Social Media",
-          "description": "News about social media, including commentary and archival articles published in The New York Times.",
-          "whyNow": "The Funny Way That Stand-Up Comics Are Posting on Social Media.",
-          "url": "https://www.nytimes.com/topic/subject/social-media",
-          "source": "The New York Times",
+          "title": "New York Comedy Festival Adds More Shows to Lineup",
+          "description": "The New York Comedy Festival has added more than 100 shows to its lineup. The 10-day celebration of comedy, taking place Nov. 6 to 15 across New York City’s five boroughs, will also feature programming from the Tokyo Kampai Boys, Moshe Kasher, Alfred Robles and more.",
+          "whyNow": "The New York Comedy Festival has added more than 100 shows to its lineup.",
+          "url": "https://variety.com/2026/tv/news/new-york-comedy-festival-adds-more-shows-lineup-1236836435/",
+          "source": "Variety",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-comedy-1.webp",
-          "imageSource": "https://static01.nyt.com/newsgraphics/images/icons/defaultPromoCrop.png",
-          "imageSourcePageUrl": "https://www.nytimes.com/topic/subject/social-media",
-          "imageAlt": "",
-          "publishedAt": "Thu, 20 Aug 2026 18:34:00 GMT",
-          "coverageCount": 1,
-          "accent": "#e2a33f",
-          "trendLabel": "Reported this week"
+          "imageSource": "https://variety.com/wp-content/uploads/2026/08/2152431387.jpg?w=1000&h=563&crop=1",
+          "imageSourcePageUrl": "https://variety.com/2026/tv/news/new-york-comedy-festival-adds-more-shows-lineup-1236836435/",
+          "imageAlt": "LOS ANGELES, CALIFORNIA - MAY 10: Moshe Kasher attends Netflix Is A Joke Festival: Outside Joke at Hollywood Palladium on May 10, 2024 in Los Angeles, California. (Photo by Araya Doheny/Getty Images for Netflix)",
+          "publishedAt": "Wed, 19 Aug 2026 14:51:00 GMT",
+          "coverageCount": 9,
+          "coverageSources": [
+            "Variety",
+            "Deadline",
+            "Yahoo",
+            "Icon Vs. Icon",
+            "Patch",
+            "WKYC"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 9,
+            "coverageSources": [
+              "Variety",
+              "Deadline",
+              "Yahoo",
+              "Icon Vs. Icon",
+              "Patch",
+              "WKYC"
+            ],
+            "signal": ""
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         },
         {
           "id": "comedy-2",
-          "title": "Jo Koy Sets Sixth Netflix Comedy Special ‘Blue In The Face’",
-          "description": "EXCLUSIVE: Comedian Jo Koy has announced his sixth Netflix special, Blue in the Face, which will premiere globally on September 15. Filmed before a sold-out crowd at Stockton Arena, Koy’s new hour see... 'All Quiet On The Western Front' Exec Sasha Bühler Exits International Film Role At Netflix How A Tray Of Bloody Oysters Helped 'The Diplomat' Find \"A Real Spine\" For Season 4 - The Backstory",
-          "whyNow": "Jo Koy Sets Sixth Netflix Comedy Special ‘Blue In The Face’.",
-          "url": "https://www.yahoo.com/entertainment/music/articles/jo-koy-sets-sixth-netflix-130000811.html",
-          "source": "Yahoo",
+          "title": "Robby Hoffman Drops Limited-Edition Vinyl of Her Latest Comedy Special, ‘Wake Up’",
+          "description": "Comedian Robby Hoffman today releases an album of her 2025 Netflix special 'Wake Up,' available in limited-edition vinyl and digital versions. Tomorrow, it also drops as an album from the legendary indie label Secretly Canadian, available in digital format as well as a limited run of signed vinyl.",
+          "whyNow": "Comedian Robby Hoffman today releases an album of her 2025 Netflix special 'Wake Up,' available in limited-edition vinyl and digital versions.",
+          "url": "https://www.rollingstone.com/culture/culture-news/robby-hoffman-wake-up-limited-edition-vinyl-release-1235610125/",
+          "source": "Rolling Stone",
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-comedy-2.webp",
-          "playback": {
-            "provider": "YouTube",
-            "externalUrl": "https://www.youtube.com/watch?v=UIUITdkLMXs",
-            "embedUrl": "https://www.youtube-nocookie.com/embed/UIUITdkLMXs?rel=0",
-            "label": "Watch on YouTube"
+          "imageSource": "https://www.rollingstone.com/wp-content/uploads/2026/08/robby-new-crop.jpg?crop=0px%2C30px%2C1800px%2C1014px&resize=1600%2C900",
+          "imageSourcePageUrl": "https://www.rollingstone.com/culture/culture-news/robby-hoffman-wake-up-limited-edition-vinyl-release-1235610125/",
+          "imageAlt": "Robby Hoffman",
+          "publishedAt": "Tue, 18 Aug 2026 13:00:00 GMT",
+          "coverageCount": 4,
+          "coverageSources": [
+            "Rolling Stone",
+            "IMDb"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 4,
+            "coverageSources": [
+              "Rolling Stone",
+              "IMDb"
+            ],
+            "signal": "We’re talking about her comedy special, Robby Hoffman: Wake Up, which was produced by John Mulaney and was a breakout hit on Netflix when it aired in December 2025."
           },
-          "imageSource": "https://s.yimg.com/lo/mysterio/api/eb505a808425a271e0f3d0eebab2ed981206a0308a6b9e2f8e8c61457f2732db/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fdeadline.com%2F2614ccf1816e15f2f39d53fb1539b12b.jpg",
-          "imageSourcePageUrl": "https://www.yahoo.com/entertainment/music/articles/jo-koy-sets-sixth-netflix-130000811.html",
-          "imageAlt": "",
-          "publishedAt": "Wed, 19 Aug 2026 13:00:00 GMT",
-          "coverageCount": 1,
-          "accent": "#e2a33f",
-          "trendLabel": "Reported this week"
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         },
         {
           "id": "comedy-3",
           "title": "Nate Bargatze's BIG DUMB EYES Tour Earns Official Guinness World Records Title",
-          "description": "GUINNESS WORLD RECORDS recognized Nate Bargatze onstage in Toronto for selling more tickets than any stand-up comedy tour in history, a milestone reached during his BIG DUMB EYES World Tour. Bargatze's massive touring success is anchored by his hit comedy specials. In 2023, his Amazon Prime special, Nate Bargatze: Hello World, broke records as the platform's most-streamed original comedy special in its first 28 days.",
-          "whyNow": "Nate Bargatze's BIG DUMB EYES Tour Earns Official Guinness World Records Title.",
+          "description": "GUINNESS WORLD RECORDS recognized Nate Bargatze onstage in Toronto for selling more tickets than any stand-up comedy tour in history, a milestone reached during his BIG DUMB EYES World Tour.",
+          "whyNow": "GUINNESS WORLD RECORDS recognized Nate Bargatze onstage in Toronto for selling more tickets than any stand-up comedy tour in history, a milestone reached during his BIG DUMB EYES World Tour.",
           "url": "https://www.broadwayworld.com/bwwmusic/article/Nate-Bargatzes-BIG-DUMB-EYES-Tour-Earns-Official-Guinness-World-Records-Title-20260817",
           "source": "BroadwayWorld",
           "sourceLabel": "Read the report",
@@ -1760,9 +1427,22 @@
           "imageSourcePageUrl": "https://www.broadwayworld.com/bwwmusic/article/Nate-Bargatzes-BIG-DUMB-EYES-Tour-Earns-Official-Guinness-World-Records-Title-20260817",
           "imageAlt": "",
           "publishedAt": "Mon, 17 Aug 2026 13:56:07 GMT",
-          "coverageCount": 1,
-          "accent": "#e2a33f",
-          "trendLabel": "Reported this week"
+          "coverageCount": 2,
+          "coverageSources": [
+            "BroadwayWorld",
+            "facebook.com"
+          ],
+          "popularityEvidence": {
+            "mode": "independent-coverage",
+            "coverageCount": 2,
+            "coverageSources": [
+              "BroadwayWorld",
+              "facebook.com"
+            ],
+            "signal": "Throughout the course of The Big Dumb Eyes World Tour, Bargatze broke 84 venues records, including becoming the only comedian to sell out three consecutive performances at Nashville's Bridgestone Arena in a single calendar year—a feat matched only by Taylor Swift and Garth Brooks."
+          },
+          "accent": "#3fa7ff",
+          "trendLabel": "Recent signal"
         }
       ]
     }

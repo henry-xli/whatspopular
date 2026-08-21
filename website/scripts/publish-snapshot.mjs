@@ -16,9 +16,11 @@ if (!Array.isArray(brief.sections) || brief.sections.length !== 8
   || !brief.quiz || !Array.isArray(brief.quiz.questions) || brief.quiz.questions.length === 0) {
   throw new Error("Refusing to publish an invalid briefing snapshot");
 }
+// Keep a broad digest floor, but allow individual lanes to fail closed when
+// their live source coverage is unavailable instead of publishing stale cards.
 if (!Array.isArray(nicheBrief.categories)
-  || nicheBrief.categories.length < 25
-  || nicheBrief.categories.some((category) => !Array.isArray(category.topics) || category.topics.length < 3)) {
+  || nicheBrief.categories.length < 18
+  || nicheBrief.categories.some((category) => !Array.isArray(category.topics) || category.topics.length < 1)) {
   throw new Error("Refusing to publish an invalid expanded niche snapshot");
 }
 
