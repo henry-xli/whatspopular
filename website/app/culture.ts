@@ -27,6 +27,7 @@ export type CultureItem = {
   ratingLabel?: string;
   spotifyId?: string;
   spotifyRank?: number;
+  previewUrl?: string;
   releaseDate?: string;
   category?: string;
 };
@@ -205,6 +206,12 @@ function validateItem(value: unknown, label: string, rank: number, titles: Set<s
   if (item.category !== undefined) assertText(item.category, `${item.title} category`, 40);
   if (item.spotifyId !== undefined && (typeof item.spotifyId !== "string" || !/^[A-Za-z0-9]{22}$/.test(item.spotifyId))) {
     throw new Error(`${item.title} has an invalid Spotify track ID`);
+  }
+  if (item.previewUrl !== undefined) {
+    const previewUrl = externalUrl(item.previewUrl, `${item.title} preview`, true);
+    if (!/^p\.scdn\.co$|^open\.spotify\.com$/i.test(previewUrl.hostname)) {
+      throw new Error(`${item.title} has an unapproved music preview host`);
+    }
   }
   if (item.spotifyRank !== undefined && (!Number.isInteger(item.spotifyRank) || Number(item.spotifyRank) < 1 || Number(item.spotifyRank) > 50)) {
     throw new Error(`${item.title} has an invalid Spotify rank`);

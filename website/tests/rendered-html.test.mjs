@@ -36,6 +36,17 @@ test("builds and validates source-grounded AI descriptions", () => {
   assert.match(prompt, /concrete causal signal/i);
   assert.match(prompt, /meme or unusual fan reaction/i);
   assert.match(prompt, /return or re-release/i);
+  const musicPrompt = buildDescriptionPrompt("music", [{
+    id: "music-1",
+    title: "Example Song",
+    role: "Example Artist",
+    sourceSnippets: [
+      { kind: "current_reception", source: "Current coverage", text: "Listeners are using the song in workout edits." },
+      { kind: "current_usage", source: "Current coverage", text: "Creators are pairing it with fast-cut dance videos." },
+    ],
+  }]);
+  assert.match(musicPrompt, /what listeners appear to be responding to/i);
+  assert.match(musicPrompt, /how the track is being used/i);
   assert.match(prompt, /return an empty description/i);
   assert.match(prompt, /Never mention a publisher|quote a headline/i);
   const parsed = parseDescriptionOutput({
@@ -98,6 +109,13 @@ test("builds and validates source-grounded AI descriptions", () => {
   };
   assert.equal(isDescriptionUsable("products", "The Unicorn Frappuccino is back for a limited return, reviving the viral Starbucks drink that was first introduced in 2017.", productEvidence), true);
   assert.equal(isDescriptionUsable("products", "The Unicorn Frappuccino is a blended drink with a sweet flavor.", productEvidence), false);
+  const musicEvidence = {
+    title: "Example Song",
+    sourceSnippets: [{ kind: "current_reception", source: "Current coverage", text: "Listeners are using the song in workout edits." }],
+  };
+  assert.equal(isDescriptionUsable("music", "Listeners are using Example Song in workout edits, while creators keep pairing it with fast-cut videos.", musicEvidence), true);
+  assert.equal(isDescriptionUsable("music", "“Example Song” is a track by Example Artist, released this summer.", musicEvidence), false);
+  assert.equal(isDescriptionUsable("music", "“Example Song” is a track by Example Artist, released this summer.", { title: "Example Song", sourceSnippets: [] }), false);
 });
 
 test("uses a bounded structured request for an enabled AI description batch", async () => {
@@ -313,6 +331,17 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
 
   const profile = await render("/api/for-you/profile", { headers: { accept: "application/json" } });
   assert.equal(profile.status, 401);
+  const account = await render("/account");
+  assert.equal(account.status, 200);
+  const accountHtml = await account.text();
+  assert.match(accountHtml, /Account settings/);
+  assert.match(accountHtml, /Continue with ChatGPT/);
+  assert.match(accountHtml, /does not store a second password/i);
+  const mobileLink = await render("/mobile-link");
+  assert.equal(mobileLink.status, 200);
+  assert.match(await mobileLink.text(), /This link is invalid/);
+  const revoke = await render("/api/account/sessions/revoke", { method: "POST" });
+  assert.equal(revoke.status, 401);
 });
 
 test("never edge-caches errors or unsafe request methods", async () => {
@@ -594,6 +623,8 @@ test("keeps content and outbound links constrained", async () => {
   assert.deepEqual(billboardRanks, [...billboardRanks].sort((left, right) => left - right));
   assert.ok(allSongs.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
   assert.ok(allSongs.every((item) => !/Billboard Hot 100|Spotify’s Today’s Top Hits|\b#\d+\b/i.test(item.description)));
+  const songsWithCurrentCoverage = allSongs.filter((item) => item.evidence.length >= 3);
+  assert.ok(songsWithCurrentCoverage.every((item) => !/^“[^”]+” is a track by [^.]+(?:, released [^.]+)?\.$/i.test(item.description)));
   const products = brief.sections.find((section) => section.id === "products");
   const allProducts = [...products.items, ...products.moreItems];
   assert.ok(allProducts.every((item) => (item.metric.label === "Independent viral sources"
@@ -642,6 +673,9 @@ test("keeps content and outbound links constrained", async () => {
   assert.match(updater, /isAmazonListingUrl/);
   assert.match(updater, /amazonListingMatchesProduct/);
   assert.match(updater, /amazonDetailMatchesProduct/);
+  assert.match(updater, /musicContextForTrack/);
+  assert.match(updater, /current_reception/);
+  assert.match(updater, /No source-grounded current context found/);
   assert.doesNotMatch(updater, /Unicorn Frappuccino|Galaxy Z Fold 8/i);
   assert.doesNotMatch(updater, /annualSlangCandidates|summaryQuery\s*=/);
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);

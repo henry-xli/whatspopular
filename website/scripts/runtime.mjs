@@ -128,49 +128,54 @@ async function fetchOnce(rawUrl, options) {
   let method = options.method.toUpperCase();
   let body = options.body;
   const headers = new Headers(options.headers);
-  const signal = AbortSignal.timeout(options.timeoutMs);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), options.timeoutMs);
 
-  for (let redirects = 0; redirects <= options.maxRedirects; redirects += 1) {
-    if (options.validateHost) await options.validateHost(url.hostname);
-    const response = await fetch(url, {
-      method,
-      body,
-      headers,
-      redirect: "manual",
-      signal,
-    });
-    if (!redirectStatuses.has(response.status)) {
-      if (!response.ok) {
-        const delay = retryAfter(response);
-        await response.body?.cancel().catch(() => {});
-        throw new FetchFailure(`${response.status} from ${url.hostname}`, response.status, delay);
+  try {
+    for (let redirects = 0; redirects <= options.maxRedirects; redirects += 1) {
+      if (options.validateHost) await options.validateHost(url.hostname);
+      const response = await fetch(url, {
+        method,
+        body,
+        headers,
+        redirect: "manual",
+        signal: controller.signal,
+      });
+      if (!redirectStatuses.has(response.status)) {
+        if (!response.ok) {
+          const delay = retryAfter(response);
+          await response.body?.cancel().catch(() => {});
+          throw new FetchFailure(`${response.status} from ${url.hostname}`, response.status, delay);
+        }
+        return {
+          buffer: await readLimited(response, options.maxBytes, options.kind),
+          contentType: response.headers.get("content-type") ?? "",
+          finalUrl: url.href,
+        };
       }
-      return {
-        buffer: await readLimited(response, options.maxBytes, options.kind),
-        contentType: response.headers.get("content-type") ?? "",
-        finalUrl: url.href,
-      };
-    }
-    if (redirects === options.maxRedirects) {
+      if (redirects === options.maxRedirects) {
+        await response.body?.cancel().catch(() => {});
+        throw new Error(`${options.kind} exceeded ${options.maxRedirects} redirects`);
+      }
+      const location = response.headers.get("location");
       await response.body?.cancel().catch(() => {});
-      throw new Error(`${options.kind} exceeded ${options.maxRedirects} redirects`);
+      if (!location) throw new Error(`${options.kind} redirect had no location`);
+      const nextUrl = secureUrl(new URL(location, url), options.isAllowedHost, options.kind);
+      if (nextUrl.origin !== url.origin) {
+        headers.delete("authorization");
+        headers.delete("cookie");
+      }
+      url = nextUrl;
+      if (response.status === 303 || ((response.status === 301 || response.status === 302) && method === "POST")) {
+        method = "GET";
+        body = undefined;
+        headers.delete("content-type");
+      }
     }
-    const location = response.headers.get("location");
-    await response.body?.cancel().catch(() => {});
-    if (!location) throw new Error(`${options.kind} redirect had no location`);
-    const nextUrl = secureUrl(new URL(location, url), options.isAllowedHost, options.kind);
-    if (nextUrl.origin !== url.origin) {
-      headers.delete("authorization");
-      headers.delete("cookie");
-    }
-    url = nextUrl;
-    if (response.status === 303 || ((response.status === 301 || response.status === 302) && method === "POST")) {
-      method = "GET";
-      body = undefined;
-      headers.delete("content-type");
-    }
+    throw new Error(`${options.kind} request failed`);
+  } finally {
+    clearTimeout(timeout);
   }
-  throw new Error(`${options.kind} request failed`);
 }
 
 function isRetryable(error) {

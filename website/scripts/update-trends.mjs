@@ -14,6 +14,7 @@ const dryRun = process.argv.includes("--dry-run");
 const force = process.argv.includes("--force");
 const quizOnly = process.argv.includes("--quiz-only");
 const refreshContextOnly = process.argv.includes("--refresh-context");
+const skipNiche = process.argv.includes("--skip-niche");
 const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
@@ -1267,10 +1268,74 @@ function personIdentity(title, description, categoryLabel) {
   return ensureSentence(`${title} is primarily known as ${article} ${role}`);
 }
 
-function recentDescription(identity, headline, options = {}) {
-  const context = factualHeadline(headline, options);
-  if (context) return `${identity} ${context}`;
-  return identity;
+const musicAudiencePattern = /\b(?:fans?|listeners?|audiences?|people|users?|creators?|dancers?|editors?|clubs?|parties|workout|drive|video(?:s)?|edit(?:s)?|dance|sound|trend(?:ing)?|viral|reaction|prais(?:e|ed)|love(?:d)?|critic(?:s)?|review(?:s)?|play(?:ed|list)?|stream(?:ed|ing)?)\b/i;
+
+function musicContextSentence(value) {
+  const text = plainText(value);
+  if (!text) return "";
+  const sentencesToCheck = sentences(text)
+    .filter((sentence) => sentence.length >= 24 && !copiedMetricPattern.test(sentence))
+    .map((sentence) => stripSourceAttribution(sentence).trim())
+    .filter(Boolean);
+  const audienceSentence = sentencesToCheck.find((sentence) => musicAudiencePattern.test(sentence));
+  return conciseSentences(audienceSentence ?? sentencesToCheck[0] ?? "", 300);
+}
+
+function musicContextForTrack(track, context) {
+  if (!context) return null;
+  const title = normalize(track.title);
+  const titleTokens = new Set(title.split(" ").filter((token) => token.length >= 3));
+  const candidates = [context, ...(context.alternates ?? [])]
+    .filter((candidate) => candidate?.headline)
+    .filter((candidate, index, values) => values.findIndex((value) => normalize(value.headline) === normalize(candidate.headline)) === index)
+    .map((candidate) => {
+      const headline = normalize(candidate.headline);
+      const overlap = [...titleTokens].filter((token) => headline.split(" ").includes(token)).length;
+      const exactTitle = title && headline.includes(title);
+      return {
+        candidate,
+        overlap,
+        exactTitle,
+        audience: musicAudiencePattern.test(candidate.headline),
+      };
+    })
+    .filter((candidate) => candidate.exactTitle || candidate.overlap >= Math.min(2, Math.max(1, titleTokens.size)))
+    .sort((left, right) => Number(right.exactTitle) - Number(left.exactTitle)
+      || Number(right.audience) - Number(left.audience)
+      || right.overlap - left.overlap
+      || right.candidate.score - left.candidate.score);
+  const selected = candidates[0]?.candidate;
+  if (!selected) return null;
+  return {
+    ...selected,
+    alternates: candidates.slice(1, 9).map(({ candidate }) => candidate),
+  };
+}
+
+function musicRecentDescription(identity, article, context) {
+  const articleSentences = sentences(article?.intro)
+    .map((sentence) => stripSourceAttribution(sentence).trim())
+    .filter((sentence) => sentence.length >= 24 && !copiedMetricPattern.test(sentence));
+  const headlineCandidates = [
+    context?.headline,
+    ...(context?.alternates ?? []).map((candidate) => candidate.headline),
+  ];
+  const allCandidates = [...articleSentences, ...headlineCandidates];
+  const audienceContext = allCandidates
+    .map(musicContextSentence)
+    .find((sentence) => sentence && musicAudiencePattern.test(sentence));
+  const eventContext = allCandidates
+    .map((value) => factualHeadline(value, { rejectChartPlacement: true, maxLength: 260, allowCultural: true }))
+    .find(Boolean);
+  const selected = audienceContext || eventContext;
+  return selected ? conciseSentences(`${selected} ${identity}`, 560) : "";
+}
+
+function usablePriorMusicDescription(value) {
+  const text = plainText(value);
+  return text.length >= 60
+    && !/^“[^”]+” is a track by .+\.$/i.test(text)
+    && /(?:after|amid|because|following|fans?|listeners?|audiences?|creators?|viral|reaction|trend(?:ing)?|released?|returned?|performed|featured|used|dance|edit|video|workout|party|club)/i.test(text);
 }
 
 function personRecentDescription(title, identity, article, context) {
@@ -2083,6 +2148,7 @@ async function spotifyApiTracks() {
     title: track.name,
     artist: (track.artists ?? []).map((artist) => artist.name).join(", "),
     image: track.album?.images?.[0]?.url,
+    previewUrl: track.preview_url,
   }));
   if (tracks.length < 20) throw new Error("Spotify API returned an incomplete editorial playlist");
   return tracks;
@@ -2099,6 +2165,7 @@ async function spotifyEmbedTracks() {
     title: track.title,
     artist: plainText(track.subtitle ?? ""),
     image: track.visualIdentity?.image?.[0]?.url ?? track.visualIdentity?.image,
+    previewUrl: track.preview_url,
   }));
 }
 
@@ -2158,13 +2225,21 @@ async function updateMusic(brief, chart, spotifyTracks) {
     .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
   const descriptions = await mapConcurrent(crossovers, 4, async ({ track }) => {
     const [candidateContext, details] = await Promise.all([
-      googleNewsContext(`"${track.title}" "${track.artist}"`, 30, { requireEvent: true }).catch(() => null),
+      googleNewsContext(`"${track.title}" "${track.artist}"`, 30, {
+        requireEvent: false,
+        queryVariants: [
+          `"${track.title}" "${track.artist}" audience reaction`,
+          `"${track.title}" "${track.artist}" TikTok sound edit dance`,
+          `"${track.title}" "${track.artist}" viral use fans`,
+        ],
+      }).catch(() => null),
       spotifyTrackDetails(track.id),
     ]);
-    const context = candidateContext && normalize(candidateContext.headline).includes(normalize(track.title))
-      ? candidateContext
+    const context = musicContextForTrack(track, candidateContext);
+    const article = context
+      ? await linkedNewsArticle(context, track.title).catch(() => null)
       : null;
-    return { context, details };
+    return { context, article, details };
   });
   const currentById = new Map(
     [...section.items, ...(section.moreItems ?? [])]
@@ -2180,14 +2255,23 @@ async function updateMusic(brief, chart, spotifyTracks) {
   ];
   const allItems = crossovers.map(({ row, track, spotifyRank }, index) => {
     const current = currentById.get(track.id);
-    const { context, details } = descriptions[index];
+    const { context, article, details } = descriptions[index];
     const released = publicationDateLabel(details.released);
     const identity = ensureSentence(`“${track.title}” is a track by ${track.artist}${released ? `, released ${released}` : ""}`);
-    return {
+    const articleContext = musicContextSentence(article?.intro);
+    const headlineContext = musicContextSentence(context?.headline);
+    const currentHeadline = context?.headline && musicAudiencePattern.test(context.headline) ? headlineContext : "";
+    const usageHeadline = (context?.alternates ?? [])
+      .map((candidate) => musicContextSentence(candidate.headline))
+      .find((headline) => headline && musicAudiencePattern.test(headline));
+    const description = musicRecentDescription(identity, article, context)
+      || (usablePriorMusicDescription(current?.description) ? current.description : "");
+    if (!description) throw new Error(`No source-grounded current context found for music track ${track.title}`);
+    const item = {
       rank: index + 1,
       title: track.title,
       subtitle: track.artist,
-      description: recentDescription(identity, context?.headline, { rejectChartPlacement: true, requireEvent: true }),
+      description,
       image: current?.image ?? `/culture/song-${slugify(`${track.title}-${track.artist}`)}.webp`,
       imageSource: track.image,
       alt: current?.alt ?? `${track.title} artwork by ${track.artist}`,
@@ -2197,13 +2281,23 @@ async function updateMusic(brief, chart, spotifyTracks) {
       evidence: [
         { source: "Spotify", url: `https://open.spotify.com/playlist/${spotifyPlaylistId}` },
         { source: "Billboard", url: chart.chartUrl },
-        ...(context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
+        ...(article?.url
+          ? [{ source: article.context?.source ?? context?.source ?? "Current music coverage", url: article.url }]
+          : context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
       ],
       accent: accents[index % accents.length],
       spotifyId: track.id,
       spotifyRank,
+      ...(track.previewUrl && /^https:\/\/(?:p\.scdn\.co|open\.spotify\.com)\//i.test(track.previewUrl) ? { previewUrl: track.previewUrl } : {}),
       ...(released ? { releaseDate: released } : {}),
     };
+    rememberAiDescriptionContext(item, "music", [
+      { kind: "current_coverage", source: article?.context?.source ?? context?.source ?? "Current music coverage", text: [articleContext, headlineContext].filter(Boolean).join(" ") },
+      { kind: "current_reception", source: context?.source ?? "Current audience coverage", text: currentHeadline },
+      { kind: "current_usage", source: "Related current music coverage", text: usageHeadline },
+      { kind: "background", source: "Spotify track metadata", text: identity },
+    ]);
+    return item;
   });
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5, 10);
@@ -4053,7 +4147,7 @@ async function refreshCurrentContext(brief, now) {
   console.log(`Context refresh wrote ${refreshedPeople} people and ${refreshedProducts} products.`);
 }
 
-const aiDescriptionSectionIds = ["people", "movies", "books", "products", "news"];
+const aiDescriptionSectionIds = ["people", "movies", "books", "music", "products", "news"];
 const unusableAiDescriptionPattern = /\b(?:as an ai|i cannot|i can’t|insufficient information|source snippets|ranking metric|page views|search volume|billboard hot 100|know your meme|goodreads monthly readers|according to|reported by|reports? say|as reported|authorities told|officials told|in an article (?:by|from)|via [A-Z]|takes? a closer look|everything (?:we|you) know|what you need to know|not what you think|click here|publisher|source says|credit)\b|(?:\b(?:daily|weekly|news|times|post|journal|wire|gazette|herald)\s+(?:[A-Z][A-Za-z-]+\b|says?\b))|(?:…|\.\.\.)\s*$/i;
 
 function usableAiDescription(sectionId, description) {
@@ -4103,7 +4197,7 @@ async function updateAiDescriptions(brief) {
         id: `${sectionId}-${item.rank}`,
         title: item.title,
         role: item.subtitle,
-        purpose: sectionId === "people" ? "current_relevance" : "section_description",
+        purpose: sectionId === "people" || sectionId === "music" ? "current_relevance" : "section_description",
         sourceSnippets,
       };
     });
@@ -4681,7 +4775,11 @@ brief.window = "Memes: latest complete poll · People and Movies: last month · 
 sanitizeBriefSocialMentions(brief);
 capLinkedSources(brief);
 validateBrief(brief);
-await generateNicheSnapshot(brief, { now, dryRun });
+if (skipNiche) {
+  console.log("Niche snapshot skipped; preserving the last validated niche edition.");
+} else {
+  await generateNicheSnapshot(brief, { now, dryRun });
+}
 
 const output = `${JSON.stringify(brief, null, 2)}\n`;
 if (dryRun) {

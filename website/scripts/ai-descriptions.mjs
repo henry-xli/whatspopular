@@ -79,6 +79,7 @@ const sectionInstructions = {
   people: "For people, lead with the concrete recent event, appearance, performance, release, announcement, meme, fan reaction, or coverage signal that explains why this person is unusually relevant in the current edition. If the supplied context says the attention comes from an unusual look, gesture, joke, or internet format, name that mechanism plainly. A brief identity clause may follow, but a generic occupation is never an acceptable lead.",
   movies: "For films, give only a clear plot premise: what kind of film it is, who or what it follows, and the central conflict. Do not explain rankings or why it is trending.",
   books: "For books, give only a clear plot premise: the setting or situation, the main character or subject, and the central conflict or hook. Do not explain rankings or why it is trending.",
+  music: "For music, explain the concrete current audience context when supplied: what listeners appear to be responding to, and how the track is being used in videos, edits, dances, workouts, parties, playlists, or other settings when that is significant. If the supplied context does not support a reception or usage claim, give only the supported current track context and do not invent one.",
   products: "For products, identify the specific product, explain how it's used, and explain the concrete demand mechanism that made it popular now: a return or re-release, nostalgia, a limited drop, restock, scarcity, collecting, unboxing, recommendation, or another supplied trend signal. If background context gives an original release or earlier cultural moment, connect it to the current return instead of omitting it.",
   news: "For news, summarize the actual event or development and explain why it is relevant now. Use the article context, not a vague topic label or publisher name.",
 };
@@ -118,8 +119,9 @@ export function buildDescriptionPrompt(sectionId, records) {
     instruction,
     "Write one short, intuitive description per entry: one or two complete sentences, normally 25–70 words.",
     "The description must explain the entry's defining current relevance or supplied premise; do not fill space with a generic definition of what the entry is.",
-    "For people and products specifically, the first sentence must answer 'why is this especially relevant now?' using a concrete causal signal from a snippet marked current, recent, event, coverage, demand, headline, or background_context. Preserve the decisive context: a meme or unusual fan reaction, a return or re-release, nostalgia for an earlier version, a restock, a limited drop, a comeback, or the concrete event that changed attention.",
+    "For people, products, and music specifically, the first sentence must answer 'why is this especially relevant now?' using a concrete causal signal from a snippet marked current, recent, event, coverage, demand, headline, reception, usage, or background_context. Preserve the decisive context: a meme or unusual fan reaction, a return or re-release, nostalgia for an earlier version, a restock, a limited drop, a comeback, the way listeners are using a song, or the concrete event that changed attention.",
     "For people, a recent event or coverage signal is mandatory; for products, a recent demand signal plus any supplied origin or return context is mandatory.",
+    "For music, mention what people think or how they use the track only when the supplied current_reception or current_usage snippets support it; never turn chart position or a generic release date into an audience opinion.",
     "If no current/recent snippet supports a concrete why-now explanation, return an empty description for that id. Never invent an event, convert a ranking or metric into a story, or use a biography or product category as a substitute.",
     "Do not mention the ranking, page views, search volume, chart position, source list, or this instruction.",
     "Do not add personality, hype, moralizing, warnings, censorship, or unsupported facts.",
@@ -164,6 +166,7 @@ const sourceAttributionPattern = /\b(?:according to|reported by|as reported|auth
 const genericPeopleIdentityPattern = /^(?:is|was|are|were)\s+(?:primarily known as|best known as|widely known as|a|an)\b/i;
 const commentaryPattern = /\b(?:as an ai|i cannot|i can['’]?t|which reminds me|this reminds me|in an odd sense|speaking of|as an aside|interestingly,?\s+in my view|i think|i want|we can see)\b/i;
 const currentSignalPattern = /\b(?:after|following|amid|during|since|when|appeared|announced|attended|confirmed|debut(?:ed)?|earned|joined|made|performed|played|premier(?:ed|es?)|released?|returned?|starred|unveiled?|won|winning|coverage|attention|spotlight|feature(?:d)?|role|cast|tournament|match|championship|world cup|final|meme|memes|viral|internet|online|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|restock(?:ed)?|sold out|limited|introduced|re-?released?|bring(?:s|ing)? back|nostalgia|comeback|origin(?:ated)?)\b/i;
+const musicContextPattern = /\b(?:fans?|listeners?|audiences?|creators?|dancers?|editors?|clubs?|parties|workout|drive|videos?|edits?|dances?|sound|trend(?:ing)?|viral|reaction|prais(?:e|ed)|love(?:d)?|critic(?:s)?|review(?:s)?|play(?:ed|list)?|stream(?:ed|ing)?|released?|returned?|featured)\b/i;
 const causalContextPattern = /\b(?:after|amid|because|by|following|when|as|returned?|re-?released?|reintroduced|revived|nostalgia|meme|memes|viral|internet|online|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|restock(?:ed)?|sold out|limited|introduced|debuted|bring(?:s|ing)? back|origin(?:ated)?|comeback|from\s+20\d{2})\b/i;
 const descriptionStopWords = new Set([
   "a", "an", "and", "are", "as", "at", "be", "been", "by", "for", "from", "has", "have", "in", "is", "it",
@@ -230,6 +233,11 @@ export function isDescriptionUsable(sectionId, description, record = {}, { allow
   if (!completeDescription(text) || commentaryPattern.test(text)) return false;
 
   const snippets = (record.sourceSnippets ?? []).filter((snippet) => String(snippet?.text ?? "").trim());
+  if (sectionId === "music") {
+    const supportedContext = snippets.some((snippet) => /current_reception|current_usage|current_coverage|current_event|headline/i.test(snippet.kind ?? ""));
+    const identityOnly = /^(?:[“"].+[”"]\s+)?is\s+(?:a\s+)?(?:track|song)\s+by\b[^.]*\.?$/i.test(text);
+    return supportedContext && !identityOnly && musicContextPattern.test(text);
+  }
   if (sectionId !== "people" && sectionId !== "products") return true;
 
   const currentSnippets = snippets.filter((snippet) => /current|recent|event|coverage|demand|headline/i.test(snippet.kind ?? ""));

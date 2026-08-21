@@ -36,6 +36,7 @@ const securityHeaders = {
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.buymeacoffee.com https://open.spotify.com https://embed-cdn.spotifycdn.com",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://cdn.buymeacoffee.com",
+    "media-src 'self' https://p.scdn.co https://open.spotify.com",
     "font-src 'self' data: https://cdn.buymeacoffee.com",
     "connect-src 'self' https://open.spotify.com",
     "frame-src https://open.spotify.com https://www.buymeacoffee.com https://buymeacoffee.com",

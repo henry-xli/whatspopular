@@ -1,5 +1,8 @@
 import Foundation
 import SwiftUI
+import UIKit
+import WebKit
+import AVFoundation
 
 private enum MobileThemeMode: String, CaseIterable, Identifiable {
     case system
@@ -21,8 +24,12 @@ struct ContentView: View {
     @StateObject private var store = BriefStore()
     @StateObject private var preferences = LayoutPreferences()
     @StateObject private var alerts = AlertPreferences()
+    @StateObject private var account = AccountStore()
+    @StateObject private var nicheStore = NicheStore()
     @AppStorage("whatspopular-mobile-theme") private var themeRawValue = MobileThemeMode.system.rawValue
     @State private var settingsPresented = false
+    @State private var accountPresented = false
+    @State private var selectedTab = 0
     @Environment(\.scenePhase) private var scenePhase
 
     private var preferredColorScheme: ColorScheme? {
@@ -34,30 +41,54 @@ struct ContentView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if let brief = store.brief {
-                    BriefHome(
-                        brief: brief,
-                        preferences: preferences,
-                        alerts: alerts,
-                        settingsPresented: $settingsPresented,
-                        remoteImageVersion: store.isUsingRemoteSnapshot ? brief.generatedAt : nil
-                    )
-                } else if let errorMessage = store.errorMessage {
-                    ContentUnavailableView(
-                        "Briefing unavailable",
-                        systemImage: "exclamationmark.triangle",
-                        description: Text(errorMessage)
-                    )
-                } else {
-                    ProgressView("Loading the briefing…")
+        TabView(selection: $selectedTab) {
+            ForYouMobileView(
+                account: account,
+                nicheStore: nicheStore,
+                accountPresented: $accountPresented
+            )
+            .tabItem { Label("For You", systemImage: "sparkles") }
+            .tag(0)
+
+            NavigationStack {
+                Group {
+                    if let brief = store.brief {
+                        BriefHome(
+                            brief: brief,
+                            preferences: preferences,
+                            alerts: alerts,
+                            account: account,
+                            settingsPresented: $settingsPresented,
+                            openAccount: { accountPresented = true },
+                            remoteImageVersion: store.isUsingRemoteSnapshot ? brief.generatedAt : nil
+                        )
+                    } else if let errorMessage = store.errorMessage {
+                        ContentUnavailableView(
+                            "Briefing unavailable",
+                            systemImage: "exclamationmark.triangle",
+                            description: Text(errorMessage)
+                        )
+                    } else {
+                        ProgressView("Loading the briefing…")
+                    }
                 }
+                .toolbar(.hidden, for: .navigationBar)
             }
-            .toolbar(.hidden, for: .navigationBar)
+            .tabItem { Label("Explore", systemImage: "square.grid.2x2") }
+            .tag(1)
         }
         .preferredColorScheme(preferredColorScheme)
+        .sheet(isPresented: $accountPresented) {
+            MobileAccountSheet(account: account, categories: nicheStore.brief?.categories ?? [])
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        }
         .task {
+            await account.bootstrap()
+            await nicheStore.refreshIfNeeded()
+            if !account.isLinked {
+                accountPresented = true
+            }
             if let brief = store.brief {
                 alerts.seed(brief: brief)
             }
@@ -73,7 +104,11 @@ struct ContentView: View {
         .onChange(of: scenePhase) { _, phase in
             switch phase {
             case .active:
-                Task { await store.refreshIfNeeded() }
+                Task {
+                    await account.refreshProfile()
+                    await nicheStore.refreshIfNeeded()
+                    await store.refreshIfNeeded()
+                }
             case .background where alerts.notificationsEnabled:
                 BackgroundRefreshScheduler.schedule()
             default:
@@ -88,10 +123,44 @@ private enum BriefScrollTarget {
 }
 
 private struct BriefScrollOffsetKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
+    static let defaultValue: CGFloat? = nil
 
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
+    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+        if let nextValue = nextValue() {
+            value = nextValue
+        }
+    }
+}
+
+private final class ScrollViewHandle: ObservableObject {
+    weak var scrollView: UIScrollView?
+
+    @discardableResult
+    func scrollToTopImmediately() -> Bool {
+        guard let scrollView else { return false }
+
+        scrollView.layer.removeAllAnimations()
+        scrollView.setContentOffset(
+            CGPoint(
+                x: -scrollView.adjustedContentInset.left,
+                y: -scrollView.adjustedContentInset.top
+            ),
+            animated: false
+        )
+        return true
+    }
+}
+
+@available(iOS 18.0, *)
+private struct NativeScrollOffsetObserver: ViewModifier {
+    let update: (CGFloat) -> Void
+
+    func body(content: Content) -> some View {
+        content.onScrollGeometryChange(for: CGFloat.self) { geometry in
+            max(0, geometry.contentOffset.y + geometry.contentInsets.top)
+        } action: { _, offset in
+            update(offset)
+        }
     }
 }
 
@@ -99,28 +168,41 @@ private struct BriefHome: View {
     let brief: CultureBrief
     @ObservedObject var preferences: LayoutPreferences
     @ObservedObject var alerts: AlertPreferences
+    @ObservedObject var account: AccountStore
     @Binding var settingsPresented: Bool
+    let openAccount: () -> Void
     let remoteImageVersion: String?
 
     @State private var scrollOffset: CGFloat = 0
+    @StateObject private var scrollViewHandle = ScrollViewHandle()
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ScrollViewReader { proxy in
             ZStack(alignment: .topTrailing) {
                 ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 10) {
-                        Color.clear
-                            .frame(height: 1)
-                            .background {
-                                GeometryReader { geometry in
-                                    Color.clear.preference(
-                                        key: BriefScrollOffsetKey.self,
-                                        value: geometry.frame(in: .named("briefScroll")).minY
-                                    )
-                                }
-                            }
-                            .id(BriefScrollTarget.top)
+                    GeometryReader { geometry in
+                        Color.clear.preference(
+                            key: BriefScrollOffsetKey.self,
+                            value: Optional(geometry.frame(in: .named("briefScroll")).minY)
+                        )
+                    }
+                    .frame(height: 0)
+                    .frame(maxWidth: .infinity)
+                    .allowsHitTesting(false)
 
+                    ScrollViewProbe { scrollView in
+                        scrollViewHandle.scrollView = scrollView
+                    }
+                    .frame(width: 1, height: 1)
+                    .allowsHitTesting(false)
+
+                    Color.clear
+                        .frame(height: 1)
+                        .frame(maxWidth: .infinity)
+                        .id(BriefScrollTarget.top)
+
+                    LazyVStack(alignment: .leading, spacing: 10) {
                         MobileHeader(brief: brief) {
                             settingsPresented = true
                         }
@@ -159,41 +241,127 @@ private struct BriefHome: View {
                     .padding(.bottom, 64)
                 }
                 .scrollIndicators(.hidden)
+                .modifier(BriefScrollObservation { offset in
+                    scrollOffset = offset
+                })
 
-                if scrollOffset < -180 {
+                LinearGradient(
+                    colors: [
+                        (colorScheme == .dark ? Color.black : Color.white).opacity(0.78),
+                        (colorScheme == .dark ? Color.black : Color.white).opacity(0.34),
+                        .clear
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(maxWidth: .infinity)
+                .frame(height: 54)
+                .ignoresSafeArea(edges: .top)
+                .allowsHitTesting(false)
+                .zIndex(1)
+
+                if scrollOffset > 120 {
                     Button {
-                        withAnimation(.easeInOut(duration: 0.35)) {
-                            proxy.scrollTo(BriefScrollTarget.top, anchor: .top)
-                        }
+                        scrollToTop(using: proxy)
                     } label: {
                         Image(systemName: "arrow.up")
                             .font(.headline.weight(.bold))
                             .foregroundStyle(.white)
                             .frame(width: 42, height: 42)
                             .background(Color(hex: "#6F48E5"), in: Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(.white.opacity(colorScheme == .dark ? 0.22 : 0.34), lineWidth: 1)
+                            }
                             .shadow(color: .black.opacity(0.18), radius: 8, y: 4)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to top")
                     .padding(.trailing, 16)
                     .padding(.top, 8)
+                    .zIndex(2)
                     .transition(.scale.combined(with: .opacity))
                 }
             }
-            .animation(.easeInOut(duration: 0.2), value: scrollOffset < -180)
+            .animation(.easeInOut(duration: 0.2), value: scrollOffset > 120)
             .background(Color(.systemGroupedBackground).ignoresSafeArea())
             .onPreferenceChange(BriefScrollOffsetKey.self) { offset in
-                scrollOffset = offset
+                guard let offset else { return }
+                scrollOffset = max(0, -offset)
             }
             .onAppear {
                 preferences.synchronize(with: brief.sections)
             }
             .sheet(isPresented: $settingsPresented) {
-                LayoutSettingsSheet(sections: brief.sections, preferences: preferences, alerts: alerts)
+                LayoutSettingsSheet(sections: brief.sections, preferences: preferences, alerts: alerts, account: account, openAccount: openAccount)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
             }
             .coordinateSpace(name: "briefScroll")
+        }
+    }
+
+    private func scrollToTop(using proxy: ScrollViewProxy) {
+        scrollOffset = 0
+
+        if scrollViewHandle.scrollToTopImmediately() {
+            return
+        }
+
+        withTransaction(Transaction(animation: nil)) {
+            proxy.scrollTo(BriefScrollTarget.top, anchor: .top)
+        }
+    }
+}
+
+private struct BriefScrollObservation: ViewModifier {
+    let update: (CGFloat) -> Void
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.modifier(NativeScrollOffsetObserver(update: update))
+        } else {
+            content
+        }
+    }
+}
+
+private struct ScrollViewProbe: UIViewRepresentable {
+    let onResolve: (UIScrollView) -> Void
+
+    func makeUIView(context: Context) -> ProbeView {
+        let view = ProbeView()
+        view.onResolve = onResolve
+        return view
+    }
+
+    func updateUIView(_ uiView: ProbeView, context: Context) {
+        uiView.onResolve = onResolve
+        uiView.resolveScrollView()
+    }
+
+    final class ProbeView: UIView {
+        var onResolve: ((UIScrollView) -> Void)?
+
+        override func didMoveToSuperview() {
+            super.didMoveToSuperview()
+            resolveScrollView()
+        }
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            resolveScrollView()
+        }
+
+        func resolveScrollView() {
+            var ancestor = superview
+            while let current = ancestor {
+                if let scrollView = current as? UIScrollView {
+                    onResolve?(scrollView)
+                    return
+                }
+                ancestor = current.superview
+            }
         }
     }
 }
@@ -427,12 +595,15 @@ private struct MobileLeaderboard: View {
                         layout: section.layout,
                         preference: preference,
                         expanded: expanded,
+                        isMusic: section.id == "music",
                         remoteImageVersion: remoteImageVersion
                     )
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(8)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .overlay {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -446,171 +617,403 @@ private struct MobileLeaderboard: View {
     }
 }
 
+private struct ExternalLinkRequest: Identifiable {
+    let url: URL
+
+    var id: String { url.absoluteString }
+}
+
 private struct MobileEntryCard: View {
     let item: CultureItem
     let layout: CultureLayout
     let preference: BoardPreference
     let expanded: Bool
+    let isMusic: Bool
     let remoteImageVersion: String?
 
-    var body: some View {
-        if let url = URL(string: item.url) {
-            Link(destination: url) {
-                cardContent
-            }
-            .buttonStyle(.plain)
-        } else {
-            cardContent
-        }
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.openURL) private var openURL
+    @State private var expansionOverride: Bool?
+    @State private var externalLinkRequest: ExternalLinkRequest?
+    @StateObject private var previewPlayer = PreviewPlayer()
+
+    private var isExpanded: Bool {
+        expansionOverride ?? expanded
     }
 
-    @ViewBuilder
-    private var cardContent: some View {
-        if preference.format == .fullCards && expanded {
-            fullCard
-        } else {
-            compactRow
+    private var isExplicitlyExpanded: Bool {
+        expansionOverride == true
+    }
+
+    private var showsFullCard: Bool {
+        preference.format == .fullCards && isExpanded
+    }
+
+    var body: some View {
+        ZStack {
+            if showsFullCard {
+                fullCard
+            } else {
+                compactRow
+            }
+        }
+        .alert(item: $externalLinkRequest) { request in
+            Alert(
+                title: Text("Open external source?"),
+                message: Text("You’re about to leave the app and open:\n\(request.url.absoluteString)"),
+                primaryButton: .default(Text("Okay")) {
+                    openExternalLink(request.url)
+                },
+                secondaryButton: .cancel(Text("Cancel"))
+            )
+        }
+        .onChange(of: expanded) { _, _ in
+            expansionOverride = nil
+        }
+        .onChange(of: preference.format) { _, _ in
+            expansionOverride = nil
+        }
+        .onDisappear {
+            previewPlayer.stop()
         }
     }
 
     private var compactRow: some View {
-        HStack(spacing: 6) {
-            Text(String(format: "%02d", item.rank))
-                .font(.caption.weight(.black).monospacedDigit())
-                .foregroundStyle(Color(hex: preference.accentHex))
-                .frame(width: 20, alignment: .leading)
+        VStack(alignment: .leading, spacing: 6) {
+            ZStack(alignment: .trailing) {
+                Button(action: toggleExpanded) {
+                    HStack(spacing: 6) {
+                        Text(String(format: "%02d", item.rank))
+                            .font(.caption.weight(.black).monospacedDigit())
+                            .foregroundStyle(Color(hex: preference.accentHex))
+                            .frame(width: 20, alignment: .leading)
 
-            CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
-                .frame(width: 40, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
+                            .frame(width: 40, height: 40)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 5) {
-                    Text(item.title)
-                        .font(.subheadline.weight(.semibold))
-                        .lineLimit(1)
-                    if item.rating != nil {
-                        Image(systemName: "star.fill")
-                            .font(.caption2)
-                            .foregroundStyle(.yellow)
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 5) {
+                                Text(item.title)
+                                    .font(.subheadline.weight(.semibold))
+                                    .lineLimit(1)
+                                if item.rating != nil {
+                                    Image(systemName: "star.fill")
+                                        .font(.caption2)
+                                        .foregroundStyle(.yellow)
+                                }
+                            }
+                            Text(item.subtitle)
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                        }
+
+                        Spacer(minLength: 4)
+
+                        if let metric = item.metric {
+                            Text(metric.value)
+                                .font(.caption.weight(.black).monospacedDigit())
+                                .foregroundStyle(Color(hex: preference.accentHex))
+                                .lineLimit(1)
+                        }
                     }
+                    .padding(.trailing, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
-                Text(item.subtitle)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityLabel("Show details for \(item.title)")
+                .accessibilityHint(isExpanded ? "Collapse details" : "Expand full description")
+
+                externalLinkButton
+                    .zIndex(1)
             }
 
-            Spacer(minLength: 4)
-
-            if let metric = item.metric {
-                Text(metric.value)
-                    .font(.caption.weight(.black).monospacedDigit())
-                    .foregroundStyle(Color(hex: preference.accentHex))
-                    .lineLimit(1)
+            if isExpanded {
+                expandedDetails
             }
-
-            Image(systemName: "arrow.up.right")
-                .font(.caption2.weight(.bold))
-                .foregroundStyle(.secondary)
         }
         .padding(6)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .fixedSize(horizontal: false, vertical: true)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
-    private var fullCard: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ZStack(alignment: .topLeading) {
-                CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: imageHeight)
-                    .clipped()
-
-                Text("#\(item.rank)")
-                    .font(.caption.weight(.black).monospacedDigit())
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 7)
-                    .background(Color(hex: preference.accentHex), in: Capsule())
-                    .padding(10)
-
-                HStack {
-                    Spacer()
-                    Text(item.source)
-                        .font(.caption2.weight(.bold))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 9)
-                        .padding(.vertical, 6)
-                        .background(.black.opacity(0.58), in: Capsule())
-                        .padding(10)
-                }
-            }
-
+    @ViewBuilder
+    private var expandedDetails: some View {
+        if shouldShowDescription || isMusic {
             VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline, spacing: 6) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(item.title)
-                            .font(.headline.weight(.bold))
-                            .lineLimit(2)
-                        Text(item.subtitle)
-                            .font(.caption.weight(.medium))
-                            .foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(.secondary)
-                }
-
-                if let rating = item.rating {
-                    HStack(spacing: 5) {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(.yellow)
-                        Text(rating)
-                            .font(.caption.weight(.bold))
-                        Text(item.ratingLabel ?? "Rating")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                if preference.descriptionStyle != .hidden {
+                if shouldShowDescription {
                     Text(descriptionText)
-                        .font(.subheadline)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                if let metric = item.metric {
-                    HStack {
-                        Text(metric.label)
-                            .font(.caption.weight(.medium))
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text(metric.value)
-                            .font(.subheadline.weight(.black).monospacedDigit())
-                            .foregroundStyle(Color(hex: preference.accentHex))
-                    }
-                    .padding(.top, 2)
+                if isMusic {
+                    musicPlayback
                 }
             }
-            .padding(12)
+            .padding(.horizontal, 6)
+            .padding(.bottom, 6)
         }
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 
-    private var imageHeight: CGFloat {
+    private var fullCard: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ZStack(alignment: .trailing) {
+                Button(action: toggleExpanded) {
+                    HStack(alignment: .top, spacing: 12) {
+                        fullCardImage
+                        fullCardDetails
+                    }
+                    .padding(12)
+                    .padding(.trailing, 38)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityLabel("Show details for \(item.title)")
+                .accessibilityHint(isExpanded ? "Collapse details" : "Expand full description")
+
+                externalLinkButton
+                    .padding(.trailing, 8)
+                    .zIndex(1)
+            }
+
+            if isMusic && isExpanded {
+                musicPlayback
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 8)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .fixedSize(horizontal: false, vertical: true)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+    }
+
+    private var fullCardDetails: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(item.title)
+                        .font(.headline.weight(.bold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(item.subtitle)
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer()
+                Text(item.source)
+                    .font(.caption2.weight(.bold))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 5)
+                    .background(.black.opacity(0.58), in: Capsule())
+            }
+
+            if let rating = item.rating {
+                HStack(spacing: 5) {
+                    Image(systemName: "star.fill")
+                        .foregroundStyle(.yellow)
+                    Text(rating)
+                        .font(.caption.weight(.bold))
+                    Text(item.ratingLabel ?? "Rating")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            if shouldShowDescription {
+                Text(descriptionText)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            if let metric = item.metric {
+                HStack {
+                    Text(metric.label)
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Text(metric.value)
+                        .font(.subheadline.weight(.black).monospacedDigit())
+                        .foregroundStyle(Color(hex: preference.accentHex))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                .padding(.top, 2)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var fullCardImage: some View {
+        ZStack(alignment: .topLeading) {
+            CultureImage(path: item.image, contentMode: .fit, remoteImageVersion: remoteImageVersion)
+                .frame(width: fullCardImageSize.width, height: fullCardImageSize.height)
+
+            Text("#\(item.rank)")
+                .font(.caption.weight(.black).monospacedDigit())
+                .foregroundStyle(.white)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(Color(hex: preference.accentHex), in: Capsule())
+                .padding(8)
+        }
+        .frame(width: fullCardImageSize.width, height: fullCardImageSize.height)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+
+    @ViewBuilder
+    private var spotifyPlayer: some View {
+        if let spotifyId = item.spotifyId {
+            SpotifyPlayerView(trackID: spotifyId, isDark: colorScheme == .dark)
+                .frame(height: 152)
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        } else {
+            Label("Spotify playback unavailable", systemImage: "music.note.slash")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder
+    private var musicPlayback: some View {
+        if let previewUrl = item.previewUrl, let url = URL(string: previewUrl) {
+            Label("Preview autoplay", systemImage: "waveform")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 10)
+                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .onAppear { if isExpanded { previewPlayer.play(url: url) } }
+                .onChange(of: isExpanded) { _, expanded in
+                    if expanded { previewPlayer.play(url: url) } else { previewPlayer.stop() }
+                }
+        } else {
+            spotifyPlayer
+        }
+    }
+
+    private var externalLinkButton: some View {
+        Button(action: requestExternalLink) {
+            Image(systemName: "arrow.up.right")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.secondary)
+                .frame(width: 32, height: 32)
+                .background(.thinMaterial, in: Circle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Open source for \(item.title)")
+        .accessibilityHint("Shows a confirmation before opening the external link")
+    }
+
+    private func toggleExpanded() {
+        let nextValue = !isExpanded
+        withAnimation(.easeInOut(duration: 0.2)) {
+            expansionOverride = nextValue
+        }
+        if nextValue, let previewUrl = item.previewUrl, let url = URL(string: previewUrl) {
+            previewPlayer.play(url: url)
+        } else if !nextValue {
+            previewPlayer.stop()
+        }
+    }
+
+    private func requestExternalLink() {
+        guard let url = URL(string: item.url) else { return }
+        externalLinkRequest = ExternalLinkRequest(url: url)
+    }
+
+    private func openExternalLink(_ url: URL) {
+        openURL(url)
+    }
+
+    private var fullCardImageSize: CGSize {
         switch layout {
-        case .poster: 150
-        case .square: 116
-        case .landscape: 104
+        case .poster: CGSize(width: 84, height: 116)
+        case .square: CGSize(width: 96, height: 96)
+        case .landscape: CGSize(width: 112, height: 72)
         }
     }
 
     private var descriptionText: String {
-        guard preference.descriptionStyle == .concise,
+        guard !isExplicitlyExpanded,
+              preference.descriptionStyle == .concise,
               let end = item.description.firstIndex(of: ".") else { return item.description }
         return String(item.description[...end])
+    }
+
+    private var shouldShowDescription: Bool {
+        preference.descriptionStyle != .hidden || isExplicitlyExpanded
+    }
+}
+
+private final class PreviewPlayer: ObservableObject {
+    private var audioPlayer: AVPlayer?
+
+    func play(url: URL) {
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(.playback, options: [.mixWithOthers])
+        try? audioSession.setActive(true, options: [])
+        audioPlayer?.pause()
+        audioPlayer = AVPlayer(url: url)
+        audioPlayer?.volume = 0.78
+        audioPlayer?.play()
+    }
+
+    func stop() {
+        audioPlayer?.pause()
+        audioPlayer = nil
+        try? AVAudioSession.sharedInstance().setActive(false, options: [.notifyOthersOnDeactivation])
+    }
+}
+
+private struct SpotifyPlayerView: UIViewRepresentable {
+    let trackID: String
+    let isDark: Bool
+
+    private var playerURL: URL? {
+        let theme = isDark ? "0" : "1"
+        return URL(string: "https://open.spotify.com/embed/track/\(trackID)?utm_source=generator&theme=\(theme)")
+    }
+
+    func makeUIView(context: Context) -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = [.audio]
+
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.showsVerticalScrollIndicator = false
+        loadIfNeeded(webView)
+        return webView
+    }
+
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        loadIfNeeded(webView)
+    }
+
+    private func loadIfNeeded(_ webView: WKWebView) {
+        let identifier = "spotify-player-\(trackID)-\(isDark ? "dark" : "light")"
+        guard webView.accessibilityIdentifier != identifier,
+              let playerURL else { return }
+
+        webView.accessibilityIdentifier = identifier
+        webView.load(URLRequest(url: playerURL, cachePolicy: .useProtocolCachePolicy))
     }
 }
 
@@ -875,12 +1278,32 @@ private struct LayoutSettingsSheet: View {
     let sections: [CultureSection]
     @ObservedObject var preferences: LayoutPreferences
     @ObservedObject var alerts: AlertPreferences
+    @ObservedObject var account: AccountStore
+    let openAccount: () -> Void
     @AppStorage("whatspopular-mobile-theme") private var themeRawValue = MobileThemeMode.system.rawValue
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             List {
+                Section("Account") {
+                    Button {
+                        dismiss()
+                        openAccount()
+                    } label: {
+                        HStack {
+                            Label(account.isLinked ? "Shared account" : "Link account", systemImage: account.isLinked ? "checkmark.shield.fill" : "person.crop.circle.badge.plus")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption.weight(.bold))
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    Text(account.isLinked ? "For You interests sync with the website." : "Link this app to save interests across devices.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
                 Section("Appearance") {
                     Picker("Color mode", selection: $themeRawValue) {
                         ForEach(MobileThemeMode.allCases) { mode in
@@ -1049,7 +1472,7 @@ private struct LayoutSettingsSheet: View {
                         alerts.clearAllAlerts()
                     }
                 } footer: {
-                    Text("Your choices are saved on this device and do not change the shared website.")
+                    Text("Appearance, board layout, and alerts are saved on this device. For You interests are account-linked above.")
                 }
             }
             .listStyle(.insetGrouped)

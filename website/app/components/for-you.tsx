@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, FormEvent } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { NicheCategory, NicheTopic } from "../niche";
 
 const PREFERENCES_KEY = "whatspopular-for-you-tags";
@@ -94,6 +94,10 @@ export function ForYouExperience({
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const profileUpdatedAtRef = useRef<string | null>(null);
+  const saveTimerRef = useRef<number | null>(null);
+  const saveQueueRef = useRef<Promise<void>>(Promise.resolve());
+  const saveGenerationRef = useRef(0);
 
   const groups = useMemo(() => groupCategories(categories), [categories]);
   const selectedCategories = useMemo(
@@ -113,20 +117,24 @@ export function ForYouExperience({
   }, [compileNumber, generatedAt, selectedCategories, selectedTags]);
 
   useEffect(() => {
+    if (signedIn) return undefined;
     const timer = window.setTimeout(() => setSelectedTags(readLocalTags(categories)), 0);
     return () => window.clearTimeout(timer);
-  }, [categories]);
+  }, [categories, signedIn]);
 
   useEffect(() => {
     if (!signedIn) return undefined;
     let cancelled = false;
-    fetch("/api/for-you/profile", { headers: { accept: "application/json" } })
-      .then((response) => response.ok ? response.json() as Promise<{ tags?: unknown[] }> : null)
+    fetch("/api/account/profile", { headers: { accept: "application/json" } })
+      .then((response) => response.ok ? response.json() as Promise<{ tags?: unknown[]; updatedAt?: unknown; hasProfile?: boolean }> : null)
       .then((payload) => {
-        if (cancelled || !payload || !Array.isArray(payload.tags)) return;
-        const valid = payload.tags.filter((value): value is string => typeof value === "string"
-          && categories.some((category) => category.id === value));
-        if (valid.length) setSelectedTags([...new Set(valid)]);
+        if (cancelled || !payload) return;
+        if (Array.isArray(payload.tags)) {
+          const valid = payload.tags.filter((value): value is string => typeof value === "string"
+            && categories.some((category) => category.id === value));
+          if (payload.hasProfile !== false) setSelectedTags([...new Set(valid)]);
+        }
+        profileUpdatedAtRef.current = typeof payload.updatedAt === "string" ? payload.updatedAt : null;
       })
       .catch(() => undefined);
     return () => { cancelled = true; };
@@ -145,25 +153,53 @@ export function ForYouExperience({
       persistLocal(next);
       setSaved(false);
       setSaveMessage("");
+      if (signedIn) {
+        if (saveTimerRef.current !== null) window.clearTimeout(saveTimerRef.current);
+        saveTimerRef.current = window.setTimeout(() => { void queueSave(next); }, 350);
+      }
       return next;
     });
   }
 
-  async function saveTags() {
+  function queueSave(nextTags: string[]) {
+    if (!signedIn) return Promise.resolve();
+    const generation = ++saveGenerationRef.current;
+    const next = saveQueueRef.current
+      .catch(() => undefined)
+      .then(async () => {
+        if (generation !== saveGenerationRef.current) return;
+        await saveTags(nextTags);
+      });
+    saveQueueRef.current = next;
+    return next;
+  }
+
+  async function saveTags(nextTags = selectedTags) {
     if (!signedIn) return;
     setSaving(true);
     setSaveMessage("");
     try {
-      const response = await fetch("/api/for-you/profile", {
-        method: "POST",
+      const response = await fetch("/api/account/profile", {
+        method: "PUT",
         headers: { "content-type": "application/json", accept: "application/json" },
-        body: JSON.stringify({ tags: selectedTags }),
+        body: JSON.stringify({ tags: nextTags, expectedUpdatedAt: profileUpdatedAtRef.current }),
       });
-      if (!response.ok) throw new Error("Unable to save");
+      const payload = await response.json() as { updatedAt?: unknown; tags?: unknown[]; error?: string };
+      if (!response.ok) {
+        if (response.status === 409 && Array.isArray(payload.tags)) {
+          const valid = payload.tags.filter((value): value is string => typeof value === "string" && categories.some((category) => category.id === value));
+          setSelectedTags([...new Set(valid)]);
+          profileUpdatedAtRef.current = typeof payload.updatedAt === "string" ? payload.updatedAt : profileUpdatedAtRef.current;
+          setSaveMessage("Your interests changed on another device, so the newer settings were reloaded.");
+          return;
+        }
+        throw new Error(payload.error || "Unable to save");
+      }
+      profileUpdatedAtRef.current = typeof payload.updatedAt === "string" ? payload.updatedAt : profileUpdatedAtRef.current;
       setSaved(true);
       setSaveMessage("Saved to your account");
     } catch {
-      setSaveMessage("Saved for this session — account sync will retry next time.");
+      setSaveMessage("Could not sync this change. Try saving again when you’re online.");
     } finally {
       setSaving(false);
     }
@@ -178,7 +214,7 @@ export function ForYouExperience({
     }
     setCompileNumber((number) => number + 1);
     setCompiled(true);
-    await saveTags();
+    await queueSave(selectedTags);
     window.setTimeout(() => document.getElementById("digest-feed")?.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
   }
 
@@ -298,7 +334,7 @@ export function ForYouExperience({
           </div>
           <div className="digest-feed wrap" id="digest-feed" aria-label="Your For You digest">
             {digestTopics.map((topic, index) => (
-              <article className="digest-card" key={`${topic.id}-${compileNumber}`} style={{ "--card-accent": topic.accent } as CSSProperties}>
+              <article className="digest-card" key={`${topic.id}-${compileNumber}`} style={{ "--card-accent": topic.accent, "--card-index": index } as CSSProperties}>
                 <div className="digest-card-art">
                   <div className="digest-art-blob" aria-hidden="true" />
                   <img src={topic.image} alt="" width="720" height="520" loading={index < 2 ? "eager" : "lazy"} decoding="async" />

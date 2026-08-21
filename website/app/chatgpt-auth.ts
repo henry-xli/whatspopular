@@ -17,19 +17,21 @@ const SIGN_OUT_PATH = "/signout-with-chatgpt";
 
 export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
   const requestHeaders = await headers();
-  const userId = requestHeaders.get(USER_ID_HEADER);
-  const email = requestHeaders.get(USER_EMAIL_HEADER);
+  const userId = boundedIdentityValue(requestHeaders.get(USER_ID_HEADER), 256);
+  const email = boundedIdentityValue(requestHeaders.get(USER_EMAIL_HEADER), 320);
   if (!userId || !email) return null;
 
   const encodedFullName = requestHeaders.get(USER_FULL_NAME_HEADER);
-  const fullName = encodedFullName
+  const decodedFullName = encodedFullName
     && requestHeaders.get(USER_FULL_NAME_ENCODING_HEADER) === "percent-encoded-utf-8"
     ? safeDecodeURIComponent(encodedFullName)
     : null;
+  const fullName = boundedIdentityValue(decodedFullName, 160);
 
+  const displayName = boundedIdentityValue(fullName, 160) ?? email;
   return {
     userId,
-    displayName: fullName ?? email,
+    displayName,
     email,
     fullName,
   };
@@ -67,4 +69,10 @@ function safeDecodeURIComponent(value: string) {
   } catch {
     return null;
   }
+}
+
+function boundedIdentityValue(value: string | null, maxLength: number) {
+  if (!value) return null;
+  const cleaned = value.replace(/[\u0000-\u001f\u007f]/g, " ").trim();
+  return cleaned ? cleaned.slice(0, maxLength) : null;
 }

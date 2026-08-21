@@ -151,6 +151,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
   const playerRef = useRef<HTMLDivElement>(null);
   const embedHostRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<SpotifyEmbedController | null>(null);
+  const previewAudioRef = useRef<HTMLAudioElement>(null);
   const queueModeRef = useRef(false);
   const queueIndexRef = useRef(-1);
   const pendingTrackRef = useRef<string | null>(null);
@@ -289,13 +290,15 @@ export function SongBoard({ section }: { section: CultureSection }) {
     pendingPlaylistRef.current = false;
     setPlaylistMode(false);
     updateActiveTrack(trackId);
+    const item = trackById.get(trackId);
+    const previewStarted = Boolean(item?.previewUrl && playPreview(item.previewUrl));
     const controller = controllerRef.current;
     if (!controller) {
-      pendingTrackRef.current = trackId;
+      if (!previewStarted) pendingTrackRef.current = trackId;
       return;
     }
     loadTrack(controller, trackId);
-    playController(controller);
+    if (!previewStarted) playController(controller);
   };
 
   const stopTrack = () => {
@@ -311,7 +314,30 @@ export function SongBoard({ section }: { section: CultureSection }) {
     } catch {
       // A paused or unavailable embed is already in the desired state.
     }
+    stopPreview();
     updateActiveTrack(null);
+  };
+
+  const playPreview = (previewUrl: string) => {
+    const audio = previewAudioRef.current;
+    if (!audio) return false;
+    if (audio.src !== previewUrl) {
+      audio.src = previewUrl;
+      audio.load();
+    } else {
+      audio.currentTime = 0;
+    }
+    audio.volume = 0.78;
+    void audio.play().catch(() => undefined);
+    return true;
+  };
+
+  const stopPreview = () => {
+    const audio = previewAudioRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
   };
 
   return (
@@ -418,6 +444,7 @@ export function SongBoard({ section }: { section: CultureSection }) {
         </div>
       </div>
 
+      <audio ref={previewAudioRef} className="music-card-audio" preload="none" aria-label="Track preview" />
       <div className={`song-player music-player${isPlayerOpen ? "" : " is-ready"}`} ref={playerRef} aria-live="polite">
         <div className="song-player-heading">
           <span>{isPlayerOpen ? "Now playing" : "Spotify player"}</span>

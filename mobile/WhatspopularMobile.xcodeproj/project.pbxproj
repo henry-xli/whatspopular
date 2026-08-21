@@ -18,6 +18,10 @@
 		A10000010000000000000009 /* culture in Resources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000010 /* culture */; };
 		A10000010000000000000010 /* AlertPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000011 /* AlertPreferences.swift */; };
 		A10000010000000000000011 /* BackgroundRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000012 /* BackgroundRefresh.swift */; };
+		A10000010000000000000012 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000013 /* AccountStore.swift */; };
+		A10000010000000000000013 /* NicheModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000014 /* NicheModels.swift */; };
+		A10000010000000000000014 /* ForYouMobileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000015 /* ForYouMobileView.swift */; };
+		A10000010000000000000015 /* MobileAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000016 /* MobileAccountSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		B10000010000000000000010 /* culture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BundleData/culture; sourceTree = "<group>"; };
 		B10000010000000000000011 /* AlertPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPreferences.swift; sourceTree = "<group>"; };
 		B10000010000000000000012 /* BackgroundRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRefresh.swift; sourceTree = "<group>"; };
+		B10000010000000000000013 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
+		B10000010000000000000014 /* NicheModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicheModels.swift; sourceTree = "<group>"; };
+		B10000010000000000000015 /* ForYouMobileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouMobileView.swift; sourceTree = "<group>"; };
+		B10000010000000000000016 /* MobileAccountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAccountSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,10 @@
 				B10000010000000000000006 /* AssetImage.swift */,
 				B10000010000000000000011 /* AlertPreferences.swift */,
 				B10000010000000000000012 /* BackgroundRefresh.swift */,
+				B10000010000000000000013 /* AccountStore.swift */,
+				B10000010000000000000014 /* NicheModels.swift */,
+				B10000010000000000000015 /* ForYouMobileView.swift */,
+				B10000010000000000000016 /* MobileAccountSheet.swift */,
 				B10000010000000000000007 /* Assets.xcassets */,
 			);
 			path = WhatspopularMobile;
@@ -158,6 +170,10 @@
 				A10000010000000000000006 /* AssetImage.swift in Sources */,
 				A10000010000000000000010 /* AlertPreferences.swift in Sources */,
 				A10000010000000000000011 /* BackgroundRefresh.swift in Sources */,
+				A10000010000000000000012 /* AccountStore.swift in Sources */,
+				A10000010000000000000013 /* NicheModels.swift in Sources */,
+				A10000010000000000000014 /* ForYouMobileView.swift in Sources */,
+				A10000010000000000000015 /* MobileAccountSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

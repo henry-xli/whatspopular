@@ -32,6 +32,7 @@ struct CultureItem: Codable, Identifiable {
     let ratingLabel: String?
     let spotifyId: String?
     let spotifyRank: Int?
+    let previewUrl: String?
     let releaseDate: String?
 
     var id: String { "\(rank)-\(title)" }

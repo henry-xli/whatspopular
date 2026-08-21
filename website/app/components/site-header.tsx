@@ -108,6 +108,7 @@ export function SiteHeader() {
           <a className={pathname === "/" ? "is-active" : undefined} href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</a>
           <a className={pathname === "/explore" ? "is-active" : undefined} href="/explore" aria-current={pathname === "/explore" ? "page" : undefined}>Explore</a>
           <a className={pathname === "/for-you" ? "is-active" : undefined} href="/for-you" aria-current={pathname === "/for-you" ? "page" : undefined}>For You</a>
+          <a className={pathname === "/account" ? "is-active" : undefined} href="/account" aria-current={pathname === "/account" ? "page" : undefined}>Account</a>
           <ThemeToggle />
         </nav>
       </div>
