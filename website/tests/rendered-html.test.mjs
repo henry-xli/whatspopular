@@ -79,6 +79,15 @@ test("builds and validates source-grounded AI descriptions", () => {
       text: "Example Person joins a new project after a major announcement this summer.",
     }],
   }), false);
+  const culturalPersonEvidence = {
+    title: "Erling Haaland",
+    sourceSnippets: [
+      { kind: "current_headline", source: "Current coverage", text: "Erling Haaland's funny walk has become a meme after a viral concert clip." },
+      { kind: "current_coverage", source: "Related current coverage", text: "Fans are reacting to Erling Haaland memes and his unusual appearance." },
+    ],
+  };
+  assert.equal(isDescriptionUsable("people", "Erling Haaland became a meme after fans reacted online to his funny walk and unusual appearance.", culturalPersonEvidence), true);
+  assert.equal(isDescriptionUsable("people", "Erling Haaland is primarily known as a footballer. He appeared at the World Cup.", culturalPersonEvidence), false);
 
   const productEvidence = {
     title: "Unicorn Frappuccino",

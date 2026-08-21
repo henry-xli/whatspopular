@@ -17,6 +17,7 @@
     "content:niche-catalog": "node scripts/materialize-niche-catalog.mjs",
     "content:niches": "node scripts/niche-ingestion.mjs --standalone",
     "content:update": "node scripts/update-trends.mjs",
+    "content:refresh-context": "node scripts/update-trends.mjs --force --refresh-context",
     "content:quiz": "node scripts/update-trends.mjs --quiz-only",
     "content:refresh": "npm run content:update && npm run content:images && npm run content:publish"
   },

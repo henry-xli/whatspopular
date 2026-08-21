@@ -13,6 +13,7 @@ const dataPath = path.join(root, "data", "trends.json");
 const dryRun = process.argv.includes("--dry-run");
 const force = process.argv.includes("--force");
 const quizOnly = process.argv.includes("--quiz-only");
+const refreshContextOnly = process.argv.includes("--refresh-context");
 const MAX_BYTES = 12 * 1024 * 1024;
 const TIMEOUT_MS = 18_000;
 const accents = ["#ffc857", "#9b8cff", "#57d5a4", "#5ab0ff", "#ff6b57"];
@@ -1280,7 +1281,7 @@ function personRecentDescription(title, identity, article, context) {
     ...(context?.alternates ?? []).map((candidate) => candidate.headline),
   ];
   const titleTokens = new Set(normalize(title).split(" ").filter((token) => token.length >= 3));
-  const recent = candidates.map((value) => {
+  const recentCandidates = candidates.map((value) => {
     const raw = plainText(value);
     const neutral = neutralPersonHeadline(title, value);
     const text = neutral || cleanPersonEventContext(title, value);
@@ -1291,25 +1292,45 @@ function personRecentDescription(title, identity, article, context) {
       || personRelevancePattern.test(raw);
     const causal = /\b(?:after|amid|because|following|return(?:ed|ing)?|re-?released?|viral|meme|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|sold out|trending|won|announced|arrested|joined|performed|released?)\b/i.test(raw);
     const cultural = personRelevancePattern.test(raw);
+    const mechanism = /\b(?:meme|memes|funny|walk(?:ed|ing)?|appearance|look(?:s|ed)?|expression|joke|parody)\b/i.test(raw);
+    const explicitMeme = /\bmemes?\b/i.test(raw);
     const editorial = !neutral && !personRelevancePattern.test(raw)
       && (editorialHeadlinePattern.test(raw) || personEditorialPattern.test(raw));
-    return { text, overlap, event, topical: topical || Boolean(neutral), causal, cultural, editorial };
+    return { raw, text, overlap, event, topical: topical || Boolean(neutral), causal, cultural, mechanism, explicitMeme, editorial };
   }).filter((candidate) => candidate.text && !copiedMetricPattern.test(candidate.text)
     && !clippedSentencePattern.test(candidate.text))
     .filter((candidate) => !(normalize(candidate.text).startsWith(`${normalize(title)} is `)
       && candidate.text.length < 180))
     .sort((left, right) => Number(left.editorial) - Number(right.editorial)
+      || Number(right.explicitMeme) - Number(left.explicitMeme)
+      || Number(right.mechanism) - Number(left.mechanism)
       || Number(right.cultural) - Number(left.cultural)
       || Number(right.causal) - Number(left.causal)
       || Number(right.topical) - Number(left.topical)
       || Number(right.event) - Number(left.event)
       || right.overlap - left.overlap
-      || right.text.length - left.text.length)
-    .find((candidate) => candidate.overlap > 0 && candidate.event && !candidate.editorial);
+      || right.text.length - left.text.length);
+  const recent = recentCandidates.find((candidate) => candidate.overlap > 0 && candidate.event && !candidate.editorial);
   if (!recent) return "";
+  const supportingMechanism = recentCandidates.find((candidate) => candidate !== recent
+    && candidate.overlap > 0
+    && candidate.event
+    && !candidate.editorial
+    && /\b(?:funny|walk(?:ed|ing)?|appearance|look(?:s|ed)?|expression|gesture)\b/i.test(candidate.text));
+  const mechanismText = `${recent.raw} ${supportingMechanism?.raw ?? ""}`;
+  const hasMeme = /\bmemes?\b/i.test(mechanismText);
+  const hasWalk = /\bwalk(?:ed|ing)?\b/i.test(mechanismText);
+  const hasHumor = /\b(?:funny|laugh(?:s|ed|ing)?|hilarious)\b/i.test(mechanismText);
+  const mechanismSummary = hasMeme && hasWalk && hasHumor
+    ? "Fans are turning the funny walk into memes."
+    : hasMeme && hasWalk
+      ? "The meme response centers on the walk."
+      : hasMeme && /\b(?:appearance|look(?:s|ed)?|expression|gesture)\b/i.test(mechanismText)
+        ? "The meme response centers on the appearance."
+        : "";
   // Put the current signal first. The identity sentence is useful context,
   // but it must never be allowed to become the explanation for the trend.
-  return `${recent.text} ${identity}`;
+  return conciseSentences(`${recent.text}${mechanismSummary ? ` ${mechanismSummary}` : supportingMechanism ? ` ${supportingMechanism.text}` : ""} ${identity}`, 560);
 }
 
 function neutralPersonHeadline(title, value) {
@@ -3934,6 +3955,104 @@ function updateNews(brief, topics) {
   section.moreLabel = `Show ranks 6–${allItems.length}`;
 }
 
+function currentProductSignal(item) {
+  const genericPrefix = `${normalize(item.title)} is `;
+  return conciseSentences(sentences(item.description)
+    .filter((sentence) => !normalize(sentence).startsWith(genericPrefix))
+    .join(" "), 180);
+}
+
+async function refreshCurrentContext(brief, now) {
+  const peopleSection = brief.sections.find((section) => section.id === "people");
+  const people = peopleSection ? [...peopleSection.items, ...(peopleSection.moreItems ?? [])] : [];
+  const peopleResults = await mapConcurrent(people, 3, async (item) => {
+    const context = await googleNewsContext(`"${item.title}"`, 45, {
+      requireEvent: true,
+      queryVariants: [
+        `"${item.title}" meme viral funny`,
+        `"${item.title}" reaction fans appearance`,
+        `"${item.title}" clip joke walk`,
+      ],
+    }).catch(() => null);
+    if (!context) return false;
+    const identity = personIdentity(item.title, item.description, item.subtitle);
+    const description = personRecentDescription(item.title, identity, null, context);
+    if (!description) return false;
+    const sourceSnippets = [
+      { kind: "current_headline", source: context.source ?? "Current coverage", text: factualHeadline(context.headline, { requireEvent: true, allowCultural: true }), publishedAt: context.publishedAt },
+      {
+        kind: "current_coverage",
+        source: "Related current coverage",
+        text: (context.alternates ?? [])
+          .map((candidate) => factualHeadline(candidate.headline, { requireEvent: true, allowCultural: true }))
+          .filter(Boolean)
+          .slice(0, 6)
+          .join(" "),
+        publishedAt: context.publishedAt,
+      },
+    ];
+    if (!isDescriptionUsable("people", description, { title: item.title, sourceSnippets }, { allowHeadlineReuse: true })) return false;
+    item.description = description;
+    rememberAiDescriptionContext(item, "people", [
+      ...sourceSnippets,
+      { kind: "background", source: "Existing biography context", text: identity },
+    ]);
+    return true;
+  });
+
+  const productsSection = brief.sections.find((section) => section.id === "products");
+  const products = productsSection ? [...productsSection.items, ...(productsSection.moreItems ?? [])] : [];
+  const productResults = await mapConcurrent(products, 3, async (item) => {
+    const [context, linkedContext] = await Promise.all([
+      googleNewsContext(`"${item.title}"`, 3_650, {
+        queryVariants: [
+          `"${item.title}" first introduced original history`,
+          `"${item.title}" returned brought back re-release`,
+        ],
+      }).catch(() => null),
+      item.url ? linkedArticleMetadata(item.url, { allowMissingImage: true }).catch(() => null) : Promise.resolve(null),
+    ]);
+    const searchedHistory = [...(context ? [context.headline, ...(context.alternates ?? []).map((candidate) => candidate.headline)] : [])];
+    const linkedHistory = linkedContext?.intro ? conciseSentences(linkedContext.intro, 260) : "";
+    const history = linkedHistory
+      ? [linkedHistory]
+      : searchedHistory
+        .map((headline) => factualHeadline(headline, { maxLength: 260 }))
+        .filter((headline) => headline && productHistoryPattern.test(headline) && productTokenOverlap(item.title, headline) > 0);
+    const historicalContext = conciseSentences([...new Set(history)].join(" "), 360);
+    const current = currentProductSignal(item);
+    if (!historicalContext || !current) return false;
+    item.description = conciseSentences(`${current} ${historicalContext}`, 560);
+    rememberAiDescriptionContext(item, "products", [
+      { kind: "current_demand", source: "Existing current demand context", text: current },
+      { kind: "background_context", source: "Current historical context", text: historicalContext },
+    ]);
+    return true;
+  });
+
+  const refreshedPeople = peopleResults.filter(Boolean).length;
+  const refreshedProducts = productResults.filter(Boolean).length;
+  brief.generatedAt = now.toISOString();
+  brief.status = "Checked today";
+  sanitizeBriefSocialMentions(brief);
+  validateBrief(brief);
+  const output = `${JSON.stringify(brief, null, 2)}\n`;
+  if (dryRun) {
+    console.log(`Context refresh dry run: ${refreshedPeople} people, ${refreshedProducts} products`);
+    return;
+  }
+  const temporaryPath = `${dataPath}.${process.pid}.next`;
+  try {
+    await writeFile(temporaryPath, output, { mode: 0o644, flag: "wx" });
+    await rename(temporaryPath, dataPath);
+  } finally {
+    await unlink(temporaryPath).catch((error) => {
+      if (error?.code !== "ENOENT") throw error;
+    });
+  }
+  console.log(`Context refresh wrote ${refreshedPeople} people and ${refreshedProducts} products.`);
+}
+
 const aiDescriptionSectionIds = ["people", "movies", "books", "products", "news"];
 const unusableAiDescriptionPattern = /\b(?:as an ai|i cannot|i can’t|insufficient information|source snippets|ranking metric|page views|search volume|billboard hot 100|know your meme|goodreads monthly readers|according to|reported by|reports? say|as reported|authorities told|officials told|in an article (?:by|from)|via [A-Z]|takes? a closer look|everything (?:we|you) know|what you need to know|not what you think|click here|publisher|source says|credit)\b|(?:\b(?:daily|weekly|news|times|post|journal|wire|gazette|herald)\s+(?:[A-Z][A-Za-z-]+\b|says?\b))|(?:…|\.\.\.)\s*$/i;
 
@@ -4480,6 +4599,10 @@ if (quizOnly) {
 }
 
 const now = new Date();
+if (refreshContextOnly) {
+  await refreshCurrentContext(brief, now);
+  process.exit(0);
+}
 if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().slice(0, 10)) {
   console.log(`Already refreshed on ${now.toISOString().slice(0, 10)}; use --force to run again.`);
   process.exit(0);
