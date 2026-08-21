@@ -358,7 +358,7 @@ export function ForYouExperience({
               </div>
             </div>
           </div>
-          <div className="digest-feed wrap" id="digest-feed" aria-label="Your For You digest">
+          <div className={`digest-feed wrap${digestTopics.length === 1 ? " digest-feed-single" : ""}`} id="digest-feed" aria-label="Your For You digest">
             {digestTopics.map((topic, index) => {
               const layout = digestLayoutFor(index, compileNumber);
               return (

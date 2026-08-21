@@ -3170,8 +3170,13 @@ button.music-track-select:focus-visible {
 
 .digest-feed {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
   gap: 24px;
+  scroll-margin-top: calc(var(--header-height) + 18px);
+}
+
+.digest-feed-single {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .digest-card {
@@ -3196,6 +3201,13 @@ button.music-track-select:focus-visible {
   grid-column: 1 / -1;
   grid-template-columns: 1.15fr 0.85fr;
   min-height: 470px;
+}
+
+/* A full-width opener resets the two-column rhythm. If the final pair has
+   only one card, let that card use the whole row instead of leaving a blank
+   half-column beside it. */
+.digest-card:nth-child(3n + 2):last-child {
+  grid-column: 1 / -1;
 }
 
 .digest-card.digest-card-split {
@@ -3244,6 +3256,7 @@ button.music-track-select:focus-visible {
   z-index: 4;
   min-height: 640px;
   justify-content: flex-end;
+  background: linear-gradient(180deg, rgba(23, 21, 28, 0.9), rgba(23, 21, 28, 0.76) 62%, rgba(23, 21, 28, 0.58));
   color: #fff;
 }
 
@@ -3382,6 +3395,16 @@ button.music-track-select:focus-visible {
   box-shadow: 12px 15px 0 color-mix(in srgb, var(--ink) 22%, transparent);
   filter: saturate(1.07) contrast(1.02);
   transform: rotate(-4deg);
+}
+
+/* Framed editorial treatments should preserve the supplied image rather than
+   crop a portrait or a source with an unusual focal point into a stretched
+   vertical sliver. Full-bleed poster cards keep their cover treatment. */
+.digest-card-split .digest-card-art img,
+.digest-card-quote .digest-card-art img,
+.digest-card-collage .digest-card-art img {
+  object-fit: contain;
+  background: color-mix(in srgb, var(--card-accent) 16%, var(--card));
 }
 
 .digest-card:nth-child(2n):not(.digest-card-split):not(.digest-card-quote):not(.digest-card-collage) .digest-card-art img {
@@ -3927,7 +3950,7 @@ button.music-track-select:focus-visible {
 }
 
 .digest-card {
-  animation: digest-card-in 720ms calc(80ms + (var(--card-index, 0) * 55ms)) cubic-bezier(0.22, 0.8, 0.25, 1) both;
+  animation: digest-card-in 520ms calc(60ms + (var(--card-index, 0) * 45ms)) ease-out both;
 }
 
 .digest-card-art img {
@@ -3945,8 +3968,8 @@ button.music-track-select:focus-visible {
 }
 
 @keyframes digest-card-in {
-  from { opacity: 0; transform: translateY(22px) rotate(1deg); }
-  to { opacity: 1; transform: translateY(0) rotate(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes digest-art-float {
@@ -4203,6 +4226,7 @@ button.music-track-select:focus-visible {
     flex-direction: column;
     gap: 15px;
     scroll-snap-type: y mandatory;
+    scroll-padding-top: calc(var(--header-height) + 18px);
   }
 
   .digest-card,
@@ -4248,21 +4272,21 @@ button.music-track-select:focus-visible {
     margin-top: 6px;
   }
 
-  .digest-card-split {
+  .digest-card.digest-card-split {
     grid-template-columns: 1fr;
     background: color-mix(in srgb, var(--card-accent) 8%, var(--card));
   }
 
-  .digest-card-split .digest-card-body {
+  .digest-card.digest-card-split .digest-card-body {
     order: 1;
   }
 
-  .digest-card-split .digest-card-art {
+  .digest-card.digest-card-split .digest-card-art {
     order: 2;
     min-height: 30svh;
   }
 
-  .digest-card-split .digest-card-art img {
+  .digest-card.digest-card-split .digest-card-art img {
     inset: 9% 15% 7% 15%;
     width: 70%;
     height: 84%;

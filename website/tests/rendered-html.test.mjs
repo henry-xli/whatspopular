@@ -445,6 +445,12 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   }
   assert.match(forYouStyles, /\.digest-card > \*/);
   assert.match(forYouStyles, /overflow-wrap: anywhere/);
+  assert.match(forYouStyles, /grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, 520px\), 1fr\)\)/);
+  assert.match(forYouStyles, /\.digest-card:nth-child\(3n \+ 2\):last-child/);
+  assert.match(forYouStyles, /scroll-margin-top: calc\(var\(--header-height\) \+ 18px\)/);
+  assert.match(forYouStyles, /\.digest-card\.digest-card-split \{\s*grid-template-columns: 1fr/);
+  assert.match(forYouStyles, /object-fit: contain/);
+  assert.match(forYouStyles, /@keyframes digest-card-in \{\s*from \{ opacity: 0; \}/);
 
   const profile = await render("/api/for-you/profile", { headers: { accept: "application/json" } });
   assert.equal(profile.status, 401);
