@@ -24,6 +24,8 @@ type DigestTopic = NicheTopic & {
   categoryParent: string;
 };
 
+type DigestLayout = "poster" | "split" | "quote" | "ticker" | "collage";
+
 function hashSeed(value: string) {
   let hash = 2166136261;
   for (let index = 0; index < value.length; index += 1) {
@@ -42,6 +44,11 @@ function seededShuffle<T>(values: readonly T[], seedValue: string) {
     [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
   }
   return result;
+}
+
+function digestLayoutFor(topic: DigestTopic, index: number, compileNumber: number): DigestLayout {
+  const layouts: DigestLayout[] = ["poster", "split", "quote", "ticker", "collage"];
+  return layouts[hashSeed(`${topic.id}:${compileNumber}:${index}`) % layouts.length];
 }
 
 function readLocalTags(categories: readonly NicheCategory[]) {
@@ -334,7 +341,11 @@ export function ForYouExperience({
           </div>
           <div className="digest-feed wrap" id="digest-feed" aria-label="Your For You digest">
             {digestTopics.map((topic, index) => (
-              <article className="digest-card" key={`${topic.id}-${compileNumber}`} style={{ "--card-accent": topic.accent, "--card-index": index } as CSSProperties}>
+              <article
+                className={`digest-card digest-card-${digestLayoutFor(topic, index, compileNumber)}`}
+                key={`${topic.id}-${compileNumber}`}
+                style={{ "--card-accent": topic.accent, "--card-index": index } as CSSProperties}
+              >
                 <div className="digest-card-art">
                   <div className="digest-art-blob" aria-hidden="true" />
                   <img src={topic.image} alt="" width="720" height="520" loading={index < 2 ? "eager" : "lazy"} decoding="async" />

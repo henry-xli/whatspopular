@@ -3233,6 +3233,151 @@ button.music-track-select:focus-visible {
   min-height: 470px;
 }
 
+/* Each compiled mix rotates through a small editorial grammar so the feed
+   feels assembled, not like the same card repeated with new text. */
+.digest-card-poster {
+  display: block;
+  min-height: 640px;
+  background: var(--card-accent);
+}
+
+.digest-card-poster .digest-card-art {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+}
+
+.digest-card-poster .digest-card-art::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 18%, rgba(0, 0, 0, 0.78) 86%);
+}
+
+.digest-card-poster .digest-card-art img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  box-shadow: none;
+  opacity: 0.72;
+  transform: none;
+}
+
+.digest-card-poster .digest-card-body {
+  position: relative;
+  z-index: 4;
+  min-height: 640px;
+  justify-content: flex-end;
+  color: #fff;
+}
+
+.digest-card-poster .digest-card-meta,
+.digest-card-poster .digest-card-meta > span:first-child,
+.digest-card-poster .digest-trend-label,
+.digest-card-poster .digest-description,
+.digest-card-poster .digest-why p,
+.digest-card-poster .digest-source,
+.digest-card-poster .digest-source strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.digest-card-poster .digest-card-body h3,
+.digest-card-poster .digest-why > span,
+.digest-card-poster .digest-source > span:last-child {
+  color: #fff;
+}
+
+.digest-card-poster .digest-why {
+  border-left-color: #fff;
+}
+
+.digest-card-poster .digest-source {
+  border-top-color: rgba(255, 255, 255, 0.35);
+}
+
+.digest-card-quote {
+  grid-template-columns: 0.72fr 1.28fr;
+  background: color-mix(in srgb, var(--card-accent) 9%, var(--card));
+}
+
+.digest-card-quote .digest-card-art img {
+  inset: 13% 11% 12% 13%;
+  width: 74%;
+  height: 73%;
+  border-radius: 48% 52% 44% 56%;
+  transform: rotate(7deg);
+}
+
+.digest-card-quote .digest-card-body h3 {
+  max-width: 440px;
+  font-size: clamp(2.4rem, 4vw, 4.35rem);
+}
+
+.digest-card-quote .digest-why {
+  padding: 0;
+  border-left: 0;
+}
+
+.digest-card-quote .digest-why p {
+  margin-top: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.digest-card-ticker {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 510px;
+  background: color-mix(in srgb, var(--card-accent) 12%, var(--card));
+}
+
+.digest-card-ticker .digest-card-art {
+  min-height: 250px;
+  order: 2;
+}
+
+.digest-card-ticker .digest-card-body {
+  order: 1;
+  padding-bottom: 23px;
+}
+
+.digest-card-ticker .digest-card-body h3 {
+  max-width: 760px;
+  margin-top: 18px;
+  font-size: clamp(2.35rem, 5vw, 5.8rem);
+}
+
+.digest-card-ticker .digest-why {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 15px;
+  align-items: start;
+  padding: 13px 0 0;
+  border-left: 0;
+  border-top: 2px solid var(--card-accent);
+}
+
+.digest-card-ticker .digest-why p {
+  margin: 0;
+}
+
+.digest-card-collage {
+  background: color-mix(in srgb, var(--card-accent) 16%, var(--card));
+}
+
+.digest-card-collage .digest-card-art img {
+  inset: 16% 5% 12% 15%;
+  width: 76%;
+  height: 70%;
+  border-radius: 18px 54px 18px 54px;
+  transform: rotate(-8deg);
+}
+
+.digest-card-collage .digest-card-body h3 {
+  max-width: 430px;
+}
+
 .digest-card-art {
   position: relative;
   min-height: 100%;
@@ -4051,6 +4196,39 @@ button.music-track-select:focus-visible {
     min-height: calc(100svh - 92px);
     scroll-snap-align: start;
     border-radius: 21px;
+  }
+
+  .digest-card-poster .digest-card-art {
+    position: relative;
+    inset: auto;
+    min-height: 39svh;
+  }
+
+  .digest-card-poster .digest-card-body {
+    min-height: 0;
+  }
+
+  .digest-card-ticker {
+    grid-template-rows: 1fr auto;
+  }
+
+  .digest-card-ticker .digest-card-art {
+    min-height: 28svh;
+  }
+
+  .digest-card-ticker .digest-card-body {
+    order: 1;
+  }
+
+  .digest-card-ticker .digest-why {
+    display: block;
+    padding-top: 10px;
+    border-top: 0;
+    border-left: 2px solid var(--card-accent);
+  }
+
+  .digest-card-ticker .digest-why p {
+    margin-top: 6px;
   }
 
   .digest-card-art {

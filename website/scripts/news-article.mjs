@@ -9,6 +9,7 @@ function decodeHtml(value) {
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')
     .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&nbsp;/gi, " ")
     .replace(/&#x2f;/gi, "/")
     .replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, hex, decimal) => {
       const codePoint = Number.parseInt(hex ?? decimal, hex ? 16 : 10);
@@ -127,6 +128,18 @@ export function extractArticleImage(html, baseUrl) {
   return { imageSource: unique[0].url, imageAlt };
 }
 
+export function extractArticleTitle(html) {
+  for (const tag of html.match(/<meta\s+[^>]*>/gi) ?? []) {
+    const attributes = htmlAttributes(tag);
+    const key = (attributes.property ?? attributes.name ?? "").toLowerCase();
+    if (/^(?:og:title|twitter:title)$/.test(key) && attributes.content?.trim()) {
+      return articleText(attributes.content).slice(0, 240);
+    }
+  }
+  const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1];
+  return title ? articleText(title).slice(0, 240) : "";
+}
+
 function articleText(value) {
   return decodeHtml(value)
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
@@ -135,6 +148,8 @@ function articleText(value) {
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
     .replace(/\s+/g, " ")
     .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/\bU\.\s*S\.\b/gi, "U.S.")
+    .replace(/(\d)\.\s+(\d)/g, "$1.$2")
     .trim();
 }
 
@@ -145,6 +160,7 @@ function completeSentences(value, maxLength) {
   for (const { segment } of sentenceSegmenter.segment(value)) {
     const sentence = segment.trim();
     if (!sentence) continue;
+    if (/^(?:although|because|but|which|while|with|as)\b/i.test(sentence.replace(/^[\s"“”'’]+/, "")) && sentence.length < 72) break;
     const candidate = `${result} ${sentence}`.trim();
     if (candidate.length > maxLength) break;
     result = candidate;
@@ -156,25 +172,35 @@ export function extractArticleIntro(html) {
   const scope = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1]
     ?? html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1]
     ?? html;
+  const boilerplatePattern = /^(?:reporting by|editing by|edited by|our standards|this article has been reviewed|advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i;
+  const contextPattern = /\b(?:after|amid|announc|brought back|bring(?:s|ing)? back|because|comeback|confirm|debut(?:ed)?|first introduced|introduced|launch|limited(?:[- ]time)?|meme|nostalgia|original(?:ly)?|reaction|return(?:ed|ing)?|re-?released?|revived|viral|fans?|funny|walk(?:ed|ing)?|appearance|sold out|restock(?:ed)?|from\s+20\d{2}|in\s+20\d{2}|win|won|beat|loss|match|tournament|championship|playoffs?|final|injur|trade|transfer|sign(?:ed|ing)?|ruling|vote|strike|storm|fire|earthquake|study|research|mission|update|festival|concert|tour|game|season|episode|chapter|book|film|series)\b/gi;
+  const metadata = [...html.matchAll(/<meta\s+[^>]*>/gi)]
+    .map((match) => htmlAttributes(match[0]))
+    .filter((attributes) => /^(?:description|og:description|twitter:description)$/i.test(attributes.property ?? attributes.name ?? ""))
+    .map((attributes) => articleText(attributes.content ?? ""))
+    .filter((text) => text.length >= 45 && text.length <= 720 && !boilerplatePattern.test(text))
+    .map((text, index) => ({
+      text: completeSentences(text, 720),
+      index: -100 + index,
+      contextScore: (text.match(contextPattern) ?? []).length + 3,
+    }));
   const paragraphs = [...scope.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
     .map((match) => articleText(match[1]))
     .filter((text) => text.length >= 45 && text.length <= 720)
-    .filter((text) => !/^(?:advertisement|subscribe|sign up|newsletter|read more|©|by\s+)/i.test(text))
+    .filter((text) => !boilerplatePattern.test(text))
     .filter((text) => !/\b(?:see more of our coverage|our coverage|in your search results|click here|download our app|follow us|sign up for our|subscribe to our)\b/i.test(text))
     .filter((text, index, values) => values.indexOf(text) === index)
     .map((text, index) => ({
       text: completeSentences(text, 720),
       index,
-      contextScore: (text.match(/\b(?:because|after|amid|announced|brought back|bring(?:s|ing)? back|debut(?:ed)?|first introduced|introduced|original(?:ly)?|return(?:ed|ing)?|re-?released?|revived|viral|meme|nostalgia|fans?|funny|walk(?:ed|ing)?|appearance|sold out|restock(?:ed)?|from\s+20\d{2}|in\s+20\d{2})\b/gi) ?? []).length,
+      contextScore: (text.match(contextPattern) ?? []).length + (text.length >= 90 && text.length <= 520 ? 1 : 0),
     }))
     .filter((entry) => entry.text);
-  if (!paragraphs.length) return "";
-  const selected = paragraphs
-    .slice(0, 2)
-    .concat(paragraphs
-      .slice(2)
-      .sort((left, right) => right.contextScore - left.contextScore || left.index - right.index)
-      .slice(0, 4))
+  if (!paragraphs.length && !metadata.length) return "";
+  const selected = metadata.concat(paragraphs)
+    .slice()
+    .sort((left, right) => right.contextScore - left.contextScore || left.index - right.index)
+    .slice(0, 5)
     .sort((left, right) => left.index - right.index)
     .filter((entry, index, values) => values.findIndex((candidate) => candidate.text === entry.text) === index);
   let result = "";
@@ -254,7 +280,11 @@ export async function resolveGoogleNewsArticle(rawUrl) {
     accept: "application/json",
     headers: { "content-type": "application/x-www-form-urlencoded;charset=UTF-8" },
   });
-  return publicHttpsUrl(rpcResult(response.buffer.toString("utf8")), "publisher article").href;
+  const resolved = publicHttpsUrl(rpcResult(response.buffer.toString("utf8")), "publisher article");
+  if (resolved.hostname === "google.com" || resolved.hostname.endsWith(".google.com")) {
+    throw new Error("Google News did not resolve to a publisher article");
+  }
+  return resolved.href;
 }
 
 export async function linkedArticleMetadata(articleUrl, { allowMissingImage = false } = {}) {
@@ -278,12 +308,13 @@ export async function linkedArticleMetadata(articleUrl, { allowMissingImage = fa
   }
   const html = page.buffer.toString("utf8");
   const intro = extractArticleIntro(html);
+  const title = extractArticleTitle(html);
   try {
     const metadata = extractArticleImage(html, page.finalUrl);
     await assertPublicHostname(new URL(metadata.imageSource).hostname);
-    return { url: page.finalUrl, intro, ...metadata };
+    return { url: page.finalUrl, title, intro, ...metadata };
   } catch (error) {
     if (!allowMissingImage) throw error;
-    return { url: page.finalUrl, intro };
+    return { url: page.finalUrl, title, intro };
   }
 }

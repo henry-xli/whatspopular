@@ -3,8 +3,8 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { buildDescriptionPrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, parseDescriptionOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
-import { extractArticleImage, extractArticleIntro, publicHttpsUrl } from "../scripts/news-article.mjs";
+import { buildDescriptionPrompt, buildNichePrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, isNicheTopicUsable, parseDescriptionOutput, parseNicheOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
+import { extractArticleImage, extractArticleIntro, extractArticleTitle, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
@@ -116,6 +116,43 @@ test("builds and validates source-grounded AI descriptions", () => {
   assert.equal(isDescriptionUsable("music", "Listeners are using Example Song in workout edits, while creators keep pairing it with fast-cut videos.", musicEvidence), true);
   assert.equal(isDescriptionUsable("music", "“Example Song” is a track by Example Artist, released this summer.", musicEvidence), false);
   assert.equal(isDescriptionUsable("music", "“Example Song” is a track by Example Artist, released this summer.", { title: "Example Song", sourceSnippets: [] }), false);
+});
+
+test("niche cards require concrete current context and plain language", () => {
+  const record = {
+    id: "golf-1",
+    category: "Golf",
+    categoryContext: "Current tournament developments and player news.",
+    title: "Who is on the bubble to make the Tour Championship?",
+    sourceSnippets: [
+      {
+        kind: "current_headline",
+        source: "ESPN",
+        headline: "Who is on the bubble to make the Tour Championship?",
+        text: "Who is on the bubble to make the Tour Championship?",
+        publishedAt: "Fri, 21 Aug 2026 00:00:00 GMT",
+      },
+      {
+        kind: "current_coverage",
+        source: "ESPN",
+        headline: "Who is on the bubble to make the Tour Championship?",
+        text: "The final playoff event is reshaping which players can qualify for the Tour Championship, with late scores changing the field.",
+        publishedAt: "Fri, 21 Aug 2026 00:00:00 GMT",
+      },
+    ],
+  };
+  const prompt = buildNichePrompt([record]);
+  assert.match(prompt, /publisher article excerpt/i);
+  assert.match(prompt, /actual event, person, release, match, result/i);
+  assert.match(prompt, /main-character week/i);
+  assert.match(prompt, /read like news/i);
+  const useful = { title: "Players are fighting for the final places", description: "Late scores in the final playoff event are changing which players can qualify for the Tour Championship.", whyNow: "The final playoff event is changing the Tour Championship field this week.", trendLabel: "Playoff pressure" };
+  assert.equal(isNicheTopicUsable(useful, record), true);
+  assert.equal(isNicheTopicUsable({ ...useful, title: "The leaderboard is having a main-character week" }, record), false);
+  const parsed = parseNicheOutput({ output_text: JSON.stringify({ topics: [
+    { id: "golf-1", title: "The leaderboard is having a main-character week", description: "Golf is having a main-character week as fans follow the standings.", why_now: "The sport is having a main-character week.", trend_label: "Big week" },
+  ] }) }, ["golf-1"]);
+  assert.equal(parsed.has("golf-1"), false);
 });
 
 test("uses a bounded structured request for an enabled AI description batch", async () => {
@@ -312,10 +349,11 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   const nicheBrief = JSON.parse(await readFile(new URL("../data/niche-trends.json", import.meta.url), "utf8"));
   const publishedNicheBrief = JSON.parse(await readFile(new URL("../public/data/niche-trends.json", import.meta.url), "utf8"));
   assert.deepEqual(publishedNicheBrief, nicheBrief);
-  assert.ok(nicheBrief.categories.length >= 40);
+  assert.ok(nicheBrief.categories.length >= 25);
   assert.ok(nicheBrief.categories.every((category) => category.topics.length >= 3));
+  assert.ok(nicheBrief.categories.every((category) => category.topics.every((topic) => topic.evidenceMode === "source-grounded")));
   const nicheIds = new Set(nicheBrief.categories.map((category) => category.id));
-  for (const id of ["pop", "hip-hop-rap", "r-and-b-soul", "indie-alternative", "latin-music", "country", "afrobeats", "basketball", "sports-news", "us-news", "world-news", "business-markets", "science-space", "climate-environment", "health", "tech-news"]) {
+  for (const id of ["edm", "football", "food-drink", "golf", "pop", "hip-hop-rap", "r-and-b-soul", "indie-alternative", "sports-news", "world-news", "science-space", "tech-news"]) {
     assert.ok(nicheIds.has(id), `expected expanded niche category: ${id}`);
   }
 
@@ -458,6 +496,7 @@ test("extracts safe lead images from linked publisher metadata", () => {
   `, "https://www.example.com/story");
   assert.equal(metadata.imageSource, "https://cdn.example.com/news/lead.jpg?width=1200&height=675");
   assert.equal(metadata.imageAlt, "Storm clouds approaching the coast");
+  assert.equal(extractArticleTitle('<meta property="og:title" content="A concrete current event">'), "A concrete current event");
   const structured = extractArticleImage(`
     <script type="application/ld+json">{"url":"https://www.example.com/story","image":{"url":"https://cdn.example.com/news/structured.jpg"}}</script>
   `, "https://www.example.com/story");
@@ -467,6 +506,7 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <p>The move affects stores nationwide and has prompted new guidance for consumers.</p></article>
   `);
   assert.match(intro, /recall after officials found a contamination risk/);
+  assert.match(extractArticleIntro('<meta property="og:description" content="The product returned this week after a limited re-release and demand rose quickly.">'), /returned this week after a limited re-release/);
   const boundedIntro = extractArticleIntro(`
     <article><p>Officials announced a new event after months of preparation. The update drew fresh attention from readers.</p>
     <p>This paragraph is deliberately long and should not be clipped in the middle of a sentence when the ingestion limit is reached. It remains complete.</p></article>

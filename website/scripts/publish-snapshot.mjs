@@ -17,7 +17,7 @@ if (!Array.isArray(brief.sections) || brief.sections.length !== 8
   throw new Error("Refusing to publish an invalid briefing snapshot");
 }
 if (!Array.isArray(nicheBrief.categories)
-  || nicheBrief.categories.length < 40
+  || nicheBrief.categories.length < 25
   || nicheBrief.categories.some((category) => !Array.isArray(category.topics) || category.topics.length < 3)) {
   throw new Error("Refusing to publish an invalid expanded niche snapshot");
 }

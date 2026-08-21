@@ -111,11 +111,12 @@ struct ForYouMobileView: View {
                     ForEach(categories) { category in
                         let active = selectedTags.contains(category.id)
                         Button {
-                            guard account.isLinked else { accountPresented = true; return }
                             let next = active ? selectedTags.filter { $0 != category.id } : selectedTags + [category.id]
                             selectedTags = next
                             activeIndex = 0
-                            Task { await account.saveTags(next) }
+                            if account.isLinked {
+                                Task { await account.saveTags(next) }
+                            }
                         } label: {
                             HStack(spacing: 6) {
                                 Circle().fill(Color(hex: category.accent)).frame(width: 7, height: 7)
@@ -127,6 +128,7 @@ struct ForYouMobileView: View {
                             .foregroundStyle(active ? .white : .primary)
                             .background(active ? Color(hex: category.accent) : Color(.secondarySystemGroupedBackground), in: Capsule())
                             .overlay { Capsule().stroke(Color(hex: category.accent).opacity(active ? 0 : 0.35), lineWidth: 1) }
+                            .contentShape(Capsule())
                         }
                         .buttonStyle(.plain)
                     }

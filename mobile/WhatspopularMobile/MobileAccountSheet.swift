@@ -67,7 +67,6 @@ struct MobileAccountSheet: View {
                             ForEach(categories) { category in
                                 let selected = selectedTags.contains(category.id)
                                 Button {
-                                    guard account.isLinked else { return }
                                     if selected { selectedTags.removeAll { $0 == category.id } }
                                     else { selectedTags.append(category.id) }
                                 } label: {
@@ -83,9 +82,9 @@ struct MobileAccountSheet: View {
                                     .padding(.vertical, 9)
                                     .foregroundStyle(selected ? Color(hex: "#4F2EB8") : .primary)
                                     .background(selected ? Color(hex: category.accent).opacity(0.18) : Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                                    .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                                 }
                                 .buttonStyle(.plain)
-                                .disabled(!account.isLinked)
                             }
                         }
                         Button {
