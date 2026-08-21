@@ -6,6 +6,7 @@ import sharp from "sharp";
 import { buildDescriptionPrompt, buildNichePrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, isNicheTopicUsable, parseDescriptionOutput, parseNicheOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
 import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractArticleTitle, extractPlayableMedia, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { categoryDefinitions, sourceCandidateUsable } from "../scripts/niche-ingestion.mjs";
+import { quizAnswerLeak, quizClueIsUsable, quizQuestionIsUsable, quizTitleSignals } from "../scripts/quiz-quality.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
@@ -237,7 +238,9 @@ test("builds complete description-matching quiz prompts with fixed answer sets",
   assert.match(prompt, /QUIZ DATA BEGIN/);
   assert.match(prompt, /only the supplied target_context/i);
   assert.doesNotMatch(prompt, /target_description/);
-  assert.match(prompt, /one or two complete sentences/i);
+  assert.match(prompt, /one or two complete clue sentences/i);
+  assert.match(prompt, /never submit a template-only clue/i);
+  assert.match(prompt, /distinctive word, proper name, place name, number/i);
   assert.match(prompt, /exactly four answers/i);
   assert.doesNotMatch(prompt, /which topic matches a description/i);
   const parsed = parseQuizOutput({
@@ -257,6 +260,22 @@ test("builds complete description-matching quiz prompts with fixed answer sets",
     correctAnswer: "Example Person",
   });
   assert.equal(parsed.has("unexpected"), false);
+});
+
+test("rejects generic or answer-spoiling quiz clues", () => {
+  const weakStory = "This story. Which story matches this description?";
+  assert.equal(quizQuestionIsUsable(weakStory, "A current event", "news", "This story."), false);
+
+  const answerLeakingBook = "One spring morning, a stranger arrives in the small southern city of Golden. Which book matches this description?";
+  assert.equal(quizAnswerLeak(answerLeakingBook, "Theo of Golden"), true);
+  assert.equal(quizQuestionIsUsable(answerLeakingBook, "Theo of Golden", "books", "One spring morning, a stranger arrives in the small southern city of Golden."), false);
+
+  const answerSafeBook = "One spring morning, a stranger arrives in a small southern city. No one knows where he came from or why he asks more questions than he answers. Which book matches this description?";
+  assert.equal(quizAnswerLeak(answerSafeBook, "Theo of Golden"), false);
+  assert.equal(quizQuestionIsUsable(answerSafeBook, "Theo of Golden", "books", "One spring morning, a stranger arrives in the small southern city. No one knows where he has come from or why he asks a lot more questions than he answers."), true);
+
+  assert.equal(quizClueIsUsable("This story", "Any story", "news"), false);
+  assert.deepEqual(quizTitleSignals("Theo of Golden"), ["theo", "golden"]);
 });
 
 test("renders the complete finite culture briefing", async () => {
@@ -694,6 +713,11 @@ test("keeps content and outbound links constrained", async () => {
     assert.equal(new Set(question.answers).size, 4);
     assert.ok(question.answers.includes(question.correctAnswer));
     quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
+    const sourceSection = brief.sections.find((section) => section.id === question.topicId);
+    const sourceItem = [...(sourceSection?.items ?? []), ...(sourceSection?.moreItems ?? [])]
+      .find((item) => item.title === question.itemTitle);
+    assert.ok(sourceItem);
+    assert.equal(quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceItem.description), true);
   }
   const movieQuizQuestions = brief.quiz.questions.filter((question) => question.topicId === "movies");
   assert.ok(movieQuizQuestions.every((question) => !/^This film is (?:an?\s+)?[\w/-]+ film\./i.test(question.prompt)));

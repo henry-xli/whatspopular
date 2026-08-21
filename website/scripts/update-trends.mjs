@@ -6,6 +6,7 @@ import { generateDescriptionBatch, generateQuizBatch, isDescriptionUsable } from
 import { withHeadlessPage } from "./headless-browser.mjs";
 import { linkedArticleMetadata, publicHttpsUrl, resolveGoogleNewsArticle } from "./news-article.mjs";
 import { generateNicheSnapshot } from "./niche-ingestion.mjs";
+import { quizAnswerLeak, quizClueIsUsable, quizQuestionIsUsable, quizTitleSignals } from "./quiz-quality.mjs";
 import { createRateLimiter, fetchBytes, mapConcurrent } from "./runtime.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -4235,83 +4236,124 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function redactQuizTitle(value, title) {
-  // Redact the complete answer label only. Removing individual title words
-  // used to turn ordinary prose into fragments such as “non-it” and “the it”.
-  const phrases = [title.trim()];
+function redactQuizTitle(value, title, topicId) {
   const marker = "__QUIZ_TITLE__";
-  const redacted = [...new Set(phrases.filter(Boolean))].sort((left, right) => right.length - left.length)
-    .reduce((result, phrase) => {
-      const words = phrase.split(/\s+/).filter(Boolean);
-      const pattern = words.length > 1
-        ? words.map((word) => escapeRegExp(word)).join("[^A-Za-z0-9]+")
-        : `\\b${escapeRegExp(phrase)}\\b`;
-      const flags = words.length > 1 ? "gi" : "g";
-      return result.replace(new RegExp(pattern, flags), marker);
-    }, value)
-    .replace(new RegExp(`${marker}(?:\\s+(?:or|and|/)\\s*${marker})+`, "g"), marker)
-    .replaceAll(marker, "it")
+  let redacted = String(value ?? "");
+  const phrases = [title.trim()].filter(Boolean).sort((left, right) => right.length - left.length);
+  for (const phrase of phrases) {
+    const titleWords = phrase.split(/\s+/).filter(Boolean);
+    const pattern = titleWords.length > 1
+      ? titleWords.map((word) => escapeRegExp(word)).join("[^A-Za-z0-9]+")
+      : `\\b${escapeRegExp(phrase)}\\b`;
+    redacted = redacted.replace(new RegExp(pattern, "gi"), marker);
+  }
+
+  for (const signal of quizTitleSignals(title).sort((left, right) => right.length - left.length)) {
+    const token = escapeRegExp(signal);
+    redacted = redacted
+      .replace(new RegExp(`\\b((?:city|town|village|island|state|street|road|lake|river|mount))\\s+of\\s+${token}\\b`, "gi"), "$1")
+      .replace(new RegExp(`\\b(?:named|called|name\\s+is)\\s+${token}\\b`, "gi"), "")
+      .replace(new RegExp(`\\b${token}['’]s\\b`, "gi"), "the person's")
+      .replace(new RegExp(`\\b${token}\\b`, "gi"), "");
+  }
+
+  redacted = redacted
+    .replaceAll(marker, "")
+    .replace(/…/g, " ")
+    .replace(/^\s*['’]s\b/, "")
+    .replace(/\b(?:his|her|their)\s*[.!?]/gi, "")
     .replace(/^\s*["'“”‘’]+\s*/g, "")
-    .replace(/\bnamed\s+it\s+(?=arrives?\b)/gi, "")
-    .replace(/\bvirtual singer\s+it\b/gi, "virtual singer")
-    .replace(/\b((?:Dutch\s+)?YouTuber|streamer|singer|artist|creator)\s+it\b/gi, (_match, role) => {
-      const replacementRole = /youtuber/i.test(role) ? "creator" : role.toLowerCase();
-      return `another ${replacementRole}`;
-    })
-    .replace(/\b(viral|trending)\s+it\s+products?\b/gi, "$1 products")
-    .replace(/\bfrom\s+(?:it['’]s|['’]s)\b/gi, "from her")
-    .replace(/[“”‘’]it[“”‘’]/gi, "it")
-    .replace(/["“”‘’]\s*["“”‘’]/g, "")
+    .replace(/^[\s–—:;,.-]+/g, "")
+    .replace(/([.!?])\s+and\s+/gi, "$1 ")
+    .replace(/\b(with|and|or|of|to|from|by|in|at)\s*,\s*/gi, "$1 ")
+    .replace(/\bof\s+(?=(?:spread|became|is|was|went|goes?|records?|filed|announced?|returned?|brought?|appeared?)\b)/gi, "")
+    .replace(/\bboth\s+and\b/gi, "both creators")
+    .replace(/^(Videos?|Clips?|Posts?)\s+(?=(?:spread|became|went|is|are|were)\b)/i, "$1 of the subject ")
+    .replace(/^The\s+(.+?)\s+Made\s+That\s+Became\s+A\s+Meme\b/i, (_match, phrase) => `A person's ${String(phrase).toLowerCase()} became a meme`)
+    .replace(/^.+\b(?:tweet|post|message)\b.+\bsparks?\s+(?:a\s+)?meme\s+fest\b.*$/i, "A social-media post sparks a meme wave")
+    .replace(/^\s*and\s+/i, "")
     .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/\s{2,}/g, " ")
     .trim();
-  return redacted;
+
+  redacted = redacted.replace(/^is\s+(?!(?:primarily|best|widely)\b)(?:an?\s+)?/i, "A ");
+
+  if (/^(?:a\s+)?(?:brother|sister|mother|father|son|daughter|child|relative)\s*,\s*(\d+)\s*,/i.test(redacted)) {
+    redacted = redacted.replace(/^(?:a\s+)?(?:brother|sister|mother|father|son|daughter|child|relative)\s*,\s*(\d+)\s*,/i, "A $1-year-old family member");
+  } else if (/^(?:a\s+)?(?:brother|sister|mother|father|son|daughter|child|relative)\b/i.test(redacted)) {
+    redacted = redacted.replace(/^(?:a\s+)?(?:brother|sister|mother|father|son|daughter|child|relative)\b/i, "A family member");
+  }
+
+  if (topicId === "news") {
+    redacted = redacted
+      .replace(/^[A-Z][\w’'-]*(?:\s+[A-Z][\w’'-]*)*(?=\s+(?:records?|defeats?|files?|filed|announces?|announced|opens?|opened|closes?|closed|leaves?|brought?|returns?|returned)\b)/, "A competitor")
+      .replace(/\bin\s+(?:his|her|their)\s+([a-z]+)\s+title\s+defeat\s+of\s+[A-Z][\w’'-]*/i, "in a $1 title fight")
+      .replace(/\b(records?|won|earned)\s+(\d+(?:st|nd|rd|th)\b)/i, "$1 a $2")
+      .replace(/\b(after|following)\s+Hurricane\b/gi, "$1 the storm")
+      .replace(/^Hurricane\s+is\s+a\s+currently\b/i, "A hurricane is currently an")
+      .replace(/^Hurricane\s+is\b/i, "A hurricane is")
+      .replace(/^A competitor\s+closed\b/i, "A city closed");
+  }
+
+  return redacted.trim();
 }
 
-const quizRecentSignalPattern = /\b(?:recent|recently|currently|now|today|this\s+(?:week|month|year)|in\s+20\d{2}|during|after|following|since|coverage|focus|attention|viral|trending|spread|became|emerged|prompted|respond(?:ed|ing)|popular|reaches?|reached|released|opening|premier\w*|outbreak|recall\w*|disappear\w*|classif\w*|hurricane|flood\w*|hunker\w*|restock\w*|sold\s+out|world\s+cup|social\s+media)\b/gi;
+const quizRecentSignalPattern = /\b(?:recent|recently|currently|now|today|this\s+(?:week|month|year)|in\s+20\d{2}|during|after|following|since|coverage|focus|attention|viral|trending|spread|became|emerged|prompted|respond(?:ed|ing)|popular|reaches?|reached|released|opening|premier\w*|outbreak|recall\w*|disappear\w*|classif\w*|hurricane|flood\w*|hunker\w*|restock\w*|sold\s+out|world\s+cup|social\s+media|meme(?:s)?|fan(?:s)?|funny|walk(?:ed|ing)?|appearance|brother|reaction)\b/gi;
+const quizPeopleIdentityOnlyPattern = /^(?:is|was|are|were)\s+(?:primarily known as|best known as|widely known as|a|an)\b/i;
 // Movie quiz clues must contain a plot-premise cue, not only the genre sentence
 // that many source descriptions place first. The vocabulary is intentionally
 // generic so it works for newly ingested films without naming any title.
 const quizMoviePlotSignalPattern = /\b(?:about|after|before|character|conflict|creator|discovers?|dimension|encounters?|family|follows?|forced|friendship|happens?|home|journey|king|memory|mission|mystery|plot|premise|reunite|returns?|set|sister|story|stranded|takes?|tries?|undergoes?|wakes?|when|where|while|world)\b/i;
-const quizMovieGenreOnlyPattern = /\bis\s+(?:an?\s+)?(?:[\w-]+(?:\/[\w-]+)*\s+)?film\.?$/i;
 
-function moviePlotSentence(parts) {
-  return parts
+function quizContextFor(description, title, topicId) {
+  const parts = sentences(description);
+  if (!parts.length) return "";
+  const safeParts = parts
+    .map((sentence) => {
+      if (topicId === "people" && quizAnswerLeak(sentence, title) && /["“].*["”]\s*[–—-]/.test(sentence)) return "";
+      return redactQuizTitle(sentence, title, topicId);
+    })
+    .map((sentence) => sentence.replace(/\s+([,.;:!?])/g, "$1").replace(/\s{2,}/g, " ").trim())
+    .filter((sentence) => !(topicId === "people" && quizPeopleIdentityOnlyPattern.test(sentence)))
+    .filter((sentence) => sentence.split(/\s+/).filter(Boolean).length >= 5)
+    .map((sentence) => ensureSentence(sentence));
+  if (!safeParts.length) return "";
+
+  let combined = conciseSentences(safeParts.join(" "), 420);
+  if (/\bthe subject\b/i.test(combined)) {
+    const leadMatch = safeParts.find((sentence) => /^(?:a|an|the)\s+/i.test(sentence))
+      ?.match(/^(?:a|an|the)\s+(.+?)(?=\s+(?:with|who|that|which|is|lives|has|have|and)\b|[,!?]|$)/i);
+    if (leadMatch?.[1]) combined = combined.replace(/\bthe subject\b/gi, `the ${leadMatch[1]}`);
+  }
+  const ranked = safeParts
     .map((sentence, index) => ({
       sentence,
       index,
-      isGenreOnly: quizMovieGenreOnlyPattern.test(sentence),
-      hasPlotSignal: quizMoviePlotSignalPattern.test(sentence),
+      score: (sentence.match(quizRecentSignalPattern) ?? []).length
+        + (sentence.match(quizMoviePlotSignalPattern) ?? []).length
+        + Math.min(3, Math.floor(sentence.length / 90)),
     }))
-    .filter((entry) => !entry.isGenreOnly && entry.hasPlotSignal)
-    .sort((left, right) => right.hasPlotSignal - left.hasPlotSignal || left.index - right.index)
-    .at(0)?.sentence;
+    .sort((left, right) => right.score - left.score || left.index - right.index);
+  const candidates = [
+    ...(topicId === "books" || topicId === "movies" ? [combined] : []),
+    ...ranked.map((entry) => entry.sentence),
+    ...(topicId === "books" || topicId === "movies" ? [] : [combined]),
+  ];
+  return candidates.find((candidate) => quizClueIsUsable(candidate, title, topicId)) ?? "";
 }
 
-function quizContextFor(description, topicId) {
-  const parts = sentences(description);
-  if (!parts.length) return ensureSentence(description);
-  if (topicId === "movies") {
-    const plot = moviePlotSentence(parts);
-    const nonGenre = parts.find((sentence) => !quizMovieGenreOnlyPattern.test(sentence));
-    return ensureSentence(plot ?? nonGenre ?? parts[0]);
-  }
-  if (topicId === "books") {
-    return ensureSentence(parts[0]);
-  }
-  const ranked = parts
-    .map((sentence, index) => ({ sentence, index, score: (sentence.match(quizRecentSignalPattern) ?? []).length }))
-    .sort((left, right) => right.score - left.score || right.index - left.index);
-  const topScore = ranked[0]?.score ?? 0;
-  const selected = topScore
-    ? ranked.filter((entry) => entry.score === topScore).sort((left, right) => left.index - right.index)[0]?.sentence
-    : parts.at(-1);
-  return conciseSentences(selected ?? parts[0], 420);
+function quizEligibleItems(section, sectionId) {
+  return [...section.items, ...(section.moreItems ?? [])]
+    .map((item) => ({ item, quizContext: quizContextFor(item.description, item.title, sectionId) }))
+    .filter(({ item, quizContext }) => quizClueIsUsable(quizContext, item.title, sectionId));
 }
 
 function quizDescriptionClue(description, title, topicId) {
-  const context = conciseSentences(description, 420) || ensureSentence(description);
-  let redacted = redactQuizTitle(context, title)
+  const context = conciseSentences(
+    quizContextFor(description, title, topicId) || conciseSentences(description, 420) || ensureSentence(description),
+    280,
+  );
+  let redacted = redactQuizTitle(context, title, topicId)
     .replace(/^\s*["'“”‘’]+|["'“”‘’]+\s*$/g, "")
     .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
@@ -4361,7 +4403,7 @@ function usableQuizPrompt(prompt) {
   if (/[.!?]\s+[a-z]/.test(prompt)) return false;
   const sentenceCount = sentences(prompt).length;
   return prompt.trim().endsWith("?")
-    && sentenceCount >= 1 && sentenceCount <= 2
+    && sentenceCount >= 2 && sentenceCount <= 3
     && prompt.trim().length >= 40 && prompt.trim().length <= 480
     && !/\.\.\.|…/.test(prompt);
 }
@@ -4371,6 +4413,7 @@ function usableGeneratedQuizQuestion(candidate, record) {
   const answers = Array.isArray(candidate.answers) ? candidate.answers : [];
   if (record.topicId === "movies" && !quizMoviePlotSignalPattern.test(candidate.prompt ?? "")) return false;
   return usableQuizPrompt(candidate.prompt)
+    && quizQuestionIsUsable(candidate.prompt, record.title, record.topicId, record.quizContext)
     && answers.length === 4
     && new Set(answers).size === 4
     && answers.every((answer) => typeof answer === "string" && answer.trim().length >= 1 && answer.length <= 160)
@@ -4385,7 +4428,11 @@ function quizRecords(brief) {
     const section = brief.sections.find((entry) => entry.id === sectionId);
     if (!section) throw new Error(`Quiz source board ${sectionId} is missing`);
     const allItems = [...section.items, ...(section.moreItems ?? [])];
-    for (const item of allItems.slice(0, 3)) {
+    const eligibleItems = quizEligibleItems(section, sectionId);
+    if (eligibleItems.length < 3) {
+      throw new Error(`${section.title} has fewer than three source-grounded quiz clues`);
+    }
+    for (const { item, quizContext } of eligibleItems.slice(0, 3)) {
       const distractors = allItems
         .filter((candidate) => candidate.title !== item.title)
         .map((candidate) => candidate.title);
@@ -4396,7 +4443,7 @@ function quizRecords(brief) {
         topicId: sectionId,
         topic: section.title,
         title: item.title,
-        quizContext: quizContextFor(item.description, sectionId),
+        quizContext,
         focus: {
           memes: "Use the concrete recent spread, format, or cultural moment in the supplied context, not a generic description of the subject.",
           people: "Use the concrete recent event, appearance, response, or coverage in the supplied context, not the person's generic occupation.",
@@ -4607,14 +4654,16 @@ function validateBrief(brief) {
     quizIds.add(question.id);
     quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
     const section = brief.sections.find((entry) => entry.id === question.topicId);
-    const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])].slice(0, 3) : [];
-    const sourceItem = sourceItems.find((item) => item.title === question.itemTitle);
+    const sourceItems = section ? quizEligibleItems(section, question.topicId) : [];
+    const sourceRecord = sourceItems.find(({ item }) => item.title === question.itemTitle);
+    const sourceItem = sourceRecord?.item;
     if (!sourceItem
         || !usableQuizPrompt(question.prompt)
+        || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceRecord?.quizContext)
         || (question.topicId === "movies" && !quizMoviePlotSignalPattern.test(question.prompt))
         || normalize(question.correctAnswer) !== normalize(question.itemTitle)
         || question.topic !== section?.title) {
-      throw new Error(`Quiz question ${question.id} is not grounded in one of the board's first three entries`);
+      throw new Error(`Quiz question ${question.id} is not grounded in a concrete source clue`);
     }
   }
   if (quizSectionIds.some((sectionId) => quizCounts.get(sectionId) !== 3)) {

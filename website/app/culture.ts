@@ -1,4 +1,5 @@
 import rawBrief from "../data/trends.json";
+import { quizQuestionIsUsable } from "../scripts/quiz-quality.mjs";
 
 export type CultureLayout = "landscape" | "poster" | "square";
 
@@ -108,7 +109,7 @@ function validQuizPrompt(prompt: string) {
   const sentenceCount = prompt.replace(/\b(?:u\.s|e\.g|i\.e)\./gi, (match) => match.replaceAll(".", ""))
     .match(/[^.!?]+[.!?]+/g)?.length ?? 0;
   return prompt.trim().endsWith("?")
-    && sentenceCount >= 1 && sentenceCount <= 2
+    && sentenceCount >= 2 && sentenceCount <= 3
     && prompt.trim().length >= 40 && prompt.trim().length <= 480
     && !/\.\.\.|…/.test(prompt)
     && !unusableQuizPromptPattern.test(prompt);
@@ -366,13 +367,14 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     if (!question.answers.includes(question.correctAnswer)) throw new Error("Quiz correct answer is not an answer choice");
     quizCounts.set(question.topicId, (quizCounts.get(question.topicId) ?? 0) + 1);
     const section = brief.sections.find((entry) => entry.id === question.topicId);
-    const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])].slice(0, 3) : [];
+    const sourceItems = section ? [...section.items, ...(section.moreItems ?? [])] : [];
     const sourceItem = sourceItems.find((item) => item.title === question.itemTitle);
     if (!section || question.topic !== section.title
       || !sourceItem
       || !validQuizPrompt(question.prompt)
+      || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceItem.description)
       || question.correctAnswer !== question.itemTitle) {
-      throw new Error("Quiz question is not grounded in a board's first three entries");
+      throw new Error("Quiz question is not grounded in a concrete source clue");
     }
   }
   if (quizBoardIds.some((id) => quizCounts.get(id) !== 3)) {

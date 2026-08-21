@@ -2404,7 +2404,7 @@
     "durationSeconds": 15,
     "questions": [
       {
-        "prompt": "Videos of Jimothy spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
+        "prompt": "Videos of the wild raccoon spread across social media, inspiring works of fan art, memes and viral coverage in the media and with streamers and social media stars. Which meme matches this description?",
         "answers": [
           "Jimothy the raccoon",
           "Kwebbelkop Laughing / YourRAGE Laugh",
@@ -2418,7 +2418,7 @@
         "itemTitle": "Jimothy the raccoon"
       },
       {
-        "prompt": "In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both YourRAGE and Kwebbelkop in different edits. Which meme matches this description?",
+        "prompt": "In 2026, the laugh became a trending sound on social media as it was used in memes, often depicting both creators in different edits. Which meme matches this description?",
         "answers": [
           "Kwebbelkop Laughing / YourRAGE Laugh",
           "Jimothy the raccoon",
@@ -2432,7 +2432,7 @@
         "itemTitle": "Kwebbelkop Laughing / YourRAGE Laugh"
       },
       {
-        "prompt": "This meme is a social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer Hatsune Miku. Which meme matches this description?",
+        "prompt": "A social game, meme and fan art trend that emerged during the 2026 FIFA World Cup in which social media users jokingly treat tournament matches as battles for the \"custody\" of the Japanese virtual singer. Which meme matches this description?",
         "answers": [
           "Hatsune Miku World Cup Custody Battle",
           "Jimothy the raccoon",
@@ -2446,7 +2446,7 @@
         "itemTitle": "Hatsune Miku World Cup Custody Battle"
       },
       {
-        "prompt": "I Want What They Have, World Cup Friendship Edition: Jude Bellingham and it. Which person matches this description?",
+        "prompt": "Fans are turning the funny walk into memes. Which person matches this description?",
         "answers": [
           "Erling Haaland",
           "Lamine Yamal",
@@ -2460,7 +2460,7 @@
         "itemTitle": "Erling Haaland"
       },
       {
-        "prompt": "This person explains Lionel Messi advice after World Cup final, says it was as valuable as a medal. Which person matches this description?",
+        "prompt": "A 3-year-old family member goes viral for 2026 World Cup appearance. Which person matches this description?",
         "answers": [
           "Lamine Yamal",
           "Erling Haaland",
@@ -2474,18 +2474,18 @@
         "itemTitle": "Lamine Yamal"
       },
       {
-        "prompt": "Which reminds me, in an odd sense, of the way Nolan’s films are often discussed. Which person matches this description?",
+        "prompt": "Madonna World Cup memes flood the internet after spectacular half-time show with BTS and Justin Bieber. Which person matches this description?",
         "answers": [
-          "Christopher Nolan",
+          "Shakira",
           "Erling Haaland",
           "Lamine Yamal",
-          "Zendaya"
+          "Christopher Nolan"
         ],
-        "correctAnswer": "Christopher Nolan",
-        "id": "people-3",
+        "correctAnswer": "Shakira",
+        "id": "people-5",
         "topicId": "people",
         "topic": "People",
-        "itemTitle": "Christopher Nolan"
+        "itemTitle": "Shakira"
       },
       {
         "prompt": "In the film, Odysseus (Damon), the Greek king of Ithaca, undergoes a long and perilous journey home after the Trojan War and encounters mythical beings as he attempts to reunite with his wife Penelope (Hathaway). Which film matches this description?",
@@ -2530,7 +2530,7 @@
         "itemTitle": "Project Hail Mary"
       },
       {
-        "prompt": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Which book matches this description?",
+        "prompt": "The story follows Natalie Heller Mills, a \"tradwife\" social media influencer, who wakes up one day in the 19th century, where she must learn how to live without modern society. Natalie lives a traditional lifestyle – and her followers are sick with envy. Which book matches this description?",
         "answers": [
           "Yesteryear",
           "The Calamity Club",
@@ -2544,21 +2544,7 @@
         "itemTitle": "Yesteryear"
       },
       {
-        "prompt": "In 1933 Oxford, Mississippi, Prohibition is on the wane, and the Great Depression is tightening its grip. Which book matches this description?",
-        "answers": [
-          "The Calamity Club",
-          "Yesteryear",
-          "Theo of Golden",
-          "Mad Mabel"
-        ],
-        "correctAnswer": "The Calamity Club",
-        "id": "books-2",
-        "topicId": "books",
-        "topic": "Books",
-        "itemTitle": "The Calamity Club"
-      },
-      {
-        "prompt": "One spring morning, a stranger arrives in the small southern city of Golden. Which book matches this description?",
+        "prompt": "One spring morning, a stranger arrives in the small southern city. No one knows where he has come from or why he asks a lot more questions than he answers. Which book matches this description?",
         "answers": [
           "Theo of Golden",
           "Yesteryear",
@@ -2572,7 +2558,21 @@
         "itemTitle": "Theo of Golden"
       },
       {
-        "prompt": "Islam Makhachev records 17th UFC victory in a row in his welterweight title defeat of Ian Machado Garry. Which story matches this description?",
+        "prompt": "But when letters from someone in her past force her to examine one of the most painful periods of her life, she realizes that the letter she has been writing over the years needs to be read and that she cannot move forward until she finds it in her heart to offer forgiveness. Which book matches this description?",
+        "answers": [
+          "The Correspondent",
+          "Yesteryear",
+          "The Calamity Club",
+          "Theo of Golden"
+        ],
+        "correctAnswer": "The Correspondent",
+        "id": "books-5",
+        "topicId": "books",
+        "topic": "Books",
+        "itemTitle": "The Correspondent"
+      },
+      {
+        "prompt": "A competitor records a 17th victory in a row in a welterweight title fight. Which story matches this description?",
         "answers": [
           "UFC 330: Makhachev secures record-setting win against Machado Garry.",
           "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
@@ -2586,21 +2586,7 @@
         "itemTitle": "UFC 330: Makhachev secures record-setting win against Machado Garry."
       },
       {
-        "prompt": "This story. Which story matches this description?",
-        "answers": [
-          "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
-          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
-          "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
-          "Egg Recall Over Salmonella Deemed Class I by the FDA: See the Full List of Affected Products."
-        ],
-        "correctAnswer": "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
-        "id": "news-2",
-        "topicId": "news",
-        "topic": "News",
-        "itemTitle": "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more."
-      },
-      {
-        "prompt": "The popular Keto-based ice cream company Rebel Creamery filed for Chapter 11 bankruptcy last week, after losing a trademark lawsuit filed by another ice cream company. Which story matches this description?",
+        "prompt": "The popular Keto-based ice cream company Creamery filed for Chapter 11 bankruptcy last week, after losing a trademark lawsuit filed by another ice cream company. Which story matches this description?",
         "answers": [
           "Ice cream company Rebel filed for Chapter 11 bankruptcy.",
           "UFC 330: Makhachev secures record-setting win against Machado Garry.",
@@ -2612,6 +2598,20 @@
         "topicId": "news",
         "topic": "News",
         "itemTitle": "Ice cream company Rebel filed for Chapter 11 bankruptcy."
+      },
+      {
+        "prompt": "A hurricane is currently an active tropical cyclone that was the third-wettest tropical cyclone to affect the U.S state of Hawaii on record. Which story matches this description?",
+        "answers": [
+          "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+          "UFC 330: Makhachev secures record-setting win against Machado Garry.",
+          "Machado Garry: How to watch UFC 330 tonight, start time, full fight card and more.",
+          "Ice cream company Rebel filed for Chapter 11 bankruptcy."
+        ],
+        "correctAnswer": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit.",
+        "id": "news-5",
+        "topicId": "news",
+        "topic": "News",
+        "itemTitle": "Hurricane Lala Passes Big Island: Hawaiʻi Spared From Direct Hit."
       }
     ]
   }
