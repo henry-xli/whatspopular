@@ -4,13 +4,34 @@ import { assertPublicHostname, fetchBytes } from "./runtime.mjs";
 const GOOGLE_NEWS_HOST = "news.google.com";
 const USER_AGENT = "whatspopular.com/1.0 (+https://whatspopular.com/about)";
 
-function decodeHtml(value) {
-  return value
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&#x2f;/gi, "/")
+const namedHtmlEntities = {
+  amp: "&",
+  apos: "'",
+  bull: "•",
+  copy: "©",
+  hellip: "…",
+  laquo: "«",
+  ldquo: "“",
+  lrm: "\u200e",
+  lsquo: "‘",
+  mdash: "—",
+  middot: "·",
+  nbsp: " ",
+  ndash: "–",
+  para: "¶",
+  quot: '"',
+  raquo: "»",
+  rdquo: "”",
+  reg: "®",
+  rsquo: "’",
+  shy: "­",
+  thinsp: "\u2009",
+  trade: "™",
+};
+
+export function decodeHtmlEntities(value) {
+  return String(value ?? "")
+    .replace(/&([a-z][a-z0-9]+);/gi, (match, name) => namedHtmlEntities[name.toLowerCase()] ?? match)
     .replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, hex, decimal) => {
       const codePoint = Number.parseInt(hex ?? decimal, hex ? 16 : 10);
       return Number.isInteger(codePoint) && codePoint >= 0 && codePoint <= 0x10ffff
@@ -18,6 +39,10 @@ function decodeHtml(value) {
         ? String.fromCodePoint(codePoint)
         : "�";
     });
+}
+
+function decodeHtml(value) {
+  return decodeHtmlEntities(value);
 }
 
 export function publicHttpsUrl(rawUrl, kind = "external") {
@@ -154,7 +179,7 @@ function articleText(value) {
 }
 
 const sentenceSegmenter = new Intl.Segmenter("en", { granularity: "sentence" });
-const incompleteSentencePattern = /\b(?:St|Mr|Mrs|Ms|Dr|Prof|No|vs|etc)\.$/i;
+const incompleteSentencePattern = /\b(?:St|Mr|Mrs|Ms|Dr|Prof|No|vs|etc|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.$/i;
 
 function completeSentences(value, maxLength) {
   let result = "";

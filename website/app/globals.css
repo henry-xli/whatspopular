@@ -3187,6 +3187,11 @@ button.music-track-select:focus-visible {
   box-shadow: 0 12px 0 color-mix(in srgb, var(--card-accent) 13%, transparent);
 }
 
+.digest-card > *,
+.digest-card-body > * {
+  min-width: 0;
+}
+
 .digest-card:nth-child(3n + 1) {
   grid-column: 1 / -1;
   grid-template-columns: 1.15fr 0.85fr;
@@ -3379,7 +3384,7 @@ button.music-track-select:focus-visible {
   transform: rotate(-4deg);
 }
 
-.digest-card:nth-child(2n):not(.digest-card-split) .digest-card-art img {
+.digest-card:nth-child(2n):not(.digest-card-split):not(.digest-card-quote):not(.digest-card-collage) .digest-card-art img {
   inset: 10% 8% 6% 10%;
   transform: rotate(4deg);
 }
@@ -3467,6 +3472,7 @@ button.music-track-select:focus-visible {
   font-weight: 500;
   letter-spacing: -0.07em;
   line-height: 0.89;
+  overflow-wrap: anywhere;
 }
 
 .digest-description {
@@ -3475,6 +3481,7 @@ button.music-track-select:focus-visible {
   color: var(--muted);
   font-size: 0.87rem;
   line-height: 1.58;
+  overflow-wrap: anywhere;
 }
 
 .digest-why {
@@ -3498,6 +3505,7 @@ button.music-track-select:focus-visible {
   font-size: 0.8rem;
   font-weight: 700;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .digest-source {
@@ -3511,11 +3519,14 @@ button.music-track-select:focus-visible {
   color: var(--muted);
   font-size: 0.61rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .digest-source strong {
+  min-width: 0;
   color: var(--ink);
   font-size: 0.72rem;
+  overflow-wrap: anywhere;
 }
 
 .digest-source > span:last-child {
@@ -4258,16 +4269,20 @@ button.music-track-select:focus-visible {
 
   .digest-card-body h3 {
     margin-top: 18px;
-    font-size: clamp(2.15rem, 10vw, 3.25rem);
+    max-width: none;
+    font-size: clamp(1.95rem, 9.2vw, 3.05rem);
+    line-height: 0.94;
   }
 
   .digest-description {
+    max-width: none;
     margin-top: 15px;
     font-size: 0.79rem;
   }
 
   .digest-why {
-    padding-top: 10px;
+    max-width: none;
+    padding: 12px 0 12px 16px;
     margin-top: 18px;
   }
 
@@ -4276,6 +4291,8 @@ button.music-track-select:focus-visible {
   }
 
   .digest-source {
+    width: 100%;
+    min-width: 0;
     padding-top: 14px;
     margin-top: 15px;
   }

@@ -1,4 +1,5 @@
 import { fetchBytes } from "./runtime.mjs";
+import { decodeHtmlEntities } from "./news-article.mjs";
 
 const endpoint = "https://api.openai.com/v1/responses";
 const defaultModel = "gpt-5.6-luna";
@@ -85,7 +86,7 @@ const sectionInstructions = {
 };
 
 function cleanText(value, maxLength = maxSourceLength) {
-  return String(value ?? "")
+  return decodeHtmlEntities(String(value ?? ""))
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
     .replace(/\s+/g, " ")
     .trim()
@@ -156,7 +157,7 @@ function responseText(payload) {
 }
 
 function cleanDescription(value) {
-  return String(value ?? "")
+  return decodeHtmlEntities(String(value ?? ""))
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
     .replace(/\s+/g, " ")
     .replace(/^\s*[-*]\s+/u, "")

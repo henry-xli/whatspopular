@@ -4,7 +4,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { buildDescriptionPrompt, buildNichePrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, isNicheTopicUsable, parseDescriptionOutput, parseNicheOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
-import { extractArticleImage, extractArticleIntro, extractArticleTitle, publicHttpsUrl } from "../scripts/news-article.mjs";
+import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractArticleTitle, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
 
 async function render(pathname = "/", init = {}) {
@@ -116,6 +116,8 @@ test("builds and validates source-grounded AI descriptions", () => {
   assert.equal(isDescriptionUsable("music", "Listeners are using Example Song in workout edits, while creators keep pairing it with fast-cut videos.", musicEvidence), true);
   assert.equal(isDescriptionUsable("music", "“Example Song” is a track by Example Artist, released this summer.", musicEvidence), false);
   assert.equal(isDescriptionUsable("music", "“Example Song” is a track by Example Artist, released this summer.", { title: "Example Song", sourceSnippets: [] }), false);
+  assert.equal(decodeHtmlEntities("&ldquo;Trivia Murder Party 3&rdquo; &amp; &hellip;"), "“Trivia Murder Party 3” & …");
+  assert.equal(extractArticleIntro("<article><p>Jackbox says the game will launch Sept.</p></article>"), "");
 });
 
 test("niche cards require concrete current context and plain language", () => {
@@ -359,8 +361,13 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.ok(nicheTopics.every((topic) => /^\/culture\/niche-[a-z0-9-]+\.webp$/.test(topic.image)));
   assert.ok(nicheTopics.every((topic) => !/(?:main[- ]character|next generation|moving target|worth watching|having (?:a|its) \w+ week|deserves the hype|sets? (?:his|her|their|its) sights|challenges? (?:the )?(?:norms|boundaries)|sparks? (?:a )?debate|current development|latest updates|news and notes|connect(?:ed|ing)? with fans|^\s*(?:the\s+)?(?!(?:19|20)\d{2}\b)\d+(?:st|nd|rd|th)?\s+(?!annual\b))/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
   assert.ok(nicheTopics.every((topic) => !topic.imageSource || (new URL(topic.imageSource).protocol === "https:" && topic.imageSourcePageUrl === topic.url)));
+  assert.doesNotMatch(JSON.stringify(nicheBrief), /&(?:ldquo|rdquo|lsquo|rsquo|hellip|nbsp|ndash|mdash);|&#(?:x[0-9a-f]+|\d+);/i);
+  const musicTopics = nicheBrief.categories.filter((category) => category.parent === "Music").flatMap((category) => category.topics);
+  assert.ok(musicTopics.every((topic) => /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist|viral (?:song|sound|audio)|listeners?|Spotify|Billboard)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
+  assert.ok(musicTopics.every((topic) => !/\b(?:festival|lineup|headliner|concert|tour|tickets?)\b/i.test(topic.title)
+    || /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
   const nicheIds = new Set(nicheBrief.categories.map((category) => category.id));
-  for (const id of ["edm", "football", "food-drink", "golf", "pop", "hip-hop-rap", "r-and-b-soul", "indie-alternative", "sports-news", "science-space", "tech-news"]) {
+  for (const id of ["edm", "football", "food-drink", "golf", "pop", "r-and-b-soul", "sports-news", "science-space", "tech-news"]) {
     assert.ok(nicheIds.has(id), `expected expanded niche category: ${id}`);
   }
 
@@ -382,6 +389,8 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   for (const layout of ["poster", "split", "quote", "ticker", "collage"]) {
     assert.match(forYouStyles, new RegExp(`\\.digest-card-${layout}`));
   }
+  assert.match(forYouStyles, /\.digest-card > \*/);
+  assert.match(forYouStyles, /overflow-wrap: anywhere/);
 
   const profile = await render("/api/for-you/profile", { headers: { accept: "application/json" } });
   assert.equal(profile.status, 401);
