@@ -5,6 +5,7 @@ import { generateNicheBatch, isNicheTopicUsable } from "./ai-descriptions.mjs";
 import { additionalNicheCategories } from "./niche-catalog.mjs";
 import { decodeHtmlEntities, linkedArticleMetadata, resolveGoogleNewsArticle } from "./news-article.mjs";
 import { fetchBytes, mapConcurrent } from "./runtime.mjs";
+import { specificMusicPlayback } from "../shared/music-playback.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const outputPath = path.join(root, "data", "niche-trends.json");
@@ -525,6 +526,15 @@ function cleanText(value, maxLength = 600) {
     .trim();
 }
 
+function normalize(value) {
+  return String(value ?? "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("en-US")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
 function cleanArticleIntro(value) {
   return cleanText(value, 1_400)
     .replace(/^\s*\d{1,3}[,.;:]\s*/u, "")
@@ -946,7 +956,11 @@ function categoryRuleUsable(category, candidate, focused) {
 
 function sourceCandidateCoreUsable(category, candidate, now) {
   if (!candidate || !isRecentPublication(candidate.publishedAt, now)) return false;
-  if (category.parent === "Music" && !candidate.playback?.embedUrl) return false;
+  if (category.parent === "Music" && !specificMusicPlayback(candidate.playback, {
+    text: `${candidate.headline ?? ""} ${candidate.articleIntro ?? ""}`,
+    title: candidate.musicSong?.title,
+    artist: candidate.musicSong?.artist,
+  })) return false;
   if (category.parent === "Music" && (!candidate.musicSong?.title || !candidate.musicAudience?.selected)) return false;
   const minimumIntroLength = category.parent === "Music" && candidate.directCategoryFeed ? 45 : 80;
   if (!articleIntroLooksComplete(candidate.articleIntro, minimumIntroLength)) return false;
@@ -1169,11 +1183,18 @@ async function categoryCandidates(category, now = new Date()) {
             const musicAudience = musicSong
               ? await musicAudienceEvidence(musicSong, { ...candidate, articleIntro, link: metadata.url })
               : null;
+            const playback = category.parent === "Music"
+              ? specificMusicPlayback(metadata.playback, {
+                text: `${candidate.headline} ${articleIntro}`,
+                title: musicSong?.title,
+                artist: musicSong?.artist,
+              })
+              : metadata.playback;
             const enrichedCandidate = {
               ...candidate,
               link: metadata.url,
               articleIntro,
-              playback: metadata.playback,
+              playback,
               imageSource: metadata.imageSource,
               imageAlt: metadata.imageAlt,
               ...(musicSong ? { musicSong } : {}),
@@ -1237,7 +1258,13 @@ async function categoryCandidates(category, now = new Date()) {
             headline: topic.title,
             articleIntro,
             publishedAt,
-            playback: metadata.playback,
+            playback: category.parent === "Music"
+              ? specificMusicPlayback(metadata.playback, {
+                text: `${topic.title} ${articleIntro}`,
+                title: topic.musicSongTitle,
+                artist: topic.musicArtist,
+              })
+              : metadata.playback,
             imageSource: metadata.imageSource,
             source: topic.source,
             coverageCount: topic.popularityEvidence?.coverageCount,
@@ -1260,7 +1287,13 @@ async function categoryCandidates(category, now = new Date()) {
           publishedAt,
           order: topic.id,
           articleIntro,
-          playback: metadata.playback,
+          playback: category.parent === "Music"
+            ? specificMusicPlayback(metadata.playback, {
+              text: `${topic.title} ${articleIntro}`,
+              title: topic.musicSongTitle,
+              artist: topic.musicArtist,
+            })
+            : metadata.playback,
           imageSource: metadata.imageSource,
           imageAlt: metadata.imageAlt,
           coverageCount: popularityEvidence.coverageCount,
@@ -1511,6 +1544,14 @@ function cleanedRetainedWhyNow(value) {
 
 function retainedTopic(topic, category, index) {
   const id = topic.id || `${category.id}-${index + 1}`;
+  const retainedText = `${topic.title ?? ""} ${topic.description ?? ""} ${topic.whyNow ?? ""}`;
+  const playback = category.parent === "Music"
+    ? specificMusicPlayback(topic.playback, {
+      text: retainedText,
+      title: topic.musicSongTitle,
+      artist: topic.musicArtist,
+    })
+    : topic.playback;
   return {
     ...topic,
     id,
@@ -1521,6 +1562,7 @@ function retainedTopic(topic, category, index) {
     ...(topic.sourceLabel ? { sourceLabel: cleanText(topic.sourceLabel, 120) } : {}),
     ...(topic.imageAlt ? { imageAlt: cleanText(topic.imageAlt, 180) } : {}),
     ...(topic.popularityEvidence ? { popularityEvidence: normalizePopularityEvidence(topic.popularityEvidence) } : {}),
+    playback,
     image: nicheImagePath(id),
   };
 }
@@ -1536,6 +1578,13 @@ function persistedTopicUsable(topic, category, now = new Date()) {
   };
   const focused = `${topic?.description ?? ""} ${topic?.whyNow ?? ""}`;
   const outputText = `${topic?.title ?? ""} ${focused}`;
+  const playback = category.parent === "Music"
+    ? specificMusicPlayback(topic?.playback, {
+      text: outputText,
+      title: topic?.musicSongTitle,
+      artist: topic?.musicArtist,
+    })
+    : topic?.playback;
   const musicSongTopic = category.parent === "Music"
     && topic?.musicKind === "song"
     && cleanText(topic?.musicSongTitle, 100)
@@ -1555,7 +1604,7 @@ function persistedTopicUsable(topic, category, now = new Date()) {
   return topic?.evidenceMode === "source-grounded"
     && isRecentPublication(topic.publishedAt, now)
     && /^https:\/\//i.test(topic.url ?? "")
-    && (category.parent !== "Music" || (Boolean(topic?.playback?.embedUrl) && musicSongTopic))
+    && (category.parent !== "Music" || (Boolean(playback) && musicSongTopic))
     && !numberedNicheHeadlinePattern.test(topic.title ?? "")
     && !genericNicheHeadlinePattern.test(topic.title ?? "")
     && !editorialNicheHeadlinePattern.test(topic.title ?? "")

@@ -8,6 +8,7 @@ import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractAr
 import { categoryDefinitions, sourceCandidateUsable } from "../scripts/niche-ingestion.mjs";
 import { quizAnswerLeak, quizClueIsUsable, quizQuestionIsUsable, quizTitleSignals } from "../scripts/quiz-quality.mjs";
 import { createRateLimiter, fetchBytes, isPublicAddress, mapConcurrent } from "../scripts/runtime.mjs";
+import { specificMusicPlayback } from "../shared/music-playback.mjs";
 
 async function render(pathname = "/", init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -432,9 +433,12 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.ok(nicheTopics.every((topic) => !topic.imageSource || (new URL(topic.imageSource).protocol === "https:" && topic.imageSourcePageUrl === topic.url)));
   assert.doesNotMatch(JSON.stringify(nicheBrief), /&(?:ldquo|rdquo|lsquo|rsquo|hellip|nbsp|ndash|mdash);|&#(?:x[0-9a-f]+|\d+);/i);
   const musicTopics = nicheBrief.categories.filter((category) => category.parent === "Music").flatMap((category) => category.topics);
-  assert.ok(musicTopics.every((topic) => topic.playback
-    && /^https:\/\/(?:open\.spotify\.com|www\.youtube-nocookie\.com|w\.soundcloud\.com|embed\.music\.apple\.com)\//i.test(topic.playback.embedUrl)
-    && /^https:\/\/(?:open\.spotify\.com|www\.youtube\.com|soundcloud\.com|music\.apple\.com)\//i.test(topic.playback.externalUrl)));
+  assert.ok(musicTopics.every((topic) => !topic.playback || specificMusicPlayback(topic.playback, {
+    text: `${topic.title} ${topic.description} ${topic.whyNow}`,
+    title: topic.musicSongTitle,
+    artist: topic.musicArtist,
+  })));
+  assert.ok(musicTopics.every((topic) => !topic.playback || !/\/playlist\//i.test(topic.playback.externalUrl)));
   assert.ok(musicTopics.every((topic) => /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist|viral (?:song|sound|audio)|listeners?|Spotify|Billboard)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
   assert.ok(musicTopics.every((topic) => !/\b(?:festival|lineup|headliner|concert|tour|tickets?)\b/i.test(topic.title)
     || /\b(?:song|track|single|album|EP|release|released|debut|drop|music video|official audio|chart|stream|playlist)\b/i.test(`${topic.title} ${topic.description} ${topic.whyNow}`)));
@@ -461,6 +465,7 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.doesNotMatch(forYouSource, /DigestLayout|digestLayoutFor|data-layout|digest-card-edge/);
   assert.match(forYouSource, /className="digest-card"/);
   assert.match(forYouSource, /MusicPlaybackEmbed/);
+  assert.match(forYouSource, /specificMusicPlaybackForTopic\(topic\)/);
   assert.match(forYouSource, /allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"/);
   assert.match(forYouStyles, /\.digest-card > \*/);
   assert.match(forYouStyles, /overflow-wrap: anywhere/);
@@ -650,10 +655,14 @@ test("extracts safe lead images from linked publisher metadata", () => {
     <iframe data-src="https://open.spotify.com/embed/album/2os46ReV779WlryAHPL6ko?si=ignored"></iframe>
   `, "https://publisher.example/story"), {
     provider: "Spotify",
+    kind: "album",
     externalUrl: "https://open.spotify.com/album/2os46ReV779WlryAHPL6ko",
     embedUrl: "https://open.spotify.com/embed/album/2os46ReV779WlryAHPL6ko?utm_source=whatspopular&theme=0",
     label: "Listen on Spotify",
   });
+  assert.equal(extractPlayableMedia(`
+    <iframe src="https://open.spotify.com/embed/playlist/5359l8Co8qztllR0Mxk4Zv"></iframe>
+  `, "https://publisher.example/story"), null);
   assert.deepEqual(extractPlayableMedia(`
     <meta property="og:video" content="https://www.youtube.com/watch?v=veBbOF5OtO8">
   `, "https://publisher.example/story"), {

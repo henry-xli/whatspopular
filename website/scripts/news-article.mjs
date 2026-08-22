@@ -100,12 +100,13 @@ function normalizedMediaUrl(rawUrl, baseUrl) {
 
 function spotifyMedia(url) {
   if (url.hostname !== "open.spotify.com") return null;
-  const match = url.pathname.match(/^\/(?:embed\/)?(track|album|playlist)\/([A-Za-z0-9]{10,64})\/?$/i);
+  const match = url.pathname.match(/^\/(?:embed\/)?(track|album)\/([A-Za-z0-9]{10,64})\/?$/i);
   if (!match) return null;
   const kind = match[1].toLowerCase();
   const id = match[2];
   return {
     provider: "Spotify",
+    kind,
     externalUrl: `https://open.spotify.com/${kind}/${id}`,
     embedUrl: `https://open.spotify.com/embed/${kind}/${id}?utm_source=whatspopular&theme=0`,
     label: playableMediaLabels.Spotify,

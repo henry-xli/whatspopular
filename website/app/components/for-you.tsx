@@ -2,7 +2,7 @@
 
 import type { CSSProperties, FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { NicheCategory, NicheTopic } from "../niche";
+import { specificMusicPlaybackForTopic, type NicheCategory, type NicheTopic } from "../niche";
 
 const PREFERENCES_KEY = "whatspopular-for-you-tags";
 const DEFAULT_TAGS = ["edm", "football", "gaming"];
@@ -25,18 +25,19 @@ type DigestTopic = NicheTopic & {
 };
 
 function MusicPlaybackEmbed({ topic }: { topic: DigestTopic }) {
-  if (topic.categoryParent !== "Music" || !topic.playback) return null;
+  const playback = topic.categoryParent === "Music" ? specificMusicPlaybackForTopic(topic) : null;
+  if (!playback) return null;
   return (
     <div className="digest-playback">
       <div className="digest-playback-head">
         <span>Playable on this card</span>
-        <a href={topic.playback.externalUrl} target="_blank" rel="noopener noreferrer">
-          {topic.playback.label} <span aria-hidden="true">↗</span>
+        <a href={playback.externalUrl} target="_blank" rel="noopener noreferrer">
+          {playback.label} <span aria-hidden="true">↗</span>
         </a>
       </div>
       <iframe
-        title={`${topic.title} ${topic.playback.provider} player`}
-        src={topic.playback.embedUrl}
+        title={`${topic.title} ${playback.provider} player`}
+        src={playback.embedUrl}
         width="100%"
         height="152"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

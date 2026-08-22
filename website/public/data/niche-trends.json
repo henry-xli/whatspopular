@@ -407,12 +407,6 @@
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-indie-alternative-1.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv",
-            "embedUrl": "https://open.spotify.com/embed/playlist/5359l8Co8qztllR0Mxk4Zv?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
-          },
           "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/beabadoobee-26-memories.jpg?fit=cover&format=webp&width=1200&s=YbqpKkSUzle8x6tdYQNX_kBhjrRzDCBB6LRBwIUvHNc",
           "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/beabadoobee-shares-new-song-memories-ahead-of-forthcoming-album-pylon",
           "imageAlt": "Beabadoobee shares new song “Memories” ahead of forthcoming album Pylon",
@@ -448,12 +442,6 @@
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-indie-alternative-2.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv",
-            "embedUrl": "https://open.spotify.com/embed/playlist/5359l8Co8qztllR0Mxk4Zv?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
-          },
           "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/de-clair-26.jpg?fit=cover&format=webp&width=1200&s=_dvU_1upp1JabW3CUu8Fun3L5r6ZyiZZ5HhbLXM6wDA",
           "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/swedish-artist-de-clair-announces-debut-album-veta-begas",
           "imageAlt": "Swedish artist de clair announces debut album veta begas",
@@ -485,12 +473,6 @@
           "sourceLabel": "Read the report",
           "evidenceMode": "source-grounded",
           "image": "/culture/niche-indie-alternative-3.webp",
-          "playback": {
-            "provider": "Spotify",
-            "externalUrl": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv",
-            "embedUrl": "https://open.spotify.com/embed/playlist/5359l8Co8qztllR0Mxk4Zv?utm_source=whatspopular&theme=0",
-            "label": "Listen on Spotify"
-          },
           "imageSource": "https://cdn.craft.cloud/3747bbfe-07db-499d-aa3d-b239ba21c062/assets/images/ms-gloom-26.jpg?fit=cover&format=webp&width=1200&s=lPZUUCpVLuVkyUeb9NIVeMIte7gVbzaZgEI64m-iJSw",
           "imageSourcePageUrl": "https://www.thelineofbestfit.com/news/ms-gloom-announces-remix-of-her-j-is-for-joon-mixtape-with-araabmuzik-version-of-joker",
           "imageAlt": "Ms* Gloom announces remix of her J Is For Joon mixtape with Araabmuzik version of “Joker”",

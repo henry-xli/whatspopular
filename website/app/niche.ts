@@ -1,7 +1,11 @@
 import rawNicheBrief from "../data/niche-trends.json";
+import { specificMusicPlayback } from "../shared/music-playback.mjs";
+
+export type NichePlaybackKind = "track" | "album";
 
 export type NichePlayback = {
   provider: "Apple Music" | "SoundCloud" | "Spotify" | "YouTube";
+  kind?: NichePlaybackKind;
   externalUrl: string;
   embedUrl: string;
   label: string;
@@ -26,6 +30,9 @@ export type NicheTopic = {
   imageSource?: string;
   imageSourcePageUrl?: string;
   imageAlt?: string;
+  musicKind?: "song" | "album";
+  musicSongTitle?: string;
+  musicArtist?: string;
   playback?: NichePlayback;
   coverageCount: number;
   coverageSources: string[];
@@ -62,4 +69,12 @@ export function topicCountFor(categories: readonly NicheCategory[]) {
 
 export function categoryById(categoryId: string) {
   return nicheCategories.find((category) => category.id === categoryId);
+}
+
+export function specificMusicPlaybackForTopic(topic: Pick<NicheTopic, "title" | "description" | "whyNow" | "musicSongTitle" | "musicArtist" | "playback">) {
+  return specificMusicPlayback(topic.playback, {
+    text: `${topic.title} ${topic.description} ${topic.whyNow}`,
+    title: topic.musicSongTitle,
+    artist: topic.musicArtist,
+  }) as NichePlayback | null;
 }
