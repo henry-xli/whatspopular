@@ -2,10 +2,10 @@ name: Refresh culture briefing
 
 on:
   schedule:
-    # GitHub cron is UTC. Trigger both possible UTC offsets, then keep only
-    # the invocation that lands at noon Pacific on an alternating epoch day.
-    - cron: "0 19 * * *"
-    - cron: "0 20 * * *"
+    # GitHub cron is UTC and cannot express a named timezone. Run the cheap
+    # gate hourly so a delayed scheduled invocation can recover during the
+    # first few Pacific hours; only the midnight-local run normally ingests.
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -19,37 +19,51 @@ jobs:
   refresh:
     if: github.repository == 'henry-xli/whatspopular'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
+    env:
+      REFRESH_RECOVERY_HOURS: "5"
     defaults:
       run:
         working-directory: website
     steps:
-      - name: Check Pacific ingestion time
-        id: timing
+      - name: Check Pacific refresh window
+        id: window
+        working-directory: .
         run: |
           pacific_hour="$(TZ=America/Los_Angeles date +%H)"
-          epoch_day=$(( $(date +%s) / 86400 ))
-          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
-          elif [[ "$pacific_hour" == "12" && $((epoch_day % 2)) -eq 0 ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
+          pacific_hour=$((10#$pacific_hour))
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$pacific_hour" -le "$REFRESH_RECOVERY_HOURS" ]]; then
+            echo "candidate=true" >> "$GITHUB_OUTPUT"
           else
-            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "candidate=false" >> "$GITHUB_OUTPUT"
           fi
+          echo "Pacific scheduler check: hour=$(printf '%02d' "$pacific_hour"), recovery window ends at $(printf '%02d' "$REFRESH_RECOVERY_HOURS"):00"
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5 (Node 24)
-        if: steps.timing.outputs.run == 'true'
+        if: steps.window.outputs.candidate == 'true'
         with:
           ref: main
+      - name: Check snapshot freshness
+        id: due
+        if: steps.window.outputs.candidate == 'true'
+        working-directory: .
+        run: node website/scripts/check-refresh-due.mjs >> "$GITHUB_OUTPUT"
+        env:
+          REFRESH_CANDIDATE: ${{ steps.window.outputs.candidate }}
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0 (Node 24)
-        if: steps.timing.outputs.run == 'true'
+        if: steps.due.outputs.run == 'true'
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: website/package-lock.json
-      - if: steps.timing.outputs.run == 'true'
+      - if: steps.due.outputs.run == 'true'
         run: npm ci
-      - if: steps.timing.outputs.run == 'true'
-        run: npm run content:update -- --force
+      - name: Ingest culture and niche topics
+        if: steps.due.outputs.run == 'true'
+        run: |
+          started_at="$(date +%s)"
+          npm run content:update -- --force
+          elapsed=$(( $(date +%s) - started_at ))
+          echo "Content ingestion completed in ${elapsed}s." | tee -a "$GITHUB_STEP_SUMMARY"
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
@@ -57,23 +71,28 @@ jobs:
           PRODUCT_MOVERS_SNAPSHOT: ${{ secrets.PRODUCT_MOVERS_SNAPSHOT || secrets.PRODUCT_TRENDS_SNAPSHOT }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_DESCRIPTION_MODEL: ${{ vars.OPENAI_DESCRIPTION_MODEL }}
-      - if: steps.timing.outputs.run == 'true'
-        run: npm run content:images
-      - if: steps.timing.outputs.run == 'true'
+      - name: Cache source images
+        if: steps.due.outputs.run == 'true'
+        run: |
+          started_at="$(date +%s)"
+          npm run content:images
+          elapsed=$(( $(date +%s) - started_at ))
+          echo "Image preparation completed in ${elapsed}s." | tee -a "$GITHUB_STEP_SUMMARY"
+      - if: steps.due.outputs.run == 'true'
         run: npm run content:publish
-      - if: steps.timing.outputs.run == 'true'
+      - if: steps.due.outputs.run == 'true'
         run: npm run lint
-      - if: steps.timing.outputs.run == 'true'
+      - if: steps.due.outputs.run == 'true'
         run: npm run typecheck
-      - if: steps.timing.outputs.run == 'true'
+      - if: steps.due.outputs.run == 'true'
         run: npm test
       - name: Commit a changed briefing
-        if: steps.timing.outputs.run == 'true'
+        if: steps.due.outputs.run == 'true'
         working-directory: .
         run: |
           git config user.name "whatspopular refresh bot"
           git config user.email "actions@users.noreply.github.com"
           git add website/data/trends.json website/data/niche-trends.json website/public/data/trends.json website/public/data/niche-trends.json website/public/culture website/public/icon.png
           git diff --cached --quiet && exit 0
-          git commit -m "Refresh 48-hour culture briefing"
+          git commit -m "Refresh daily culture briefing"
           git push origin main

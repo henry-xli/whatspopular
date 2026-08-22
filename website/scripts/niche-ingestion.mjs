@@ -1682,10 +1682,12 @@ export async function generateNicheSnapshot(brief, { now = new Date(), dryRun = 
   });
   let generated = new Map();
   if (process.env.OPENAI_API_KEY?.trim()) {
+    const aiStartedAt = Date.now();
     try {
       generated = await generateNicheBatch(records);
+      console.log(`AI niche generation returned ${generated.size}/${records.length} topic cards in ${((Date.now() - aiStartedAt) / 1000).toFixed(1)}s.`);
     } catch (error) {
-      console.warn(`AI niche topics unavailable; deterministic niche cards retained: ${error instanceof Error ? error.message : String(error)}`);
+      console.warn(`AI niche topics unavailable after ${((Date.now() - aiStartedAt) / 1000).toFixed(1)}s; deterministic niche cards retained: ${error instanceof Error ? error.message : String(error)}`);
     }
   } else {
     console.log("AI niche topics skipped: OPENAI_API_KEY is not configured; deterministic niche cards remain active.");

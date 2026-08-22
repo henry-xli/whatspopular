@@ -294,7 +294,7 @@ test("renders the complete finite culture briefing", async () => {
   const mobileSnapshotResponse = await render("/api/brief", { headers: { accept: "application/json" } });
   assert.equal(mobileSnapshotResponse.status, 200);
   assert.deepEqual(await mobileSnapshotResponse.json(), brief);
-  assert.match(mobileSnapshotResponse.headers.get("cache-control") ?? "", /s-maxage=3600/);
+  assert.match(mobileSnapshotResponse.headers.get("cache-control") ?? "", /s-maxage=300/);
   assert.equal(homeResponse.status, 200);
   const homeHtml = await homeResponse.text();
   assert.match(homeHtml, /How trendy are you\?/);
@@ -309,7 +309,7 @@ test("renders the complete finite culture briefing", async () => {
   assert.match(homeHtml, /aria-label="Next standout"/);
   assert.match(homeHtml, /class="is-active" href="\/"[^>]*>Home<\/a>/);
   assert.match(homeHtml, /aria-current="page"/);
-  assert.match(homeHtml, /One 48-hour snapshot\. Eight boards\. One quiz\./);
+  assert.match(homeHtml, /One daily snapshot\. Eight boards\. One quiz\./);
   assert.doesNotMatch(homeHtml, /Catch me up|How this works/);
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -396,19 +396,19 @@ test("renders the About flowchart", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Sources in\. Context out\./);
-  assert.match(html, /One 48-hour snapshot\. Eight boards\. One quiz\./);
-  assert.match(html, /12:00 PM Pacific/);
-  for (const label of ["Pull sources", "Ingest every 48 hours", "Build the snapshot", "Write and quiz", "Validate and publish"]) {
+  assert.match(html, /One daily snapshot\. Eight boards\. One quiz\./);
+  assert.match(html, /12:00 AM Pacific/);
+  for (const label of ["Pull sources", "Ingest every day", "Build the snapshot", "Write and quiz", "Validate and publish"]) {
     assert.match(html, new RegExp(`>${label}<`));
   }
   assert.doesNotMatch(html, /The eight algorithms|Exactly how each list is made/);
   assert.match(html, /last good snapshot stays live/i);
   assert.match(html, /<main class="about-page" id="main-content" tabindex="-1">/);
   const workflow = await readFile(new URL("../../.github/workflows/update-daily.yml", import.meta.url), "utf8");
-  assert.match(workflow, /cron: "0 19 \* \* \*"/);
-  assert.match(workflow, /cron: "0 20 \* \* \*"/);
+  assert.match(workflow, /cron: "0 \* \* \* \*"/);
   assert.match(workflow, /pacific_hour/);
-  assert.match(workflow, /epoch_day/);
+  assert.match(workflow, /check-refresh-due\.mjs/);
+  assert.match(workflow, /steps\.due\.outputs\.run/);
 });
 
 test("renders the niche For You builder and keeps anonymous profiles gated", async () => {

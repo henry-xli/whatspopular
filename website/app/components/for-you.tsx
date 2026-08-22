@@ -25,6 +25,33 @@ type DigestTopic = NicheTopic & {
   categoryParent: string;
 };
 
+function isLiveNicheSnapshot(value: unknown): value is {
+  categories: NicheCategory[];
+  generatedAt: string;
+  edition: string;
+  window: string;
+  summary: string;
+} {
+  if (!value || typeof value !== "object") return false;
+  const candidate = value as Record<string, unknown>;
+  if (typeof candidate.generatedAt !== "string" || !Number.isFinite(Date.parse(candidate.generatedAt))
+    || typeof candidate.edition !== "string" || typeof candidate.window !== "string"
+    || typeof candidate.summary !== "string" || !Array.isArray(candidate.categories)
+    || candidate.categories.length === 0) return false;
+  return candidate.categories.every((category) => {
+    if (!category || typeof category !== "object") return false;
+    const entry = category as Record<string, unknown>;
+    if (!["id", "label", "parent", "description", "accent"].every((key) => typeof entry[key] === "string")
+      || !Array.isArray(entry.topics)) return false;
+    return entry.topics.every((topic) => {
+      if (!topic || typeof topic !== "object") return false;
+      const item = topic as Record<string, unknown>;
+      return ["id", "title", "description", "whyNow", "url", "source", "sourceLabel", "image", "trendLabel"]
+        .every((key) => typeof item[key] === "string");
+    });
+  });
+}
+
 function MusicPlaybackEmbed({ topic }: { topic: DigestTopic }) {
   const playback = topic.categoryParent === "Music" ? specificMusicPlaybackForTopic(topic) : null;
   if (!playback) return null;
@@ -112,6 +139,9 @@ export function ForYouExperience({
   signedIn,
   displayName,
 }: ForYouProps) {
+  const [snapshot, setSnapshot] = useState(() => ({ categories, generatedAt, edition, windowLabel, summary }));
+  const availableCategories = snapshot.categories;
+  const availableCategoryIds = useMemo(() => new Set(availableCategories.map((category) => category.id)), [availableCategories]);
   const [selectedTags, setSelectedTags] = useState<string[]>(() => DEFAULT_TAGS.filter((id) => categories.some((category) => category.id === id)));
   const [compiled, setCompiled] = useState(false);
   const [compileNumber, setCompileNumber] = useState(0);
@@ -132,10 +162,14 @@ export function ForYouExperience({
       : signedIn;
   const effectiveDisplayName = adminPreviewMode === "signed-in" ? "Admin preview" : displayName;
 
-  const groups = useMemo(() => groupCategories(categories), [categories]);
+  const groups = useMemo(() => groupCategories(availableCategories), [availableCategories]);
+  const activeSelectedTags = useMemo(
+    () => selectedTags.filter((id) => availableCategoryIds.has(id)),
+    [availableCategoryIds, selectedTags],
+  );
   const selectedCategories = useMemo(
-    () => categories.filter((category) => selectedTags.includes(category.id)),
-    [categories, selectedTags],
+    () => availableCategories.filter((category) => activeSelectedTags.includes(category.id)),
+    [activeSelectedTags, availableCategories],
   );
   const digestTopics = useMemo<DigestTopic[]>(() => {
     const topics = selectedCategories.flatMap((category) => category.topics.map((topic) => ({
@@ -145,15 +179,33 @@ export function ForYouExperience({
       categoryParent: category.parent,
     })));
     const uniqueTopics = [...new Map(topics.map((topic) => [topic.id, topic])).values()];
-    return seededShuffle(uniqueTopics, `${generatedAt}:${selectedTags.join(",")}:${compileNumber}`)
+    return seededShuffle(uniqueTopics, `${snapshot.generatedAt}:${activeSelectedTags.join(",")}:${compileNumber}`)
       .slice(0, Math.min(16, uniqueTopics.length));
-  }, [compileNumber, generatedAt, selectedCategories, selectedTags]);
+  }, [activeSelectedTags, compileNumber, selectedCategories, snapshot.generatedAt]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/niche", { headers: { accept: "application/json" }, cache: "no-store" })
+      .then((response) => response.ok ? response.json() as Promise<unknown> : null)
+      .then((payload) => {
+        if (cancelled || !isLiveNicheSnapshot(payload)) return;
+        setSnapshot({
+          categories: payload.categories,
+          generatedAt: payload.generatedAt,
+          edition: payload.edition,
+          windowLabel: payload.window,
+          summary: payload.summary,
+        });
+      })
+      .catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [generatedAt]);
 
   useEffect(() => {
     if (effectiveSignedIn && !adminPreviewActive) return undefined;
-    const timer = window.setTimeout(() => setSelectedTags(readLocalTags(categories)), 0);
+    const timer = window.setTimeout(() => setSelectedTags(readLocalTags(availableCategories)), 0);
     return () => window.clearTimeout(timer);
-  }, [adminPreviewActive, categories, effectiveSignedIn]);
+  }, [adminPreviewActive, availableCategories, effectiveSignedIn]);
 
   useEffect(() => {
     if (!effectiveSignedIn || adminPreviewActive) return undefined;
@@ -164,14 +216,14 @@ export function ForYouExperience({
         if (cancelled || !payload) return;
         if (Array.isArray(payload.tags)) {
           const valid = payload.tags.filter((value): value is string => typeof value === "string"
-            && categories.some((category) => category.id === value));
+            && availableCategories.some((category) => category.id === value));
           if (payload.hasProfile !== false) setSelectedTags([...new Set(valid)]);
         }
         profileUpdatedAtRef.current = typeof payload.updatedAt === "string" ? payload.updatedAt : null;
       })
       .catch(() => undefined);
     return () => { cancelled = true; };
-  }, [adminPreviewActive, categories, effectiveSignedIn]);
+  }, [adminPreviewActive, availableCategories, effectiveSignedIn]);
 
   function persistLocal(nextTags: string[]) {
     if (effectiveSignedIn && !adminPreviewActive) return;
@@ -180,9 +232,10 @@ export function ForYouExperience({
 
   function toggleTag(categoryId: string) {
     setSelectedTags((previous) => {
-      const next = previous.includes(categoryId)
-        ? previous.filter((id) => id !== categoryId)
-        : [...previous, categoryId];
+      const current = previous.filter((id) => availableCategoryIds.has(id));
+      const next = current.includes(categoryId)
+        ? current.filter((id) => id !== categoryId)
+        : [...current, categoryId];
       persistLocal(next);
       setSaved(false);
       setSaveMessage("");
@@ -225,7 +278,7 @@ export function ForYouExperience({
       const payload = await response.json() as { updatedAt?: unknown; tags?: unknown[]; error?: string };
       if (!response.ok) {
         if (response.status === 409 && Array.isArray(payload.tags)) {
-          const valid = payload.tags.filter((value): value is string => typeof value === "string" && categories.some((category) => category.id === value));
+          const valid = payload.tags.filter((value): value is string => typeof value === "string" && availableCategories.some((category) => category.id === value));
           setSelectedTags([...new Set(valid)]);
           profileUpdatedAtRef.current = typeof payload.updatedAt === "string" ? payload.updatedAt : profileUpdatedAtRef.current;
           setSaveMessage("Your interests changed on another device, so the newer settings were reloaded.");
@@ -245,14 +298,14 @@ export function ForYouExperience({
 
   async function compileFeed(event?: FormEvent) {
     event?.preventDefault();
-    if (!selectedTags.length) return;
+    if (!activeSelectedTags.length) return;
     if (!effectiveSignedIn) {
       setGateOpen(true);
       return;
     }
     setCompileNumber((number) => number + 1);
     setCompiled(true);
-    await queueSave(selectedTags);
+    await queueSave(activeSelectedTags);
     window.setTimeout(() => document.getElementById("digest-feed")?.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
   }
 
@@ -266,13 +319,13 @@ export function ForYouExperience({
     <main id="main-content" className="for-you-page" tabIndex={-1}>
       <section className="for-you-hero wrap" aria-labelledby="for-you-title">
         <div className="for-you-kicker">
-          <span className="eyebrow">For You / {windowLabel}</span>
-          <span className="for-you-date">Snapshot built {displayDate(generatedAt)}</span>
+          <span className="eyebrow">For You / {snapshot.windowLabel}</span>
+          <span className="for-you-date">Snapshot built {displayDate(snapshot.generatedAt)}</span>
         </div>
         <div className="for-you-heading-grid">
           <div>
             <h1 id="for-you-title">Your internet,<br /><em>more specific.</em></h1>
-            <p className="for-you-lede">{summary}</p>
+            <p className="for-you-lede">{snapshot.summary}</p>
           </div>
         </div>
 
@@ -296,9 +349,9 @@ export function ForYouExperience({
               <h2 id="tag-builder-title">Choose your corners</h2>
             </div>
             <div className="tag-builder-summary">
-              <span><strong>{selectedTags.length}</strong> selected</span>
+              <span><strong>{activeSelectedTags.length}</strong> selected</span>
               <span aria-hidden="true">·</span>
-              <span>{selectedTags.length ? `${selectedCategories.reduce((total, category) => total + category.topics.length, 0)} stories in the mix` : "Pick at least one"}</span>
+              <span>{activeSelectedTags.length ? `${selectedCategories.reduce((total, category) => total + category.topics.length, 0)} stories in the mix` : "Pick at least one"}</span>
             </div>
           </div>
           <div className="tag-groups">
@@ -307,7 +360,7 @@ export function ForYouExperience({
                 <span className="tag-group-label">{parent}</span>
                 <div className="tag-list" aria-label={`${parent} interests`}>
                   {parentCategories.map((category) => {
-                    const active = selectedTags.includes(category.id);
+                    const active = activeSelectedTags.includes(category.id);
                     return (
                       <button
                         className={`interest-tag${active ? " is-selected" : ""}`}
@@ -329,7 +382,7 @@ export function ForYouExperience({
           </div>
           <div className="tag-builder-foot">
             <span className="builder-note"><span className="sparkle" aria-hidden="true">✦</span> We only use cards already gathered in this week’s snapshot.</span>
-            <button className="button button-primary compile-button" type="submit" disabled={!selectedTags.length || saving}>
+            <button className="button button-primary compile-button" type="submit" disabled={!activeSelectedTags.length || saving}>
               {saving ? "Saving…" : compiled ? "Recompile my mix" : "Compile my feed"}
               <span aria-hidden="true">↗</span>
             </button>
@@ -355,7 +408,7 @@ export function ForYouExperience({
           <div className="digest-intro wrap">
             <div>
               <p className="eyebrow">02 / Your weekly mix</p>
-              <h2 id="digest-title">The {edition.toLowerCase()} edition.</h2>
+              <h2 id="digest-title">The {snapshot.edition.toLowerCase()} edition.</h2>
             </div>
             <div className="digest-intro-side">
               <p>{effectiveSignedIn ? `Saved for ${effectiveDisplayName ?? "your account"}.` : "This mix is built on this device."} Each card has a source and a reason it is moving now.</p>

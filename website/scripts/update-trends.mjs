@@ -153,6 +153,10 @@ async function safely(name, work) {
   }
 }
 
+function elapsedSeconds(startedAt) {
+  return `${((Date.now() - startedAt) / 1000).toFixed(1)}s`;
+}
+
 function rememberAiDescriptionContext(item, sectionId, snippets) {
   if (!item || typeof item !== "object") return item;
   const normalized = (Array.isArray(snippets) ? snippets : [])
@@ -1174,6 +1178,20 @@ function eligiblePerson(entity) {
   return !/\b(?:politician|president|prime minister|senator|governor|member of parliament|political candidate|monarch|king|queen)\b/i.test(description);
 }
 
+function categoryCapForCandidates(candidates, targetCount) {
+  const counts = new Map();
+  for (const { person } of candidates) {
+    const category = person.category || "other";
+    counts.set(category, (counts.get(category) ?? 0) + 1);
+  }
+  let cap = 2;
+  while (cap < targetCount
+    && [...counts.values()].reduce((total, count) => total + Math.min(count, cap), 0) < targetCount) {
+    cap += 1;
+  }
+  return { cap, counts };
+}
+
 function ensureSentence(value) {
   const clean = plainText(value ?? "").replace(/\s+([,.;:!?])/g, "$1");
   if (!clean) return "";
@@ -1953,6 +1971,8 @@ async function updatePeople(brief, topviews) {
   const categoryCounts = new Map();
   const validCandidates = candidatesWithContext.filter(({ context }) => context);
   console.log(`People context validation: ${validCandidates.length}/${candidatesWithContext.length} candidates have recent causal coverage`);
+  const categorySelection = categoryCapForCandidates(validCandidates, 10);
+  console.log(`People category cap: ${categorySelection.cap} across ${categorySelection.counts.size} available primary categories`);
   const addCandidate = ({ person, context }) => {
     if (!context || selected.some((entry) => normalize(entry.title) === normalize(person.title))) return false;
     selected.push(person);
@@ -1967,17 +1987,20 @@ async function updatePeople(brief, topviews) {
     const { person, context } = candidate;
     if (!context) continue;
     const count = categoryCounts.get(person.category) ?? 0;
-    if (count >= 2) continue;
+    if (count >= categorySelection.cap) continue;
     addCandidate(candidate);
     if (selected.length === 10) break;
   }
   if (selected.length < 10) {
     for (const candidate of validCandidates) {
+      const count = categoryCounts.get(candidate.person.category) ?? 0;
+      if (count >= categorySelection.cap) continue;
       addCandidate(candidate);
       if (selected.length === 10) break;
     }
   }
   if (selected.length < 10) throw new Error("Wikimedia topviews produced fewer than ten category-balanced people with recent relevance evidence");
+  section.categoryCap = categorySelection.cap;
   const details = await wikipediaPageDetails(selected.map((person) => person.title));
   const articles = await mapConcurrent(contexts, 2, (context, index) => linkedNewsArticle(context, selected[index]?.title));
   const currentByTitle = new Map(
@@ -4356,6 +4379,7 @@ function usableProductAiDescription(description, item, siblings) {
 }
 
 async function updateAiDescriptions(brief) {
+  const startedAt = Date.now();
   if (!process.env.OPENAI_API_KEY?.trim()) {
     console.log("AI descriptions skipped: OPENAI_API_KEY is not configured; deterministic descriptions remain active.");
     return { enabled: false, applied: 0, sections: 0 };
@@ -4402,7 +4426,7 @@ async function updateAiDescriptions(brief) {
     }
   });
   const applied = results.reduce((total, result) => total + result.applied, 0);
-  console.log(`AI descriptions applied to ${applied} entries across ${results.filter((result) => result.applied > 0).length} boards.`);
+  console.log(`AI descriptions applied to ${applied} entries across ${results.filter((result) => result.applied > 0).length} boards in ${elapsedSeconds(startedAt)}.`);
   return { enabled: true, applied, sections: results.filter((result) => result.applied > 0).length };
 }
 
@@ -4636,6 +4660,7 @@ function quizRecords(brief) {
 async function updateQuiz(brief) {
   const records = quizRecords(brief);
   let generated = new Map();
+  const startedAt = Date.now();
   if (process.env.OPENAI_API_KEY?.trim()) {
     try {
       generated = await generateQuizBatch(records);
@@ -4657,7 +4682,7 @@ async function updateQuiz(brief) {
     itemTitle: record.title,
   }));
   brief.quiz = { durationSeconds: quizDurationSeconds, questions };
-  console.log(`Quiz questions prepared: ${questions.length} (${generated.size ? `${generated.size} AI prompts` : "deterministic prompts"}).`);
+  console.log(`Quiz questions prepared: ${questions.length} (${generated.size ? `${generated.size} AI prompts` : "deterministic prompts"}) in ${elapsedSeconds(startedAt)}.`);
 }
 
 function validateBrief(brief) {
@@ -4738,11 +4763,15 @@ function validateBrief(brief) {
     throw new Error("Memes must preserve the published Meme of the Month order");
   }
   const people = brief.sections.find((section) => section.id === "people");
+  const categoryCap = Number(people.categoryCap ?? 2);
+  if (!Number.isInteger(categoryCap) || categoryCap < 2) {
+    throw new Error("People must declare a generated primary-category cap");
+  }
   const peopleCategoryCounts = new Map();
   for (const item of [...people.items, ...people.moreItems]) {
     const count = (peopleCategoryCounts.get(item.category) ?? 0) + 1;
     peopleCategoryCounts.set(item.category, count);
-    if (!item.category || count > 2 || !item.metric?.label.startsWith("Wikipedia views · ")) {
+    if (!item.category || count > categoryCap || !item.metric?.label.startsWith("Wikipedia views · ")) {
       throw new Error("People must use one capped primary category and monthly Wikipedia views");
     }
   }
@@ -4859,9 +4888,9 @@ for (const section of brief.sections) {
 }
 const emptySection = (id, title, layout) => ({
   id,
-  eyebrow: "Pending first 48-hour refresh",
+  eyebrow: "Pending first daily refresh",
   title,
-  description: "This board is populated by the validated 48-hour ingestion job.",
+  description: "This board is populated by the validated daily ingestion job.",
   sources: [
     { label: id === "products" ? "Amazon Movers & Shakers" : "Google Trends", url: id === "products" ? amazonMoverCategories[0].url : newsTrendsUrl },
     { label: id === "products" ? "Google News viral coverage" : "Google News", url: id === "products" ? productDiscoveryUrl : googleNewsHomeUrl },

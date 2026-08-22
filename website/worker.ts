@@ -1,9 +1,21 @@
 import handler from "vinext/server/app-router-entry";
 import rawBrief from "./data/trends.json";
+import rawNicheBrief from "./data/niche-trends.json";
 
 declare const __BUILD_ID__: string;
 
-const mobileSnapshot = JSON.stringify(rawBrief);
+type SnapshotKind = "brief" | "niche";
+
+const staticSnapshots: Record<SnapshotKind, { body: string; generatedAt: string }> = {
+  brief: { body: JSON.stringify(rawBrief), generatedAt: rawBrief.generatedAt },
+  niche: { body: JSON.stringify(rawNicheBrief), generatedAt: rawNicheBrief.generatedAt },
+};
+const remoteSnapshotUrls: Record<SnapshotKind, string> = {
+  brief: "https://raw.githubusercontent.com/henry-xli/whatspopular/main/website/data/trends.json",
+  niche: "https://raw.githubusercontent.com/henry-xli/whatspopular/main/website/data/niche-trends.json",
+};
+const remoteCultureBase = "https://raw.githubusercontent.com/henry-xli/whatspopular/main/website/public/culture";
+const remoteCulturePath = /^\/culture\/[a-z0-9-]+\.webp$/;
 
 interface AssetFetcher {
   fetch(request: Request): Promise<Response>;
@@ -21,6 +33,65 @@ interface ExecutionContext {
 interface EdgeCache {
   match(request: Request): Promise<Response | undefined>;
   put(request: Request, response: Response): Promise<void>;
+}
+
+function isSnapshotPayload(value: unknown, kind: SnapshotKind): value is { generatedAt: string } {
+  if (!value || typeof value !== "object") return false;
+  const candidate = value as { generatedAt?: unknown; sections?: unknown; categories?: unknown };
+  return typeof candidate.generatedAt === "string"
+    && Number.isFinite(Date.parse(candidate.generatedAt))
+    && (kind === "brief" ? Array.isArray(candidate.sections) : Array.isArray(candidate.categories));
+}
+
+async function latestSnapshot(kind: SnapshotKind) {
+  const fallback = staticSnapshots[kind];
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8_000);
+  try {
+    const response = await fetch(remoteSnapshotUrls[kind], {
+      headers: { accept: "application/json" },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`remote ${kind} snapshot returned ${response.status}`);
+    const body = await response.text();
+    const parsed: unknown = JSON.parse(body);
+    if (!isSnapshotPayload(parsed, kind)) throw new Error(`remote ${kind} snapshot failed validation`);
+    return { body, generatedAt: parsed.generatedAt };
+  } catch {
+    return fallback;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function remoteCultureAsset(request: Request, edgeCache: EdgeCache | undefined, ctx: ExecutionContext) {
+  const url = new URL(request.url);
+  if ((request.method !== "GET" && request.method !== "HEAD") || !remoteCulturePath.test(url.pathname)) return undefined;
+
+  let cacheKey: Request | undefined;
+  if (request.method === "GET" && edgeCache) {
+    const cacheUrl = new URL(url.pathname, url.origin);
+    cacheUrl.searchParams.set("__wpasset", __BUILD_ID__);
+    cacheKey = new Request(cacheUrl, { headers: { accept: "image/webp,image/*;q=0.8" } });
+    try {
+      const cached = await edgeCache.match(cacheKey);
+      if (cached) return cached;
+    } catch {}
+  }
+
+  try {
+    const remoteUrl = `${remoteCultureBase}${url.pathname.slice("/culture".length)}`;
+    const response = await fetch(remoteUrl, { headers: { accept: "image/webp,image/*;q=0.8" } });
+    if (!response.ok || !(response.headers.get("content-type") ?? "").toLowerCase().startsWith("image/")) return undefined;
+    const headers = new Headers(response.headers);
+    headers.set("Cache-Control", "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400");
+    headers.set("X-Content-Type-Options", "nosniff");
+    const result = new Response(request.method === "HEAD" ? null : response.body, { status: 200, headers });
+    if (cacheKey && edgeCache) ctx.waitUntil(edgeCache.put(cacheKey, result.clone()).catch(() => {}));
+    return result;
+  } catch {
+    return undefined;
+  }
 }
 
 const securityHeaders = {
@@ -56,10 +127,14 @@ const securityHeaders = {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
-    const isMobileSnapshot = url.pathname === "/api/brief";
+    const snapshotKind = url.pathname === "/api/brief"
+      ? "brief"
+      : url.pathname === "/api/niche"
+        ? "niche"
+        : undefined;
     const edgeCache = (globalThis as unknown as { caches?: { default?: EdgeCache } }).caches?.default;
 
-    if (isMobileSnapshot) {
+    if (snapshotKind) {
       if (request.method !== "GET" && request.method !== "HEAD") {
         return new Response(null, {
           status: 405,
@@ -69,8 +144,8 @@ const worker = {
 
       let snapshotCacheKey: Request | undefined;
       if (request.method === "GET" && edgeCache) {
-        const cacheUrl = new URL("/api/brief", url.origin);
-        cacheUrl.searchParams.set("__wpv", __BUILD_ID__);
+        const cacheUrl = new URL(url.pathname, url.origin);
+        cacheUrl.searchParams.set("__wpdata", __BUILD_ID__);
         snapshotCacheKey = new Request(cacheUrl, { headers: { accept: "application/json" } });
         try {
           const cached = await edgeCache.match(snapshotCacheKey);
@@ -78,16 +153,17 @@ const worker = {
         } catch {}
       }
 
-      const etag = `"${__BUILD_ID__}"`;
+      const snapshot = await latestSnapshot(snapshotKind);
+      const etag = `"${snapshot.generatedAt}"`;
       const headers = new Headers({
-        "Cache-Control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+        "Cache-Control": "public, max-age=300, s-maxage=300, stale-while-revalidate=86400",
         "Content-Type": "application/json; charset=utf-8",
         ETag: etag,
       });
       if (process.env.NODE_ENV === "production") {
         for (const [name, value] of Object.entries(securityHeaders)) headers.set(name, value);
       }
-      const response = new Response(request.method === "HEAD" ? null : mobileSnapshot, { headers });
+      const response = new Response(request.method === "HEAD" ? null : snapshot.body, { headers });
       if (snapshotCacheKey && edgeCache) {
         ctx.waitUntil(edgeCache.put(snapshotCacheKey, response.clone()).catch(() => {}));
       }
@@ -110,6 +186,9 @@ const worker = {
         if (cached) return cached;
       } catch {}
     }
+
+    const remoteAsset = await remoteCultureAsset(request, edgeCache, ctx);
+    if (remoteAsset) return remoteAsset;
 
     const response = await handler.fetch(request, env, ctx);
     const headers = new Headers(response.headers);

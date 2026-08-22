@@ -1,6 +1,6 @@
 # what’s popular?
 
-A finite 48-hour briefing, quiz, and niche-interest digest on internet culture.
+A finite daily briefing, quiz, and niche-interest digest on internet culture.
 Visitors receive pre-rendered HTML, local images, and a cached mobile snapshot
 at `/api/brief`; the For You page assembles pre-generated cards locally after
 the user chooses interest tags.
@@ -29,9 +29,10 @@ npm test
 
 ## How rankings are made
 
-At 12:00 PM Pacific every 48 hours, `scripts/update-trends.mjs` verifies its
-required sources and writes `data/trends.json` atomically. A bad run cannot
-replace the last validated snapshot.
+At 12:00 AM Pacific every day, `scripts/update-trends.mjs` verifies its
+required sources and writes `data/trends.json` atomically. The scheduled
+workflow has a short Pacific-hours recovery window for delayed runners, and a
+bad run cannot replace the last validated snapshot.
 
 - Memes preserve the latest completed Know Your Meme Meme of the Month order,
   filtered to entries covered by Lessons in Meme Culture in the past two months.
@@ -141,13 +142,16 @@ for Amazon Movers & Shakers when its public page rate-limits automation;
 - `scripts/niche-catalog.mjs` defines the expanded interest taxonomy: 42 lanes
   across music, sports, news, lifestyle, and culture. `content:niche-catalog`
   materializes its deterministic fallback cards into the weekly snapshot.
-- `scripts/` contains the 48-hour ingestion, niche source adapters, AI copy
+- `scripts/` contains the daily ingestion, niche source adapters, AI copy
   pass, and image pipeline. The helpers are kept as separate files because
   they are independent network/security boundaries; combining them would make
   source changes harder to review and increase the blast radius of a failure.
 - `worker.ts` applies edge caching and production security headers.
 - `tests/` checks rendered content, headers, links, media, and data invariants.
-- `.github/workflows/update-daily.yml` refreshes, verifies, and commits every 48 hours.
+- `.github/workflows/update-daily.yml` refreshes, verifies, and commits daily at
+  midnight Pacific. The deployed Worker edge-caches the committed snapshots and
+  current images from the public repository, so a data-only refresh reaches the
+  public Site and mobile API without a manual application redeploy.
 
 Content-hashed application assets cache immutably; successful HTML navigations
 use a deployment-versioned edge cache, and local media uses

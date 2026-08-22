@@ -5,7 +5,6 @@ import {
   getAuthenticatedUser,
   jsonResponse,
   normalizedTags,
-  parseStoredTags,
   profileForUser,
   readJsonBody,
   sameOriginRequest,
