@@ -6,6 +6,7 @@ import { additionalNicheCategories } from "./niche-catalog.mjs";
 import { decodeHtmlEntities, linkedArticleMetadata, resolveGoogleNewsArticle } from "./news-article.mjs";
 import { fetchBytes, mapConcurrent } from "./runtime.mjs";
 import { specificMusicPlayback } from "../shared/music-playback.mjs";
+import { musicAudienceAnalysis, normalizeMusicAudience } from "../shared/music-audience.mjs";
 import { resolveSpecificSpotifyPlayback } from "./music-lookup.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -107,16 +108,19 @@ const musicReviewPattern = /\b(?:review|reviews|verdict|album review)\b/i;
 const musicGenericSubjectWords = new Set(["album", "artist", "dance", "debut", "deluxe", "edition", "electronic", "house", "latin", "music", "new", "producer", "release", "remix", "single", "song", "track", "video"]);
 const musicSongCuePattern = /\b(?:song|track|single|sound|audio|soundtrack|karaoke|hit|remix|music video|official audio|chorus|hook|lyrics?)\b/i;
 const musicAlbumOnlyPattern = /\b(?:album|EP|mixtape|record)\b/i;
-const musicAudienceSignalPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|viral|trending|TikTok|Reels?|Shorts?|sound|audio|soundtrack|karaoke|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|obsess(?:ed|ion)?|meme(?:s)?|social media)\b/i;
-const musicAudienceReceptionPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|obsess(?:ed|ion)?)\b/i;
+const musicAudienceSignalPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|viral|trending|TikTok|Reels?|Shorts?|sound|audio|soundtrack|karaoke|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|obsess(?:ed|ion)?|meme(?:s)?|social media|catchy|earworm|addictive|bad|worst|terrible|awful|cringe|mock(?:ed|ing)|critic(?:ized|ism)|backlash|polariz(?:ed|ing))\b/i;
+const musicAudienceReceptionPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|love|like|hate|bad|worst|terrible|awful|cringe|mock(?:ed|ing)|backlash|polariz(?:ed|ing)|obsess(?:ed|ion)?)\b/i;
 const musicAudienceUsagePattern = /\b(?:viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
-const musicAudienceBehaviorPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
+const musicAudienceBehaviorPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media|hate|bad|worst|terrible|awful|cringe|mock(?:ed|ing)|backlash|polariz(?:ed|ing))\b/i;
 const musicAudienceReactionActionPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|people|creators?)\b[^.!?]{0,90}\b(?:ask(?:s|ed|ing)?|credit(?:s|ed|ing)?|choos(?:e|es|ing)?|vot(?:e|ed|ing)|prais(?:e|ed|ing)|favor(?:ite|ed|ing)?|like|love|react(?:s|ed|ing)?|respond(?:s|ed|ing)?|focus(?:es|ed|ing)?|notice(?:s|d|ing)?|talk(?:s|ed|ing)?|discuss(?:es|ed|ing)?|share(?:s|d|ing)?|use(?:s|d|r|rs)?|pair(?:s|ed|ing)?|sing(?:s|ing)?|dance(?:s|d|ing)?|cover(?:s|ed|ing)?|replay(?:s|ed|ing)?|obsess(?:ed|ion|ing)?)\b|\bfan[- ]favorite\b/i;
 const musicAudienceConcreteUsePattern = /\b(?:playlist|cover|dance|edit|replay|meme|karaoke|soundtrack|workout|party|social media|TikTok)\b/i;
 const musicEditorialAudienceRejectPattern = /\b(?:review|reviews|reviewer|reviewers|critic|critics|verdict|beat of the week|ranked|ranking|best new|analysis|opinion|lyrics?\s*(?:and|&)\s*meaning|song\s+meaning)\b/i;
 
 function hasMusicAudienceAction(text) {
-  return musicAudienceConcreteUsePattern.test(text) || musicAudienceReactionActionPattern.test(text);
+  const analysis = musicAudienceAnalysis(text);
+  return musicAudienceConcreteUsePattern.test(text)
+    || musicAudienceReactionActionPattern.test(text)
+    || Boolean(analysis?.focus.length || analysis?.use.length || analysis?.sentiment !== "unclear");
 }
 const musicQuotePatterns = [
   /(?:^|[\s([{:;—-])["“]([^"“”]{2,90})["”](?=\s|[),.!?:;—-]|$)/g,
@@ -208,9 +212,10 @@ async function musicAudienceEvidence(song, candidate) {
   if (!song?.title) return null;
   const identity = [song.title, song.artist].filter(Boolean).map((value) => `"${value.replaceAll('"', "")}"`).join(" ");
   const queries = [
-    `${identity} fans listeners reaction`,
-    `${identity} viral sound hook chorus lyrics`,
-    `${identity} TikTok edit dance playlist streams`,
+    `${identity} fans listeners reaction hook chorus lyrics`,
+    `${identity} catchy bad divisive song reaction`,
+    `${identity} TikTok sound edit dance playlist streams`,
+    `${identity} vocal beat production audience reaction`,
   ];
   const feeds = await mapConcurrent(queries, 3, async (query) => {
     const url = new URL("https://news.google.com/rss/search");
@@ -264,6 +269,7 @@ async function musicAudienceEvidence(song, candidate) {
     alternates: ranked.slice(1, 8),
     hasReception: musicAudienceReceptionPattern.test(selected.text),
     hasUsage: musicAudienceUsagePattern.test(selected.text),
+    analysis: musicAudienceAnalysis(selected.text),
   };
 }
 
@@ -317,6 +323,7 @@ const categoryDefinitions = [
   { id: "film-tv", label: "Film & TV", parent: "Culture", query: "movie television trailer casting premiere", accent: "#e8b64e" },
   { id: "books-reading", label: "Books & reading", parent: "Culture", query: "books novels reading book club", accent: "#a77b55" },
   { id: "streetwear", label: "Streetwear", parent: "Lifestyle", query: "streetwear sneakers fashion bag restock", accent: "#f37d43" },
+  { id: "memes", label: "Memes", parent: "Culture", query: "internet meme viral format TikTok", queryVariants: ["meme template reaction viral clip", "new meme trend social media image video", "Know Your Meme trending meme"], accent: "#d35cf1" },
   { id: "internet-culture", label: "Internet culture", parent: "Culture", query: "meme internet slang creator trend", accent: "#e95bd6" },
   { id: "tech", label: "Tech", parent: "Culture", query: "technology gadgets AI smartphone product", accent: "#5a9cff" },
   { id: "creators", label: "Creators", parent: "Culture", query: "creator YouTube influencer interview format", accent: "#ff765f" },
@@ -445,6 +452,10 @@ const categoryRules = {
     include: /\b(?:comedian|comedy|stand[- ]up|sketch|comic|bit|special|joke|funny|crowd work|Netflix|SNL|Guinness|tour)\b/i,
     story: /\b(?:special|tour|show|series|performance|clip|bit|sketch|interview|appearance|festival|award|release|premiere|controversy|meme|viral|podcast|joke|spoof|social media|ticket|record)\b/i,
   },
+  memes: {
+    include: /\b(?:meme|memes|viral|internet|TikTok|Reels?|Shorts?|reaction image|template|format|parody|spoof)\b/i,
+    story: /\b(?:meme|memes|viral|reaction|template|format|parody|spoof|clip|image|video|post|sound|trend|joke)\b/i,
+  },
   "world-news": {
     include: /\b(?:world|international|global|foreign|diplomacy|diplomatic|country|countries|government|conflict|war|ceasefire|election|summit)\b/i,
     story: /\b(?:agreement|attack|conflict|election|government|invasion|launch|mission|negotiat|ruling|sanction|summit|treaty|war|vote)\b/i,
@@ -496,6 +507,7 @@ const categoryTermAliases = new Map([
   ["gaming", ["gameplay", "playstation", "xbox", "nintendo", "steam"]],
   ["streetwear", ["sneaker", "fashion", "apparel", "streetwear"]],
   ["travel", ["traveler", "travelers", "destination", "hotel", "flight", "airline", "tourism", "vacation", "itinerary", "trip", "airport"]],
+  ["memes", ["meme", "memes", "viral", "template", "reaction", "parody"]],
 ]);
 
 function categoryLabelUsable(category, candidate, text) {
@@ -1357,6 +1369,7 @@ function candidateRecords(category, candidates) {
       coverageSources: candidate.coverageSources,
       popularityEvidence: candidate.popularityEvidence,
       ...(candidate.musicSong ? { musicSong: candidate.musicSong } : {}),
+      ...(candidate.musicAudience?.analysis ? { musicAudience: candidate.musicAudience.analysis } : {}),
       sourceSnippets: [
         {
           kind: "current_headline",
@@ -1461,6 +1474,9 @@ function sourceGroundedTopic(record, category, index, fallback) {
   const musicAudienceContext = musicSong
     ? completeSentences(candidate.musicAudience?.selected?.text ?? "", 360)
     : "";
+  const musicAudience = musicSong && candidate.musicAudience?.analysis
+    ? candidate.musicAudience.analysis
+    : null;
   const musicReleaseContext = musicSong
     ? [...sentenceSegmenter.segment(articleIntro)]
       .map(({ segment }) => segment.trim())
@@ -1529,6 +1545,7 @@ function sourceGroundedTopic(record, category, index, fallback) {
       musicKind: "song",
       musicSongTitle: musicSong.title,
       ...(musicSong.artist ? { musicArtist: musicSong.artist } : {}),
+      ...(musicAudience ? { musicAudience } : {}),
     } : {}),
     ...(candidate.playback ? { playback: candidate.playback } : {}),
     ...(candidate.imageSource ? {
@@ -1566,6 +1583,7 @@ function retainedTopic(topic, category, index) {
       artist: topic.musicArtist,
     })
     : topic.playback;
+  const musicAudience = category.parent === "Music" ? normalizeMusicAudience(topic.musicAudience) : null;
   const retained = {
     ...topic,
     id,
@@ -1580,6 +1598,8 @@ function retainedTopic(topic, category, index) {
   };
   if (playback) retained.playback = playback;
   else delete retained.playback;
+  if (musicAudience) retained.musicAudience = musicAudience;
+  else delete retained.musicAudience;
   return retained;
 }
 
@@ -1606,6 +1626,7 @@ function persistedTopicUsable(topic, category, now = new Date()) {
     && cleanText(topic?.musicSongTitle, 100)
     && normalize(outputText).includes(normalize(topic.musicSongTitle))
     && musicAudienceSignalPattern.test(outputText)
+    && Boolean(normalizeMusicAudience(topic?.musicAudience))
     && (topic?.musicArtist ? normalize(outputText).includes(normalize(topic.musicArtist)) : true);
   const rawPopularityEvidence = normalizePopularityEvidence(topic?.popularityEvidence);
   const popularityEvidence = validatedPopularityEvidence(rawPopularityEvidence)
@@ -1723,6 +1744,7 @@ export async function generateNicheSnapshot(brief, { now = new Date(), dryRun = 
           description: usableAi.description,
           whyNow: usableAi.whyNow,
           trendLabel: usableAi.trendLabel,
+          ...(usableAi.musicAudience ? { musicAudience: usableAi.musicAudience } : {}),
         } : {}),
       };
     });

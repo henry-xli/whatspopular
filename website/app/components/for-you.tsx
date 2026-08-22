@@ -55,6 +55,18 @@ function isLiveNicheSnapshot(value: unknown): value is {
 function MusicPlaybackEmbed({ topic }: { topic: DigestTopic }) {
   const playback = topic.categoryParent === "Music" ? specificMusicPlaybackForTopic(topic) : null;
   if (!playback) return null;
+  if (playback.provider === "YouTube") {
+    return (
+      <div className="digest-playback digest-playback-link">
+        <div className="digest-playback-head">
+          <span>Video source</span>
+          <a href={playback.externalUrl} target="_blank" rel="noopener noreferrer">
+            Open in YouTube <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="digest-playback">
       <div className="digest-playback-head">
@@ -72,6 +84,30 @@ function MusicPlaybackEmbed({ topic }: { topic: DigestTopic }) {
         loading="lazy"
         referrerPolicy="strict-origin-when-cross-origin"
       />
+    </div>
+  );
+}
+
+function MusicAudienceContext({ topic }: { topic: DigestTopic }) {
+  const audience = topic.categoryParent === "Music" ? topic.musicAudience : null;
+  if (!audience?.note) return null;
+  const sentimentLabel = audience.sentiment === "positive"
+    ? "Positive response"
+    : audience.sentiment === "mixed"
+      ? "Mixed response"
+      : audience.sentiment === "negative"
+        ? "Negative response"
+        : "What listeners are focusing on";
+  const details = [...audience.focus, ...audience.use];
+  return (
+    <div className="digest-audience">
+      <span>{sentimentLabel}</span>
+      <p>{audience.note}</p>
+      {details.length ? (
+        <div className="digest-audience-tags" aria-label="Audience focus">
+          {[...new Set(details)].map((detail) => <span key={detail}>{detail}</span>)}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -445,6 +481,7 @@ export function ForYouExperience({
                       <span>Why now</span>
                       <p>{topic.whyNow}</p>
                     </div>
+                    <MusicAudienceContext topic={topic} />
                     <MusicPlaybackEmbed topic={topic} />
                     <a className="digest-source" href={topic.url} target="_blank" rel="noopener noreferrer">
                       <span>{topic.sourceLabel}</span>

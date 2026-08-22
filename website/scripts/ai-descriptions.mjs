@@ -1,5 +1,6 @@
 import { fetchBytes } from "./runtime.mjs";
 import { decodeHtmlEntities } from "./news-article.mjs";
+import { isMusicAudience, musicAudienceAnalysis, normalizeMusicAudience } from "../shared/music-audience.mjs";
 
 const endpoint = "https://api.openai.com/v1/responses";
 const defaultModel = "gpt-5.6-luna";
@@ -66,6 +67,17 @@ const nicheOutputSchema = {
           description: { type: "string" },
           why_now: { type: "string" },
           trend_label: { type: "string" },
+          music_audience: {
+            type: "object",
+            properties: {
+              note: { type: "string" },
+              sentiment: { type: "string", enum: ["positive", "mixed", "negative", "unclear"] },
+              focus: { type: "array", items: { type: "string" } },
+              use: { type: "array", items: { type: "string" } },
+            },
+            required: ["note", "sentiment", "focus", "use"],
+            additionalProperties: false,
+          },
         },
         required: ["id", "title", "description", "why_now", "trend_label"],
         additionalProperties: false,
@@ -396,6 +408,14 @@ export function buildNichePrompt(records) {
         ...(record.musicSong.artist ? { artist: cleanText(record.musicSong.artist, 120) } : {}),
       },
     } : {}),
+    ...(record.musicAudience ? {
+      music_audience_source: {
+        note: cleanText(record.musicAudience.note, 360),
+        sentiment: cleanText(record.musicAudience.sentiment, 20),
+        focus: record.musicAudience.focus.map((value) => cleanText(value, 80)),
+        use: record.musicAudience.use.map((value) => cleanText(value, 80)),
+      },
+    } : {}),
     ...(record.popularityEvidence ? {
       popularity_evidence: {
         mode: cleanText(record.popularityEvidence.mode, 48),
@@ -424,7 +444,8 @@ export function buildNichePrompt(records) {
     "The title should name the actual event, person, release, match, result, product return, meme, or development in plain language. A real headline is better than a clever slogan.",
     "The description should be one or two complete sentences, normally 25–55 words, stating what actually happened or what people are responding to.",
     "why_now must be one short complete sentence naming the concrete event or development that caused attention in the past seven days. Include the specific person, product, match, release, return, meme, result, or other named detail from the supplied evidence. It must read like news, not a category essay.",
-    "For a music_song candidate, the card is about that song alone, not the artist's album, festival appearance, tour, or genre. Keep the song title and artist in the card title. The description must lead with the supplied audience evidence: say whether the response is positive, mixed, or otherwise notable only when the evidence says so, and name the hook, chorus, lyric, vocal, beat, dance, edit, sound, playlist, cover, or other specific part/use listeners are focusing on when supplied. A release announcement by itself is not enough; if the audience evidence does not support a song-level trend explanation, return an empty description.",
+    "For a music_song candidate, the card is about that song alone, not the artist's album, festival appearance, tour, or genre. Keep the song title and artist in the card title. The description must lead with the supplied audience evidence: say whether the response is positive, mixed, negative, or otherwise notable only when the evidence says so, and name the hook, chorus, lyric, vocal, beat, dance, edit, sound, playlist, cover, or other specific part/use listeners are focusing on when supplied. A release announcement by itself is not enough; if the audience evidence does not support a song-level trend explanation, return an empty description.",
+    "For every music_song candidate with supported audience evidence, also return music_audience. Its note must be a concise, complete, source-grounded statement about the reaction or use; sentiment must be unclear unless the evidence clearly supports positive, mixed, or negative reception; focus and use must contain only short labels copied from the supplied evidence, not guesses. If the evidence does not support a field, use an empty array rather than inventing one.",
     "Use ordinary language. Do not use metaphors, hype, slang, personification, idioms, or vague editorial phrases such as 'main-character week', 'is the story', 'is the headline', 'having a moment', 'doing numbers', or 'refuses to stay niche'.",
     "Do not write generic sentences about a generation, a leaderboard, a scene, comedy norms, cultural relevance, or why a subject is worth watching. If the evidence does not identify a concrete recent development, return an empty description for that id.",
     "Do not turn popularity evidence into vague praise. If the evidence is independent coverage, describe the named development and why multiple publishers covered it; if it is a metric, state only the supplied metric and what it measures. Never infer popularity from a publisher's adjective alone.",
@@ -466,7 +487,16 @@ export function parseNicheOutput(payload, expectedIds) {
       || nicheReviewCopyPattern.test(`${title} ${description} ${whyNow}`)
       || nicheEditorialHeadlinePattern.test(title)
       || nicheNonNewsHeadlinePattern.test(title)) continue;
-    topics.set(entry.id, { title, description, whyNow, trendLabel });
+    const musicAudience = isMusicAudience(entry.music_audience)
+      ? normalizeMusicAudience(entry.music_audience)
+      : null;
+    topics.set(entry.id, {
+      title,
+      description,
+      whyNow,
+      trendLabel,
+      ...(musicAudience ? { musicAudience } : {}),
+    });
   }
   return topics;
 }
@@ -538,9 +568,21 @@ export function isNicheTopicUsable(topic, record) {
       && nicheMusicAudienceBehaviorPattern.test(outputText)
       && hasMusicAudienceAction(outputText)
       && !nicheMusicEditorialRejectPattern.test(outputText);
+    const structuredAudience = normalizeMusicAudience(topic.musicAudience);
+    const audienceSourceText = snippets
+      .filter((snippet) => /current_reception|current_usage/i.test(snippet.kind ?? ""))
+      .map((snippet) => `${snippet.headline ?? ""} ${snippet.text ?? ""}`)
+      .join(" ");
+    const audienceSourceWords = new Set(normalizedWords(audienceSourceText));
+    const audienceNoteWords = new Set(normalizedWords(structuredAudience?.note));
+    const audienceOverlap = [...audienceNoteWords].filter((word) => audienceSourceWords.has(word)).length;
+    const structuredAudienceUsable = Boolean(structuredAudience)
+      && Boolean(musicAudienceAnalysis(structuredAudience.note))
+      && (structuredAudience.focus.length > 0 || structuredAudience.use.length > 0 || structuredAudience.sentiment !== "unclear")
+      && audienceOverlap >= 2;
     const keepsSongIdentity = Boolean(songTitle && normalizedPhrase(outputText).includes(songTitle))
       && (!songArtist || normalizedPhrase(outputText).includes(songArtist));
-    if (!sourceAudience || !outputAudience || !keepsSongIdentity) return false;
+    if (!sourceAudience || !outputAudience || !structuredAudienceUsable || !keepsSongIdentity) return false;
     return overlap >= 4 && titleOverlap >= 1 && whyNowOverlap >= 2
       && (sourceSignal || outputAudience) && (outputSignal || outputAudience) && !repeatsHeadline;
   }

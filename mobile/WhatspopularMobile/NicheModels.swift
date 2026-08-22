@@ -15,6 +15,13 @@ struct NichePopularityEvidence: Codable, Equatable {
     let signal: String
 }
 
+struct NicheMusicAudience: Codable, Equatable {
+    let note: String
+    let sentiment: String
+    let focus: [String]
+    let use: [String]
+}
+
 struct NicheTopic: Codable, Identifiable, Equatable {
     let id: String
     let title: String
@@ -27,6 +34,7 @@ struct NicheTopic: Codable, Identifiable, Equatable {
     let accent: String
     let trendLabel: String
     let playback: NichePlayback?
+    let musicAudience: NicheMusicAudience?
     let imageAlt: String?
     let coverageCount: Int?
     let coverageSources: [String]?

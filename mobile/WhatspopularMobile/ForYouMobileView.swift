@@ -516,6 +516,29 @@ private struct MobileDigestCard: View {
                             }
                         }
 
+                        if let audience = topic.musicAudience,
+                           !audience.note.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(audienceLabel(for: audience))
+                                    .font(.caption2.weight(.black))
+                                    .tracking(1)
+                                    .foregroundStyle(Color(hex: topic.accent).opacity(0.95))
+                                Text(audience.note)
+                                    .font(.caption.weight(.medium))
+                                    .foregroundStyle(.white.opacity(0.88))
+                                    .lineLimit(hasPlayback ? 2 : 3)
+                                let details = (audience.focus + audience.use).reduce(into: [String]()) { result, detail in
+                                    if !result.contains(detail) { result.append(detail) }
+                                }
+                                if !details.isEmpty {
+                                    Text(details.joined(separator: " · "))
+                                        .font(.caption2.weight(.semibold))
+                                        .foregroundStyle(.white.opacity(0.68))
+                                        .lineLimit(1)
+                                }
+                            }
+                        }
+
                         if let coverageSources = topic.coverageSources,
                            !coverageSources.isEmpty {
                             Text("Reported by \(coverageSources.prefix(3).joined(separator: " · "))")
@@ -529,9 +552,11 @@ private struct MobileDigestCard: View {
                                 Label(playback.label, systemImage: "play.circle.fill")
                                     .font(.caption2.weight(.black))
                                     .tracking(0.6)
-                                NicheMusicEmbedView(playback: playback)
-                                    .frame(height: 112)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                if playback.provider.caseInsensitiveCompare("YouTube") != .orderedSame {
+                                    NicheMusicEmbedView(playback: playback)
+                                        .frame(height: 112)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                }
                                 if let playbackURL = URL(string: playback.externalUrl) {
                                     Link(destination: playbackURL) {
                                         HStack(spacing: 7) {
@@ -596,6 +621,15 @@ private struct MobileDigestCard: View {
             .joined(separator: " ")
             .split(separator: " ")
             .joined(separator: " ")
+    }
+
+    private func audienceLabel(for audience: NicheMusicAudience) -> String {
+        switch audience.sentiment.lowercased() {
+        case "positive": "POSITIVE RESPONSE"
+        case "mixed": "MIXED RESPONSE"
+        case "negative": "NEGATIVE RESPONSE"
+        default: "WHAT LISTENERS ARE FOCUSING ON"
+        }
     }
 }
 

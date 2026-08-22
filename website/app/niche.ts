@@ -18,6 +18,13 @@ export type NichePopularityEvidence = {
   signal: string;
 };
 
+export type NicheMusicAudience = {
+  note: string;
+  sentiment: "positive" | "mixed" | "negative" | "unclear";
+  focus: string[];
+  use: string[];
+};
+
 export type NicheTopic = {
   id: string;
   title: string;
@@ -33,6 +40,7 @@ export type NicheTopic = {
   musicKind?: "song" | "album";
   musicSongTitle?: string;
   musicArtist?: string;
+  musicAudience?: NicheMusicAudience;
   playback?: NichePlayback;
   coverageCount: number;
   coverageSources: string[];
