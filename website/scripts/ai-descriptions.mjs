@@ -177,7 +177,12 @@ const sourceAttributionPattern = /\b(?:according to|reported by|as reported|auth
 const genericPeopleIdentityPattern = /^(?:is|was|are|were)\s+(?:primarily known as|best known as|widely known as|a|an)\b/i;
 const commentaryPattern = /\b(?:as an ai|i cannot|i can['’]?t|which reminds me|this reminds me|in an odd sense|speaking of|as an aside|interestingly,?\s+in my view|i think|i want|we can see)\b/i;
 const currentSignalPattern = /\b(?:after|following|amid|during|since|when|appeared|announced|attended|confirmed|debut(?:ed)?|earned|joined|made|performed|played|premier(?:ed|es?)|released?|returned?|starred|unveiled?|won|winning|coverage|attention|spotlight|feature(?:d)?|role|cast|tournament|match|championship|world cup|final|meme|memes|viral|internet|online|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|restock(?:ed)?|sold out|limited|introduced|re-?released?|bring(?:s|ing)? back|nostalgia|comeback|origin(?:ated)?)\b/i;
-const musicContextPattern = /\b(?:fans?|listeners?|audiences?|creators?|dancers?|editors?|clubs?|parties|workout|drive|videos?|edits?|dances?|sound|trend(?:ing)?|viral|reaction|prais(?:e|ed)|love(?:d)?|critic(?:s)?|review(?:s)?|play(?:ed|list)?|stream(?:ed|ing)?|released?|returned?|featured)\b/i;
+const musicAudienceSpecificPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|viral|trending|TikTok|Reels?|Shorts?|sound|audio|soundtrack|karaoke|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|stream(?:s|ed|ing)?|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|obsess(?:ed|ion)?|meme(?:s)?|social media)\b/i;
+const musicAudienceReactionActionPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|people|creators?)\b[^.!?]{0,90}\b(?:ask(?:s|ed|ing)?|credit(?:s|ed|ing)?|choos(?:e|es|ing)?|vot(?:e|ed|ing)|prais(?:e|ed|ing)?|favor(?:ite|ed|ing)?|like|love|react(?:s|ed|ing)?|respond(?:s|ed|ing)?|focus(?:es|ed|ing)?|notice(?:s|d|ing)?|talk(?:s|ed|ing)?|discuss(?:es|ed|ing)?|share(?:s|d|ing)?|use(?:s|d|r|rs)?|pair(?:s|ed|ing)?|sing(?:s|ing)?|dance(?:s|d|ing)?|cover(?:s|ed|ing)?|replay(?:s|ed|ing)?|obsess(?:ed|ion|ing)?)\b|\bfan[- ]favorite\b/i;
+const musicAudienceConcreteUsePattern = /\b(?:playlist|cover|dance|edit|replay|meme|karaoke|soundtrack|workout|party|social media|TikTok)\b/i;
+function hasMusicAudienceAction(text) {
+  return musicAudienceConcreteUsePattern.test(text) || musicAudienceReactionActionPattern.test(text);
+}
 const causalContextPattern = /\b(?:after|amid|because|by|following|when|as|returned?|re-?released?|reintroduced|revived|nostalgia|meme|memes|viral|internet|online|reaction|fans?|funny|walk(?:ed|ing)?|appearance|clip|joke|parody|restock(?:ed)?|sold out|limited|introduced|debuted|bring(?:s|ing)? back|origin(?:ated)?|comeback|from\s+20\d{2})\b/i;
 const descriptionStopWords = new Set([
   "a", "an", "and", "are", "as", "at", "be", "been", "by", "for", "from", "has", "have", "in", "is", "it",
@@ -247,7 +252,16 @@ export function isDescriptionUsable(sectionId, description, record = {}, { allow
   if (sectionId === "music") {
     const supportedContext = snippets.some((snippet) => /current_reception|current_usage|current_coverage|current_event|headline/i.test(snippet.kind ?? ""));
     const identityOnly = /^(?:[“"].+[”"]\s+)?is\s+(?:a\s+)?(?:track|song)\s+by\b[^.]*\.?$/i.test(text);
-    return supportedContext && !identityOnly && musicContextPattern.test(text);
+    const audienceEvidence = snippets.some((snippet) => /current_reception|current_usage/i.test(snippet.kind ?? "")
+      && musicAudienceSpecificPattern.test(snippet.text ?? "")
+      && hasMusicAudienceAction(snippet.text ?? ""));
+    const title = normalizedPhrase(record.title);
+    const artist = normalizedPhrase(record.role);
+    const first = normalizedPhrase(firstSentence(text));
+    const namesSong = Boolean((title && first.includes(title)) || (artist && first.includes(artist)));
+    return supportedContext && audienceEvidence && !identityOnly && namesSong
+      && musicAudienceSpecificPattern.test(text)
+      && hasMusicAudienceAction(text);
   }
   if (sectionId !== "people" && sectionId !== "products") return true;
 
@@ -376,6 +390,12 @@ export function buildNichePrompt(records) {
     candidate_title: cleanText(record.title, 240),
     source_url: cleanText(record.sourceUrl, 1_000),
     published_at: cleanText(record.publishedAt, 60),
+    ...(record.musicSong ? {
+      music_song: {
+        title: cleanText(record.musicSong.title, 120),
+        ...(record.musicSong.artist ? { artist: cleanText(record.musicSong.artist, 120) } : {}),
+      },
+    } : {}),
     ...(record.popularityEvidence ? {
       popularity_evidence: {
         mode: cleanText(record.popularityEvidence.mode, 48),
@@ -404,6 +424,7 @@ export function buildNichePrompt(records) {
     "The title should name the actual event, person, release, match, result, product return, meme, or development in plain language. A real headline is better than a clever slogan.",
     "The description should be one or two complete sentences, normally 25–55 words, stating what actually happened or what people are responding to.",
     "why_now must be one short complete sentence naming the concrete event or development that caused attention in the past seven days. Include the specific person, product, match, release, return, meme, result, or other named detail from the supplied evidence. It must read like news, not a category essay.",
+    "For a music_song candidate, the card is about that song alone, not the artist's album, festival appearance, tour, or genre. Keep the song title and artist in the card title. The description must lead with the supplied audience evidence: say whether the response is positive, mixed, or otherwise notable only when the evidence says so, and name the hook, chorus, lyric, vocal, beat, dance, edit, sound, playlist, cover, or other specific part/use listeners are focusing on when supplied. A release announcement by itself is not enough; if the audience evidence does not support a song-level trend explanation, return an empty description.",
     "Use ordinary language. Do not use metaphors, hype, slang, personification, idioms, or vague editorial phrases such as 'main-character week', 'is the story', 'is the headline', 'having a moment', 'doing numbers', or 'refuses to stay niche'.",
     "Do not write generic sentences about a generation, a leaderboard, a scene, comedy norms, cultural relevance, or why a subject is worth watching. If the evidence does not identify a concrete recent development, return an empty description for that id.",
     "Do not turn popularity evidence into vague praise. If the evidence is independent coverage, describe the named development and why multiple publishers covered it; if it is a metric, state only the supplied metric and what it measures. Never infer popularity from a publisher's adjective alone.",
@@ -463,6 +484,9 @@ const nicheNumberedHeadlinePattern = /^\s*(?:the\s+)?(?!(?:19|20)\d{2}\b)\d+(?:s
 const nicheGenericHeadlinePattern = /(?:^\s*(?:\d+\s+(?:overplayed|ways?|reasons?|things?|songs?|tips?|ideas?|products?|shows?|movies?|books?|recipes?|snacks?|snackable|cocktails?|drinks?|restaurants?|places?|artists?|albums?)\b|top|best|what|why|how|everything|a guide|here are|here['’]s (?:a )?(?:list|what|how)|latest)\b|\b(?:\d+\s+of the best|best new|next great read|books? to read|what to read|gift guide|shopping guide|simple .* changes|popular .* trends|do these \d+|explained|guide|review|roundup|deserves the hype|sets? (?:his|her|their|its) sights|challenges? (?:the )?(?:norms|boundaries)|sparks? (?:a )?debate|what to know|the internet['’]s .* king|making a comeback|latest updates|news and notes|in history|biggest .* ever)\b)/i;
 const nicheMetaCopyPattern = /\b(?:next generation|moving target|worth watching|part of what makes|has amassed serious star power|dominates? social media|cultural norms?|challenges? (?:the )?(?:norms|boundaries)|sparks? (?:a )?debate|sets? (?:his|her|their|its) sights|the internet['’]s .* king|the conversation|the scene|the moment|a new era|a fresh take|a changing landscape|making a comeback|latest updates|news and notes|in history)\b/i;
 const nicheConcreteSignalPattern = /\b(?:announc|confirm|return|re-?release|reintroduc|reviv|launch|release|drop|restock|sold out|sign(?:ed|ing)?|trade|transfer|win|won|beat|loss|match|tournament|championship|playoffs?|final|race|event|ruling|vote|strike|injur|meme|viral|clip|trailer|premiere|cast|interview|performance|statement|report|earnings|deal|controvers|lawsuit|weather|storm|fire|earthquake|study|research|mission|update|festival|concert|tour|game|season|episode|chapter|book|film|series)\b/i;
+const nicheMusicAudiencePattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|obsess(?:ed|ion)?|meme(?:s)?|social media)\b/i;
+const nicheMusicAudienceBehaviorPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
+const nicheMusicEditorialRejectPattern = /\b(?:review|reviews|reviewer|reviewers|critic|critics|verdict|beat of the week|ranked|ranking|best new|analysis|opinion|lyrics?\s*(?:and|&)\s*meaning|song\s+meaning)\b/i;
 
 export function isNicheTopicUsable(topic, record) {
   if (!topic || nicheNumberedHeadlinePattern.test(topic.title)
@@ -500,6 +524,26 @@ export function isNicheTopicUsable(topic, record) {
   const normalizedTitle = normalizedPhrase(record?.title);
   const normalizedWhyNow = normalizedPhrase(topic.whyNow);
   const repeatsHeadline = normalizedTitle && normalizedWhyNow === normalizedTitle;
+  const musicSong = record?.musicSong;
+  if (musicSong) {
+    const songTitle = normalizedPhrase(musicSong.title);
+    const songArtist = normalizedPhrase(musicSong.artist);
+    const outputText = `${topic.title} ${topic.description} ${topic.whyNow}`;
+    const sourceAudience = snippets.some((snippet) => /current_reception|current_usage/i.test(snippet.kind ?? "")
+      && nicheMusicAudiencePattern.test(`${snippet.headline ?? ""} ${snippet.text ?? ""}`)
+      && nicheMusicAudienceBehaviorPattern.test(`${snippet.headline ?? ""} ${snippet.text ?? ""}`)
+      && hasMusicAudienceAction(`${snippet.headline ?? ""} ${snippet.text ?? ""}`)
+      && !nicheMusicEditorialRejectPattern.test(`${snippet.headline ?? ""} ${snippet.text ?? ""}`));
+    const outputAudience = nicheMusicAudiencePattern.test(outputText)
+      && nicheMusicAudienceBehaviorPattern.test(outputText)
+      && hasMusicAudienceAction(outputText)
+      && !nicheMusicEditorialRejectPattern.test(outputText);
+    const keepsSongIdentity = Boolean(songTitle && normalizedPhrase(outputText).includes(songTitle))
+      && (!songArtist || normalizedPhrase(outputText).includes(songArtist));
+    if (!sourceAudience || !outputAudience || !keepsSongIdentity) return false;
+    return overlap >= 4 && titleOverlap >= 1 && whyNowOverlap >= 2
+      && (sourceSignal || outputAudience) && (outputSignal || outputAudience) && !repeatsHeadline;
+  }
   return overlap >= 4 && titleOverlap >= 1 && whyNowOverlap >= 2 && sourceSignal && outputSignal && !repeatsHeadline;
 }
 

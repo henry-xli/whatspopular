@@ -14,6 +14,7 @@ const dataPath = path.join(root, "data", "trends.json");
 const dryRun = process.argv.includes("--dry-run");
 const force = process.argv.includes("--force");
 const quizOnly = process.argv.includes("--quiz-only");
+const musicOnly = process.argv.includes("--music-only");
 const refreshContextOnly = process.argv.includes("--refresh-context");
 const skipNiche = process.argv.includes("--skip-niche");
 const MAX_BYTES = 12 * 1024 * 1024;
@@ -1270,6 +1271,18 @@ function personIdentity(title, description, categoryLabel) {
 }
 
 const musicAudiencePattern = /\b(?:fans?|listeners?|audiences?|people|users?|creators?|dancers?|editors?|clubs?|parties|workout|drive|video(?:s)?|edit(?:s)?|dance|sound|trend(?:ing)?|viral|reaction|prais(?:e|ed)|love(?:d)?|critic(?:s)?|review(?:s)?|play(?:ed|list)?|stream(?:ed|ing)?)\b/i;
+const musicAudienceSpecificPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|viral|trending|TikTok|Reels?|Shorts?|sound|audio|soundtrack|karaoke|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|obsess(?:ed|ion)?|meme(?:s)?|social media)\b/i;
+const musicAudienceReceptionPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|obsess(?:ed|ion)?)\b/i;
+const musicAudienceUsagePattern = /\b(?:viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
+const musicSongContextPattern = /\b(?:song|track|single|music|sound|audio|soundtrack|karaoke|hit|album|EP|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|music video|stream(?:s|ed|ing)?|chart(?:s|ed|ing)?)\b/i;
+const musicAudienceBehaviorPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
+const musicAudienceReactionActionPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|people|creators?)\b[^.!?]{0,90}\b(?:ask(?:s|ed|ing)?|credit(?:s|ed|ing)?|choos(?:e|es|ing)?|vot(?:e|ed|ing)|prais(?:e|ed|ing)|favor(?:ite|ed|ing)?|like|love|react(?:s|ed|ing)?|respond(?:s|ed|ing)?|focus(?:es|ed|ing)?|notice(?:s|d|ing)?|talk(?:s|ed|ing)?|discuss(?:es|ed|ing)?|share(?:s|d|ing)?|use(?:s|d|r|rs)?|pair(?:s|ed|ing)?|sing(?:s|ing)?|dance(?:s|d|ing)?|cover(?:s|ed|ing)?|replay(?:s|ed|ing)?|obsess(?:ed|ion|ing)?)\b|\bfan[- ]favorite\b/i;
+const musicAudienceConcreteUsePattern = /\b(?:playlist|cover|dance|edit|replay|meme|karaoke|soundtrack|workout|party|social media|TikTok)\b/i;
+const musicEditorialAudienceRejectPattern = /\b(?:review|reviews|reviewer|reviewers|critic|critics|verdict|beat of the week|ranked|ranking|best new|analysis|opinion|lyrics?\s*(?:and|&)\s*meaning|song\s+meaning)\b/i;
+
+function hasMusicAudienceAction(text) {
+  return musicAudienceConcreteUsePattern.test(text) || musicAudienceReactionActionPattern.test(text);
+}
 
 function musicContextSentence(value) {
   const text = plainText(value);
@@ -1309,11 +1322,88 @@ function musicContextForTrack(track, context) {
   if (!selected) return null;
   return {
     ...selected,
-    alternates: candidates.slice(1, 9).map(({ candidate }) => candidate),
+    alternates: candidates.slice(1, 17).map(({ candidate }) => candidate),
   };
 }
 
-function musicRecentDescription(identity, article, context) {
+function musicAudienceCandidateForTrack(track, context) {
+  if (!context) return null;
+  const title = normalize(track.title);
+  const artistTokens = new Set(normalize(track.artist).split(" ").filter((token) => token.length >= 3));
+  const candidates = [context, ...(context.alternates ?? [])]
+    .filter((candidate) => candidate?.headline)
+    .map((candidate, index) => {
+      const normalized = normalize(candidate.headline);
+      const titlePresent = title && normalized.includes(title);
+      const artistOverlap = [...artistTokens].filter((token) => normalized.split(" ").includes(token)).length;
+      return {
+        candidate,
+        titlePresent,
+        artistOverlap,
+        audience: musicAudienceSpecificPattern.test(candidate.headline)
+          && musicAudienceBehaviorPattern.test(candidate.headline)
+          && hasMusicAudienceAction(candidate.headline)
+          && !musicEditorialAudienceRejectPattern.test(candidate.headline)
+          && musicSongContextPattern.test(candidate.headline),
+        reception: musicAudienceReceptionPattern.test(candidate.headline),
+        usage: musicAudienceUsagePattern.test(candidate.headline),
+        score: Number(titlePresent) * 32 + artistOverlap * 10
+          + Number(musicAudienceSpecificPattern.test(candidate.headline)) * 24
+          + Number(musicAudienceReceptionPattern.test(candidate.headline)) * 14
+          + Number(musicAudienceUsagePattern.test(candidate.headline)) * 12
+          + Number(/\b(?:viral|trending|stream(?:s|ed|ing)?|chart(?:ed|ing)?|record|top\s+\d+|no\.?\s*1)\b/i.test(candidate.headline)) * 10
+          - index,
+      };
+    })
+    .filter((entry) => entry.audience && musicAudienceBehaviorPattern.test(entry.candidate.headline)
+      && hasMusicAudienceAction(entry.candidate.headline)
+      && !musicEditorialAudienceRejectPattern.test(entry.candidate.headline)
+      && musicSongContextPattern.test(entry.candidate.headline)
+      && (entry.titlePresent || entry.artistOverlap >= 1))
+    .sort((left, right) => right.score - left.score);
+  return candidates[0] ?? null;
+}
+
+function musicAudienceSentenceForTrack(value, track, { allowMissingTitle = false } = {}) {
+  const title = normalize(track.title);
+  const artistTokens = new Set(normalize(track.artist).split(" ").filter((token) => token.length >= 3));
+  return sentences(value)
+    .map((sentence, index) => {
+      const normalized = normalize(sentence);
+      const titlePresent = title && normalized.includes(title);
+      const artistOverlap = [...artistTokens].filter((token) => normalized.split(" ").includes(token)).length;
+      return {
+        sentence,
+        titlePresent,
+        artistOverlap,
+        score: Number(titlePresent) * 24 + artistOverlap * 8
+          + Number(musicAudienceSpecificPattern.test(sentence)) * 22
+          + Number(musicAudienceReceptionPattern.test(sentence)) * 14
+          + Number(musicAudienceUsagePattern.test(sentence)) * 12
+          - index,
+      };
+    })
+    .filter((entry) => musicAudienceSpecificPattern.test(entry.sentence)
+      && musicAudienceBehaviorPattern.test(entry.sentence)
+      && hasMusicAudienceAction(entry.sentence)
+      && !musicEditorialAudienceRejectPattern.test(entry.sentence)
+      && musicSongContextPattern.test(entry.sentence)
+      && (allowMissingTitle || entry.titlePresent || entry.artistOverlap >= 1))
+    .sort((left, right) => right.score - left.score)[0]?.sentence ?? "";
+}
+
+function musicAudienceTextForTrack(track, article, context, audienceCandidate) {
+  const articleSentence = musicAudienceSentenceForTrack(article?.intro, track);
+  const headline = audienceCandidate?.candidate?.headline
+    ? musicContextSentence(audienceCandidate.candidate.headline)
+    : "";
+  const selected = articleSentence && musicAudienceSpecificPattern.test(articleSentence)
+    ? articleSentence
+    : headline;
+  return selected ? conciseSentences(selected, 320) : "";
+}
+
+function musicRecentDescription(identity, article, context, audienceCandidate, track) {
   const articleSentences = sentences(article?.intro)
     .map((sentence) => stripSourceAttribution(sentence).trim())
     .filter((sentence) => sentence.length >= 24 && !copiedMetricPattern.test(sentence));
@@ -1322,13 +1412,17 @@ function musicRecentDescription(identity, article, context) {
     ...(context?.alternates ?? []).map((candidate) => candidate.headline),
   ];
   const allCandidates = [...articleSentences, ...headlineCandidates];
-  const audienceContext = allCandidates
+  const audienceContext = (track ? musicAudienceTextForTrack(track, article, context, audienceCandidate) : "") || allCandidates
     .map(musicContextSentence)
-    .find((sentence) => sentence && musicAudiencePattern.test(sentence));
+    .find((sentence) => sentence && musicAudienceSpecificPattern.test(sentence));
   const eventContext = allCandidates
     .map((value) => factualHeadline(value, { rejectChartPlacement: true, maxLength: 260, allowCultural: true }))
     .find(Boolean);
   const selected = audienceContext || eventContext;
+  if (!audienceContext || !musicAudienceSpecificPattern.test(audienceContext)
+    || !musicAudienceBehaviorPattern.test(audienceContext)
+    || !hasMusicAudienceAction(audienceContext)
+    || musicEditorialAudienceRejectPattern.test(audienceContext)) return "";
   return selected ? conciseSentences(`${selected} ${identity}`, 560) : "";
 }
 
@@ -1338,6 +1432,10 @@ function usablePriorMusicDescription(value) {
     && !/^“[^”]+” is a track by .+\.$/i.test(text)
     && /(?:after|amid|because|following|fans?|listeners?|audiences?|creators?|viral|reaction|trend(?:ing)?|released?|returned?|performed|featured|used|dance|edit|video|workout|party|club)/i.test(text);
 }
+
+// Kept as a compatibility predicate for older snapshots; current music
+// selection is fail-closed and never uses a prior description as a fallback.
+void usablePriorMusicDescription;
 
 function personRecentDescription(title, identity, article, context) {
   const candidates = [
@@ -1513,7 +1611,7 @@ async function googleNewsContext(query, days = 45, { requireEvent = false, query
       .find((item) => factualHeadline(item.headline, { requireEvent, allowCultural: variants.length > 0 }));
     return selected ? {
       ...selected,
-      alternates: ranked.filter((item) => item !== selected).slice(0, 8),
+      alternates: ranked.filter((item) => item !== selected).slice(0, 16),
     } : null;
   })();
   googleNewsCache.set(key, request);
@@ -2120,7 +2218,19 @@ async function billboardHot100() {
     const title = plainText(titleMatch?.[1] ?? "");
     const afterTitle = titleMatch ? row.slice((titleMatch.index ?? 0) + titleMatch[0].length) : "";
     const artist = plainText(afterTitle.match(/<span[^>]*class="[^"]*a-no-trucate[^"]*"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? "");
-    if (Number.isInteger(rank) && rank >= 1 && rank <= 100 && title) rows.push({ this_week: rank, song: title, artist });
+    const chartDetail = (label) => plainText(row.match(new RegExp(`<span[^>]*>\\s*${label}\\s*<\\/span>[\\s\\S]{0,1200}?<span[^>]*class="[^"]*c-label[^\"]*"[^>]*>([\\s\\S]*?)<\\/span>`, "i"))?.[1] ?? "");
+    const lastWeek = chartDetail("LW");
+    const peak = chartDetail("PEAK");
+    const weeks = chartDetail("WEEKS");
+    if (Number.isInteger(rank) && rank >= 1 && rank <= 100 && title) rows.push({
+      this_week: rank,
+      song: title,
+      artist,
+      ...(Number.isInteger(Number(lastWeek)) ? { last_week: Number(lastWeek) } : {}),
+      ...(Number.isInteger(Number(peak)) ? { peak_position: Number(peak) } : {}),
+      ...(Number.isInteger(Number(weeks)) ? { weeks_on_chart: Number(weeks) } : {}),
+      ...(lastWeek && !/^\d+$/.test(lastWeek) ? { chart_debut: true } : {}),
+    });
   }
   if (rows.length !== 100) throw new Error(`Billboard returned ${rows.length} Hot 100 rows`);
   const date = html.match(/chart-date-picker[^>]*\bdata-date="(\d{4}-\d{2}-\d{2})"/)?.[1];
@@ -2150,6 +2260,7 @@ async function spotifyApiTracks() {
     artist: (track.artists ?? []).map((artist) => artist.name).join(", "),
     image: track.album?.images?.[0]?.url,
     previewUrl: track.preview_url,
+    releaseDate: track.album?.release_date,
   }));
   if (tracks.length < 20) throw new Error("Spotify API returned an incomplete editorial playlist");
   return tracks;
@@ -2167,6 +2278,7 @@ async function spotifyEmbedTracks() {
     artist: plainText(track.subtitle ?? ""),
     image: track.visualIdentity?.image?.[0]?.url ?? track.visualIdentity?.image,
     previewUrl: track.preview_url,
+    releaseDate: track.release_date ?? track.album?.release_date,
   }));
 }
 
@@ -2210,54 +2322,115 @@ async function updateMusic(brief, chart, spotifyTracks) {
     const key = normalize(row.song);
     billboardByTitle.set(key, [...(billboardByTitle.get(key) ?? []), row]);
   }
-  const spotifySelected = [];
+  const currentById = new Map(
+    [...section.items, ...(section.moreItems ?? [])]
+      .filter((item) => item.spotifyId)
+      .map((item) => [item.spotifyId, item]),
+  );
+  const spotifyCandidates = [];
   const seenTrackIds = new Set();
-  for (let index = 0; index < spotifyTracks.length && spotifySelected.length < 10; index += 1) {
+  for (let index = 0; index < spotifyTracks.length; index += 1) {
     const track = spotifyTracks[index];
     if (!/^[A-Za-z0-9]{22}$/.test(track.id) || seenTrackIds.has(track.id)) continue;
     const row = (billboardByTitle.get(normalize(track.title)) ?? [])
       .find((candidate) => sameArtist(track.artist, candidate.artist));
     if (!row) continue;
     seenTrackIds.add(track.id);
-    spotifySelected.push({ track, spotifyRank: index + 1, row });
+    spotifyCandidates.push({ track, spotifyRank: index + 1, row, current: currentById.get(track.id) });
   }
-  if (spotifySelected.length < 10) throw new Error("Fewer than ten songs overlapped Billboard and Spotify");
-  const crossovers = [...spotifySelected]
-    .sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
-  const descriptions = await mapConcurrent(crossovers, 4, async ({ track }) => {
-    const [candidateContext, details] = await Promise.all([
-      googleNewsContext(`"${track.title}" "${track.artist}"`, 30, {
-        requireEvent: false,
-        queryVariants: [
-          `"${track.title}" "${track.artist}" audience reaction`,
-          `"${track.title}" "${track.artist}" TikTok sound edit dance`,
-          `"${track.title}" "${track.artist}" viral use fans`,
-        ],
-      }).catch(() => null),
-      spotifyTrackDetails(track.id),
-    ]);
-    const context = musicContextForTrack(track, candidateContext);
-    const article = context
-      ? await linkedNewsArticle(context, track.title).catch(() => null)
-      : null;
-    return { context, article, details };
+  if (spotifyCandidates.length < 10) throw new Error("Fewer than ten songs overlapped Billboard and Spotify");
+  const candidateDetails = await mapConcurrent(spotifyCandidates, 4, async ({ track }) => {
+    const details = track.releaseDate ? { released: track.releaseDate } : await spotifyTrackDetails(track.id);
+    return { ...details, released: details.released || track.releaseDate || "" };
   });
-  const currentById = new Map(
-    [...section.items, ...(section.moreItems ?? [])]
-      .filter((item) => item.spotifyId)
-      .map((item) => [item.spotifyId, item]),
-  );
-  section.eyebrow = "Spotify Today’s Top Hits × Billboard";
+  const now = new Date();
+  const trendSignalFor = (candidate, details) => {
+    const releaseTimestamp = Date.parse(details.released || "");
+    const releaseAge = Number.isFinite(releaseTimestamp) ? (now.getTime() - releaseTimestamp) / 86_400_000 : null;
+    const chartRise = Number.isInteger(candidate.row.last_week) && candidate.row.this_week < candidate.row.last_week;
+    const chartDebut = Boolean(candidate.row.chart_debut);
+    const freshRelease = releaseAge !== null && releaseAge >= -1 && releaseAge <= 45;
+    const newToPlaylist = !candidate.current;
+    const playlistRise = candidate.current?.spotifyRank && candidate.current.spotifyRank > candidate.spotifyRank;
+    const qualifies = chartRise || chartDebut || freshRelease || newToPlaylist || playlistRise;
+    const score = Number(chartDebut) * 42
+      + Number(chartRise) * 36
+      + Number(playlistRise) * 26
+      + Number(newToPlaylist) * 22
+      + Number(freshRelease) * 20
+      + (releaseAge === null ? 0 : Math.max(0, 18 - releaseAge));
+    const label = chartDebut || newToPlaylist
+      ? "Newly trending"
+      : chartRise || playlistRise
+        ? "Rising this week"
+        : "Fresh release";
+    return { qualifies, score, label, releaseAge };
+  };
+  const trendCandidates = spotifyCandidates
+    .map((candidate, index) => ({
+      ...candidate,
+      details: candidateDetails[index],
+      trend: trendSignalFor(candidate, candidateDetails[index]),
+    }))
+    .filter((candidate) => candidate.trend.qualifies)
+    .sort((left, right) => right.trend.score - left.trend.score || left.spotifyRank - right.spotifyRank);
+  if (trendCandidates.length < 10) {
+    throw new Error(`Fewer than ten songs have a fresh chart, playlist, release, or audience trend signal (${trendCandidates.length})`);
+  }
+  const descriptions = await mapConcurrent(trendCandidates, 4, async ({ track, details }) => {
+    const candidateContext = await googleNewsContext(`"${track.title}" "${track.artist}"`, 30, {
+      requireEvent: false,
+      queryVariants: [
+        `"${track.title}" "${track.artist}" audience reaction`,
+        `"${track.title}" "${track.artist}" TikTok sound edit dance`,
+        `"${track.title}" "${track.artist}" viral use fans`,
+        `"${track.title}" "${track.artist}" hook chorus lyrics listeners`,
+        `"${track.title}" "${track.artist}" fan favorite cover playlist karaoke`,
+      ],
+    }).catch(() => null);
+    const context = musicContextForTrack(track, candidateContext);
+    const audienceCandidate = musicAudienceCandidateForTrack(track, context);
+    const articleContext = audienceCandidate?.candidate ?? context;
+    const article = articleContext
+      ? await linkedNewsArticle({ ...articleContext, alternates: [] }, track.title).catch(() => null)
+      : null;
+    const audienceText = musicAudienceTextForTrack(track, article, context, audienceCandidate);
+    return { context, audienceCandidate, article, audienceText, details };
+  });
+  const describedCandidates = trendCandidates.map((candidate, index) => ({
+    ...candidate,
+    descriptionData: descriptions[index],
+  }));
+  const qualified = describedCandidates.filter(({ descriptionData }) => descriptionData?.audienceText
+    && musicAudienceSpecificPattern.test(descriptionData.audienceText)
+    && musicAudienceBehaviorPattern.test(descriptionData.audienceText)
+    && hasMusicAudienceAction(descriptionData.audienceText)
+    && musicSongContextPattern.test(descriptionData.audienceText)
+    && !musicEditorialAudienceRejectPattern.test(descriptionData.audienceText));
+  if (qualified.length < 5) {
+    throw new Error(`Fewer than five recently trending songs have source-grounded audience context (${qualified.length})`);
+  }
+  const selected = qualified
+    .sort((left, right) => right.trend.score
+      + Number(Boolean(right.descriptionData.audienceCandidate?.reception)) * 20
+      + Number(Boolean(right.descriptionData.audienceCandidate?.usage)) * 14
+      - (left.trend.score
+        + Number(Boolean(left.descriptionData.audienceCandidate?.reception)) * 20
+        + Number(Boolean(left.descriptionData.audienceCandidate?.usage)) * 14))
+    .slice(0, 10);
+  selected.sort((left, right) => Number(left.row.this_week) - Number(right.row.this_week));
+  section.eyebrow = "Fresh song signals · Spotify × Billboard";
   section.title = "Music";
-  section.description = "The first 10 tracks in Spotify’s Today’s Top Hits that also appear on the Billboard Hot 100 are selected, then all 10 are ordered by Billboard position. Every track remains playable here.";
+  section.description = `${selected.length} songs with a fresh chart, playlist, release, or audience signal are selected from Spotify’s Today’s Top Hits and the Billboard Hot 100. The cards explain what listeners are reacting to or doing with each song, and every track remains playable here.`;
   section.sources = [
     { label: "Spotify · Today’s Top Hits", url: `https://open.spotify.com/playlist/${spotifyPlaylistId}` },
     { label: `Billboard Hot 100 · ${chart.date}`, url: chart.chartUrl },
   ];
-  const allItems = crossovers.map(({ row, track, spotifyRank }, index) => {
+  const allItems = selected.map(({ row, track, spotifyRank, trend, descriptionData }, index) => {
     const current = currentById.get(track.id);
-    const { context, article, details } = descriptions[index];
-    const released = publicationDateLabel(details.released);
+    const { context, audienceCandidate, article, audienceText, details } = descriptionData;
+    const audienceArticleUrl = article?.url && !/tiktok/i.test(article.url) ? article.url : "";
+    const released = publicationDateLabel(details.released || track.releaseDate);
     const identity = ensureSentence(`“${track.title}” is a track by ${track.artist}${released ? `, released ${released}` : ""}`);
     const articleContext = musicContextSentence(article?.intro);
     const headlineContext = musicContextSentence(context?.headline);
@@ -2265,9 +2438,7 @@ async function updateMusic(brief, chart, spotifyTracks) {
     const usageHeadline = (context?.alternates ?? [])
       .map((candidate) => musicContextSentence(candidate.headline))
       .find((headline) => headline && musicAudiencePattern.test(headline));
-    const description = musicRecentDescription(identity, article, context)
-      || (usablePriorMusicDescription(current?.description) ? current.description : "");
-    if (!description) throw new Error(`No source-grounded current context found for music track ${track.title}`);
+    const description = musicRecentDescription(identity, article, context, audienceCandidate, track);
     const item = {
       rank: index + 1,
       title: track.title,
@@ -2279,12 +2450,15 @@ async function updateMusic(brief, chart, spotifyTracks) {
       url: `https://open.spotify.com/track/${track.id}`,
       source: "Spotify",
       metric: { label: "Billboard Hot 100", value: `#${row.this_week}` },
+      trendLabel: trend.label,
       evidence: [
         { source: "Spotify", url: `https://open.spotify.com/playlist/${spotifyPlaylistId}` },
         { source: "Billboard", url: chart.chartUrl },
-        ...(article?.url
-          ? [{ source: article.context?.source ?? context?.source ?? "Current music coverage", url: article.url }]
-          : context ? [{ source: `${context.source} via Google News`, url: context.link }] : []),
+        ...(audienceArticleUrl
+          ? [{ source: article.context?.source ?? audienceCandidate?.candidate?.source ?? context?.source ?? "Current music coverage", url: audienceArticleUrl }]
+          : audienceCandidate?.candidate?.link && !audienceCandidate.candidate.link.startsWith("https://news.google.com/")
+            ? [{ source: audienceCandidate.candidate.source ?? "Current music coverage", url: audienceCandidate.candidate.link }]
+            : []),
       ],
       accent: accents[index % accents.length],
       spotifyId: track.id,
@@ -2294,15 +2468,15 @@ async function updateMusic(brief, chart, spotifyTracks) {
     };
     rememberAiDescriptionContext(item, "music", [
       { kind: "current_coverage", source: article?.context?.source ?? context?.source ?? "Current music coverage", text: [articleContext, headlineContext].filter(Boolean).join(" ") },
-      { kind: "current_reception", source: context?.source ?? "Current audience coverage", text: currentHeadline },
-      { kind: "current_usage", source: "Related current music coverage", text: usageHeadline },
+      { kind: "current_reception", source: audienceCandidate?.candidate?.source ?? context?.source ?? "Current audience coverage", text: audienceCandidate?.reception ? audienceText : currentHeadline },
+      { kind: "current_usage", source: audienceCandidate?.candidate?.source ?? "Related current music coverage", text: audienceCandidate?.usage ? audienceText : usageHeadline },
       { kind: "background", source: "Spotify track metadata", text: identity },
     ]);
     return item;
   });
   section.items = allItems.slice(0, 5);
   section.moreItems = allItems.slice(5, 10);
-  section.moreLabel = `Show ranks 6–${section.moreItems.at(-1).rank}`;
+  section.moreLabel = section.moreItems.length ? `Show ranks 6–${section.moreItems.at(-1).rank}` : undefined;
 }
 
 function titleCase(value) {
@@ -4744,6 +4918,34 @@ if (quizOnly) {
 const now = new Date();
 if (refreshContextOnly) {
   await refreshCurrentContext(brief, now);
+  process.exit(0);
+}
+if (musicOnly) {
+  const [chart, spotifyTracks] = await Promise.all([billboardHot100(), spotifyPlaylistTracks()]);
+  await updateMusic(brief, chart, spotifyTracks);
+  await updateAiDescriptions(brief);
+  for (const item of brief.sections.flatMap((section) => [...section.items, ...(section.moreItems ?? [])])) delete item.caution;
+  brief.generatedAt = now.toISOString();
+  brief.edition = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(now);
+  brief.status = "Checked today";
+  brief.window = "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: fresh song signals";
+  sanitizeBriefSocialMentions(brief);
+  capLinkedSources(brief);
+  validateBrief(brief);
+  if (dryRun) {
+    console.log(`Music-only dry run: ${brief.sections.find((section) => section.id === "music")?.items.map((item) => item.title).join(" | ")}`);
+  } else {
+    const output = `${JSON.stringify(brief, null, 2)}\n`;
+    const temporaryPath = `${dataPath}.${process.pid}.next`;
+    try {
+      await writeFile(temporaryPath, output, { mode: 0o644, flag: "wx" });
+      await rename(temporaryPath, dataPath);
+    } finally {
+      await unlink(temporaryPath).catch((error) => {
+        if (error?.code !== "ENOENT") throw error;
+      });
+    }
+  }
   process.exit(0);
 }
 if (!force && !dryRun && brief.generatedAt.slice(0, 10) === now.toISOString().slice(0, 10)) {

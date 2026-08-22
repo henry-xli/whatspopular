@@ -103,6 +103,168 @@ const musicArticleContextPattern = /\b(?:music|song|track|single|album|EP|music 
 const musicEventOnlyPattern = /\b(?:festival|lineup|headliner|concert|tour|tickets?|venue|show|event)\b/i;
 const musicReviewPattern = /\b(?:review|reviews|verdict|album review)\b/i;
 const musicGenericSubjectWords = new Set(["album", "artist", "dance", "debut", "deluxe", "edition", "electronic", "house", "latin", "music", "new", "producer", "release", "remix", "single", "song", "track", "video"]);
+const musicSongCuePattern = /\b(?:song|track|single|sound|audio|soundtrack|karaoke|hit|remix|music video|official audio|chorus|hook|lyrics?)\b/i;
+const musicAlbumOnlyPattern = /\b(?:album|EP|mixtape|record)\b/i;
+const musicAudienceSignalPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|viral|trending|TikTok|Reels?|Shorts?|sound|audio|soundtrack|karaoke|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|obsess(?:ed|ion)?|meme(?:s)?|social media)\b/i;
+const musicAudienceReceptionPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|prais(?:e|ed)|favori(?:te|tes?)|mixed|divided|obsess(?:ed|ion)?)\b/i;
+const musicAudienceUsagePattern = /\b(?:viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|hook|chorus|verse|lyric(?:s)?|vocal(?:s)?|melody|beat|drop|production|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
+const musicAudienceBehaviorPattern = /\b(?:fans?|listeners?|audiences?|reaction|react(?:ed|ion|ions)?|viral|trending|TikTok|Reels?|Shorts?|sound|audio|edit(?:s|ed)?|dance|playlist(?:s)?|cover(?:s|ed)?|sing(?:along)?|replay(?:s|ed|ing)?|meme(?:s)?|social media)\b/i;
+const musicAudienceReactionActionPattern = /\b(?:fan[- ]favorite|fans?|listeners?|audiences?|people|creators?)\b[^.!?]{0,90}\b(?:ask(?:s|ed|ing)?|credit(?:s|ed|ing)?|choos(?:e|es|ing)?|vot(?:e|ed|ing)|prais(?:e|ed|ing)|favor(?:ite|ed|ing)?|like|love|react(?:s|ed|ing)?|respond(?:s|ed|ing)?|focus(?:es|ed|ing)?|notice(?:s|d|ing)?|talk(?:s|ed|ing)?|discuss(?:es|ed|ing)?|share(?:s|d|ing)?|use(?:s|d|r|rs)?|pair(?:s|ed|ing)?|sing(?:s|ing)?|dance(?:s|d|ing)?|cover(?:s|ed|ing)?|replay(?:s|ed|ing)?|obsess(?:ed|ion|ing)?)\b|\bfan[- ]favorite\b/i;
+const musicAudienceConcreteUsePattern = /\b(?:playlist|cover|dance|edit|replay|meme|karaoke|soundtrack|workout|party|social media|TikTok)\b/i;
+const musicEditorialAudienceRejectPattern = /\b(?:review|reviews|reviewer|reviewers|critic|critics|verdict|beat of the week|ranked|ranking|best new|analysis|opinion|lyrics?\s*(?:and|&)\s*meaning|song\s+meaning)\b/i;
+
+function hasMusicAudienceAction(text) {
+  return musicAudienceConcreteUsePattern.test(text) || musicAudienceReactionActionPattern.test(text);
+}
+const musicQuotePatterns = [
+  /(?:^|[\s([{:;—-])["“]([^"“”]{2,90})["”](?=\s|[),.!?:;—-]|$)/g,
+  /(?:^|[\s([{:;—-])[‘']([^'’]{2,90})[’'](?=\s|[),.!?:;—-]|$)/g,
+];
+
+function musicQuotedTitles(text) {
+  const matches = [];
+  for (const pattern of musicQuotePatterns) {
+    for (const match of String(text ?? "").matchAll(pattern)) {
+      const title = cleanText(match[1], 100);
+      if (!title || title.length < 3) continue;
+      matches.push({ title, index: match.index ?? 0 });
+    }
+  }
+  return [...new Map(matches.map((entry) => [entry.title.toLocaleLowerCase("en-US"), entry])).values()];
+}
+
+function musicArtistFromLead(text, quoteIndex) {
+  const before = cleanText(String(text ?? "").slice(0, quoteIndex), 180)
+    .replace(/\s+/g, " ")
+    .trim();
+  const patterns = [
+    /^(.{2,90}?)\s+(?:has\s+)?(?:shared|shares|released|releases|dropped|drops|debuted|premiered|teased|teases|announced|unveiled|revealed|says|sheds|uses|used|links|teams?)\b/i,
+    /^(.{2,90}?)['’]s\s*$/i,
+    /^(.{2,90}?)\s+(?:has\s+)?(?:a|the)\s+(?:new\s+)?(?:song|track|single|remix|music video)\b/i,
+  ];
+  const match = patterns.map((pattern) => before.match(pattern)).find(Boolean);
+  if (!match?.[1]) return "";
+  return match[1]
+    .replace(/^(?:new|latest|the)\s+/i, "")
+    .replace(/\s+['’]s$/i, "")
+    .trim();
+}
+
+function extractMusicSongIdentity(candidate) {
+  const sourceTexts = [candidate?.headline, candidate?.articleIntro].filter(Boolean);
+  for (const text of sourceTexts) {
+    for (const quoted of musicQuotedTitles(text)) {
+      const window = String(text).slice(Math.max(0, quoted.index - 110), quoted.index + quoted.title.length + 110);
+      const hasSongCue = musicSongCuePattern.test(window);
+      const hasAlbumCue = musicAlbumOnlyPattern.test(window);
+      if (!hasSongCue || (hasAlbumCue && !musicSongCuePattern.test(window.replace(musicAlbumOnlyPattern, "")))) continue;
+      const artist = musicArtistFromLead(text, quoted.index);
+      return {
+        title: quoted.title,
+        ...(artist ? { artist } : {}),
+        sourceText: text,
+      };
+    }
+  }
+  return null;
+}
+
+function musicIdentityTokens(song) {
+  return new Set(normalize(`${song?.title ?? ""} ${song?.artist ?? ""}`)
+    .split(" ")
+    .filter((token) => token.length >= 3 && !musicGenericSubjectWords.has(token)));
+}
+
+function musicAudienceTextUsable(text, song) {
+  const clean = cleanText(text, 1_200);
+  if (!clean || !musicAudienceSignalPattern.test(clean) || !musicAudienceBehaviorPattern.test(clean)
+    || !hasMusicAudienceAction(clean)
+    || musicEditorialAudienceRejectPattern.test(clean) || !musicSongCuePattern.test(clean)) return false;
+  const title = normalize(song?.title ?? "");
+  const titlePresent = title && normalize(clean).includes(title);
+  const identityOverlap = [...musicIdentityTokens(song)].filter((token) => normalize(clean).split(" ").includes(token)).length;
+  return Boolean(titlePresent || identityOverlap >= 2 || (song?.artist && identityOverlap >= 1));
+}
+
+function musicAudienceScore(text, song, index = 0) {
+  const clean = cleanText(text, 1_200);
+  if (!musicAudienceTextUsable(clean, song)) return -Infinity;
+  const titlePresent = normalize(clean).includes(normalize(song.title));
+  const identityOverlap = [...musicIdentityTokens(song)].filter((token) => normalize(clean).split(" ").includes(token)).length;
+  return Number(titlePresent) * 30
+    + identityOverlap * 8
+    + Number(musicAudienceReceptionPattern.test(clean)) * 18
+    + Number(musicAudienceUsagePattern.test(clean)) * 16
+    + Number(/\b(?:viral|trending|stream(?:s|ed|ing)?|chart(?:ed|ing)?|record|top\s+\d+|no\.?\s*1)\b/i.test(clean)) * 12
+    - index;
+}
+
+async function musicAudienceEvidence(song, candidate) {
+  if (!song?.title) return null;
+  const identity = [song.title, song.artist].filter(Boolean).map((value) => `"${value.replaceAll('"', "")}"`).join(" ");
+  const queries = [
+    `${identity} fans listeners reaction`,
+    `${identity} viral sound hook chorus lyrics`,
+    `${identity} TikTok edit dance playlist streams`,
+  ];
+  const feeds = await mapConcurrent(queries, 3, async (query) => {
+    const url = new URL("https://news.google.com/rss/search");
+    url.search = new URLSearchParams({ q: `${query} when:8d`, hl: "en-US", gl: "US", ceid: "US:en" });
+    return { query, items: parseRss(await fetchText(url).catch(() => ""), query) };
+  });
+  const entries = [];
+  const add = (text, source, link = "", publishedAt = null, kind = "current_reception") => {
+    const clean = cleanText(text, 1_200);
+    if (!musicAudienceTextUsable(clean, song)) return;
+    entries.push({ text: clean, source: source || "Current music coverage", link, publishedAt, kind });
+  };
+  for (const sentence of [...sentenceSegmenter.segment(candidate.articleIntro ?? "")].map(({ segment }) => segment.trim())) {
+    add(sentence, candidate.source, candidate.link, candidate.publishedAt, "current_coverage");
+  }
+  for (const related of candidate.coverageHeadlines ?? []) {
+    add(related.headline, related.source, "", related.publishedAt, "current_reception");
+  }
+  for (const feed of feeds) {
+    for (const item of feed.items) {
+      add(item.headline, item.source, item.link, item.publishedAt, musicAudienceUsagePattern.test(item.headline) ? "current_usage" : "current_reception");
+      if (entries.length > 36) break;
+    }
+  }
+  const ranked = [...new Map(entries.map((entry) => [normalize(entry.text), entry])).values()]
+    .map((entry, index) => ({ ...entry, score: musicAudienceScore(entry.text, song, index) }))
+    .filter((entry) => Number.isFinite(entry.score))
+    .sort((left, right) => right.score - left.score);
+  const selected = ranked[0];
+  if (!selected) return null;
+  // A Google News result is useful for discovery but not as the card's source.
+  // Resolve one winning result so the audience context can come from the linked
+  // publisher article whenever the publisher is available.
+  if (selected.link.startsWith("https://news.google.com/")) {
+    const resolved = await resolveGoogleNewsArticle(selected.link).catch(() => null);
+    if (resolved) {
+      const metadata = await linkedArticleMetadata(resolved, { allowMissingImage: true }).catch(() => null);
+      const articleSentences = [...sentenceSegmenter.segment(cleanText(metadata?.intro, 1_400))]
+        .map(({ segment }) => segment.trim())
+        .filter((sentence) => musicAudienceTextUsable(sentence, song));
+      if (articleSentences.length) {
+        selected.text = articleSentences.sort((left, right) => musicAudienceScore(right, song) - musicAudienceScore(left, song))[0];
+        selected.link = metadata.url;
+        selected.source = metadata.source ?? selected.source;
+        selected.kind = musicAudienceUsagePattern.test(selected.text) ? "current_usage" : "current_reception";
+      }
+    }
+  }
+  return {
+    selected,
+    alternates: ranked.slice(1, 8),
+    hasReception: musicAudienceReceptionPattern.test(selected.text),
+    hasUsage: musicAudienceUsagePattern.test(selected.text),
+  };
+}
+
+function musicSongDisplayTitle(song) {
+  return `“${song.title}”${song.artist ? ` by ${song.artist}` : ""}`;
+}
 
 function musicSubjectOverlap(headline, sentence) {
   return headlineContextOverlap(headline, sentence).filter((word) => !musicGenericSubjectWords.has(word));
@@ -785,6 +947,7 @@ function categoryRuleUsable(category, candidate, focused) {
 function sourceCandidateCoreUsable(category, candidate, now) {
   if (!candidate || !isRecentPublication(candidate.publishedAt, now)) return false;
   if (category.parent === "Music" && !candidate.playback?.embedUrl) return false;
+  if (category.parent === "Music" && (!candidate.musicSong?.title || !candidate.musicAudience?.selected)) return false;
   const minimumIntroLength = category.parent === "Music" && candidate.directCategoryFeed ? 45 : 80;
   if (!articleIntroLooksComplete(candidate.articleIntro, minimumIntroLength)) return false;
   const focused = focusedArticleContext(candidate.headline, candidate.articleIntro, 620);
@@ -830,6 +993,9 @@ function sourceCandidateUsable(category, candidate, now) {
   const focused = focusedArticleContext(candidate.headline, candidate.articleIntro, 620);
   const popularityEvidence = validatedPopularityEvidence(popularityEvidenceFor(candidate, focused));
   if (!popularityEvidence) return false;
+  if (category.parent === "Music" && (!candidate.musicSong?.title
+    || !candidate.musicAudience?.selected
+    || (!candidate.musicAudience.hasReception && !candidate.musicAudience.hasUsage))) return false;
   if (!attentionSignalPattern.test(`${candidate.headline} ${focused}`)
     && !["independent-coverage", "measurable-signal", "concrete-trend-signal"].includes(popularityEvidence.mode)) return false;
   return true;
@@ -849,7 +1015,12 @@ function candidateRelevanceScore(candidate, now) {
   const coverageSourceSignal = Math.min(4, new Set(candidate.coverageSources ?? []).size);
   const popularitySignal = Number(candidate.popularityEvidence?.mode && candidate.popularityEvidence.mode !== "none");
   const attentionSignal = Number(attentionSignalPattern.test(`${candidate.headline} ${focused}`));
-  return freshness * 12 + coverageSignal * 18 + coverageSourceSignal * 16 + popularitySignal * 24 + headlineSignal * 28 + articleSignal * 12 + causalSignal * 10 + attentionSignal * 14 + overlap * 5 + imageSignal * 6 + playbackSignal * 8;
+  const musicSongSignal = Number(Boolean(candidate.musicSong?.title));
+  const musicAudienceSignal = Number(Boolean(candidate.musicAudience?.selected));
+  const musicReceptionSignal = Number(Boolean(candidate.musicAudience?.hasReception));
+  const musicUsageSignal = Number(Boolean(candidate.musicAudience?.hasUsage));
+  return freshness * 12 + coverageSignal * 18 + coverageSourceSignal * 16 + popularitySignal * 24 + headlineSignal * 28 + articleSignal * 12 + causalSignal * 10 + attentionSignal * 14 + overlap * 5 + imageSignal * 6 + playbackSignal * 8
+    + musicSongSignal * 30 + musicAudienceSignal * 42 + musicReceptionSignal * 18 + musicUsageSignal * 12;
 }
 
 const corroborationQueryStopWords = new Set([
@@ -912,7 +1083,7 @@ async function corroborateCandidate(category, candidate) {
 async function categoryCandidates(category, now = new Date()) {
   try {
     const broadQuery = category.parent === "Music"
-      ? `${category.label} new music news`
+      ? `${category.label} new song fans listeners`
       : `${category.label} latest news`;
     const queries = [...new Set([
       broadQuery,
@@ -992,6 +1163,12 @@ async function categoryCandidates(category, now = new Date()) {
           try {
             const metadata = await linkedArticleMetadata(publisherUrl, { allowMissingImage: true });
             const articleIntro = cleanArticleIntro(metadata.intro);
+            const musicSong = category.parent === "Music"
+              ? extractMusicSongIdentity({ headline: candidate.headline, articleIntro })
+              : null;
+            const musicAudience = musicSong
+              ? await musicAudienceEvidence(musicSong, { ...candidate, articleIntro, link: metadata.url })
+              : null;
             const enrichedCandidate = {
               ...candidate,
               link: metadata.url,
@@ -999,21 +1176,11 @@ async function categoryCandidates(category, now = new Date()) {
               playback: metadata.playback,
               imageSource: metadata.imageSource,
               imageAlt: metadata.imageAlt,
+              ...(musicSong ? { musicSong } : {}),
+              ...(musicAudience ? { musicAudience } : {}),
             };
             const minimumIntroLength = category.parent === "Music" && enrichedCandidate.directCategoryFeed ? 45 : 80;
             if (articleIntro.length < minimumIntroLength || !sourceCandidateCoreUsable(category, enrichedCandidate, now)) {
-              if (process.env.NICHE_DEBUG === "1") {
-                console.log(JSON.stringify({
-                  category: category.id,
-                  headline: candidate.headline,
-                  source: candidate.source,
-                  coverageCount: candidate.coverageCount,
-                  coverageSources: candidate.coverageSources,
-                  introLength: articleIntro.length,
-                  articleIntro: articleIntro.slice(0, 240),
-                  coreUsable: false,
-                }));
-              }
               continue;
             }
             let candidateWithEvidence = {
@@ -1033,20 +1200,7 @@ async function categoryCandidates(category, now = new Date()) {
                 ),
               };
             }
-            const popularityEvidence = candidateWithEvidence.popularityEvidence;
             const usable = sourceCandidateUsable(category, candidateWithEvidence, now);
-            if (process.env.NICHE_DEBUG === "1" && !usable) {
-              console.log(JSON.stringify({
-                category: category.id,
-                headline: candidate.headline,
-                source: candidate.source,
-                coverageCount: candidateWithEvidence.coverageCount,
-                coverageSources: candidateWithEvidence.coverageSources,
-                evidence: popularityEvidence,
-                introLength: articleIntro.length,
-                articleIntro: articleIntro.slice(0, 240),
-              }));
-            }
             if (!usable) continue;
             if (metadata.title && meaningfulWordOverlap(candidate.headline, metadata.title).length < 2) continue;
             return { ...candidateWithEvidence, relevanceScore: candidateRelevanceScore(candidateWithEvidence, now) };
@@ -1071,7 +1225,7 @@ async function categoryCandidates(category, now = new Date()) {
     // Google News occasionally returns its own interstitial instead of a
     // publisher URL. Revalidate the last source-grounded cards directly so a
     // resolver outage does not force a generic fallback or lose a good feed.
-    const priorTopics = fallbackCategory(category).topics
+    const priorTopics = (fallbackCategory(category).topics ?? [])
       .filter((topic) => topic.evidenceMode === "source-grounded" && /^https:\/\//i.test(topic.url ?? ""))
       .slice(0, maxPublisherCandidates);
     const prior = await mapConcurrent(priorTopics, 3, async (topic) => {
@@ -1155,6 +1309,7 @@ function candidateRecords(category, candidates) {
       coverageCount: candidate.coverageCount,
       coverageSources: candidate.coverageSources,
       popularityEvidence: candidate.popularityEvidence,
+      ...(candidate.musicSong ? { musicSong: candidate.musicSong } : {}),
       sourceSnippets: [
         {
           kind: "current_headline",
@@ -1177,6 +1332,20 @@ function candidateRecords(category, candidates) {
           text: popularityEvidenceText(candidate),
           publishedAt: candidate.publishedAt,
         },
+        ...(candidate.musicAudience?.selected ? [{
+          kind: candidate.musicAudience.selected.kind ?? "current_reception",
+          source: candidate.musicAudience.selected.source,
+          headline: candidate.musicAudience.selected.text,
+          text: candidate.musicAudience.selected.text,
+          publishedAt: candidate.musicAudience.selected.publishedAt ?? candidate.publishedAt,
+        }] : []),
+        ...(candidate.musicAudience?.alternates ?? []).slice(0, 3).map((audience) => ({
+          kind: audience.kind ?? "current_reception",
+          source: audience.source,
+          headline: audience.text,
+          text: audience.text,
+          publishedAt: audience.publishedAt ?? candidate.publishedAt,
+        })),
         ...(candidate.coverageHeadlines ?? []).map((coverage) => ({
           kind: "related_coverage",
           source: coverage.source,
@@ -1200,7 +1369,7 @@ function completeSentences(value, maxLength = 520) {
     if (next.length > maxLength && result) break;
     result = next;
   }
-  return result;
+  return result && !/[.!?]["'’”)]?$/.test(result) ? `${result}.` : result;
 }
 
 function normalizePopularityEvidence(value) {
@@ -1234,13 +1403,25 @@ function sourceGroundedTopic(record, category, index, fallback) {
   const candidate = record.candidate;
   const fallbackTopics = fallbackBrief.categories.flatMap((entry) => entry.topics ?? []);
   const fallbackTopic = fallback?.topics?.[index] ?? fallbackTopics[index % Math.max(1, fallbackTopics.length)] ?? { accent: category.accent };
-  const headline = cleanText(candidate?.headline, 180);
+  const sourceHeadline = cleanText(candidate?.headline, 180);
+  const musicSong = category.parent === "Music" ? candidate?.musicSong : null;
+  const headline = musicSong ? musicSongDisplayTitle(musicSong) : sourceHeadline;
   const sourceArticleIntro = removeArticleBoilerplate(candidate?.articleIntro);
-  const articleIntro = removeArticleBoilerplate(focusedArticleContext(headline, sourceArticleIntro, 420));
+  const articleIntro = removeArticleBoilerplate(focusedArticleContext(sourceHeadline, sourceArticleIntro, 420));
   if (!candidate || !articleIntro) throw new Error(`Niche topic ${record.id} has no source-grounded article context`);
   const popularityEvidence = validatedPopularityEvidence(candidate.popularityEvidence);
   if (!popularityEvidence) throw new Error(`Niche topic ${record.id} has no validated popularity evidence`);
-  const description = completeSentences(articleIntro, 520);
+  const musicAudienceContext = musicSong
+    ? completeSentences(candidate.musicAudience?.selected?.text ?? "", 360)
+    : "";
+  const musicReleaseContext = musicSong
+    ? [...sentenceSegmenter.segment(articleIntro)]
+      .map(({ segment }) => segment.trim())
+      .find((sentence) => musicSongCuePattern.test(sentence) && !musicAudienceSignalPattern.test(sentence)) ?? ""
+    : "";
+  const description = musicSong
+    ? completeSentences([musicAudienceContext, musicReleaseContext].filter(Boolean).join(" "), 520)
+    : completeSentences(articleIntro, 520);
   const whyNowSource = [...sentenceSegmenter.segment(articleIntro)]
     .map(({ segment }) => segment.trim())
     .filter((sentence) => sentence && !/["“][^"”]+["”]/.test(sentence) && !articleContextBoilerplatePattern.test(sentence))
@@ -1248,13 +1429,13 @@ function sourceGroundedTopic(record, category, index, fallback) {
       const score = (sentence) => Number(concreteContextPattern.test(sentence)) * 2
         + Number(popularityMetricPattern.test(sentence)) * 4
         + Number(attentionSignalPattern.test(sentence))
-        + meaningfulWordOverlap(headline, sentence).length;
+        + meaningfulWordOverlap(sourceHeadline, sentence).length;
       return score(right) - score(left);
     })
     .find((sentence) => concreteContextPattern.test(sentence)
       && !publisherBoilerplatePattern.test(sentence)
       && !articleCaptionPattern.test(sentence)
-      && headlineContextOverlap(headline, sentence).length >= 1);
+      && headlineContextOverlap(sourceHeadline, sentence).length >= 1);
   const fallbackWhyNowSource = [...sentenceSegmenter.segment(articleIntro)]
     .map(({ segment }) => segment.trim())
     .find((sentence) => sentence
@@ -1269,10 +1450,12 @@ function sourceGroundedTopic(record, category, index, fallback) {
       && !articleContextBoilerplatePattern.test(sentence)
       && !publisherBoilerplatePattern.test(sentence)
       && !articleCaptionPattern.test(sentence)
-      && headlineContextOverlap(headline, sentence).length >= 1
+      && headlineContextOverlap(sourceHeadline, sentence).length >= 1
       && sentence !== whyNowSource);
   const whyNowParts = [];
-  if (["measurable-signal", "concrete-trend-signal"].includes(popularityEvidence.mode) && popularityEvidence.signal) {
+  if (musicSong && musicAudienceContext) {
+    whyNowParts.push(musicAudienceContext);
+  } else if (["measurable-signal", "concrete-trend-signal"].includes(popularityEvidence.mode) && popularityEvidence.signal) {
     whyNowParts.push(popularityEvidence.signal);
   } else if (whyNowSource) {
     whyNowParts.push(whyNowSource);
@@ -1295,6 +1478,11 @@ function sourceGroundedTopic(record, category, index, fallback) {
     sourceLabel: "Read the report",
     evidenceMode: "source-grounded",
     image: nicheImagePath(record.id),
+    ...(musicSong ? {
+      musicKind: "song",
+      musicSongTitle: musicSong.title,
+      ...(musicSong.artist ? { musicArtist: musicSong.artist } : {}),
+    } : {}),
     ...(candidate.playback ? { playback: candidate.playback } : {}),
     ...(candidate.imageSource ? {
       imageSource: candidate.imageSource,
@@ -1348,6 +1536,12 @@ function persistedTopicUsable(topic, category, now = new Date()) {
   };
   const focused = `${topic?.description ?? ""} ${topic?.whyNow ?? ""}`;
   const outputText = `${topic?.title ?? ""} ${focused}`;
+  const musicSongTopic = category.parent === "Music"
+    && topic?.musicKind === "song"
+    && cleanText(topic?.musicSongTitle, 100)
+    && normalize(outputText).includes(normalize(topic.musicSongTitle))
+    && musicAudienceSignalPattern.test(outputText)
+    && (topic?.musicArtist ? normalize(outputText).includes(normalize(topic.musicArtist)) : true);
   const rawPopularityEvidence = normalizePopularityEvidence(topic?.popularityEvidence);
   const popularityEvidence = validatedPopularityEvidence(rawPopularityEvidence)
     ?? (category.parent === "Music"
@@ -1361,7 +1555,7 @@ function persistedTopicUsable(topic, category, now = new Date()) {
   return topic?.evidenceMode === "source-grounded"
     && isRecentPublication(topic.publishedAt, now)
     && /^https:\/\//i.test(topic.url ?? "")
-    && (category.parent !== "Music" || Boolean(topic?.playback?.embedUrl))
+    && (category.parent !== "Music" || (Boolean(topic?.playback?.embedUrl) && musicSongTopic))
     && !numberedNicheHeadlinePattern.test(topic.title ?? "")
     && !genericNicheHeadlinePattern.test(topic.title ?? "")
     && !editorialNicheHeadlinePattern.test(topic.title ?? "")
@@ -1391,6 +1585,7 @@ function persistedTopicUsable(topic, category, now = new Date()) {
     && headlineContextStrong(topic.title ?? "", focused)
     && !(category.parent === "Music" && candidate.directCategoryFeed && category.id !== "edm"
       && (!musicArtifactPattern.test(candidate.headline) || !musicArticleContextPattern.test(focused)))
+    && (category.parent !== "Music" || musicSongTopic)
     && categoryRuleUsable(category, candidate, focused);
 }
 

@@ -794,8 +794,9 @@ test("keeps content and outbound links constrained", async () => {
   const bookReaders = allBooks.map((item) => Number(item.metric.value.replaceAll(",", "")));
   assert.deepEqual(bookReaders, [...bookReaders].sort((left, right) => right - left));
   const music = brief.sections.find((section) => section.id === "music");
-  assert.match(music.description, /first 10 tracks in Spotify’s Today’s Top Hits/i);
+  assert.match(music.description, /songs with a fresh chart, playlist, release, or audience signal/i);
   const allSongs = [...music.items, ...music.moreItems];
+  assert.ok(allSongs.length >= 5 && allSongs.length <= 10);
   assert.ok(allSongs.every((item) => item.metric.label === "Billboard Hot 100"));
   assert.ok(allSongs.every((item) => Number.isInteger(item.spotifyRank) && item.spotifyRank <= 50));
   assert.ok(allSongs.every((item) => /^[A-Za-z0-9]{22}$/.test(item.spotifyId)));
@@ -803,6 +804,8 @@ test("keeps content and outbound links constrained", async () => {
   assert.deepEqual(billboardRanks, [...billboardRanks].sort((left, right) => left - right));
   assert.ok(allSongs.every((item) => item.evidence.some((entry) => new URL(entry.url).hostname === "www.billboard.com")));
   assert.ok(allSongs.every((item) => !/Billboard Hot 100|Spotify’s Today’s Top Hits|\b#\d+\b/i.test(item.description)));
+  assert.ok(allSongs.every((item) => /\b(?:fans?|listeners?|audiences?|viral|social media|playlist|cover|dance|edit|replay|meme|soundtrack|karaoke)\b/i.test(item.description)));
+  assert.ok(allSongs.every((item) => !/^(?:“[^”]+”\s+)?is\s+(?:a\s+)?(?:track|song)\s+by\b/i.test(item.description)));
   const songsWithCurrentCoverage = allSongs.filter((item) => item.evidence.length >= 3);
   assert.ok(songsWithCurrentCoverage.every((item) => !/^“[^”]+” is a track by [^.]+(?:, released [^.]+)?\.$/i.test(item.description)));
   const products = brief.sections.find((section) => section.id === "products");
@@ -855,7 +858,7 @@ test("keeps content and outbound links constrained", async () => {
   assert.match(updater, /amazonDetailMatchesProduct/);
   assert.match(updater, /musicContextForTrack/);
   assert.match(updater, /current_reception/);
-  assert.match(updater, /No source-grounded current context found/);
+  assert.match(updater, /source-grounded audience context/);
   assert.doesNotMatch(updater, /Unicorn Frappuccino|Galaxy Z Fold 8/i);
   assert.doesNotMatch(updater, /annualSlangCandidates|summaryQuery\s*=/);
   assert.doesNotMatch(JSON.stringify(brief), /tiktok|socialcounts|socialblade/i);

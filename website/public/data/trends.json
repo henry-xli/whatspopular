@@ -1,8 +1,8 @@
 {
   "edition": "August 2026",
   "status": "Checked today",
-  "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: current charts",
-  "generatedAt": "2026-08-21T06:15:29.184Z",
+  "window": "Memes: latest complete poll · People and Movies: last month · Books: latest Goodreads month · Products: past 90 days · News: past 7 days · Music: fresh song signals",
+  "generatedAt": "2026-08-22T00:31:28.255Z",
   "summary": "A five-minute, two-source briefing on the people, movies, books, music, products, news, memes, and slang shaping internet culture right now.",
   "sections": [
     {
@@ -1003,9 +1003,9 @@
     },
     {
       "id": "music",
-      "eyebrow": "Spotify Today’s Top Hits × Billboard",
+      "eyebrow": "Fresh song signals · Spotify × Billboard",
       "title": "Music",
-      "description": "The first 10 tracks in Spotify’s Today’s Top Hits that also appear on the Billboard Hot 100 are selected, then all 10 are ordered by Billboard position. Every track remains playable here.",
+      "description": "8 songs with a fresh chart, playlist, release, or audience signal are selected from Spotify’s Today’s Top Hits and the Billboard Hot 100. The cards explain what listeners are reacting to or doing with each song, and every track remains playable here.",
       "sources": [
         {
           "label": "Spotify · Today’s Top Hits",
@@ -1020,17 +1020,18 @@
       "items": [
         {
           "rank": 1,
-          "title": "Choosin' Texas",
-          "subtitle": "Ella Langley",
-          "description": "“Choosin' Texas” is a track by Ella Langley, released Oct 17, 2025. Matthew McConaughey prompts priceless reaction from Ella Langley after Oscar winner covers ‘Choosin’ Texas’.",
-          "image": "/culture/song-choosin-texas-ella-langley.webp",
-          "alt": "Choosin' Texas artwork by Ella Langley",
-          "url": "https://open.spotify.com/track/65DbTqJKhbwqYbZ1Okr0rc",
+          "title": "Been By Now",
+          "subtitle": "Morgan Wallen",
+          "description": "Morgan Wallen's New Single 'Been By Now' Drops: Fans Share Heartfelt Reactions. “Been By Now” is a track by Morgan Wallen, released Jul 24, 2026.",
+          "image": "/culture/song-been-by-now-morgan-wallen.webp",
+          "alt": "Been By Now artwork by Morgan Wallen",
+          "url": "https://open.spotify.com/track/3xwMjQriBVW0OGEvNKo9c0",
           "source": "Spotify",
           "metric": {
             "label": "Billboard Hot 100",
-            "value": "#1"
+            "value": "#3"
           },
+          "trendLabel": "Newly trending",
           "evidence": [
             {
               "source": "Spotify",
@@ -1041,48 +1042,20 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
             },
             {
-              "source": "Fox News via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPYk1HNFVQTzI0UDVBVGItLUx0Z1V1clNmUFo4bFVFSGVUeFNGZV9fdE9KbVlQdWVMTlVJYjBMLUI5ZWpoNFRZMGhIT1RPMEVWUGRMN2hxRXk3R0NZdmtTNVNSUzZidTU1UklfV3ozX3JkdnZFN1BhMVVfSUJIbnlrSnM0T0V6dF9YSkNCZmR1RjVFd3A2Q0s5NnA0MmQzMjY0ZHhHV1Q3V0hQeDBjTEtJSWZRbWh0ZmpWd2tYUTVVRHFNZ2pkVTJHdHBHZlFlNTJpeWpxSVZ5OTNIZ9IB3wFBVV95cUxQdEtmblh6UzMtdDJSbDYxbm91TC15WHhHR1VHOTNQVjN2b0pzWDhpWXlIeER0TTJqTTZBaDFZTmE5ZnJmQTFTT3FOSi05N0lIaVlGUDNfQXZMSWtrNnI0N0V5Y3hndXRia3otcmN5NmFNU2JQUmVoTnRBYjc4UEZLbmV0aXlJNWxSVFdMd0RzaUhmNFp0ZEVwMkpHblBHX25MVDVRejRZSm50SGtOcjdUWFUxYUFMRjJCZ014end4OTdiYkZ3ckw1a3R0ZG9NRFhVZF9aejdyU0JqNlEyZEJ3?oc=5"
+              "source": "Yahoo",
+              "url": "https://genius.com/Morgan-wallen-been-by-now-lyrics"
             }
           ],
           "accent": "#ffc857",
-          "spotifyId": "65DbTqJKhbwqYbZ1Okr0rc",
-          "spotifyRank": 7,
-          "releaseDate": "Oct 17, 2025"
+          "spotifyId": "3xwMjQriBVW0OGEvNKo9c0",
+          "spotifyRank": 37,
+          "releaseDate": "Jul 24, 2026"
         },
         {
           "rank": 2,
-          "title": "hate that i made you love me",
-          "subtitle": "Ariana Grande",
-          "description": "“hate that i made you love me” is a track by Ariana Grande, released May 29, 2026.",
-          "image": "/culture/song-hate-that-i-made-you-love-me-ariana-grande.webp",
-          "alt": "hate that i made you love me artwork by Ariana Grande",
-          "url": "https://open.spotify.com/track/20jbSiX29FDX4oQxBXyUEi",
-          "source": "Spotify",
-          "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#5"
-          },
-          "evidence": [
-            {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
-            },
-            {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
-            }
-          ],
-          "accent": "#9b8cff",
-          "spotifyId": "20jbSiX29FDX4oQxBXyUEi",
-          "spotifyRank": 11,
-          "releaseDate": "May 29, 2026"
-        },
-        {
-          "rank": 3,
           "title": "Man I Need",
           "subtitle": "Olivia Dean",
-          "description": "“Man I Need” is a track by Olivia Dean, released Aug 15, 2025.",
+          "description": "Lainey Wilson Delivers Mash Up Cover Of Justin Bieber’s “Daisies” With Olivia Dean’s “Man I Need” & It Just WORKS. “Man I Need” is a track by Olivia Dean, released Aug 15, 2025.",
           "image": "/culture/song-man-i-need-olivia-dean.webp",
           "alt": "Man I Need artwork by Olivia Dean",
           "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
@@ -1091,6 +1064,7 @@
             "label": "Billboard Hot 100",
             "value": "#9"
           },
+          "trendLabel": "Rising this week",
           "evidence": [
             {
               "source": "Spotify",
@@ -1099,46 +1073,22 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Whiskey Riff",
+              "url": "https://genius.com/Olivia-dean-man-i-need-lyrics"
             }
           ],
-          "accent": "#57d5a4",
+          "accent": "#9b8cff",
           "spotifyId": "1qbmS6ep2hbBRaEZFpn7BX",
-          "spotifyRank": 8,
+          "spotifyRank": 9,
           "releaseDate": "Aug 15, 2025"
         },
         {
-          "rank": 4,
-          "title": "stupid song",
-          "subtitle": "Olivia Rodrigo",
-          "description": "“stupid song” is a track by Olivia Rodrigo, released Jun 12, 2026.",
-          "image": "/culture/song-stupid-song-olivia-rodrigo.webp",
-          "alt": "stupid song artwork by Olivia Rodrigo",
-          "url": "https://open.spotify.com/track/4LfCY65LvojKjWEnU7fNN4",
-          "source": "Spotify",
-          "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#15"
-          },
-          "evidence": [
-            {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
-            },
-            {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
-            }
-          ],
-          "accent": "#5ab0ff",
-          "spotifyId": "4LfCY65LvojKjWEnU7fNN4",
-          "spotifyRank": 2,
-          "releaseDate": "Jun 12, 2026"
-        },
-        {
-          "rank": 5,
+          "rank": 3,
           "title": "petal",
           "subtitle": "Ariana Grande",
-          "description": "“petal” is a track by Ariana Grande, released Jul 31, 2026. Ariana Grande Says She Loves ‘Petal’ Music Video ‘With My Entire Heart’ After It Sparks Controversy.",
+          "description": "Fans Choose Ariana Grande’s ‘Petal’ as This Week’s Favorite New Music. “petal” is a track by Ariana Grande, released Jul 31, 2026.",
           "image": "/culture/song-petal-ariana-grande.webp",
           "alt": "petal artwork by Ariana Grande",
           "url": "https://open.spotify.com/track/70pVCVMGjmIWPbWXDwf11e",
@@ -1147,6 +1097,7 @@
             "label": "Billboard Hot 100",
             "value": "#18"
           },
+          "trendLabel": "Fresh release",
           "evidence": [
             {
               "source": "Spotify",
@@ -1157,50 +1108,20 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
             },
             {
-              "source": "Billboard via Google News",
-              "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNMk10Y0RJcDFlT2VPQnNyTWptbjBNamgxZm5FVTRSUExFY3dYcHR2QzJVbGhxVklQZEFxdG03eWNfMU14TmdBZzVrZHJVN1JQTkt1cGpaUDNoUDRsbW53QzBRRzkzcGJ1V3RwRk5qakIzNHpkTGppS21mTHhfbExNTmwwOW9yM1Y2eHN2QmU2R1RVQmp3alAxeVB5OG14bEdSUGFmSXphZ1ZIVk5WMnJn?oc=5"
+              "source": "Yahoo",
+              "url": "https://www.elle.com/culture/music/a73301770/ariana-grande-petal-review/"
             }
           ],
-          "accent": "#ff6b57",
+          "accent": "#57d5a4",
           "spotifyId": "70pVCVMGjmIWPbWXDwf11e",
-          "spotifyRank": 4,
+          "spotifyRank": 11,
           "releaseDate": "Jul 31, 2026"
-        }
-      ],
-      "moreItems": [
-        {
-          "rank": 6,
-          "title": "Earrings",
-          "subtitle": "Malcolm Todd",
-          "description": "“Earrings” is a track by Malcolm Todd, released Apr 5, 2024.",
-          "image": "/culture/song-earrings-malcolm-todd.webp",
-          "alt": "Earrings artwork by Malcolm Todd",
-          "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
-          "source": "Spotify",
-          "metric": {
-            "label": "Billboard Hot 100",
-            "value": "#21"
-          },
-          "evidence": [
-            {
-              "source": "Spotify",
-              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
-            },
-            {
-              "source": "Billboard",
-              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
-            }
-          ],
-          "accent": "#ffc857",
-          "spotifyId": "0eAuGrXyGFYwur9ARUe7LJ",
-          "spotifyRank": 3,
-          "releaseDate": "Apr 5, 2024"
         },
         {
-          "rank": 7,
+          "rank": 4,
           "title": "Loser",
           "subtitle": "Tame Impala",
-          "description": "“Loser” is a track by Tame Impala, released Oct 17, 2025. 'Loser' Lyrics: Tame Impala's 'Deadbeat' Track Finds Second Wind After Being Featured In 'Spider-Man: Brand New Day'.",
+          "description": "Tame Impala's \"Loser\" and Dominic Fike's \"Babydoll\" added to the KROQ playlist. “Loser” is a track by Tame Impala, released Oct 17, 2025.",
           "image": "/culture/song-loser-tame-impala.webp",
           "alt": "Loser artwork by Tame Impala",
           "url": "https://open.spotify.com/track/7bxaFZ1O3cHkgLKMsdC3xR",
@@ -1209,6 +1130,7 @@
             "label": "Billboard Hot 100",
             "value": "#22"
           },
+          "trendLabel": "Rising this week",
           "evidence": [
             {
               "source": "Spotify",
@@ -1217,22 +1139,18 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
-            },
-            {
-              "source": "Just Jared via Google News",
-              "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTkpVeVVtV05jVTlpUnUzZmpGd3IwNGZuelN1Q1dFUFlWdjRuU0ktU0JFSGVYazdueWNja0tvY0gyTDUwaGQwMEl1V08xNWhjRmwwN0NHbWxLZmhzbkRLZVVPVlk5QWp3N0duUzdhT1VMaHA0V0VpNng4ZmQ2UkJxN3dZakVaeEY3dXUtcEppaE5VdUZYMXU5R0hTcW5NdWtHbFBMQkpjczZrS08xWFV1bEU0OHpEa3BUUC1MZGRjamtVYkYxLWhZQVZnNmpkMU1VYVNoUVY3c01jZlJ3dHc?oc=5"
             }
           ],
-          "accent": "#9b8cff",
+          "accent": "#5ab0ff",
           "spotifyId": "7bxaFZ1O3cHkgLKMsdC3xR",
-          "spotifyRank": 9,
+          "spotifyRank": 1,
           "releaseDate": "Oct 17, 2025"
         },
         {
-          "rank": 8,
+          "rank": 5,
           "title": "Babydoll",
           "subtitle": "Dominic Fike",
-          "description": "“Babydoll” is a track by Dominic Fike, released Oct 16, 2018.",
+          "description": "Tame Impala's \"Loser\" and Dominic Fike's \"Babydoll\" added to the KROQ playlist. “Babydoll” is a track by Dominic Fike, released Oct 16, 2018.",
           "image": "/culture/song-babydoll-dominic-fike.webp",
           "alt": "Babydoll artwork by Dominic Fike",
           "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
@@ -1241,6 +1159,7 @@
             "label": "Billboard Hot 100",
             "value": "#24"
           },
+          "trendLabel": "Rising this week",
           "evidence": [
             {
               "source": "Spotify",
@@ -1249,18 +1168,24 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Audacy",
+              "url": "https://genius.com/Dominic-fike-babydoll-lyrics"
             }
           ],
-          "accent": "#57d5a4",
+          "accent": "#ff6b57",
           "spotifyId": "7yNf9YjeO5JXUE3JEBgnYc",
-          "spotifyRank": 6,
+          "spotifyRank": 7,
           "releaseDate": "Oct 16, 2018"
-        },
+        }
+      ],
+      "moreItems": [
         {
-          "rank": 9,
+          "rank": 6,
           "title": "Animal",
           "subtitle": "KATSEYE",
-          "description": "“Animal” is a track by KATSEYE, released Jul 24, 2026. Demi Moore Gets Front-Row Seat to Katseye’s Breakdown in ‘Animal’ Video.",
+          "description": "KATSEYE Performs Fan-Favorite ‘Animal’ From New EP 'Wild'. “Animal” is a track by KATSEYE, released Jul 24, 2026.",
           "image": "/culture/song-animal-katseye.webp",
           "alt": "Animal artwork by KATSEYE",
           "url": "https://open.spotify.com/track/3ouNEk0tv5TTi8VWMe1xbX",
@@ -1269,6 +1194,7 @@
             "label": "Billboard Hot 100",
             "value": "#30"
           },
+          "trendLabel": "Rising this week",
           "evidence": [
             {
               "source": "Spotify",
@@ -1279,20 +1205,20 @@
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
             },
             {
-              "source": "Rolling Stone via Google News",
-              "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPREtHY0s0MkNoM2tyNXF4WU04VXE3Sk1mTUVMQXlWdE5KRUpTNjRwSWRnSTUxMXJudHVLb2xsdjdFdWdtN0xocTlwX1JsUlhuNTF5ZzZSdUJRUGc5Y191RFVMQnFuRmFYM2pQUDJkSmhnVndTVGxad20yRVFBMWg4V1BUUXY3NkE0dzMxQzFDYjRGemdrYy1tMHNVbTRZRTA1aEtXVjFKU3pIdw?oc=5"
+              "source": "TODAY.com",
+              "url": "https://a-z-animals.com/animals/"
             }
           ],
-          "accent": "#5ab0ff",
+          "accent": "#ffc857",
           "spotifyId": "3ouNEk0tv5TTi8VWMe1xbX",
-          "spotifyRank": 1,
+          "spotifyRank": 6,
           "releaseDate": "Jul 24, 2026"
         },
         {
-          "rank": 10,
+          "rank": 7,
           "title": "Self Aware",
           "subtitle": "Temper City",
-          "description": "“Self Aware” is a track by Temper City, released Feb 15, 2026.",
+          "description": "How Temper City’s Self Aware became a viral social media hit with SoundOn’s help. “Self Aware” is a track by Temper City, released Feb 15, 2026.",
           "image": "/culture/song-self-aware-temper-city.webp",
           "alt": "Self Aware artwork by Temper City",
           "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
@@ -1301,6 +1227,7 @@
             "label": "Billboard Hot 100",
             "value": "#37"
           },
+          "trendLabel": "Rising this week",
           "evidence": [
             {
               "source": "Spotify",
@@ -1309,15 +1236,52 @@
             {
               "source": "Billboard",
               "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Headliner Magazine",
+              "url": "https://genius.com/Temper-city-self-aware-lyrics"
             }
           ],
-          "accent": "#ff6b57",
+          "accent": "#9b8cff",
           "spotifyId": "4qW3BbQAwZsrnu8a3ZRdyT",
           "spotifyRank": 10,
           "releaseDate": "Feb 15, 2026"
+        },
+        {
+          "rank": 8,
+          "title": "Sue me",
+          "subtitle": "Audrey Hobert",
+          "description": "Robyn Should Sue Audrey Hobert's Brother over This \"Dancing on My Own\" Cover for Gap. “Sue me” is a track by Audrey Hobert, released Aug 15, 2025.",
+          "image": "/culture/song-sue-me-audrey-hobert.webp",
+          "alt": "Sue me artwork by Audrey Hobert",
+          "url": "https://open.spotify.com/track/6ZAuQOgLrNQb9s7BXheuTy",
+          "source": "Spotify",
+          "metric": {
+            "label": "Billboard Hot 100",
+            "value": "#85"
+          },
+          "trendLabel": "Rising this week",
+          "evidence": [
+            {
+              "source": "Spotify",
+              "url": "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            },
+            {
+              "source": "Billboard",
+              "url": "https://www.billboard.com/charts/hot-100/2026-08-22/"
+            },
+            {
+              "source": "Exclaim!",
+              "url": "https://genius.com/Audrey-hobert-sue-me-lyrics"
+            }
+          ],
+          "accent": "#57d5a4",
+          "spotifyId": "6ZAuQOgLrNQb9s7BXheuTy",
+          "spotifyRank": 33,
+          "releaseDate": "Aug 15, 2025"
         }
       ],
-      "moreLabel": "Show ranks 6–10"
+      "moreLabel": "Show ranks 6–8"
     },
     {
       "id": "products",
