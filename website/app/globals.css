@@ -1284,9 +1284,17 @@ img {
 }
 
 .card-art img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Portrait boards must keep the full source frame so faces do not disappear
+   when a portrait is normalized into the square leaderboard art slot. */
+.board[data-section="people"] .card-art img {
+  object-fit: contain;
+  background: var(--paper-deep);
 }
 
 .source-chip {

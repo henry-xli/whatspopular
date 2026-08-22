@@ -11,7 +11,7 @@ export function Leaderboard({ section }: { section: CultureSection }) {
       : { width: 720, height: 520 };
 
   return (
-    <section className="board" id={section.id} aria-labelledby={`${section.id}-title`}>
+    <section className="board" data-section={section.id} id={section.id} aria-labelledby={`${section.id}-title`}>
       <div className="board-heading">
         <div>
           <p className="eyebrow">{section.eyebrow}</p>

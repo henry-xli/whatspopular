@@ -70,7 +70,7 @@ for (const section of brief.sections) {
       refreshDaily: section.id === "news" || section.id === "products",
       expectedFallback: section.id === "news" && !item.imageSource,
       fit: section.id === "news" && /(?:logo|seal)/i.test(item.imageSource ?? "") ? "contain" : "cover",
-      position: section.id === "news" ? "centre" : "attention",
+      position: section.id === "people" ? "top" : section.id === "news" ? "centre" : "attention",
       ...(item.imageSource
         ? { direct: item.imageSource, directKind: item.imageSourceKind }
         : imdbId

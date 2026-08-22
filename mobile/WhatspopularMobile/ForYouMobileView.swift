@@ -69,8 +69,11 @@ struct ForYouMobileView: View {
         }
         .onAppear {
             if selectedTags.isEmpty {
-                selectedTags = account.presentedProfile?.tags
-                    ?? defaultTags.filter { defaultID in categories.contains(where: { $0.id == defaultID }) }
+                let validStoredTags = (account.presentedProfile?.tags ?? [])
+                    .filter { storedTag in categories.contains(where: { $0.id == storedTag }) }
+                selectedTags = validStoredTags.isEmpty
+                    ? defaultTags.filter { defaultID in categories.contains(where: { $0.id == defaultID }) }
+                    : validStoredTags
             }
         }
         .onChange(of: account.presentedProfile?.tags ?? []) { _, tags in
@@ -153,14 +156,7 @@ struct ForYouMobileView: View {
                     ForEach(categories) { category in
                         let active = selectedTags.contains(category.id)
                         Button {
-                            let next = active
-                                ? selectedTags.filter { $0 != category.id }
-                                : selectedTags + [category.id]
-                            selectedTags = next
-                            mixRevision += 1
-                            if account.isLinked {
-                                Task { await account.saveTags(next) }
-                            }
+                            toggleTag(category)
                         } label: {
                             HStack(spacing: 6) {
                                 Circle().fill(Color(hex: category.accent)).frame(width: 7, height: 7)
@@ -187,6 +183,16 @@ struct ForYouMobileView: View {
         ScrollViewReader { proxy in
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
+                    MobileDigestIntroCard(
+                        summary: brief?.summary ?? "A pre-built signal mix from the corners you actually follow.",
+                        categories: categories,
+                        selectedTags: selectedTags,
+                        onToggle: toggleTag
+                    )
+                    .frame(maxWidth: .infinity)
+                    .containerRelativeFrame(.vertical)
+                    .id(introFeedID)
+
                     ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
                         MobileDigestCard(entry: entry, number: index + 1)
                             .frame(maxWidth: .infinity)
@@ -197,7 +203,11 @@ struct ForYouMobileView: View {
                     MobileDigestEndCard(
                         cardCount: entries.count,
                         onRecompile: { mixRevision += 1 },
-                        onEditInterests: { accountPresented = true }
+                        onEditInterests: {
+                            withAnimation(.easeOut(duration: 0.35)) {
+                                proxy.scrollTo(introFeedID, anchor: .top)
+                            }
+                        }
                     )
                     .frame(maxWidth: .infinity)
                     .containerRelativeFrame(.vertical)
@@ -208,21 +218,18 @@ struct ForYouMobileView: View {
             .scrollTargetBehavior(.paging)
             .scrollIndicators(.hidden)
             .background(Color.black)
-            .overlay(alignment: .top) {
+            .safeAreaInset(edge: .top, spacing: 0) {
                 feedHeader(cardCount: entries.count)
             }
             .id(mixRevision)
             .onChange(of: mixRevision) { _, _ in
-                guard let firstEntry = entries.first else { return }
                 DispatchQueue.main.async {
                     withAnimation(.easeOut(duration: 0.35)) {
-                        proxy.scrollTo(feedID(for: firstEntry), anchor: .top)
+                        proxy.scrollTo(introFeedID, anchor: .top)
                     }
                 }
             }
         }
-        .toolbar(.hidden, for: .tabBar)
-        .ignoresSafeArea(.container, edges: .vertical)
     }
 
     private func feedHeader(cardCount: Int) -> some View {
@@ -255,16 +262,21 @@ struct ForYouMobileView: View {
             .accessibilityLabel("Open account settings")
         }
         .padding(.horizontal, 16)
-        .padding(.top, 12)
-        .padding(.bottom, 19)
+        .padding(.top, 7)
+        .padding(.bottom, 10)
         .foregroundStyle(.white)
-        .background(
-            LinearGradient(
-                colors: [.black.opacity(0.72), .black.opacity(0)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
+        .background(Color.black.opacity(0.94))
+    }
+
+    private func toggleTag(_ category: NicheCategory) {
+        let next = selectedTags.contains(category.id)
+            ? selectedTags.filter { $0 != category.id }
+            : selectedTags + [category.id]
+        selectedTags = next
+        mixRevision += 1
+        if account.isLinked {
+            Task { await account.saveTags(next) }
+        }
     }
 
     private var accountGate: some View {
@@ -297,6 +309,7 @@ struct ForYouMobileView: View {
     }
 
     private var endFeedID: String { "feed-end-\(mixRevision)" }
+    private var introFeedID: String { "feed-intro-\(mixRevision)" }
 
     private func feedID(for entry: MobileDigestEntry) -> String {
         "feed-\(mixRevision)-\(entry.id)"
@@ -316,6 +329,89 @@ private struct MobileDigestEntry: Identifiable {
     let categoryParent: String
 
     var id: String { topic.id }
+}
+
+private struct MobileDigestIntroCard: View {
+    let summary: String
+    let categories: [NicheCategory]
+    let selectedTags: [String]
+    let onToggle: (NicheCategory) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("YOUR WEEKLY MIX")
+                        .font(.caption2.weight(.black))
+                        .tracking(1.2)
+                    Text("Start with the corners you chose.")
+                        .font(.system(size: 33, weight: .black, design: .rounded))
+                        .tracking(-1.15)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: 12)
+                Text("\(selectedTags.count)\nselected")
+                    .font(.caption.weight(.black))
+                    .multilineTextAlignment(.trailing)
+                    .foregroundStyle(.white.opacity(0.72))
+            }
+
+            Spacer(minLength: 8)
+
+            Text(summary)
+                .font(.body.weight(.medium))
+                .foregroundStyle(.white.opacity(0.88))
+                .fixedSize(horizontal: false, vertical: true)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("TAP TO TUNE THIS MIX")
+                    .font(.caption2.weight(.black))
+                    .tracking(1)
+                    .foregroundStyle(.white.opacity(0.72))
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(categories) { category in
+                            let active = selectedTags.contains(category.id)
+                            Button { onToggle(category) } label: {
+                                HStack(spacing: 6) {
+                                    Circle()
+                                        .fill(active ? .white : Color(hex: category.accent))
+                                        .frame(width: 7, height: 7)
+                                    Text(category.label)
+                                        .font(.caption.weight(.bold))
+                                }
+                                .padding(.horizontal, 11)
+                                .padding(.vertical, 8)
+                                .foregroundStyle(active ? Color(hex: category.accent) : .white)
+                                .background(active ? .white : .white.opacity(0.12), in: Capsule())
+                                .overlay {
+                                    Capsule().stroke(.white.opacity(active ? 0 : 0.26), lineWidth: 1)
+                                }
+                                .contentShape(Capsule())
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
+            }
+
+            Spacer(minLength: 4)
+
+            Label("Swipe up for the first signal", systemImage: "arrow.up")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.white.opacity(0.68))
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 30)
+        .foregroundStyle(.white)
+        .background(
+            LinearGradient(
+                colors: [Color(hex: "#264b68"), Color(hex: "#122738"), .black],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+    }
 }
 
 private struct MobileDigestCard: View {
@@ -428,6 +524,28 @@ private struct MobileDigestCard: View {
                                 NicheMusicEmbedView(playback: playback)
                                     .frame(height: 142)
                                     .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                if let playbackURL = URL(string: playback.externalUrl) {
+                                    Link(destination: playbackURL) {
+                                        HStack(spacing: 7) {
+                                            Image(systemName: playback.provider.caseInsensitiveCompare("YouTube") == .orderedSame
+                                                ? "play.rectangle.fill"
+                                                : "arrow.up.right.square")
+                                            Text(playback.provider.caseInsensitiveCompare("YouTube") == .orderedSame
+                                                ? "Open in YouTube"
+                                                : "Open in \(playback.provider)")
+                                            Spacer(minLength: 0)
+                                            Image(systemName: "arrow.up.right")
+                                        }
+                                        .font(.caption.weight(.bold))
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 8)
+                                        .foregroundStyle(.white)
+                                        .background(.white.opacity(0.13), in: Capsule())
+                                        .contentShape(Capsule())
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityHint("Opens the source player outside the embedded preview")
+                                }
                             }
                             .padding(9)
                             .background(.black.opacity(0.28), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
@@ -535,10 +653,32 @@ private struct MobileDigestEndCard: View {
 private struct NicheMusicEmbedView: UIViewRepresentable {
     let playback: NichePlayback
 
+    private var embedURL: URL? {
+        guard var components = URLComponents(string: playback.embedUrl) else { return nil }
+        if playback.provider.caseInsensitiveCompare("YouTube") == .orderedSame {
+            components.host = "www.youtube.com"
+            var queryItems = components.queryItems ?? []
+            func setQuery(_ name: String, _ value: String) {
+                if let index = queryItems.firstIndex(where: { $0.name == name }) {
+                    queryItems[index].value = value
+                } else {
+                    queryItems.append(URLQueryItem(name: name, value: value))
+                }
+            }
+            setQuery("enablejsapi", "1")
+            setQuery("origin", "https://whatspopular.pigeonflare.chatgpt.site")
+            setQuery("playsinline", "1")
+            setQuery("rel", "0")
+            components.queryItems = queryItems
+        }
+        return components.url
+    }
+
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = [.audio, .video]
+        configuration.defaultWebpagePreferences.allowsContentJavaScript = true
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.isOpaque = false
@@ -554,10 +694,17 @@ private struct NicheMusicEmbedView: UIViewRepresentable {
     }
 
     private func loadIfNeeded(_ webView: WKWebView) {
-        let identifier = "niche-music-player-\(playback.provider)-\(playback.embedUrl)"
-        guard webView.accessibilityIdentifier != identifier,
-              let url = URL(string: playback.embedUrl) else { return }
+        guard let url = embedURL else { return }
+        let identifier = "niche-player-\(playback.provider)-\(url.absoluteString)"
+        guard webView.accessibilityIdentifier != identifier else { return }
         webView.accessibilityIdentifier = identifier
-        webView.load(URLRequest(url: url, cachePolicy: .useProtocolCachePolicy))
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy)
+        if playback.provider.caseInsensitiveCompare("YouTube") == .orderedSame {
+            request.setValue(
+                "https://whatspopular.pigeonflare.chatgpt.site/for-you",
+                forHTTPHeaderField: "Referer"
+            )
+        }
+        webView.load(request)
     }
 }
