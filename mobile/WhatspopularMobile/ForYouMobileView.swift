@@ -704,6 +704,23 @@ private struct NicheMusicEmbedView: UIViewRepresentable {
                 "https://whatspopular.pigeonflare.chatgpt.site/for-you",
                 forHTTPHeaderField: "Referer"
             )
+            let escapedURL = url.absoluteString
+                .replacingOccurrences(of: "&", with: "&amp;")
+                .replacingOccurrences(of: "\"", with: "&quot;")
+            let wrapper = """
+            <!doctype html>
+            <html><head><meta name="viewport" content="width=device-width,initial-scale=1">
+            <style>html,body,iframe{width:100%;height:100%;margin:0;border:0;background:transparent}body{overflow:hidden}</style>
+            </head><body><iframe src="\(escapedURL)" title="YouTube player"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe></body></html>
+            """
+            webView.loadHTMLString(
+                wrapper,
+                baseURL: URL(string: "https://whatspopular.pigeonflare.chatgpt.site/for-you")
+            )
+            return
         }
         webView.load(request)
     }
