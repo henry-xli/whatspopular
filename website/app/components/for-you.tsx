@@ -388,11 +388,15 @@ export function ForYouExperience({
                 </article>
               );
             })}
-          </div>
-          <div className="digest-end wrap">
-            <span className="sparkle" aria-hidden="true">✦</span>
-            <p>That’s the signal for this week.<br /><strong>Come back after the next snapshot.</strong></p>
-            {signedIn ? <span className="account-state"><span className="status-dot" aria-hidden="true" /> {saved ? saveMessage || "Saved" : saveMessage || "Account sync on"}</span> : null}
+            <article className="digest-end digest-end-card" aria-labelledby="digest-end-title">
+              <span className="sparkle" aria-hidden="true">✦</span>
+              <p id="digest-end-title"><strong>You’re all caught up.</strong><br />That’s the signal for this week.</p>
+              <div className="digest-end-actions">
+                <button className="button button-primary button-small" type="button" onClick={revealAgain}>Recompile this mix <span aria-hidden="true">↻</span></button>
+                <button className="button button-quiet button-small" type="button" onClick={() => document.getElementById("tag-builder-title")?.scrollIntoView({ behavior: "smooth", block: "center" })}>Edit interests</button>
+              </div>
+              {signedIn ? <span className="account-state"><span className="status-dot" aria-hidden="true" /> {saved ? saveMessage || "Saved" : saveMessage || "Account sync on"}</span> : null}
+            </article>
           </div>
         </section>
       )}
@@ -404,8 +408,8 @@ export function ForYouExperience({
             <span className="modal-symbol" aria-hidden="true">✳</span>
             <p className="eyebrow">Keep your signal close</p>
             <h2 id="signin-title">Your mix is ready.<br /><em>Save it for next week.</em></h2>
-            <p>Sign in with ChatGPT to save your tags and have the next pre-built digest waiting when you come back. No live scraping. No infinite feed.</p>
-            <a className="button button-primary modal-signin-button" href={SIGN_IN_HREF}>Continue with ChatGPT <span aria-hidden="true">↗</span></a>
+            <p>Sign in with Google or create an account with a verified email to save your tags and have the next pre-built digest waiting when you come back. No live scraping. No infinite feed.</p>
+            <a className="button button-primary modal-signin-button" href={SIGN_IN_HREF}>Sign in or create account <span aria-hidden="true">↗</span></a>
             <button className="modal-secondary" type="button" onClick={() => { setGateOpen(false); setCompiled(true); }}>Preview this mix on this device</button>
             <span className="modal-footnote">Your preferences are stored locally until you sign in.</span>
           </section>

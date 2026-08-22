@@ -22,7 +22,7 @@ export class VerificationEmailError extends Error {
   }
 }
 
-export async function sendVerificationEmail(to: string, code: string, displayName: string) {
+export async function sendVerificationEmail(to: string, code: string, displayName: string, purpose: "signup" | "change_email" = "signup") {
   const environment = await runtimeEnvironment();
   const apiKey = configuredString(environment, "AUTH_EMAIL_API_KEY") || configuredString(environment, "RESEND_API_KEY");
   const from = configuredString(environment, "AUTH_EMAIL_FROM") || configuredString(environment, "RESEND_FROM");
@@ -30,6 +30,12 @@ export async function sendVerificationEmail(to: string, code: string, displayNam
   if (!apiKey || !from || !endpoint) throw new VerificationEmailError("not_configured");
 
   const safeName = displayName.replace(/[\u0000-\u001f\u007f]/g, " ").trim().slice(0, 80) || "there";
+  const subject = purpose === "change_email"
+    ? "Confirm your new what’s popular? email"
+    : "Your what’s popular? verification code";
+  const intro = purpose === "change_email"
+    ? `Your what’s popular? email-change code is ${code}. It expires in 10 minutes.`
+    : `Your what’s popular? verification code is ${code}. It expires in 10 minutes.`;
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -40,9 +46,9 @@ export async function sendVerificationEmail(to: string, code: string, displayNam
     body: JSON.stringify({
       from,
       to: [to],
-      subject: "Your what’s popular? verification code",
-      text: `Hi ${safeName},\n\nYour what’s popular? verification code is ${code}. It expires in 10 minutes. If you did not request an account, you can ignore this email.\n\nThis code is single-use.`,
-      html: `<p>Hi ${escapeHtml(safeName)},</p><p>Your what’s popular? verification code is <strong>${code}</strong>. It expires in 10 minutes.</p><p>If you did not request an account, you can ignore this email.</p>`,
+      subject,
+      text: `Hi ${safeName},\n\n${intro} If you did not request this change, you can ignore this email.\n\nThis code is single-use.`,
+      html: `<p>Hi ${escapeHtml(safeName)},</p><p>${escapeHtml(intro).replace(code, `<strong>${escapeHtml(code)}</strong>`)}</p><p>If you did not request this change, you can ignore this email.</p>`,
     }),
   });
   if (!response.ok) throw new VerificationEmailError("delivery_failed");

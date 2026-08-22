@@ -9,6 +9,9 @@ struct SharedAccountProfile: Codable, Equatable {
     var email: String
     var displayName: String
     var updatedAt: String?
+    var username: String
+    var emailVerified: Bool
+    var canEditIdentity: Bool
 }
 
 private struct MobileSession: Codable {
@@ -24,6 +27,9 @@ private struct ProfileResponse: Codable {
     let email: String?
     let displayName: String?
     let updatedAt: String?
+    let username: String?
+    let emailVerified: Bool?
+    let canEditIdentity: Bool?
 }
 
 private struct LinkStartResponse: Codable {
@@ -54,6 +60,17 @@ private struct SignupStartResponse: Codable {
     let pending: Bool
     let email: String
     let expiresAt: String
+}
+
+private struct EmailChangeStartResponse: Codable {
+    let pending: Bool
+    let email: String
+    let expiresAt: String
+}
+
+struct ProviderStatus: Codable {
+    let emailVerificationConfigured: Bool
+    let googleConfigured: Bool
 }
 
 private struct APIErrorPayload: Codable {
@@ -92,6 +109,8 @@ final class AccountStore: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var message: String?
     @Published private(set) var verificationEmail: String?
+    @Published private(set) var emailChangeTarget: String?
+    @Published private(set) var providerStatus: ProviderStatus?
 
     private var session: MobileSession?
     private var refreshTask: Task<MobileSession, Error>?
@@ -106,6 +125,14 @@ final class AccountStore: ObservableObject {
     func bootstrap() async {
         guard session != nil else { return }
         await refreshProfile()
+    }
+
+    func loadProviderStatus() async {
+        do {
+            providerStatus = try await decodeJSON(path: "/api/auth/providers", method: "GET")
+        } catch {
+            providerStatus = nil
+        }
     }
 
     func refreshProfile() async {
@@ -151,6 +178,63 @@ final class AccountStore: ObservableObject {
         }
     }
 
+    func updateUsername(_ username: String) async {
+        guard session != nil, !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, !isLoading else { return }
+        isLoading = true
+        message = nil
+        defer { isLoading = false }
+        do {
+            let response: ProfileResponse = try await authorizedJSON(
+                path: "/api/account/identity",
+                method: "PATCH",
+                body: ["username": username]
+            )
+            profile = makeProfile(response)
+            message = "Username saved."
+        } catch {
+            message = error.localizedDescription
+        }
+    }
+
+    func beginEmailChange(_ email: String) async -> Bool {
+        guard session != nil, !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, !isLoading else { return false }
+        isLoading = true
+        message = nil
+        defer { isLoading = false }
+        do {
+            let response: EmailChangeStartResponse = try await authorizedJSON(
+                path: "/api/account/email/start",
+                method: "POST",
+                body: ["email": email]
+            )
+            emailChangeTarget = response.email
+            message = "Enter the six-digit code sent to \(response.email)."
+            return response.pending
+        } catch {
+            message = error.localizedDescription
+            return false
+        }
+    }
+
+    func verifyEmailChange(code: String) async {
+        guard emailChangeTarget != nil, !isLoading else { return }
+        isLoading = true
+        message = nil
+        defer { isLoading = false }
+        do {
+            let response: ProfileResponse = try await authorizedJSON(
+                path: "/api/account/email/verify",
+                method: "POST",
+                body: ["code": code]
+            )
+            profile = makeProfile(response)
+            emailChangeTarget = nil
+            message = "Email updated and verified."
+        } catch {
+            message = error.localizedDescription
+        }
+    }
+
     func signIn(identifier: String, password: String) async {
         guard !isLoading else { return }
         isLoading = true
@@ -170,6 +254,11 @@ final class AccountStore: ObservableObject {
     }
 
     func beginEmailSignup(username: String, email: String, password: String) async -> Bool {
+        if providerStatus?.emailVerificationConfigured != true { await loadProviderStatus() }
+        guard providerStatus?.emailVerificationConfigured == true else {
+            message = "Email sign-up is unavailable until email delivery is configured. Try Google sign-in or contact the site owner."
+            return false
+        }
         guard !isLoading else { return false }
         isLoading = true
         message = nil
@@ -209,6 +298,11 @@ final class AccountStore: ObservableObject {
     }
 
     func signInWithGoogle() async {
+        if providerStatus?.googleConfigured != true { await loadProviderStatus() }
+        guard providerStatus?.googleConfigured == true else {
+            message = "Google sign-in is unavailable until the site’s Google provider is configured."
+            return
+        }
         guard !isLoading else { return }
         isLoading = true
         message = nil
@@ -317,6 +411,7 @@ final class AccountStore: ObservableObject {
         }
         session = nil
         profile = nil
+        emailChangeTarget = nil
         SecureMobileSessionStore.clear()
         message = "Signed out on this device."
     }
@@ -327,7 +422,10 @@ final class AccountStore: ObservableObject {
             tags: response.tags ?? [],
             email: response.email ?? "",
             displayName: response.displayName ?? "what’s popular? member",
-            updatedAt: response.updatedAt
+            updatedAt: response.updatedAt,
+            username: response.username ?? "",
+            emailVerified: response.emailVerified ?? false,
+            canEditIdentity: response.canEditIdentity ?? false
         )
     }
 

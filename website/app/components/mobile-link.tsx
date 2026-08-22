@@ -13,7 +13,7 @@ export function MobileLinkExperience({ requestId, code, signedIn, displayName }:
   const [status, setStatus] = useState<"idle" | "working" | "approved" | "error">("idle");
   const [message, setMessage] = useState("");
   const validRequest = /^[0-9a-f-]{20,80}$/i.test(requestId) && /^[A-Z2-9]{8}$/.test(code);
-  const signInHref = `/signin-with-chatgpt?return_to=${encodeURIComponent(`/mobile-link?request_id=${requestId}&code=${code}`)}`;
+  const signInHref = `/signin?return_to=${encodeURIComponent(`/mobile-link?request_id=${requestId}&code=${code}`)}`;
 
   async function approve() {
     if (!validRequest || !signedIn || status === "working") return;
@@ -45,8 +45,8 @@ export function MobileLinkExperience({ requestId, code, signedIn, displayName }:
           <p className="account-error">This link is invalid. Start a new link from the mobile app.</p>
         ) : !signedIn ? (
           <>
-            <p>Sign in with ChatGPT first. The short-lived link code is not an account password and cannot be reused.</p>
-            <a className="button button-primary" href={signInHref}>Continue with ChatGPT <span aria-hidden="true">↗</span></a>
+            <p>Sign in or create an account with Google or a verified email first. The short-lived link code is not an account password and cannot be reused.</p>
+            <a className="button button-primary" href={signInHref}>Sign in or create account <span aria-hidden="true">↗</span></a>
           </>
         ) : status === "approved" ? (
           <>

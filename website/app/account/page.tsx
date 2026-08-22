@@ -1,24 +1,14 @@
 import type { Metadata } from "next";
-import { getServerAuthenticatedUser } from "../account-server";
-import { AccountSettingsExperience } from "../components/account-settings";
-import { nicheBrief } from "../niche";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Account settings",
-  description: "Manage the interests that shape your what’s popular? digest.",
+  title: "Profile",
+  description: "Open the profile menu to manage your what’s popular? account.",
   robots: { index: false, follow: false },
 };
 
-export default async function AccountPage() {
-  const user = await getServerAuthenticatedUser();
-  return (
-    <AccountSettingsExperience
-      categories={nicheBrief.categories}
-      signedIn={Boolean(user)}
-      displayName={user?.displayName}
-      email={user?.email}
-    />
-  );
+export default function AccountPage() {
+  redirect("/for-you");
 }

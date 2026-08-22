@@ -300,16 +300,30 @@ export async function clientAddressHash(request: Request, prefix: string) {
 
 export async function profileForUser(db: D1Like, user: Pick<AccountUser, "userId" | "email" | "displayName">) {
   const row = await db.prepare(`
-    SELECT email, display_name, selected_tags_json, updated_at
-    FROM user_profiles
-    WHERE user_id = ?1
-  `).bind(user.userId).first<{ email?: string; display_name?: string; selected_tags_json?: string; updated_at?: string }>();
+    SELECT p.user_id AS profile_user_id,
+      COALESCE(p.email, u.email) AS email,
+      COALESCE(p.display_name, u.username) AS display_name,
+      p.selected_tags_json, p.updated_at,
+      u.username, u.email_verified
+    FROM auth_users u
+    LEFT JOIN user_profiles p ON p.user_id = u.user_id
+    WHERE u.user_id = ?1
+    UNION ALL
+    SELECT p.user_id, p.email, p.display_name, p.selected_tags_json, p.updated_at, NULL, 0
+    FROM user_profiles p
+    WHERE p.user_id = ?1
+      AND NOT EXISTS (SELECT 1 FROM auth_users WHERE user_id = ?1)
+    LIMIT 1
+  `).bind(user.userId).first<{ profile_user_id?: string; email?: string; display_name?: string; selected_tags_json?: string; updated_at?: string; username?: string; email_verified?: number }>();
   return {
-    hasProfile: Boolean(row),
+    hasProfile: Boolean(row?.profile_user_id),
     tags: parseStoredTags(row?.selected_tags_json),
     email: row?.email ?? user.email,
     displayName: row?.display_name ?? user.displayName,
     updatedAt: row?.updated_at ?? null,
+    username: row?.username ?? "",
+    emailVerified: Number(row?.email_verified ?? 0) === 1,
+    canEditIdentity: Boolean(row?.username),
   };
 }
 

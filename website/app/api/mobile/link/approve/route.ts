@@ -1,8 +1,8 @@
-import { getChatGPTUser } from "../../../../chatgpt-auth";
 import {
   changesFrom,
   database,
   ensureAccountSchema,
+  getAuthenticatedUser,
   jsonResponse,
   readJsonBody,
   sameOriginRequest,
@@ -15,8 +15,8 @@ export const dynamic = "force-dynamic";
 type ApprovalPayload = { requestId?: unknown; code?: unknown };
 
 export async function POST(request: Request) {
-  const user = await getChatGPTUser();
-  if (!user) return jsonResponse({ error: "Sign in with ChatGPT before linking a device" }, 401);
+  const user = await getAuthenticatedUser(request);
+  if (!user) return jsonResponse({ error: "Sign in or create an account before linking a device" }, 401);
   if (!sameOriginRequest(request)) return jsonResponse({ error: "Cross-site link approvals are not allowed" }, 403);
   const payload = await readJsonBody<ApprovalPayload>(request);
   const requestId = typeof payload?.requestId === "string" ? payload.requestId.trim() : "";

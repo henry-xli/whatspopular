@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getChatGPTUser } from "../chatgpt-auth";
+import { getServerAuthenticatedUser } from "../account-server";
 import { MobileLinkExperience } from "../components/mobile-link";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +18,7 @@ export default async function MobileLinkPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const requestId = typeof params.request_id === "string" ? params.request_id : "";
   const code = typeof params.code === "string" ? params.code.toUpperCase() : "";
-  const user = await getChatGPTUser();
+  const user = await getServerAuthenticatedUser();
   return (
     <MobileLinkExperience
       requestId={requestId}

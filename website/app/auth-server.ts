@@ -329,6 +329,173 @@ async function issueSession(db: D1Like, userId: string, client: AuthClient) {
   }, 200, client === "web" ? { "Set-Cookie": sessionCookie(session.accessToken) } : undefined);
 }
 
+async function identityForUser(db: D1Like, user: Awaited<ReturnType<typeof getAuthenticatedUser>>) {
+  if (!user) return null;
+  const profile = await profileForUser(db, user);
+  const row = await db.prepare(`
+    SELECT username, email, email_verified
+    FROM auth_users
+    WHERE user_id = ?1
+  `).bind(user.userId).first<AuthUserRow>();
+  return {
+    username: row?.username ?? profile.username,
+    email: row?.email ?? profile.email,
+    emailVerified: Number(row?.email_verified ?? 0) === 1,
+    displayName: profile.displayName,
+    updatedAt: profile.updatedAt,
+    authMethod: user.authMethod,
+    canEditIdentity: Boolean(row?.username) && user.authMethod !== "chatgpt",
+  };
+}
+
+export async function accountIdentity(request: Request) {
+  const user = await getAuthenticatedUser(request);
+  if (!user) return jsonResponse({ error: "Sign in required" }, 401);
+  const db = await database();
+  if (!db) return authError("Account storage unavailable", 503);
+  try {
+    await ensureAccountSchema(db);
+    const identity = await identityForUser(db, user);
+    return jsonResponse(identity ? { ...identity, storage: "d1" } : { error: "Account not found" }, identity ? 200 : 404);
+  } catch {
+    return authError("Account storage unavailable", 503);
+  }
+}
+
+export async function updateAccountIdentity(request: Request, payload: Record<string, unknown>) {
+  if (!browserMutationAllowed(request)) return authError("Cross-site account requests are not allowed", 403);
+  const user = await getAuthenticatedUser(request);
+  if (!user) return jsonResponse({ error: "Sign in required" }, 401);
+  if (user.authMethod === "chatgpt") return authError("This account identity is managed by the sign-in provider.", 400);
+  const username = normalizeUsername(payload.username);
+  if (!username) return authError("Username must be 3–24 letters, numbers, or underscores.", 422);
+  const db = await database();
+  if (!db) return authError("Account storage unavailable", 503);
+  try {
+    await ensureAccountSchema(db);
+    const existing = await db.prepare("SELECT user_id, username FROM auth_users WHERE user_id = ?1 LIMIT 1").bind(user.userId).first<AuthUserRow>();
+    if (!existing?.user_id) return authError("This account does not support editable identity settings.", 400);
+    const conflict = await db.prepare("SELECT user_id FROM auth_users WHERE username = ?1 COLLATE NOCASE AND user_id != ?2 LIMIT 1").bind(username, user.userId).first<{ user_id?: string }>();
+    if (conflict?.user_id) return authError("That username is already in use.", 409);
+    await db.prepare("UPDATE auth_users SET username = ?1, updated_at = ?2 WHERE user_id = ?3").bind(username, new Date().toISOString(), user.userId).run();
+    const identity = await identityForUser(db, user);
+    return jsonResponse(identity ? { ...identity, storage: "d1" } : { error: "Account not found" });
+  } catch (error) {
+    if (String(error).toLowerCase().includes("unique")) return authError("That username is already in use.", 409);
+    return authError("Account storage unavailable", 503);
+  }
+}
+
+export async function startEmailChange(request: Request, payload: Record<string, unknown>) {
+  if (!browserMutationAllowed(request)) return authError("Cross-site account requests are not allowed", 403);
+  const user = await getAuthenticatedUser(request);
+  if (!user) return jsonResponse({ error: "Sign in required" }, 401);
+  if (user.authMethod === "chatgpt") return authError("This account identity is managed by the sign-in provider.", 400);
+  const email = normalizeEmail(payload.email);
+  if (!email) return authError("Enter a valid new email address.", 422);
+  const db = await database();
+  if (!db) return authError("Account storage unavailable", 503);
+  try {
+    await ensureAccountSchema(db);
+    const account = await db.prepare("SELECT user_id, email FROM auth_users WHERE user_id = ?1 LIMIT 1").bind(user.userId).first<AuthUserRow>();
+    if (!account?.user_id || !account.email) return authError("This account does not support editable email settings.", 400);
+    if (email === account.email.toLowerCase()) return authError("Enter a different email address.", 422);
+    const taken = await db.prepare("SELECT user_id FROM auth_users WHERE email = ?1 COLLATE NOCASE LIMIT 1").bind(email).first<{ user_id?: string }>();
+    if (taken?.user_id && taken.user_id !== user.userId) return authError("That email is already in use.", 409);
+
+    const now = new Date();
+    const nowIso = now.toISOString();
+    const ipHash = await clientAddressHash(request, "whatspopular-email-change");
+    const hourAgo = new Date(now.getTime() - 60 * 60 * 1000).toISOString();
+    const recentFromIp = await db.prepare("SELECT COUNT(*) AS count FROM auth_email_change_challenges WHERE ip_hash = ?1 AND created_at > ?2").bind(ipHash, hourAgo).first<{ count?: number | string }>();
+    if (Number(recentFromIp?.count ?? 0) >= MAX_VERIFICATION_STARTS_PER_HOUR) return authError("Too many verification requests. Try again later.", 429, 3600);
+    const recent = await db.prepare(`
+      SELECT next_send_at
+      FROM auth_email_change_challenges
+      WHERE user_id = ?1 AND status = 'pending'
+      ORDER BY created_at DESC
+      LIMIT 1
+    `).bind(user.userId).first<{ next_send_at?: string }>();
+    if (recent?.next_send_at && recent.next_send_at > nowIso) {
+      return authError("A verification code was already sent. Check that email or wait before requesting another.", 429, Math.max(1, Math.ceil((Date.parse(recent.next_send_at) - now.getTime()) / 1000)));
+    }
+
+    const code = randomDigits(6);
+    const codeSalt = randomToken(16);
+    const challengeId = randomToken(18);
+    const expiresAt = new Date(now.getTime() + authVerificationLifetimeMs).toISOString();
+    const nextSendAt = new Date(now.getTime() + authVerificationResendMs).toISOString();
+    await db.prepare("UPDATE auth_email_change_challenges SET status = 'replaced' WHERE user_id = ?1 AND status = 'pending'").bind(user.userId).run();
+    await db.prepare(`
+      INSERT INTO auth_email_change_challenges
+        (challenge_id, user_id, new_email, code_hash, code_salt, created_at, expires_at, next_send_at, ip_hash, status)
+      VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, 'pending')
+    `).bind(challengeId, user.userId, email, await hashCode(code, codeSalt), codeSalt, nowIso, expiresAt, nextSendAt, ipHash).run();
+    try {
+      const profile = await profileForUser(db, user);
+      await sendVerificationEmail(email, code, profile.displayName, "change_email");
+    } catch (error) {
+      await db.prepare("UPDATE auth_email_change_challenges SET status = 'delivery_failed' WHERE challenge_id = ?1 AND status = 'pending'").bind(challengeId).run();
+      if (error instanceof VerificationEmailError && error.code === "not_configured") return authError("Email verification is not configured on this site yet.", 503);
+      return authError("We could not send that verification email. Try again shortly.", 503);
+    }
+    return jsonResponse({ pending: true, email, expiresAt });
+  } catch {
+    return authError("Account storage unavailable", 503);
+  }
+}
+
+export async function verifyEmailChange(request: Request, payload: Record<string, unknown>) {
+  if (!browserMutationAllowed(request)) return authError("Cross-site account requests are not allowed", 403);
+  const user = await getAuthenticatedUser(request);
+  if (!user) return jsonResponse({ error: "Sign in required" }, 401);
+  if (user.authMethod === "chatgpt") return authError("This account identity is managed by the sign-in provider.", 400);
+  const code = typeof payload.code === "string" ? payload.code.trim() : "";
+  if (!CODE_PATTERN.test(code)) return authError("Enter the six-digit verification code.", 422);
+  const db = await database();
+  if (!db) return authError("Account storage unavailable", 503);
+  try {
+    await ensureAccountSchema(db);
+    const nowIso = new Date().toISOString();
+    const challenge = await db.prepare(`
+      SELECT challenge_id, user_id, new_email, code_hash, code_salt, attempt_count, expires_at
+      FROM auth_email_change_challenges
+      WHERE user_id = ?1 AND status = 'pending'
+      ORDER BY created_at DESC
+      LIMIT 1
+    `).bind(user.userId).first<{ challenge_id?: string; user_id?: string; new_email?: string; code_hash?: string; code_salt?: string; attempt_count?: number; expires_at?: string }>();
+    if (!challenge?.challenge_id || !challenge.new_email || !challenge.code_hash || !challenge.code_salt || !challenge.expires_at || challenge.expires_at <= nowIso || Number(challenge.attempt_count ?? 0) >= 5) {
+      if (challenge?.challenge_id) await db.prepare("UPDATE auth_email_change_challenges SET status = 'expired' WHERE challenge_id = ?1 AND status = 'pending'").bind(challenge.challenge_id).run();
+      return authError("That code is invalid or expired. Request a new one.", 410);
+    }
+    if (await hashCode(code, challenge.code_salt) !== challenge.code_hash) {
+      const attempts = Number(challenge.attempt_count ?? 0) + 1;
+      await db.prepare("UPDATE auth_email_change_challenges SET attempt_count = ?1, status = CASE WHEN ?1 >= 5 THEN 'expired' ELSE status END WHERE challenge_id = ?2 AND status = 'pending'").bind(attempts, challenge.challenge_id).run();
+      return authError("That code is invalid or expired. Try again.", 400);
+    }
+    const taken = await db.prepare("SELECT user_id FROM auth_users WHERE email = ?1 COLLATE NOCASE AND user_id != ?2 LIMIT 1").bind(challenge.new_email, user.userId).first<{ user_id?: string }>();
+    if (taken?.user_id) {
+      await db.prepare("UPDATE auth_email_change_challenges SET status = 'replaced' WHERE challenge_id = ?1 AND status = 'pending'").bind(challenge.challenge_id).run();
+      return authError("That email is already in use.", 409);
+    }
+    const claimed = await db.prepare("UPDATE auth_email_change_challenges SET status = 'used' WHERE challenge_id = ?1 AND status = 'pending' AND expires_at > ?2").bind(challenge.challenge_id, nowIso).run();
+    if (changesFrom(claimed) !== 1) return authError("That code was already used. Request a new one.", 409);
+    const updatedAt = new Date().toISOString();
+    try {
+      const updated = await db.prepare("UPDATE auth_users SET email = ?1, email_verified = 1, updated_at = ?2 WHERE user_id = ?3").bind(challenge.new_email, updatedAt, user.userId).run();
+      if (changesFrom(updated) !== 1) return authError("Account email could not be updated.", 409);
+      await db.prepare("UPDATE user_profiles SET email = ?1, updated_at = ?2 WHERE user_id = ?3").bind(challenge.new_email, updatedAt, user.userId).run();
+    } catch (error) {
+      if (String(error).toLowerCase().includes("unique")) return authError("That email is already in use.", 409);
+      throw error;
+    }
+    const identity = await identityForUser(db, user);
+    return jsonResponse(identity ? { ...identity, storage: "d1" } : { error: "Account not found" });
+  } catch {
+    return authError("Account storage unavailable", 503);
+  }
+}
+
 async function loginLimit(db: D1Like, key: string) {
   const row = await db.prepare("SELECT attempt_count, blocked_until, window_started_at FROM auth_login_limits WHERE bucket_key = ?1").bind(key).first<{ attempt_count?: number; blocked_until?: string | null; window_started_at?: string }>();
   const now = Date.now();
@@ -504,7 +671,8 @@ async function upsertGoogleUser(db: D1Like, subject: string, email: string, disp
       VALUES (?1, ?2, ?3, 1, ?4, ?5, ?5)
     `).bind(userId, username, email, subject, now).run();
   }
-  await upsertProfileIdentity(db, { userId, email, displayName });
+  const storedAccount = await db.prepare("SELECT email FROM auth_users WHERE user_id = ?1 LIMIT 1").bind(userId).first<{ email?: string }>();
+  await upsertProfileIdentity(db, { userId, email: storedAccount?.email ?? email, displayName });
   await db.prepare("UPDATE auth_users SET last_login_at = ?1, updated_at = ?1 WHERE user_id = ?2").bind(new Date().toISOString(), userId).run();
   return userId;
 }

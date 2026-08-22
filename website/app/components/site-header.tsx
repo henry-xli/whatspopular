@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { ProfileSettingsPanel } from "./profile-settings";
 
 const STORAGE_KEY = "whatspopular-theme";
 
@@ -156,7 +157,7 @@ function ProfileMenu({ pathname }: { pathname: string }) {
         className="profile-avatar-button"
         type="button"
         aria-label={session.signedIn ? `Open profile menu for ${session.user?.displayName ?? "your account"}` : "Open account menu"}
-        aria-haspopup="menu"
+        aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
@@ -166,7 +167,7 @@ function ProfileMenu({ pathname }: { pathname: string }) {
         <span className="sr-only">Profile and settings</span>
       </button>
       {open ? (
-        <div className="profile-popover" role="menu" aria-label="Profile and settings">
+        <div className="profile-popover" role="dialog" aria-label="Profile and settings">
           {session.signedIn ? (
             <div className="profile-popover-identity">
               <span className="profile-popover-avatar" aria-hidden="true">{initialsFor(session.user)}</span>
@@ -185,15 +186,20 @@ function ProfileMenu({ pathname }: { pathname: string }) {
           </div>
           {session.signedIn ? (
             <>
-              <a className="profile-menu-link" role="menuitem" href="/account"><span>Settings</span><span aria-hidden="true">↗</span></a>
+              <ProfileSettingsPanel
+                onIdentityUpdated={(identity) => setSession((current) => ({
+                  ...current,
+                  user: current.user ? { ...current.user, email: identity.email, displayName: identity.displayName } : current.user,
+                }))}
+              />
               {isChatGPTIdentity ? (
-                <a className="profile-menu-link is-danger" role="menuitem" href={`/signout-with-chatgpt?return_to=${returnTo}`}><span>Sign out</span><span aria-hidden="true">↗</span></a>
+                <a className="profile-menu-link is-danger" href={`/signout-with-chatgpt?return_to=${returnTo}`}><span>Sign out</span><span aria-hidden="true">↗</span></a>
               ) : (
-                <button className="profile-menu-link is-danger" role="menuitem" type="button" onClick={() => { void signOut(); }} disabled={signingOut}><span>{signingOut ? "Signing out…" : "Sign out"}</span><span aria-hidden="true">↗</span></button>
+                <button className="profile-menu-link is-danger" type="button" onClick={() => { void signOut(); }} disabled={signingOut}><span>{signingOut ? "Signing out…" : "Sign out"}</span><span aria-hidden="true">↗</span></button>
               )}
             </>
           ) : (
-            <a className="profile-menu-link is-primary" role="menuitem" href={`/signin?return_to=${returnTo}`}><span>Sign in or create account</span><span aria-hidden="true">↗</span></a>
+            <a className="profile-menu-link is-primary" href={`/signin?return_to=${returnTo}`}><span>Sign in or create account</span><span aria-hidden="true">↗</span></a>
           )}
         </div>
       ) : null}

@@ -12,6 +12,9 @@ struct MobileAccountSheet: View {
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var verificationCode = ""
+    @State private var newUsername = ""
+    @State private var newEmail = ""
+    @State private var emailChangeCode = ""
 
     private enum AuthMode: String, CaseIterable, Identifiable {
         case signIn
@@ -52,9 +55,15 @@ struct MobileAccountSheet: View {
                         Button {
                             Task { await account.signInWithGoogle() }
                         } label: {
-                            Label(account.isLoading ? "Opening Google…" : "Continue with Google", systemImage: "g.circle.fill")
+                            Label(account.isLoading ? "Opening Google…" : account.providerStatus?.googleConfigured == false ? "Google sign-in unavailable" : "Continue with Google", systemImage: "g.circle.fill")
                         }
-                        .disabled(account.isLoading)
+                        .disabled(account.isLoading || account.providerStatus?.googleConfigured == false)
+
+                        if account.providerStatus?.googleConfigured == false {
+                            Text("Google sign-in is not enabled on this deployment yet.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
 
                         if account.verificationEmail == nil {
                             if authMode == .signIn {
@@ -86,9 +95,14 @@ struct MobileAccountSheet: View {
                                 Button {
                                     Task { _ = await account.beginEmailSignup(username: username, email: email, password: password) }
                                 } label: {
-                                    Label(account.isLoading ? "Sending code…" : "Email me a verification code", systemImage: "envelope.badge.fill")
+                                    Label(account.isLoading ? "Sending code…" : account.providerStatus?.emailVerificationConfigured == false ? "Email verification unavailable" : "Email me a verification code", systemImage: "envelope.badge.fill")
                                 }
-                                .disabled(account.isLoading || username.isEmpty || email.isEmpty || password.count < 12 || password != confirmPassword)
+                                .disabled(account.isLoading || account.providerStatus?.emailVerificationConfigured == false || username.isEmpty || email.isEmpty || password.count < 12 || password != confirmPassword)
+                            }
+                            if account.providerStatus?.emailVerificationConfigured == false {
+                                Text("Email verification is not enabled on this deployment yet, so no code can be sent.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
                             }
                         } else {
                             Text("Enter the six-digit code sent to \(account.verificationEmail ?? "your email")")
@@ -112,35 +126,73 @@ struct MobileAccountSheet: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
 
-                        Divider()
-                        Button {
-                            Task { await account.startLinking() }
-                        } label: {
-                            Label(account.isLinking ? "Waiting for website approval…" : "Use an existing website account", systemImage: "link")
-                        }
-                        .disabled(account.isLoading || account.isLinking)
-                    }
-
-                    if let pendingLink = account.pendingLink {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text("Approve the code on the website")
-                                .font(.caption.weight(.bold))
-                            Text(pendingLink.code)
-                                .font(.system(.title2, design: .monospaced).weight(.black))
-                                .foregroundStyle(Color(hex: "#6F48E5"))
-                            Text("This code expires soon and can be used only once.")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
                     }
 
                     if account.isLinked {
-                        Button("Link again on another device") {
-                            Task { await account.startLinking() }
-                        }
-                        .disabled(account.isLinking)
                         Button("Sign out on this phone", role: .destructive) {
                             Task { await account.signOut() }
+                        }
+                    }
+                }
+
+                if let profile = account.profile, account.isLinked {
+                    Section("Profile details") {
+                        if profile.canEditIdentity {
+                            TextField("Username", text: $newUsername)
+                                .textContentType(.username)
+                                .textInputAutocapitalization(.never)
+                                .autocorrectionDisabled()
+                            Button {
+                                Task { await account.updateUsername(newUsername) }
+                            } label: {
+                                HStack {
+                                    Text("Save username")
+                                    Spacer()
+                                    if account.isLoading { ProgressView() }
+                                }
+                            }
+                            .disabled(account.isLoading || newUsername.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || newUsername == profile.username)
+
+                            LabeledContent("Verified email", value: profile.email)
+                            TextField("New email", text: $newEmail)
+                                .textContentType(.emailAddress)
+                                .textInputAutocapitalization(.never)
+                                .autocorrectionDisabled()
+                            Button {
+                                Task { _ = await account.beginEmailChange(newEmail) }
+                            } label: {
+                                HStack {
+                                    Text("Email me a verification code")
+                                    Spacer()
+                                    if account.isLoading { ProgressView() }
+                                }
+                            }
+                            .disabled(account.isLoading || newEmail.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                            if account.emailChangeTarget != nil {
+                                Text("Enter the six-digit code sent to \(account.emailChangeTarget ?? newEmail).")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                TextField("Email verification code", text: $emailChangeCode)
+                                    .keyboardType(.numberPad)
+                                    .textContentType(.oneTimeCode)
+                                    .onChange(of: emailChangeCode) { _, value in
+                                        emailChangeCode = String(value.filter(\.isNumber).prefix(6))
+                                    }
+                                Button {
+                                    Task { await account.verifyEmailChange(code: emailChangeCode) }
+                                } label: {
+                                    HStack {
+                                        Text("Verify new email")
+                                        Spacer()
+                                        if account.isLoading { ProgressView() }
+                                    }
+                                }
+                                .disabled(account.isLoading || emailChangeCode.count != 6)
+                            }
+                        } else {
+                            Text("Your sign-in provider manages this identity. You can still change your shared interests below.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
@@ -203,9 +255,14 @@ struct MobileAccountSheet: View {
             }
             .onAppear {
                 selectedTags = account.profile?.tags ?? []
+                newUsername = account.profile?.username ?? ""
+                Task { await account.loadProviderStatus() }
             }
             .onChange(of: account.profile?.tags ?? []) { _, tags in
                 selectedTags = tags
+            }
+            .onChange(of: account.profile?.username ?? "") { _, username in
+                newUsername = username
             }
         }
     }

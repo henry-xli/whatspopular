@@ -166,12 +166,14 @@ account.
 ## Account authentication
 
 The profile avatar in the shared header is the account entry point; there is no
-separate Account navigation tab. First-party accounts use the same D1-backed
-identity for the website and iOS app. Passwords are PBKDF2-HMAC-SHA-256 hashes
-with per-account salts, verification codes are salted, short-lived, limited to
-five attempts, and sessions store only token hashes. The web uses an HttpOnly
-`__Host-wp_session` cookie; the app uses a Keychain-held access/refresh pair
-with refresh-token rotation.
+separate Account navigation tab or settings page. The popover contains
+appearance, username, verified-email change, shared For You interests, mobile
+session revocation, and sign-out controls. First-party accounts use the same
+D1-backed identity for the website and iOS app. Passwords are PBKDF2-HMAC-SHA-256
+hashes with per-account salts, verification codes are salted, short-lived,
+limited to five attempts, and sessions store only token hashes. The web uses an
+HttpOnly `__Host-wp_session` cookie; the app uses a Keychain-held access/refresh
+pair with refresh-token rotation.
 
 Email signup stays disabled until an email provider is configured. Set the
 managed Site secrets `AUTH_EMAIL_API_KEY`, `AUTH_EMAIL_FROM`, and optionally

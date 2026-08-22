@@ -85,14 +85,7 @@ async function updateProfile(request: Request) {
       const current = await profileForUser(db, user);
       return jsonResponse({ error: "Profile changed on another device", conflict: true, ...current }, 409);
     }
-    return jsonResponse({
-      tags: parseStoredTags(JSON.stringify(normalized.tags)),
-      email: user.email,
-      displayName: user.displayName,
-      updatedAt: now,
-      hasProfile: true,
-      storage: "d1",
-    });
+    return jsonResponse({ ...(await profileForUser(db, user)), storage: "d1" });
   } catch {
     return jsonResponse({ error: "Profile storage unavailable" }, 503);
   }
