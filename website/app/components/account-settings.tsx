@@ -113,8 +113,8 @@ export function AccountSettingsExperience({ categories, signedIn, displayName, e
         <section className="account-panel" aria-labelledby="account-title">
           <p className="eyebrow">Account settings</p>
           <h1 id="account-title">Keep your signal<br /><em>in sync.</em></h1>
-          <p>Sign in with ChatGPT to save your interest tags and link the mobile app. This site does not store a second password or keep credentials in browser storage.</p>
-          <a className="button button-primary" href="/signin-with-chatgpt?return_to=%2Faccount">Continue with ChatGPT <span aria-hidden="true">↗</span></a>
+          <p>Sign in with Google or create a password account with a verified email. Your interest tags then sync across the website and mobile app.</p>
+          <a className="button button-primary" href="/signin?return_to=%2Faccount">Sign in or create account <span aria-hidden="true">↗</span></a>
         </section>
       </main>
     );

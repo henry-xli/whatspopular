@@ -162,3 +162,23 @@ deployment artifact because the Sites packaging format requires that location.
 The source repository therefore contains no provider metadata directory. The
 custom `whatspopular.com` domain must be configured in the owning Cloudflare
 account.
+
+## Account authentication
+
+The profile avatar in the shared header is the account entry point; there is no
+separate Account navigation tab. First-party accounts use the same D1-backed
+identity for the website and iOS app. Passwords are PBKDF2-HMAC-SHA-256 hashes
+with per-account salts, verification codes are salted, short-lived, limited to
+five attempts, and sessions store only token hashes. The web uses an HttpOnly
+`__Host-wp_session` cookie; the app uses a Keychain-held access/refresh pair
+with refresh-token rotation.
+
+Email signup stays disabled until an email provider is configured. Set the
+managed Site secrets `AUTH_EMAIL_API_KEY`, `AUTH_EMAIL_FROM`, and optionally
+`AUTH_EMAIL_API_URL` (the default API shape is Resend’s `/emails` endpoint).
+Google sign-in requires `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`; set
+`GOOGLE_REDIRECT_URI` to the exact production URL
+`https://whatspopular.pigeonflare.chatgpt.site/api/auth/google/callback` and
+register that same URI in Google Cloud. The native app uses the same OAuth
+callback and exchanges a one-time code through its `whatspopular://` callback,
+so it never receives a browser session cookie or an OAuth access token.

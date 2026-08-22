@@ -1,6 +1,7 @@
 import { getChatGPTUser } from "./chatgpt-auth";
 import { accountSchemaStatements } from "../db/schema";
 import { nicheCategories } from "./niche";
+import { headers as nextHeaders } from "next/headers";
 
 export type D1StatementLike = {
   bind: (...values: unknown[]) => D1StatementLike;
@@ -10,6 +11,7 @@ export type D1StatementLike = {
 
 export type D1Like = {
   prepare: (query: string) => D1StatementLike;
+  batch?: (statements: D1StatementLike[]) => Promise<Array<{ meta?: { changes?: number } }>>;
 };
 
 export type AccountUser = {
@@ -17,13 +19,18 @@ export type AccountUser = {
   displayName: string;
   email: string;
   fullName: string | null;
-  authMethod: "chatgpt" | "mobile";
+  authMethod: "chatgpt" | "mobile" | "first-party";
   sessionId?: string;
 };
 
 const MAX_JSON_BODY_BYTES = 32 * 1024;
 const MAX_TAGS = 24;
 const TOKEN_PATTERN = /^[A-Za-z0-9_-]{32,160}$/;
+export const webSessionLifetimeMs = 30 * 24 * 60 * 60 * 1000;
+export const authVerificationLifetimeMs = 10 * 60 * 1000;
+export const authVerificationResendMs = 60 * 1000;
+export const authMobileCodeLifetimeMs = 3 * 60 * 1000;
+export const authCookieName = "__Host-wp_session";
 
 export async function database(): Promise<D1Like | null> {
   try {
@@ -133,9 +140,24 @@ export function sameOriginRequest(request: Request) {
 }
 
 export async function getAuthenticatedUser(request: Request): Promise<AccountUser | null> {
+  const cookieUser = await getCookieUser(request);
+  if (cookieUser) return cookieUser;
+  const mobileUser = await getMobileUser(request);
+  if (mobileUser) return mobileUser;
   const chatUser = await getChatGPTUser();
   if (chatUser) return { ...chatUser, authMethod: "chatgpt" };
-  return getMobileUser(request);
+  return null;
+}
+
+export async function getServerAuthenticatedUser(): Promise<AccountUser | null> {
+  const requestHeaders = await nextHeaders();
+  return getAuthenticatedUser(new Request("https://whatspopular.local/", { headers: requestHeaders }));
+}
+
+async function getCookieUser(request: Request): Promise<AccountUser | null> {
+  const token = cookieValue(request.headers.get("cookie"), authCookieName);
+  if (!token || !TOKEN_PATTERN.test(token)) return null;
+  return tokenUser(token, "first-party");
 }
 
 export async function getMobileUser(request: Request): Promise<AccountUser | null> {
@@ -143,6 +165,10 @@ export async function getMobileUser(request: Request): Promise<AccountUser | nul
   const match = authorization.match(/^Bearer\s+([^\s]+)$/i);
   const token = match?.[1] ?? "";
   if (!TOKEN_PATTERN.test(token)) return null;
+  return tokenUser(token, "mobile");
+}
+
+async function tokenUser(token: string, authMethod: "mobile" | "first-party") {
   const db = await database();
   if (!db) return null;
   try {
@@ -150,9 +176,12 @@ export async function getMobileUser(request: Request): Promise<AccountUser | nul
     const tokenHash = await sha256(token);
     const now = new Date().toISOString();
     const row = await db.prepare(`
-      SELECT s.session_id, s.user_id, p.email, p.display_name
+      SELECT s.session_id, s.user_id,
+        COALESCE(p.email, u.email, '') AS email,
+        COALESCE(p.display_name, u.username, 'what’s popular? member') AS display_name
       FROM mobile_sessions s
       LEFT JOIN user_profiles p ON p.user_id = s.user_id
+      LEFT JOIN auth_users u ON u.user_id = s.user_id
       WHERE s.access_token_hash = ?1
         AND s.revoked_at IS NULL
         AND s.access_expires_at > ?2
@@ -163,12 +192,21 @@ export async function getMobileUser(request: Request): Promise<AccountUser | nul
       email: row.email ?? "",
       displayName: row.display_name ?? "what’s popular? member",
       fullName: null,
-      authMethod: "mobile",
+      authMethod,
       sessionId: row.session_id,
     };
   } catch {
     return null;
   }
+}
+
+export function cookieValue(cookieHeader: string | null, name: string) {
+  if (!cookieHeader) return "";
+  for (const part of cookieHeader.split(";")) {
+    const [key, ...value] = part.trim().split("=");
+    if (key === name) return value.join("=");
+  }
+  return "";
 }
 
 export async function sha256(value: string) {
@@ -209,6 +247,55 @@ export async function upsertProfileIdentity(db: D1Like, user: Pick<AccountUser, 
       email = excluded.email,
       display_name = excluded.display_name
   `).bind(user.userId, user.email, user.displayName, now).run();
+}
+
+export async function createSession(db: D1Like, userId: string, client: "web" | "mobile") {
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const accessToken = randomToken(32);
+  const refreshToken = randomToken(32);
+  const accessLifetime = client === "web" ? webSessionLifetimeMs : mobileAccessLifetimeMs;
+  const accessExpiresAt = new Date(now.getTime() + accessLifetime).toISOString();
+  const refreshExpiresAt = new Date(now.getTime() + mobileRefreshLifetimeMs).toISOString();
+  const sessionId = crypto.randomUUID();
+  await db.prepare(`
+    INSERT INTO mobile_sessions
+      (session_id, user_id, access_token_hash, refresh_token_hash, created_at, last_seen_at, access_expires_at, refresh_expires_at)
+    VALUES (?1, ?2, ?3, ?4, ?5, ?5, ?6, ?7)
+  `).bind(
+    sessionId,
+    userId,
+    await sha256(accessToken),
+    await sha256(refreshToken),
+    nowIso,
+    accessExpiresAt,
+    refreshExpiresAt,
+  ).run();
+  return { sessionId, accessToken, refreshToken, accessExpiresAt, refreshExpiresAt };
+}
+
+export function sessionCookie(token: string, maxAgeSeconds = Math.floor(webSessionLifetimeMs / 1000)) {
+  return `${authCookieName}=${token}; Path=/; Max-Age=${maxAgeSeconds}; HttpOnly; Secure; SameSite=Lax`;
+}
+
+export function clearSessionCookie() {
+  return `${authCookieName}=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax`;
+}
+
+export function safeReturnPath(value: unknown, fallback = "/for-you") {
+  if (typeof value !== "string" || !value.startsWith("/") || value.startsWith("//")) return fallback;
+  try {
+    const parsed = new URL(value, "https://whatspopular.local");
+    if (parsed.origin !== "https://whatspopular.local" || parsed.pathname.startsWith("/api/")) return fallback;
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return fallback;
+  }
+}
+
+export async function clientAddressHash(request: Request, prefix: string) {
+  const address = request.headers.get("cf-connecting-ip")?.trim() || "unknown";
+  return sha256(`${prefix}:${address}`);
 }
 
 export async function profileForUser(db: D1Like, user: Pick<AccountUser, "userId" | "email" | "displayName">) {

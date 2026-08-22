@@ -5,6 +5,21 @@ struct MobileAccountSheet: View {
     let categories: [NicheCategory]
     @Environment(\.dismiss) private var dismiss
     @State private var selectedTags: [String] = []
+    @State private var authMode: AuthMode = .signIn
+    @State private var identifier = ""
+    @State private var username = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
+    @State private var verificationCode = ""
+
+    private enum AuthMode: String, CaseIterable, Identifiable {
+        case signIn
+        case create
+
+        var id: String { rawValue }
+        var label: String { self == .signIn ? "Sign in" : "Create account" }
+    }
 
     var body: some View {
         NavigationStack {
@@ -23,15 +38,87 @@ struct MobileAccountSheet: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
-                        Text("Link with ChatGPT on the website to save your digest across devices.")
+                        Text("Use Google or sign in with the email and password you created for what’s popular?. Email accounts are verified with a one-time code.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+
+                        Picker("Account access", selection: $authMode) {
+                            ForEach(AuthMode.allCases) { mode in
+                                Text(mode.label).tag(mode)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+
+                        Button {
+                            Task { await account.signInWithGoogle() }
+                        } label: {
+                            Label(account.isLoading ? "Opening Google…" : "Continue with Google", systemImage: "g.circle.fill")
+                        }
+                        .disabled(account.isLoading)
+
+                        if account.verificationEmail == nil {
+                            if authMode == .signIn {
+                                TextField("Username or email", text: $identifier)
+                                    .textContentType(.username)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                SecureField("Password", text: $password)
+                                    .textContentType(.password)
+                                Button {
+                                    Task { await account.signIn(identifier: identifier, password: password) }
+                                } label: {
+                                    Label(account.isLoading ? "Signing in…" : "Sign in", systemImage: "arrow.right.circle.fill")
+                                }
+                                .disabled(account.isLoading || identifier.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || password.isEmpty)
+                            } else {
+                                TextField("Username", text: $username)
+                                    .textContentType(.username)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                TextField("Email", text: $email)
+                                    .textContentType(.emailAddress)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                SecureField("Password (12+ characters)", text: $password)
+                                    .textContentType(.newPassword)
+                                SecureField("Confirm password", text: $confirmPassword)
+                                    .textContentType(.newPassword)
+                                Button {
+                                    Task { _ = await account.beginEmailSignup(username: username, email: email, password: password) }
+                                } label: {
+                                    Label(account.isLoading ? "Sending code…" : "Email me a verification code", systemImage: "envelope.badge.fill")
+                                }
+                                .disabled(account.isLoading || username.isEmpty || email.isEmpty || password.count < 12 || password != confirmPassword)
+                            }
+                        } else {
+                            Text("Enter the six-digit code sent to \(account.verificationEmail ?? "your email")")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            TextField("Verification code", text: $verificationCode)
+                                .keyboardType(.numberPad)
+                                .textContentType(.oneTimeCode)
+                                .onChange(of: verificationCode) { _, value in
+                                    verificationCode = String(value.filter(\.isNumber).prefix(6))
+                                }
+                            Button {
+                                Task { await account.verifyEmailSignup(code: verificationCode) }
+                            } label: {
+                                Label(account.isLoading ? "Checking code…" : "Verify and create account", systemImage: "checkmark.shield.fill")
+                            }
+                            .disabled(account.isLoading || verificationCode.count != 6)
+                        }
+
+                        Text("Your password is sent only over HTTPS and the app keeps the resulting session in the iPhone Keychain.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        Divider()
                         Button {
                             Task { await account.startLinking() }
                         } label: {
-                            Label(account.isLinking ? "Waiting for approval…" : "Link this phone", systemImage: "link")
+                            Label(account.isLinking ? "Waiting for website approval…" : "Use an existing website account", systemImage: "link")
                         }
-                        .disabled(account.isLinking)
+                        .disabled(account.isLoading || account.isLinking)
                     }
 
                     if let pendingLink = account.pendingLink {
@@ -108,7 +195,7 @@ struct MobileAccountSheet: View {
                     }
                 }
             }
-            .navigationTitle("Account")
+            .navigationTitle("Profile")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }

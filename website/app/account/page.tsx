@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getChatGPTUser } from "../chatgpt-auth";
+import { getServerAuthenticatedUser } from "../account-server";
 import { AccountSettingsExperience } from "../components/account-settings";
 import { nicheBrief } from "../niche";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AccountPage() {
-  const user = await getChatGPTUser();
+  const user = await getServerAuthenticatedUser();
   return (
     <AccountSettingsExperience
       categories={nicheBrief.categories}

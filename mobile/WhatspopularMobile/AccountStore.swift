@@ -1,6 +1,7 @@
 import Foundation
 import Security
 import UIKit
+import AuthenticationServices
 
 struct SharedAccountProfile: Codable, Equatable {
     var hasProfile: Bool
@@ -49,6 +50,12 @@ private struct LinkExchangeResponse: Codable {
     let profile: ProfileResponse
 }
 
+private struct SignupStartResponse: Codable {
+    let pending: Bool
+    let email: String
+    let expiresAt: String
+}
+
 private struct APIErrorPayload: Codable {
     let error: String?
     let conflict: Bool?
@@ -84,9 +91,11 @@ final class AccountStore: ObservableObject {
     @Published private(set) var isLinking = false
     @Published private(set) var isLoading = false
     @Published private(set) var message: String?
+    @Published private(set) var verificationEmail: String?
 
     private var session: MobileSession?
     private var refreshTask: Task<MobileSession, Error>?
+    private var googleAuth: GoogleAuthCoordinator?
 
     init() {
         session = SecureMobileSessionStore.load()
@@ -137,6 +146,95 @@ final class AccountStore: ObservableObject {
         } catch AccountStoreError.conflict {
             await refreshProfile()
             message = AccountStoreError.conflict.localizedDescription
+        } catch {
+            message = error.localizedDescription
+        }
+    }
+
+    func signIn(identifier: String, password: String) async {
+        guard !isLoading else { return }
+        isLoading = true
+        message = nil
+        defer { isLoading = false }
+        do {
+            let response: LinkExchangeResponse = try await publicJSON(
+                path: "/api/auth/login",
+                method: "POST",
+                body: ["identifier": identifier, "password": password, "client": "mobile"]
+            )
+            install(response)
+            message = "Signed in."
+        } catch {
+            message = error.localizedDescription
+        }
+    }
+
+    func beginEmailSignup(username: String, email: String, password: String) async -> Bool {
+        guard !isLoading else { return false }
+        isLoading = true
+        message = nil
+        defer { isLoading = false }
+        do {
+            let response: SignupStartResponse = try await publicJSON(
+                path: "/api/auth/signup/start",
+                method: "POST",
+                body: ["username": username, "email": email, "password": password, "client": "mobile"]
+            )
+            verificationEmail = response.email
+            message = "Enter the six-digit code sent to \(response.email)."
+            return response.pending
+        } catch {
+            message = error.localizedDescription
+            return false
+        }
+    }
+
+    func verifyEmailSignup(code: String) async {
+        guard let email = verificationEmail, !isLoading else { return }
+        isLoading = true
+        message = nil
+        defer { isLoading = false }
+        do {
+            let response: LinkExchangeResponse = try await publicJSON(
+                path: "/api/auth/signup/verify",
+                method: "POST",
+                body: ["email": email, "code": code, "client": "mobile"]
+            )
+            install(response)
+            verificationEmail = nil
+            message = "Account created."
+        } catch {
+            message = error.localizedDescription
+        }
+    }
+
+    func signInWithGoogle() async {
+        guard !isLoading else { return }
+        isLoading = true
+        message = nil
+        defer {
+            isLoading = false
+            googleAuth = nil
+        }
+        do {
+            let startURL = MobileContentEndpoint.baseURL
+                .appendingPathComponent("api/auth/google/start")
+                .appending(queryItems: [URLQueryItem(name: "client", value: "mobile")])
+            let coordinator = GoogleAuthCoordinator()
+            googleAuth = coordinator
+            let callback = try await coordinator.authenticate(startURL)
+            guard let code = URLComponents(url: callback, resolvingAgainstBaseURL: false)?.queryItems?.first(where: { $0.name == "code" })?.value else {
+                throw AccountStoreError.invalidResponse
+            }
+            let response: LinkExchangeResponse = try await publicJSON(
+                path: "/api/auth/google/mobile-exchange",
+                method: "POST",
+                body: ["code": code]
+            )
+            install(response)
+            message = "Signed in with Google."
+        } catch is ASWebAuthenticationSessionError {
+            message = "Google sign-in was cancelled."
         } catch {
             message = error.localizedDescription
         }
@@ -233,6 +331,18 @@ final class AccountStore: ObservableObject {
         )
     }
 
+    private func install(_ response: LinkExchangeResponse) {
+        let next = MobileSession(
+            accessToken: response.accessToken,
+            refreshToken: response.refreshToken,
+            accessExpiresAt: response.accessExpiresAt,
+            refreshExpiresAt: response.refreshExpiresAt
+        )
+        session = next
+        SecureMobileSessionStore.save(next)
+        profile = makeProfile(response.profile)
+    }
+
     private func authorizedJSON<T: Decodable>(
         path: String,
         method: String,
@@ -276,6 +386,21 @@ final class AccountStore: ObservableObject {
         request.httpMethod = method
         request.timeoutInterval = 15
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else { throw AccountStoreError.invalidResponse }
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            throw try decodeAPIError(data, statusCode: httpResponse.statusCode)
+        }
+        do { return try JSONDecoder().decode(T.self, from: data) } catch { throw AccountStoreError.invalidResponse }
+    }
+
+    private func publicJSON<T: Decodable>(path: String, method: String, body: [String: Any]) async throws -> T {
+        var request = URLRequest(url: MobileContentEndpoint.baseURL.appendingPathComponent(String(path.dropFirst())))
+        request.httpMethod = method
+        request.timeoutInterval = 20
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [.sortedKeys])
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else { throw AccountStoreError.invalidResponse }
         guard (200..<300).contains(httpResponse.statusCode) else {
@@ -347,6 +472,39 @@ final class AccountStore: ObservableObject {
         }
         let message = (try? JSONDecoder().decode(APIErrorPayload.self, from: data))?.error
         return .server(message ?? "The account service returned an error (\(statusCode)).")
+    }
+}
+
+private final class GoogleAuthCoordinator: NSObject, ASWebAuthenticationPresentationContextProviding {
+    private var session: ASWebAuthenticationSession?
+
+    func authenticate(_ url: URL) async throws -> URL {
+        try await withCheckedThrowingContinuation { continuation in
+            let nextSession = ASWebAuthenticationSession(url: url, callbackURLScheme: "whatspopular") { [weak self] callback, error in
+                self?.session = nil
+                if let callback {
+                    continuation.resume(returning: callback)
+                } else if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: AccountStoreError.invalidResponse)
+                }
+            }
+            session = nextSession
+            nextSession.presentationContextProvider = self
+            nextSession.prefersEphemeralWebBrowserSession = false
+            if !nextSession.start() {
+                session = nil
+                continuation.resume(throwing: AccountStoreError.server("Google sign-in could not be opened."))
+            }
+        }
+    }
+
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first(where: \.isKeyWindow) ?? ASPresentationAnchor()
     }
 }
 

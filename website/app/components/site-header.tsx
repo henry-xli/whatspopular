@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "whatspopular-theme";
@@ -92,6 +93,114 @@ function ThemeToggle() {
   );
 }
 
+type AuthSession = {
+  signedIn: boolean;
+  user?: { displayName?: string; email?: string; authMethod?: string };
+};
+
+function initialsFor(user?: AuthSession["user"]) {
+  const value = user?.displayName || user?.email || "";
+  const pieces = value.trim().split(/\s+/u).filter(Boolean);
+  if (pieces.length > 1) return `${pieces[0][0]}${pieces.at(-1)?.[0] ?? ""}`.toUpperCase();
+  return (pieces[0]?.slice(0, 2) || "?").toUpperCase();
+}
+
+function ProfileMenu({ pathname }: { pathname: string }) {
+  const router = useRouter();
+  const [session, setSession] = useState<AuthSession>({ signedIn: false });
+  const [open, setOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/auth/session", { headers: { accept: "application/json" }, credentials: "same-origin" })
+      .then((response) => response.ok ? response.json() as Promise<AuthSession> : null)
+      .then((payload) => { if (!cancelled && payload) setSession(payload); })
+      .catch(() => undefined);
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const closeOnPointer = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) setOpen(false);
+    };
+    const closeOnKey = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", closeOnPointer);
+    document.addEventListener("keydown", closeOnKey);
+    return () => {
+      document.removeEventListener("mousedown", closeOnPointer);
+      document.removeEventListener("keydown", closeOnKey);
+    };
+  }, [open]);
+
+  async function signOut() {
+    if (signingOut) return;
+    setSigningOut(true);
+    try {
+      await fetch("/api/auth/logout", { method: "POST", headers: { accept: "application/json" }, credentials: "same-origin" });
+      setSession({ signedIn: false });
+      setOpen(false);
+      router.refresh();
+    } finally {
+      setSigningOut(false);
+    }
+  }
+
+  const returnTo = encodeURIComponent(pathname || "/");
+  const isChatGPTIdentity = session.user?.authMethod === "chatgpt";
+  return (
+    <div className="profile-menu" ref={menuRef}>
+      <button
+        className="profile-avatar-button"
+        type="button"
+        aria-label={session.signedIn ? `Open profile menu for ${session.user?.displayName ?? "your account"}` : "Open account menu"}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span className={`profile-avatar${session.signedIn ? " is-signed-in" : ""}`} aria-hidden="true">
+          {session.signedIn ? initialsFor(session.user) : <span className="profile-avatar-person">♙</span>}
+        </span>
+        <span className="sr-only">Profile and settings</span>
+      </button>
+      {open ? (
+        <div className="profile-popover" role="menu" aria-label="Profile and settings">
+          {session.signedIn ? (
+            <div className="profile-popover-identity">
+              <span className="profile-popover-avatar" aria-hidden="true">{initialsFor(session.user)}</span>
+              <span><strong>{session.user?.displayName ?? "what’s popular? member"}</strong><small>{session.user?.email ?? "Signed-in account"}</small></span>
+            </div>
+          ) : (
+            <div className="profile-popover-identity is-anonymous">
+              <span className="profile-popover-avatar" aria-hidden="true">♙</span>
+              <span><strong>Make this signal yours</strong><small>Save interests across web and mobile</small></span>
+            </div>
+          )}
+          <div className="profile-popover-divider" />
+          <div className="profile-theme-row">
+            <span><strong>Appearance</strong><small>Light / dark mode</small></span>
+            <ThemeToggle />
+          </div>
+          {session.signedIn ? (
+            <>
+              <a className="profile-menu-link" role="menuitem" href="/account"><span>Settings</span><span aria-hidden="true">↗</span></a>
+              {isChatGPTIdentity ? (
+                <a className="profile-menu-link is-danger" role="menuitem" href={`/signout-with-chatgpt?return_to=${returnTo}`}><span>Sign out</span><span aria-hidden="true">↗</span></a>
+              ) : (
+                <button className="profile-menu-link is-danger" role="menuitem" type="button" onClick={() => { void signOut(); }} disabled={signingOut}><span>{signingOut ? "Signing out…" : "Sign out"}</span><span aria-hidden="true">↗</span></button>
+              )}
+            </>
+          ) : (
+            <a className="profile-menu-link is-primary" role="menuitem" href={`/signin?return_to=${returnTo}`}><span>Sign in or create account</span><span aria-hidden="true">↗</span></a>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
 
@@ -104,13 +213,14 @@ export function SiteHeader() {
           </span>
           <span>what’s popular?</span>
         </a>
-        <nav aria-label="Main navigation">
+        <div className="header-actions">
+          <nav aria-label="Main navigation">
           <a className={pathname === "/" ? "is-active" : undefined} href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</a>
           <a className={pathname === "/explore" ? "is-active" : undefined} href="/explore" aria-current={pathname === "/explore" ? "page" : undefined}>Explore</a>
           <a className={pathname === "/for-you" ? "is-active" : undefined} href="/for-you" aria-current={pathname === "/for-you" ? "page" : undefined}>For You</a>
-          <a className={pathname === "/account" ? "is-active" : undefined} href="/account" aria-current={pathname === "/account" ? "page" : undefined}>Account</a>
-          <ThemeToggle />
-        </nav>
+          </nav>
+          <ProfileMenu pathname={pathname} />
+        </div>
       </div>
     </header>
   );

@@ -6,7 +6,7 @@ import { specificMusicPlaybackForTopic, type NicheCategory, type NicheTopic } fr
 
 const PREFERENCES_KEY = "whatspopular-for-you-tags";
 const DEFAULT_TAGS = ["edm", "football", "gaming"];
-const SIGN_IN_HREF = "/signin-with-chatgpt?return_to=%2Ffor-you";
+const SIGN_IN_HREF = "/signin?return_to=%2Ffor-you";
 
 type ForYouProps = {
   categories: readonly NicheCategory[];

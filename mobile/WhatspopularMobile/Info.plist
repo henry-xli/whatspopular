@@ -16,6 +16,19 @@
 	<string>1.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>what’s popular?</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>com.whatspopular.mobile.auth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>whatspopular</string>
+			</array>
+		</dict>
+	</array>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.whatspopular.mobile.refresh</string>

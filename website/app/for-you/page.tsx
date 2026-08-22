@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getChatGPTUser } from "../chatgpt-auth";
+import { getServerAuthenticatedUser } from "../account-server";
 import { ForYouExperience } from "../components/for-you";
 import { nicheBrief } from "../niche";
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ForYouPage() {
-  const user = await getChatGPTUser();
+  const user = await getServerAuthenticatedUser();
   return (
     <ForYouExperience
       categories={nicheBrief.categories}

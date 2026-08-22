@@ -43,7 +43,7 @@ export async function PATCH(request: Request) {
 async function updateProfile(request: Request) {
   const user = await getAuthenticatedUser(request);
   if (!user) return jsonResponse({ error: "Sign in required" }, 401);
-  if (user.authMethod === "chatgpt" && !sameOriginRequest(request)) {
+  if (user.authMethod !== "mobile" && !sameOriginRequest(request)) {
     return jsonResponse({ error: "Cross-site profile writes are not allowed" }, 403);
   }
   const payload = await readJsonBody<ProfilePayload>(request);

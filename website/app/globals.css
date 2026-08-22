@@ -174,6 +174,13 @@ img {
   gap: 24px;
 }
 
+.header-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -224,6 +231,187 @@ img {
 .site-header nav > a.is-active {
   color: var(--ink);
   font-weight: 900;
+}
+
+.profile-menu {
+  position: relative;
+  z-index: 2;
+}
+
+.profile-avatar-button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  padding: 3px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.profile-avatar-button:hover,
+.profile-avatar-button[aria-expanded="true"] {
+  border-color: var(--purple);
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--purple) 28%, transparent);
+  transform: translateY(-1px);
+}
+
+.profile-avatar {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--muted) 15%, var(--card));
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.profile-avatar.is-signed-in {
+  background: var(--purple);
+  color: #fff;
+}
+
+.profile-avatar-person {
+  font-size: 1.15rem;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.profile-popover {
+  position: absolute;
+  top: calc(100% + 13px);
+  right: 0;
+  display: grid;
+  width: min(320px, calc(100vw - 28px));
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 10px 12px 0 color-mix(in srgb, var(--purple) 16%, transparent), 0 16px 35px rgba(20, 15, 30, 0.15);
+  color: var(--ink);
+}
+
+.profile-popover-identity,
+.profile-theme-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+}
+
+.profile-popover-identity > span:last-child,
+.profile-theme-row > span:first-child {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.profile-popover-identity strong,
+.profile-theme-row strong {
+  overflow: hidden;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-popover-identity small,
+.profile-theme-row small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.64rem;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-popover-avatar {
+  display: grid;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #fff;
+  font-size: 0.61rem;
+  font-weight: 900;
+}
+
+.profile-popover-identity.is-anonymous .profile-popover-avatar {
+  background: color-mix(in srgb, var(--muted) 16%, var(--card));
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.profile-popover-divider {
+  height: 1px;
+  margin: 5px 9px;
+  background: var(--line);
+}
+
+.profile-theme-row {
+  justify-content: space-between;
+}
+
+.profile-theme-row .theme-toggle {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 36px;
+}
+
+.profile-theme-row .theme-track {
+  transform: scale(0.82);
+}
+
+.profile-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  padding: 11px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.73rem;
+  font-weight: 800;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-menu-link:hover,
+.profile-menu-link:focus-visible {
+  background: color-mix(in srgb, var(--purple) 9%, var(--card));
+  color: var(--purple-dark);
+}
+
+.profile-menu-link.is-primary {
+  background: var(--purple);
+  color: #fff;
+}
+
+.profile-menu-link.is-primary:hover,
+.profile-menu-link.is-primary:focus-visible {
+  background: var(--purple-dark);
+  color: #fff;
+}
+
+.profile-menu-link.is-danger {
+  color: var(--coral);
+}
+
+.profile-menu-link:disabled {
+  cursor: wait;
+  opacity: 0.6;
 }
 
 .theme-toggle {
@@ -3580,6 +3768,195 @@ button.music-track-select:focus-visible {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.signin-panel {
+  max-width: 660px;
+}
+
+.signin-lede {
+  margin-bottom: 27px;
+}
+
+.google-signin-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.google-signin-button:hover {
+  border-color: var(--purple);
+  color: var(--purple-dark);
+}
+
+.google-signin-button.is-unavailable {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.google-g-mark {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--card);
+  color: #4285f4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.google-signin-button > span:nth-child(2) {
+  flex: 1;
+  text-align: left;
+}
+
+.signin-provider-note {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.signin-or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 27px 0 18px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.signin-or::before,
+.signin-or::after {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  content: "";
+}
+
+.signin-mode-switch {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  margin-bottom: 18px;
+  border-radius: 11px;
+  background: var(--paper-deep);
+}
+
+.signin-mode-switch button {
+  flex: 1;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.signin-mode-switch button.is-active {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 1px 5px color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.signin-form {
+  display: grid;
+  gap: 14px;
+}
+
+.signin-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.signin-form label span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.signin-form label small {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.signin-form input {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.84rem;
+}
+
+.signin-form input:focus {
+  border-color: var(--purple);
+  outline: 3px solid color-mix(in srgb, var(--purple) 18%, transparent);
+}
+
+.signin-form .button {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.text-button {
+  justify-self: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: var(--ink);
+}
+
+.signin-message {
+  padding: 11px 13px;
+  margin: 17px 0 0;
+  border-left: 3px solid var(--purple);
+  background: color-mix(in srgb, var(--purple) 8%, var(--card));
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.signin-security-note {
+  margin: 24px 0 0 !important;
+  color: var(--muted);
+  font-size: 0.64rem !important;
+  line-height: 1.45;
 }
 
 .account-kicker,
