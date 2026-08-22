@@ -458,22 +458,23 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.match(html, /signin-with-chatgpt/);
   const forYouSource = await readFile(new URL("../app/components/for-you.tsx", import.meta.url), "utf8");
   const forYouStyles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(forYouSource, /const layouts: DigestLayout\[\] = \["poster", "split", "quote", "ticker", "collage"\]/);
-  assert.match(forYouSource, /digestLayoutFor\(index, compileNumber\)/);
-  assert.match(forYouSource, /data-layout=\{layout\}/);
+  assert.doesNotMatch(forYouSource, /DigestLayout|digestLayoutFor|data-layout|digest-card-edge/);
+  assert.match(forYouSource, /className="digest-card"/);
   assert.match(forYouSource, /MusicPlaybackEmbed/);
   assert.match(forYouSource, /allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"/);
-  for (const layout of ["poster", "split", "quote", "ticker", "collage"]) {
-    assert.match(forYouStyles, new RegExp(`\\.digest-card-${layout}`));
-  }
   assert.match(forYouStyles, /\.digest-card > \*/);
   assert.match(forYouStyles, /overflow-wrap: anywhere/);
   assert.match(forYouStyles, /grid-template-columns: minmax\(0, 1fr\)/);
-  assert.match(forYouStyles, /grid-template-rows: auto auto/);
+  assert.match(forYouStyles, /grid-column: 1 \/ -1/);
+  assert.match(forYouStyles, /grid-template-columns: minmax\(280px, 0\.38fr\) minmax\(0, 0\.62fr\)/);
+  assert.match(forYouStyles, /aspect-ratio: 16 \/ 10/);
+  assert.match(forYouStyles, /\.digest-card-meta[\s\S]*align-items: baseline/);
+  assert.match(forYouStyles, /\.tag-builder-summary[\s\S]*align-items: baseline/);
   assert.match(forYouStyles, /scroll-margin-top: calc\(var\(--header-height\) \+ 18px\)/);
-  assert.match(forYouStyles, /\.digest-card\.digest-card-split/);
+  assert.doesNotMatch(forYouStyles, /digest-card-edge|rotate\(-17deg\)/);
+  assert.doesNotMatch(forYouStyles, /transform: rotate\(-17deg\)/);
   assert.match(forYouStyles, /\.digest-why[\s\S]*margin-top: clamp\(26px, 4vw, 42px\)/);
-  assert.match(forYouStyles, /object-fit: contain/);
+  assert.match(forYouStyles, /object-fit: cover/);
   assert.match(forYouStyles, /@keyframes digest-card-in \{\s*from \{ opacity: 0; \}/);
 
   const profile = await render("/api/for-you/profile", { headers: { accept: "application/json" } });

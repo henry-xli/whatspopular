@@ -24,8 +24,6 @@ type DigestTopic = NicheTopic & {
   categoryParent: string;
 };
 
-type DigestLayout = "poster" | "split" | "quote" | "ticker" | "collage";
-
 function MusicPlaybackEmbed({ topic }: { topic: DigestTopic }) {
   if (topic.categoryParent !== "Music" || !topic.playback) return null;
   return (
@@ -67,12 +65,6 @@ function seededShuffle<T>(values: readonly T[], seedValue: string) {
     [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
   }
   return result;
-}
-
-function digestLayoutFor(index: number, compileNumber: number): DigestLayout {
-  const layouts: DigestLayout[] = ["poster", "split", "quote", "ticker", "collage"];
-  const offset = hashSeed(`for-you-layout:${compileNumber}`) % layouts.length;
-  return layouts[(offset + index) % layouts.length];
 }
 
 function readLocalTags(categories: readonly NicheCategory[]) {
@@ -360,11 +352,9 @@ export function ForYouExperience({
           </div>
           <div className="digest-feed wrap" id="digest-feed" aria-label="Your For You digest">
             {digestTopics.map((topic, index) => {
-              const layout = digestLayoutFor(index, compileNumber);
               return (
                 <article
-                  className={`digest-card digest-card-${layout}`}
-                  data-layout={layout}
+                  className="digest-card"
                   key={`${topic.id}-${compileNumber}`}
                   style={{ "--card-accent": topic.accent, "--card-index": index } as CSSProperties}
                 >
@@ -394,7 +384,6 @@ export function ForYouExperience({
                       <span aria-hidden="true">↗</span>
                     </a>
                   </div>
-                  <div className="digest-card-edge" aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span><i /></div>
                 </article>
               );
             })}
