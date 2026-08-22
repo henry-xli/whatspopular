@@ -4,6 +4,7 @@ struct MobileAccountSheet: View {
     @ObservedObject var account: AccountStore
     let categories: [NicheCategory]
     @Environment(\.dismiss) private var dismiss
+    private let supportURL = URL(string: "https://buymeacoffee.com/0wtynrfutb")!
     @State private var selectedTags: [String] = []
     @State private var authMode: AuthMode = .signIn
     @State private var identifier = ""
@@ -278,6 +279,26 @@ struct MobileAccountSheet: View {
                         }
                         .disabled(!account.isLinked || account.isLoading)
                     }
+                }
+
+                Section("Support the project") {
+                    Text("If this digest is useful, you can support its next snapshot.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Link(destination: supportURL) {
+                        HStack(spacing: 10) {
+                            Image(systemName: "cup.and.saucer.fill")
+                                .foregroundStyle(Color(hex: "#BD5FFF"))
+                            Text("Buy me a coffee")
+                                .font(.subheadline.weight(.bold))
+                            Spacer(minLength: 0)
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption.weight(.bold))
+                                .foregroundStyle(.secondary)
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .accessibilityHint("Opens the Buy Me a Coffee supporter page")
                 }
 
                 if let message = account.message {
