@@ -2,6 +2,7 @@
 
 import type { CSSProperties, FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useAdminPreviewMode } from "./admin-preview";
 import { specificMusicPlaybackForTopic, type NicheCategory, type NicheTopic } from "../niche";
 
 const PREFERENCES_KEY = "whatspopular-for-you-tags";
@@ -122,6 +123,14 @@ export function ForYouExperience({
   const saveTimerRef = useRef<number | null>(null);
   const saveQueueRef = useRef<Promise<void>>(Promise.resolve());
   const saveGenerationRef = useRef(0);
+  const [adminPreviewMode] = useAdminPreviewMode();
+  const adminPreviewActive = adminPreviewMode !== null;
+  const effectiveSignedIn = adminPreviewMode === "signed-in"
+    ? true
+    : adminPreviewMode === "signed-out"
+      ? false
+      : signedIn;
+  const effectiveDisplayName = adminPreviewMode === "signed-in" ? "Admin preview" : displayName;
 
   const groups = useMemo(() => groupCategories(categories), [categories]);
   const selectedCategories = useMemo(
@@ -141,13 +150,13 @@ export function ForYouExperience({
   }, [compileNumber, generatedAt, selectedCategories, selectedTags]);
 
   useEffect(() => {
-    if (signedIn) return undefined;
+    if (effectiveSignedIn && !adminPreviewActive) return undefined;
     const timer = window.setTimeout(() => setSelectedTags(readLocalTags(categories)), 0);
     return () => window.clearTimeout(timer);
-  }, [categories, signedIn]);
+  }, [adminPreviewActive, categories, effectiveSignedIn]);
 
   useEffect(() => {
-    if (!signedIn) return undefined;
+    if (!effectiveSignedIn || adminPreviewActive) return undefined;
     let cancelled = false;
     fetch("/api/account/profile", { headers: { accept: "application/json" } })
       .then((response) => response.ok ? response.json() as Promise<{ tags?: unknown[]; updatedAt?: unknown; hasProfile?: boolean }> : null)
@@ -162,10 +171,10 @@ export function ForYouExperience({
       })
       .catch(() => undefined);
     return () => { cancelled = true; };
-  }, [categories, signedIn]);
+  }, [adminPreviewActive, categories, effectiveSignedIn]);
 
   function persistLocal(nextTags: string[]) {
-    if (signedIn) return;
+    if (effectiveSignedIn && !adminPreviewActive) return;
     try { window.localStorage.setItem(PREFERENCES_KEY, JSON.stringify(nextTags)); } catch {}
   }
 
@@ -177,7 +186,7 @@ export function ForYouExperience({
       persistLocal(next);
       setSaved(false);
       setSaveMessage("");
-      if (signedIn) {
+      if (effectiveSignedIn && !adminPreviewActive) {
         if (saveTimerRef.current !== null) window.clearTimeout(saveTimerRef.current);
         saveTimerRef.current = window.setTimeout(() => { void queueSave(next); }, 350);
       }
@@ -186,7 +195,7 @@ export function ForYouExperience({
   }
 
   function queueSave(nextTags: string[]) {
-    if (!signedIn) return Promise.resolve();
+    if (!effectiveSignedIn || adminPreviewActive) return Promise.resolve();
     const generation = ++saveGenerationRef.current;
     const next = saveQueueRef.current
       .catch(() => undefined)
@@ -199,7 +208,12 @@ export function ForYouExperience({
   }
 
   async function saveTags(nextTags = selectedTags) {
-    if (!signedIn) return;
+    if (!effectiveSignedIn) return;
+    if (adminPreviewActive) {
+      setSaved(true);
+      setSaveMessage("Preview only — this change is not saved to an account.");
+      return;
+    }
     setSaving(true);
     setSaveMessage("");
     try {
@@ -232,7 +246,7 @@ export function ForYouExperience({
   async function compileFeed(event?: FormEvent) {
     event?.preventDefault();
     if (!selectedTags.length) return;
-    if (!signedIn) {
+    if (!effectiveSignedIn) {
       setGateOpen(true);
       return;
     }
@@ -268,7 +282,7 @@ export function ForYouExperience({
             <strong>Your digest is ready after sign-in.</strong>
             <span>Pick your corners once. We’ll keep the next weekly mix waiting.</span>
           </div>
-          {signedIn ? (
+          {effectiveSignedIn ? (
             <span className="account-state"><span className="status-dot" aria-hidden="true" /> Signed in</span>
           ) : (
             <a className="button button-primary button-small" href={SIGN_IN_HREF}>Sign in</a>
@@ -344,7 +358,7 @@ export function ForYouExperience({
               <h2 id="digest-title">The {edition.toLowerCase()} edition.</h2>
             </div>
             <div className="digest-intro-side">
-              <p>{signedIn ? `Saved for ${displayName ?? "your account"}.` : "This mix is built on this device."} Each card has a source and a reason it is moving now.</p>
+              <p>{effectiveSignedIn ? `Saved for ${effectiveDisplayName ?? "your account"}.` : "This mix is built on this device."} Each card has a source and a reason it is moving now.</p>
               <div className="digest-actions">
                 <button className="button button-quiet button-small" type="button" onClick={revealAgain}>Shuffle the mix <span aria-hidden="true">↻</span></button>
                 <button className="button button-quiet button-small" type="button" onClick={() => document.getElementById("tag-builder-title")?.scrollIntoView({ behavior: "smooth", block: "center" })}>Edit tags</button>
@@ -395,7 +409,7 @@ export function ForYouExperience({
                 <button className="button button-primary button-small" type="button" onClick={revealAgain}>Recompile this mix <span aria-hidden="true">↻</span></button>
                 <button className="button button-quiet button-small" type="button" onClick={() => document.getElementById("tag-builder-title")?.scrollIntoView({ behavior: "smooth", block: "center" })}>Edit interests</button>
               </div>
-              {signedIn ? <span className="account-state"><span className="status-dot" aria-hidden="true" /> {saved ? saveMessage || "Saved" : saveMessage || "Account sync on"}</span> : null}
+              {effectiveSignedIn ? <span className="account-state"><span className="status-dot" aria-hidden="true" /> {saved ? saveMessage || "Saved" : saveMessage || "Account sync on"}</span> : null}
             </article>
           </div>
         </section>

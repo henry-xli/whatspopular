@@ -507,6 +507,58 @@ img {
   margin: 0;
 }
 
+.profile-admin-preview {
+  padding: 11px 9px 10px;
+  border: 1px dashed color-mix(in srgb, var(--purple) 36%, var(--line));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--purple) 5%, var(--card));
+}
+
+.profile-admin-preview-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.profile-admin-preview-button {
+  min-width: 0;
+  padding: 8px 7px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.62rem;
+  font-weight: 850;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.profile-admin-preview-button:hover,
+.profile-admin-preview-button:focus-visible,
+.profile-admin-preview-button.is-selected {
+  border-color: var(--purple);
+  background: color-mix(in srgb, var(--purple) 12%, var(--card));
+  color: var(--purple-dark);
+}
+
+.profile-admin-preview-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+.profile-admin-preview-status strong {
+  color: var(--purple-dark);
+}
+
+.profile-admin-preview-note {
+  padding: 8px 9px;
+  border-left: 2px solid var(--purple);
+  background: color-mix(in srgb, var(--purple) 6%, var(--card));
+}
+
 .profile-settings-message {
   padding: 8px 9px;
   margin: 0;

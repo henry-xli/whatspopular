@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { AdminPreviewSection, useAdminPreviewMode } from "./admin-preview";
 import { ProfileSettingsPanel } from "./profile-settings";
 
 const STORAGE_KEY = "whatspopular-theme";
@@ -112,6 +113,8 @@ function ProfileMenu({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const [adminPreviewMode, setAdminPreviewMode] = useAdminPreviewMode();
+  const adminPreviewActive = adminPreviewMode !== null;
 
   useEffect(() => {
     let cancelled = false;
@@ -149,29 +152,34 @@ function ProfileMenu({ pathname }: { pathname: string }) {
     }
   }
 
+  const visibleSession: AuthSession = adminPreviewMode === "signed-in"
+    ? { signedIn: true, user: { displayName: "Admin preview", email: "admin-preview@local", authMethod: "admin-preview" } }
+    : adminPreviewMode === "signed-out"
+      ? { signedIn: false }
+      : session;
   const returnTo = encodeURIComponent(pathname || "/");
-  const isChatGPTIdentity = session.user?.authMethod === "chatgpt";
+  const isChatGPTIdentity = visibleSession.user?.authMethod === "chatgpt";
   return (
     <div className="profile-menu" ref={menuRef}>
       <button
         className="profile-avatar-button"
         type="button"
-        aria-label={session.signedIn ? `Open profile menu for ${session.user?.displayName ?? "your account"}` : "Open account menu"}
+        aria-label={visibleSession.signedIn ? `Open profile menu for ${visibleSession.user?.displayName ?? "your account"}` : "Open account menu"}
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
-        <span className={`profile-avatar${session.signedIn ? " is-signed-in" : ""}`} aria-hidden="true">
-          {session.signedIn ? initialsFor(session.user) : <span className="profile-avatar-person">♙</span>}
+        <span className={`profile-avatar${visibleSession.signedIn ? " is-signed-in" : ""}`} aria-hidden="true">
+          {visibleSession.signedIn ? initialsFor(visibleSession.user) : <span className="profile-avatar-person">♙</span>}
         </span>
         <span className="sr-only">Profile and settings</span>
       </button>
       {open ? (
         <div className="profile-popover" role="dialog" aria-label="Profile and settings">
-          {session.signedIn ? (
+          {visibleSession.signedIn ? (
             <div className="profile-popover-identity">
-              <span className="profile-popover-avatar" aria-hidden="true">{initialsFor(session.user)}</span>
-              <span><strong>{session.user?.displayName ?? "what’s popular? member"}</strong><small>{session.user?.email ?? "Signed-in account"}</small></span>
+              <span className="profile-popover-avatar" aria-hidden="true">{initialsFor(visibleSession.user)}</span>
+              <span><strong>{visibleSession.user?.displayName ?? "what’s popular? member"}</strong><small>{visibleSession.user?.email ?? "Signed-in account"}</small></span>
             </div>
           ) : (
             <div className="profile-popover-identity is-anonymous">
@@ -184,15 +192,22 @@ function ProfileMenu({ pathname }: { pathname: string }) {
             <span><strong>Appearance</strong><small>Light / dark mode</small></span>
             <ThemeToggle />
           </div>
-          {session.signedIn ? (
+          <AdminPreviewSection />
+          {visibleSession.signedIn ? (
             <>
-              <ProfileSettingsPanel
-                onIdentityUpdated={(identity) => setSession((current) => ({
-                  ...current,
-                  user: current.user ? { ...current.user, email: identity.email, displayName: identity.displayName } : current.user,
-                }))}
-              />
-              {isChatGPTIdentity ? (
+              {adminPreviewActive ? (
+                <p className="profile-settings-note profile-admin-preview-note">Real account settings are paused while the local preview is active.</p>
+              ) : (
+                <ProfileSettingsPanel
+                  onIdentityUpdated={(identity) => setSession((current) => ({
+                    ...current,
+                    user: current.user ? { ...current.user, email: identity.email, displayName: identity.displayName } : current.user,
+                  }))}
+                />
+              )}
+              {adminPreviewActive ? (
+                <button className="profile-menu-link" type="button" onClick={() => setAdminPreviewMode(null)}><span>Use real account session</span><span aria-hidden="true">↺</span></button>
+              ) : isChatGPTIdentity ? (
                 <a className="profile-menu-link is-danger" href={`/signout-with-chatgpt?return_to=${returnTo}`}><span>Sign out</span><span aria-hidden="true">↗</span></a>
               ) : (
                 <button className="profile-menu-link is-danger" type="button" onClick={() => { void signOut(); }} disabled={signingOut}><span>{signingOut ? "Signing out…" : "Sign out"}</span><span aria-hidden="true">↗</span></button>
