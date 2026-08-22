@@ -32,7 +32,7 @@ These rules exist to keep multi-step work fast, resumable, and honest across Cod
 
 - Distinguish local, committed, pushed, saved Site version, private deployment, and public deployment.
 - Saving a Site version does not change the public URL. Do not claim a live fix unless the current change was actually deployed and verified.
-- Public deployment is an external state change and requires explicit authorization for the current update. When not authorized, commit, push, package, and save the validated version, then stop.
+- Public deployment is never the default. It is an external state change and requires an unambiguous imperative in the current turn, such as “publish this,” “deploy this,” or “put it live.” A URL mention, a question about why the live site is stale, or approval from an earlier turn does not authorize a new public deployment. When not explicitly authorized, commit, push, package, and save the validated version, then stop.
 
 ## Handoff
 
