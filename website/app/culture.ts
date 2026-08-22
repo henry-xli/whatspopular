@@ -372,7 +372,7 @@ function validateBrief(value: unknown): asserts value is CultureBrief {
     if (!section || question.topic !== section.title
       || !sourceItem
       || !validQuizPrompt(question.prompt)
-      || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceItem.description)
+      || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceItem.description, { answerChoices: question.answers })
       || question.correctAnswer !== question.itemTitle) {
       throw new Error("Quiz question is not grounded in a concrete source clue");
     }

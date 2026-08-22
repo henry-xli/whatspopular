@@ -41,7 +41,7 @@ function rawTitleTokens(title) {
 export function quizTitleSignals(title) {
   const raw = rawTitleTokens(title);
   const hasAcronym = raw.some((token) => /^[A-Z]{2,}[0-9]*$/.test(token));
-  const signals = raw
+  const capitalizedSignals = raw
     .filter((token) => {
       const normalized = normalize(token);
       if (!normalized || genericWords.has(normalized) || genericTitleWords.has(normalized)) return false;
@@ -49,6 +49,11 @@ export function quizTitleSignals(title) {
     })
     .map(normalize)
     .filter(Boolean);
+  const signals = capitalizedSignals.length
+    ? capitalizedSignals
+    : raw
+      .map(normalize)
+      .filter((token) => token.length >= 4 && !genericWords.has(token) && !genericTitleWords.has(token));
   return [...new Set(signals)];
 }
 
@@ -56,9 +61,15 @@ export function quizAnswerLeak(value, title) {
   const clue = normalize(value);
   const normalizedTitle = normalize(title);
   if (!clue || !normalizedTitle) return false;
-  if (normalizedTitle.length >= 5 && clue.includes(normalizedTitle)) return true;
   const clueWords = new Set(words(clue));
+  const titleWords = words(normalizedTitle).filter((word) => !genericTitleWords.has(word));
+  if (titleWords.length >= 2 && titleWords.every((word) => clueWords.has(word))) return true;
+  if (titleWords.length === 1 && titleWords[0].length >= 4 && clueWords.has(titleWords[0])) return true;
   return quizTitleSignals(title).some((signal) => clueWords.has(signal));
+}
+
+export function quizAnswerChoicesLeak(value, answerChoices = []) {
+  return answerChoices.some((answer) => quizAnswerLeak(value, answer));
 }
 
 export function quizClueTokens(value) {
@@ -81,21 +92,24 @@ export function quizClueIsUsable(value, title, topicId) {
 
 export function quizQuestionClue(value) {
   return String(value ?? "")
-    .replace(/\s+(?:Which|What|Who)\s+(?:meme|person|film|book|story|entry|description)\s+matches\s+this\s+description\??\s*$/i, "")
+    .replace(/\s+(?:Which|What|Who)\s+(?:meme|person|film|book|story|entry|description|item)\s+(?:matches\s+(?:this\s+description|the\s+clue)|is\s+being\s+described)\??\s*$/i, "")
     .replace(/\s+(?:Which|What|Who)\s+(?:entry|item)\s+is\s+being\s+described\??\s*$/i, "")
     .trim();
 }
 
-export function quizQuestionIsUsable(prompt, title, topicId, context) {
+export function quizQuestionIsUsable(prompt, title, topicId, context, options = {}) {
+  const answerChoices = Array.isArray(options.answerChoices) ? options.answerChoices : [];
   const clean = String(prompt ?? "").replace(/\s+/g, " ").trim();
   if (!clean || !clean.endsWith("?") || clean.length < 40 || clean.length > 480) return false;
   if (/\.\.\.|…/.test(clean) || /[.!?]\s+[a-z]/.test(clean)) return false;
   const clue = quizQuestionClue(clean);
   if (!quizClueIsUsable(clue, title, topicId)) return false;
+  if (quizAnswerChoicesLeak(clue, answerChoices)) return false;
   const contextWords = new Set(words(context));
+  if (!contextWords.size) return false;
   const clueWords = new Set(words(clue));
   const overlap = [...clueWords].filter((word) => contextWords.has(word)).length;
-  return overlap >= Math.min(3, Math.max(2, contextWords.size));
+  return overlap >= Math.min(4, Math.max(3, Math.ceil(contextWords.size * 0.25)));
 }
 
 export function quizGenericPrompt(value) {

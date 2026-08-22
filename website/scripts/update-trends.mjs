@@ -4523,10 +4523,9 @@ function quizEligibleItems(section, sectionId) {
 }
 
 function quizDescriptionClue(description, title, topicId) {
-  const context = conciseSentences(
-    quizContextFor(description, title, topicId) || conciseSentences(description, 420) || ensureSentence(description),
-    280,
-  );
+  const safeContext = String(description ?? "").replace(/\s+/g, " ").trim();
+  if (!safeContext || quizAnswerLeak(safeContext, title)) return "";
+  const context = conciseSentences(safeContext, 280);
   let redacted = redactQuizTitle(context, title, topicId)
     .replace(/^\s*["'“”‘’]+|["'“”‘’]+\s*$/g, "")
     .replace(/\s+([,.;:!?])/g, "$1")
@@ -4550,10 +4549,11 @@ function quizDescriptionClue(description, title, topicId) {
   } else if (/^[a-z]/.test(redacted)) {
     redacted = `${subject} ${redacted}`;
   }
-  return ensureSentence(redacted || context);
+  const clue = ensureSentence(redacted || context);
+  return quizClueIsUsable(clue, title, topicId) ? clue : "";
 }
 
-function quizPromptFallback(description, title, topicId, answerChoices = []) {
+function quizPromptFallback(context, title, topicId, answerChoices = []) {
   const labels = {
     memes: "meme",
     people: "person",
@@ -4563,11 +4563,11 @@ function quizPromptFallback(description, title, topicId, answerChoices = []) {
     products: "product",
     news: "story",
   };
-  return {
-    prompt: `${quizDescriptionClue(description, title, topicId)} Which ${labels[topicId] ?? "entry"} matches this description?`,
-    answers: [...answerChoices],
-    correctAnswer: title,
-  };
+  const clue = quizDescriptionClue(context, title, topicId);
+  if (!clue) return null;
+  const prompt = `${clue} Which ${labels[topicId] ?? "entry"} matches this description?`;
+  if (!quizQuestionIsUsable(prompt, title, topicId, context, { answerChoices })) return null;
+  return { prompt, answers: [...answerChoices], correctAnswer: title };
 }
 
 const unusableQuizPromptPattern = /\b(?:page views?|search volume|ranking|ranked|billboard hot 100|source list|know your meme|goodreads monthly readers|spotify today['’]s top hits)\b/i;
@@ -4587,7 +4587,7 @@ function usableGeneratedQuizQuestion(candidate, record) {
   const answers = Array.isArray(candidate.answers) ? candidate.answers : [];
   if (record.topicId === "movies" && !quizMoviePlotSignalPattern.test(candidate.prompt ?? "")) return false;
   return usableQuizPrompt(candidate.prompt)
-    && quizQuestionIsUsable(candidate.prompt, record.title, record.topicId, record.quizContext)
+    && quizQuestionIsUsable(candidate.prompt, record.title, record.topicId, record.quizContext, { answerChoices: answers })
     && answers.length === 4
     && new Set(answers).size === 4
     && answers.every((answer) => typeof answer === "string" && answer.trim().length >= 1 && answer.length <= 160)
@@ -4647,7 +4647,9 @@ async function updateQuiz(brief) {
     ...(() => {
       const generatedQuestion = generated.get(record.id);
       if (usableGeneratedQuizQuestion(generatedQuestion, record)) return generatedQuestion;
-      return quizPromptFallback(record.quizContext, record.title, record.topicId, record.answerChoices);
+      const fallback = quizPromptFallback(record.quizContext, record.title, record.topicId, record.answerChoices);
+      if (!fallback) throw new Error(`No safe quiz clue is available for ${record.id}; refusing to publish a generic or answer-leaking question`);
+      return fallback;
     })(),
     id: record.id,
     topicId: record.topicId,
@@ -4833,7 +4835,7 @@ function validateBrief(brief) {
     const sourceItem = sourceRecord?.item;
     if (!sourceItem
         || !usableQuizPrompt(question.prompt)
-        || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceRecord?.quizContext)
+        || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceRecord?.quizContext, { answerChoices: question.answers })
         || (question.topicId === "movies" && !quizMoviePlotSignalPattern.test(question.prompt))
         || normalize(question.correctAnswer) !== normalize(question.itemTitle)
         || question.topic !== section?.title) {

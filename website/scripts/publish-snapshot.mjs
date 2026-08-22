@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { quizQuestionIsUsable } from "./quiz-quality.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const sourcePath = path.join(root, "data", "trends.json");
@@ -15,6 +16,19 @@ if (!Array.isArray(brief.sections) || brief.sections.length !== 8
   || brief.sections.some((section) => !Array.isArray(section.items) || section.items.length !== 5)
   || !brief.quiz || !Array.isArray(brief.quiz.questions) || brief.quiz.questions.length === 0) {
   throw new Error("Refusing to publish an invalid briefing snapshot");
+}
+const quizBoardIds = ["memes", "people", "movies", "books", "news"];
+for (const question of brief.quiz.questions) {
+  const section = brief.sections.find((entry) => entry.id === question.topicId);
+  const sourceItem = section
+    ? [...section.items, ...(section.moreItems ?? [])].find((item) => item.title === question.itemTitle)
+    : null;
+  if (!section || !quizBoardIds.includes(question.topicId) || !sourceItem
+      || question.topic !== section.title
+      || question.correctAnswer !== question.itemTitle
+      || !quizQuestionIsUsable(question.prompt, question.itemTitle, question.topicId, sourceItem.description, { answerChoices: question.answers })) {
+    throw new Error(`Refusing to publish an invalid quiz question: ${question?.id ?? "unknown"}`);
+  }
 }
 // Keep a broad digest floor, but allow individual lanes to fail closed when
 // their live source coverage is unavailable instead of publishing stale cards.

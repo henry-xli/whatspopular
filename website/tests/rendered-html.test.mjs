@@ -270,6 +270,10 @@ test("rejects generic or answer-spoiling quiz clues", () => {
   assert.equal(quizAnswerLeak(answerLeakingBook, "Theo of Golden"), true);
   assert.equal(quizQuestionIsUsable(answerLeakingBook, "Theo of Golden", "books", "One spring morning, a stranger arrives in the small southern city of Golden."), false);
 
+  const answerLeakingPerson = "Which reminds me, in an odd sense, of the way Nolan’s films are often discussed. Which person matches this description?";
+  assert.equal(quizAnswerLeak(answerLeakingPerson, "Christopher Nolan"), true);
+  assert.equal(quizQuestionIsUsable(answerLeakingPerson, "Christopher Nolan", "people", "A director drew attention after a recent meme about his films."), false);
+
   const answerSafeBook = "One spring morning, a stranger arrives in a small southern city. No one knows where he came from or why he asks more questions than he answers. Which book matches this description?";
   assert.equal(quizAnswerLeak(answerSafeBook, "Theo of Golden"), false);
   assert.equal(quizQuestionIsUsable(answerSafeBook, "Theo of Golden", "books", "One spring morning, a stranger arrives in the small southern city. No one knows where he has come from or why he asks a lot more questions than he answers."), true);
