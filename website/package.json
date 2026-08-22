@@ -12,6 +12,7 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "typecheck": "tsc --noEmit",
+    "verify": "node scripts/verify.mjs",
     "content:images": "node scripts/cache-images.mjs",
     "content:publish": "node scripts/publish-snapshot.mjs",
     "content:niche-catalog": "node scripts/materialize-niche-catalog.mjs",
