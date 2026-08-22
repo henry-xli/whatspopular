@@ -17,6 +17,7 @@
     "content:publish": "node scripts/publish-snapshot.mjs",
     "content:niche-catalog": "node scripts/materialize-niche-catalog.mjs",
     "content:niches": "node scripts/niche-ingestion.mjs --standalone",
+    "content:repair-music": "node scripts/repair-music-playback.mjs",
     "content:update": "node scripts/update-trends.mjs",
     "content:update-without-niche": "node scripts/update-trends.mjs --skip-niche",
     "content:refresh-context": "node scripts/update-trends.mjs --force --refresh-context",

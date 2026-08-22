@@ -4,6 +4,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { buildDescriptionPrompt, buildNichePrompt, buildQuizPrompt, generateDescriptionBatch, isDescriptionUsable, isNicheTopicUsable, parseDescriptionOutput, parseNicheOutput, parseQuizOutput } from "../scripts/ai-descriptions.mjs";
+import { normalizeMusicIdentity, selectExactSpotifyItem, spotifyPageMatchesIdentity } from "../scripts/music-lookup.mjs";
 import { decodeHtmlEntities, extractArticleImage, extractArticleIntro, extractArticleTitle, extractPlayableMedia, publicHttpsUrl } from "../scripts/news-article.mjs";
 import { categoryDefinitions, sourceCandidateUsable } from "../scripts/niche-ingestion.mjs";
 import { quizAnswerLeak, quizClueIsUsable, quizQuestionIsUsable, quizTitleSignals } from "../scripts/quiz-quality.mjs";
@@ -433,6 +434,10 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.ok(nicheTopics.every((topic) => !topic.imageSource || (new URL(topic.imageSource).protocol === "https:" && topic.imageSourcePageUrl === topic.url)));
   assert.doesNotMatch(JSON.stringify(nicheBrief), /&(?:ldquo|rdquo|lsquo|rsquo|hellip|nbsp|ndash|mdash);|&#(?:x[0-9a-f]+|\d+);/i);
   const musicTopics = nicheBrief.categories.filter((category) => category.parent === "Music").flatMap((category) => category.topics);
+  const songTopics = musicTopics.filter((topic) => topic.musicKind === "song");
+  assert.ok(songTopics.length > 0);
+  assert.ok(songTopics.some((topic) => topic.musicSongTitle && topic.musicArtist && topic.playback?.kind === "track"));
+  assert.ok(songTopics.every((topic) => !topic.playback || topic.playback.kind === "track"));
   assert.ok(musicTopics.every((topic) => !topic.playback || specificMusicPlayback(topic.playback, {
     text: `${topic.title} ${topic.description} ${topic.whyNow}`,
     title: topic.musicSongTitle,
@@ -495,6 +500,26 @@ test("renders the niche For You builder and keeps anonymous profiles gated", asy
   assert.match(await mobileLink.text(), /This link is invalid/);
   const revoke = await render("/api/account/sessions/revoke", { method: "POST" });
   assert.equal(revoke.status, 401);
+});
+
+test("matches Spotify players to the named card identity instead of accepting adjacent results", () => {
+  assert.equal(normalizeMusicIdentity("Beyoncé — Memories"), "beyonce memories");
+  const exact = selectExactSpotifyItem([
+    { id: "wrongartist123", name: "Memories", artists: [{ name: "Another Artist" }] },
+    { id: "righttrack123", name: "Memories", artists: [{ name: "beabadoobee" }] },
+  ], { kind: "song", title: "Memories", artist: "Beabadoobee" });
+  assert.equal(exact?.id, "righttrack123");
+  assert.equal(selectExactSpotifyItem([
+    { id: "livetrack123", name: "Memories (Live)", artists: [{ name: "beabadoobee" }] },
+  ], { kind: "song", title: "Memories", artist: "Beabadoobee" }), null);
+  assert.equal(spotifyPageMatchesIdentity(`
+    <meta property="og:title" content="Memories">
+    <meta property="og:description" content="beabadoobee · Pylon · Song · 2026">
+  `, { kind: "song", title: "Memories", artist: "beabadoobee" }, "track"), true);
+  assert.equal(spotifyPageMatchesIdentity(`
+    <meta property="og:title" content="Memories (Live)">
+    <meta property="og:description" content="beabadoobee · Live · Song · 2026">
+  `, { kind: "song", title: "Memories", artist: "beabadoobee" }, "track"), false);
 });
 
 test("never edge-caches errors or unsafe request methods", async () => {

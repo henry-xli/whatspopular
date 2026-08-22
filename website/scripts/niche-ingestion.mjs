@@ -6,6 +6,7 @@ import { additionalNicheCategories } from "./niche-catalog.mjs";
 import { decodeHtmlEntities, linkedArticleMetadata, resolveGoogleNewsArticle } from "./news-article.mjs";
 import { fetchBytes, mapConcurrent } from "./runtime.mjs";
 import { specificMusicPlayback } from "../shared/music-playback.mjs";
+import { resolveSpecificSpotifyPlayback } from "./music-lookup.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const outputPath = path.join(root, "data", "niche-trends.json");
@@ -139,6 +140,9 @@ function musicArtistFromLead(text, quoteIndex) {
     .replace(/\s+/g, " ")
     .trim();
   const patterns = [
+    /\bwith\s+(.{2,90}?)\s+(?:version|remix|cover|take)\s+of\b/i,
+    /\b(?:version|remix|cover)\s+of\s+(.{2,90}?)\s+by\b/i,
+    /\bby\s+(.{2,90}?)\s*$/i,
     /^(.{2,90}?)\s+(?:has\s+)?(?:shared|shares|released|releases|dropped|drops|debuted|premiered|teased|teases|announced|unveiled|revealed|says|sheds|uses|used|links|teams?)\b/i,
     /^(.{2,90}?)['’]s\s*$/i,
     /^(.{2,90}?)\s+(?:has\s+)?(?:a|the)\s+(?:new\s+)?(?:song|track|single|remix|music video)\b/i,
@@ -956,7 +960,7 @@ function categoryRuleUsable(category, candidate, focused) {
 
 function sourceCandidateCoreUsable(category, candidate, now) {
   if (!candidate || !isRecentPublication(candidate.publishedAt, now)) return false;
-  if (category.parent === "Music" && !specificMusicPlayback(candidate.playback, {
+  if (category.parent === "Music" && candidate.playback && !specificMusicPlayback(candidate.playback, {
     text: `${candidate.headline ?? ""} ${candidate.articleIntro ?? ""}`,
     title: candidate.musicSong?.title,
     artist: candidate.musicSong?.artist,
@@ -1184,10 +1188,11 @@ async function categoryCandidates(category, now = new Date()) {
               ? await musicAudienceEvidence(musicSong, { ...candidate, articleIntro, link: metadata.url })
               : null;
             const playback = category.parent === "Music"
-              ? specificMusicPlayback(metadata.playback, {
+              ? await resolveSpecificSpotifyPlayback(metadata.playback, {
                 text: `${candidate.headline} ${articleIntro}`,
                 title: musicSong?.title,
                 artist: musicSong?.artist,
+                kind: "song",
               })
               : metadata.playback;
             const enrichedCandidate = {
@@ -1254,15 +1259,22 @@ async function categoryCandidates(category, now = new Date()) {
         const metadata = await linkedArticleMetadata(topic.url, { allowMissingImage: true });
         const articleIntro = cleanArticleIntro(metadata.intro);
         const publishedAt = topic.publishedAt ?? fallbackBrief.generatedAt;
+          const musicSong = category.parent === "Music"
+            ? (topic.musicSongTitle
+              ? { title: topic.musicSongTitle, ...(topic.musicArtist ? { artist: topic.musicArtist } : {}) }
+              : extractMusicSongIdentity({ headline: topic.title, articleIntro }))
+            : null;
           const priorCandidate = {
             headline: topic.title,
             articleIntro,
             publishedAt,
+            musicSong,
             playback: category.parent === "Music"
-              ? specificMusicPlayback(metadata.playback, {
+              ? await resolveSpecificSpotifyPlayback(metadata.playback, {
                 text: `${topic.title} ${articleIntro}`,
-                title: topic.musicSongTitle,
-                artist: topic.musicArtist,
+                title: musicSong?.title,
+                artist: musicSong?.artist,
+                kind: topic.musicKind ?? "song",
               })
               : metadata.playback,
             imageSource: metadata.imageSource,
@@ -1287,11 +1299,13 @@ async function categoryCandidates(category, now = new Date()) {
           publishedAt,
           order: topic.id,
           articleIntro,
+          musicSong,
           playback: category.parent === "Music"
-            ? specificMusicPlayback(metadata.playback, {
+            ? await resolveSpecificSpotifyPlayback(metadata.playback, {
               text: `${topic.title} ${articleIntro}`,
-              title: topic.musicSongTitle,
-              artist: topic.musicArtist,
+              title: musicSong?.title,
+              artist: musicSong?.artist,
+              kind: topic.musicKind ?? "song",
             })
             : metadata.playback,
           imageSource: metadata.imageSource,
@@ -1552,7 +1566,7 @@ function retainedTopic(topic, category, index) {
       artist: topic.musicArtist,
     })
     : topic.playback;
-  return {
+  const retained = {
     ...topic,
     id,
     title: cleanText(topic.title, 180),
@@ -1562,9 +1576,11 @@ function retainedTopic(topic, category, index) {
     ...(topic.sourceLabel ? { sourceLabel: cleanText(topic.sourceLabel, 120) } : {}),
     ...(topic.imageAlt ? { imageAlt: cleanText(topic.imageAlt, 180) } : {}),
     ...(topic.popularityEvidence ? { popularityEvidence: normalizePopularityEvidence(topic.popularityEvidence) } : {}),
-    playback,
     image: nicheImagePath(id),
   };
+  if (playback) retained.playback = playback;
+  else delete retained.playback;
+  return retained;
 }
 
 function persistedTopicUsable(topic, category, now = new Date()) {
@@ -1604,7 +1620,7 @@ function persistedTopicUsable(topic, category, now = new Date()) {
   return topic?.evidenceMode === "source-grounded"
     && isRecentPublication(topic.publishedAt, now)
     && /^https:\/\//i.test(topic.url ?? "")
-    && (category.parent !== "Music" || (Boolean(playback) && musicSongTopic))
+    && (category.parent !== "Music" || (musicSongTopic && (!topic?.playback || Boolean(playback))))
     && !numberedNicheHeadlinePattern.test(topic.title ?? "")
     && !genericNicheHeadlinePattern.test(topic.title ?? "")
     && !editorialNicheHeadlinePattern.test(topic.title ?? "")
@@ -1737,7 +1753,7 @@ export async function generateNicheSnapshot(brief, { now = new Date(), dryRun = 
   return snapshot;
 }
 
-export { categoryCandidates, categoryDefinitions, concreteTrendSentence, coverageStoryMatch, focusedArticleContext, popularityEvidenceFor, sourceCandidateUsable };
+export { categoryCandidates, categoryDefinitions, concreteTrendSentence, coverageStoryMatch, extractMusicSongIdentity, focusedArticleContext, popularityEvidenceFor, sourceCandidateUsable };
 
 if (process.argv.includes("--standalone")) {
   const rawBrief = JSON.parse(await readFile(path.join(root, "data", "trends.json"), "utf8"));

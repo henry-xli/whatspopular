@@ -23,6 +23,7 @@
           "image": "/culture/niche-edm-1.webp",
           "playback": {
             "provider": "Spotify",
+            "kind": "album",
             "externalUrl": "https://open.spotify.com/album/77JXbheLxVnzQSG3Gygmw5",
             "embedUrl": "https://open.spotify.com/embed/album/77JXbheLxVnzQSG3Gygmw5?utm_source=whatspopular&theme=0",
             "label": "Listen on Spotify"
@@ -430,7 +431,17 @@
             "signal": "beabadoobee has shared “Memories,” the latest preview of her fourth album Pylon, due on 18 September."
           },
           "accent": "#6c9e7b",
-          "trendLabel": "Recent signal"
+          "trendLabel": "Recent signal",
+          "musicKind": "song",
+          "musicSongTitle": "Memories",
+          "musicArtist": "Beabadoobee",
+          "playback": {
+            "provider": "Spotify",
+            "kind": "track",
+            "externalUrl": "https://open.spotify.com/track/2Zy3t3v5NntHzEQW3NEd8K",
+            "embedUrl": "https://open.spotify.com/embed/track/2Zy3t3v5NntHzEQW3NEd8K?utm_source=whatspopular&theme=0",
+            "label": "Listen on Spotify"
+          }
         },
         {
           "id": "indie-alternative-2",
@@ -490,7 +501,10 @@
             "signal": "Ms* Gloom has announced J Is For Joon (RMX), a remix collection based on February's debut mixtape J Is For Joon."
           },
           "accent": "#3fa7ff",
-          "trendLabel": "Recent signal"
+          "trendLabel": "Recent signal",
+          "musicKind": "song",
+          "musicSongTitle": "Joker",
+          "musicArtist": "Araabmuzik"
         }
       ]
     },
