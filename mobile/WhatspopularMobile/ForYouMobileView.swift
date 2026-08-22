@@ -12,6 +12,7 @@ struct ForYouMobileView: View {
     @State private var mixRevision = 0
 
     private let defaultTags = ["edm", "football", "gaming"]
+    private let feedHeaderHeight: CGFloat = 64
 
     init(
         account: AccountStore,
@@ -180,56 +181,65 @@ struct ForYouMobileView: View {
     }
 
     private func fullScreenFeed(entries: [MobileDigestEntry]) -> some View {
-        ScrollViewReader { proxy in
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack(spacing: 0) {
-                    MobileDigestIntroCard(
-                        summary: brief?.summary ?? "A pre-built signal mix from the corners you actually follow.",
-                        categories: categories,
-                        selectedTags: selectedTags,
-                        onToggle: toggleTag
-                    )
-                    .frame(maxWidth: .infinity)
-                    .containerRelativeFrame(.vertical)
-                    .id(introFeedID)
+        GeometryReader { geometry in
+            let pageHeight = max(1, geometry.size.height - feedHeaderHeight)
 
-                    ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
-                        MobileDigestCard(entry: entry, number: index + 1)
-                            .frame(maxWidth: .infinity)
-                            .containerRelativeFrame(.vertical)
-                            .id(feedID(for: entry))
+            VStack(spacing: 0) {
+                feedHeader(cardCount: entries.count)
+                    .frame(height: feedHeaderHeight)
+
+                ScrollViewReader { proxy in
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVStack(spacing: 0) {
+                            MobileDigestIntroCard(
+                                summary: brief?.summary ?? "A pre-built signal mix from the corners you actually follow.",
+                                categories: categories,
+                                selectedTags: selectedTags,
+                                onToggle: toggleTag
+                            )
+                            .frame(maxWidth: .infinity, minHeight: pageHeight, maxHeight: pageHeight)
+                            .id(introFeedID)
+
+                            ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
+                                MobileDigestCard(entry: entry, number: index + 1)
+                                    .frame(maxWidth: .infinity, minHeight: pageHeight, maxHeight: pageHeight)
+                                    .id(feedID(for: entry))
+                            }
+
+                            MobileDigestEndCard(
+                                cardCount: entries.count,
+                                onRecompile: { mixRevision += 1 },
+                                onEditInterests: {
+                                    withAnimation(.easeOut(duration: 0.35)) {
+                                        proxy.scrollTo(introFeedID, anchor: .top)
+                                    }
+                                }
+                            )
+                            .frame(maxWidth: .infinity, minHeight: pageHeight, maxHeight: pageHeight)
+                            .id(endFeedID)
+                        }
+                        .scrollTargetLayout()
                     }
-
-                    MobileDigestEndCard(
-                        cardCount: entries.count,
-                        onRecompile: { mixRevision += 1 },
-                        onEditInterests: {
+                    .frame(maxWidth: .infinity, minHeight: pageHeight, maxHeight: pageHeight)
+                    .scrollTargetBehavior(.paging)
+                    .scrollIndicators(.hidden)
+                    .background(Color.black)
+                    .id(mixRevision)
+                    .onChange(of: mixRevision) { _, _ in
+                        DispatchQueue.main.async {
                             withAnimation(.easeOut(duration: 0.35)) {
                                 proxy.scrollTo(introFeedID, anchor: .top)
                             }
                         }
-                    )
-                    .frame(maxWidth: .infinity)
-                    .containerRelativeFrame(.vertical)
-                    .id(endFeedID)
-                }
-                .scrollTargetLayout()
-            }
-            .scrollTargetBehavior(.paging)
-            .scrollIndicators(.hidden)
-            .background(Color.black)
-            .safeAreaInset(edge: .top, spacing: 0) {
-                feedHeader(cardCount: entries.count)
-            }
-            .id(mixRevision)
-            .onChange(of: mixRevision) { _, _ in
-                DispatchQueue.main.async {
-                    withAnimation(.easeOut(duration: 0.35)) {
-                        proxy.scrollTo(introFeedID, anchor: .top)
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
+        .background {
+            Color.black.ignoresSafeArea(edges: .top)
+        }
+        .clipped()
     }
 
     private func feedHeader(cardCount: Int) -> some View {
@@ -262,8 +272,6 @@ struct ForYouMobileView: View {
             .accessibilityLabel("Open account settings")
         }
         .padding(.horizontal, 16)
-        .padding(.top, 7)
-        .padding(.bottom, 10)
         .foregroundStyle(.white)
         .background(Color.black.opacity(0.94))
     }
@@ -356,12 +364,12 @@ private struct MobileDigestIntroCard: View {
                     .foregroundStyle(.white.opacity(0.72))
             }
 
-            Spacer(minLength: 8)
+            Spacer(minLength: 4)
 
             Text(summary)
                 .font(.body.weight(.medium))
                 .foregroundStyle(.white.opacity(0.88))
-                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(4)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("TAP TO TUNE THIS MIX")
@@ -395,14 +403,14 @@ private struct MobileDigestIntroCard: View {
                 }
             }
 
-            Spacer(minLength: 4)
+            Spacer(minLength: 2)
 
             Label("Swipe up for the first signal", systemImage: "arrow.up")
                 .font(.caption.weight(.bold))
                 .foregroundStyle(.white.opacity(0.68))
         }
         .padding(.horizontal, 24)
-        .padding(.vertical, 30)
+        .padding(.vertical, 24)
         .foregroundStyle(.white)
         .background(
             LinearGradient(
@@ -419,6 +427,7 @@ private struct MobileDigestCard: View {
     let number: Int
 
     private var topic: NicheTopic { entry.topic }
+    private var hasPlayback: Bool { topic.playback != nil }
 
     var body: some View {
         GeometryReader { geometry in
@@ -473,14 +482,13 @@ private struct MobileDigestCard: View {
                         Text(topic.title)
                             .font(.system(size: 34, weight: .black, design: .rounded))
                             .tracking(-1.05)
-                            .lineLimit(6)
-                            .minimumScaleFactor(0.68)
-                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(hasPlayback ? 4 : 5)
+                            .minimumScaleFactor(0.62)
 
                         Text(topic.description)
                             .font(.callout.weight(.medium))
                             .foregroundStyle(.white.opacity(0.9))
-                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(hasPlayback ? 3 : 4)
 
                         VStack(alignment: .leading, spacing: 5) {
                             Text("WHY NOW")
@@ -490,7 +498,7 @@ private struct MobileDigestCard: View {
                             Text(topic.whyNow)
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(.white)
-                                .fixedSize(horizontal: false, vertical: true)
+                                .lineLimit(hasPlayback ? 2 : 3)
                         }
 
                         if let evidence = topic.popularityEvidence,
@@ -504,7 +512,7 @@ private struct MobileDigestCard: View {
                                 Text(evidence.signal)
                                     .font(.caption.weight(.medium))
                                     .foregroundStyle(.white.opacity(0.88))
-                                    .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(2)
                             }
                         }
 
@@ -522,7 +530,7 @@ private struct MobileDigestCard: View {
                                     .font(.caption2.weight(.black))
                                     .tracking(0.6)
                                 NicheMusicEmbedView(playback: playback)
-                                    .frame(height: 142)
+                                    .frame(height: 112)
                                     .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 if let playbackURL = URL(string: playback.externalUrl) {
                                     Link(destination: playbackURL) {
@@ -567,15 +575,16 @@ private struct MobileDigestCard: View {
                             }
                         }
                     }
-                    .padding(18)
+                    .padding(15)
                     .foregroundStyle(.white)
                     .background(.black.opacity(0.64), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 58)
-                .padding(.bottom, 22)
+                .padding(.top, 42)
+                .padding(.bottom, 14)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
+            .clipped()
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Card \(number): \(topic.title)")
