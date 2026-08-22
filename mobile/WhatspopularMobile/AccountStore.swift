@@ -14,6 +14,22 @@ struct SharedAccountProfile: Codable, Equatable {
     var canEditIdentity: Bool
 }
 
+enum AdminPreviewMode: String, CaseIterable, Identifiable {
+    case real
+    case signedIn = "signed-in"
+    case signedOut = "signed-out"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .real: "Real account"
+        case .signedIn: "Preview signed in"
+        case .signedOut: "Preview signed out"
+        }
+    }
+}
+
 private struct MobileSession: Codable {
     let accessToken: String
     let refreshToken: String
@@ -111,19 +127,61 @@ final class AccountStore: ObservableObject {
     @Published private(set) var verificationEmail: String?
     @Published private(set) var emailChangeTarget: String?
     @Published private(set) var providerStatus: ProviderStatus?
+    @Published private(set) var adminPreviewMode: AdminPreviewMode
 
     private var session: MobileSession?
     private var refreshTask: Task<MobileSession, Error>?
     private var googleAuth: GoogleAuthCoordinator?
+    private static let adminPreviewKey = "whatspopular-admin-preview-auth"
 
     init() {
         session = SecureMobileSessionStore.load()
+        adminPreviewMode = AdminPreviewMode(rawValue: UserDefaults.standard.string(forKey: Self.adminPreviewKey) ?? "") ?? .real
     }
 
-    var isLinked: Bool { session != nil }
+    var isLinked: Bool {
+        switch adminPreviewMode {
+        case .real: session != nil
+        case .signedIn: true
+        case .signedOut: false
+        }
+    }
+
+    var isAdminPreviewActive: Bool { adminPreviewMode != .real }
+
+    var presentedProfile: SharedAccountProfile? {
+        switch adminPreviewMode {
+        case .real: profile
+        case .signedIn:
+            SharedAccountProfile(
+                hasProfile: true,
+                tags: profile?.tags ?? [],
+                email: "admin-preview@local",
+                displayName: "Admin preview",
+                updatedAt: profile?.updatedAt,
+                username: "admin-preview",
+                emailVerified: true,
+                canEditIdentity: true
+            )
+        case .signedOut: nil
+        }
+    }
+
+    func setAdminPreviewMode(_ mode: AdminPreviewMode) {
+        adminPreviewMode = mode
+        if mode == .real {
+            UserDefaults.standard.removeObject(forKey: Self.adminPreviewKey)
+            message = "Using the real account session."
+        } else {
+            UserDefaults.standard.set(mode.rawValue, forKey: Self.adminPreviewKey)
+            message = mode == .signedIn
+                ? "Admin preview: signed-in UI only; no account changes will be saved."
+                : "Admin preview: signed-out UI only; your real session is unchanged."
+        }
+    }
 
     func bootstrap() async {
-        guard session != nil else { return }
+        guard session != nil, !isAdminPreviewActive else { return }
         await refreshProfile()
     }
 
@@ -136,7 +194,7 @@ final class AccountStore: ObservableObject {
     }
 
     func refreshProfile() async {
-        guard session != nil else { return }
+        guard session != nil, !isAdminPreviewActive else { return }
         isLoading = true
         defer { isLoading = false }
         do {
@@ -152,6 +210,10 @@ final class AccountStore: ObservableObject {
     }
 
     func saveTags(_ tags: [String]) async {
+        guard !isAdminPreviewActive else {
+            message = "Admin preview only — interests are not saved to an account."
+            return
+        }
         guard session != nil else {
             message = AccountStoreError.notLinked.localizedDescription
             return
@@ -179,6 +241,10 @@ final class AccountStore: ObservableObject {
     }
 
     func updateUsername(_ username: String) async {
+        guard !isAdminPreviewActive else {
+            message = "Admin preview only — identity changes are not saved."
+            return
+        }
         guard session != nil, !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, !isLoading else { return }
         isLoading = true
         message = nil
@@ -197,6 +263,10 @@ final class AccountStore: ObservableObject {
     }
 
     func beginEmailChange(_ email: String) async -> Bool {
+        guard !isAdminPreviewActive else {
+            message = "Admin preview only — email changes are not sent."
+            return false
+        }
         guard session != nil, !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, !isLoading else { return false }
         isLoading = true
         message = nil
@@ -217,6 +287,10 @@ final class AccountStore: ObservableObject {
     }
 
     func verifyEmailChange(code: String) async {
+        guard !isAdminPreviewActive else {
+            message = "Admin preview only — email changes are not saved."
+            return
+        }
         guard emailChangeTarget != nil, !isLoading else { return }
         isLoading = true
         message = nil
@@ -376,6 +450,7 @@ final class AccountStore: ObservableObject {
                     throw try decodeAPIError(data, statusCode: httpResponse.statusCode)
                 }
                 let exchange = try JSONDecoder().decode(LinkExchangeResponse.self, from: data)
+                clearAdminPreview()
                 session = MobileSession(
                     accessToken: exchange.accessToken,
                     refreshToken: exchange.refreshToken,
@@ -396,6 +471,11 @@ final class AccountStore: ObservableObject {
     }
 
     func signOut() async {
+        if isAdminPreviewActive {
+            setAdminPreviewMode(.signedOut)
+            message = "Preview switched to signed out. Your real session is unchanged."
+            return
+        }
         if let current = session {
             let accessToken: String
             if isExpired(current.accessExpiresAt), let refreshed = try? await refreshSession() {
@@ -430,6 +510,7 @@ final class AccountStore: ObservableObject {
     }
 
     private func install(_ response: LinkExchangeResponse) {
+        clearAdminPreview()
         let next = MobileSession(
             accessToken: response.accessToken,
             refreshToken: response.refreshToken,
@@ -439,6 +520,11 @@ final class AccountStore: ObservableObject {
         session = next
         SecureMobileSessionStore.save(next)
         profile = makeProfile(response.profile)
+    }
+
+    private func clearAdminPreview() {
+        adminPreviewMode = .real
+        UserDefaults.standard.removeObject(forKey: Self.adminPreviewKey)
     }
 
     private func authorizedJSON<T: Decodable>(

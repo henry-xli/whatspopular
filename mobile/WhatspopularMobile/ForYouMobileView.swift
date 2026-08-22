@@ -13,6 +13,18 @@ struct ForYouMobileView: View {
 
     private let defaultTags = ["edm", "football", "gaming"]
 
+    init(
+        account: AccountStore,
+        nicheStore: NicheStore,
+        accountPresented: Binding<Bool>,
+        selectedTab: Binding<Int>
+    ) {
+        self._account = ObservedObject(wrappedValue: account)
+        self._nicheStore = ObservedObject(wrappedValue: nicheStore)
+        self._accountPresented = accountPresented
+        self._selectedTab = selectedTab
+    }
+
     private var brief: NicheBrief? { nicheStore.brief }
     private var categories: [NicheCategory] { brief?.categories ?? [] }
     private var selectedCategories: [NicheCategory] {
@@ -57,11 +69,11 @@ struct ForYouMobileView: View {
         }
         .onAppear {
             if selectedTags.isEmpty {
-                selectedTags = account.profile?.tags
+                selectedTags = account.presentedProfile?.tags
                     ?? defaultTags.filter { defaultID in categories.contains(where: { $0.id == defaultID }) }
             }
         }
-        .onChange(of: account.profile?.tags ?? []) { _, tags in
+        .onChange(of: account.presentedProfile?.tags ?? []) { _, tags in
             selectedTags = tags
             mixRevision += 1
         }

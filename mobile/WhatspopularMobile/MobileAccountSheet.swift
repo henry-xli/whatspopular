@@ -24,11 +24,52 @@ struct MobileAccountSheet: View {
         var label: String { self == .signIn ? "Sign in" : "Create account" }
     }
 
+    private var adminPreviewStateLabel: String {
+        switch account.adminPreviewMode {
+        case .real: "real account"
+        case .signedIn: "preview signed in"
+        case .signedOut: "preview signed out"
+        }
+    }
+
     var body: some View {
         NavigationStack {
             List {
+                Section("Admin preview") {
+                    Label("Temporary local testing", systemImage: "wrench.and.screwdriver.fill")
+                        .font(.subheadline.weight(.bold))
+                    Text("Preview the signed-in or signed-out interface while the real providers are being set up. This never creates, signs in, or signs out a real account.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    HStack(spacing: 8) {
+                        Button("Signed in") {
+                            account.setAdminPreviewMode(.signedIn)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(account.adminPreviewMode == .signedIn ? Color(hex: "#6F48E5") : .gray)
+
+                        Button("Signed out") {
+                            account.setAdminPreviewMode(.signedOut)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(account.adminPreviewMode == .signedOut ? Color(hex: "#6F48E5") : .gray)
+                    }
+
+                    if account.isAdminPreviewActive {
+                        Button("Use real account session") {
+                            account.setAdminPreviewMode(.real)
+                        }
+                        .foregroundStyle(Color(hex: "#4F2EB8"))
+                    }
+
+                    Text("Current state: \(adminPreviewStateLabel)")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                }
+
                 Section("Shared account") {
-                    if let profile = account.profile {
+                    if let profile = account.presentedProfile {
                         Label {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(profile.displayName).font(.subheadline.weight(.bold))
@@ -135,7 +176,7 @@ struct MobileAccountSheet: View {
                     }
                 }
 
-                if let profile = account.profile, account.isLinked {
+                if let profile = account.presentedProfile, account.isLinked {
                     Section("Profile details") {
                         if profile.canEditIdentity {
                             TextField("Username", text: $newUsername)
@@ -254,14 +295,14 @@ struct MobileAccountSheet: View {
                 }
             }
             .onAppear {
-                selectedTags = account.profile?.tags ?? []
-                newUsername = account.profile?.username ?? ""
+                selectedTags = account.presentedProfile?.tags ?? []
+                newUsername = account.presentedProfile?.username ?? ""
                 Task { await account.loadProviderStatus() }
             }
-            .onChange(of: account.profile?.tags ?? []) { _, tags in
+            .onChange(of: account.presentedProfile?.tags ?? []) { _, tags in
                 selectedTags = tags
             }
-            .onChange(of: account.profile?.username ?? "") { _, username in
+            .onChange(of: account.presentedProfile?.username ?? "") { _, username in
                 newUsername = username
             }
         }
