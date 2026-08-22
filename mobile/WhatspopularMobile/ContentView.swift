@@ -45,7 +45,8 @@ struct ContentView: View {
             ForYouMobileView(
                 account: account,
                 nicheStore: nicheStore,
-                accountPresented: $accountPresented
+                accountPresented: $accountPresented,
+                selectedTab: $selectedTab
             )
             .tabItem { Label("For You", systemImage: "sparkles") }
             .tag(0)

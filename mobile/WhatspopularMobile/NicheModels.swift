@@ -2,9 +2,17 @@ import Foundation
 
 struct NichePlayback: Codable, Equatable {
     let provider: String
+    let kind: String?
     let externalUrl: String
     let embedUrl: String
     let label: String
+}
+
+struct NichePopularityEvidence: Codable, Equatable {
+    let mode: String
+    let coverageCount: Int
+    let coverageSources: [String]
+    let signal: String
 }
 
 struct NicheTopic: Codable, Identifiable, Equatable {
@@ -19,6 +27,11 @@ struct NicheTopic: Codable, Identifiable, Equatable {
     let accent: String
     let trendLabel: String
     let playback: NichePlayback?
+    let imageAlt: String?
+    let coverageCount: Int?
+    let coverageSources: [String]?
+    let popularityEvidence: NichePopularityEvidence?
+    let publishedAt: String?
 }
 
 struct NicheCategory: Codable, Identifiable, Equatable {
@@ -63,6 +76,8 @@ final class NicheStore: ObservableObject {
                       && !category.topics.isEmpty
                       && category.topics.allSatisfy { topic in
                           guard topic.image.range(of: #"^/culture/[a-z0-9-]+\.webp$"#, options: .regularExpression) != nil,
+                                topic.description.trimmingCharacters(in: .whitespacesAndNewlines).count >= 30,
+                                topic.whyNow.trimmingCharacters(in: .whitespacesAndNewlines).count >= 20,
                                 let url = URL(string: topic.url),
                                 url.scheme?.lowercased() == "https",
                                 url.user == nil,

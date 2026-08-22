@@ -6,66 +6,94 @@ struct ForYouMobileView: View {
     @ObservedObject var account: AccountStore
     @ObservedObject var nicheStore: NicheStore
     @Binding var accountPresented: Bool
+    @Binding var selectedTab: Int
 
     @State private var selectedTags: [String] = []
-    @State private var activeIndex = 0
-    @State private var compiled = false
+    @State private var mixRevision = 0
 
     private let defaultTags = ["edm", "football", "gaming"]
 
     private var brief: NicheBrief? { nicheStore.brief }
     private var categories: [NicheCategory] { brief?.categories ?? [] }
-    private var selectedCategories: [NicheCategory] { categories.filter { selectedTags.contains($0.id) } }
-    private var digestTopics: [NicheTopic] {
+    private var selectedCategories: [NicheCategory] {
+        categories.filter { selectedTags.contains($0.id) }
+    }
+    private var digestEntries: [MobileDigestEntry] {
         var seen = Set<String>()
-        return selectedCategories.flatMap(\.topics).filter { seen.insert($0.id).inserted }
+        let uniqueEntries = selectedCategories.flatMap { category in
+            category.topics.compactMap { topic -> MobileDigestEntry? in
+                guard seen.insert(topic.id).inserted else { return nil }
+                return MobileDigestEntry(
+                    topic: topic,
+                    categoryLabel: category.label,
+                    categoryParent: category.parent
+                )
+            }
+        }
+
+        return uniqueEntries
+            .sorted { stableScore(for: $0.id) < stableScore(for: $1.id) }
+            .prefix(16)
+            .map { $0 }
     }
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 15) {
-                    header
-                    if let brief {
-                        tagPicker(categories: brief.categories)
-                        if account.isLinked && !digestTopics.isEmpty {
-                            digestPager(topics: digestTopics)
-                        } else if account.isLinked {
-                            emptySelection
-                        } else {
-                            accountGate
-                        }
-                    } else if let errorMessage = nicheStore.errorMessage {
-                        ContentUnavailableView("Digest unavailable", systemImage: "sparkles", description: Text(errorMessage))
+            Group {
+                if let brief {
+                    if account.isLinked && !digestEntries.isEmpty {
+                        fullScreenFeed(entries: digestEntries)
                     } else {
-                        ProgressView("Loading your digest…")
-                            .frame(maxWidth: .infinity, minHeight: 300)
+                        setupView(brief: brief)
                     }
+                } else if let errorMessage = nicheStore.errorMessage {
+                    ContentUnavailableView("Digest unavailable", systemImage: "sparkles", description: Text(errorMessage))
+                } else {
+                    ProgressView("Loading your digest…")
+                        .frame(maxWidth: .infinity, minHeight: 300)
                 }
-                .padding(.horizontal, 14)
-                .padding(.top, 10)
-                .padding(.bottom, 42)
             }
-            .scrollIndicators(.hidden)
-            .background(Color(.systemGroupedBackground).ignoresSafeArea())
             .navigationBarHidden(true)
         }
         .onAppear {
             if selectedTags.isEmpty {
-                selectedTags = account.profile?.tags ?? defaultTags.filter { defaultID in categories.contains(where: { $0.id == defaultID }) }
+                selectedTags = account.profile?.tags
+                    ?? defaultTags.filter { defaultID in categories.contains(where: { $0.id == defaultID }) }
             }
-            compiled = account.isLinked
         }
         .onChange(of: account.profile?.tags ?? []) { _, tags in
             selectedTags = tags
-            activeIndex = 0
-            compiled = account.isLinked
+            mixRevision += 1
         }
         .onChange(of: categories) { _, nextCategories in
             let valid = Set(nextCategories.map(\.id))
-            selectedTags = selectedTags.filter(valid.contains)
-            if selectedTags.isEmpty { selectedTags = defaultTags.filter(valid.contains) }
+            let nextTags = selectedTags.filter(valid.contains)
+            let fallbackTags = defaultTags.filter(valid.contains)
+            let resolvedTags = nextTags.isEmpty ? fallbackTags : nextTags
+            if resolvedTags != selectedTags {
+                selectedTags = resolvedTags
+                mixRevision += 1
+            }
         }
+    }
+
+    private func setupView(brief: NicheBrief) -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 15) {
+                header
+                tagPicker(categories: brief.categories)
+                if account.isLinked {
+                    emptySelection
+                } else {
+                    accountGate
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 10)
+            .padding(.bottom, 42)
+        }
+        .scrollIndicators(.hidden)
+        .background(Color(.systemGroupedBackground).ignoresSafeArea())
     }
 
     private var header: some View {
@@ -113,9 +141,11 @@ struct ForYouMobileView: View {
                     ForEach(categories) { category in
                         let active = selectedTags.contains(category.id)
                         Button {
-                            let next = active ? selectedTags.filter { $0 != category.id } : selectedTags + [category.id]
+                            let next = active
+                                ? selectedTags.filter { $0 != category.id }
+                                : selectedTags + [category.id]
                             selectedTags = next
-                            activeIndex = 0
+                            mixRevision += 1
                             if account.isLinked {
                                 Task { await account.saveTags(next) }
                             }
@@ -141,41 +171,88 @@ struct ForYouMobileView: View {
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 17, style: .continuous))
     }
 
-    private func digestPager(topics: [NicheTopic]) -> some View {
-        VStack(alignment: .leading, spacing: 9) {
-            HStack(alignment: .firstTextBaseline) {
-                Text(compiled ? "THIS WEEK" : "YOUR MIX")
-                    .font(.caption2.weight(.black))
-                    .tracking(1)
-                    .foregroundStyle(Color(hex: "#6F48E5"))
-                Spacer()
-                Text("\(min(topics.count, 16)) cards")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
+    private func fullScreenFeed(entries: [MobileDigestEntry]) -> some View {
+        ScrollViewReader { proxy in
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack(spacing: 0) {
+                    ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
+                        MobileDigestCard(entry: entry, number: index + 1)
+                            .frame(maxWidth: .infinity)
+                            .containerRelativeFrame(.vertical)
+                            .id(feedID(for: entry))
+                    }
+
+                    MobileDigestEndCard(
+                        cardCount: entries.count,
+                        onRecompile: { mixRevision += 1 },
+                        onEditInterests: { accountPresented = true }
+                    )
+                    .frame(maxWidth: .infinity)
+                    .containerRelativeFrame(.vertical)
+                    .id(endFeedID)
+                }
+                .scrollTargetLayout()
             }
-            TabView(selection: $activeIndex) {
-                ForEach(Array(topics.prefix(16).enumerated()), id: \.element.id) { index, topic in
-                    MobileDigestCard(topic: topic, number: index + 1)
-                        .tag(index)
-                        .padding(.bottom, 24)
+            .scrollTargetBehavior(.paging)
+            .scrollIndicators(.hidden)
+            .background(Color.black)
+            .overlay(alignment: .top) {
+                feedHeader(cardCount: entries.count)
+            }
+            .id(mixRevision)
+            .onChange(of: mixRevision) { _, _ in
+                guard let firstEntry = entries.first else { return }
+                DispatchQueue.main.async {
+                    withAnimation(.easeOut(duration: 0.35)) {
+                        proxy.scrollTo(feedID(for: firstEntry), anchor: .top)
+                    }
                 }
             }
-            .frame(height: topics.contains(where: { $0.playback != nil }) ? 650 : 535)
-            .tabViewStyle(.page(indexDisplayMode: .automatic))
-            .animation(.easeInOut(duration: 0.35), value: activeIndex)
-            Button {
-                activeIndex = 0
-                compiled.toggle()
-            } label: {
-                Label(compiled ? "Recompile this mix" : "Compile my digest", systemImage: compiled ? "shuffle" : "wand.and.stars")
-                    .font(.subheadline.weight(.bold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .foregroundStyle(.white)
-                    .background(Color(hex: "#6F48E5"), in: Capsule())
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .ignoresSafeArea(.container, edges: .vertical)
+    }
+
+    private func feedHeader(cardCount: Int) -> some View {
+        HStack(spacing: 11) {
+            Button { selectedTab = 1 } label: {
+                Image(systemName: "square.grid.2x2")
+                    .font(.headline.weight(.bold))
+                    .frame(width: 38, height: 38)
+                    .background(.white.opacity(0.16), in: Circle())
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Open Explore")
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("FOR YOU")
+                    .font(.caption2.weight(.black))
+                    .tracking(1.2)
+                Text("\(cardCount) signals · swipe up to keep going")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.white.opacity(0.8))
+            }
+            Spacer(minLength: 0)
+            Button { accountPresented = true } label: {
+                Image(systemName: account.isLinked ? "person.crop.circle.fill" : "person.crop.circle.badge.plus")
+                    .font(.title3.weight(.semibold))
+                    .frame(width: 38, height: 38)
+                    .background(.white.opacity(0.16), in: Circle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Open account settings")
         }
+        .padding(.horizontal, 16)
+        .padding(.top, 12)
+        .padding(.bottom, 19)
+        .foregroundStyle(.white)
+        .background(
+            LinearGradient(
+                colors: [.black.opacity(0.72), .black.opacity(0)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
     }
 
     private var accountGate: some View {
@@ -206,80 +283,240 @@ struct ForYouMobileView: View {
     private var emptySelection: some View {
         ContentUnavailableView("Choose a corner", systemImage: "slider.horizontal.3", description: Text("Pick at least one interest above to compile your weekly cards."))
     }
+
+    private var endFeedID: String { "feed-end-\(mixRevision)" }
+
+    private func feedID(for entry: MobileDigestEntry) -> String {
+        "feed-\(mixRevision)-\(entry.id)"
+    }
+
+    private func stableScore(for id: String) -> UInt64 {
+        let seed = "\(brief?.generatedAt ?? "")|\(selectedTags.joined(separator: ","))|\(mixRevision)|\(id)"
+        return seed.utf8.reduce(UInt64(1469598103934665603)) { hash, byte in
+            (hash ^ UInt64(byte)) &* 1099511628211
+        }
+    }
+}
+
+private struct MobileDigestEntry: Identifiable {
+    let topic: NicheTopic
+    let categoryLabel: String
+    let categoryParent: String
+
+    var id: String { topic.id }
 }
 
 private struct MobileDigestCard: View {
-    let topic: NicheTopic
+    let entry: MobileDigestEntry
     let number: Int
+
+    private var topic: NicheTopic { entry.topic }
 
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .bottomLeading) {
+            ZStack(alignment: .bottom) {
                 Color(hex: topic.accent)
                 if let url = MobileContentEndpoint.imageURL(for: topic.image, revision: nil) {
                     AsyncImage(url: url) { phase in
                         if let image = phase.image {
-                            image.resizable().scaledToFill().frame(width: geometry.size.width, height: geometry.size.height).clipped().opacity(0.72)
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .clipped()
+                                .opacity(0.64)
                         }
                     }
                 }
-                LinearGradient(colors: [.clear, .black.opacity(0.82)], startPoint: .top, endPoint: .bottom)
-                VStack(alignment: .leading, spacing: 9) {
-                    HStack {
+                LinearGradient(
+                    colors: [.black.opacity(0.04), .black.opacity(0.18), .black.opacity(0.9)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(alignment: .top, spacing: 10) {
                         Text(String(format: "%02d", number))
-                            .font(.system(size: 18, weight: .black, design: .rounded))
-                        Spacer()
+                            .font(.system(size: 20, weight: .black, design: .rounded))
+                        Spacer(minLength: 0)
                         Text(topic.trendLabel.uppercased())
                             .font(.caption2.weight(.black))
-                            .tracking(0.8)
+                            .tracking(0.9)
+                            .multilineTextAlignment(.trailing)
                     }
-                    Spacer()
-                    Text(topic.title)
-                        .font(.system(size: 30, weight: .black, design: .rounded))
-                        .tracking(-1)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(topic.description)
-                        .font(.subheadline.weight(.medium))
-                        .lineLimit(4)
-                    HStack(alignment: .top, spacing: 7) {
-                        Text("WHY NOW")
-                            .font(.caption2.weight(.black))
-                            .tracking(0.8)
-                        Text(topic.whyNow)
-                            .font(.caption.weight(.semibold))
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    if let playback = topic.playback {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Label("Play on this card", systemImage: "play.circle.fill")
+                    .foregroundStyle(.white)
+
+                    Spacer(minLength: 14)
+
+                    VStack(alignment: .leading, spacing: 11) {
+                        HStack(spacing: 7) {
+                            Text(entry.categoryParent.uppercased())
                                 .font(.caption2.weight(.black))
-                                .tracking(0.6)
-                            NicheMusicEmbedView(playback: playback)
-                                .frame(height: 152)
-                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                .tracking(0.9)
+                            Text("·")
+                                .foregroundStyle(.white.opacity(0.6))
+                            Text(entry.categoryLabel.uppercased())
+                                .font(.caption2.weight(.black))
+                                .tracking(0.9)
+                                .lineLimit(1)
                         }
-                        .padding(9)
-                        .background(.black.opacity(0.24), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
-                    }
-                    if let url = URL(string: topic.url), url.scheme?.lowercased() == "https" {
-                        Link(destination: url) {
-                            HStack {
-                                Text(topic.sourceLabel)
-                                Spacer()
-                                Image(systemName: "arrow.up.right")
+                        .foregroundStyle(Color(hex: topic.accent).opacity(0.95))
+
+                        Text(topic.title)
+                            .font(.system(size: 34, weight: .black, design: .rounded))
+                            .tracking(-1.05)
+                            .lineLimit(6)
+                            .minimumScaleFactor(0.68)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Text(topic.description)
+                            .font(.callout.weight(.medium))
+                            .foregroundStyle(.white.opacity(0.9))
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("WHY NOW")
+                                .font(.caption2.weight(.black))
+                                .tracking(1)
+                                .foregroundStyle(Color(hex: topic.accent).opacity(0.95))
+                            Text(topic.whyNow)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(.white)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+
+                        if let evidence = topic.popularityEvidence,
+                           !evidence.signal.isEmpty,
+                           normalized(evidence.signal) != normalized(topic.whyNow) {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text("WHAT PEOPLE ARE FOLLOWING")
+                                    .font(.caption2.weight(.black))
+                                    .tracking(1)
+                                    .foregroundStyle(Color(hex: topic.accent).opacity(0.95))
+                                Text(evidence.signal)
+                                    .font(.caption.weight(.medium))
+                                    .foregroundStyle(.white.opacity(0.88))
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
-                            .font(.caption.weight(.bold))
-                            .padding(.top, 9)
-                            .overlay(alignment: .top) { Rectangle().fill(.white.opacity(0.4)).frame(height: 1) }
+                        }
+
+                        if let coverageSources = topic.coverageSources,
+                           !coverageSources.isEmpty {
+                            Text("Reported by \(coverageSources.prefix(3).joined(separator: " · "))")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(.white.opacity(0.68))
+                                .lineLimit(2)
+                        }
+
+                        if let playback = topic.playback {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Label(playback.label, systemImage: "play.circle.fill")
+                                    .font(.caption2.weight(.black))
+                                    .tracking(0.6)
+                                NicheMusicEmbedView(playback: playback)
+                                    .frame(height: 142)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            }
+                            .padding(9)
+                            .background(.black.opacity(0.28), in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+                        }
+
+                        if let url = URL(string: topic.url), url.scheme?.lowercased() == "https" {
+                            Link(destination: url) {
+                                HStack {
+                                    Text(topic.sourceLabel)
+                                    Spacer(minLength: 8)
+                                    Text(topic.source)
+                                    Image(systemName: "arrow.up.right")
+                                }
+                                .font(.caption.weight(.bold))
+                                .padding(.top, 9)
+                                .overlay(alignment: .top) {
+                                    Rectangle().fill(.white.opacity(0.4)).frame(height: 1)
+                                }
+                            }
                         }
                     }
+                    .padding(18)
+                    .foregroundStyle(.white)
+                    .background(.black.opacity(0.64), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
                 }
-                .padding(20)
-                .foregroundStyle(.white)
+                .padding(.horizontal, 16)
+                .padding(.top, 58)
+                .padding(.bottom, 22)
             }
-            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .black.opacity(0.18), radius: 15, y: 8)
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Card \(number): \(topic.title)")
+    }
+
+    private func normalized(_ value: String) -> String {
+        value.lowercased()
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .joined(separator: " ")
+            .split(separator: " ")
+            .joined(separator: " ")
+    }
+}
+
+private struct MobileDigestEndCard: View {
+    let cardCount: Int
+    let onRecompile: () -> Void
+    let onEditInterests: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            HStack {
+                Text("✦")
+                    .font(.title.weight(.bold))
+                Spacer()
+                Text("END OF MIX")
+                    .font(.caption2.weight(.black))
+                    .tracking(1.2)
+            }
+
+            Spacer()
+
+            Text("You’re all caught up.")
+                .font(.system(size: 43, weight: .black, design: .rounded))
+                .tracking(-1.3)
+            Text("That’s the end of this \(cardCount)-card signal. Swipe down to revisit anything you want to read again.")
+                .font(.body.weight(.medium))
+                .foregroundStyle(.white.opacity(0.82))
+
+            Button(action: onRecompile) {
+                Label("Recompile this mix", systemImage: "shuffle")
+                    .font(.subheadline.weight(.bold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .foregroundStyle(Color(hex: "#4F2EB8"))
+                    .background(.white, in: Capsule())
+            }
+            .buttonStyle(.plain)
+
+            Button(action: onEditInterests) {
+                Label("Edit interests", systemImage: "slider.horizontal.3")
+                    .font(.subheadline.weight(.bold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 13)
+                    .foregroundStyle(.white)
+                    .background(.white.opacity(0.16), in: Capsule())
+            }
+            .buttonStyle(.plain)
+
+            Spacer()
+        }
+        .padding(.horizontal, 25)
+        .padding(.vertical, 34)
+        .foregroundStyle(.white)
+        .background(
+            LinearGradient(
+                colors: [Color(hex: "#6F48E5"), Color(hex: "#342070"), .black],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
     }
 }
 

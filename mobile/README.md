@@ -1,9 +1,15 @@
 # what’s popular? mobile
 
-This folder contains the native SwiftUI iOS companion to the website. It is a
-single, scrollable briefing screen designed for one-handed reading:
+This folder contains the native SwiftUI iOS companion to the website. Its
+For You tab is a one-handed, full-screen vertical digest: swipe up to move
+from one signal card to the next, like a reel, and land on a dedicated end
+card with recompile and interest-edit controls. The Explore tab remains the
+long-form briefing screen:
 
-- a compact five-question quiz sits at the top;
+- the For You tab uses the same pre-built niche topic payload as the website,
+  including its full description, why-now context, popularity evidence, source,
+  and topic-specific music player;
+- a compact five-question quiz sits at the top of Explore;
 - a horizontal Standout rail surfaces the top entry from each board;
 - all eight website leaderboards follow below on the same page;
 - entries open their existing source URLs, including Spotify tracks;
